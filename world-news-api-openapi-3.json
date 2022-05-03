@@ -1,0 +1,1280 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Humor API",
+    "version": "1.0",
+    "contact": {
+      "name": "David",
+      "url": "https://humorapi.com",
+      "email": "mail@humorapi.com"
+    },
+    "termsOfService": "https://humorapi.com/terms",
+    "description": "Awesome Humor API."
+  },
+  "servers": [
+    {
+      "url": "https://api.humorapi.com"
+    }
+  ],
+  "paths": {
+    "/jokes/search": {
+      "parameters": [],
+      "get": {
+        "summary": "Search Jokes",
+        "tags": [
+          "jokes"
+        ],
+        "responses": {
+          "200": {
+            "description": "Joke Search Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "jokes": {
+                      "type": "array",
+                      "uniqueItems": true,
+                      "minItems": 1,
+                      "items": {
+                        "required": [
+                          "id",
+                          "joke"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "integer"
+                          },
+                          "joke": {
+                            "type": "string",
+                            "minLength": 1
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "jokes"
+                  ],
+                  "x-examples": {
+                    "example-1": {
+                      "jokes": [
+                        {
+                          "id": 1,
+                          "joke": "This is a joke"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "examples": {
+                  "Jokes-with-Cars": {
+                    "value": {
+                      "jokes": [
+                        {
+                          "id": 1,
+                          "joke": "this is a car joke"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "operationId": "search-jokes",
+        "description": "Search for jokes.\nSee https://humorapi.com/docs/#Search-Jokes for more.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/keywords"
+          },
+          {
+            "$ref": "#/components/parameters/include-tags"
+          },
+          {
+            "$ref": "#/components/parameters/exclude-tags"
+          },
+          {
+            "$ref": "#/components/parameters/number"
+          },
+          {
+            "$ref": "#/components/parameters/min-rating"
+          },
+          {
+            "$ref": "#/components/parameters/max-length"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          }
+        ]
+      }
+    },
+    "/gif/search": {
+      "parameters": [],
+      "get": {
+        "summary": "Search Gifs",
+        "tags": [
+          "other"
+        ],
+        "responses": {
+          "200": {
+            "description": "Gif Search Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "images": {
+                      "type": "array",
+                      "uniqueItems": true,
+                      "minItems": 1,
+                      "items": {
+                        "required": [
+                          "url",
+                          "width",
+                          "height"
+                        ],
+                        "properties": {
+                          "url": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "width": {
+                            "type": "integer"
+                          },
+                          "height": {
+                            "type": "integer"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "images"
+                  ],
+                  "x-examples": {
+                    "example-1": {
+                      "images": [
+                        {
+                          "url": "https://media.tenor.com/images/f97a4505bb4f972cef00bc377aff7f4e/tenor.gif",
+                          "width": 498,
+                          "height": 364
+                        },
+                        {
+                          "url": "https://media.tenor.com/images/1d73fd5b39730fd356b482128eb3746a/tenor.gif",
+                          "width": 498,
+                          "height": 490
+                        },
+                        {
+                          "url": "https://media.tenor.com/images/6e45dbbc34d8427ffcc322024c73f8fc/tenor.gif",
+                          "width": 498,
+                          "height": 498
+                        }
+                      ]
+                    }
+                  }
+                },
+                "examples": {
+                  "Gifs-with-Dogs": {
+                    "value": {
+                      "images": [
+                        {
+                          "url": "https://media.tenor.com/images/f97a4505bb4f972cef00bc377aff7f4e/tenor.gif",
+                          "width": 498,
+                          "height": 364
+                        },
+                        {
+                          "url": "https://media.tenor.com/images/1d73fd5b39730fd356b482128eb3746a/tenor.gif",
+                          "width": 498,
+                          "height": 490
+                        },
+                        {
+                          "url": "https://media.tenor.com/images/6e45dbbc34d8427ffcc322024c73f8fc/tenor.gif",
+                          "width": 498,
+                          "height": 498
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "operationId": "search-gifs",
+        "description": "Search for gifs.\nSee https://humorapi.com/docs/#Search-Gifs for more.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/query"
+          },
+          {
+            "$ref": "#/components/parameters/number"
+          }
+        ]
+      }
+    },
+    "/memes/search": {
+      "parameters": [],
+      "get": {
+        "summary": "Search Memes",
+        "tags": [
+          "memes"
+        ],
+        "responses": {
+          "200": {
+            "description": "Meme Search Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "memes": {
+                      "type": "array",
+                      "uniqueItems": true,
+                      "minItems": 1,
+                      "items": {
+                        "required": [
+                          "id",
+                          "url",
+                          "type"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "integer"
+                          },
+                          "url": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "type": {
+                            "type": "string",
+                            "minLength": 1
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "memes"
+                  ],
+                  "x-examples": {
+                    "example-1": {
+                      "memes": [
+                        {
+                          "id": 6696,
+                          "url": "https://i.imgur.com/1rmAxUG.jpg",
+                          "type": "image/jpeg"
+                        },
+                        {
+                          "id": 6697,
+                          "url": "https://i.imgur.com/ELT8zMQ.jpg",
+                          "type": "image/jpeg"
+                        },
+                        {
+                          "id": 6698,
+                          "url": "https://i.imgur.com/8JTc5z3.jpg",
+                          "type": "image/jpeg"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "examples": {
+                  "Memes-about-Rockets": {
+                    "value": {
+                      "memes": [
+                        {
+                          "id": 6696,
+                          "url": "https://i.imgur.com/1rmAxUG.jpg",
+                          "type": "image/jpeg"
+                        },
+                        {
+                          "id": 6697,
+                          "url": "https://i.imgur.com/ELT8zMQ.jpg",
+                          "type": "image/jpeg"
+                        },
+                        {
+                          "id": 6698,
+                          "url": "https://i.imgur.com/8JTc5z3.jpg",
+                          "type": "image/jpeg"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "operationId": "search-memes",
+        "description": "Search for memes.\nSee https://humorapi.com/docs/#Search-Memes for more.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/keywords"
+          },
+          {
+            "in": "query",
+            "name": "keywords-in-image",
+            "schema": {
+              "type": "boolean",
+              "enum": [
+                true,
+                false
+              ],
+              "example": false
+            },
+            "description": "Whether the keywords should be found in the meme's image."
+          },
+          {
+            "$ref": "#/components/parameters/media-type"
+          },
+          {
+            "$ref": "#/components/parameters/number"
+          },
+          {
+            "$ref": "#/components/parameters/min-rating"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          }
+        ]
+      }
+    },
+    "/memes/random": {
+      "parameters": [],
+      "get": {
+        "summary": "Random Meme",
+        "tags": [
+          "memes"
+        ],
+        "responses": {
+          "200": {
+            "description": "Random Meme Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    },
+                    "url": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "type": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "url",
+                    "type"
+                  ],
+                  "x-examples": {
+                    "example-1": {
+                      "id": 50561,
+                      "url": "https://preview.redd.it/hg0zn2mhjsh01.png?width=640&crop=smart&auto=webp&s=f19b0a87edfc6c71b35ec9aceb64799cd532ff59",
+                      "type": "image/png"
+                    }
+                  }
+                },
+                "examples": {
+                  "Random-Meme": {
+                    "value": {
+                      "id": 50561,
+                      "url": "https://preview.redd.it/hg0zn2mhjsh01.png?width=640&crop=smart&auto=webp&s=f19b0a87edfc6c71b35ec9aceb64799cd532ff59",
+                      "type": "image/png"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "operationId": "random-meme",
+        "description": "Get a random meme.\nSee https://humorapi.com/docs/#Random-Meme for more.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/keywords"
+          },
+          {
+            "in": "query",
+            "name": "keywords-in-image",
+            "schema": {
+              "type": "boolean",
+              "enum": [
+                true,
+                false
+              ],
+              "example": false
+            },
+            "description": "Whether the keywords should be found in the meme's image."
+          },
+          {
+            "$ref": "#/components/parameters/media-type"
+          },
+          {
+            "$ref": "#/components/parameters/number"
+          },
+          {
+            "$ref": "#/components/parameters/min-rating"
+          }
+        ]
+      }
+    },
+    "/jokes/random": {
+      "parameters": [],
+      "get": {
+        "summary": "Random Joke",
+        "tags": [
+          "jokes"
+        ],
+        "responses": {
+          "200": {
+            "description": "Random Joke Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    },
+                    "joke": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "joke"
+                  ],
+                  "x-examples": {
+                    "example-1": {
+                      "id": 1,
+                      "joke": "this is a car joke"
+                    }
+                  }
+                },
+                "examples": {
+                  "Random-Car-Joke": {
+                    "value": {
+                      "id": 1,
+                      "joke": "this is a car joke"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "operationId": "random-joke",
+        "description": "Get a random joke.\nSee https://humorapi.com/docs/#Random-Joke for more.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/keywords"
+          },
+          {
+            "$ref": "#/components/parameters/include-tags"
+          },
+          {
+            "$ref": "#/components/parameters/exclude-tags"
+          },
+          {
+            "$ref": "#/components/parameters/min-rating"
+          },
+          {
+            "$ref": "#/components/parameters/max-length"
+          }
+        ]
+      }
+    },
+    "/praise": {
+      "parameters": [],
+      "get": {
+        "summary": "Praise",
+        "tags": [
+          "other"
+        ],
+        "responses": {
+          "200": {
+            "description": "Praise Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "text": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "text"
+                  ],
+                  "x-examples": {
+                    "example-1": {
+                      "text": "Bravo Alex, you mastermind, you did it again."
+                    }
+                  }
+                },
+                "examples": {
+                  "Praise": {
+                    "value": {
+                      "text": "Bravo Alex, you mastermind, you did it again."
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "operationId": "praise",
+        "description": "Praise somebody for doing something.\nSee https://humorapi.com/docs/#Praise for more.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/name"
+          },
+          {
+            "$ref": "#/components/parameters/reason"
+          }
+        ]
+      }
+    },
+    "/insult": {
+      "parameters": [],
+      "get": {
+        "summary": "Insult",
+        "tags": [
+          "other"
+        ],
+        "responses": {
+          "200": {
+            "description": "Insult Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "text": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "text"
+                  ],
+                  "x-examples": {
+                    "example-1": {
+                      "text": "Bravo Alex, you mastermind, you did it again."
+                    }
+                  }
+                },
+                "examples": {
+                  "Insult": {
+                    "value": {
+                      "text": "Holy moley, you dropped the ball Alex, you dingbat."
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "operationId": "insult",
+        "description": "Insult somebody for doing something.\nSee https://humorapi.com/docs/#Insult for more.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/name"
+          },
+          {
+            "$ref": "#/components/parameters/reason"
+          }
+        ]
+      }
+    },
+    "/words/rate": {
+      "parameters": [],
+      "get": {
+        "summary": "Rate Word",
+        "tags": [
+          "other"
+        ],
+        "responses": {
+          "200": {
+            "description": "Word Rating Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "rating": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "rating"
+                  ],
+                  "x-examples": {
+                    "example-1": {
+                      "rating": 0.57
+                    }
+                  }
+                },
+                "examples": {
+                  "Word-Funniness-Rating": {
+                    "value": {
+                      "rating": 0.57
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "operationId": "rate-word",
+        "description": "Rate the funniness of a word.\nSee https://humorapi.com/docs/#Rate-Word for more.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "example": "cookie"
+            },
+            "in": "query",
+            "name": "word",
+            "description": "The word to be rated.",
+            "required": true
+          }
+        ]
+      }
+    },
+    "/words/nonsense/random": {
+      "parameters": [],
+      "get": {
+        "summary": "Generate Nonsense Word",
+        "tags": [
+          "other"
+        ],
+        "responses": {
+          "200": {
+            "description": "Generate Nonsense Word Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "word": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "rating": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "word",
+                    "rating"
+                  ],
+                  "x-examples": {
+                    "example-1": {
+                      "word": "caboo",
+                      "rating": 0.41
+                    }
+                  }
+                },
+                "examples": {
+                  "Generated-Nonsense-Word": {
+                    "value": {
+                      "word": "caboo",
+                      "rating": 0.41
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "operationId": "generate-nonsense-word",
+        "description": "Generate a nonsense word.\nSee https://humorapi.com/docs/#Generate-Nonsense-Word for more.",
+        "parameters": []
+      }
+    },
+    "/jokes": {
+      "post": {
+        "summary": "Submit Joke",
+        "operationId": "submit-joke",
+        "responses": {
+          "200": {
+            "description": "Successful submission.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ],
+                  "x-examples": {
+                    "example-1": {
+                      "message": ""
+                    }
+                  }
+                },
+                "examples": {
+                  "Successful-Joke-Submission": {
+                    "value": {
+                      "message": "Thanks for submitting the joke."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Submit a joke.\nSee https://humorapi.com/docs/#Submit-Joke for more.",
+        "requestBody": {
+          "content": {
+            "text/plain": {
+              "schema": {
+                "description": "",
+                "type": "string",
+                "x-examples": {
+                  "example-1": "asdf"
+                }
+              },
+              "examples": {
+                "Joke-Request-Body": {
+                  "$ref": "#/components/examples/Plain-Joke"
+                }
+              }
+            }
+          },
+          "description": "Post the joke as plain text."
+        },
+        "tags": [
+          "jokes"
+        ]
+      },
+      "parameters": []
+    },
+    "/jokes/analyze": {
+      "post": {
+        "summary": "Analyze Joke",
+        "operationId": "analyze-joke",
+        "responses": {
+          "200": {
+            "description": "Successful analysis",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "joke": "What do you call a deer without eyes? No ideer.",
+                      "tags": [
+                        "ANIMAL"
+                      ]
+                    }
+                  },
+                  "properties": {
+                    "joke": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "tags": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "joke",
+                    "tags"
+                  ]
+                },
+                "examples": {
+                  "Successful-Joke-Analysis": {
+                    "value": {
+                      "joke": "What do you call a deer without eyes? No ideer.",
+                      "tags": [
+                        "ANIMAL"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Analyze a joke.\nSee https://humorapi.com/docs/#Analyze-Joke for more.",
+        "requestBody": {
+          "content": {
+            "text/plain": {
+              "schema": {
+                "description": "",
+                "type": "string",
+                "x-examples": {
+                  "example-1": "abc"
+                }
+              },
+              "examples": {
+                "Joke-Request-Body": {
+                  "$ref": "#/components/examples/Plain-Joke"
+                }
+              }
+            }
+          },
+          "description": "Post the joke as plain text."
+        },
+        "tags": [
+          "jokes"
+        ]
+      },
+      "parameters": []
+    },
+    "/jokes/{id}/upvote": {
+      "post": {
+        "summary": "Upvote a Joke",
+        "operationId": "upvote-joke",
+        "responses": {
+          "200": {
+            "description": "Successful upvote",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ],
+                  "x-examples": {
+                    "example-1": {
+                      "message": ""
+                    }
+                  }
+                },
+                "examples": {
+                  "Successful-Vote": {
+                    "$ref": "#/components/examples/Successful-Vote"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Upvote a joke.\nSee https://humorapi.com/docs/#Upvote-Joke for more.",
+        "tags": [
+          "jokes"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/id"
+        }
+      ]
+    },
+    "/memes/{id}/upvote": {
+      "post": {
+        "summary": "Upvote a Meme",
+        "operationId": "upvote-meme",
+        "responses": {
+          "200": {
+            "description": "Successful upvote",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ],
+                  "x-examples": {
+                    "example-1": {
+                      "message": ""
+                    }
+                  }
+                },
+                "examples": {
+                  "Successful-Vote": {
+                    "$ref": "#/components/examples/Successful-Vote"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Upvote a meme.\nSee https://humorapi.com/docs/#Upvote-Meme for more.",
+        "tags": [
+          "memes"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/id"
+        }
+      ]
+    },
+    "/jokes/{id}/downvote": {
+      "post": {
+        "summary": "Downvote a Joke",
+        "operationId": "downvote-joke",
+        "responses": {
+          "200": {
+            "description": "Successful downvote",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ],
+                  "x-examples": {
+                    "example-1": {
+                      "message": ""
+                    }
+                  }
+                },
+                "examples": {
+                  "Successful-Vote": {
+                    "$ref": "#/components/examples/Successful-Vote"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Downvote a joke.\nSee https://humorapi.com/docs/#Downvote-Joke for more.",
+        "tags": [
+          "jokes"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/id"
+        }
+      ]
+    },
+    "/memes/{id}/downvote": {
+      "post": {
+        "summary": "Downvote a Meme",
+        "operationId": "downvote-meme",
+        "responses": {
+          "200": {
+            "description": "Successful downvote",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ],
+                  "x-examples": {
+                    "example-1": {
+                      "message": ""
+                    }
+                  }
+                },
+                "examples": {
+                  "Successful-Vote": {
+                    "$ref": "#/components/examples/Successful-Vote"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Downvote a meme.\nSee https://humorapi.com/docs/#Downvote-Meme for more.",
+        "tags": [
+          "memes"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/id"
+        }
+      ]
+    }
+  },
+  "components": {
+    "schemas": {},
+    "securitySchemes": {
+      "apiKey": {
+        "type": "apiKey",
+        "in": "query",
+        "name": "api-key"
+      }
+    },
+    "parameters": {
+      "keywords": {
+        "name": "keywords",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "example": "rocket"
+        },
+        "description": "A comma separated list of keywords."
+      },
+      "id": {
+        "name": "id",
+        "in": "path",
+        "schema": {
+          "type": "integer",
+          "example": 1,
+          "minimum": 1
+        },
+        "description": "The object's id.",
+        "required": true
+      },
+      "include-tags": {
+        "name": "include-tags",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "clean",
+            "yo_mama",
+            "chuck_norris",
+            "nsfw",
+            "racist",
+            "sexist",
+            "sexual",
+            "political",
+            "religious",
+            "knock_knock",
+            "christmas",
+            "nerdy",
+            "analogy",
+            "one_liner",
+            "dark",
+            "jewish",
+            "school",
+            "sport",
+            "law",
+            "kids",
+            "animal",
+            "relationship",
+            "insults",
+            "blondes",
+            "deep_thoughts",
+            "food",
+            "holiday"
+          ],
+          "example": "one_liner"
+        },
+        "description": "A comma separated list of tags that the joke must have."
+      },
+      "exclude-tags": {
+        "name": "exclude-tags",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "clean",
+            "yo_mama",
+            "chuck_norris",
+            "nsfw",
+            "racist",
+            "sexist",
+            "sexual",
+            "political",
+            "religious",
+            "knock_knock",
+            "christmas",
+            "nerdy",
+            "analogy",
+            "one_liner",
+            "dark",
+            "jewish",
+            "school",
+            "sport",
+            "law",
+            "kids",
+            "animal",
+            "relationship",
+            "insults",
+            "blondes",
+            "deep_thoughts",
+            "food",
+            "holiday"
+          ],
+          "example": "nsfw"
+        },
+        "description": "A comma separated list of tags that the joke must not have."
+      },
+      "number": {
+        "name": "number",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10,
+          "example": 3
+        },
+        "description": "The number of results to retrieve between 1 and 10."
+      },
+      "min-rating": {
+        "name": "min-rating",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "minLength": 0,
+          "minimum": 0,
+          "maximum": 10,
+          "example": 7
+        },
+        "description": "The minimum rating between 0 and 10 the result should have."
+      },
+      "max-length": {
+        "name": "max-length",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "minimum": 10,
+          "maximum": 9999,
+          "example": 200
+        },
+        "description": "The maximum number of letters in the joke."
+      },
+      "media-type": {
+        "name": "media-type",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "image",
+            "video",
+            "jpg",
+            "gif",
+            "png",
+            "mp4"
+          ],
+          "example": "image"
+        },
+        "description": "The type of the content. Can be either 'image' or 'video' or specific formats such as 'jpg', 'png', 'gif', or 'mp4'."
+      },
+      "name": {
+        "name": "name",
+        "in": "query",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "Alex"
+        },
+        "description": "The person's name."
+      },
+      "reason": {
+        "name": "reason",
+        "in": "query",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "you did it again"
+        },
+        "description": "The reason for the praise/insult."
+      },
+      "query": {
+        "name": "query",
+        "in": "query",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "cat"
+        },
+        "description": "A search query."
+      },
+      "offset": {
+        "name": "offset",
+        "in": "query",
+        "schema": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1000
+        },
+        "description": "The number of results to skip."
+      }
+    },
+    "examples": {
+      "Successful-Vote": {
+        "value": {
+          "message": "Thanks for submitting an upvote."
+        }
+      },
+      "Plain-Joke": {
+        "value": "What do you call a deer without eyes? No ideer."
+      }
+    }
+  },
+  "security": [
+    {
+      "apiKey": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "jokes"
+    },
+    {
+      "name": "memes"
+    },
+    {
+      "name": "other"
+    }
+  ]
+}
