@@ -1,0 +1,17 @@
+.gitignore
+.openapi-generator-ignore
+com/worldnewsapi/api.ts
+com/worldnewsapi/client/README.md
+com/worldnewsapi/client/api.module.ts
+com/worldnewsapi/client/configuration.ts
+com/worldnewsapi/client/encoder.ts
+com/worldnewsapi/client/index.ts
+com/worldnewsapi/client/model/inlineResponse200.ts
+com/worldnewsapi/client/model/inlineResponse2001.ts
+com/worldnewsapi/client/model/inlineResponse2002.ts
+com/worldnewsapi/client/model/inlineResponse200News.ts
+com/worldnewsapi/client/model/models.ts
+com/worldnewsapi/client/model/news.ts
+com/worldnewsapi/client/variables.ts
+com/worldnewsapi/news.service.ts
+git_push.sh

@@ -1,0 +1,14 @@
+{
+    "artifactId": "com.worldnewsapi",
+    "artifactUrl": "https://worldnewsapi.com/sdks",
+    "dateLibrary": "java8",
+    "artifactDescription": "Java Client for the World News API",
+    "developerName": "David Urbansky",
+	"developerEmail": "mail@worldnewsapi.com",
+	"developerOrganization": "dsky",
+	"developerOrganizationUrl": "https://worldnewsapi.com",
+	"licenseName": "World News API license",
+	"licenseUrl": "https://worldnewsapi.com/terms",
+	"java8": true
+}
+

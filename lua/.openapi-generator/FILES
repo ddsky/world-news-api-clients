@@ -1,0 +1,16 @@
+.gitignore
+.openapi-generator-ignore
+git_push.sh
+openapiclient-1.0.0-1.rockspec
+openapiclient/api/news_api.lua
+openapiclient/model/inline_response_200.lua
+openapiclient/model/inline_response_200_1.lua
+openapiclient/model/inline_response_200_2.lua
+openapiclient/model/inline_response_200_news.lua
+openapiclient/model/news.lua
+spec/inline_response_200_1_spec.lua
+spec/inline_response_200_2_spec.lua
+spec/inline_response_200_news_spec.lua
+spec/inline_response_200_spec.lua
+spec/news_api_spec.lua
+spec/news_spec.lua
