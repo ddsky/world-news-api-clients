@@ -27,7 +27,6 @@ java -jar .\openapi-generator-cli-5.4.0.jar generate -i .\world-news-api-openapi
 
 # create sdk zips
 .\7za.exe a -tzip .\zips\java-client.zip .\java\*
-.\7za.exe a -tzip .\zips\java-client.zip .\java\*
 .\7za.exe a -tzip .\zips\javascript-client.zip .\javascript\*
 .\7za.exe a -tzip .\zips\typescript-client.zip .\typescript\*
 .\7za.exe a -tzip .\zips\angular-client.zip .\angular\*
