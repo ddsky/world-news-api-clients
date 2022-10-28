@@ -2,7 +2,7 @@
 
 World News API
 - API version: 1.0
-  - Build date: 2022-05-05T15:22:16.944+02:00[Europe/Berlin]
+  - Build date: 2022-10-28T13:50:26.867+02:00[Europe/Berlin]
 
 The world's news wrapped into a single API.
 
