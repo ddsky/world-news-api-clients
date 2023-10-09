@@ -101,7 +101,7 @@ public class NewsApi {
       // normal form params
     }
 
-    String[] authNames = new String[] { "apiKey" };
+    String[] authNames = new String[] { "apiKey", "headerApiKey" };
 
     try {
       String localVarResponse = apiInvoker.invokeAPI (basePath, path, "GET", queryParams, postBody, headerParams, formParams, contentType, authNames);
@@ -176,7 +176,7 @@ public class NewsApi {
       // normal form params
           }
 
-    String[] authNames = new String[] { "apiKey" };
+    String[] authNames = new String[] { "apiKey", "headerApiKey" };
 
     try {
       apiInvoker.invokeAPI(basePath, path, "GET", queryParams, postBody, headerParams, formParams, contentType, authNames,
@@ -185,6 +185,154 @@ public class NewsApi {
           public void onResponse(String localVarResponse) {
             try {
               responseListener.onResponse((InlineResponse2001) ApiInvoker.deserialize(localVarResponse,  "", InlineResponse2001.class));
+            } catch (ApiException exception) {
+               errorListener.onErrorResponse(new VolleyError(exception));
+            }
+          }
+      }, new Response.ErrorListener() {
+          @Override
+          public void onErrorResponse(VolleyError error) {
+            errorListener.onErrorResponse(error);
+          }
+      });
+    } catch (ApiException ex) {
+      errorListener.onErrorResponse(new VolleyError(ex));
+    }
+  }
+  /**
+  * Extract News
+  * Extract a news links from a news website. 
+   * @param url The url from which links should be extracted.
+   * @param apiKey Your API key.
+   * @param prefix The prefix the news links must start with.
+   * @param subDomain Whether to include links to news on sub-domains.
+   * @return Object
+  */
+  public Object extractNews_1 (String url, String apiKey, String prefix, Boolean subDomain) throws TimeoutException, ExecutionException, InterruptedException, ApiException {
+    Object postBody = null;
+    // verify the required parameter 'url' is set
+    if (url == null) {
+      VolleyError error = new VolleyError("Missing the required parameter 'url' when calling extractNews_1",
+        new ApiException(400, "Missing the required parameter 'url' when calling extractNews_1"));
+    }
+    // verify the required parameter 'apiKey' is set
+    if (apiKey == null) {
+      VolleyError error = new VolleyError("Missing the required parameter 'apiKey' when calling extractNews_1",
+        new ApiException(400, "Missing the required parameter 'apiKey' when calling extractNews_1"));
+    }
+
+    // create path and map variables
+    String path = "/extract-news-links";
+
+    // query params
+    List<Pair> queryParams = new ArrayList<Pair>();
+    // header params
+    Map<String, String> headerParams = new HashMap<String, String>();
+    // form params
+    Map<String, String> formParams = new HashMap<String, String>();
+    queryParams.addAll(ApiInvoker.parameterToPairs("", "url", url));
+    queryParams.addAll(ApiInvoker.parameterToPairs("", "prefix", prefix));
+    queryParams.addAll(ApiInvoker.parameterToPairs("", "sub-domain", subDomain));
+    queryParams.addAll(ApiInvoker.parameterToPairs("", "api-key", apiKey));
+    String[] contentTypes = {
+    };
+    String contentType = contentTypes.length > 0 ? contentTypes[0] : "application/json";
+
+    if (contentType.startsWith("multipart/form-data")) {
+      // file uploading
+      MultipartEntityBuilder localVarBuilder = MultipartEntityBuilder.create();
+      HttpEntity httpEntity = localVarBuilder.build();
+      postBody = httpEntity;
+    } else {
+      // normal form params
+    }
+
+    String[] authNames = new String[] { "apiKey", "headerApiKey" };
+
+    try {
+      String localVarResponse = apiInvoker.invokeAPI (basePath, path, "GET", queryParams, postBody, headerParams, formParams, contentType, authNames);
+      if (localVarResponse != null) {
+         return (Object) ApiInvoker.deserialize(localVarResponse, "", Object.class);
+      } else {
+         return null;
+      }
+    } catch (ApiException ex) {
+       throw ex;
+    } catch (InterruptedException ex) {
+       throw ex;
+    } catch (ExecutionException ex) {
+      if (ex.getCause() instanceof VolleyError) {
+        VolleyError volleyError = (VolleyError)ex.getCause();
+        if (volleyError.networkResponse != null) {
+          throw new ApiException(volleyError.networkResponse.statusCode, volleyError.getMessage());
+        }
+      }
+      throw ex;
+    } catch (TimeoutException ex) {
+      throw ex;
+    }
+  }
+
+      /**
+   * Extract News
+   * Extract a news links from a news website. 
+   * @param url The url from which links should be extracted.   * @param apiKey Your API key.   * @param prefix The prefix the news links must start with.   * @param subDomain Whether to include links to news on sub-domains.
+  */
+  public void extractNews_1 (String url, String apiKey, String prefix, Boolean subDomain, final Response.Listener<Object> responseListener, final Response.ErrorListener errorListener) {
+    Object postBody = null;
+
+    // verify the required parameter 'url' is set
+    if (url == null) {
+      VolleyError error = new VolleyError("Missing the required parameter 'url' when calling extractNews_1",
+        new ApiException(400, "Missing the required parameter 'url' when calling extractNews_1"));
+    }
+    // verify the required parameter 'apiKey' is set
+    if (apiKey == null) {
+      VolleyError error = new VolleyError("Missing the required parameter 'apiKey' when calling extractNews_1",
+        new ApiException(400, "Missing the required parameter 'apiKey' when calling extractNews_1"));
+    }
+
+    // create path and map variables
+    String path = "/extract-news-links".replaceAll("\\{format\\}","json");
+
+    // query params
+    List<Pair> queryParams = new ArrayList<Pair>();
+    // header params
+    Map<String, String> headerParams = new HashMap<String, String>();
+    // form params
+    Map<String, String> formParams = new HashMap<String, String>();
+
+    queryParams.addAll(ApiInvoker.parameterToPairs("", "url", url));
+    queryParams.addAll(ApiInvoker.parameterToPairs("", "prefix", prefix));
+    queryParams.addAll(ApiInvoker.parameterToPairs("", "sub-domain", subDomain));
+    queryParams.addAll(ApiInvoker.parameterToPairs("", "api-key", apiKey));
+
+
+    String[] contentTypes = {
+      
+    };
+    String contentType = contentTypes.length > 0 ? contentTypes[0] : "application/json";
+
+    if (contentType.startsWith("multipart/form-data")) {
+      // file uploading
+      MultipartEntityBuilder localVarBuilder = MultipartEntityBuilder.create();
+      
+
+      HttpEntity httpEntity = localVarBuilder.build();
+      postBody = httpEntity;
+    } else {
+      // normal form params
+          }
+
+    String[] authNames = new String[] { "apiKey", "headerApiKey" };
+
+    try {
+      apiInvoker.invokeAPI(basePath, path, "GET", queryParams, postBody, headerParams, formParams, contentType, authNames,
+        new Response.Listener<String>() {
+          @Override
+          public void onResponse(String localVarResponse) {
+            try {
+              responseListener.onResponse((Object) ApiInvoker.deserialize(localVarResponse,  "", Object.class));
             } catch (ApiException exception) {
                errorListener.onErrorResponse(new VolleyError(exception));
             }
@@ -236,7 +384,7 @@ public class NewsApi {
       // normal form params
     }
 
-    String[] authNames = new String[] { "apiKey" };
+    String[] authNames = new String[] { "apiKey", "headerApiKey" };
 
     try {
       String localVarResponse = apiInvoker.invokeAPI (basePath, path, "GET", queryParams, postBody, headerParams, formParams, contentType, authNames);
@@ -305,7 +453,7 @@ public class NewsApi {
       // normal form params
           }
 
-    String[] authNames = new String[] { "apiKey" };
+    String[] authNames = new String[] { "apiKey", "headerApiKey" };
 
     try {
       apiInvoker.invokeAPI(basePath, path, "GET", queryParams, postBody, headerParams, formParams, contentType, authNames,
@@ -314,6 +462,151 @@ public class NewsApi {
           public void onResponse(String localVarResponse) {
             try {
               responseListener.onResponse((InlineResponse2002) ApiInvoker.deserialize(localVarResponse,  "", InlineResponse2002.class));
+            } catch (ApiException exception) {
+               errorListener.onErrorResponse(new VolleyError(exception));
+            }
+          }
+      }, new Response.ErrorListener() {
+          @Override
+          public void onErrorResponse(VolleyError error) {
+            errorListener.onErrorResponse(error);
+          }
+      });
+    } catch (ApiException ex) {
+      errorListener.onErrorResponse(new VolleyError(ex));
+    }
+  }
+  /**
+  * News Website to RSS Feed
+  * Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page. 
+   * @param url The url from which links should be extracted.
+   * @param apiKey Your API key.
+   * @param extractNews Whether extract news and add information such as description, publish date, and image to each item.
+   * @return Object
+  */
+  public Object newsWebsiteToRSSFeed (String url, String apiKey, Boolean extractNews) throws TimeoutException, ExecutionException, InterruptedException, ApiException {
+    Object postBody = null;
+    // verify the required parameter 'url' is set
+    if (url == null) {
+      VolleyError error = new VolleyError("Missing the required parameter 'url' when calling newsWebsiteToRSSFeed",
+        new ApiException(400, "Missing the required parameter 'url' when calling newsWebsiteToRSSFeed"));
+    }
+    // verify the required parameter 'apiKey' is set
+    if (apiKey == null) {
+      VolleyError error = new VolleyError("Missing the required parameter 'apiKey' when calling newsWebsiteToRSSFeed",
+        new ApiException(400, "Missing the required parameter 'apiKey' when calling newsWebsiteToRSSFeed"));
+    }
+
+    // create path and map variables
+    String path = "/feed.rss";
+
+    // query params
+    List<Pair> queryParams = new ArrayList<Pair>();
+    // header params
+    Map<String, String> headerParams = new HashMap<String, String>();
+    // form params
+    Map<String, String> formParams = new HashMap<String, String>();
+    queryParams.addAll(ApiInvoker.parameterToPairs("", "url", url));
+    queryParams.addAll(ApiInvoker.parameterToPairs("", "extract-news", extractNews));
+    queryParams.addAll(ApiInvoker.parameterToPairs("", "api-key", apiKey));
+    String[] contentTypes = {
+    };
+    String contentType = contentTypes.length > 0 ? contentTypes[0] : "application/json";
+
+    if (contentType.startsWith("multipart/form-data")) {
+      // file uploading
+      MultipartEntityBuilder localVarBuilder = MultipartEntityBuilder.create();
+      HttpEntity httpEntity = localVarBuilder.build();
+      postBody = httpEntity;
+    } else {
+      // normal form params
+    }
+
+    String[] authNames = new String[] { "apiKey", "headerApiKey" };
+
+    try {
+      String localVarResponse = apiInvoker.invokeAPI (basePath, path, "GET", queryParams, postBody, headerParams, formParams, contentType, authNames);
+      if (localVarResponse != null) {
+         return (Object) ApiInvoker.deserialize(localVarResponse, "", Object.class);
+      } else {
+         return null;
+      }
+    } catch (ApiException ex) {
+       throw ex;
+    } catch (InterruptedException ex) {
+       throw ex;
+    } catch (ExecutionException ex) {
+      if (ex.getCause() instanceof VolleyError) {
+        VolleyError volleyError = (VolleyError)ex.getCause();
+        if (volleyError.networkResponse != null) {
+          throw new ApiException(volleyError.networkResponse.statusCode, volleyError.getMessage());
+        }
+      }
+      throw ex;
+    } catch (TimeoutException ex) {
+      throw ex;
+    }
+  }
+
+      /**
+   * News Website to RSS Feed
+   * Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page. 
+   * @param url The url from which links should be extracted.   * @param apiKey Your API key.   * @param extractNews Whether extract news and add information such as description, publish date, and image to each item.
+  */
+  public void newsWebsiteToRSSFeed (String url, String apiKey, Boolean extractNews, final Response.Listener<Object> responseListener, final Response.ErrorListener errorListener) {
+    Object postBody = null;
+
+    // verify the required parameter 'url' is set
+    if (url == null) {
+      VolleyError error = new VolleyError("Missing the required parameter 'url' when calling newsWebsiteToRSSFeed",
+        new ApiException(400, "Missing the required parameter 'url' when calling newsWebsiteToRSSFeed"));
+    }
+    // verify the required parameter 'apiKey' is set
+    if (apiKey == null) {
+      VolleyError error = new VolleyError("Missing the required parameter 'apiKey' when calling newsWebsiteToRSSFeed",
+        new ApiException(400, "Missing the required parameter 'apiKey' when calling newsWebsiteToRSSFeed"));
+    }
+
+    // create path and map variables
+    String path = "/feed.rss".replaceAll("\\{format\\}","json");
+
+    // query params
+    List<Pair> queryParams = new ArrayList<Pair>();
+    // header params
+    Map<String, String> headerParams = new HashMap<String, String>();
+    // form params
+    Map<String, String> formParams = new HashMap<String, String>();
+
+    queryParams.addAll(ApiInvoker.parameterToPairs("", "url", url));
+    queryParams.addAll(ApiInvoker.parameterToPairs("", "extract-news", extractNews));
+    queryParams.addAll(ApiInvoker.parameterToPairs("", "api-key", apiKey));
+
+
+    String[] contentTypes = {
+      
+    };
+    String contentType = contentTypes.length > 0 ? contentTypes[0] : "application/json";
+
+    if (contentType.startsWith("multipart/form-data")) {
+      // file uploading
+      MultipartEntityBuilder localVarBuilder = MultipartEntityBuilder.create();
+      
+
+      HttpEntity httpEntity = localVarBuilder.build();
+      postBody = httpEntity;
+    } else {
+      // normal form params
+          }
+
+    String[] authNames = new String[] { "apiKey", "headerApiKey" };
+
+    try {
+      apiInvoker.invokeAPI(basePath, path, "GET", queryParams, postBody, headerParams, formParams, contentType, authNames,
+        new Response.Listener<String>() {
+          @Override
+          public void onResponse(String localVarResponse) {
+            try {
+              responseListener.onResponse((Object) ApiInvoker.deserialize(localVarResponse,  "", Object.class));
             } catch (ApiException exception) {
                errorListener.onErrorResponse(new VolleyError(exception));
             }
@@ -388,7 +681,7 @@ public class NewsApi {
       // normal form params
     }
 
-    String[] authNames = new String[] { "apiKey" };
+    String[] authNames = new String[] { "apiKey", "headerApiKey" };
 
     try {
       String localVarResponse = apiInvoker.invokeAPI (basePath, path, "GET", queryParams, postBody, headerParams, formParams, contentType, authNames);
@@ -466,7 +759,7 @@ public class NewsApi {
       // normal form params
           }
 
-    String[] authNames = new String[] { "apiKey" };
+    String[] authNames = new String[] { "apiKey", "headerApiKey" };
 
     try {
       apiInvoker.invokeAPI(basePath, path, "GET", queryParams, postBody, headerParams, formParams, contentType, authNames,

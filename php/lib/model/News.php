@@ -67,6 +67,7 @@ class News implements ModelInterface, ArrayAccess, \JsonSerializable
         'summary' => 'string',
         'url' => 'string',
         'image' => 'string',
+        'publish_date' => 'string',
         'author' => 'string',
         'language' => 'string',
         'source_country' => 'string',
@@ -87,6 +88,7 @@ class News implements ModelInterface, ArrayAccess, \JsonSerializable
         'summary' => null,
         'url' => null,
         'image' => null,
+        'publish_date' => null,
         'author' => null,
         'language' => null,
         'source_country' => null,
@@ -126,6 +128,7 @@ class News implements ModelInterface, ArrayAccess, \JsonSerializable
         'summary' => 'summary',
         'url' => 'url',
         'image' => 'image',
+        'publish_date' => 'publish_date',
         'author' => 'author',
         'language' => 'language',
         'source_country' => 'source_country',
@@ -144,6 +147,7 @@ class News implements ModelInterface, ArrayAccess, \JsonSerializable
         'summary' => 'setSummary',
         'url' => 'setUrl',
         'image' => 'setImage',
+        'publish_date' => 'setPublishDate',
         'author' => 'setAuthor',
         'language' => 'setLanguage',
         'source_country' => 'setSourceCountry',
@@ -162,6 +166,7 @@ class News implements ModelInterface, ArrayAccess, \JsonSerializable
         'summary' => 'getSummary',
         'url' => 'getUrl',
         'image' => 'getImage',
+        'publish_date' => 'getPublishDate',
         'author' => 'getAuthor',
         'language' => 'getLanguage',
         'source_country' => 'getSourceCountry',
@@ -231,6 +236,7 @@ class News implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->container['summary'] = $data['summary'] ?? null;
         $this->container['url'] = $data['url'] ?? null;
         $this->container['image'] = $data['image'] ?? null;
+        $this->container['publish_date'] = $data['publish_date'] ?? null;
         $this->container['author'] = $data['author'] ?? null;
         $this->container['language'] = $data['language'] ?? null;
         $this->container['source_country'] = $data['source_country'] ?? null;
@@ -401,6 +407,30 @@ class News implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setImage($image)
     {
         $this->container['image'] = $image;
+
+        return $this;
+    }
+
+    /**
+     * Gets publish_date
+     *
+     * @return string|null
+     */
+    public function getPublishDate()
+    {
+        return $this->container['publish_date'];
+    }
+
+    /**
+     * Sets publish_date
+     *
+     * @param string|null $publish_date publish_date
+     *
+     * @return self
+     */
+    public function setPublishDate($publish_date)
+    {
+        $this->container['publish_date'] = $publish_date;
 
         return $this;
     }

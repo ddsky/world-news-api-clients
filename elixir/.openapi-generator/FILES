@@ -1,5 +1,4 @@
 .gitignore
-.openapi-generator-ignore
 README.md
 config/config.exs
 lib/com/worldnewsapi/client/api/news.ex

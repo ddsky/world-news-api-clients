@@ -342,6 +342,12 @@ sub update_params_for_auth {
                 $query_params->{'api-key'} = $api_key;
             }
         }
+        elsif ($auth eq 'headerApiKey') {
+            my $api_key = $self->get_api_key_with_prefix('x-api-key');
+            if ($api_key) {
+                $header_params->{'x-api-key'} = $api_key;
+            }
+        }
         else {
            # TODO show warning about security definition not found
         }

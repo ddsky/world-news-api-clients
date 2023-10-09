@@ -32,6 +32,7 @@ import com.squareup.moshi.Json
  * @param summary 
  * @param url 
  * @param image 
+ * @param publishDate 
  * @param author 
  * @param language 
  * @param sourceCountry 
@@ -57,6 +58,9 @@ data class News (
 
     @Json(name = "image")
     val image: kotlin.String? = null,
+
+    @Json(name = "publish_date")
+    val publishDate: kotlin.String? = null,
 
     @Json(name = "author")
     val author: kotlin.String? = null,

@@ -11,6 +11,7 @@ servers:
 - url: https://api.worldnewsapi.com
 security:
 - apiKey: []
+- headerApiKey: []
 tags:
 - name: news
 paths:
@@ -35,7 +36,7 @@ paths:
         name: source-countries
         required: false
         schema:
-          example: gb,us
+          example: us,uk
           type: string
         style: form
       - description: The ISO 6391 language code of the news, e.g. "en" for English.
@@ -687,6 +688,194 @@ paths:
       tags:
       - news
       x-accepts: application/json
+  /extract-news-links:
+    get:
+      deprecated: false
+      description: 'Extract a news links from a news website. '
+      externalDocs:
+        description: Read entire docs
+        url: https://worldnewsapi.com/docs#Extract-News
+      operationId: extractNews
+      parameters:
+      - description: The url from which links should be extracted.
+        explode: false
+        in: query
+        name: url
+        required: true
+        schema:
+          example: https://nytimes.com
+          type: string
+        style: form
+      - description: The prefix the news links must start with.
+        explode: false
+        in: query
+        name: prefix
+        required: false
+        schema:
+          example: ""
+          type: string
+        style: form
+      - description: Whether to include links to news on sub-domains.
+        explode: false
+        in: query
+        name: sub-domain
+        required: false
+        schema:
+          example: true
+          type: boolean
+        style: form
+      - description: Your API key.
+        explode: false
+        in: query
+        name: api-key
+        required: true
+        schema:
+          example: abcd1234
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            ? ""
+            : schema:
+                type: object
+            application/json:
+              examples:
+                Example 1:
+                  value:
+                    news_links:
+                    - https://www.nytimes.com/2023/10/07/opinion/wnba-liberty-championship.html
+                    - https://www.nytimes.com/2023/10/08/business/economy/labor-strikes.html
+                    - https://www.nytimes.com/2023/10/08/dining/sunday-calls-for-old-fashioned-beef-stew.html
+              schema:
+                properties:
+                  news_links:
+                    items:
+                      type: string
+                    type: array
+                type: object
+                x-examples:
+                  Example 1:
+                    news_links:
+                    - https://www.nytimes.com/2023/10/07/opinion/wnba-liberty-championship.html
+                    - https://www.nytimes.com/2023/10/08/business/economy/labor-strikes.html
+                    - https://www.nytimes.com/2023/10/08/dining/sunday-calls-for-old-fashioned-beef-stew.html
+          description: Success
+        "401":
+          description: Unauthorized
+        "402":
+          description: Payment Required
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "429":
+          description: Too Many Requests
+      summary: Extract News
+      tags:
+      - news
+      x-stoplight:
+        id: fcck1ufz377mk
+      x-accepts: application/json
+  /feed.rss:
+    get:
+      deprecated: false
+      description: 'Turn a news website into an RSS feed. Any page of a news website
+        can be turned into an RSS feed. Provide the URL to the page and the API will
+        return an RSS feed with the latest news from that page. '
+      externalDocs:
+        description: Read entire docs
+        url: https://worldnewsapi.com/docs#News-Website-to-RSS-Feed
+      operationId: newsWebsiteToRSSFeed
+      parameters:
+      - description: The url from which links should be extracted.
+        explode: false
+        in: query
+        name: url
+        required: true
+        schema:
+          example: https://nytimes.com
+          type: string
+        style: form
+      - description: Whether extract news and add information such as description,
+          publish date, and image to each item.
+        explode: false
+        in: query
+        name: extract-news
+        required: false
+        schema:
+          example: false
+          type: boolean
+        style: form
+      - description: Your API key.
+        explode: false
+        in: query
+        name: api-key
+        required: true
+        schema:
+          example: abcd1234
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            ? ""
+            : schema:
+                type: object
+            application/json:
+              examples:
+                Example 1:
+                  value: <rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"
+                    xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom">
+                    <channel> <title>Europe News | Today's latest from Al Jazeera</title>
+                    <link>https://www.aljazeera.com/europe/</link> <lastBuildDate>Sun,
+                    08 Oct 2023 23:16:44 +0000</lastBuildDate> <pubDate>Sun, 08 Oct
+                    2023 23:16:44 +0000</pubDate> <item> <title>Martinelli Fires Arsenal
+                    To Late 1 0 Win Over Manchester City</title> <link>https://www.aljazeera.com/sports/2023/10/8/martinelli-fires-arsenal-to-late-1-0-win-over-manchester-city</link>
+                    <guid isPermaLink="true">https://www.aljazeera.com/sports/2023/10/8/martinelli-fires-arsenal-to-late-1-0-win-over-manchester-city</guid>
+                    <atom:link href="https://www.aljazeera.com/sports/2023/10/8/martinelli-fires-arsenal-to-late-1-0-win-over-manchester-city"/>
+                    </item> </channel> </rss>
+              schema:
+                properties: {}
+                type: object
+            application/xml:
+              examples:
+                Example 1:
+                  value: |-
+                    <rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom">
+                        <channel>
+                            <title>Europe News | Today's latest from Al Jazeera</title>
+                            <link>https://www.aljazeera.com/europe/</link>
+                            <lastBuildDate>Sun, 08 Oct 2023 23:16:44 +0000</lastBuildDate>
+                            <pubDate>Sun, 08 Oct 2023 23:16:44 +0000</pubDate>
+                            <item>
+                                <title>Martinelli Fires Arsenal To Late 1 0 Win Over Manchester City</title>
+                                <link>https://www.aljazeera.com/sports/2023/10/8/martinelli-fires-arsenal-to-late-1-0-win-over-manchester-city</link>
+                                <guid isPermaLink="true">https://www.aljazeera.com/sports/2023/10/8/martinelli-fires-arsenal-to-late-1-0-win-over-manchester-city</guid>
+                                <atom:link href="https://www.aljazeera.com/sports/2023/10/8/martinelli-fires-arsenal-to-late-1-0-win-over-manchester-city"/>
+                            </item>
+                        </channel>
+                    </rss>
+              schema:
+                properties: {}
+                type: object
+          description: Success
+        "401":
+          description: Unauthorized
+        "402":
+          description: Payment Required
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "429":
+          description: Too Many Requests
+      summary: News Website to RSS Feed
+      tags:
+      - news
+      x-stoplight:
+        id: tj5m7hh8ozmgw
+      x-accepts: application/json
   /geo-coordinates:
     get:
       description: Get the geo coordinates for a location. The location can be an
@@ -738,6 +927,8 @@ components:
           type: string
         image:
           type: string
+        publish_date:
+          type: string
         author:
           type: string
         language:
@@ -779,6 +970,7 @@ components:
             will begin with a four-motor variant.
           url: https://internetprotocol.co/hitech/2021/12/07/tesla-to-release-a-four-motor-cybertruck/
           image: https://internetprotocol.co/content/images/2021/12/Tesla-to-Release-a-Four-Motor-Version-of-Cybertruck.png
+          publish_date: 2022-09-30 01:07:48
           author: Kay Lee
           language: en
           source_country: co
@@ -898,6 +1090,7 @@ components:
               will begin with a four-motor variant.
             url: https://internetprotocol.co/hitech/2021/12/07/tesla-to-release-a-four-motor-cybertruck/
             image: https://internetprotocol.co/content/images/2021/12/Tesla-to-Release-a-Four-Motor-Version-of-Cybertruck.png
+            publish_date: 2022-09-30 01:07:48
             author: Kay Lee
             language: en
             source_country: co
@@ -1326,5 +1519,9 @@ components:
     apiKey:
       in: query
       name: api-key
+      type: apiKey
+    headerApiKey:
+      in: header
+      name: x-api-key
       type: apiKey
 

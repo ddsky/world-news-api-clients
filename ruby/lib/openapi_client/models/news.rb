@@ -28,6 +28,8 @@ module OpenapiClient
 
     attr_accessor :image
 
+    attr_accessor :publish_date
+
     attr_accessor :author
 
     attr_accessor :language
@@ -45,6 +47,7 @@ module OpenapiClient
         :'summary' => :'summary',
         :'url' => :'url',
         :'image' => :'image',
+        :'publish_date' => :'publish_date',
         :'author' => :'author',
         :'language' => :'language',
         :'source_country' => :'source_country',
@@ -66,6 +69,7 @@ module OpenapiClient
         :'summary' => :'String',
         :'url' => :'String',
         :'image' => :'String',
+        :'publish_date' => :'String',
         :'author' => :'String',
         :'language' => :'String',
         :'source_country' => :'String',
@@ -118,6 +122,10 @@ module OpenapiClient
         self.image = attributes[:'image']
       end
 
+      if attributes.key?(:'publish_date')
+        self.publish_date = attributes[:'publish_date']
+      end
+
       if attributes.key?(:'author')
         self.author = attributes[:'author']
       end
@@ -159,6 +167,7 @@ module OpenapiClient
           summary == o.summary &&
           url == o.url &&
           image == o.image &&
+          publish_date == o.publish_date &&
           author == o.author &&
           language == o.language &&
           source_country == o.source_country &&
@@ -174,7 +183,7 @@ module OpenapiClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, title, text, summary, url, image, author, language, source_country, sentiment].hash
+      [id, title, text, summary, url, image, publish_date, author, language, source_country, sentiment].hash
     end
 
     # Builds the object from hash

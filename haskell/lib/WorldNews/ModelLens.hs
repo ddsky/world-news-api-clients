@@ -210,6 +210,11 @@ newsImageL :: Lens_' News (Maybe Text)
 newsImageL f News{..} = (\newsImage -> News { newsImage, ..} ) <$> f newsImage
 {-# INLINE newsImageL #-}
 
+-- | 'newsPublishDate' Lens
+newsPublishDateL :: Lens_' News (Maybe Text)
+newsPublishDateL f News{..} = (\newsPublishDate -> News { newsPublishDate, ..} ) <$> f newsPublishDate
+{-# INLINE newsPublishDateL #-}
+
 -- | 'newsAuthor' Lens
 newsAuthorL :: Lens_' News (Maybe Text)
 newsAuthorL f News{..} = (\newsAuthor -> News { newsAuthor, ..} ) <$> f newsAuthor

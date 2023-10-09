@@ -52,6 +52,9 @@ void OAINews::initializeModel() {
     m_image_isSet = false;
     m_image_isValid = false;
 
+    m_publish_date_isSet = false;
+    m_publish_date_isValid = false;
+
     m_author_isSet = false;
     m_author_isValid = false;
 
@@ -92,6 +95,9 @@ void OAINews::fromJsonObject(QJsonObject json) {
     m_image_isValid = ::OpenAPI::fromJsonValue(image, json[QString("image")]);
     m_image_isSet = !json[QString("image")].isNull() && m_image_isValid;
 
+    m_publish_date_isValid = ::OpenAPI::fromJsonValue(publish_date, json[QString("publish_date")]);
+    m_publish_date_isSet = !json[QString("publish_date")].isNull() && m_publish_date_isValid;
+
     m_author_isValid = ::OpenAPI::fromJsonValue(author, json[QString("author")]);
     m_author_isSet = !json[QString("author")].isNull() && m_author_isValid;
 
@@ -131,6 +137,9 @@ QJsonObject OAINews::asJsonObject() const {
     }
     if (m_image_isSet) {
         obj.insert(QString("image"), ::OpenAPI::toJsonValue(image));
+    }
+    if (m_publish_date_isSet) {
+        obj.insert(QString("publish_date"), ::OpenAPI::toJsonValue(publish_date));
     }
     if (m_author_isSet) {
         obj.insert(QString("author"), ::OpenAPI::toJsonValue(author));
@@ -243,6 +252,22 @@ bool OAINews::is_image_Valid() const{
     return m_image_isValid;
 }
 
+QString OAINews::getPublishDate() const {
+    return publish_date;
+}
+void OAINews::setPublishDate(const QString &publish_date) {
+    this->publish_date = publish_date;
+    this->m_publish_date_isSet = true;
+}
+
+bool OAINews::is_publish_date_Set() const{
+    return m_publish_date_isSet;
+}
+
+bool OAINews::is_publish_date_Valid() const{
+    return m_publish_date_isValid;
+}
+
 QString OAINews::getAuthor() const {
     return author;
 }
@@ -336,6 +361,11 @@ bool OAINews::isSet() const {
         }
 
         if (m_image_isSet) {
+            isObjectUpdated = true;
+            break;
+        }
+
+        if (m_publish_date_isSet) {
             isObjectUpdated = true;
             break;
         }

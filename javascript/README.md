@@ -106,6 +106,11 @@ var apiKey = defaultClient.authentications['apiKey'];
 apiKey.apiKey = "YOUR API KEY"
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //apiKey.apiKeyPrefix['api-key'] = "Token"
+// Configure API key authorization: headerApiKey
+var headerApiKey = defaultClient.authentications['headerApiKey'];
+headerApiKey.apiKey = "YOUR API KEY"
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//headerApiKey.apiKeyPrefix['x-api-key'] = "Token"
 
 var api = new WorldNewsApi.NewsApi()
 var url = https://www.bbc.com/news/world-us-canada-59340789; // {String} The url of the news.
@@ -128,7 +133,9 @@ All URIs are relative to *https://api.worldnewsapi.com*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *WorldNewsApi.NewsApi* | [**extractNews**](docs/NewsApi.md#extractNews) | **GET** /extract-news | Extract News
+*WorldNewsApi.NewsApi* | [**extractNews_0**](docs/NewsApi.md#extractNews_0) | **GET** /extract-news-links | Extract News
 *WorldNewsApi.NewsApi* | [**geoCoordinates**](docs/NewsApi.md#geoCoordinates) | **GET** /geo-coordinates | Get Geo Coordinates
+*WorldNewsApi.NewsApi* | [**newsWebsiteToRSSFeed**](docs/NewsApi.md#newsWebsiteToRSSFeed) | **GET** /feed.rss | News Website to RSS Feed
 *WorldNewsApi.NewsApi* | [**searchNews**](docs/NewsApi.md#searchNews) | **GET** /search-news | Search News
 
 
@@ -151,4 +158,13 @@ Class | Method | HTTP request | Description
 - **Type**: API key
 - **API key parameter name**: api-key
 - **Location**: URL query string
+
+
+
+### headerApiKey
+
+
+- **Type**: API key
+- **API key parameter name**: x-api-key
+- **Location**: HTTP header
 

@@ -15,6 +15,7 @@ import com.worldnewsapi.client.model.BigDecimal
  * @param summary 
  * @param url 
  * @param image 
+ * @param publishUnderscoredate 
  * @param author 
  * @param language 
  * @param sourceUnderscorecountry 
@@ -26,6 +27,7 @@ case class News(id: Option[Int],
                 summary: Option[String],
                 url: Option[String],
                 image: Option[String],
+                publishUnderscoredate: Option[String],
                 author: Option[String],
                 language: Option[String],
                 sourceUnderscorecountry: Option[String],

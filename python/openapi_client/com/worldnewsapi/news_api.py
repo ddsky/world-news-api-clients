@@ -42,7 +42,8 @@ class NewsApi(object):
             settings={
                 'response_type': (InlineResponse2001,),
                 'auth': [
-                    'apiKey'
+                    'apiKey',
+                    'headerApiKey'
                 ],
                 'endpoint_path': '/extract-news',
                 'operation_id': 'extract_news',
@@ -95,11 +96,81 @@ class NewsApi(object):
             },
             api_client=api_client
         )
+        self.extract_news_0_endpoint = _Endpoint(
+            settings={
+                'response_type': ({str: (bool, date, datetime, dict, float, int, list, str, none_type)},),
+                'auth': [
+                    'apiKey',
+                    'headerApiKey'
+                ],
+                'endpoint_path': '/extract-news-links',
+                'operation_id': 'extract_news_0',
+                'http_method': 'GET',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'url',
+                    'api_key',
+                    'prefix',
+                    'sub_domain',
+                ],
+                'required': [
+                    'url',
+                    'api_key',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'url':
+                        (str,),
+                    'api_key':
+                        (str,),
+                    'prefix':
+                        (str,),
+                    'sub_domain':
+                        (bool,),
+                },
+                'attribute_map': {
+                    'url': 'url',
+                    'api_key': 'api-key',
+                    'prefix': 'prefix',
+                    'sub_domain': 'sub-domain',
+                },
+                'location_map': {
+                    'url': 'query',
+                    'api_key': 'query',
+                    'prefix': 'query',
+                    'sub_domain': 'query',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    '',
+                    'application/json'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client
+        )
         self.geo_coordinates_endpoint = _Endpoint(
             settings={
                 'response_type': (InlineResponse2002,),
                 'auth': [
-                    'apiKey'
+                    'apiKey',
+                    'headerApiKey'
                 ],
                 'endpoint_path': '/geo-coordinates',
                 'operation_id': 'geo_coordinates',
@@ -146,11 +217,77 @@ class NewsApi(object):
             },
             api_client=api_client
         )
+        self.news_website_to_rss_feed_endpoint = _Endpoint(
+            settings={
+                'response_type': ({str: (bool, date, datetime, dict, float, int, list, str, none_type)},),
+                'auth': [
+                    'apiKey',
+                    'headerApiKey'
+                ],
+                'endpoint_path': '/feed.rss',
+                'operation_id': 'news_website_to_rss_feed',
+                'http_method': 'GET',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'url',
+                    'api_key',
+                    'extract_news',
+                ],
+                'required': [
+                    'url',
+                    'api_key',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'url':
+                        (str,),
+                    'api_key':
+                        (str,),
+                    'extract_news':
+                        (bool,),
+                },
+                'attribute_map': {
+                    'url': 'url',
+                    'api_key': 'api-key',
+                    'extract_news': 'extract-news',
+                },
+                'location_map': {
+                    'url': 'query',
+                    'api_key': 'query',
+                    'extract_news': 'query',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    '',
+                    'application/json',
+                    'application/xml'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client
+        )
         self.search_news_endpoint = _Endpoint(
             settings={
                 'response_type': (InlineResponse200,),
                 'auth': [
-                    'apiKey'
+                    'apiKey',
+                    'headerApiKey'
                 ],
                 'endpoint_path': '/search-news',
                 'operation_id': 'search_news',
@@ -385,6 +522,90 @@ class NewsApi(object):
             analyze
         return self.extract_news_endpoint.call_with_http_info(**kwargs)
 
+    def extract_news_0(
+        self,
+        url,
+        api_key,
+        **kwargs
+    ):
+        """Extract News  # noqa: E501
+
+        Extract a news links from a news website.   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.extract_news_0(url, api_key, async_req=True)
+        >>> result = thread.get()
+
+        Args:
+            url (str): The url from which links should be extracted.
+            api_key (str): Your API key.
+
+        Keyword Args:
+            prefix (str): The prefix the news links must start with.. [optional]
+            sub_domain (bool): Whether to include links to news on sub-domains.. [optional]
+            _return_http_data_only (bool): response data without head status
+                code and headers. Default is True.
+            _preload_content (bool): if False, the urllib3.HTTPResponse object
+                will be returned without reading/decoding response data.
+                Default is True.
+            _request_timeout (int/float/tuple): timeout setting for this request. If
+                one number provided, it will be total request timeout. It can also
+                be a pair (tuple) of (connection, read) timeouts.
+                Default is None.
+            _check_input_type (bool): specifies if type checking
+                should be done one the data sent to the server.
+                Default is True.
+            _check_return_type (bool): specifies if type checking
+                should be done one the data received from the server.
+                Default is True.
+            _spec_property_naming (bool): True if the variable names in the input data
+                are serialized names, as specified in the OpenAPI document.
+                False if the variable names in the input data
+                are pythonic names, e.g. snake case (default)
+            _content_type (str/None): force body content-type.
+                Default is None and content-type will be predicted by allowed
+                content-types and body.
+            _host_index (int/None): specifies the index of the server
+                that we want to use.
+                Default is read from the configuration.
+            async_req (bool): execute request asynchronously
+
+        Returns:
+            {str: (bool, date, datetime, dict, float, int, list, str, none_type)}
+                If the method is called asynchronously, returns the request
+                thread.
+        """
+        kwargs['async_req'] = kwargs.get(
+            'async_req', False
+        )
+        kwargs['_return_http_data_only'] = kwargs.get(
+            '_return_http_data_only', True
+        )
+        kwargs['_preload_content'] = kwargs.get(
+            '_preload_content', True
+        )
+        kwargs['_request_timeout'] = kwargs.get(
+            '_request_timeout', None
+        )
+        kwargs['_check_input_type'] = kwargs.get(
+            '_check_input_type', True
+        )
+        kwargs['_check_return_type'] = kwargs.get(
+            '_check_return_type', True
+        )
+        kwargs['_spec_property_naming'] = kwargs.get(
+            '_spec_property_naming', False
+        )
+        kwargs['_content_type'] = kwargs.get(
+            '_content_type')
+        kwargs['_host_index'] = kwargs.get('_host_index')
+        kwargs['url'] = \
+            url
+        kwargs['api_key'] = \
+            api_key
+        return self.extract_news_0_endpoint.call_with_http_info(**kwargs)
+
     def geo_coordinates(
         self,
         location,
@@ -462,6 +683,89 @@ class NewsApi(object):
         kwargs['location'] = \
             location
         return self.geo_coordinates_endpoint.call_with_http_info(**kwargs)
+
+    def news_website_to_rss_feed(
+        self,
+        url,
+        api_key,
+        **kwargs
+    ):
+        """News Website to RSS Feed  # noqa: E501
+
+        Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page.   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.news_website_to_rss_feed(url, api_key, async_req=True)
+        >>> result = thread.get()
+
+        Args:
+            url (str): The url from which links should be extracted.
+            api_key (str): Your API key.
+
+        Keyword Args:
+            extract_news (bool): Whether extract news and add information such as description, publish date, and image to each item.. [optional]
+            _return_http_data_only (bool): response data without head status
+                code and headers. Default is True.
+            _preload_content (bool): if False, the urllib3.HTTPResponse object
+                will be returned without reading/decoding response data.
+                Default is True.
+            _request_timeout (int/float/tuple): timeout setting for this request. If
+                one number provided, it will be total request timeout. It can also
+                be a pair (tuple) of (connection, read) timeouts.
+                Default is None.
+            _check_input_type (bool): specifies if type checking
+                should be done one the data sent to the server.
+                Default is True.
+            _check_return_type (bool): specifies if type checking
+                should be done one the data received from the server.
+                Default is True.
+            _spec_property_naming (bool): True if the variable names in the input data
+                are serialized names, as specified in the OpenAPI document.
+                False if the variable names in the input data
+                are pythonic names, e.g. snake case (default)
+            _content_type (str/None): force body content-type.
+                Default is None and content-type will be predicted by allowed
+                content-types and body.
+            _host_index (int/None): specifies the index of the server
+                that we want to use.
+                Default is read from the configuration.
+            async_req (bool): execute request asynchronously
+
+        Returns:
+            {str: (bool, date, datetime, dict, float, int, list, str, none_type)}
+                If the method is called asynchronously, returns the request
+                thread.
+        """
+        kwargs['async_req'] = kwargs.get(
+            'async_req', False
+        )
+        kwargs['_return_http_data_only'] = kwargs.get(
+            '_return_http_data_only', True
+        )
+        kwargs['_preload_content'] = kwargs.get(
+            '_preload_content', True
+        )
+        kwargs['_request_timeout'] = kwargs.get(
+            '_request_timeout', None
+        )
+        kwargs['_check_input_type'] = kwargs.get(
+            '_check_input_type', True
+        )
+        kwargs['_check_return_type'] = kwargs.get(
+            '_check_return_type', True
+        )
+        kwargs['_spec_property_naming'] = kwargs.get(
+            '_spec_property_naming', False
+        )
+        kwargs['_content_type'] = kwargs.get(
+            '_content_type')
+        kwargs['_host_index'] = kwargs.get('_host_index')
+        kwargs['url'] = \
+            url
+        kwargs['api_key'] = \
+            api_key
+        return self.news_website_to_rss_feed_endpoint.call_with_http_info(**kwargs)
 
     def search_news(
         self,

@@ -68,6 +68,17 @@ export class Configuration {
                 }
             };
         }
+
+        // init default headerApiKey credential
+        if (!this.credentials['headerApiKey']) {
+            this.credentials['headerApiKey'] = () => {
+                if (this.apiKeys === null || this.apiKeys === undefined) {
+                    return undefined;
+                } else {
+                    return this.apiKeys['headerApiKey'] || this.apiKeys['x-api-key'];
+                }
+            };
+        }
     }
 
     /**

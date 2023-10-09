@@ -399,6 +399,15 @@ conf = openapi_client.Configuration(
                     'apiKey',
                 ),
             }
+        if 'headerApiKey' in self.api_key:
+            auth['headerApiKey'] = {
+                'type': 'api_key',
+                'in': 'header',
+                'key': 'x-api-key',
+                'value': self.get_api_key_with_prefix(
+                    'headerApiKey',
+                ),
+            }
         return auth
 
     def to_debug_report(self):

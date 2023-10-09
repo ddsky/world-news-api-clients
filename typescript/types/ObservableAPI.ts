@@ -51,6 +51,33 @@ export class ObservableNewsApi {
     }
 
     /**
+     * Extract a news links from a news website. 
+     * Extract News
+     * @param url The url from which links should be extracted.
+     * @param apiKey Your API key.
+     * @param prefix The prefix the news links must start with.
+     * @param subDomain Whether to include links to news on sub-domains.
+     */
+    public extractNews_1(url: string, apiKey: string, prefix?: string, subDomain?: boolean, _options?: Configuration): Observable<any> {
+        const requestContextPromise = this.requestFactory.extractNews_1(url, apiKey, prefix, subDomain, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.extractNews_1(rsp)));
+            }));
+    }
+
+    /**
      * Get the geo coordinates for a location. The location can be an exact address but also just the name of a city or country.
      * Get Geo Coordinates
      * @param location The address or name of the location, e.g. Tokyo, Japan.
@@ -71,6 +98,32 @@ export class ObservableNewsApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.geoCoordinates(rsp)));
+            }));
+    }
+
+    /**
+     * Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page. 
+     * News Website to RSS Feed
+     * @param url The url from which links should be extracted.
+     * @param apiKey Your API key.
+     * @param extractNews Whether extract news and add information such as description, publish date, and image to each item.
+     */
+    public newsWebsiteToRSSFeed(url: string, apiKey: string, extractNews?: boolean, _options?: Configuration): Observable<any> {
+        const requestContextPromise = this.requestFactory.newsWebsiteToRSSFeed(url, apiKey, extractNews, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.newsWebsiteToRSSFeed(rsp)));
             }));
     }
 

@@ -68,6 +68,11 @@ OAIDefaultConfiguration *apiConfig = [OAIDefaultConfiguration sharedConfig];
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 //[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"api-key"];
 
+// Configure API key authorization: (authentication scheme: headerApiKey)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"x-api-key"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"x-api-key"];
+
 
 NSString* *url = https://www.bbc.com/news/world-us-canada-59340789; // The url of the news.
 NSNumber* *analyze = true; // Whether to analyze the news (extract entities etc.) (default to @(NO))
@@ -95,7 +100,9 @@ All URIs are relative to *https://api.worldnewsapi.com*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *OAINewsApi* | [**extractNews**](docs/OAINewsApi.md#extractnews) | **GET** /extract-news | Extract News
+*OAINewsApi* | [**extractNews_0**](docs/OAINewsApi.md#extractnews_0) | **GET** /extract-news-links | Extract News
 *OAINewsApi* | [**geoCoordinates**](docs/OAINewsApi.md#geocoordinates) | **GET** /geo-coordinates | Get Geo Coordinates
+*OAINewsApi* | [**newsWebsiteToRSSFeed**](docs/OAINewsApi.md#newswebsitetorssfeed) | **GET** /feed.rss | News Website to RSS Feed
 *OAINewsApi* | [**searchNews**](docs/OAINewsApi.md#searchnews) | **GET** /search-news | Search News
 
 
@@ -116,6 +123,12 @@ Class | Method | HTTP request | Description
 - **Type**: API key
 - **API key parameter name**: api-key
 - **Location**: URL query string
+
+## headerApiKey
+
+- **Type**: API key
+- **API key parameter name**: x-api-key
+- **Location**: HTTP header
 
 
 ## Author

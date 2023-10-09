@@ -26,6 +26,33 @@ export interface NewsApiExtractNewsRequest {
     analyze: boolean
 }
 
+export interface NewsApiExtractNews0Request {
+    /**
+     * The url from which links should be extracted.
+     * @type string
+     * @memberof NewsApiextractNews_1
+     */
+    url: string
+    /**
+     * Your API key.
+     * @type string
+     * @memberof NewsApiextractNews_1
+     */
+    apiKey: string
+    /**
+     * The prefix the news links must start with.
+     * @type string
+     * @memberof NewsApiextractNews_1
+     */
+    prefix?: string
+    /**
+     * Whether to include links to news on sub-domains.
+     * @type boolean
+     * @memberof NewsApiextractNews_1
+     */
+    subDomain?: boolean
+}
+
 export interface NewsApiGeoCoordinatesRequest {
     /**
      * The address or name of the location, e.g. Tokyo, Japan.
@@ -33,6 +60,27 @@ export interface NewsApiGeoCoordinatesRequest {
      * @memberof NewsApigeoCoordinates
      */
     location: string
+}
+
+export interface NewsApiNewsWebsiteToRSSFeedRequest {
+    /**
+     * The url from which links should be extracted.
+     * @type string
+     * @memberof NewsApinewsWebsiteToRSSFeed
+     */
+    url: string
+    /**
+     * Your API key.
+     * @type string
+     * @memberof NewsApinewsWebsiteToRSSFeed
+     */
+    apiKey: string
+    /**
+     * Whether extract news and add information such as description, publish date, and image to each item.
+     * @type boolean
+     * @memberof NewsApinewsWebsiteToRSSFeed
+     */
+    extractNews?: boolean
 }
 
 export interface NewsApiSearchNewsRequest {
@@ -145,12 +193,30 @@ export class ObjectNewsApi {
     }
 
     /**
+     * Extract a news links from a news website. 
+     * Extract News
+     * @param param the request object
+     */
+    public extractNews_1(param: NewsApiExtractNews0Request, options?: Configuration): Promise<any> {
+        return this.api.extractNews_1(param.url, param.apiKey, param.prefix, param.subDomain,  options).toPromise();
+    }
+
+    /**
      * Get the geo coordinates for a location. The location can be an exact address but also just the name of a city or country.
      * Get Geo Coordinates
      * @param param the request object
      */
     public geoCoordinates(param: NewsApiGeoCoordinatesRequest, options?: Configuration): Promise<InlineResponse2002> {
         return this.api.geoCoordinates(param.location,  options).toPromise();
+    }
+
+    /**
+     * Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page. 
+     * News Website to RSS Feed
+     * @param param the request object
+     */
+    public newsWebsiteToRSSFeed(param: NewsApiNewsWebsiteToRSSFeedRequest, options?: Configuration): Promise<any> {
+        return this.api.newsWebsiteToRSSFeed(param.url, param.apiKey, param.extractNews,  options).toPromise();
     }
 
     /**

@@ -16,6 +16,7 @@ local dkjson = require "dkjson"
 local basexx = require "basexx"
 
 -- model import
+local openapiclient_todo_object_mapping = require "openapiclient.model.todo_object_mapping"
 local openapiclient_inline_response_200 = require "openapiclient.model.inline_response_200"
 local openapiclient_inline_response_200_1 = require "openapiclient.model.inline_response_200_1"
 local openapiclient_inline_response_200_2 = require "openapiclient.model.inline_response_200_2"
@@ -62,6 +63,10 @@ function news_api:extract_news(url, analyze)
 	req.headers:upsert("content-type", "application/json")
 
 	-- TODO: api key in query 'api-key'
+	-- api key in headers 'x-api-key'
+	if self.api_key['x-api-key'] then
+		req.headers:upsert("headerApiKey", self.api_key['x-api-key'])
+	end
 
 	-- make the HTTP call
 	local headers, stream, errno = req:go()
@@ -93,6 +98,57 @@ function news_api:extract_news(url, analyze)
 	end
 end
 
+function news_api:extract_news_0(url, api_key, prefix, sub_domain)
+	local req = http_request.new_from_uri({
+		scheme = self.default_scheme;
+		host = self.host;
+		port = self.port;
+		path = string.format("%s/extract-news-links?url=%s&prefix=%s&sub-domain=%s&api-key=%s",
+			self.basePath, http_util.encodeURIComponent(url), http_util.encodeURIComponent(prefix), http_util.encodeURIComponent(sub_domain), http_util.encodeURIComponent(api_key));
+	})
+
+	-- set HTTP verb
+	req.headers:upsert(":method", "GET")
+	-- TODO: create a function to select proper content-type
+	--local var_accept = { "", "application/json" }
+	req.headers:upsert("content-type", "")
+
+	-- TODO: api key in query 'api-key'
+	-- api key in headers 'x-api-key'
+	if self.api_key['x-api-key'] then
+		req.headers:upsert("headerApiKey", self.api_key['x-api-key'])
+	end
+
+	-- make the HTTP call
+	local headers, stream, errno = req:go()
+	if not headers then
+		return nil, stream, errno
+	end
+	local http_status = headers:get(":status")
+	if http_status:sub(1,1) == "2" then
+		local body, err, errno2 = stream:get_body_as_string()
+		-- exception when getting the HTTP body
+		if not body then
+			return nil, err, errno2
+		end
+		stream:shutdown()
+		local result, _, err3 = dkjson.decode(body)
+		-- exception when decoding the HTTP body
+		if result == nil then
+			return nil, err3
+		end
+		return openapiclient_TODO_OBJECT_MAPPING.cast(result), headers
+	else
+		local body, err, errno2 = stream:get_body_as_string()
+		if not body then
+			return nil, err, errno2
+		end
+		stream:shutdown()
+		-- return the error message (http body)
+		return nil, http_status, body
+	end
+end
+
 function news_api:geo_coordinates(location)
 	local req = http_request.new_from_uri({
 		scheme = self.default_scheme;
@@ -109,6 +165,10 @@ function news_api:geo_coordinates(location)
 	req.headers:upsert("content-type", "application/json")
 
 	-- TODO: api key in query 'api-key'
+	-- api key in headers 'x-api-key'
+	if self.api_key['x-api-key'] then
+		req.headers:upsert("headerApiKey", self.api_key['x-api-key'])
+	end
 
 	-- make the HTTP call
 	local headers, stream, errno = req:go()
@@ -140,6 +200,57 @@ function news_api:geo_coordinates(location)
 	end
 end
 
+function news_api:news_website_to_rss_feed(url, api_key, extract_news)
+	local req = http_request.new_from_uri({
+		scheme = self.default_scheme;
+		host = self.host;
+		port = self.port;
+		path = string.format("%s/feed.rss?url=%s&extract-news=%s&api-key=%s",
+			self.basePath, http_util.encodeURIComponent(url), http_util.encodeURIComponent(extract_news), http_util.encodeURIComponent(api_key));
+	})
+
+	-- set HTTP verb
+	req.headers:upsert(":method", "GET")
+	-- TODO: create a function to select proper content-type
+	--local var_accept = { "", "application/json", "application/xml" }
+	req.headers:upsert("content-type", "")
+
+	-- TODO: api key in query 'api-key'
+	-- api key in headers 'x-api-key'
+	if self.api_key['x-api-key'] then
+		req.headers:upsert("headerApiKey", self.api_key['x-api-key'])
+	end
+
+	-- make the HTTP call
+	local headers, stream, errno = req:go()
+	if not headers then
+		return nil, stream, errno
+	end
+	local http_status = headers:get(":status")
+	if http_status:sub(1,1) == "2" then
+		local body, err, errno2 = stream:get_body_as_string()
+		-- exception when getting the HTTP body
+		if not body then
+			return nil, err, errno2
+		end
+		stream:shutdown()
+		local result, _, err3 = dkjson.decode(body)
+		-- exception when decoding the HTTP body
+		if result == nil then
+			return nil, err3
+		end
+		return openapiclient_TODO_OBJECT_MAPPING.cast(result), headers
+	else
+		local body, err, errno2 = stream:get_body_as_string()
+		if not body then
+			return nil, err, errno2
+		end
+		stream:shutdown()
+		-- return the error message (http body)
+		return nil, http_status, body
+	end
+end
+
 function news_api:search_news(text, source_countries, language, min_sentiment, max_sentiment, earliest_publish_date, latest_publish_date, news_sources, authors, entities, location_filter, offset, Number_, sort, sort_direction)
 	local req = http_request.new_from_uri({
 		scheme = self.default_scheme;
@@ -156,6 +267,10 @@ function news_api:search_news(text, source_countries, language, min_sentiment, m
 	req.headers:upsert("content-type", "application/json")
 
 	-- TODO: api key in query 'api-key'
+	-- api key in headers 'x-api-key'
+	if self.api_key['x-api-key'] then
+		req.headers:upsert("headerApiKey", self.api_key['x-api-key'])
+	end
 
 	-- make the HTTP call
 	local headers, stream, errno = req:go()

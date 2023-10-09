@@ -69,6 +69,11 @@ public:
     bool is_image_Set() const;
     bool is_image_Valid() const;
 
+    QString getPublishDate() const;
+    void setPublishDate(const QString &publish_date);
+    bool is_publish_date_Set() const;
+    bool is_publish_date_Valid() const;
+
     QString getAuthor() const;
     void setAuthor(const QString &author);
     bool is_author_Set() const;
@@ -118,6 +123,10 @@ private:
     QString image;
     bool m_image_isSet;
     bool m_image_isValid;
+
+    QString publish_date;
+    bool m_publish_date_isSet;
+    bool m_publish_date_isValid;
 
     QString author;
     bool m_author_isSet;

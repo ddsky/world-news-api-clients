@@ -5,7 +5,9 @@ All URIs are relative to *https://api.worldnewsapi.com*
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
 | [**extract_news**](NewsApi.md#extract_news) | **GET** /extract-news | Extract News |
+| [**extract_news_0**](NewsApi.md#extract_news_0) | **GET** /extract-news-links | Extract News |
 | [**geo_coordinates**](NewsApi.md#geo_coordinates) | **GET** /geo-coordinates | Get Geo Coordinates |
+| [**news_website_to_rss_feed**](NewsApi.md#news_website_to_rss_feed) | **GET** /feed.rss | News Website to RSS Feed |
 | [**search_news**](NewsApi.md#search_news) | **GET** /search-news | Search News |
 
 
@@ -28,6 +30,11 @@ OpenapiClient.configure do |config|
   config.api_key['apiKey'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
   # config.api_key_prefix['apiKey'] = 'Bearer'
+
+  # Configure API key authorization: headerApiKey
+  config.api_key['headerApiKey'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['headerApiKey'] = 'Bearer'
 end
 
 api_instance = OpenapiClient::NewsApi.new
@@ -74,12 +81,96 @@ end
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
 - **Accept**: application/json
+
+
+## extract_news_0
+
+> Object extract_news_0(url, api_key, opts)
+
+Extract News
+
+Extract a news links from a news website. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'openapi_client'
+# setup authorization
+OpenapiClient.configure do |config|
+  # Configure API key authorization: apiKey
+  config.api_key['apiKey'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['apiKey'] = 'Bearer'
+
+  # Configure API key authorization: headerApiKey
+  config.api_key['headerApiKey'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['headerApiKey'] = 'Bearer'
+end
+
+api_instance = OpenapiClient::NewsApi.new
+url = 'https://nytimes.com' # String | The url from which links should be extracted.
+api_key = 'abcd1234' # String | Your API key.
+opts = {
+  prefix: 'prefix_example', # String | The prefix the news links must start with.
+  sub_domain: true # Boolean | Whether to include links to news on sub-domains.
+}
+
+begin
+  # Extract News
+  result = api_instance.extract_news_0(url, api_key, opts)
+  p result
+rescue OpenapiClient::ApiError => e
+  puts "Error when calling NewsApi->extract_news_0: #{e}"
+end
+```
+
+#### Using the extract_news_0_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(Object, Integer, Hash)> extract_news_0_with_http_info(url, api_key, opts)
+
+```ruby
+begin
+  # Extract News
+  data, status_code, headers = api_instance.extract_news_0_with_http_info(url, api_key, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => Object
+rescue OpenapiClient::ApiError => e
+  puts "Error when calling NewsApi->extract_news_0_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **url** | **String** | The url from which links should be extracted. |  |
+| **api_key** | **String** | Your API key. |  |
+| **prefix** | **String** | The prefix the news links must start with. | [optional] |
+| **sub_domain** | **Boolean** | Whether to include links to news on sub-domains. | [optional] |
+
+### Return type
+
+**Object**
+
+### Authorization
+
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: , application/json
 
 
 ## geo_coordinates
@@ -101,6 +192,11 @@ OpenapiClient.configure do |config|
   config.api_key['apiKey'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
   # config.api_key_prefix['apiKey'] = 'Bearer'
+
+  # Configure API key authorization: headerApiKey
+  config.api_key['headerApiKey'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['headerApiKey'] = 'Bearer'
 end
 
 api_instance = OpenapiClient::NewsApi.new
@@ -145,12 +241,94 @@ end
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
 - **Accept**: application/json
+
+
+## news_website_to_rss_feed
+
+> Object news_website_to_rss_feed(url, api_key, opts)
+
+News Website to RSS Feed
+
+Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'openapi_client'
+# setup authorization
+OpenapiClient.configure do |config|
+  # Configure API key authorization: apiKey
+  config.api_key['apiKey'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['apiKey'] = 'Bearer'
+
+  # Configure API key authorization: headerApiKey
+  config.api_key['headerApiKey'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['headerApiKey'] = 'Bearer'
+end
+
+api_instance = OpenapiClient::NewsApi.new
+url = 'https://nytimes.com' # String | The url from which links should be extracted.
+api_key = 'abcd1234' # String | Your API key.
+opts = {
+  extract_news: false # Boolean | Whether extract news and add information such as description, publish date, and image to each item.
+}
+
+begin
+  # News Website to RSS Feed
+  result = api_instance.news_website_to_rss_feed(url, api_key, opts)
+  p result
+rescue OpenapiClient::ApiError => e
+  puts "Error when calling NewsApi->news_website_to_rss_feed: #{e}"
+end
+```
+
+#### Using the news_website_to_rss_feed_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(Object, Integer, Hash)> news_website_to_rss_feed_with_http_info(url, api_key, opts)
+
+```ruby
+begin
+  # News Website to RSS Feed
+  data, status_code, headers = api_instance.news_website_to_rss_feed_with_http_info(url, api_key, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => Object
+rescue OpenapiClient::ApiError => e
+  puts "Error when calling NewsApi->news_website_to_rss_feed_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **url** | **String** | The url from which links should be extracted. |  |
+| **api_key** | **String** | Your API key. |  |
+| **extract_news** | **Boolean** | Whether extract news and add information such as description, publish date, and image to each item. | [optional] |
+
+### Return type
+
+**Object**
+
+### Authorization
+
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: , application/json, application/xml
 
 
 ## search_news
@@ -172,12 +350,17 @@ OpenapiClient.configure do |config|
   config.api_key['apiKey'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
   # config.api_key_prefix['apiKey'] = 'Bearer'
+
+  # Configure API key authorization: headerApiKey
+  config.api_key['headerApiKey'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['headerApiKey'] = 'Bearer'
 end
 
 api_instance = OpenapiClient::NewsApi.new
 opts = {
   text: 'hurricane', # String | The text to match in the news content.
-  source_countries: 'gb,us', # String | A comma-separated list of ISO 3166 country codes from which the news should originate, e.g. gb,us.
+  source_countries: 'us,uk', # String | A comma-separated list of ISO 3166 country codes from which the news should originate, e.g. gb,us.
   language: 'en', # String | The ISO 6391 language code of the news, e.g. \"en\" for English.
   min_sentiment: -0.8, # Float | The minimal sentiment of the news in range [-1,1].
   max_sentiment: 0.8, # Float | The maximal sentiment of the news in range [-1,1].
@@ -246,7 +429,7 @@ end
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
 
 ### HTTP request headers
 

@@ -16,7 +16,9 @@
 
 module Api.Request.News exposing
     ( extractNews
+    , extractNews_0
     , geoCoordinates
+    , newsWebsiteToRSSFeed
     , searchNews, Sort(..), sortVariants, Sortdirection(..), sortdirectionVariants
     )
 
@@ -97,6 +99,21 @@ extractNews url_query analyze_query =
 
 
 
+{-| Extract a news links from a news website. 
+-}
+extractNews_0 : String -> String -> Maybe String -> Maybe Bool -> Api.Request (Dict.Dict String Api.Data.Object)
+extractNews_0 url_query apiKey_query prefix_query subDomain_query =
+    Api.request
+        "GET"
+        "/extract-news-links"
+        []
+        [ ( "url", Just <| identity url_query ), ( "prefix", Maybe.map identity prefix_query ), ( "sub-domain", Maybe.map (\val -> if val then "true" else "false") subDomain_query ), ( "api-key", Just <| identity apiKey_query ) ]
+        []
+        Nothing
+        (Json.Decode.dict )
+
+
+
 {-| Get the geo coordinates for a location. The location can be an exact address but also just the name of a city or country.
 -}
 geoCoordinates : String -> Api.Request Api.Data.InlineResponse2002
@@ -109,6 +126,21 @@ geoCoordinates location_query =
         []
         Nothing
         Api.Data.inlineResponse2002Decoder
+
+
+
+{-| Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page. 
+-}
+newsWebsiteToRSSFeed : String -> String -> Maybe Bool -> Api.Request (Dict.Dict String Api.Data.Object)
+newsWebsiteToRSSFeed url_query apiKey_query extractNews_query =
+    Api.request
+        "GET"
+        "/feed.rss"
+        []
+        [ ( "url", Just <| identity url_query ), ( "extract-news", Maybe.map (\val -> if val then "true" else "false") extractNews_query ), ( "api-key", Just <| identity apiKey_query ) ]
+        []
+        Nothing
+        (Json.Decode.dict )
 
 
 

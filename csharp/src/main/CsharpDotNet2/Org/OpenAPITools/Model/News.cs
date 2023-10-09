@@ -55,6 +55,13 @@ namespace Org.OpenAPITools.Model {
     public string Image { get; set; }
 
     /// <summary>
+    /// Gets or Sets PublishDate
+    /// </summary>
+    [DataMember(Name="publish_date", EmitDefaultValue=false)]
+    [JsonProperty(PropertyName = "publish_date")]
+    public string PublishDate { get; set; }
+
+    /// <summary>
     /// Gets or Sets Author
     /// </summary>
     [DataMember(Name="author", EmitDefaultValue=false)]
@@ -96,6 +103,7 @@ namespace Org.OpenAPITools.Model {
       sb.Append("  Summary: ").Append(Summary).Append("\n");
       sb.Append("  Url: ").Append(Url).Append("\n");
       sb.Append("  Image: ").Append(Image).Append("\n");
+      sb.Append("  PublishDate: ").Append(PublishDate).Append("\n");
       sb.Append("  Author: ").Append(Author).Append("\n");
       sb.Append("  Language: ").Append(Language).Append("\n");
       sb.Append("  SourceCountry: ").Append(SourceCountry).Append("\n");

@@ -5,7 +5,9 @@ All URIs are relative to *https://api.worldnewsapi.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**extractNews**](NewsApi.md#extractNews) | **GET** /extract-news | Extract News
+[**extractNews_0**](NewsApi.md#extractNews_0) | **GET** /extract-news-links | Extract News
 [**geoCoordinates**](NewsApi.md#geoCoordinates) | **GET** /geo-coordinates | Get Geo Coordinates
+[**newsWebsiteToRSSFeed**](NewsApi.md#newsWebsiteToRSSFeed) | **GET** /feed.rss | News Website to RSS Feed
 [**searchNews**](NewsApi.md#searchNews) | **GET** /search-news | Search News
 
 
@@ -51,7 +53,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKey](README.md#apiKey)
+[apiKey](README.md#apiKey), [headerApiKey](README.md#headerApiKey)
 
 ### HTTP request headers
 
@@ -63,6 +65,74 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Extracted news. |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **extractNews_0**
+> any extractNews_0()
+
+Extract a news links from a news website. 
+
+### Example
+
+
+```typescript
+import {  } from '';
+import * as fs from 'fs';
+
+const configuration = .createConfiguration();
+const apiInstance = new .NewsApi(configuration);
+
+let body:.NewsApiExtractNews0Request = {
+  // string | The url from which links should be extracted.
+  url: "https://nytimes.com",
+  // string | Your API key.
+  apiKey: "abcd1234",
+  // string | The prefix the news links must start with. (optional)
+  prefix: "",
+  // boolean | Whether to include links to news on sub-domains. (optional)
+  subDomain: true,
+};
+
+apiInstance.extractNews_0(body).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **url** | [**string**] | The url from which links should be extracted. | defaults to undefined
+ **apiKey** | [**string**] | Your API key. | defaults to undefined
+ **prefix** | [**string**] | The prefix the news links must start with. | (optional) defaults to undefined
+ **subDomain** | [**boolean**] | Whether to include links to news on sub-domains. | (optional) defaults to undefined
+
+
+### Return type
+
+**any**
+
+### Authorization
+
+[apiKey](README.md#apiKey), [headerApiKey](README.md#headerApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: , application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**401** | Unauthorized |  -  |
+**402** | Payment Required |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**429** | Too Many Requests |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
@@ -105,7 +175,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKey](README.md#apiKey)
+[apiKey](README.md#apiKey), [headerApiKey](README.md#headerApiKey)
 
 ### HTTP request headers
 
@@ -118,6 +188,71 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | The coordinates of the location. |  -  |
 **404** | Not Found |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **newsWebsiteToRSSFeed**
+> any newsWebsiteToRSSFeed()
+
+Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page. 
+
+### Example
+
+
+```typescript
+import {  } from '';
+import * as fs from 'fs';
+
+const configuration = .createConfiguration();
+const apiInstance = new .NewsApi(configuration);
+
+let body:.NewsApiNewsWebsiteToRSSFeedRequest = {
+  // string | The url from which links should be extracted.
+  url: "https://nytimes.com",
+  // string | Your API key.
+  apiKey: "abcd1234",
+  // boolean | Whether extract news and add information such as description, publish date, and image to each item. (optional)
+  extractNews: false,
+};
+
+apiInstance.newsWebsiteToRSSFeed(body).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **url** | [**string**] | The url from which links should be extracted. | defaults to undefined
+ **apiKey** | [**string**] | Your API key. | defaults to undefined
+ **extractNews** | [**boolean**] | Whether extract news and add information such as description, publish date, and image to each item. | (optional) defaults to undefined
+
+
+### Return type
+
+**any**
+
+### Authorization
+
+[apiKey](README.md#apiKey), [headerApiKey](README.md#headerApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: , application/json, application/xml
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**401** | Unauthorized |  -  |
+**402** | Payment Required |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**429** | Too Many Requests |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
@@ -140,7 +275,7 @@ let body:.NewsApiSearchNewsRequest = {
   // string | The text to match in the news content. (optional)
   text: "hurricane",
   // string | A comma-separated list of ISO 3166 country codes from which the news should originate, e.g. gb,us. (optional)
-  sourceCountries: "gb,us",
+  sourceCountries: "us,uk",
   // string | The ISO 6391 language code of the news, e.g. \"en\" for English. (optional)
   language: "en",
   // number | The minimal sentiment of the news in range [-1,1]. (optional)
@@ -202,7 +337,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKey](README.md#apiKey)
+[apiKey](README.md#apiKey), [headerApiKey](README.md#headerApiKey)
 
 ### HTTP request headers
 

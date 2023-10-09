@@ -1,6 +1,5 @@
 .gitignore
 .gitlab-ci.yml
-.openapi-generator-ignore
 .travis.yml
 README.md
 docs/InlineResponse200.md
@@ -31,10 +30,4 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_inline_response200.py
-test/test_inline_response2001.py
-test/test_inline_response2002.py
-test/test_inline_response200_news.py
-test/test_news.py
-test/test_news_api.py
 tox.ini

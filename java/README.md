@@ -2,7 +2,7 @@
 
 World News API
 - API version: 1.0
-  - Build date: 2022-10-28T13:50:26.867+02:00[Europe/Berlin]
+  - Build date: 2023-10-09T02:36:49.995+02:00[Europe/Berlin]
 
 The world's news wrapped into a single API.
 
@@ -98,6 +98,12 @@ public class Example {
     // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
     //apiKey.setApiKeyPrefix("Token");
 
+    // Configure API key authorization: headerApiKey
+    ApiKeyAuth headerApiKey = (ApiKeyAuth) defaultClient.getAuthentication("headerApiKey");
+    headerApiKey.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //headerApiKey.setApiKeyPrefix("Token");
+
     NewsApi apiInstance = new NewsApi(defaultClient);
     String url = "https://www.bbc.com/news/world-us-canada-59340789"; // String | The url of the news.
     Boolean analyze = false; // Boolean | Whether to analyze the news (extract entities etc.)
@@ -123,7 +129,9 @@ All URIs are relative to *https://api.worldnewsapi.com*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *NewsApi* | [**extractNews**](docs/NewsApi.md#extractNews) | **GET** /extract-news | Extract News
+*NewsApi* | [**extractNews_0**](docs/NewsApi.md#extractNews_0) | **GET** /extract-news-links | Extract News
 *NewsApi* | [**geoCoordinates**](docs/NewsApi.md#geoCoordinates) | **GET** /geo-coordinates | Get Geo Coordinates
+*NewsApi* | [**newsWebsiteToRSSFeed**](docs/NewsApi.md#newsWebsiteToRSSFeed) | **GET** /feed.rss | News Website to RSS Feed
 *NewsApi* | [**searchNews**](docs/NewsApi.md#searchNews) | **GET** /search-news | Search News
 
 
@@ -144,6 +152,12 @@ Authentication schemes defined for the API:
 - **Type**: API key
 - **API key parameter name**: api-key
 - **Location**: URL query string
+
+### headerApiKey
+
+- **Type**: API key
+- **API key parameter name**: x-api-key
+- **Location**: HTTP header
 
 
 ## Recommendation

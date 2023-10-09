@@ -5,7 +5,9 @@ All URIs are relative to *https://api.worldnewsapi.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**extract_news**](NewsApi.md#extract_news) | **GET** /extract-news | Extract News
+[**extract_news_0**](NewsApi.md#extract_news_0) | **GET** /extract-news-links | Extract News
 [**geo_coordinates**](NewsApi.md#geo_coordinates) | **GET** /geo-coordinates | Get Geo Coordinates
+[**news_website_to_rss_feed**](NewsApi.md#news_website_to_rss_feed) | **GET** /feed.rss | News Website to RSS Feed
 [**search_news**](NewsApi.md#search_news) | **GET** /search-news | Search News
 
 
@@ -19,6 +21,7 @@ Extract a news entry from a news site.
 ### Example
 
 * Api Key Authentication (apiKey):
+* Api Key Authentication (headerApiKey):
 
 ```python
 import time
@@ -42,6 +45,12 @@ configuration.api_key['apiKey'] = 'YOUR_API_KEY'
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['apiKey'] = 'Bearer'
+
+# Configure API key authorization: headerApiKey
+configuration.api_key['headerApiKey'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['headerApiKey'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 with openapi_client.ApiClient(configuration) as api_client:
@@ -72,7 +81,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
 
 ### HTTP request headers
 
@@ -88,6 +97,110 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **extract_news_0**
+> {str: (bool, date, datetime, dict, float, int, list, str, none_type)} extract_news_0(url, api_key)
+
+Extract News
+
+Extract a news links from a news website. 
+
+### Example
+
+* Api Key Authentication (apiKey):
+* Api Key Authentication (headerApiKey):
+
+```python
+import time
+import openapi_client
+from com.worldnewsapi import news_api
+from pprint import pprint
+# Defining the host is optional and defaults to https://api.worldnewsapi.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://api.worldnewsapi.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKey
+configuration.api_key['apiKey'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKey'] = 'Bearer'
+
+# Configure API key authorization: headerApiKey
+configuration.api_key['headerApiKey'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['headerApiKey'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = news_api.NewsApi(api_client)
+    url = "https://nytimes.com" # str | The url from which links should be extracted.
+    api_key = "abcd1234" # str | Your API key.
+    prefix = "" # str | The prefix the news links must start with. (optional)
+    sub_domain = True # bool | Whether to include links to news on sub-domains. (optional)
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Extract News
+        api_response = api_instance.extract_news_0(url, api_key)
+        pprint(api_response)
+    except openapi_client.ApiException as e:
+        print("Exception when calling NewsApi->extract_news_0: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Extract News
+        api_response = api_instance.extract_news_0(url, api_key, prefix=prefix, sub_domain=sub_domain)
+        pprint(api_response)
+    except openapi_client.ApiException as e:
+        print("Exception when calling NewsApi->extract_news_0: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **url** | **str**| The url from which links should be extracted. |
+ **api_key** | **str**| Your API key. |
+ **prefix** | **str**| The prefix the news links must start with. | [optional]
+ **sub_domain** | **bool**| Whether to include links to news on sub-domains. | [optional]
+
+### Return type
+
+**{str: (bool, date, datetime, dict, float, int, list, str, none_type)}**
+
+### Authorization
+
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: , application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**401** | Unauthorized |  -  |
+**402** | Payment Required |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**429** | Too Many Requests |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **geo_coordinates**
 > InlineResponse2002 geo_coordinates(location)
 
@@ -98,6 +211,7 @@ Get the geo coordinates for a location. The location can be an exact address but
 ### Example
 
 * Api Key Authentication (apiKey):
+* Api Key Authentication (headerApiKey):
 
 ```python
 import time
@@ -121,6 +235,12 @@ configuration.api_key['apiKey'] = 'YOUR_API_KEY'
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['apiKey'] = 'Bearer'
+
+# Configure API key authorization: headerApiKey
+configuration.api_key['headerApiKey'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['headerApiKey'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 with openapi_client.ApiClient(configuration) as api_client:
@@ -150,7 +270,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
 
 ### HTTP request headers
 
@@ -167,6 +287,108 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **news_website_to_rss_feed**
+> {str: (bool, date, datetime, dict, float, int, list, str, none_type)} news_website_to_rss_feed(url, api_key)
+
+News Website to RSS Feed
+
+Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page. 
+
+### Example
+
+* Api Key Authentication (apiKey):
+* Api Key Authentication (headerApiKey):
+
+```python
+import time
+import openapi_client
+from com.worldnewsapi import news_api
+from pprint import pprint
+# Defining the host is optional and defaults to https://api.worldnewsapi.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://api.worldnewsapi.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKey
+configuration.api_key['apiKey'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKey'] = 'Bearer'
+
+# Configure API key authorization: headerApiKey
+configuration.api_key['headerApiKey'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['headerApiKey'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = news_api.NewsApi(api_client)
+    url = "https://nytimes.com" # str | The url from which links should be extracted.
+    api_key = "abcd1234" # str | Your API key.
+    extract_news = False # bool | Whether extract news and add information such as description, publish date, and image to each item. (optional)
+
+    # example passing only required values which don't have defaults set
+    try:
+        # News Website to RSS Feed
+        api_response = api_instance.news_website_to_rss_feed(url, api_key)
+        pprint(api_response)
+    except openapi_client.ApiException as e:
+        print("Exception when calling NewsApi->news_website_to_rss_feed: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # News Website to RSS Feed
+        api_response = api_instance.news_website_to_rss_feed(url, api_key, extract_news=extract_news)
+        pprint(api_response)
+    except openapi_client.ApiException as e:
+        print("Exception when calling NewsApi->news_website_to_rss_feed: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **url** | **str**| The url from which links should be extracted. |
+ **api_key** | **str**| Your API key. |
+ **extract_news** | **bool**| Whether extract news and add information such as description, publish date, and image to each item. | [optional]
+
+### Return type
+
+**{str: (bool, date, datetime, dict, float, int, list, str, none_type)}**
+
+### Authorization
+
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: , application/json, application/xml
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**401** | Unauthorized |  -  |
+**402** | Payment Required |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**429** | Too Many Requests |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **search_news**
 > InlineResponse200 search_news()
 
@@ -177,6 +399,7 @@ Search for news.
 ### Example
 
 * Api Key Authentication (apiKey):
+* Api Key Authentication (headerApiKey):
 
 ```python
 import time
@@ -201,12 +424,18 @@ configuration.api_key['apiKey'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['apiKey'] = 'Bearer'
 
+# Configure API key authorization: headerApiKey
+configuration.api_key['headerApiKey'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['headerApiKey'] = 'Bearer'
+
 # Enter a context with an instance of the API client
 with openapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = news_api.NewsApi(api_client)
     text = "hurricane" # str | The text to match in the news content. (optional)
-    source_countries = "gb,us" # str | A comma-separated list of ISO 3166 country codes from which the news should originate, e.g. gb,us. (optional)
+    source_countries = "us,uk" # str | A comma-separated list of ISO 3166 country codes from which the news should originate, e.g. gb,us. (optional)
     language = "en" # str | The ISO 6391 language code of the news, e.g. \"en\" for English. (optional)
     min_sentiment = -0.8 # float | The minimal sentiment of the news in range [-1,1]. (optional)
     max_sentiment = 0.8 # float | The maximal sentiment of the news in range [-1,1]. (optional)
@@ -258,7 +487,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
 
 ### HTTP request headers
 

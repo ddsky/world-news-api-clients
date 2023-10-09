@@ -10,7 +10,9 @@ All URIs are relative to *https://api.worldnewsapi.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**extract_news**](NewsApi.md#extract_news) | **GET** /extract-news | Extract News
+[**extract_news_0**](NewsApi.md#extract_news_0) | **GET** /extract-news-links | Extract News
 [**geo_coordinates**](NewsApi.md#geo_coordinates) | **GET** /geo-coordinates | Get Geo Coordinates
+[**news_website_to_rss_feed**](NewsApi.md#news_website_to_rss_feed) | **GET** /feed.rss | News Website to RSS Feed
 [**search_news**](NewsApi.md#search_news) | **GET** /search-news | Search News
 
 
@@ -31,6 +33,10 @@ my $api_instance = WWW::OpenAPIClient::NewsApi->new(
     api_key => {'api-key' => 'YOUR_API_KEY'},
     # uncomment below to setup prefix (e.g. Bearer) for API key, if needed
     #api_key_prefix => {'api-key' => 'Bearer'},
+    # Configure API key authorization: headerApiKey
+    api_key => {'x-api-key' => 'YOUR_API_KEY'},
+    # uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+    #api_key_prefix => {'x-api-key' => 'Bearer'},
 );
 
 my $url = https://www.bbc.com/news/world-us-canada-59340789; # string | The url of the news.
@@ -58,12 +64,73 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **extract_news_0**
+> object extract_news_0(url => $url, api_key => $api_key, prefix => $prefix, sub_domain => $sub_domain)
+
+Extract News
+
+Extract a news links from a news website. 
+
+### Example
+```perl
+use Data::Dumper;
+use WWW::OpenAPIClient::NewsApi;
+my $api_instance = WWW::OpenAPIClient::NewsApi->new(
+
+    # Configure API key authorization: apiKey
+    api_key => {'api-key' => 'YOUR_API_KEY'},
+    # uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+    #api_key_prefix => {'api-key' => 'Bearer'},
+    # Configure API key authorization: headerApiKey
+    api_key => {'x-api-key' => 'YOUR_API_KEY'},
+    # uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+    #api_key_prefix => {'x-api-key' => 'Bearer'},
+);
+
+my $url = https://nytimes.com; # string | The url from which links should be extracted.
+my $api_key = abcd1234; # string | Your API key.
+my $prefix = ; # string | The prefix the news links must start with.
+my $sub_domain = true; # boolean | Whether to include links to news on sub-domains.
+
+eval {
+    my $result = $api_instance->extract_news_0(url => $url, api_key => $api_key, prefix => $prefix, sub_domain => $sub_domain);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling NewsApi->extract_news_0: $@\n";
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **url** | **string**| The url from which links should be extracted. | 
+ **api_key** | **string**| Your API key. | 
+ **prefix** | **string**| The prefix the news links must start with. | [optional] 
+ **sub_domain** | **boolean**| Whether to include links to news on sub-domains. | [optional] 
+
+### Return type
+
+**object**
+
+### Authorization
+
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: , application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -84,6 +151,10 @@ my $api_instance = WWW::OpenAPIClient::NewsApi->new(
     api_key => {'api-key' => 'YOUR_API_KEY'},
     # uncomment below to setup prefix (e.g. Bearer) for API key, if needed
     #api_key_prefix => {'api-key' => 'Bearer'},
+    # Configure API key authorization: headerApiKey
+    api_key => {'x-api-key' => 'YOUR_API_KEY'},
+    # uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+    #api_key_prefix => {'x-api-key' => 'Bearer'},
 );
 
 my $location = Tokyo, Japan; # string | The address or name of the location, e.g. Tokyo, Japan.
@@ -109,12 +180,71 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **news_website_to_rss_feed**
+> object news_website_to_rss_feed(url => $url, api_key => $api_key, extract_news => $extract_news)
+
+News Website to RSS Feed
+
+Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page. 
+
+### Example
+```perl
+use Data::Dumper;
+use WWW::OpenAPIClient::NewsApi;
+my $api_instance = WWW::OpenAPIClient::NewsApi->new(
+
+    # Configure API key authorization: apiKey
+    api_key => {'api-key' => 'YOUR_API_KEY'},
+    # uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+    #api_key_prefix => {'api-key' => 'Bearer'},
+    # Configure API key authorization: headerApiKey
+    api_key => {'x-api-key' => 'YOUR_API_KEY'},
+    # uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+    #api_key_prefix => {'x-api-key' => 'Bearer'},
+);
+
+my $url = https://nytimes.com; # string | The url from which links should be extracted.
+my $api_key = abcd1234; # string | Your API key.
+my $extract_news = false; # boolean | Whether extract news and add information such as description, publish date, and image to each item.
+
+eval {
+    my $result = $api_instance->news_website_to_rss_feed(url => $url, api_key => $api_key, extract_news => $extract_news);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling NewsApi->news_website_to_rss_feed: $@\n";
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **url** | **string**| The url from which links should be extracted. | 
+ **api_key** | **string**| Your API key. | 
+ **extract_news** | **boolean**| Whether extract news and add information such as description, publish date, and image to each item. | [optional] 
+
+### Return type
+
+**object**
+
+### Authorization
+
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: , application/json, application/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -135,10 +265,14 @@ my $api_instance = WWW::OpenAPIClient::NewsApi->new(
     api_key => {'api-key' => 'YOUR_API_KEY'},
     # uncomment below to setup prefix (e.g. Bearer) for API key, if needed
     #api_key_prefix => {'api-key' => 'Bearer'},
+    # Configure API key authorization: headerApiKey
+    api_key => {'x-api-key' => 'YOUR_API_KEY'},
+    # uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+    #api_key_prefix => {'x-api-key' => 'Bearer'},
 );
 
 my $text = hurricane; # string | The text to match in the news content.
-my $source_countries = gb,us; # string | A comma-separated list of ISO 3166 country codes from which the news should originate, e.g. gb,us.
+my $source_countries = us,uk; # string | A comma-separated list of ISO 3166 country codes from which the news should originate, e.g. gb,us.
 my $language = en; # string | The ISO 6391 language code of the news, e.g. \"en\" for English.
 my $min_sentiment = -0.8; # double | The minimal sentiment of the news in range [-1,1].
 my $max_sentiment = 0.8; # double | The maximal sentiment of the news in range [-1,1].
@@ -188,7 +322,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
 
 ### HTTP request headers
 

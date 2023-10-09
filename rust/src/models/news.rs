@@ -26,6 +26,8 @@ pub struct News {
     pub url: Option<String>,
     #[serde(rename = "image", skip_serializing_if = "Option::is_none")]
     pub image: Option<String>,
+    #[serde(rename = "publish_date", skip_serializing_if = "Option::is_none")]
+    pub publish_date: Option<String>,
     #[serde(rename = "author", skip_serializing_if = "Option::is_none")]
     pub author: Option<String>,
     #[serde(rename = "language", skip_serializing_if = "Option::is_none")]
@@ -46,6 +48,7 @@ impl News {
             summary: None,
             url: None,
             image: None,
+            publish_date: None,
             author: None,
             language: None,
             source_country: None,

@@ -129,6 +129,12 @@ export class NewsService {
             localVarQueryParameters = localVarQueryParameters.set('api-key', localVarCredential);
         }
 
+        // authentication (headerApiKey) required
+        localVarCredential = this.configuration.lookupCredential('headerApiKey');
+        if (localVarCredential) {
+            localVarHeaders = localVarHeaders.set('x-api-key', localVarCredential);
+        }
+
         let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
         if (localVarHttpHeaderAcceptSelected === undefined) {
             // to determine the Accept header
@@ -172,6 +178,103 @@ export class NewsService {
     }
 
     /**
+     * Extract News
+     * Extract a news links from a news website. 
+     * @param url The url from which links should be extracted.
+     * @param apiKey Your API key.
+     * @param prefix The prefix the news links must start with.
+     * @param subDomain Whether to include links to news on sub-domains.
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public extractNews_1(url: string, apiKey: string, prefix?: string, subDomain?: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '' | 'application/json', context?: HttpContext}): Observable<object>;
+    public extractNews_1(url: string, apiKey: string, prefix?: string, subDomain?: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '' | 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public extractNews_1(url: string, apiKey: string, prefix?: string, subDomain?: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '' | 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public extractNews_1(url: string, apiKey: string, prefix?: string, subDomain?: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '' | 'application/json', context?: HttpContext}): Observable<any> {
+        if (url === null || url === undefined) {
+            throw new Error('Required parameter url was null or undefined when calling extractNews_1.');
+        }
+        if (apiKey === null || apiKey === undefined) {
+            throw new Error('Required parameter apiKey was null or undefined when calling extractNews_1.');
+        }
+
+        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
+        if (url !== undefined && url !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>url, 'url');
+        }
+        if (prefix !== undefined && prefix !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>prefix, 'prefix');
+        }
+        if (subDomain !== undefined && subDomain !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>subDomain, 'sub-domain');
+        }
+        if (apiKey !== undefined && apiKey !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>apiKey, 'api-key');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarCredential: string | undefined;
+        // authentication (apiKey) required
+        localVarCredential = this.configuration.lookupCredential('apiKey');
+        if (localVarCredential) {
+            localVarQueryParameters = localVarQueryParameters.set('api-key', localVarCredential);
+        }
+
+        // authentication (headerApiKey) required
+        localVarCredential = this.configuration.lookupCredential('headerApiKey');
+        if (localVarCredential) {
+            localVarHeaders = localVarHeaders.set('x-api-key', localVarCredential);
+        }
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                '',
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        return this.httpClient.get<object>(`${this.configuration.basePath}/extract-news-links`,
+            {
+                context: localVarHttpContext,
+                params: localVarQueryParameters,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Get Geo Coordinates
      * Get the geo coordinates for a location. The location can be an exact address but also just the name of a city or country.
      * @param location The address or name of the location, e.g. Tokyo, Japan.
@@ -199,6 +302,12 @@ export class NewsService {
         localVarCredential = this.configuration.lookupCredential('apiKey');
         if (localVarCredential) {
             localVarQueryParameters = localVarQueryParameters.set('api-key', localVarCredential);
+        }
+
+        // authentication (headerApiKey) required
+        localVarCredential = this.configuration.lookupCredential('headerApiKey');
+        if (localVarCredential) {
+            localVarHeaders = localVarHeaders.set('x-api-key', localVarCredential);
         }
 
         let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
@@ -231,6 +340,99 @@ export class NewsService {
         }
 
         return this.httpClient.get<InlineResponse2002>(`${this.configuration.basePath}/geo-coordinates`,
+            {
+                context: localVarHttpContext,
+                params: localVarQueryParameters,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * News Website to RSS Feed
+     * Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page. 
+     * @param url The url from which links should be extracted.
+     * @param apiKey Your API key.
+     * @param extractNews Whether extract news and add information such as description, publish date, and image to each item.
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public newsWebsiteToRSSFeed(url: string, apiKey: string, extractNews?: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '' | 'application/json' | 'application/xml', context?: HttpContext}): Observable<object>;
+    public newsWebsiteToRSSFeed(url: string, apiKey: string, extractNews?: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '' | 'application/json' | 'application/xml', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public newsWebsiteToRSSFeed(url: string, apiKey: string, extractNews?: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '' | 'application/json' | 'application/xml', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public newsWebsiteToRSSFeed(url: string, apiKey: string, extractNews?: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '' | 'application/json' | 'application/xml', context?: HttpContext}): Observable<any> {
+        if (url === null || url === undefined) {
+            throw new Error('Required parameter url was null or undefined when calling newsWebsiteToRSSFeed.');
+        }
+        if (apiKey === null || apiKey === undefined) {
+            throw new Error('Required parameter apiKey was null or undefined when calling newsWebsiteToRSSFeed.');
+        }
+
+        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
+        if (url !== undefined && url !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>url, 'url');
+        }
+        if (extractNews !== undefined && extractNews !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>extractNews, 'extract-news');
+        }
+        if (apiKey !== undefined && apiKey !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>apiKey, 'api-key');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarCredential: string | undefined;
+        // authentication (apiKey) required
+        localVarCredential = this.configuration.lookupCredential('apiKey');
+        if (localVarCredential) {
+            localVarQueryParameters = localVarQueryParameters.set('api-key', localVarCredential);
+        }
+
+        // authentication (headerApiKey) required
+        localVarCredential = this.configuration.lookupCredential('headerApiKey');
+        if (localVarCredential) {
+            localVarHeaders = localVarHeaders.set('x-api-key', localVarCredential);
+        }
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                '',
+                'application/json',
+                'application/xml'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        return this.httpClient.get<object>(`${this.configuration.basePath}/feed.rss`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,
@@ -338,6 +540,12 @@ export class NewsService {
         localVarCredential = this.configuration.lookupCredential('apiKey');
         if (localVarCredential) {
             localVarQueryParameters = localVarQueryParameters.set('api-key', localVarCredential);
+        }
+
+        // authentication (headerApiKey) required
+        localVarCredential = this.configuration.lookupCredential('headerApiKey');
+        if (localVarCredential) {
+            localVarHeaders = localVarHeaders.set('x-api-key', localVarCredential);
         }
 
         let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;

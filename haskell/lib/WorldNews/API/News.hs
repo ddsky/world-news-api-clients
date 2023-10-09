@@ -66,7 +66,7 @@ import qualified Prelude as P
 -- 
 -- Extract a news entry from a news site.
 -- 
--- AuthMethod: 'AuthApiKeyApiKey'
+-- AuthMethod: 'AuthApiKeyApiKey', 'AuthApiKeyHeaderApiKey'
 -- 
 extractNews
   :: Url -- ^ "url" -  The url of the news.
@@ -75,12 +75,52 @@ extractNews
 extractNews (Url url) (Analyze analyze) =
   _mkRequest "GET" ["/extract-news"]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
+    `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyHeaderApiKey)
     `addQuery` toQuery ("url", Just url)
     `addQuery` toQuery ("analyze", Just analyze)
 
 data ExtractNews  
 -- | @application/json@
 instance Produces ExtractNews MimeJSON
+
+
+-- *** extractNews0
+
+-- | @GET \/extract-news-links@
+-- 
+-- Extract News
+-- 
+-- Extract a news links from a news website. 
+-- 
+-- AuthMethod: 'AuthApiKeyApiKey', 'AuthApiKeyHeaderApiKey'
+-- 
+extractNews0
+  :: Accept accept -- ^ request accept ('MimeType')
+  -> Url -- ^ "url" -  The url from which links should be extracted.
+  -> ApiKey -- ^ "apiKey" -  Your API key.
+  -> WorldNewsRequest ExtractNews0 MimeNoContent A.Value accept
+extractNews0  _ (Url url) (ApiKey apiKey) =
+  _mkRequest "GET" ["/extract-news-links"]
+    `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
+    `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyHeaderApiKey)
+    `addQuery` toQuery ("url", Just url)
+    `addQuery` toQuery ("api-key", Just apiKey)
+
+data ExtractNews0  
+
+-- | /Optional Param/ "prefix" - The prefix the news links must start with.
+instance HasOptionalParam ExtractNews0 Prefix where
+  applyOptionalParam req (Prefix xs) =
+    req `addQuery` toQuery ("prefix", Just xs)
+
+-- | /Optional Param/ "sub-domain" - Whether to include links to news on sub-domains.
+instance HasOptionalParam ExtractNews0 SubDomain where
+  applyOptionalParam req (SubDomain xs) =
+    req `addQuery` toQuery ("sub-domain", Just xs)
+-- | @@
+instance Produces ExtractNews0 
+-- | @application/json@
+instance Produces ExtractNews0 MimeJSON
 
 
 -- *** geoCoordinates
@@ -91,7 +131,7 @@ instance Produces ExtractNews MimeJSON
 -- 
 -- Get the geo coordinates for a location. The location can be an exact address but also just the name of a city or country.
 -- 
--- AuthMethod: 'AuthApiKeyApiKey'
+-- AuthMethod: 'AuthApiKeyApiKey', 'AuthApiKeyHeaderApiKey'
 -- 
 geoCoordinates
   :: Location -- ^ "location" -  The address or name of the location, e.g. Tokyo, Japan.
@@ -99,11 +139,48 @@ geoCoordinates
 geoCoordinates (Location location) =
   _mkRequest "GET" ["/geo-coordinates"]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
+    `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyHeaderApiKey)
     `addQuery` toQuery ("location", Just location)
 
 data GeoCoordinates  
 -- | @application/json@
 instance Produces GeoCoordinates MimeJSON
+
+
+-- *** newsWebsiteToRSSFeed
+
+-- | @GET \/feed.rss@
+-- 
+-- News Website to RSS Feed
+-- 
+-- Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page. 
+-- 
+-- AuthMethod: 'AuthApiKeyApiKey', 'AuthApiKeyHeaderApiKey'
+-- 
+newsWebsiteToRSSFeed
+  :: Accept accept -- ^ request accept ('MimeType')
+  -> Url -- ^ "url" -  The url from which links should be extracted.
+  -> ApiKey -- ^ "apiKey" -  Your API key.
+  -> WorldNewsRequest NewsWebsiteToRSSFeed MimeNoContent A.Value accept
+newsWebsiteToRSSFeed  _ (Url url) (ApiKey apiKey) =
+  _mkRequest "GET" ["/feed.rss"]
+    `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
+    `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyHeaderApiKey)
+    `addQuery` toQuery ("url", Just url)
+    `addQuery` toQuery ("api-key", Just apiKey)
+
+data NewsWebsiteToRSSFeed  
+
+-- | /Optional Param/ "extract-news" - Whether extract news and add information such as description, publish date, and image to each item.
+instance HasOptionalParam NewsWebsiteToRSSFeed ExtractNews2 where
+  applyOptionalParam req (ExtractNews2 xs) =
+    req `addQuery` toQuery ("extract-news", Just xs)
+-- | @@
+instance Produces NewsWebsiteToRSSFeed 
+-- | @application/xml@
+instance Produces NewsWebsiteToRSSFeed MimeXML
+-- | @application/json@
+instance Produces NewsWebsiteToRSSFeed MimeJSON
 
 
 -- *** searchNews
@@ -114,13 +191,14 @@ instance Produces GeoCoordinates MimeJSON
 -- 
 -- Search for news.
 -- 
--- AuthMethod: 'AuthApiKeyApiKey'
+-- AuthMethod: 'AuthApiKeyApiKey', 'AuthApiKeyHeaderApiKey'
 -- 
 searchNews
   :: WorldNewsRequest SearchNews MimeNoContent InlineResponse200 MimeJSON
 searchNews =
   _mkRequest "GET" ["/search-news"]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyApiKey)
+    `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyHeaderApiKey)
 
 data SearchNews  
 

@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **Summary** | **string** |  | [optional] 
 **Url** | **string** |  | [optional] 
 **Image** | **string** |  | [optional] 
+**PublishDate** | **string** |  | [optional] 
 **Author** | **string** |  | [optional] 
 **Language** | **string** |  | [optional] 
 **SourceCountry** | **string** |  | [optional] 

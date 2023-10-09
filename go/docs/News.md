@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **Summary** | Pointer to **string** |  | [optional] 
 **Url** | Pointer to **string** |  | [optional] 
 **Image** | Pointer to **string** |  | [optional] 
+**PublishDate** | Pointer to **string** |  | [optional] 
 **Author** | Pointer to **string** |  | [optional] 
 **Language** | Pointer to **string** |  | [optional] 
 **SourceCountry** | Pointer to **string** |  | [optional] 
@@ -183,6 +184,31 @@ SetImage sets Image field to given value.
 `func (o *News) HasImage() bool`
 
 HasImage returns a boolean if a field has been set.
+
+### GetPublishDate
+
+`func (o *News) GetPublishDate() string`
+
+GetPublishDate returns the PublishDate field if non-nil, zero value otherwise.
+
+### GetPublishDateOk
+
+`func (o *News) GetPublishDateOk() (*string, bool)`
+
+GetPublishDateOk returns a tuple with the PublishDate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPublishDate
+
+`func (o *News) SetPublishDate(v string)`
+
+SetPublishDate sets PublishDate field to given value.
+
+### HasPublishDate
+
+`func (o *News) HasPublishDate() bool`
+
+HasPublishDate returns a boolean if a field has been set.
 
 ### GetAuthor
 

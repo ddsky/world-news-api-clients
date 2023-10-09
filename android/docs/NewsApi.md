@@ -5,7 +5,9 @@ All URIs are relative to *https://api.worldnewsapi.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**extractNews**](NewsApi.md#extractNews) | **GET** /extract-news | Extract News
+[**extractNews_0**](NewsApi.md#extractNews_0) | **GET** /extract-news-links | Extract News
 [**geoCoordinates**](NewsApi.md#geoCoordinates) | **GET** /geo-coordinates | Get Geo Coordinates
+[**newsWebsiteToRSSFeed**](NewsApi.md#newsWebsiteToRSSFeed) | **GET** /feed.rss | News Website to RSS Feed
 [**searchNews**](NewsApi.md#searchNews) | **GET** /search-news | Search News
 
 
@@ -50,12 +52,64 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
 - **Accept**: application/json
+
+
+## extractNews_0
+
+> Object extractNews_0(url, apiKey, prefix, subDomain)
+
+Extract News
+
+Extract a news links from a news website. 
+
+### Example
+
+```java
+// Import classes:
+//import com.worldnewsapi.NewsApi;
+
+NewsApi apiInstance = new NewsApi();
+String url = https://nytimes.com; // String | The url from which links should be extracted.
+String apiKey = abcd1234; // String | Your API key.
+String prefix = ; // String | The prefix the news links must start with.
+Boolean subDomain = true; // Boolean | Whether to include links to news on sub-domains.
+try {
+    Object result = apiInstance.extractNews_0(url, apiKey, prefix, subDomain);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling NewsApi#extractNews_0");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **url** | **String**| The url from which links should be extracted. | [default to null]
+ **apiKey** | **String**| Your API key. | [default to null]
+ **prefix** | **String**| The prefix the news links must start with. | [optional] [default to null]
+ **subDomain** | **Boolean**| Whether to include links to news on sub-domains. | [optional] [default to null]
+
+### Return type
+
+**Object**
+
+### Authorization
+
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: , application/json
 
 
 ## geoCoordinates
@@ -96,12 +150,62 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
 - **Accept**: application/json
+
+
+## newsWebsiteToRSSFeed
+
+> Object newsWebsiteToRSSFeed(url, apiKey, extractNews)
+
+News Website to RSS Feed
+
+Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page. 
+
+### Example
+
+```java
+// Import classes:
+//import com.worldnewsapi.NewsApi;
+
+NewsApi apiInstance = new NewsApi();
+String url = https://nytimes.com; // String | The url from which links should be extracted.
+String apiKey = abcd1234; // String | Your API key.
+Boolean extractNews = false; // Boolean | Whether extract news and add information such as description, publish date, and image to each item.
+try {
+    Object result = apiInstance.newsWebsiteToRSSFeed(url, apiKey, extractNews);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling NewsApi#newsWebsiteToRSSFeed");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **url** | **String**| The url from which links should be extracted. | [default to null]
+ **apiKey** | **String**| Your API key. | [default to null]
+ **extractNews** | **Boolean**| Whether extract news and add information such as description, publish date, and image to each item. | [optional] [default to null]
+
+### Return type
+
+**Object**
+
+### Authorization
+
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: , application/json, application/xml
 
 
 ## searchNews
@@ -120,7 +224,7 @@ Search for news.
 
 NewsApi apiInstance = new NewsApi();
 String text = hurricane; // String | The text to match in the news content.
-String sourceCountries = gb,us; // String | A comma-separated list of ISO 3166 country codes from which the news should originate, e.g. gb,us.
+String sourceCountries = us,uk; // String | A comma-separated list of ISO 3166 country codes from which the news should originate, e.g. gb,us.
 String language = en; // String | The ISO 6391 language code of the news, e.g. \"en\" for English.
 Double minSentiment = -0.8; // Double | The minimal sentiment of the news in range [-1,1].
 Double maxSentiment = 0.8; // Double | The maximal sentiment of the news in range [-1,1].
@@ -170,7 +274,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
 
 ### HTTP request headers
 

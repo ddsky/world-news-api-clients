@@ -10,6 +10,7 @@
 | **summary** | **String** |  | [optional] |
 | **url** | **String** |  | [optional] |
 | **image** | **String** |  | [optional] |
+| **publish_date** | **String** |  | [optional] |
 | **author** | **String** |  | [optional] |
 | **language** | **String** |  | [optional] |
 | **source_country** | **String** |  | [optional] |
@@ -27,6 +28,7 @@ instance = OpenapiClient::News.new(
   summary: null,
   url: null,
   image: null,
+  publish_date: null,
   author: null,
   language: null,
   source_country: null,

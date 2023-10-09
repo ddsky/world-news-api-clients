@@ -5,7 +5,9 @@ All URIs are relative to *https://api.worldnewsapi.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**ExtractNews**](NewsApi.md#extractnews) | **GET** /extract-news | Extract News
+[**ExtractNews_0**](NewsApi.md#extractnews_0) | **GET** /extract-news-links | Extract News
 [**GeoCoordinates**](NewsApi.md#geocoordinates) | **GET** /geo-coordinates | Get Geo Coordinates
+[**NewsWebsiteToRSSFeed**](NewsApi.md#newswebsitetorssfeed) | **GET** /feed.rss | News Website to RSS Feed
 [**SearchNews**](NewsApi.md#searchnews) | **GET** /search-news | Search News
 
 
@@ -35,6 +37,10 @@ namespace Example
             Configuration.Default.ApiKey.Add("api-key", "YOUR_API_KEY");
             // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
             // Configuration.Default.ApiKeyPrefix.Add("api-key", "Bearer");
+            // Configure API key authorization: headerApiKey
+            Configuration.Default.ApiKey.Add("x-api-key", "YOUR_API_KEY");
+            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+            // Configuration.Default.ApiKeyPrefix.Add("x-api-key", "Bearer");
 
             var apiInstance = new NewsApi();
             var url = https://www.bbc.com/news/world-us-canada-59340789;  // string | The url of the news.
@@ -68,12 +74,88 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a name="extractnews_0"></a>
+# **ExtractNews_0**
+> Object ExtractNews_0 (string url, string apiKey, string prefix, bool? subDomain)
+
+Extract News
+
+Extract a news links from a news website. 
+
+### Example
+```csharp
+using System;
+using System.Diagnostics;
+using com.worldnewsapi;
+using Org.OpenAPITools.Client;
+using com.worldnewsapi.client.model;
+
+namespace Example
+{
+    public class ExtractNews_0Example
+    {
+        public void main()
+        {
+            // Configure API key authorization: apiKey
+            Configuration.Default.ApiKey.Add("api-key", "YOUR_API_KEY");
+            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+            // Configuration.Default.ApiKeyPrefix.Add("api-key", "Bearer");
+            // Configure API key authorization: headerApiKey
+            Configuration.Default.ApiKey.Add("x-api-key", "YOUR_API_KEY");
+            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+            // Configuration.Default.ApiKeyPrefix.Add("x-api-key", "Bearer");
+
+            var apiInstance = new NewsApi();
+            var url = https://nytimes.com;  // string | The url from which links should be extracted.
+            var apiKey = abcd1234;  // string | Your API key.
+            var prefix = ;  // string | The prefix the news links must start with. (optional) 
+            var subDomain = true;  // bool? | Whether to include links to news on sub-domains. (optional) 
+
+            try
+            {
+                // Extract News
+                Object result = apiInstance.ExtractNews_0(url, apiKey, prefix, subDomain);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling NewsApi.ExtractNews_0: " + e.Message );
+            }
+        }
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **url** | **string**| The url from which links should be extracted. | 
+ **apiKey** | **string**| Your API key. | 
+ **prefix** | **string**| The prefix the news links must start with. | [optional] 
+ **subDomain** | **bool?**| Whether to include links to news on sub-domains. | [optional] 
+
+### Return type
+
+**Object**
+
+### Authorization
+
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: , application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -103,6 +185,10 @@ namespace Example
             Configuration.Default.ApiKey.Add("api-key", "YOUR_API_KEY");
             // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
             // Configuration.Default.ApiKeyPrefix.Add("api-key", "Bearer");
+            // Configure API key authorization: headerApiKey
+            Configuration.Default.ApiKey.Add("x-api-key", "YOUR_API_KEY");
+            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+            // Configuration.Default.ApiKeyPrefix.Add("x-api-key", "Bearer");
 
             var apiInstance = new NewsApi();
             var location = Tokyo, Japan;  // string | The address or name of the location, e.g. Tokyo, Japan.
@@ -134,12 +220,86 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a name="newswebsitetorssfeed"></a>
+# **NewsWebsiteToRSSFeed**
+> Object NewsWebsiteToRSSFeed (string url, string apiKey, bool? extractNews)
+
+News Website to RSS Feed
+
+Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page. 
+
+### Example
+```csharp
+using System;
+using System.Diagnostics;
+using com.worldnewsapi;
+using Org.OpenAPITools.Client;
+using com.worldnewsapi.client.model;
+
+namespace Example
+{
+    public class NewsWebsiteToRSSFeedExample
+    {
+        public void main()
+        {
+            // Configure API key authorization: apiKey
+            Configuration.Default.ApiKey.Add("api-key", "YOUR_API_KEY");
+            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+            // Configuration.Default.ApiKeyPrefix.Add("api-key", "Bearer");
+            // Configure API key authorization: headerApiKey
+            Configuration.Default.ApiKey.Add("x-api-key", "YOUR_API_KEY");
+            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+            // Configuration.Default.ApiKeyPrefix.Add("x-api-key", "Bearer");
+
+            var apiInstance = new NewsApi();
+            var url = https://nytimes.com;  // string | The url from which links should be extracted.
+            var apiKey = abcd1234;  // string | Your API key.
+            var extractNews = false;  // bool? | Whether extract news and add information such as description, publish date, and image to each item. (optional) 
+
+            try
+            {
+                // News Website to RSS Feed
+                Object result = apiInstance.NewsWebsiteToRSSFeed(url, apiKey, extractNews);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling NewsApi.NewsWebsiteToRSSFeed: " + e.Message );
+            }
+        }
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **url** | **string**| The url from which links should be extracted. | 
+ **apiKey** | **string**| Your API key. | 
+ **extractNews** | **bool?**| Whether extract news and add information such as description, publish date, and image to each item. | [optional] 
+
+### Return type
+
+**Object**
+
+### Authorization
+
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: , application/json, application/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -169,10 +329,14 @@ namespace Example
             Configuration.Default.ApiKey.Add("api-key", "YOUR_API_KEY");
             // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
             // Configuration.Default.ApiKeyPrefix.Add("api-key", "Bearer");
+            // Configure API key authorization: headerApiKey
+            Configuration.Default.ApiKey.Add("x-api-key", "YOUR_API_KEY");
+            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+            // Configuration.Default.ApiKeyPrefix.Add("x-api-key", "Bearer");
 
             var apiInstance = new NewsApi();
             var text = hurricane;  // string | The text to match in the news content. (optional) 
-            var sourceCountries = gb,us;  // string | A comma-separated list of ISO 3166 country codes from which the news should originate, e.g. gb,us. (optional) 
+            var sourceCountries = us,uk;  // string | A comma-separated list of ISO 3166 country codes from which the news should originate, e.g. gb,us. (optional) 
             var language = en;  // string | The ISO 6391 language code of the news, e.g. \"en\" for English. (optional) 
             var minSentiment = -0.8;  // double? | The minimal sentiment of the news in range [-1,1]. (optional) 
             var maxSentiment = 0.8;  // double? | The maximal sentiment of the news in range [-1,1]. (optional) 
@@ -228,7 +392,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
 
 ### HTTP request headers
 

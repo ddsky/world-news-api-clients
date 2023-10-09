@@ -91,6 +91,7 @@ type alias News =
 , summary : Maybe String
 , url : Maybe String
 , image : Maybe String
+, publishDate : Maybe String
 , author : Maybe String
 , language : Maybe String
 , sourceCountry : Maybe String
@@ -222,6 +223,7 @@ encodeNewsPairs model =
             , maybeEncode "summary" Json.Encode.string model.summary
             , maybeEncode "url" Json.Encode.string model.url
             , maybeEncode "image" Json.Encode.string model.image
+            , maybeEncode "publish_date" Json.Encode.string model.publishDate
             , maybeEncode "author" Json.Encode.string model.author
             , maybeEncode "language" Json.Encode.string model.language
             , maybeEncode "source_country" Json.Encode.string model.sourceCountry
@@ -288,6 +290,7 @@ newsDecoder =
         |> maybeDecode "summary" Json.Decode.string Nothing
         |> maybeDecode "url" Json.Decode.string Nothing
         |> maybeDecode "image" Json.Decode.string Nothing
+        |> maybeDecode "publish_date" Json.Decode.string Nothing
         |> maybeDecode "author" Json.Decode.string Nothing
         |> maybeDecode "language" Json.Decode.string Nothing
         |> maybeDecode "source_country" Json.Decode.string Nothing

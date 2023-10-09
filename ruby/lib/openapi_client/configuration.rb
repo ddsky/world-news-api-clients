@@ -222,6 +222,13 @@ module OpenapiClient
             key: 'api-key',
             value: api_key_with_prefix('apiKey')
           },
+        'headerApiKey' =>
+          {
+            type: 'api_key',
+            in: 'header',
+            key: 'x-api-key',
+            value: api_key_with_prefix('headerApiKey')
+          },
       }
     end
 

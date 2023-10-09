@@ -270,6 +270,10 @@ my $api_instance = WWW::OpenAPIClient::NewsApi->new(
     api_key => {'api-key' => 'YOUR_API_KEY'},
     # uncomment below to setup prefix (e.g. Bearer) for API key, if needed
     #api_key_prefix => {'api-key' => 'Bearer'},
+    # Configure API key authorization: headerApiKey
+    api_key => {'x-api-key' => 'YOUR_API_KEY'},
+    # uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+    #api_key_prefix => {'x-api-key' => 'Bearer'},
 );
 
 my $url = https://www.bbc.com/news/world-us-canada-59340789; # string | The url of the news.
@@ -292,7 +296,9 @@ All URIs are relative to *https://api.worldnewsapi.com*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *NewsApi* | [**extract_news**](docs/NewsApi.md#extract_news) | **GET** /extract-news | Extract News
+*NewsApi* | [**extract_news_1**](docs/NewsApi.md#extract_news_1) | **GET** /extract-news-links | Extract News
 *NewsApi* | [**geo_coordinates**](docs/NewsApi.md#geo_coordinates) | **GET** /geo-coordinates | Get Geo Coordinates
+*NewsApi* | [**news_website_to_rss_feed**](docs/NewsApi.md#news_website_to_rss_feed) | **GET** /feed.rss | News Website to RSS Feed
 *NewsApi* | [**search_news**](docs/NewsApi.md#search_news) | **GET** /search-news | Search News
 
 
@@ -311,4 +317,10 @@ Class | Method | HTTP request | Description
 - **Type**: API key
 - **API key parameter name**: api-key
 - **Location**: URL query string
+
+## headerApiKey
+
+- **Type**: API key
+- **API key parameter name**: x-api-key
+- **Location**: HTTP header
 

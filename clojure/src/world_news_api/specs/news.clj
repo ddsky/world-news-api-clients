@@ -13,6 +13,7 @@
    (ds/opt :summary) string?
    (ds/opt :url) string?
    (ds/opt :image) string?
+   (ds/opt :publish_date) string?
    (ds/opt :author) string?
    (ds/opt :language) string?
    (ds/opt :source_country) string?

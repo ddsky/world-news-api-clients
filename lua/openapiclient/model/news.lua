@@ -19,7 +19,7 @@ local function cast_news(t)
 	return setmetatable(t, news_mt)
 end
 
-local function new_news(id, title, text, summary, url, image, author, language, source_country, sentiment)
+local function new_news(id, title, text, summary, url, image, publish_date, author, language, source_country, sentiment)
 	return cast_news({
 		["id"] = id;
 		["title"] = title;
@@ -27,6 +27,7 @@ local function new_news(id, title, text, summary, url, image, author, language, 
 		["summary"] = summary;
 		["url"] = url;
 		["image"] = image;
+		["publish_date"] = publish_date;
 		["author"] = author;
 		["language"] = language;
 		["source_country"] = source_country;

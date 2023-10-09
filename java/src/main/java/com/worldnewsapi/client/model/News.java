@@ -29,7 +29,7 @@ import java.math.BigDecimal;
  * A news entry.
  */
 @ApiModel(description = "A news entry.")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-10-28T13:50:26.867+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-10-09T02:36:49.995+02:00[Europe/Berlin]")
 public class News {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
@@ -54,6 +54,10 @@ public class News {
   public static final String SERIALIZED_NAME_IMAGE = "image";
   @SerializedName(SERIALIZED_NAME_IMAGE)
   private String image;
+
+  public static final String SERIALIZED_NAME_PUBLISH_DATE = "publish_date";
+  @SerializedName(SERIALIZED_NAME_PUBLISH_DATE)
+  private String publishDate;
 
   public static final String SERIALIZED_NAME_AUTHOR = "author";
   @SerializedName(SERIALIZED_NAME_AUTHOR)
@@ -212,6 +216,29 @@ public class News {
   }
 
 
+  public News publishDate(String publishDate) {
+    
+    this.publishDate = publishDate;
+    return this;
+  }
+
+   /**
+   * Get publishDate
+   * @return publishDate
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public String getPublishDate() {
+    return publishDate;
+  }
+
+
+  public void setPublishDate(String publishDate) {
+    this.publishDate = publishDate;
+  }
+
+
   public News author(String author) {
     
     this.author = author;
@@ -319,6 +346,7 @@ public class News {
         Objects.equals(this.summary, news.summary) &&
         Objects.equals(this.url, news.url) &&
         Objects.equals(this.image, news.image) &&
+        Objects.equals(this.publishDate, news.publishDate) &&
         Objects.equals(this.author, news.author) &&
         Objects.equals(this.language, news.language) &&
         Objects.equals(this.sourceCountry, news.sourceCountry) &&
@@ -327,7 +355,7 @@ public class News {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, title, text, summary, url, image, author, language, sourceCountry, sentiment);
+    return Objects.hash(id, title, text, summary, url, image, publishDate, author, language, sourceCountry, sentiment);
   }
 
   @Override
@@ -340,6 +368,7 @@ public class News {
     sb.append("    summary: ").append(toIndentedString(summary)).append("\n");
     sb.append("    url: ").append(toIndentedString(url)).append("\n");
     sb.append("    image: ").append(toIndentedString(image)).append("\n");
+    sb.append("    publishDate: ").append(toIndentedString(publishDate)).append("\n");
     sb.append("    author: ").append(toIndentedString(author)).append("\n");
     sb.append("    language: ").append(toIndentedString(language)).append("\n");
     sb.append("    sourceCountry: ").append(toIndentedString(sourceCountry)).append("\n");

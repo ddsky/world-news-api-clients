@@ -41,6 +41,47 @@ defmodule com.worldnewsapi.client.Api.News do
   end
 
   @doc """
+  Extract News
+  Extract a news links from a news website. 
+
+  ## Parameters
+
+  - connection (com.worldnewsapi.client.Connection): Connection to server
+  - url (String.t): The url from which links should be extracted.
+  - api_key (String.t): Your API key.
+  - opts (KeywordList): [optional] Optional parameters
+    - :prefix (String.t): The prefix the news links must start with.
+    - :sub_domain (boolean()): Whether to include links to news on sub-domains.
+  ## Returns
+
+  {:ok, map()} on success
+  {:error, Tesla.Env.t} on failure
+  """
+  @spec extract_news_0(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, nil} | {:ok, Map.t} | {:error, Tesla.Env.t}
+  def extract_news_0(connection, url, api_key, opts \\ []) do
+    optional_params = %{
+      :"prefix" => :query,
+      :"sub-domain" => :query
+    }
+    %{}
+    |> method(:get)
+    |> url("/extract-news-links")
+    |> add_param(:query, :"url", url)
+    |> add_param(:query, :"api-key", api_key)
+    |> add_optional_params(optional_params, opts)
+    |> Enum.into([])
+    |> (&Connection.request(connection, &1)).()
+    |> evaluate_response([
+      { 200, %{}},
+      { 401, false},
+      { 402, false},
+      { 403, false},
+      { 404, false},
+      { 429, false}
+    ])
+  end
+
+  @doc """
   Get Geo Coordinates
   Get the geo coordinates for a location. The location can be an exact address but also just the name of a city or country.
 
@@ -65,6 +106,45 @@ defmodule com.worldnewsapi.client.Api.News do
     |> evaluate_response([
       { 200, %com.worldnewsapi.client.Model.InlineResponse2002{}},
       { 404, false}
+    ])
+  end
+
+  @doc """
+  News Website to RSS Feed
+  Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page. 
+
+  ## Parameters
+
+  - connection (com.worldnewsapi.client.Connection): Connection to server
+  - url (String.t): The url from which links should be extracted.
+  - api_key (String.t): Your API key.
+  - opts (KeywordList): [optional] Optional parameters
+    - :extract_news (boolean()): Whether extract news and add information such as description, publish date, and image to each item.
+  ## Returns
+
+  {:ok, map()} on success
+  {:error, Tesla.Env.t} on failure
+  """
+  @spec news_website_to_rss_feed(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, nil} | {:ok, Map.t} | {:error, Tesla.Env.t}
+  def news_website_to_rss_feed(connection, url, api_key, opts \\ []) do
+    optional_params = %{
+      :"extract-news" => :query
+    }
+    %{}
+    |> method(:get)
+    |> url("/feed.rss")
+    |> add_param(:query, :"url", url)
+    |> add_param(:query, :"api-key", api_key)
+    |> add_optional_params(optional_params, opts)
+    |> Enum.into([])
+    |> (&Connection.request(connection, &1)).()
+    |> evaluate_response([
+      { 200, %{}},
+      { 401, false},
+      { 402, false},
+      { 403, false},
+      { 404, false},
+      { 429, false}
     ])
   end
 

@@ -14,6 +14,7 @@ class ApiClient {
   ApiClient({this.basePath = 'https://api.worldnewsapi.com'}) {
     // Setup authentications (key: authentication name, value: authentication).
     _authentications[r'apiKey'] = ApiKeyAuth('query', 'api-key');
+    _authentications[r'headerApiKey'] = ApiKeyAuth('header', 'x-api-key');
   }
 
   final String basePath;

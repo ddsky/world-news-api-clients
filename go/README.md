@@ -79,7 +79,9 @@ All URIs are relative to *https://api.worldnewsapi.com*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *NewsApi* | [**ExtractNews**](docs/NewsApi.md#extractnews) | **Get** /extract-news | Extract News
+*NewsApi* | [**ExtractNews_0**](docs/NewsApi.md#extractnews_0) | **Get** /extract-news-links | Extract News
 *NewsApi* | [**GeoCoordinates**](docs/NewsApi.md#geocoordinates) | **Get** /geo-coordinates | Get Geo Coordinates
+*NewsApi* | [**NewsWebsiteToRSSFeed**](docs/NewsApi.md#newswebsitetorssfeed) | **Get** /feed.rss | News Website to RSS Feed
 *NewsApi* | [**SearchNews**](docs/NewsApi.md#searchnews) | **Get** /search-news | Search News
 
 
@@ -103,6 +105,15 @@ Class | Method | HTTP request | Description
 - **Location**: URL query string
 
 Note, each API key must be added to a map of `map[string]APIKey` where the key is: api-key and passed in as the auth context for each request.
+
+
+### headerApiKey
+
+- **Type**: API key
+- **API key parameter name**: x-api-key
+- **Location**: HTTP header
+
+Note, each API key must be added to a map of `map[string]APIKey` where the key is: x-api-key and passed in as the auth context for each request.
 
 
 ## Documentation for Utility Methods

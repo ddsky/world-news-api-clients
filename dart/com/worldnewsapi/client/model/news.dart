@@ -19,6 +19,7 @@ class News {
     this.summary,
     this.url,
     this.image,
+    this.publishDate,
     this.author,
     this.language,
     this.sourceCountry,
@@ -37,6 +38,8 @@ class News {
 
   String image;
 
+  String publishDate;
+
   String author;
 
   String language;
@@ -53,6 +56,7 @@ class News {
      other.summary == summary &&
      other.url == url &&
      other.image == image &&
+     other.publishDate == publishDate &&
      other.author == author &&
      other.language == language &&
      other.sourceCountry == sourceCountry &&
@@ -67,13 +71,14 @@ class News {
     (summary == null ? 0 : summary.hashCode) +
     (url == null ? 0 : url.hashCode) +
     (image == null ? 0 : image.hashCode) +
+    (publishDate == null ? 0 : publishDate.hashCode) +
     (author == null ? 0 : author.hashCode) +
     (language == null ? 0 : language.hashCode) +
     (sourceCountry == null ? 0 : sourceCountry.hashCode) +
     (sentiment == null ? 0 : sentiment.hashCode);
 
   @override
-  String toString() => 'News[id=$id, title=$title, text=$text, summary=$summary, url=$url, image=$image, author=$author, language=$language, sourceCountry=$sourceCountry, sentiment=$sentiment]';
+  String toString() => 'News[id=$id, title=$title, text=$text, summary=$summary, url=$url, image=$image, publishDate=$publishDate, author=$author, language=$language, sourceCountry=$sourceCountry, sentiment=$sentiment]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
@@ -94,6 +99,9 @@ class News {
     }
     if (image != null) {
       json[r'image'] = image;
+    }
+    if (publishDate != null) {
+      json[r'publish_date'] = publishDate;
     }
     if (author != null) {
       json[r'author'] = author;
@@ -123,6 +131,7 @@ class News {
         summary: mapValueOfType<String>(json, r'summary'),
         url: mapValueOfType<String>(json, r'url'),
         image: mapValueOfType<String>(json, r'image'),
+        publishDate: mapValueOfType<String>(json, r'publish_date'),
         author: mapValueOfType<String>(json, r'author'),
         language: mapValueOfType<String>(json, r'language'),
         sourceCountry: mapValueOfType<String>(json, r'source_country'),

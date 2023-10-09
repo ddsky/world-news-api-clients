@@ -66,6 +66,9 @@ class News {
             if (data.hasOwnProperty('image')) {
                 obj['image'] = ApiClient.convertToType(data['image'], 'String');
             }
+            if (data.hasOwnProperty('publish_date')) {
+                obj['publish_date'] = ApiClient.convertToType(data['publish_date'], 'String');
+            }
             if (data.hasOwnProperty('author')) {
                 obj['author'] = ApiClient.convertToType(data['author'], 'String');
             }
@@ -114,6 +117,11 @@ News.prototype['url'] = undefined;
  * @member {String} image
  */
 News.prototype['image'] = undefined;
+
+/**
+ * @member {String} publish_date
+ */
+News.prototype['publish_date'] = undefined;
 
 /**
  * @member {String} author

@@ -24,7 +24,7 @@
              :form-params   {}
              :content-types []
              :accepts       ["application/json"]
-             :auth-names    ["apiKey"]}))
+             :auth-names    ["apiKey" "headerApiKey"]}))
 
 (defn-spec extract-news inline-response-200-1-spec
   "Extract News
@@ -34,6 +34,32 @@
     (if (:decode-models *api-context*)
        (st/decode inline-response-200-1-spec res st/string-transformer)
        res)))
+
+
+(defn-spec extract-news_0-with-http-info any?
+  "Extract News
+  Extract a news links from a news website."
+  ([url string?, api-key string?, ] (extract-news_0-with-http-info url api-key nil))
+  ([url string?, api-key string?, {:keys [prefix sub-domain]} (s/map-of keyword? any?)]
+   (check-required-params url api-key)
+   (call-api "/extract-news-links" :get
+             {:path-params   {}
+              :header-params {}
+              :query-params  {"url" url "prefix" prefix "sub-domain" sub-domain "api-key" api-key }
+              :form-params   {}
+              :content-types []
+              :accepts       ["" "application/json"]
+              :auth-names    ["apiKey" "headerApiKey"]})))
+
+(defn-spec extract-news_0 any?
+  "Extract News
+  Extract a news links from a news website."
+  ([url string?, api-key string?, ] (extract-news_0 url api-key nil))
+  ([url string?, api-key string?, optional-params any?]
+   (let [res (:data (extract-news_0-with-http-info url api-key optional-params))]
+     (if (:decode-models *api-context*)
+        (st/decode any? res st/string-transformer)
+        res))))
 
 
 (defn-spec geo-coordinates-with-http-info any?
@@ -48,7 +74,7 @@
              :form-params   {}
              :content-types []
              :accepts       ["application/json"]
-             :auth-names    ["apiKey"]}))
+             :auth-names    ["apiKey" "headerApiKey"]}))
 
 (defn-spec geo-coordinates inline-response-200-2-spec
   "Get Geo Coordinates
@@ -58,6 +84,32 @@
     (if (:decode-models *api-context*)
        (st/decode inline-response-200-2-spec res st/string-transformer)
        res)))
+
+
+(defn-spec news-website-to-rss-feed-with-http-info any?
+  "News Website to RSS Feed
+  Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page."
+  ([url string?, api-key string?, ] (news-website-to-rss-feed-with-http-info url api-key nil))
+  ([url string?, api-key string?, {:keys [extract-news]} (s/map-of keyword? any?)]
+   (check-required-params url api-key)
+   (call-api "/feed.rss" :get
+             {:path-params   {}
+              :header-params {}
+              :query-params  {"url" url "extract-news" extract-news "api-key" api-key }
+              :form-params   {}
+              :content-types []
+              :accepts       ["" "application/json" "application/xml"]
+              :auth-names    ["apiKey" "headerApiKey"]})))
+
+(defn-spec news-website-to-rss-feed any?
+  "News Website to RSS Feed
+  Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page."
+  ([url string?, api-key string?, ] (news-website-to-rss-feed url api-key nil))
+  ([url string?, api-key string?, optional-params any?]
+   (let [res (:data (news-website-to-rss-feed-with-http-info url api-key optional-params))]
+     (if (:decode-models *api-context*)
+        (st/decode any? res st/string-transformer)
+        res))))
 
 
 (defn-spec search-news-with-http-info any?
@@ -72,7 +124,7 @@
               :form-params   {}
               :content-types []
               :accepts       ["application/json"]
-              :auth-names    ["apiKey"]})))
+              :auth-names    ["apiKey" "headerApiKey"]})))
 
 (defn-spec search-news inline-response-200-spec
   "Search News

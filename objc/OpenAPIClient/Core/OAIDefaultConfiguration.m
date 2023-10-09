@@ -111,6 +111,13 @@
                        @"key": @"api-key",
                        @"value": [self getApiKeyWithPrefix:@"api-key"]
                    },
+               @"headerApiKey":
+                   @{
+                       @"type": @"api_key",
+                       @"in": @"header",
+                       @"key": @"x-api-key",
+                       @"value": [self getApiKeyWithPrefix:@"x-api-key"]
+                   },
                };
 }
 

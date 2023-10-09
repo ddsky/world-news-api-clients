@@ -1,5 +1,4 @@
 .gitignore
-.openapi-generator-ignore
 com/worldnewsapi/api.ts
 com/worldnewsapi/client/README.md
 com/worldnewsapi/client/api.module.ts

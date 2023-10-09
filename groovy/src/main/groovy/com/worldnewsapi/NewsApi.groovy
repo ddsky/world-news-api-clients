@@ -44,6 +44,46 @@ class NewsApi {
 
     }
 
+    def extractNews_0 ( String url, String apiKey, String prefix, Boolean subDomain, Closure onSuccess, Closure onFailure)  {
+        String resourcePath = "/extract-news-links"
+
+        // params
+        def queryParams = [:]
+        def headerParams = [:]
+        def bodyParams
+        def contentType
+
+        // verify required params are set
+        if (url == null) {
+            throw new RuntimeException("missing required params url")
+        }
+        // verify required params are set
+        if (apiKey == null) {
+            throw new RuntimeException("missing required params apiKey")
+        }
+
+        if (url != null) {
+            queryParams.put("url", url)
+        }
+        if (prefix != null) {
+            queryParams.put("prefix", prefix)
+        }
+        if (subDomain != null) {
+            queryParams.put("sub-domain", subDomain)
+        }
+        if (apiKey != null) {
+            queryParams.put("api-key", apiKey)
+        }
+
+
+
+
+        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, contentType,
+                    "GET", "",
+                    Object.class )
+
+    }
+
     def geoCoordinates ( String location, Closure onSuccess, Closure onFailure)  {
         String resourcePath = "/geo-coordinates"
 
@@ -68,6 +108,43 @@ class NewsApi {
         apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, contentType,
                     "GET", "",
                     InlineResponse2002.class )
+
+    }
+
+    def newsWebsiteToRSSFeed ( String url, String apiKey, Boolean extractNews, Closure onSuccess, Closure onFailure)  {
+        String resourcePath = "/feed.rss"
+
+        // params
+        def queryParams = [:]
+        def headerParams = [:]
+        def bodyParams
+        def contentType
+
+        // verify required params are set
+        if (url == null) {
+            throw new RuntimeException("missing required params url")
+        }
+        // verify required params are set
+        if (apiKey == null) {
+            throw new RuntimeException("missing required params apiKey")
+        }
+
+        if (url != null) {
+            queryParams.put("url", url)
+        }
+        if (extractNews != null) {
+            queryParams.put("extract-news", extractNews)
+        }
+        if (apiKey != null) {
+            queryParams.put("api-key", apiKey)
+        }
+
+
+
+
+        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, contentType,
+                    "GET", "",
+                    Object.class )
 
     }
 

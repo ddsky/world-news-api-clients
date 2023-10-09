@@ -51,7 +51,7 @@ class NewsApi {
       queryParams.addAll(_convertParametersForCollectionFormat('', 'url', url));
       queryParams.addAll(_convertParametersForCollectionFormat('', 'analyze', analyze));
 
-    const authNames = <String>['apiKey'];
+    const authNames = <String>['apiKey', 'headerApiKey'];
     const contentTypes = <String>[];
 
 
@@ -93,6 +93,101 @@ class NewsApi {
     return Future<InlineResponse2001>.value();
   }
 
+  /// Extract News
+  ///
+  /// Extract a news links from a news website. 
+  ///
+  /// Note: This method returns the HTTP [Response].
+  ///
+  /// Parameters:
+  ///
+  /// * [String] url (required):
+  ///   The url from which links should be extracted.
+  ///
+  /// * [String] apiKey (required):
+  ///   Your API key.
+  ///
+  /// * [String] prefix:
+  ///   The prefix the news links must start with.
+  ///
+  /// * [bool] subDomain:
+  ///   Whether to include links to news on sub-domains.
+  Future<Response> extractNews_1WithHttpInfo(String url, String apiKey, { String prefix, bool subDomain, }) async {
+    // Verify required params are set.
+    if (url == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: url');
+    }
+    if (apiKey == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: apiKey');
+    }
+
+    // ignore: prefer_const_declarations
+    final path = r'/extract-news-links';
+
+    // ignore: prefer_final_locals
+    Object postBody;
+
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'url', url));
+    if (prefix != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'prefix', prefix));
+    }
+    if (subDomain != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'sub-domain', subDomain));
+    }
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'api-key', apiKey));
+
+    const authNames = <String>['apiKey', 'headerApiKey'];
+    const contentTypes = <String>[];
+
+
+    return apiClient.invokeAPI(
+      path,
+      'GET',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      contentTypes.isEmpty ? null : contentTypes[0],
+      authNames,
+    );
+  }
+
+  /// Extract News
+  ///
+  /// Extract a news links from a news website. 
+  ///
+  /// Parameters:
+  ///
+  /// * [String] url (required):
+  ///   The url from which links should be extracted.
+  ///
+  /// * [String] apiKey (required):
+  ///   Your API key.
+  ///
+  /// * [String] prefix:
+  ///   The prefix the news links must start with.
+  ///
+  /// * [bool] subDomain:
+  ///   Whether to include links to news on sub-domains.
+  Future<Object> extractNews_1(String url, String apiKey, { String prefix, bool subDomain, }) async {
+    final response = await extractNews_1WithHttpInfo(url, apiKey,  prefix: prefix, subDomain: subDomain, );
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
+    }
+    // When a remote server returns no body with a status of 204, we shall not decode it.
+    // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
+    // FormatException when trying to decode an empty string.
+    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Object',) as Object;
+    
+    }
+    return Future<Object>.value();
+  }
+
   /// Get Geo Coordinates
   ///
   /// Get the geo coordinates for a location. The location can be an exact address but also just the name of a city or country.
@@ -121,7 +216,7 @@ class NewsApi {
 
       queryParams.addAll(_convertParametersForCollectionFormat('', 'location', location));
 
-    const authNames = <String>['apiKey'];
+    const authNames = <String>['apiKey', 'headerApiKey'];
     const contentTypes = <String>[];
 
 
@@ -158,6 +253,92 @@ class NewsApi {
     
     }
     return Future<InlineResponse2002>.value();
+  }
+
+  /// News Website to RSS Feed
+  ///
+  /// Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page. 
+  ///
+  /// Note: This method returns the HTTP [Response].
+  ///
+  /// Parameters:
+  ///
+  /// * [String] url (required):
+  ///   The url from which links should be extracted.
+  ///
+  /// * [String] apiKey (required):
+  ///   Your API key.
+  ///
+  /// * [bool] extractNews:
+  ///   Whether extract news and add information such as description, publish date, and image to each item.
+  Future<Response> newsWebsiteToRSSFeedWithHttpInfo(String url, String apiKey, { bool extractNews, }) async {
+    // Verify required params are set.
+    if (url == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: url');
+    }
+    if (apiKey == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: apiKey');
+    }
+
+    // ignore: prefer_const_declarations
+    final path = r'/feed.rss';
+
+    // ignore: prefer_final_locals
+    Object postBody;
+
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'url', url));
+    if (extractNews != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'extract-news', extractNews));
+    }
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'api-key', apiKey));
+
+    const authNames = <String>['apiKey', 'headerApiKey'];
+    const contentTypes = <String>[];
+
+
+    return apiClient.invokeAPI(
+      path,
+      'GET',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      contentTypes.isEmpty ? null : contentTypes[0],
+      authNames,
+    );
+  }
+
+  /// News Website to RSS Feed
+  ///
+  /// Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page. 
+  ///
+  /// Parameters:
+  ///
+  /// * [String] url (required):
+  ///   The url from which links should be extracted.
+  ///
+  /// * [String] apiKey (required):
+  ///   Your API key.
+  ///
+  /// * [bool] extractNews:
+  ///   Whether extract news and add information such as description, publish date, and image to each item.
+  Future<Object> newsWebsiteToRSSFeed(String url, String apiKey, { bool extractNews, }) async {
+    final response = await newsWebsiteToRSSFeedWithHttpInfo(url, apiKey,  extractNews: extractNews, );
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
+    }
+    // When a remote server returns no body with a status of 204, we shall not decode it.
+    // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
+    // FormatException when trying to decode an empty string.
+    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Object',) as Object;
+    
+    }
+    return Future<Object>.value();
   }
 
   /// Search News
@@ -271,7 +452,7 @@ class NewsApi {
       queryParams.addAll(_convertParametersForCollectionFormat('', 'sort-direction', sortDirection));
     }
 
-    const authNames = <String>['apiKey'];
+    const authNames = <String>['apiKey', 'headerApiKey'];
     const contentTypes = <String>[];
 
 

@@ -19,11 +19,28 @@ namespace com.worldnewsapi
         /// <returns>InlineResponse2001</returns>
         InlineResponse2001 ExtractNews (string url, bool? analyze);
         /// <summary>
+        /// Extract News Extract a news links from a news website. 
+        /// </summary>
+        /// <param name="url">The url from which links should be extracted.</param>
+        /// <param name="apiKey">Your API key.</param>
+        /// <param name="prefix">The prefix the news links must start with.</param>
+        /// <param name="subDomain">Whether to include links to news on sub-domains.</param>
+        /// <returns>Object</returns>
+        Object ExtractNews_1 (string url, string apiKey, string prefix, bool? subDomain);
+        /// <summary>
         /// Get Geo Coordinates Get the geo coordinates for a location. The location can be an exact address but also just the name of a city or country.
         /// </summary>
         /// <param name="location">The address or name of the location, e.g. Tokyo, Japan.</param>
         /// <returns>InlineResponse2002</returns>
         InlineResponse2002 GeoCoordinates (string location);
+        /// <summary>
+        /// News Website to RSS Feed Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page. 
+        /// </summary>
+        /// <param name="url">The url from which links should be extracted.</param>
+        /// <param name="apiKey">Your API key.</param>
+        /// <param name="extractNews">Whether extract news and add information such as description, publish date, and image to each item.</param>
+        /// <returns>Object</returns>
+        Object NewsWebsiteToRSSFeed (string url, string apiKey, bool? extractNews);
         /// <summary>
         /// Search News Search for news.
         /// </summary>
@@ -128,7 +145,7 @@ namespace com.worldnewsapi
  if (analyze != null) queryParams.Add("analyze", ApiClient.ParameterToString(analyze)); // query parameter
                                     
             // authentication setting, if any
-            String[] authSettings = new String[] { "apiKey" };
+            String[] authSettings = new String[] { "apiKey", "headerApiKey" };
 
             // make the HTTP request
             IRestResponse response = (IRestResponse) ApiClient.CallApi(path, Method.GET, queryParams, postBody, headerParams, formParams, fileParams, authSettings);
@@ -139,6 +156,52 @@ namespace com.worldnewsapi
                 throw new ApiException ((int)response.StatusCode, "Error calling ExtractNews: " + response.ErrorMessage, response.ErrorMessage);
 
             return (InlineResponse2001) ApiClient.Deserialize(response.Content, typeof(InlineResponse2001), response.Headers);
+        }
+
+        /// <summary>
+        /// Extract News Extract a news links from a news website. 
+        /// </summary>
+        /// <param name="url">The url from which links should be extracted.</param>
+        /// <param name="apiKey">Your API key.</param>
+        /// <param name="prefix">The prefix the news links must start with.</param>
+        /// <param name="subDomain">Whether to include links to news on sub-domains.</param>
+        /// <returns>Object</returns>
+        public Object ExtractNews_1 (string url, string apiKey, string prefix, bool? subDomain)
+        {
+            
+            // verify the required parameter 'url' is set
+            if (url == null) throw new ApiException(400, "Missing required parameter 'url' when calling ExtractNews_1");
+            
+            // verify the required parameter 'apiKey' is set
+            if (apiKey == null) throw new ApiException(400, "Missing required parameter 'apiKey' when calling ExtractNews_1");
+            
+
+            var path = "/extract-news-links";
+            path = path.Replace("{format}", "json");
+            
+            var queryParams = new Dictionary<String, String>();
+            var headerParams = new Dictionary<String, String>();
+            var formParams = new Dictionary<String, String>();
+            var fileParams = new Dictionary<String, FileParameter>();
+            String postBody = null;
+
+             if (url != null) queryParams.Add("url", ApiClient.ParameterToString(url)); // query parameter
+ if (prefix != null) queryParams.Add("prefix", ApiClient.ParameterToString(prefix)); // query parameter
+ if (subDomain != null) queryParams.Add("sub-domain", ApiClient.ParameterToString(subDomain)); // query parameter
+ if (apiKey != null) queryParams.Add("api-key", ApiClient.ParameterToString(apiKey)); // query parameter
+                                    
+            // authentication setting, if any
+            String[] authSettings = new String[] { "apiKey", "headerApiKey" };
+
+            // make the HTTP request
+            IRestResponse response = (IRestResponse) ApiClient.CallApi(path, Method.GET, queryParams, postBody, headerParams, formParams, fileParams, authSettings);
+
+            if (((int)response.StatusCode) >= 400)
+                throw new ApiException ((int)response.StatusCode, "Error calling ExtractNews_1: " + response.Content, response.Content);
+            else if (((int)response.StatusCode) == 0)
+                throw new ApiException ((int)response.StatusCode, "Error calling ExtractNews_1: " + response.ErrorMessage, response.ErrorMessage);
+
+            return (Object) ApiClient.Deserialize(response.Content, typeof(Object), response.Headers);
         }
 
         /// <summary>
@@ -165,7 +228,7 @@ namespace com.worldnewsapi
              if (location != null) queryParams.Add("location", ApiClient.ParameterToString(location)); // query parameter
                                     
             // authentication setting, if any
-            String[] authSettings = new String[] { "apiKey" };
+            String[] authSettings = new String[] { "apiKey", "headerApiKey" };
 
             // make the HTTP request
             IRestResponse response = (IRestResponse) ApiClient.CallApi(path, Method.GET, queryParams, postBody, headerParams, formParams, fileParams, authSettings);
@@ -176,6 +239,50 @@ namespace com.worldnewsapi
                 throw new ApiException ((int)response.StatusCode, "Error calling GeoCoordinates: " + response.ErrorMessage, response.ErrorMessage);
 
             return (InlineResponse2002) ApiClient.Deserialize(response.Content, typeof(InlineResponse2002), response.Headers);
+        }
+
+        /// <summary>
+        /// News Website to RSS Feed Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page. 
+        /// </summary>
+        /// <param name="url">The url from which links should be extracted.</param>
+        /// <param name="apiKey">Your API key.</param>
+        /// <param name="extractNews">Whether extract news and add information such as description, publish date, and image to each item.</param>
+        /// <returns>Object</returns>
+        public Object NewsWebsiteToRSSFeed (string url, string apiKey, bool? extractNews)
+        {
+            
+            // verify the required parameter 'url' is set
+            if (url == null) throw new ApiException(400, "Missing required parameter 'url' when calling NewsWebsiteToRSSFeed");
+            
+            // verify the required parameter 'apiKey' is set
+            if (apiKey == null) throw new ApiException(400, "Missing required parameter 'apiKey' when calling NewsWebsiteToRSSFeed");
+            
+
+            var path = "/feed.rss";
+            path = path.Replace("{format}", "json");
+            
+            var queryParams = new Dictionary<String, String>();
+            var headerParams = new Dictionary<String, String>();
+            var formParams = new Dictionary<String, String>();
+            var fileParams = new Dictionary<String, FileParameter>();
+            String postBody = null;
+
+             if (url != null) queryParams.Add("url", ApiClient.ParameterToString(url)); // query parameter
+ if (extractNews != null) queryParams.Add("extract-news", ApiClient.ParameterToString(extractNews)); // query parameter
+ if (apiKey != null) queryParams.Add("api-key", ApiClient.ParameterToString(apiKey)); // query parameter
+                                    
+            // authentication setting, if any
+            String[] authSettings = new String[] { "apiKey", "headerApiKey" };
+
+            // make the HTTP request
+            IRestResponse response = (IRestResponse) ApiClient.CallApi(path, Method.GET, queryParams, postBody, headerParams, formParams, fileParams, authSettings);
+
+            if (((int)response.StatusCode) >= 400)
+                throw new ApiException ((int)response.StatusCode, "Error calling NewsWebsiteToRSSFeed: " + response.Content, response.Content);
+            else if (((int)response.StatusCode) == 0)
+                throw new ApiException ((int)response.StatusCode, "Error calling NewsWebsiteToRSSFeed: " + response.ErrorMessage, response.ErrorMessage);
+
+            return (Object) ApiClient.Deserialize(response.Content, typeof(Object), response.Headers);
         }
 
         /// <summary>
@@ -227,7 +334,7 @@ namespace com.worldnewsapi
  if (sortDirection != null) queryParams.Add("sort-direction", ApiClient.ParameterToString(sortDirection)); // query parameter
                                     
             // authentication setting, if any
-            String[] authSettings = new String[] { "apiKey" };
+            String[] authSettings = new String[] { "apiKey", "headerApiKey" };
 
             // make the HTTP request
             IRestResponse response = (IRestResponse) ApiClient.CallApi(path, Method.GET, queryParams, postBody, headerParams, formParams, fileParams, authSettings);

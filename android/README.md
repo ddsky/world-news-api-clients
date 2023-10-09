@@ -85,7 +85,9 @@ All URIs are relative to *https://api.worldnewsapi.com*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *NewsApi* | [**extractNews**](docs/NewsApi.md#extractNews) | **GET** /extract-news | Extract News
+*NewsApi* | [**extractNews_0**](docs/NewsApi.md#extractNews_0) | **GET** /extract-news-links | Extract News
 *NewsApi* | [**geoCoordinates**](docs/NewsApi.md#geoCoordinates) | **GET** /geo-coordinates | Get Geo Coordinates
+*NewsApi* | [**newsWebsiteToRSSFeed**](docs/NewsApi.md#newsWebsiteToRSSFeed) | **GET** /feed.rss | News Website to RSS Feed
 *NewsApi* | [**searchNews**](docs/NewsApi.md#searchNews) | **GET** /search-news | Search News
 
 
@@ -107,6 +109,13 @@ Authentication schemes defined for the API:
 
 - **API key parameter name**: api-key
 - **Location**: URL query string
+
+### headerApiKey
+
+- **Type**: API key
+
+- **API key parameter name**: x-api-key
+- **Location**: HTTP header
 
 
 ## Recommendation

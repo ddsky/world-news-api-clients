@@ -262,6 +262,9 @@ namespace Org.OpenAPITools.Client
                     case "apiKey":
                         queryParams["api-key"] = GetApiKeyWithPrefix("api-key");
                         break;
+                    case "headerApiKey":
+                        headerParams["x-api-key"] = GetApiKeyWithPrefix("x-api-key");
+                        break;
                     default:
                         //TODO show warning about security definition not found
                         break;

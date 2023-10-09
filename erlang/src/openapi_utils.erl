@@ -75,7 +75,10 @@ update_params_with_auth(Cfg, Headers, QS) ->
     Auths = #{ 'apiKey' =>
                 #{type => 'apiKey',
                   key => <<"api-key">>,
-                  in => query}},
+                  in => query}, 'headerApiKey' =>
+                #{type => 'apiKey',
+                  key => <<"x-api-key">>,
+                  in => header}},
 
     maps:fold(fun(AuthName, #{type := _Type,
                               in := In,

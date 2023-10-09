@@ -5,7 +5,9 @@ All URIs are relative to *https://api.worldnewsapi.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**extractNews**](NewsApi.md#extractNews) | **GET** /extract-news | Extract News
+[**extractNews_0**](NewsApi.md#extractNews_0) | **GET** /extract-news-links | Extract News
 [**geoCoordinates**](NewsApi.md#geoCoordinates) | **GET** /geo-coordinates | Get Geo Coordinates
+[**newsWebsiteToRSSFeed**](NewsApi.md#newsWebsiteToRSSFeed) | **GET** /feed.rss | News Website to RSS Feed
 [**searchNews**](NewsApi.md#searchNews) | **GET** /search-news | Search News
 
 
@@ -38,6 +40,12 @@ public class Example {
     // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
     //apiKey.setApiKeyPrefix("Token");
 
+    // Configure API key authorization: headerApiKey
+    ApiKeyAuth headerApiKey = (ApiKeyAuth) defaultClient.getAuthentication("headerApiKey");
+    headerApiKey.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //headerApiKey.setApiKeyPrefix("Token");
+
     NewsApi apiInstance = new NewsApi(defaultClient);
     String url = "https://www.bbc.com/news/world-us-canada-59340789"; // String | The url of the news.
     Boolean analyze = false; // Boolean | Whether to analyze the news (extract entities etc.)
@@ -68,7 +76,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
 
 ### HTTP request headers
 
@@ -79,6 +87,92 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Extracted news. |  -  |
+
+<a name="extractNews_0"></a>
+# **extractNews_0**
+> Object extractNews_0(url, apiKey, prefix, subDomain)
+
+Extract News
+
+Extract a news links from a news website. 
+
+### Example
+```java
+// Import classes:
+import com.worldnewsapi.client.ApiClient;
+import com.worldnewsapi.client.ApiException;
+import com.worldnewsapi.client.Configuration;
+import com.worldnewsapi.client.auth.*;
+import com.worldnewsapi.client.models.*;
+import com.worldnewsapi.NewsApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://api.worldnewsapi.com");
+    
+    // Configure API key authorization: apiKey
+    ApiKeyAuth apiKey = (ApiKeyAuth) defaultClient.getAuthentication("apiKey");
+    apiKey.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKey.setApiKeyPrefix("Token");
+
+    // Configure API key authorization: headerApiKey
+    ApiKeyAuth headerApiKey = (ApiKeyAuth) defaultClient.getAuthentication("headerApiKey");
+    headerApiKey.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //headerApiKey.setApiKeyPrefix("Token");
+
+    NewsApi apiInstance = new NewsApi(defaultClient);
+    String url = "https://nytimes.com"; // String | The url from which links should be extracted.
+    String apiKey = "abcd1234"; // String | Your API key.
+    String prefix = ""; // String | The prefix the news links must start with.
+    Boolean subDomain = true; // Boolean | Whether to include links to news on sub-domains.
+    try {
+      Object result = apiInstance.extractNews_0(url, apiKey, prefix, subDomain);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling NewsApi#extractNews_0");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **url** | **String**| The url from which links should be extracted. |
+ **apiKey** | **String**| Your API key. |
+ **prefix** | **String**| The prefix the news links must start with. | [optional]
+ **subDomain** | **Boolean**| Whether to include links to news on sub-domains. | [optional]
+
+### Return type
+
+**Object**
+
+### Authorization
+
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: , application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**401** | Unauthorized |  -  |
+**402** | Payment Required |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**429** | Too Many Requests |  -  |
 
 <a name="geoCoordinates"></a>
 # **geoCoordinates**
@@ -109,6 +203,12 @@ public class Example {
     // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
     //apiKey.setApiKeyPrefix("Token");
 
+    // Configure API key authorization: headerApiKey
+    ApiKeyAuth headerApiKey = (ApiKeyAuth) defaultClient.getAuthentication("headerApiKey");
+    headerApiKey.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //headerApiKey.setApiKeyPrefix("Token");
+
     NewsApi apiInstance = new NewsApi(defaultClient);
     String location = "Tokyo, Japan"; // String | The address or name of the location, e.g. Tokyo, Japan.
     try {
@@ -137,7 +237,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
 
 ### HTTP request headers
 
@@ -149,6 +249,90 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | The coordinates of the location. |  -  |
 **404** | Not Found |  -  |
+
+<a name="newsWebsiteToRSSFeed"></a>
+# **newsWebsiteToRSSFeed**
+> Object newsWebsiteToRSSFeed(url, apiKey, extractNews)
+
+News Website to RSS Feed
+
+Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page. 
+
+### Example
+```java
+// Import classes:
+import com.worldnewsapi.client.ApiClient;
+import com.worldnewsapi.client.ApiException;
+import com.worldnewsapi.client.Configuration;
+import com.worldnewsapi.client.auth.*;
+import com.worldnewsapi.client.models.*;
+import com.worldnewsapi.NewsApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://api.worldnewsapi.com");
+    
+    // Configure API key authorization: apiKey
+    ApiKeyAuth apiKey = (ApiKeyAuth) defaultClient.getAuthentication("apiKey");
+    apiKey.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKey.setApiKeyPrefix("Token");
+
+    // Configure API key authorization: headerApiKey
+    ApiKeyAuth headerApiKey = (ApiKeyAuth) defaultClient.getAuthentication("headerApiKey");
+    headerApiKey.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //headerApiKey.setApiKeyPrefix("Token");
+
+    NewsApi apiInstance = new NewsApi(defaultClient);
+    String url = "https://nytimes.com"; // String | The url from which links should be extracted.
+    String apiKey = "abcd1234"; // String | Your API key.
+    Boolean extractNews = false; // Boolean | Whether extract news and add information such as description, publish date, and image to each item.
+    try {
+      Object result = apiInstance.newsWebsiteToRSSFeed(url, apiKey, extractNews);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling NewsApi#newsWebsiteToRSSFeed");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **url** | **String**| The url from which links should be extracted. |
+ **apiKey** | **String**| Your API key. |
+ **extractNews** | **Boolean**| Whether extract news and add information such as description, publish date, and image to each item. | [optional]
+
+### Return type
+
+**Object**
+
+### Authorization
+
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: , application/json, application/xml
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**401** | Unauthorized |  -  |
+**402** | Payment Required |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**429** | Too Many Requests |  -  |
 
 <a name="searchNews"></a>
 # **searchNews**
@@ -179,9 +363,15 @@ public class Example {
     // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
     //apiKey.setApiKeyPrefix("Token");
 
+    // Configure API key authorization: headerApiKey
+    ApiKeyAuth headerApiKey = (ApiKeyAuth) defaultClient.getAuthentication("headerApiKey");
+    headerApiKey.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //headerApiKey.setApiKeyPrefix("Token");
+
     NewsApi apiInstance = new NewsApi(defaultClient);
     String text = "hurricane"; // String | The text to match in the news content.
-    String sourceCountries = "gb,us"; // String | A comma-separated list of ISO 3166 country codes from which the news should originate, e.g. gb,us.
+    String sourceCountries = "us,uk"; // String | A comma-separated list of ISO 3166 country codes from which the news should originate, e.g. gb,us.
     String language = "en"; // String | The ISO 6391 language code of the news, e.g. \"en\" for English.
     Double minSentiment = -0.8D; // Double | The minimal sentiment of the news in range [-1,1].
     Double maxSentiment = 0.8D; // Double | The maximal sentiment of the news in range [-1,1].
@@ -235,7 +425,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
 
 ### HTTP request headers
 

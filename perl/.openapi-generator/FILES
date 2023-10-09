@@ -1,5 +1,4 @@
 .gitignore
-.openapi-generator-ignore
 .travis.yml
 README.md
 bin/autodoc
@@ -21,9 +20,3 @@ lib/WWW/OpenAPIClientcom.worldnewsapi.client.model/InlineResponse2002.pm
 lib/WWW/OpenAPIClientcom.worldnewsapi.client.model/InlineResponse200News.pm
 lib/WWW/OpenAPIClientcom.worldnewsapi.client.model/News.pm
 lib/WWW/OpenAPIClientcom.worldnewsapi/NewsApi.pm
-t/InlineResponse2001Test.t
-t/InlineResponse2002Test.t
-t/InlineResponse200NewsTest.t
-t/InlineResponse200Test.t
-t/NewsApiTest.t
-t/NewsTest.t

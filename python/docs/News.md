@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **summary** | **str** |  | [optional] 
 **url** | **str** |  | [optional] 
 **image** | **str** |  | [optional] 
+**publish_date** | **str** |  | [optional] 
 **author** | **str** |  | [optional] 
 **language** | **str** |  | [optional] 
 **source_country** | **str** |  | [optional] 

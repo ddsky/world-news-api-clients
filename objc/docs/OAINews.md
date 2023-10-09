@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **summary** | **NSString*** |  | [optional] 
 **url** | **NSString*** |  | [optional] 
 **image** | **NSString*** |  | [optional] 
+**publishDate** | **NSString*** |  | [optional] 
 **author** | **NSString*** |  | [optional] 
 **language** | **NSString*** |  | [optional] 
 **sourceCountry** | **NSString*** |  | [optional] 

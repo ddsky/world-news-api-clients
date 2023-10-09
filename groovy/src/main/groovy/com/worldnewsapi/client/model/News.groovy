@@ -20,6 +20,8 @@ class News {
     
     String image
     
+    String publishDate
+    
     String author
     
     String language

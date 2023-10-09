@@ -71,7 +71,7 @@ module OpenapiClient
       return_type = opts[:debug_return_type] || 'InlineResponse2001'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || ['apiKey']
+      auth_names = opts[:debug_auth_names] || ['apiKey', 'headerApiKey']
 
       new_options = opts.merge(
         :operation => :"NewsApi.extract_news",
@@ -86,6 +86,83 @@ module OpenapiClient
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: NewsApi#extract_news\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Extract News
+    # Extract a news links from a news website. 
+    # @param url [String] The url from which links should be extracted.
+    # @param api_key [String] Your API key.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :prefix The prefix the news links must start with.
+    # @option opts [Boolean] :sub_domain Whether to include links to news on sub-domains.
+    # @return [Object]
+    def extract_news_0(url, api_key, opts = {})
+      data, _status_code, _headers = extract_news_0_with_http_info(url, api_key, opts)
+      data
+    end
+
+    # Extract News
+    # Extract a news links from a news website. 
+    # @param url [String] The url from which links should be extracted.
+    # @param api_key [String] Your API key.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :prefix The prefix the news links must start with.
+    # @option opts [Boolean] :sub_domain Whether to include links to news on sub-domains.
+    # @return [Array<(Object, Integer, Hash)>] Object data, response status code and response headers
+    def extract_news_0_with_http_info(url, api_key, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: NewsApi.extract_news_0 ...'
+      end
+      # verify the required parameter 'url' is set
+      if @api_client.config.client_side_validation && url.nil?
+        fail ArgumentError, "Missing the required parameter 'url' when calling NewsApi.extract_news_0"
+      end
+      # verify the required parameter 'api_key' is set
+      if @api_client.config.client_side_validation && api_key.nil?
+        fail ArgumentError, "Missing the required parameter 'api_key' when calling NewsApi.extract_news_0"
+      end
+      # resource path
+      local_var_path = '/extract-news-links'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'url'] = url
+      query_params[:'api-key'] = api_key
+      query_params[:'prefix'] = opts[:'prefix'] if !opts[:'prefix'].nil?
+      query_params[:'sub-domain'] = opts[:'sub_domain'] if !opts[:'sub_domain'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['', 'application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'Object'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['apiKey', 'headerApiKey']
+
+      new_options = opts.merge(
+        :operation => :"NewsApi.extract_news_0",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: NewsApi#extract_news_0\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -135,7 +212,7 @@ module OpenapiClient
       return_type = opts[:debug_return_type] || 'InlineResponse2002'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || ['apiKey']
+      auth_names = opts[:debug_auth_names] || ['apiKey', 'headerApiKey']
 
       new_options = opts.merge(
         :operation => :"NewsApi.geo_coordinates",
@@ -150,6 +227,80 @@ module OpenapiClient
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: NewsApi#geo_coordinates\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # News Website to RSS Feed
+    # Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page. 
+    # @param url [String] The url from which links should be extracted.
+    # @param api_key [String] Your API key.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Boolean] :extract_news Whether extract news and add information such as description, publish date, and image to each item.
+    # @return [Object]
+    def news_website_to_rss_feed(url, api_key, opts = {})
+      data, _status_code, _headers = news_website_to_rss_feed_with_http_info(url, api_key, opts)
+      data
+    end
+
+    # News Website to RSS Feed
+    # Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page. 
+    # @param url [String] The url from which links should be extracted.
+    # @param api_key [String] Your API key.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Boolean] :extract_news Whether extract news and add information such as description, publish date, and image to each item.
+    # @return [Array<(Object, Integer, Hash)>] Object data, response status code and response headers
+    def news_website_to_rss_feed_with_http_info(url, api_key, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: NewsApi.news_website_to_rss_feed ...'
+      end
+      # verify the required parameter 'url' is set
+      if @api_client.config.client_side_validation && url.nil?
+        fail ArgumentError, "Missing the required parameter 'url' when calling NewsApi.news_website_to_rss_feed"
+      end
+      # verify the required parameter 'api_key' is set
+      if @api_client.config.client_side_validation && api_key.nil?
+        fail ArgumentError, "Missing the required parameter 'api_key' when calling NewsApi.news_website_to_rss_feed"
+      end
+      # resource path
+      local_var_path = '/feed.rss'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'url'] = url
+      query_params[:'api-key'] = api_key
+      query_params[:'extract-news'] = opts[:'extract_news'] if !opts[:'extract_news'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['', 'application/json', 'application/xml'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'Object'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['apiKey', 'headerApiKey']
+
+      new_options = opts.merge(
+        :operation => :"NewsApi.news_website_to_rss_feed",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: NewsApi#news_website_to_rss_feed\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -277,7 +428,7 @@ module OpenapiClient
       return_type = opts[:debug_return_type] || 'InlineResponse200'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || ['apiKey']
+      auth_names = opts[:debug_auth_names] || ['apiKey', 'headerApiKey']
 
       new_options = opts.merge(
         :operation => :"NewsApi.search_news",

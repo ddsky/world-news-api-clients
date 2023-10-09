@@ -44,6 +44,10 @@ import 'package:openapi/api.dart';
 //defaultApiClient.getAuthentication<ApiKeyAuth>('apiKey').apiKey = 'YOUR_API_KEY';
 // uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 //defaultApiClient.getAuthentication<ApiKeyAuth>('apiKey').apiKeyPrefix = 'Bearer';
+// TODO Configure API key authorization: headerApiKey
+//defaultApiClient.getAuthentication<ApiKeyAuth>('headerApiKey').apiKey = 'YOUR_API_KEY';
+// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//defaultApiClient.getAuthentication<ApiKeyAuth>('headerApiKey').apiKeyPrefix = 'Bearer';
 
 final api_instance = NewsApi();
 final url = https://www.bbc.com/news/world-us-canada-59340789; // String | The url of the news.
@@ -65,7 +69,9 @@ All URIs are relative to *https://api.worldnewsapi.com*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *NewsApi* | [**extractNews**](doc\/NewsApi.md#extractnews) | **GET** /extract-news | Extract News
+*NewsApi* | [**extractNews_0**](doc\/NewsApi.md#extractnews_0) | **GET** /extract-news-links | Extract News
 *NewsApi* | [**geoCoordinates**](doc\/NewsApi.md#geocoordinates) | **GET** /geo-coordinates | Get Geo Coordinates
+*NewsApi* | [**newsWebsiteToRSSFeed**](doc\/NewsApi.md#newswebsitetorssfeed) | **GET** /feed.rss | News Website to RSS Feed
 *NewsApi* | [**searchNews**](doc\/NewsApi.md#searchnews) | **GET** /search-news | Search News
 
 
@@ -86,6 +92,12 @@ Class | Method | HTTP request | Description
 - **Type**: API key
 - **API key parameter name**: api-key
 - **Location**: URL query string
+
+## headerApiKey
+
+- **Type**: API key
+- **API key parameter name**: x-api-key
+- **Location**: HTTP header
 
 
 ## Author

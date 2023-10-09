@@ -1,5 +1,4 @@
 .gitignore
-.openapi-generator-ignore
 .php_cs
 .travis.yml
 README.md
@@ -23,9 +22,3 @@ lib/model/InlineResponse200News.php
 lib/model/ModelInterface.php
 lib/model/News.php
 phpunit.xml.dist
-test/Api/NewsApiTest.php
-test/Model/InlineResponse2001Test.php
-test/Model/InlineResponse2002Test.php
-test/Model/InlineResponse200NewsTest.php
-test/Model/InlineResponse200Test.php
-test/Model/NewsTest.php

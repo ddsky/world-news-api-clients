@@ -1,5 +1,4 @@
 .gitignore
-.openapi-generator-ignore
 .travis.yml
 README.md
 api/openapi.yaml
@@ -43,9 +42,3 @@ src/main/java/com/worldnewsapi/client/model/InlineResponse2001.java
 src/main/java/com/worldnewsapi/client/model/InlineResponse2002.java
 src/main/java/com/worldnewsapi/client/model/InlineResponse200News.java
 src/main/java/com/worldnewsapi/client/model/News.java
-src/test/java/com/worldnewsapi/NewsApiTest.java
-src/test/java/com/worldnewsapi/client/model/InlineResponse2001Test.java
-src/test/java/com/worldnewsapi/client/model/InlineResponse2002Test.java
-src/test/java/com/worldnewsapi/client/model/InlineResponse200NewsTest.java
-src/test/java/com/worldnewsapi/client/model/InlineResponse200Test.java
-src/test/java/com/worldnewsapi/client/model/NewsTest.java

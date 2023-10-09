@@ -70,6 +70,9 @@ import qualified Prelude as P
 -- ** Analyze
 newtype Analyze = Analyze { unAnalyze :: Bool } deriving (P.Eq, P.Show)
 
+-- ** ApiKey
+newtype ApiKey = ApiKey { unApiKey :: Text } deriving (P.Eq, P.Show)
+
 -- ** Authors
 newtype Authors = Authors { unAuthors :: Text } deriving (P.Eq, P.Show)
 
@@ -78,6 +81,9 @@ newtype EarliestPublishDate = EarliestPublishDate { unEarliestPublishDate :: Tex
 
 -- ** Entities
 newtype Entities = Entities { unEntities :: Text } deriving (P.Eq, P.Show)
+
+-- ** ExtractNews2
+newtype ExtractNews2 = ExtractNews2 { unExtractNews2 :: Bool } deriving (P.Eq, P.Show)
 
 -- ** Language
 newtype Language = Language { unLanguage :: Text } deriving (P.Eq, P.Show)
@@ -109,6 +115,9 @@ newtype Offset = Offset { unOffset :: Int } deriving (P.Eq, P.Show)
 -- ** ParamText
 newtype ParamText = ParamText { unParamText :: Text } deriving (P.Eq, P.Show)
 
+-- ** Prefix
+newtype Prefix = Prefix { unPrefix :: Text } deriving (P.Eq, P.Show)
+
 -- ** Sort
 newtype Sort = Sort { unSort :: E'Sort } deriving (P.Eq, P.Show)
 
@@ -117,6 +126,9 @@ newtype SortDirection = SortDirection { unSortDirection :: E'SortDirection } der
 
 -- ** SourceCountries
 newtype SourceCountries = SourceCountries { unSourceCountries :: Text } deriving (P.Eq, P.Show)
+
+-- ** SubDomain
+newtype SubDomain = SubDomain { unSubDomain :: Bool } deriving (P.Eq, P.Show)
 
 -- ** Url
 newtype Url = Url { unUrl :: Text } deriving (P.Eq, P.Show)
@@ -338,6 +350,7 @@ data News = News
   , newsSummary :: !(Maybe Text) -- ^ "summary"
   , newsUrl :: !(Maybe Text) -- ^ "url"
   , newsImage :: !(Maybe Text) -- ^ "image"
+  , newsPublishDate :: !(Maybe Text) -- ^ "publish_date"
   , newsAuthor :: !(Maybe Text) -- ^ "author"
   , newsLanguage :: !(Maybe Text) -- ^ "language"
   , newsSourceCountry :: !(Maybe Text) -- ^ "source_country"
@@ -354,6 +367,7 @@ instance A.FromJSON News where
       <*> (o .:? "summary")
       <*> (o .:? "url")
       <*> (o .:? "image")
+      <*> (o .:? "publish_date")
       <*> (o .:? "author")
       <*> (o .:? "language")
       <*> (o .:? "source_country")
@@ -369,6 +383,7 @@ instance A.ToJSON News where
       , "summary" .= newsSummary
       , "url" .= newsUrl
       , "image" .= newsImage
+      , "publish_date" .= newsPublishDate
       , "author" .= newsAuthor
       , "language" .= newsLanguage
       , "source_country" .= newsSourceCountry
@@ -387,6 +402,7 @@ mkNews =
   , newsSummary = Nothing
   , newsUrl = Nothing
   , newsImage = Nothing
+  , newsPublishDate = Nothing
   , newsAuthor = Nothing
   , newsLanguage = Nothing
   , newsSourceCountry = Nothing
@@ -468,6 +484,19 @@ instance AuthMethod AuthApiKeyApiKey where
     P.pure $
     if (P.typeOf a `P.elem` rAuthTypes req)
       then req `setQuery` toQuery ("api-key", Just secret)
+           & L.over rAuthTypesL (P.filter (/= P.typeOf a))
+      else req
+
+-- ** AuthApiKeyHeaderApiKey
+data AuthApiKeyHeaderApiKey =
+  AuthApiKeyHeaderApiKey Text -- ^ secret
+  deriving (P.Eq, P.Show, P.Typeable)
+
+instance AuthMethod AuthApiKeyHeaderApiKey where
+  applyAuthMethod _ a@(AuthApiKeyHeaderApiKey secret) req =
+    P.pure $
+    if (P.typeOf a `P.elem` rAuthTypes req)
+      then req `setHeader` toHeader ("x-api-key", secret)
            & L.over rAuthTypesL (P.filter (/= P.typeOf a))
       else req
 

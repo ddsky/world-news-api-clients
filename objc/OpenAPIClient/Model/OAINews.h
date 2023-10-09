@@ -35,6 +35,8 @@
 
 @property(nonatomic) NSString* image;
 
+@property(nonatomic) NSString* publishDate;
+
 @property(nonatomic) NSString* author;
 
 @property(nonatomic) NSString* language;

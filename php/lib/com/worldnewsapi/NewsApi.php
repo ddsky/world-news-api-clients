@@ -396,6 +396,333 @@ class NewsApi
         if ($apiKey !== null) {
             $queryParams['api-key'] = $apiKey;
         }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('x-api-key');
+        if ($apiKey !== null) {
+            $headers['x-api-key'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\Query::build($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation extractNews_0
+     *
+     * Extract News
+     *
+     * @param  string $url The url from which links should be extracted. (required)
+     * @param  string $api_key Your API key. (required)
+     * @param  string $prefix The prefix the news links must start with. (optional)
+     * @param  bool $sub_domain Whether to include links to news on sub-domains. (optional)
+     *
+     * @throws \com.worldnewsapi.client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return object
+     */
+    public function extractNews_0($url, $api_key, $prefix = null, $sub_domain = null)
+    {
+        list($response) = $this->extractNews_0WithHttpInfo($url, $api_key, $prefix, $sub_domain);
+        return $response;
+    }
+
+    /**
+     * Operation extractNews_0WithHttpInfo
+     *
+     * Extract News
+     *
+     * @param  string $url The url from which links should be extracted. (required)
+     * @param  string $api_key Your API key. (required)
+     * @param  string $prefix The prefix the news links must start with. (optional)
+     * @param  bool $sub_domain Whether to include links to news on sub-domains. (optional)
+     *
+     * @throws \com.worldnewsapi.client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function extractNews_0WithHttpInfo($url, $api_key, $prefix = null, $sub_domain = null)
+    {
+        $request = $this->extractNews_0Request($url, $api_key, $prefix, $sub_domain);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('object' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'object', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = 'object';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation extractNews_0Async
+     *
+     * Extract News
+     *
+     * @param  string $url The url from which links should be extracted. (required)
+     * @param  string $api_key Your API key. (required)
+     * @param  string $prefix The prefix the news links must start with. (optional)
+     * @param  bool $sub_domain Whether to include links to news on sub-domains. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function extractNews_0Async($url, $api_key, $prefix = null, $sub_domain = null)
+    {
+        return $this->extractNews_0AsyncWithHttpInfo($url, $api_key, $prefix, $sub_domain)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation extractNews_0AsyncWithHttpInfo
+     *
+     * Extract News
+     *
+     * @param  string $url The url from which links should be extracted. (required)
+     * @param  string $api_key Your API key. (required)
+     * @param  string $prefix The prefix the news links must start with. (optional)
+     * @param  bool $sub_domain Whether to include links to news on sub-domains. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function extractNews_0AsyncWithHttpInfo($url, $api_key, $prefix = null, $sub_domain = null)
+    {
+        $returnType = 'object';
+        $request = $this->extractNews_0Request($url, $api_key, $prefix, $sub_domain);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'extractNews_0'
+     *
+     * @param  string $url The url from which links should be extracted. (required)
+     * @param  string $api_key Your API key. (required)
+     * @param  string $prefix The prefix the news links must start with. (optional)
+     * @param  bool $sub_domain Whether to include links to news on sub-domains. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function extractNews_0Request($url, $api_key, $prefix = null, $sub_domain = null)
+    {
+        // verify the required parameter 'url' is set
+        if ($url === null || (is_array($url) && count($url) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $url when calling extractNews_0'
+            );
+        }
+        // verify the required parameter 'api_key' is set
+        if ($api_key === null || (is_array($api_key) && count($api_key) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $api_key when calling extractNews_0'
+            );
+        }
+
+        $resourcePath = '/extract-news-links';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if (is_array($url)) {
+            $url = ObjectSerializer::serializeCollection($url, 'form', true);
+        }
+        if ($url !== null) {
+            $queryParams['url'] = $url;
+        }
+        // query params
+        if (is_array($prefix)) {
+            $prefix = ObjectSerializer::serializeCollection($prefix, 'form', true);
+        }
+        if ($prefix !== null) {
+            $queryParams['prefix'] = $prefix;
+        }
+        // query params
+        if (is_array($sub_domain)) {
+            $sub_domain = ObjectSerializer::serializeCollection($sub_domain, 'form', true);
+        }
+        if ($sub_domain !== null) {
+            $queryParams['sub-domain'] = $sub_domain;
+        }
+        // query params
+        if (is_array($api_key)) {
+            $api_key = ObjectSerializer::serializeCollection($api_key, 'form', true);
+        }
+        if ($api_key !== null) {
+            $queryParams['api-key'] = $api_key;
+        }
+
+
+
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['', 'application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['', 'application/json'],
+                []
+            );
+        }
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\Query::build($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('api-key');
+        if ($apiKey !== null) {
+            $queryParams['api-key'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('x-api-key');
+        if ($apiKey !== null) {
+            $headers['x-api-key'] = $apiKey;
+        }
 
         $defaultHeaders = [];
         if ($this->config->getUserAgent()) {
@@ -674,6 +1001,321 @@ class NewsApi
         $apiKey = $this->config->getApiKeyWithPrefix('api-key');
         if ($apiKey !== null) {
             $queryParams['api-key'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('x-api-key');
+        if ($apiKey !== null) {
+            $headers['x-api-key'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\Query::build($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation newsWebsiteToRSSFeed
+     *
+     * News Website to RSS Feed
+     *
+     * @param  string $url The url from which links should be extracted. (required)
+     * @param  string $api_key Your API key. (required)
+     * @param  bool $extract_news Whether extract news and add information such as description, publish date, and image to each item. (optional)
+     *
+     * @throws \com.worldnewsapi.client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return object
+     */
+    public function newsWebsiteToRSSFeed($url, $api_key, $extract_news = null)
+    {
+        list($response) = $this->newsWebsiteToRSSFeedWithHttpInfo($url, $api_key, $extract_news);
+        return $response;
+    }
+
+    /**
+     * Operation newsWebsiteToRSSFeedWithHttpInfo
+     *
+     * News Website to RSS Feed
+     *
+     * @param  string $url The url from which links should be extracted. (required)
+     * @param  string $api_key Your API key. (required)
+     * @param  bool $extract_news Whether extract news and add information such as description, publish date, and image to each item. (optional)
+     *
+     * @throws \com.worldnewsapi.client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function newsWebsiteToRSSFeedWithHttpInfo($url, $api_key, $extract_news = null)
+    {
+        $request = $this->newsWebsiteToRSSFeedRequest($url, $api_key, $extract_news);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('object' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'object', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = 'object';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation newsWebsiteToRSSFeedAsync
+     *
+     * News Website to RSS Feed
+     *
+     * @param  string $url The url from which links should be extracted. (required)
+     * @param  string $api_key Your API key. (required)
+     * @param  bool $extract_news Whether extract news and add information such as description, publish date, and image to each item. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function newsWebsiteToRSSFeedAsync($url, $api_key, $extract_news = null)
+    {
+        return $this->newsWebsiteToRSSFeedAsyncWithHttpInfo($url, $api_key, $extract_news)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation newsWebsiteToRSSFeedAsyncWithHttpInfo
+     *
+     * News Website to RSS Feed
+     *
+     * @param  string $url The url from which links should be extracted. (required)
+     * @param  string $api_key Your API key. (required)
+     * @param  bool $extract_news Whether extract news and add information such as description, publish date, and image to each item. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function newsWebsiteToRSSFeedAsyncWithHttpInfo($url, $api_key, $extract_news = null)
+    {
+        $returnType = 'object';
+        $request = $this->newsWebsiteToRSSFeedRequest($url, $api_key, $extract_news);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'newsWebsiteToRSSFeed'
+     *
+     * @param  string $url The url from which links should be extracted. (required)
+     * @param  string $api_key Your API key. (required)
+     * @param  bool $extract_news Whether extract news and add information such as description, publish date, and image to each item. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function newsWebsiteToRSSFeedRequest($url, $api_key, $extract_news = null)
+    {
+        // verify the required parameter 'url' is set
+        if ($url === null || (is_array($url) && count($url) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $url when calling newsWebsiteToRSSFeed'
+            );
+        }
+        // verify the required parameter 'api_key' is set
+        if ($api_key === null || (is_array($api_key) && count($api_key) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $api_key when calling newsWebsiteToRSSFeed'
+            );
+        }
+
+        $resourcePath = '/feed.rss';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if (is_array($url)) {
+            $url = ObjectSerializer::serializeCollection($url, 'form', true);
+        }
+        if ($url !== null) {
+            $queryParams['url'] = $url;
+        }
+        // query params
+        if (is_array($extract_news)) {
+            $extract_news = ObjectSerializer::serializeCollection($extract_news, 'form', true);
+        }
+        if ($extract_news !== null) {
+            $queryParams['extract-news'] = $extract_news;
+        }
+        // query params
+        if (is_array($api_key)) {
+            $api_key = ObjectSerializer::serializeCollection($api_key, 'form', true);
+        }
+        if ($api_key !== null) {
+            $queryParams['api-key'] = $api_key;
+        }
+
+
+
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['', 'application/json', 'application/xml']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['', 'application/json', 'application/xml'],
+                []
+            );
+        }
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\Query::build($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('api-key');
+        if ($apiKey !== null) {
+            $queryParams['api-key'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('x-api-key');
+        if ($apiKey !== null) {
+            $headers['x-api-key'] = $apiKey;
         }
 
         $defaultHeaders = [];
@@ -1199,6 +1841,11 @@ class NewsApi
         $apiKey = $this->config->getApiKeyWithPrefix('api-key');
         if ($apiKey !== null) {
             $queryParams['api-key'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('x-api-key');
+        if ($apiKey !== null) {
+            $headers['x-api-key'] = $apiKey;
         }
 
         $defaultHeaders = [];

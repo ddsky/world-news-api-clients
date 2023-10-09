@@ -1,7 +1,9 @@
 -module(openapi_news_api).
 
 -export([extract_news/3, extract_news/4,
+         extract_news_0/3, extract_news_0/4,
          geo_coordinates/2, geo_coordinates/3,
+         news_website_to_rss_feed/3, news_website_to_rss_feed/4,
          search_news/1, search_news/2]).
 
 -define(BASE_URL, <<"">>).
@@ -27,6 +29,27 @@ extract_news(Ctx, Url, Analyze, Optional) ->
 
     openapi_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
+%% @doc Extract News
+%% Extract a news links from a news website. 
+-spec extract_news_0(ctx:ctx(), binary(), binary()) -> {ok, maps:map(), openapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), openapi_utils:response_info()}.
+extract_news_0(Ctx, Url, ApiKey) ->
+    extract_news_0(Ctx, Url, ApiKey, #{}).
+
+-spec extract_news_0(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, maps:map(), openapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), openapi_utils:response_info()}.
+extract_news_0(Ctx, Url, ApiKey, Optional) ->
+    _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
+
+    Method = get,
+    Path = [<<"/extract-news-links">>],
+    QS = lists:flatten([{<<"url">>, Url}, {<<"api-key">>, ApiKey}])++openapi_utils:optional_params(['prefix', 'sub-domain'], _OptionalParams),
+    Headers = [],
+    Body1 = [],
+    ContentTypeHeader = openapi_utils:select_header_content_type([]),
+    Opts = maps:get(hackney_opts, Optional, []),
+
+    openapi_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
+
 %% @doc Get Geo Coordinates
 %% Get the geo coordinates for a location. The location can be an exact address but also just the name of a city or country.
 -spec geo_coordinates(ctx:ctx(), binary()) -> {ok, openapi_inline_response_200_2:openapi_inline_response_200_2(), openapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), openapi_utils:response_info()}.
@@ -41,6 +64,27 @@ geo_coordinates(Ctx, Location, Optional) ->
     Method = get,
     Path = [<<"/geo-coordinates">>],
     QS = lists:flatten([{<<"location">>, Location}])++openapi_utils:optional_params([], _OptionalParams),
+    Headers = [],
+    Body1 = [],
+    ContentTypeHeader = openapi_utils:select_header_content_type([]),
+    Opts = maps:get(hackney_opts, Optional, []),
+
+    openapi_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
+
+%% @doc News Website to RSS Feed
+%% Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page. 
+-spec news_website_to_rss_feed(ctx:ctx(), binary(), binary()) -> {ok, maps:map(), openapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), openapi_utils:response_info()}.
+news_website_to_rss_feed(Ctx, Url, ApiKey) ->
+    news_website_to_rss_feed(Ctx, Url, ApiKey, #{}).
+
+-spec news_website_to_rss_feed(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, maps:map(), openapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), openapi_utils:response_info()}.
+news_website_to_rss_feed(Ctx, Url, ApiKey, Optional) ->
+    _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
+
+    Method = get,
+    Path = [<<"/feed.rss">>],
+    QS = lists:flatten([{<<"url">>, Url}, {<<"api-key">>, ApiKey}])++openapi_utils:optional_params(['extract-news'], _OptionalParams),
     Headers = [],
     Body1 = [],
     ContentTypeHeader = openapi_utils:select_header_content_type([]),

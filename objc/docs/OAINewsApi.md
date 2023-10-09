@@ -5,7 +5,9 @@ All URIs are relative to *https://api.worldnewsapi.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**extractNews**](OAINewsApi.md#extractnews) | **GET** /extract-news | Extract News
+[**extractNews_0**](OAINewsApi.md#extractnews_0) | **GET** /extract-news-links | Extract News
 [**geoCoordinates**](OAINewsApi.md#geocoordinates) | **GET** /geo-coordinates | Get Geo Coordinates
+[**newsWebsiteToRSSFeed**](OAINewsApi.md#newswebsitetorssfeed) | **GET** /feed.rss | News Website to RSS Feed
 [**searchNews**](OAINewsApi.md#searchnews) | **GET** /search-news | Search News
 
 
@@ -28,6 +30,11 @@ OAIDefaultConfiguration *apiConfig = [OAIDefaultConfiguration sharedConfig];
 [apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"api-key"];
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 //[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"api-key"];
+
+// Configure API key authorization: (authentication scheme: headerApiKey)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"x-api-key"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"x-api-key"];
 
 
 NSString* url = https://www.bbc.com/news/world-us-canada-59340789; // The url of the news.
@@ -61,12 +68,86 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **extractNews_0**
+```objc
+-(NSURLSessionTask*) extractNews_1WithUrl: (NSString*) url
+    apiKey: (NSString*) apiKey
+    prefix: (NSString*) prefix
+    subDomain: (NSNumber*) subDomain
+        completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
+```
+
+Extract News
+
+Extract a news links from a news website. 
+
+### Example
+```objc
+OAIDefaultConfiguration *apiConfig = [OAIDefaultConfiguration sharedConfig];
+
+// Configure API key authorization: (authentication scheme: apiKey)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"api-key"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"api-key"];
+
+// Configure API key authorization: (authentication scheme: headerApiKey)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"x-api-key"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"x-api-key"];
+
+
+NSString* url = https://nytimes.com; // The url from which links should be extracted.
+NSString* apiKey = abcd1234; // Your API key.
+NSString* prefix = ; // The prefix the news links must start with. (optional)
+NSNumber* subDomain = true; // Whether to include links to news on sub-domains. (optional)
+
+OAINewsApi*apiInstance = [[OAINewsApi alloc] init];
+
+// Extract News
+[apiInstance extractNews_1WithUrl:url
+              apiKey:apiKey
+              prefix:prefix
+              subDomain:subDomain
+          completionHandler: ^(NSObject* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
+                        if (error) {
+                            NSLog(@"Error calling OAINewsApi->extractNews_0: %@", error);
+                        }
+                    }];
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **url** | **NSString***| The url from which links should be extracted. | 
+ **apiKey** | **NSString***| Your API key. | 
+ **prefix** | **NSString***| The prefix the news links must start with. | [optional] 
+ **subDomain** | **NSNumber***| Whether to include links to news on sub-domains. | [optional] 
+
+### Return type
+
+**NSObject***
+
+### Authorization
+
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: , application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -88,6 +169,11 @@ OAIDefaultConfiguration *apiConfig = [OAIDefaultConfiguration sharedConfig];
 [apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"api-key"];
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 //[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"api-key"];
+
+// Configure API key authorization: (authentication scheme: headerApiKey)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"x-api-key"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"x-api-key"];
 
 
 NSString* location = Tokyo, Japan; // The address or name of the location, e.g. Tokyo, Japan.
@@ -118,12 +204,82 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **newsWebsiteToRSSFeed**
+```objc
+-(NSURLSessionTask*) newsWebsiteToRSSFeedWithUrl: (NSString*) url
+    apiKey: (NSString*) apiKey
+    extractNews: (NSNumber*) extractNews
+        completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
+```
+
+News Website to RSS Feed
+
+Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page. 
+
+### Example
+```objc
+OAIDefaultConfiguration *apiConfig = [OAIDefaultConfiguration sharedConfig];
+
+// Configure API key authorization: (authentication scheme: apiKey)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"api-key"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"api-key"];
+
+// Configure API key authorization: (authentication scheme: headerApiKey)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"x-api-key"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"x-api-key"];
+
+
+NSString* url = https://nytimes.com; // The url from which links should be extracted.
+NSString* apiKey = abcd1234; // Your API key.
+NSNumber* extractNews = false; // Whether extract news and add information such as description, publish date, and image to each item. (optional)
+
+OAINewsApi*apiInstance = [[OAINewsApi alloc] init];
+
+// News Website to RSS Feed
+[apiInstance newsWebsiteToRSSFeedWithUrl:url
+              apiKey:apiKey
+              extractNews:extractNews
+          completionHandler: ^(NSObject* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
+                        if (error) {
+                            NSLog(@"Error calling OAINewsApi->newsWebsiteToRSSFeed: %@", error);
+                        }
+                    }];
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **url** | **NSString***| The url from which links should be extracted. | 
+ **apiKey** | **NSString***| Your API key. | 
+ **extractNews** | **NSNumber***| Whether extract news and add information such as description, publish date, and image to each item. | [optional] 
+
+### Return type
+
+**NSObject***
+
+### Authorization
+
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: , application/json, application/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -160,9 +316,14 @@ OAIDefaultConfiguration *apiConfig = [OAIDefaultConfiguration sharedConfig];
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 //[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"api-key"];
 
+// Configure API key authorization: (authentication scheme: headerApiKey)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"x-api-key"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"x-api-key"];
+
 
 NSString* text = hurricane; // The text to match in the news content. (optional)
-NSString* sourceCountries = gb,us; // A comma-separated list of ISO 3166 country codes from which the news should originate, e.g. gb,us. (optional)
+NSString* sourceCountries = us,uk; // A comma-separated list of ISO 3166 country codes from which the news should originate, e.g. gb,us. (optional)
 NSString* language = en; // The ISO 6391 language code of the news, e.g. \"en\" for English. (optional)
 NSNumber* minSentiment = -0.8; // The minimal sentiment of the news in range [-1,1]. (optional)
 NSNumber* maxSentiment = 0.8; // The maximal sentiment of the news in range [-1,1]. (optional)
@@ -231,7 +392,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
 
 ### HTTP request headers
 

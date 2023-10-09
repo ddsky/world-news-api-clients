@@ -5,7 +5,9 @@ All URIs are relative to *https://api.worldnewsapi.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**extractNews**](NewsApi.md#extractNews) | **GET** /extract-news | Extract News
+[**extractNews_0**](NewsApi.md#extractNews_0) | **GET** /extract-news-links | Extract News
 [**geoCoordinates**](NewsApi.md#geoCoordinates) | **GET** /geo-coordinates | Get Geo Coordinates
+[**newsWebsiteToRSSFeed**](NewsApi.md#newsWebsiteToRSSFeed) | **GET** /feed.rss | News Website to RSS Feed
 [**searchNews**](NewsApi.md#searchNews) | **GET** /search-news | Search News
 
 
@@ -28,6 +30,11 @@ let apiKey = defaultClient.authentications['apiKey'];
 apiKey.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //apiKey.apiKeyPrefix = 'Token';
+// Configure API key authorization: headerApiKey
+let headerApiKey = defaultClient.authentications['headerApiKey'];
+headerApiKey.apiKey = 'YOUR API KEY';
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//headerApiKey.apiKeyPrefix = 'Token';
 
 let apiInstance = new WorldNewsApi.NewsApi();
 let url = https://www.bbc.com/news/world-us-canada-59340789; // String | The url of the news.
@@ -55,12 +62,76 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
 - **Accept**: application/json
+
+
+## extractNews_0
+
+> Object extractNews_0(url, apiKey, opts)
+
+Extract News
+
+Extract a news links from a news website. 
+
+### Example
+
+```javascript
+import WorldNewsApi from 'world_news_api';
+let defaultClient = WorldNewsApi.ApiClient.instance;
+// Configure API key authorization: apiKey
+let apiKey = defaultClient.authentications['apiKey'];
+apiKey.apiKey = 'YOUR API KEY';
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKey.apiKeyPrefix = 'Token';
+// Configure API key authorization: headerApiKey
+let headerApiKey = defaultClient.authentications['headerApiKey'];
+headerApiKey.apiKey = 'YOUR API KEY';
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//headerApiKey.apiKeyPrefix = 'Token';
+
+let apiInstance = new WorldNewsApi.NewsApi();
+let url = https://nytimes.com; // String | The url from which links should be extracted.
+let apiKey = abcd1234; // String | Your API key.
+let opts = {
+  'prefix': , // String | The prefix the news links must start with.
+  'subDomain': true // Boolean | Whether to include links to news on sub-domains.
+};
+apiInstance.extractNews_0(url, apiKey, opts, (error, data, response) => {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+});
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **url** | **String**| The url from which links should be extracted. | 
+ **apiKey** | **String**| Your API key. | 
+ **prefix** | **String**| The prefix the news links must start with. | [optional] 
+ **subDomain** | **Boolean**| Whether to include links to news on sub-domains. | [optional] 
+
+### Return type
+
+**Object**
+
+### Authorization
+
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: , application/json
 
 
 ## geoCoordinates
@@ -81,6 +152,11 @@ let apiKey = defaultClient.authentications['apiKey'];
 apiKey.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //apiKey.apiKeyPrefix = 'Token';
+// Configure API key authorization: headerApiKey
+let headerApiKey = defaultClient.authentications['headerApiKey'];
+headerApiKey.apiKey = 'YOUR API KEY';
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//headerApiKey.apiKeyPrefix = 'Token';
 
 let apiInstance = new WorldNewsApi.NewsApi();
 let location = Tokyo, Japan; // String | The address or name of the location, e.g. Tokyo, Japan.
@@ -106,12 +182,74 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
 - **Accept**: application/json
+
+
+## newsWebsiteToRSSFeed
+
+> Object newsWebsiteToRSSFeed(url, apiKey, opts)
+
+News Website to RSS Feed
+
+Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page. 
+
+### Example
+
+```javascript
+import WorldNewsApi from 'world_news_api';
+let defaultClient = WorldNewsApi.ApiClient.instance;
+// Configure API key authorization: apiKey
+let apiKey = defaultClient.authentications['apiKey'];
+apiKey.apiKey = 'YOUR API KEY';
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKey.apiKeyPrefix = 'Token';
+// Configure API key authorization: headerApiKey
+let headerApiKey = defaultClient.authentications['headerApiKey'];
+headerApiKey.apiKey = 'YOUR API KEY';
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//headerApiKey.apiKeyPrefix = 'Token';
+
+let apiInstance = new WorldNewsApi.NewsApi();
+let url = https://nytimes.com; // String | The url from which links should be extracted.
+let apiKey = abcd1234; // String | Your API key.
+let opts = {
+  'extractNews': false // Boolean | Whether extract news and add information such as description, publish date, and image to each item.
+};
+apiInstance.newsWebsiteToRSSFeed(url, apiKey, opts, (error, data, response) => {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+});
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **url** | **String**| The url from which links should be extracted. | 
+ **apiKey** | **String**| Your API key. | 
+ **extractNews** | **Boolean**| Whether extract news and add information such as description, publish date, and image to each item. | [optional] 
+
+### Return type
+
+**Object**
+
+### Authorization
+
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: , application/json, application/xml
 
 
 ## searchNews
@@ -132,11 +270,16 @@ let apiKey = defaultClient.authentications['apiKey'];
 apiKey.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //apiKey.apiKeyPrefix = 'Token';
+// Configure API key authorization: headerApiKey
+let headerApiKey = defaultClient.authentications['headerApiKey'];
+headerApiKey.apiKey = 'YOUR API KEY';
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//headerApiKey.apiKeyPrefix = 'Token';
 
 let apiInstance = new WorldNewsApi.NewsApi();
 let opts = {
   'text': hurricane, // String | The text to match in the news content.
-  'sourceCountries': gb,us, // String | A comma-separated list of ISO 3166 country codes from which the news should originate, e.g. gb,us.
+  'sourceCountries': us,uk, // String | A comma-separated list of ISO 3166 country codes from which the news should originate, e.g. gb,us.
   'language': en, // String | The ISO 6391 language code of the news, e.g. \"en\" for English.
   'minSentiment': -0.8, // Number | The minimal sentiment of the news in range [-1,1].
   'maxSentiment': 0.8, // Number | The maximal sentiment of the news in range [-1,1].
@@ -187,7 +330,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
 
 ### HTTP request headers
 

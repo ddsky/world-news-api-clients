@@ -5,7 +5,9 @@ All URIs are relative to https://api.worldnewsapi.com.
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**extractNews()**](NewsApi.md#extractNews) | **GET** /extract-news | Extract News
+[**extractNews_0()**](NewsApi.md#extractNews_0) | **GET** /extract-news-links | Extract News
 [**geoCoordinates()**](NewsApi.md#geoCoordinates) | **GET** /geo-coordinates | Get Geo Coordinates
+[**newsWebsiteToRSSFeed()**](NewsApi.md#newsWebsiteToRSSFeed) | **GET** /feed.rss | News Website to RSS Feed
 [**searchNews()**](NewsApi.md#searchNews) | **GET** /search-news | Search News
 
 
@@ -30,6 +32,11 @@ require_once(__DIR__ . '/vendor/autoload.php');
 $config = com.worldnewsapi.client\Configuration::getDefaultConfiguration()->setApiKey('api-key', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 // $config = com.worldnewsapi.client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('api-key', 'Bearer');
+
+// Configure API key authorization: headerApiKey
+$config = com.worldnewsapi.client\Configuration::getDefaultConfiguration()->setApiKey('x-api-key', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = com.worldnewsapi.client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('x-api-key', 'Bearer');
 
 
 $apiInstance = new com.worldnewsapi.client\Api\NewsApi(
@@ -62,12 +69,85 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKey](../../README.md#apiKey)
+[apiKey](../../README.md#apiKey), [headerApiKey](../../README.md#headerApiKey)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
 - **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `extractNews_0()`
+
+```php
+extractNews_0($url, $api_key, $prefix, $sub_domain): object
+```
+
+Extract News
+
+Extract a news links from a news website.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKey
+$config = com.worldnewsapi.client\Configuration::getDefaultConfiguration()->setApiKey('api-key', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = com.worldnewsapi.client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('api-key', 'Bearer');
+
+// Configure API key authorization: headerApiKey
+$config = com.worldnewsapi.client\Configuration::getDefaultConfiguration()->setApiKey('x-api-key', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = com.worldnewsapi.client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('x-api-key', 'Bearer');
+
+
+$apiInstance = new com.worldnewsapi.client\Api\NewsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$url = https://nytimes.com; // string | The url from which links should be extracted.
+$api_key = abcd1234; // string | Your API key.
+$prefix = ; // string | The prefix the news links must start with.
+$sub_domain = true; // bool | Whether to include links to news on sub-domains.
+
+try {
+    $result = $apiInstance->extractNews_0($url, $api_key, $prefix, $sub_domain);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling NewsApi->extractNews_0: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **url** | **string**| The url from which links should be extracted. |
+ **api_key** | **string**| Your API key. |
+ **prefix** | **string**| The prefix the news links must start with. | [optional]
+ **sub_domain** | **bool**| Whether to include links to news on sub-domains. | [optional]
+
+### Return type
+
+**object**
+
+### Authorization
+
+[apiKey](../../README.md#apiKey), [headerApiKey](../../README.md#headerApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: ``, `application/json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
 [[Back to Model list]](../../README.md#models)
@@ -94,6 +174,11 @@ require_once(__DIR__ . '/vendor/autoload.php');
 $config = com.worldnewsapi.client\Configuration::getDefaultConfiguration()->setApiKey('api-key', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 // $config = com.worldnewsapi.client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('api-key', 'Bearer');
+
+// Configure API key authorization: headerApiKey
+$config = com.worldnewsapi.client\Configuration::getDefaultConfiguration()->setApiKey('x-api-key', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = com.worldnewsapi.client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('x-api-key', 'Bearer');
 
 
 $apiInstance = new com.worldnewsapi.client\Api\NewsApi(
@@ -124,12 +209,83 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKey](../../README.md#apiKey)
+[apiKey](../../README.md#apiKey), [headerApiKey](../../README.md#headerApiKey)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
 - **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `newsWebsiteToRSSFeed()`
+
+```php
+newsWebsiteToRSSFeed($url, $api_key, $extract_news): object
+```
+
+News Website to RSS Feed
+
+Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKey
+$config = com.worldnewsapi.client\Configuration::getDefaultConfiguration()->setApiKey('api-key', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = com.worldnewsapi.client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('api-key', 'Bearer');
+
+// Configure API key authorization: headerApiKey
+$config = com.worldnewsapi.client\Configuration::getDefaultConfiguration()->setApiKey('x-api-key', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = com.worldnewsapi.client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('x-api-key', 'Bearer');
+
+
+$apiInstance = new com.worldnewsapi.client\Api\NewsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$url = https://nytimes.com; // string | The url from which links should be extracted.
+$api_key = abcd1234; // string | Your API key.
+$extract_news = false; // bool | Whether extract news and add information such as description, publish date, and image to each item.
+
+try {
+    $result = $apiInstance->newsWebsiteToRSSFeed($url, $api_key, $extract_news);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling NewsApi->newsWebsiteToRSSFeed: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **url** | **string**| The url from which links should be extracted. |
+ **api_key** | **string**| Your API key. |
+ **extract_news** | **bool**| Whether extract news and add information such as description, publish date, and image to each item. | [optional]
+
+### Return type
+
+**object**
+
+### Authorization
+
+[apiKey](../../README.md#apiKey), [headerApiKey](../../README.md#headerApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: ``, `application/json`, `application/xml`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
 [[Back to Model list]](../../README.md#models)
@@ -157,6 +313,11 @@ $config = com.worldnewsapi.client\Configuration::getDefaultConfiguration()->setA
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 // $config = com.worldnewsapi.client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('api-key', 'Bearer');
 
+// Configure API key authorization: headerApiKey
+$config = com.worldnewsapi.client\Configuration::getDefaultConfiguration()->setApiKey('x-api-key', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = com.worldnewsapi.client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('x-api-key', 'Bearer');
+
 
 $apiInstance = new com.worldnewsapi.client\Api\NewsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
@@ -165,7 +326,7 @@ $apiInstance = new com.worldnewsapi.client\Api\NewsApi(
     $config
 );
 $text = hurricane; // string | The text to match in the news content.
-$source_countries = gb,us; // string | A comma-separated list of ISO 3166 country codes from which the news should originate, e.g. gb,us.
+$source_countries = us,uk; // string | A comma-separated list of ISO 3166 country codes from which the news should originate, e.g. gb,us.
 $language = en; // string | The ISO 6391 language code of the news, e.g. \"en\" for English.
 $min_sentiment = -0.8; // double | The minimal sentiment of the news in range [-1,1].
 $max_sentiment = 0.8; // double | The maximal sentiment of the news in range [-1,1].
@@ -214,7 +375,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKey](../../README.md#apiKey)
+[apiKey](../../README.md#apiKey), [headerApiKey](../../README.md#headerApiKey)
 
 ### HTTP request headers
 

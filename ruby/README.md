@@ -62,6 +62,11 @@ OpenapiClient.configure do |config|
   config.api_key['apiKey'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
   # config.api_key_prefix['apiKey'] = 'Bearer'
+
+  # Configure API key authorization: headerApiKey
+  config.api_key['headerApiKey'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['headerApiKey'] = 'Bearer'
 end
 
 api_instance = OpenapiClient::NewsApi.new
@@ -85,7 +90,9 @@ All URIs are relative to *https://api.worldnewsapi.com*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *OpenapiClient::NewsApi* | [**extract_news**](docs/NewsApi.md#extract_news) | **GET** /extract-news | Extract News
+*OpenapiClient::NewsApi* | [**extract_news_0**](docs/NewsApi.md#extract_news_0) | **GET** /extract-news-links | Extract News
 *OpenapiClient::NewsApi* | [**geo_coordinates**](docs/NewsApi.md#geo_coordinates) | **GET** /geo-coordinates | Get Geo Coordinates
+*OpenapiClient::NewsApi* | [**news_website_to_rss_feed**](docs/NewsApi.md#news_website_to_rss_feed) | **GET** /feed.rss | News Website to RSS Feed
 *OpenapiClient::NewsApi* | [**search_news**](docs/NewsApi.md#search_news) | **GET** /search-news | Search News
 
 
@@ -107,4 +114,11 @@ Class | Method | HTTP request | Description
 - **Type**: API key
 - **API key parameter name**: api-key
 - **Location**: URL query string
+
+### headerApiKey
+
+
+- **Type**: API key
+- **API key parameter name**: x-api-key
+- **Location**: HTTP header
 

@@ -26,7 +26,9 @@ All URIs are relative to *https://api.worldnewsapi.com*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *NewsApi* | [**extract_news**](docs/NewsApi.md#extract_news) | **GET** /extract-news | Extract News
+*NewsApi* | [**extract_news_0**](docs/NewsApi.md#extract_news_0) | **GET** /extract-news-links | Extract News
 *NewsApi* | [**geo_coordinates**](docs/NewsApi.md#geo_coordinates) | **GET** /geo-coordinates | Get Geo Coordinates
+*NewsApi* | [**news_website_to_rss_feed**](docs/NewsApi.md#news_website_to_rss_feed) | **GET** /feed.rss | News Website to RSS Feed
 *NewsApi* | [**search_news**](docs/NewsApi.md#search_news) | **GET** /search-news | Search News
 
 

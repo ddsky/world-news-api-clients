@@ -91,6 +91,7 @@ public class ApiClient {
 
         // Setup authentications (key: authentication name, value: authentication).
         authentications.put("apiKey", new ApiKeyAuth("query", "api-key"));
+        authentications.put("headerApiKey", new ApiKeyAuth("header", "x-api-key"));
         // Prevent the authentications from being modified.
         authentications = Collections.unmodifiableMap(authentications);
     }
@@ -107,6 +108,7 @@ public class ApiClient {
 
         // Setup authentications (key: authentication name, value: authentication).
         authentications.put("apiKey", new ApiKeyAuth("query", "api-key"));
+        authentications.put("headerApiKey", new ApiKeyAuth("header", "x-api-key"));
         // Prevent the authentications from being modified.
         authentications = Collections.unmodifiableMap(authentications);
     }

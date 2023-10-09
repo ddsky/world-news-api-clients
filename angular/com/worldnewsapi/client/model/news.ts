@@ -21,6 +21,7 @@ export interface News {
     summary?: string;
     url?: string;
     image?: string;
+    publish_date?: string;
     author?: string;
     language?: string;
     source_country?: string;

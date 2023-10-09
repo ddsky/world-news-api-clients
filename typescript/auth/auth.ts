@@ -42,10 +42,31 @@ export class ApiKeyAuthentication implements SecurityAuthentication {
     }
 }
 
+/**
+ * Applies apiKey authentication to the request context.
+ */
+export class HeaderApiKeyAuthentication implements SecurityAuthentication {
+    /**
+     * Configures this api key authentication with the necessary properties
+     *
+     * @param apiKey: The api key to be used for every request
+     */
+    public constructor(private apiKey: string) {}
+
+    public getName(): string {
+        return "headerApiKey";
+    }
+
+    public applySecurityAuthentication(context: RequestContext) {
+        context.setHeaderParam("x-api-key", this.apiKey);
+    }
+}
+
 
 export type AuthMethods = {
     "default"?: SecurityAuthentication,
-    "apiKey"?: SecurityAuthentication
+    "apiKey"?: SecurityAuthentication,
+    "headerApiKey"?: SecurityAuthentication
 }
 
 export type ApiKeyConfiguration = string;
@@ -55,7 +76,8 @@ export type OAuth2Configuration = { accessToken: string };
 
 export type AuthMethodsConfiguration = {
     "default"?: SecurityAuthentication,
-    "apiKey"?: ApiKeyConfiguration
+    "apiKey"?: ApiKeyConfiguration,
+    "headerApiKey"?: ApiKeyConfiguration
 }
 
 /**
@@ -73,6 +95,12 @@ export function configureAuthMethods(config: AuthMethodsConfiguration | undefine
     if (config["apiKey"]) {
         authMethods["apiKey"] = new ApiKeyAuthentication(
             config["apiKey"]
+        );
+    }
+
+    if (config["headerApiKey"]) {
+        authMethods["headerApiKey"] = new HeaderApiKeyAuthentication(
+            config["headerApiKey"]
         );
     }
 

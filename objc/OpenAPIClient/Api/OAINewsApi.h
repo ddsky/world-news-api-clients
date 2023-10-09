@@ -39,6 +39,29 @@ extern NSInteger kOAINewsApiMissingParamErrorCode;
     completionHandler: (void (^)(OAIInlineResponse2001* output, NSError* error)) handler;
 
 
+/// Extract News
+/// Extract a news links from a news website. 
+///
+/// @param url The url from which links should be extracted.
+/// @param apiKey Your API key.
+/// @param prefix The prefix the news links must start with. (optional)
+/// @param subDomain Whether to include links to news on sub-domains. (optional)
+/// 
+///  code:200 message:"Success",
+///  code:401 message:"Unauthorized",
+///  code:402 message:"Payment Required",
+///  code:403 message:"Forbidden",
+///  code:404 message:"Not Found",
+///  code:429 message:"Too Many Requests"
+///
+/// @return NSObject*
+-(NSURLSessionTask*) extractNews_1WithUrl: (NSString*) url
+    apiKey: (NSString*) apiKey
+    prefix: (NSString*) prefix
+    subDomain: (NSNumber*) subDomain
+    completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
+
+
 /// Get Geo Coordinates
 /// Get the geo coordinates for a location. The location can be an exact address but also just the name of a city or country.
 ///
@@ -50,6 +73,27 @@ extern NSInteger kOAINewsApiMissingParamErrorCode;
 /// @return OAIInlineResponse2002*
 -(NSURLSessionTask*) geoCoordinatesWithLocation: (NSString*) location
     completionHandler: (void (^)(OAIInlineResponse2002* output, NSError* error)) handler;
+
+
+/// News Website to RSS Feed
+/// Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page. 
+///
+/// @param url The url from which links should be extracted.
+/// @param apiKey Your API key.
+/// @param extractNews Whether extract news and add information such as description, publish date, and image to each item. (optional)
+/// 
+///  code:200 message:"Success",
+///  code:401 message:"Unauthorized",
+///  code:402 message:"Payment Required",
+///  code:403 message:"Forbidden",
+///  code:404 message:"Not Found",
+///  code:429 message:"Too Many Requests"
+///
+/// @return NSObject*
+-(NSURLSessionTask*) newsWebsiteToRSSFeedWithUrl: (NSString*) url
+    apiKey: (NSString*) apiKey
+    extractNews: (NSNumber*) extractNews
+    completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
 
 
 /// Search News

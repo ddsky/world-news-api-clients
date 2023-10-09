@@ -116,7 +116,7 @@ sub extract_news {
 
     my $_body_data;
     # authentication setting, if any
-    my $auth_settings = [qw(apiKey )];
+    my $auth_settings = [qw(apiKey headerApiKey )];
 
     # make the API Call
     my $response = $self->{api_client}->call_api($_resource_path, $_method,
@@ -126,6 +126,109 @@ sub extract_news {
         return;
     }
     my $_response_object = $self->{api_client}->deserialize('InlineResponse2001', $response);
+    return $_response_object;
+}
+
+#
+# extract_news_0
+#
+# Extract News
+#
+# @param string $url The url from which links should be extracted. (required)
+# @param string $api_key Your API key. (required)
+# @param string $prefix The prefix the news links must start with. (optional)
+# @param boolean $sub_domain Whether to include links to news on sub-domains. (optional)
+{
+    my $params = {
+    'url' => {
+        data_type => 'string',
+        description => 'The url from which links should be extracted.',
+        required => '1',
+    },
+    'api_key' => {
+        data_type => 'string',
+        description => 'Your API key.',
+        required => '1',
+    },
+    'prefix' => {
+        data_type => 'string',
+        description => 'The prefix the news links must start with.',
+        required => '0',
+    },
+    'sub_domain' => {
+        data_type => 'boolean',
+        description => 'Whether to include links to news on sub-domains.',
+        required => '0',
+    },
+    };
+    __PACKAGE__->method_documentation->{ 'extract_news_0' } = {
+        summary => 'Extract News',
+        params => $params,
+        returns => 'object',
+        };
+}
+# @return object
+#
+sub extract_news_0 {
+    my ($self, %args) = @_;
+
+    # verify the required parameter 'url' is set
+    unless (exists $args{'url'}) {
+      croak("Missing the required parameter 'url' when calling extract_news_0");
+    }
+
+    # verify the required parameter 'api_key' is set
+    unless (exists $args{'api_key'}) {
+      croak("Missing the required parameter 'api_key' when calling extract_news_0");
+    }
+
+    # parse inputs
+    my $_resource_path = '/extract-news-links';
+
+    my $_method = 'GET';
+    my $query_params = {};
+    my $header_params = {};
+    my $form_params = {};
+
+    # 'Accept' and 'Content-Type' header
+    my $_header_accept = $self->{api_client}->select_header_accept('', 'application/json');
+    if ($_header_accept) {
+        $header_params->{'Accept'} = $_header_accept;
+    }
+    $header_params->{'Content-Type'} = $self->{api_client}->select_header_content_type();
+
+    # query params
+    if ( exists $args{'url'}) {
+        $query_params->{'url'} = $self->{api_client}->to_query_value($args{'url'});
+    }
+
+    # query params
+    if ( exists $args{'prefix'}) {
+        $query_params->{'prefix'} = $self->{api_client}->to_query_value($args{'prefix'});
+    }
+
+    # query params
+    if ( exists $args{'sub_domain'}) {
+        $query_params->{'sub-domain'} = $self->{api_client}->to_query_value($args{'sub_domain'});
+    }
+
+    # query params
+    if ( exists $args{'api_key'}) {
+        $query_params->{'api-key'} = $self->{api_client}->to_query_value($args{'api_key'});
+    }
+
+    my $_body_data;
+    # authentication setting, if any
+    my $auth_settings = [qw(apiKey headerApiKey )];
+
+    # make the API Call
+    my $response = $self->{api_client}->call_api($_resource_path, $_method,
+                                           $query_params, $form_params,
+                                           $header_params, $_body_data, $auth_settings);
+    if (!$response) {
+        return;
+    }
+    my $_response_object = $self->{api_client}->deserialize('object', $response);
     return $_response_object;
 }
 
@@ -181,7 +284,7 @@ sub geo_coordinates {
 
     my $_body_data;
     # authentication setting, if any
-    my $auth_settings = [qw(apiKey )];
+    my $auth_settings = [qw(apiKey headerApiKey )];
 
     # make the API Call
     my $response = $self->{api_client}->call_api($_resource_path, $_method,
@@ -191,6 +294,98 @@ sub geo_coordinates {
         return;
     }
     my $_response_object = $self->{api_client}->deserialize('InlineResponse2002', $response);
+    return $_response_object;
+}
+
+#
+# news_website_to_rss_feed
+#
+# News Website to RSS Feed
+#
+# @param string $url The url from which links should be extracted. (required)
+# @param string $api_key Your API key. (required)
+# @param boolean $extract_news Whether extract news and add information such as description, publish date, and image to each item. (optional)
+{
+    my $params = {
+    'url' => {
+        data_type => 'string',
+        description => 'The url from which links should be extracted.',
+        required => '1',
+    },
+    'api_key' => {
+        data_type => 'string',
+        description => 'Your API key.',
+        required => '1',
+    },
+    'extract_news' => {
+        data_type => 'boolean',
+        description => 'Whether extract news and add information such as description, publish date, and image to each item.',
+        required => '0',
+    },
+    };
+    __PACKAGE__->method_documentation->{ 'news_website_to_rss_feed' } = {
+        summary => 'News Website to RSS Feed',
+        params => $params,
+        returns => 'object',
+        };
+}
+# @return object
+#
+sub news_website_to_rss_feed {
+    my ($self, %args) = @_;
+
+    # verify the required parameter 'url' is set
+    unless (exists $args{'url'}) {
+      croak("Missing the required parameter 'url' when calling news_website_to_rss_feed");
+    }
+
+    # verify the required parameter 'api_key' is set
+    unless (exists $args{'api_key'}) {
+      croak("Missing the required parameter 'api_key' when calling news_website_to_rss_feed");
+    }
+
+    # parse inputs
+    my $_resource_path = '/feed.rss';
+
+    my $_method = 'GET';
+    my $query_params = {};
+    my $header_params = {};
+    my $form_params = {};
+
+    # 'Accept' and 'Content-Type' header
+    my $_header_accept = $self->{api_client}->select_header_accept('', 'application/json', 'application/xml');
+    if ($_header_accept) {
+        $header_params->{'Accept'} = $_header_accept;
+    }
+    $header_params->{'Content-Type'} = $self->{api_client}->select_header_content_type();
+
+    # query params
+    if ( exists $args{'url'}) {
+        $query_params->{'url'} = $self->{api_client}->to_query_value($args{'url'});
+    }
+
+    # query params
+    if ( exists $args{'extract_news'}) {
+        $query_params->{'extract-news'} = $self->{api_client}->to_query_value($args{'extract_news'});
+    }
+
+    # query params
+    if ( exists $args{'api_key'}) {
+        $query_params->{'api-key'} = $self->{api_client}->to_query_value($args{'api_key'});
+    }
+
+    my $_body_data;
+    # authentication setting, if any
+    my $auth_settings = [qw(apiKey headerApiKey )];
+
+    # make the API Call
+    my $response = $self->{api_client}->call_api($_resource_path, $_method,
+                                           $query_params, $form_params,
+                                           $header_params, $_body_data, $auth_settings);
+    if (!$response) {
+        return;
+    }
+    my $_response_object = $self->{api_client}->deserialize('object', $response);
     return $_response_object;
 }
 
@@ -395,7 +590,7 @@ sub search_news {
 
     my $_body_data;
     # authentication setting, if any
-    my $auth_settings = [qw(apiKey )];
+    my $auth_settings = [qw(apiKey headerApiKey )];
 
     # make the API Call
     my $response = $self->{api_client}->call_api($_resource_path, $_method,

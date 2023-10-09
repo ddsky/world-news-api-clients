@@ -54,6 +54,11 @@ $config = com.worldnewsapi.client\Configuration::getDefaultConfiguration()->setA
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 // $config = com.worldnewsapi.client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('api-key', 'Bearer');
 
+// Configure API key authorization: headerApiKey
+$config = com.worldnewsapi.client\Configuration::getDefaultConfiguration()->setApiKey('x-api-key', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = com.worldnewsapi.client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('x-api-key', 'Bearer');
+
 
 $apiInstance = new com.worldnewsapi.client\Api\NewsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
@@ -80,7 +85,9 @@ All URIs are relative to *https://api.worldnewsapi.com*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *NewsApi* | [**extractNews**](docs/Api/NewsApi.md#extractnews) | **GET** /extract-news | Extract News
+*NewsApi* | [**extractNews_0**](docs/Api/NewsApi.md#extractnews_0) | **GET** /extract-news-links | Extract News
 *NewsApi* | [**geoCoordinates**](docs/Api/NewsApi.md#geocoordinates) | **GET** /geo-coordinates | Get Geo Coordinates
+*NewsApi* | [**newsWebsiteToRSSFeed**](docs/Api/NewsApi.md#newswebsitetorssfeed) | **GET** /feed.rss | News Website to RSS Feed
 *NewsApi* | [**searchNews**](docs/Api/NewsApi.md#searchnews) | **GET** /search-news | Search News
 
 ## Models
@@ -98,6 +105,14 @@ Class | Method | HTTP request | Description
 - **Type**: API key
 - **API key parameter name**: api-key
 - **Location**: URL query string
+
+
+
+### headerApiKey
+
+- **Type**: API key
+- **API key parameter name**: x-api-key
+- **Location**: HTTP header
 
 
 ## Tests

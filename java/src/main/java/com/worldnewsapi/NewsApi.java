@@ -137,7 +137,7 @@ public class NewsApi {
             localVarHeaderParams.put("Content-Type", localVarContentType);
         }
 
-        String[] localVarAuthNames = new String[] { "apiKey" };
+        String[] localVarAuthNames = new String[] { "apiKey", "headerApiKey" };
         return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
@@ -219,6 +219,194 @@ public class NewsApi {
         return localVarCall;
     }
     /**
+     * Build call for extractNews_0
+     * @param url The url from which links should be extracted. (required)
+     * @param apiKey Your API key. (required)
+     * @param prefix The prefix the news links must start with. (optional)
+     * @param subDomain Whether to include links to news on sub-domains. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 402 </td><td> Payment Required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+     </table>
+     * Read entire docs
+     * @see <a href="https://worldnewsapi.com/docs#Extract-News">Extract News Documentation</a>
+     */
+    public okhttp3.Call extractNews_0Call(String url, String apiKey, String prefix, Boolean subDomain, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/extract-news-links";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (url != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("url", url));
+        }
+
+        if (prefix != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("prefix", prefix));
+        }
+
+        if (subDomain != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("sub-domain", subDomain));
+        }
+
+        if (apiKey != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("api-key", apiKey));
+        }
+
+        final String[] localVarAccepts = {
+            "", "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKey", "headerApiKey" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call extractNews_0ValidateBeforeCall(String url, String apiKey, String prefix, Boolean subDomain, final ApiCallback _callback) throws ApiException {
+        
+        // verify the required parameter 'url' is set
+        if (url == null) {
+            throw new ApiException("Missing the required parameter 'url' when calling extractNews_0(Async)");
+        }
+        
+        // verify the required parameter 'apiKey' is set
+        if (apiKey == null) {
+            throw new ApiException("Missing the required parameter 'apiKey' when calling extractNews_0(Async)");
+        }
+        
+
+        okhttp3.Call localVarCall = extractNews_0Call(url, apiKey, prefix, subDomain, _callback);
+        return localVarCall;
+
+    }
+
+    /**
+     * Extract News
+     * Extract a news links from a news website. 
+     * @param url The url from which links should be extracted. (required)
+     * @param apiKey Your API key. (required)
+     * @param prefix The prefix the news links must start with. (optional)
+     * @param subDomain Whether to include links to news on sub-domains. (optional)
+     * @return Object
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 402 </td><td> Payment Required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+     </table>
+     * Read entire docs
+     * @see <a href="https://worldnewsapi.com/docs#Extract-News">Extract News Documentation</a>
+     */
+    public Object extractNews_0(String url, String apiKey, String prefix, Boolean subDomain) throws ApiException {
+        ApiResponse<Object> localVarResp = extractNews_0WithHttpInfo(url, apiKey, prefix, subDomain);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Extract News
+     * Extract a news links from a news website. 
+     * @param url The url from which links should be extracted. (required)
+     * @param apiKey Your API key. (required)
+     * @param prefix The prefix the news links must start with. (optional)
+     * @param subDomain Whether to include links to news on sub-domains. (optional)
+     * @return ApiResponse&lt;Object&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 402 </td><td> Payment Required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+     </table>
+     * Read entire docs
+     * @see <a href="https://worldnewsapi.com/docs#Extract-News">Extract News Documentation</a>
+     */
+    public ApiResponse<Object> extractNews_0WithHttpInfo(String url, String apiKey, String prefix, Boolean subDomain) throws ApiException {
+        okhttp3.Call localVarCall = extractNews_0ValidateBeforeCall(url, apiKey, prefix, subDomain, null);
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Extract News (asynchronously)
+     * Extract a news links from a news website. 
+     * @param url The url from which links should be extracted. (required)
+     * @param apiKey Your API key. (required)
+     * @param prefix The prefix the news links must start with. (optional)
+     * @param subDomain Whether to include links to news on sub-domains. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 402 </td><td> Payment Required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+     </table>
+     * Read entire docs
+     * @see <a href="https://worldnewsapi.com/docs#Extract-News">Extract News Documentation</a>
+     */
+    public okhttp3.Call extractNews_0Async(String url, String apiKey, String prefix, Boolean subDomain, final ApiCallback<Object> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = extractNews_0ValidateBeforeCall(url, apiKey, prefix, subDomain, _callback);
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for geoCoordinates
      * @param location The address or name of the location, e.g. Tokyo, Japan. (required)
      * @param _callback Callback for upload/download progress
@@ -277,7 +465,7 @@ public class NewsApi {
             localVarHeaderParams.put("Content-Type", localVarContentType);
         }
 
-        String[] localVarAuthNames = new String[] { "apiKey" };
+        String[] localVarAuthNames = new String[] { "apiKey", "headerApiKey" };
         return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
@@ -350,6 +538,186 @@ public class NewsApi {
 
         okhttp3.Call localVarCall = geoCoordinatesValidateBeforeCall(location, _callback);
         Type localVarReturnType = new TypeToken<InlineResponse2002>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for newsWebsiteToRSSFeed
+     * @param url The url from which links should be extracted. (required)
+     * @param apiKey Your API key. (required)
+     * @param extractNews Whether extract news and add information such as description, publish date, and image to each item. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 402 </td><td> Payment Required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+     </table>
+     * Read entire docs
+     * @see <a href="https://worldnewsapi.com/docs#News-Website-to-RSS-Feed">News Website to RSS Feed Documentation</a>
+     */
+    public okhttp3.Call newsWebsiteToRSSFeedCall(String url, String apiKey, Boolean extractNews, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/feed.rss";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (url != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("url", url));
+        }
+
+        if (extractNews != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("extract-news", extractNews));
+        }
+
+        if (apiKey != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("api-key", apiKey));
+        }
+
+        final String[] localVarAccepts = {
+            "", "application/json", "application/xml"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKey", "headerApiKey" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call newsWebsiteToRSSFeedValidateBeforeCall(String url, String apiKey, Boolean extractNews, final ApiCallback _callback) throws ApiException {
+        
+        // verify the required parameter 'url' is set
+        if (url == null) {
+            throw new ApiException("Missing the required parameter 'url' when calling newsWebsiteToRSSFeed(Async)");
+        }
+        
+        // verify the required parameter 'apiKey' is set
+        if (apiKey == null) {
+            throw new ApiException("Missing the required parameter 'apiKey' when calling newsWebsiteToRSSFeed(Async)");
+        }
+        
+
+        okhttp3.Call localVarCall = newsWebsiteToRSSFeedCall(url, apiKey, extractNews, _callback);
+        return localVarCall;
+
+    }
+
+    /**
+     * News Website to RSS Feed
+     * Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page. 
+     * @param url The url from which links should be extracted. (required)
+     * @param apiKey Your API key. (required)
+     * @param extractNews Whether extract news and add information such as description, publish date, and image to each item. (optional)
+     * @return Object
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 402 </td><td> Payment Required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+     </table>
+     * Read entire docs
+     * @see <a href="https://worldnewsapi.com/docs#News-Website-to-RSS-Feed">News Website to RSS Feed Documentation</a>
+     */
+    public Object newsWebsiteToRSSFeed(String url, String apiKey, Boolean extractNews) throws ApiException {
+        ApiResponse<Object> localVarResp = newsWebsiteToRSSFeedWithHttpInfo(url, apiKey, extractNews);
+        return localVarResp.getData();
+    }
+
+    /**
+     * News Website to RSS Feed
+     * Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page. 
+     * @param url The url from which links should be extracted. (required)
+     * @param apiKey Your API key. (required)
+     * @param extractNews Whether extract news and add information such as description, publish date, and image to each item. (optional)
+     * @return ApiResponse&lt;Object&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 402 </td><td> Payment Required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+     </table>
+     * Read entire docs
+     * @see <a href="https://worldnewsapi.com/docs#News-Website-to-RSS-Feed">News Website to RSS Feed Documentation</a>
+     */
+    public ApiResponse<Object> newsWebsiteToRSSFeedWithHttpInfo(String url, String apiKey, Boolean extractNews) throws ApiException {
+        okhttp3.Call localVarCall = newsWebsiteToRSSFeedValidateBeforeCall(url, apiKey, extractNews, null);
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * News Website to RSS Feed (asynchronously)
+     * Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page. 
+     * @param url The url from which links should be extracted. (required)
+     * @param apiKey Your API key. (required)
+     * @param extractNews Whether extract news and add information such as description, publish date, and image to each item. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 402 </td><td> Payment Required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+     </table>
+     * Read entire docs
+     * @see <a href="https://worldnewsapi.com/docs#News-Website-to-RSS-Feed">News Website to RSS Feed Documentation</a>
+     */
+    public okhttp3.Call newsWebsiteToRSSFeedAsync(String url, String apiKey, Boolean extractNews, final ApiCallback<Object> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = newsWebsiteToRSSFeedValidateBeforeCall(url, apiKey, extractNews, _callback);
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -481,7 +849,7 @@ public class NewsApi {
             localVarHeaderParams.put("Content-Type", localVarContentType);
         }
 
-        String[] localVarAuthNames = new String[] { "apiKey" };
+        String[] localVarAuthNames = new String[] { "apiKey", "headerApiKey" };
         return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 

@@ -124,6 +124,186 @@ func (a *NewsApiService) ExtractNewsExecute(r ApiExtractNewsRequest) (*InlineRes
 			}
 		}
 	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["headerApiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["x-api-key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiExtractNews_0Request struct {
+	ctx context.Context
+	ApiService *NewsApiService
+	url *string
+	apiKey *string
+	prefix *string
+	subDomain *bool
+}
+
+// The url from which links should be extracted.
+func (r ApiExtractNews_0Request) Url(url string) ApiExtractNews_0Request {
+	r.url = &url
+	return r
+}
+// Your API key.
+func (r ApiExtractNews_0Request) ApiKey(apiKey string) ApiExtractNews_0Request {
+	r.apiKey = &apiKey
+	return r
+}
+// The prefix the news links must start with.
+func (r ApiExtractNews_0Request) Prefix(prefix string) ApiExtractNews_0Request {
+	r.prefix = &prefix
+	return r
+}
+// Whether to include links to news on sub-domains.
+func (r ApiExtractNews_0Request) SubDomain(subDomain bool) ApiExtractNews_0Request {
+	r.subDomain = &subDomain
+	return r
+}
+
+func (r ApiExtractNews_0Request) Execute() (map[string]interface{}, *http.Response, error) {
+	return r.ApiService.ExtractNews_1Execute(r)
+}
+
+/*
+ExtractNews_0 Extract News
+
+Extract a news links from a news website. 
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiExtractNews_0Request
+*/
+func (a *NewsApiService) ExtractNews_1(ctx context.Context) ApiExtractNews_0Request {
+	return ApiExtractNews_0Request{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return map[string]interface{}
+func (a *NewsApiService) ExtractNews_1Execute(r ApiExtractNews_0Request) (map[string]interface{}, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  map[string]interface{}
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NewsApiService.ExtractNews_1")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/extract-news-links"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.url == nil {
+		return localVarReturnValue, nil, reportError("url is required and must be specified")
+	}
+	if r.apiKey == nil {
+		return localVarReturnValue, nil, reportError("apiKey is required and must be specified")
+	}
+
+	localVarQueryParams.Add("url", parameterToString(*r.url, ""))
+	if r.prefix != nil {
+		localVarQueryParams.Add("prefix", parameterToString(*r.prefix, ""))
+	}
+	if r.subDomain != nil {
+		localVarQueryParams.Add("sub-domain", parameterToString(*r.subDomain, ""))
+	}
+	localVarQueryParams.Add("api-key", parameterToString(*r.apiKey, ""))
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"", "application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarQueryParams.Add("api-key", key)
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["headerApiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["x-api-key"] = key
+			}
+		}
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -245,6 +425,177 @@ func (a *NewsApiService) GeoCoordinatesExecute(r ApiGeoCoordinatesRequest) (*Inl
 					key = apiKey.Key
 				}
 				localVarQueryParams.Add("api-key", key)
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["headerApiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["x-api-key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiNewsWebsiteToRSSFeedRequest struct {
+	ctx context.Context
+	ApiService *NewsApiService
+	url *string
+	apiKey *string
+	extractNews *bool
+}
+
+// The url from which links should be extracted.
+func (r ApiNewsWebsiteToRSSFeedRequest) Url(url string) ApiNewsWebsiteToRSSFeedRequest {
+	r.url = &url
+	return r
+}
+// Your API key.
+func (r ApiNewsWebsiteToRSSFeedRequest) ApiKey(apiKey string) ApiNewsWebsiteToRSSFeedRequest {
+	r.apiKey = &apiKey
+	return r
+}
+// Whether extract news and add information such as description, publish date, and image to each item.
+func (r ApiNewsWebsiteToRSSFeedRequest) ExtractNews(extractNews bool) ApiNewsWebsiteToRSSFeedRequest {
+	r.extractNews = &extractNews
+	return r
+}
+
+func (r ApiNewsWebsiteToRSSFeedRequest) Execute() (map[string]interface{}, *http.Response, error) {
+	return r.ApiService.NewsWebsiteToRSSFeedExecute(r)
+}
+
+/*
+NewsWebsiteToRSSFeed News Website to RSS Feed
+
+Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page. 
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiNewsWebsiteToRSSFeedRequest
+*/
+func (a *NewsApiService) NewsWebsiteToRSSFeed(ctx context.Context) ApiNewsWebsiteToRSSFeedRequest {
+	return ApiNewsWebsiteToRSSFeedRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return map[string]interface{}
+func (a *NewsApiService) NewsWebsiteToRSSFeedExecute(r ApiNewsWebsiteToRSSFeedRequest) (map[string]interface{}, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  map[string]interface{}
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NewsApiService.NewsWebsiteToRSSFeed")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/feed.rss"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.url == nil {
+		return localVarReturnValue, nil, reportError("url is required and must be specified")
+	}
+	if r.apiKey == nil {
+		return localVarReturnValue, nil, reportError("apiKey is required and must be specified")
+	}
+
+	localVarQueryParams.Add("url", parameterToString(*r.url, ""))
+	if r.extractNews != nil {
+		localVarQueryParams.Add("extract-news", parameterToString(*r.extractNews, ""))
+	}
+	localVarQueryParams.Add("api-key", parameterToString(*r.apiKey, ""))
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"", "application/json", "application/xml"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarQueryParams.Add("api-key", key)
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["headerApiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["x-api-key"] = key
 			}
 		}
 	}
@@ -494,6 +845,20 @@ func (a *NewsApiService) SearchNewsExecute(r ApiSearchNewsRequest) (*InlineRespo
 					key = apiKey.Key
 				}
 				localVarQueryParams.Add("api-key", key)
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["headerApiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["x-api-key"] = key
 			}
 		}
 	}

@@ -169,6 +169,7 @@ genNews n =
     <*> arbitraryReducedMaybe n -- newsSummary :: Maybe Text
     <*> arbitraryReducedMaybe n -- newsUrl :: Maybe Text
     <*> arbitraryReducedMaybe n -- newsImage :: Maybe Text
+    <*> arbitraryReducedMaybe n -- newsPublishDate :: Maybe Text
     <*> arbitraryReducedMaybe n -- newsAuthor :: Maybe Text
     <*> arbitraryReducedMaybe n -- newsLanguage :: Maybe Text
     <*> arbitraryReducedMaybe n -- newsSourceCountry :: Maybe Text

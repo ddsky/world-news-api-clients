@@ -74,12 +74,67 @@ export default class NewsApi {
       let formParams = {
       };
 
-      let authNames = ['apiKey'];
+      let authNames = ['apiKey', 'headerApiKey'];
       let contentTypes = [];
       let accepts = ['application/json'];
       let returnType = InlineResponse2001;
       return this.apiClient.callApi(
         '/extract-news', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the extractNews_0 operation.
+     * @callback module:com.worldnewsapi.client/com.worldnewsapi/NewsApi~extractNews_0Callback
+     * @param {String} error Error message, if any.
+     * @param {Object} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Extract News
+     * Extract a news links from a news website. 
+     * @param {String} url The url from which links should be extracted.
+     * @param {String} apiKey Your API key.
+     * @param {Object} opts Optional parameters
+     * @param {String} opts.prefix The prefix the news links must start with.
+     * @param {Boolean} opts.subDomain Whether to include links to news on sub-domains.
+     * @param {module:com.worldnewsapi.client/com.worldnewsapi/NewsApi~extractNews_0Callback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link Object}
+     */
+    extractNews_0(url, apiKey, opts, callback) {
+      opts = opts || {};
+      let postBody = null;
+      // verify the required parameter 'url' is set
+      if (url === undefined || url === null) {
+        throw new Error("Missing the required parameter 'url' when calling extractNews_0");
+      }
+      // verify the required parameter 'apiKey' is set
+      if (apiKey === undefined || apiKey === null) {
+        throw new Error("Missing the required parameter 'apiKey' when calling extractNews_0");
+      }
+
+      let pathParams = {
+      };
+      let queryParams = {
+        'url': url,
+        'prefix': opts['prefix'],
+        'sub-domain': opts['subDomain'],
+        'api-key': apiKey
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['apiKey', 'headerApiKey'];
+      let contentTypes = [];
+      let accepts = ['', 'application/json'];
+      let returnType = Object;
+      return this.apiClient.callApi(
+        '/extract-news-links', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null, callback
       );
@@ -117,12 +172,65 @@ export default class NewsApi {
       let formParams = {
       };
 
-      let authNames = ['apiKey'];
+      let authNames = ['apiKey', 'headerApiKey'];
       let contentTypes = [];
       let accepts = ['application/json'];
       let returnType = InlineResponse2002;
       return this.apiClient.callApi(
         '/geo-coordinates', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the newsWebsiteToRSSFeed operation.
+     * @callback module:com.worldnewsapi.client/com.worldnewsapi/NewsApi~newsWebsiteToRSSFeedCallback
+     * @param {String} error Error message, if any.
+     * @param {Object} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * News Website to RSS Feed
+     * Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page. 
+     * @param {String} url The url from which links should be extracted.
+     * @param {String} apiKey Your API key.
+     * @param {Object} opts Optional parameters
+     * @param {Boolean} opts.extractNews Whether extract news and add information such as description, publish date, and image to each item.
+     * @param {module:com.worldnewsapi.client/com.worldnewsapi/NewsApi~newsWebsiteToRSSFeedCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link Object}
+     */
+    newsWebsiteToRSSFeed(url, apiKey, opts, callback) {
+      opts = opts || {};
+      let postBody = null;
+      // verify the required parameter 'url' is set
+      if (url === undefined || url === null) {
+        throw new Error("Missing the required parameter 'url' when calling newsWebsiteToRSSFeed");
+      }
+      // verify the required parameter 'apiKey' is set
+      if (apiKey === undefined || apiKey === null) {
+        throw new Error("Missing the required parameter 'apiKey' when calling newsWebsiteToRSSFeed");
+      }
+
+      let pathParams = {
+      };
+      let queryParams = {
+        'url': url,
+        'extract-news': opts['extractNews'],
+        'api-key': apiKey
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['apiKey', 'headerApiKey'];
+      let contentTypes = [];
+      let accepts = ['', 'application/json', 'application/xml'];
+      let returnType = Object;
+      return this.apiClient.callApi(
+        '/feed.rss', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null, callback
       );
@@ -186,7 +294,7 @@ export default class NewsApi {
       let formParams = {
       };
 
-      let authNames = ['apiKey'];
+      let authNames = ['apiKey', 'headerApiKey'];
       let contentTypes = [];
       let accepts = ['application/json'];
       let returnType = InlineResponse200;

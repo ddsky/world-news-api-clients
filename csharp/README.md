@@ -53,6 +53,10 @@ namespace Example
             Configuration.Default.ApiKey.Add("api-key", "YOUR_API_KEY");
             // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
             // Configuration.Default.ApiKeyPrefix.Add("api-key", "Bearer");
+            // Configure API key authorization: headerApiKey
+            Configuration.Default.ApiKey.Add("x-api-key", "YOUR_API_KEY");
+            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+            // Configuration.Default.ApiKeyPrefix.Add("x-api-key", "Bearer");
 
             var apiInstance = new NewsApi();
             var url = https://www.bbc.com/news/world-us-canada-59340789;  // string | The url of the news.
@@ -81,7 +85,9 @@ All URIs are relative to *https://api.worldnewsapi.com*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *NewsApi* | [**ExtractNews**](docs/NewsApi.md#extractnews) | **GET** /extract-news | Extract News
+*NewsApi* | [**ExtractNews_0**](docs/NewsApi.md#extractnews_0) | **GET** /extract-news-links | Extract News
 *NewsApi* | [**GeoCoordinates**](docs/NewsApi.md#geocoordinates) | **GET** /geo-coordinates | Get Geo Coordinates
+*NewsApi* | [**NewsWebsiteToRSSFeed**](docs/NewsApi.md#newswebsitetorssfeed) | **GET** /feed.rss | News Website to RSS Feed
 *NewsApi* | [**SearchNews**](docs/NewsApi.md#searchnews) | **GET** /search-news | Search News
 
 
@@ -105,4 +111,11 @@ Authentication schemes defined for the API:
 - **Type**: API key
 - **API key parameter name**: api-key
 - **Location**: URL query string
+
+<a name="headerApiKey"></a>
+### headerApiKey
+
+- **Type**: API key
+- **API key parameter name**: x-api-key
+- **Location**: HTTP header
 

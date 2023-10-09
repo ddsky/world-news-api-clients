@@ -22,6 +22,7 @@ export class News {
     'summary'?: string;
     'url'?: string;
     'image'?: string;
+    'publishDate'?: string;
     'author'?: string;
     'language'?: string;
     'sourceCountry'?: string;
@@ -63,6 +64,12 @@ export class News {
         {
             "name": "image",
             "baseName": "image",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "publishDate",
+            "baseName": "publish_date",
             "type": "string",
             "format": ""
         },

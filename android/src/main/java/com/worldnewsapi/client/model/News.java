@@ -34,6 +34,8 @@ public class News {
   private String url = null;
   @SerializedName("image")
   private String image = null;
+  @SerializedName("publish_date")
+  private String publishDate = null;
   @SerializedName("author")
   private String author = null;
   @SerializedName("language")
@@ -106,6 +108,16 @@ public class News {
   /**
    **/
   @ApiModelProperty(value = "")
+  public String getPublishDate() {
+    return publishDate;
+  }
+  public void setPublishDate(String publishDate) {
+    this.publishDate = publishDate;
+  }
+
+  /**
+   **/
+  @ApiModelProperty(value = "")
   public String getAuthor() {
     return author;
   }
@@ -159,6 +171,7 @@ public class News {
         (this.summary == null ? news.summary == null : this.summary.equals(news.summary)) &&
         (this.url == null ? news.url == null : this.url.equals(news.url)) &&
         (this.image == null ? news.image == null : this.image.equals(news.image)) &&
+        (this.publishDate == null ? news.publishDate == null : this.publishDate.equals(news.publishDate)) &&
         (this.author == null ? news.author == null : this.author.equals(news.author)) &&
         (this.language == null ? news.language == null : this.language.equals(news.language)) &&
         (this.sourceCountry == null ? news.sourceCountry == null : this.sourceCountry.equals(news.sourceCountry)) &&
@@ -174,6 +187,7 @@ public class News {
     result = 31 * result + (this.summary == null ? 0: this.summary.hashCode());
     result = 31 * result + (this.url == null ? 0: this.url.hashCode());
     result = 31 * result + (this.image == null ? 0: this.image.hashCode());
+    result = 31 * result + (this.publishDate == null ? 0: this.publishDate.hashCode());
     result = 31 * result + (this.author == null ? 0: this.author.hashCode());
     result = 31 * result + (this.language == null ? 0: this.language.hashCode());
     result = 31 * result + (this.sourceCountry == null ? 0: this.sourceCountry.hashCode());
@@ -192,6 +206,7 @@ public class News {
     sb.append("  summary: ").append(summary).append("\n");
     sb.append("  url: ").append(url).append("\n");
     sb.append("  image: ").append(image).append("\n");
+    sb.append("  publishDate: ").append(publishDate).append("\n");
     sb.append("  author: ").append(author).append("\n");
     sb.append("  language: ").append(language).append("\n");
     sb.append("  sourceCountry: ").append(sourceCountry).append("\n");

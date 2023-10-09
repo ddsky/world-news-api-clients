@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **summary** | **kotlin.String** |  |  [optional]
 **url** | **kotlin.String** |  |  [optional]
 **image** | **kotlin.String** |  |  [optional]
+**publishDate** | **kotlin.String** |  |  [optional]
 **author** | **kotlin.String** |  |  [optional]
 **language** | **kotlin.String** |  |  [optional]
 **sourceCountry** | **kotlin.String** |  |  [optional]

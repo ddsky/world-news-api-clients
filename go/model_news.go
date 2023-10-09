@@ -23,6 +23,7 @@ type News struct {
 	Summary *string `json:"summary,omitempty"`
 	Url *string `json:"url,omitempty"`
 	Image *string `json:"image,omitempty"`
+	PublishDate *string `json:"publish_date,omitempty"`
 	Author *string `json:"author,omitempty"`
 	Language *string `json:"language,omitempty"`
 	SourceCountry *string `json:"source_country,omitempty"`
@@ -238,6 +239,38 @@ func (o *News) SetImage(v string) {
 	o.Image = &v
 }
 
+// GetPublishDate returns the PublishDate field value if set, zero value otherwise.
+func (o *News) GetPublishDate() string {
+	if o == nil || o.PublishDate == nil {
+		var ret string
+		return ret
+	}
+	return *o.PublishDate
+}
+
+// GetPublishDateOk returns a tuple with the PublishDate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *News) GetPublishDateOk() (*string, bool) {
+	if o == nil || o.PublishDate == nil {
+		return nil, false
+	}
+	return o.PublishDate, true
+}
+
+// HasPublishDate returns a boolean if a field has been set.
+func (o *News) HasPublishDate() bool {
+	if o != nil && o.PublishDate != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPublishDate gets a reference to the given string and assigns it to the PublishDate field.
+func (o *News) SetPublishDate(v string) {
+	o.PublishDate = &v
+}
+
 // GetAuthor returns the Author field value if set, zero value otherwise.
 func (o *News) GetAuthor() string {
 	if o == nil || o.Author == nil {
@@ -385,6 +418,9 @@ func (o News) MarshalJSON() ([]byte, error) {
 	}
 	if o.Image != nil {
 		toSerialize["image"] = o.Image
+	}
+	if o.PublishDate != nil {
+		toSerialize["publish_date"] = o.PublishDate
 	}
 	if o.Author != nil {
 		toSerialize["author"] = o.Author

@@ -43,6 +43,7 @@
                           "summary": "Tesla CEO Elon Musk has revealed new details about the upcoming Cybertruck electric pickup truck. According to Musk, its initial production will begin with a four-motor variant.",
                           "url": "https://internetprotocol.co/hitech/2021/12/07/tesla-to-release-a-four-motor-cybertruck/",
                           "image": "https://internetprotocol.co/content/images/2021/12/Tesla-to-Release-a-Four-Motor-Version-of-Cybertruck.png",
+                          "publish_date": "2022-09-30 01:07:48",
                           "author": "Kay Lee",
                           "language": "en",
                           "source_country": "co",
@@ -365,7 +366,7 @@
           {
             "schema": {
               "type": "string",
-              "example": "gb,us"
+              "example": "us,uk"
             },
             "in": "query",
             "name": "source-countries",
@@ -608,6 +609,234 @@
       },
       "parameters": []
     },
+    "/extract-news-links": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success",
+            "headers": {},
+            "content": {
+              "": {
+                "schema": {
+                  "type": "object"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "news_links": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "news_links": [
+                        "https://www.nytimes.com/2023/10/07/opinion/wnba-liberty-championship.html",
+                        "https://www.nytimes.com/2023/10/08/business/economy/labor-strikes.html",
+                        "https://www.nytimes.com/2023/10/08/dining/sunday-calls-for-old-fashioned-beef-stew.html"
+                      ]
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "news_links": [
+                        "https://www.nytimes.com/2023/10/07/opinion/wnba-liberty-championship.html",
+                        "https://www.nytimes.com/2023/10/08/business/economy/labor-strikes.html",
+                        "https://www.nytimes.com/2023/10/08/dining/sunday-calls-for-old-fashioned-beef-stew.html"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "402": {
+            "description": "Payment Required"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "429": {
+            "description": "Too Many Requests"
+          }
+        },
+        "parameters": [
+          {
+            "name": "url",
+            "description": "The url from which links should be extracted.",
+            "schema": {
+              "type": "string",
+              "example": "https://nytimes.com"
+            },
+            "required": true,
+            "explode": false,
+            "in": "query"
+          },
+          {
+            "name": "prefix",
+            "description": "The prefix the news links must start with.",
+            "schema": {
+              "type": "string",
+              "example": ""
+            },
+            "required": false,
+            "explode": false,
+            "in": "query"
+          },
+          {
+            "name": "sub-domain",
+            "description": "Whether to include links to news on sub-domains.",
+            "schema": {
+              "type": "boolean",
+              "example": true
+            },
+            "required": false,
+            "explode": false,
+            "in": "query"
+          },
+          {
+            "name": "api-key",
+            "description": "Your API key.",
+            "schema": {
+              "type": "string",
+              "example": "abcd1234"
+            },
+            "required": true,
+            "explode": false,
+            "in": "query"
+          }
+        ],
+        "externalDocs": {
+          "description": "Read entire docs",
+          "url": "https://worldnewsapi.com/docs#Extract-News"
+        },
+        "summary": "Extract News",
+        "description": "Extract a news links from a news website. ",
+        "operationId": "extractNews",
+        "deprecated": false,
+        "x-stoplight": {
+          "id": "fcck1ufz377mk"
+        },
+        "tags": [
+          "news"
+        ]
+      }
+    },
+    "/feed.rss": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success",
+            "headers": {},
+            "content": {
+              "": {
+                "schema": {
+                  "type": "object"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": "<rss version=\"2.0\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:media=\"http://search.yahoo.com/mrss/\" xmlns:atom=\"http://www.w3.org/2005/Atom\"> <channel> <title>Europe News | Today's latest from Al Jazeera</title> <link>https://www.aljazeera.com/europe/</link> <lastBuildDate>Sun, 08 Oct 2023 23:16:44 +0000</lastBuildDate> <pubDate>Sun, 08 Oct 2023 23:16:44 +0000</pubDate> <item> <title>Martinelli Fires Arsenal To Late 1 0 Win Over Manchester City</title> <link>https://www.aljazeera.com/sports/2023/10/8/martinelli-fires-arsenal-to-late-1-0-win-over-manchester-city</link> <guid isPermaLink=\"true\">https://www.aljazeera.com/sports/2023/10/8/martinelli-fires-arsenal-to-late-1-0-win-over-manchester-city</guid> <atom:link href=\"https://www.aljazeera.com/sports/2023/10/8/martinelli-fires-arsenal-to-late-1-0-win-over-manchester-city\"/> </item> </channel> </rss>"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": "<rss version=\"2.0\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:media=\"http://search.yahoo.com/mrss/\" xmlns:atom=\"http://www.w3.org/2005/Atom\">\n    <channel>\n        <title>Europe News | Today's latest from Al Jazeera</title>\n        <link>https://www.aljazeera.com/europe/</link>\n        <lastBuildDate>Sun, 08 Oct 2023 23:16:44 +0000</lastBuildDate>\n        <pubDate>Sun, 08 Oct 2023 23:16:44 +0000</pubDate>\n        <item>\n            <title>Martinelli Fires Arsenal To Late 1 0 Win Over Manchester City</title>\n            <link>https://www.aljazeera.com/sports/2023/10/8/martinelli-fires-arsenal-to-late-1-0-win-over-manchester-city</link>\n            <guid isPermaLink=\"true\">https://www.aljazeera.com/sports/2023/10/8/martinelli-fires-arsenal-to-late-1-0-win-over-manchester-city</guid>\n            <atom:link href=\"https://www.aljazeera.com/sports/2023/10/8/martinelli-fires-arsenal-to-late-1-0-win-over-manchester-city\"/>\n        </item>\n    </channel>\n</rss>"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "402": {
+            "description": "Payment Required"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "429": {
+            "description": "Too Many Requests"
+          }
+        },
+        "parameters": [
+          {
+            "name": "url",
+            "description": "The url from which links should be extracted.",
+            "schema": {
+              "type": "string",
+              "example": "https://nytimes.com"
+            },
+            "required": true,
+            "explode": false,
+            "in": "query"
+          },
+          {
+            "name": "extract-news",
+            "description": "Whether extract news and add information such as description, publish date, and image to each item.",
+            "schema": {
+              "type": "boolean",
+              "example": false
+            },
+            "required": false,
+            "explode": false,
+            "in": "query"
+          },
+          {
+            "name": "api-key",
+            "description": "Your API key.",
+            "schema": {
+              "type": "string",
+              "example": "abcd1234"
+            },
+            "required": true,
+            "explode": false,
+            "in": "query"
+          }
+        ],
+        "externalDocs": {
+          "description": "Read entire docs",
+          "url": "https://worldnewsapi.com/docs#News-Website-to-RSS-Feed"
+        },
+        "summary": "News Website to RSS Feed",
+        "description": "Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page. ",
+        "operationId": "newsWebsiteToRSSFeed",
+        "deprecated": false,
+        "x-stoplight": {
+          "id": "tj5m7hh8ozmgw"
+        },
+        "tags": [
+          "news"
+        ]
+      }
+    },
     "/geo-coordinates": {
       "get": {
         "summary": "Get Geo Coordinates",
@@ -700,6 +929,9 @@
           "image": {
             "type": "string"
           },
+          "publish_date": {
+            "type": "string"
+          },
           "author": {
             "type": "string"
           },
@@ -721,6 +953,7 @@
             "summary": "Tesla CEO Elon Musk has revealed new details about the upcoming Cybertruck electric pickup truck. According to Musk, its initial production will begin with a four-motor variant.",
             "url": "https://internetprotocol.co/hitech/2021/12/07/tesla-to-release-a-four-motor-cybertruck/",
             "image": "https://internetprotocol.co/content/images/2021/12/Tesla-to-Release-a-Four-Motor-Version-of-Cybertruck.png",
+            "publish_date": "2022-09-30 01:07:48",
             "author": "Kay Lee",
             "language": "en",
             "source_country": "co",
@@ -739,12 +972,20 @@
         "name": "api-key",
         "type": "apiKey",
         "in": "query"
+      },
+      "headerApiKey": {
+        "name": "x-api-key",
+        "type": "apiKey",
+        "in": "header"
       }
     }
   },
   "security": [
     {
       "apiKey": []
+    },
+    {
+      "headerApiKey": []
     }
   ],
   "tags": [

@@ -1,6 +1,5 @@
 .babelrc
 .gitignore
-.openapi-generator-ignore
 .travis.yml
 README.md
 docs/InlineResponse200.md
@@ -20,9 +19,3 @@ src/com.worldnewsapi.client/com.worldnewsapi.client.model/InlineResponse200News.
 src/com.worldnewsapi.client/com.worldnewsapi.client.model/News.js
 src/com.worldnewsapi.client/com.worldnewsapi/NewsApi.js
 src/com.worldnewsapi.client/index.js
-test/com.worldnewsapi.client/api/NewsApi.spec.js
-test/com.worldnewsapi.client/model/InlineResponse200.spec.js
-test/com.worldnewsapi.client/model/InlineResponse2001.spec.js
-test/com.worldnewsapi.client/model/InlineResponse2002.spec.js
-test/com.worldnewsapi.client/model/InlineResponse200News.spec.js
-test/com.worldnewsapi.client/model/News.spec.js
