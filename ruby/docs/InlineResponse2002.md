@@ -4,9 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **latitude** | **Float** |  |  |
-| **longitude** | **Float** |  |  |
-| **city** | **String** |  | [optional] |
+| **news_links** | **Array&lt;String&gt;** |  | [optional] |
 
 ## Example
 
@@ -14,9 +12,7 @@
 require 'openapi_client'
 
 instance = OpenapiClient::InlineResponse2002.new(
-  latitude: null,
-  longitude: null,
-  city: null
+  news_links: null
 )
 ```
 

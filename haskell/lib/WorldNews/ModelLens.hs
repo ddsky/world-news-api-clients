@@ -107,20 +107,29 @@ inlineResponse2001SentimentL f InlineResponse2001{..} = (\inlineResponse2001Sent
 
 -- * InlineResponse2002
 
--- | 'inlineResponse2002Latitude' Lens
-inlineResponse2002LatitudeL :: Lens_' InlineResponse2002 (Double)
-inlineResponse2002LatitudeL f InlineResponse2002{..} = (\inlineResponse2002Latitude -> InlineResponse2002 { inlineResponse2002Latitude, ..} ) <$> f inlineResponse2002Latitude
-{-# INLINE inlineResponse2002LatitudeL #-}
+-- | 'inlineResponse2002NewsLinks' Lens
+inlineResponse2002NewsLinksL :: Lens_' InlineResponse2002 (Maybe [Text])
+inlineResponse2002NewsLinksL f InlineResponse2002{..} = (\inlineResponse2002NewsLinks -> InlineResponse2002 { inlineResponse2002NewsLinks, ..} ) <$> f inlineResponse2002NewsLinks
+{-# INLINE inlineResponse2002NewsLinksL #-}
 
--- | 'inlineResponse2002Longitude' Lens
-inlineResponse2002LongitudeL :: Lens_' InlineResponse2002 (Double)
-inlineResponse2002LongitudeL f InlineResponse2002{..} = (\inlineResponse2002Longitude -> InlineResponse2002 { inlineResponse2002Longitude, ..} ) <$> f inlineResponse2002Longitude
-{-# INLINE inlineResponse2002LongitudeL #-}
 
--- | 'inlineResponse2002City' Lens
-inlineResponse2002CityL :: Lens_' InlineResponse2002 (Maybe Text)
-inlineResponse2002CityL f InlineResponse2002{..} = (\inlineResponse2002City -> InlineResponse2002 { inlineResponse2002City, ..} ) <$> f inlineResponse2002City
-{-# INLINE inlineResponse2002CityL #-}
+
+-- * InlineResponse2003
+
+-- | 'inlineResponse2003Latitude' Lens
+inlineResponse2003LatitudeL :: Lens_' InlineResponse2003 (Double)
+inlineResponse2003LatitudeL f InlineResponse2003{..} = (\inlineResponse2003Latitude -> InlineResponse2003 { inlineResponse2003Latitude, ..} ) <$> f inlineResponse2003Latitude
+{-# INLINE inlineResponse2003LatitudeL #-}
+
+-- | 'inlineResponse2003Longitude' Lens
+inlineResponse2003LongitudeL :: Lens_' InlineResponse2003 (Double)
+inlineResponse2003LongitudeL f InlineResponse2003{..} = (\inlineResponse2003Longitude -> InlineResponse2003 { inlineResponse2003Longitude, ..} ) <$> f inlineResponse2003Longitude
+{-# INLINE inlineResponse2003LongitudeL #-}
+
+-- | 'inlineResponse2003City' Lens
+inlineResponse2003CityL :: Lens_' InlineResponse2003 (Maybe Text)
+inlineResponse2003CityL f InlineResponse2003{..} = (\inlineResponse2003City -> InlineResponse2003 { inlineResponse2003City, ..} ) <$> f inlineResponse2003City
+{-# INLINE inlineResponse2003CityL #-}
 
 
 

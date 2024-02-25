@@ -239,6 +239,7 @@ To load the models:
 use WWW::OpenAPIClient::Object::InlineResponse200;
 use WWW::OpenAPIClient::Object::InlineResponse2001;
 use WWW::OpenAPIClient::Object::InlineResponse2002;
+use WWW::OpenAPIClient::Object::InlineResponse2003;
 use WWW::OpenAPIClient::Object::InlineResponse200News;
 use WWW::OpenAPIClient::Object::News;
 
@@ -258,6 +259,7 @@ use WWW::OpenAPIClient::NewsApi;
 use WWW::OpenAPIClient::Object::InlineResponse200;
 use WWW::OpenAPIClient::Object::InlineResponse2001;
 use WWW::OpenAPIClient::Object::InlineResponse2002;
+use WWW::OpenAPIClient::Object::InlineResponse2003;
 use WWW::OpenAPIClient::Object::InlineResponse200News;
 use WWW::OpenAPIClient::Object::News;
 
@@ -296,7 +298,7 @@ All URIs are relative to *https://api.worldnewsapi.com*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *NewsApi* | [**extract_news**](docs/NewsApi.md#extract_news) | **GET** /extract-news | Extract News
-*NewsApi* | [**extract_news_1**](docs/NewsApi.md#extract_news_1) | **GET** /extract-news-links | Extract News
+*NewsApi* | [**extract_news_links**](docs/NewsApi.md#extract_news_links) | **GET** /extract-news-links | Extract News Links
 *NewsApi* | [**geo_coordinates**](docs/NewsApi.md#geo_coordinates) | **GET** /geo-coordinates | Get Geo Coordinates
 *NewsApi* | [**news_website_to_rss_feed**](docs/NewsApi.md#news_website_to_rss_feed) | **GET** /feed.rss | News Website to RSS Feed
 *NewsApi* | [**search_news**](docs/NewsApi.md#search_news) | **GET** /search-news | Search News
@@ -306,6 +308,7 @@ Class | Method | HTTP request | Description
  - [WWW::OpenAPIClient::Object::InlineResponse200](docs/InlineResponse200.md)
  - [WWW::OpenAPIClient::Object::InlineResponse2001](docs/InlineResponse2001.md)
  - [WWW::OpenAPIClient::Object::InlineResponse2002](docs/InlineResponse2002.md)
+ - [WWW::OpenAPIClient::Object::InlineResponse2003](docs/InlineResponse2003.md)
  - [WWW::OpenAPIClient::Object::InlineResponse200News](docs/InlineResponse200News.md)
  - [WWW::OpenAPIClient::Object::News](docs/News.md)
 

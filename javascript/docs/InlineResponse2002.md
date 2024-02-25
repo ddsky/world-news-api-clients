@@ -4,8 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**latitude** | **Number** |  | 
-**longitude** | **Number** |  | 
-**city** | **String** |  | [optional] 
+**newsLinks** | **[String]** |  | [optional] 
 
 

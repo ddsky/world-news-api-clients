@@ -26,21 +26,13 @@ import com.squareup.moshi.Json
 /**
  * 
  *
- * @param latitude 
- * @param longitude 
- * @param city 
+ * @param newsLinks 
  */
 
 data class InlineResponse2002 (
 
-    @Json(name = "latitude")
-    val latitude: java.math.BigDecimal,
-
-    @Json(name = "longitude")
-    val longitude: java.math.BigDecimal,
-
-    @Json(name = "city")
-    val city: kotlin.String? = null
+    @Json(name = "news_links")
+    val newsLinks: kotlin.collections.List<kotlin.String>? = null
 
 )
 

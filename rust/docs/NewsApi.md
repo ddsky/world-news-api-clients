@@ -5,7 +5,7 @@ All URIs are relative to *https://api.worldnewsapi.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**extract_news**](NewsApi.md#extract_news) | **GET** /extract-news | Extract News
-[**extract_news_0**](NewsApi.md#extract_news_0) | **GET** /extract-news-links | Extract News
+[**extract_news_links**](NewsApi.md#extract_news_links) | **GET** /extract-news-links | Extract News Links
 [**geo_coordinates**](NewsApi.md#geo_coordinates) | **GET** /geo-coordinates | Get Geo Coordinates
 [**news_website_to_rss_feed**](NewsApi.md#news_website_to_rss_feed) | **GET** /feed.rss | News Website to RSS Feed
 [**search_news**](NewsApi.md#search_news) | **GET** /search-news | Search News
@@ -43,10 +43,10 @@ Name | Type | Description  | Required | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 
-## extract_news_0
+## extract_news_links
 
-> serde_json::Value extract_news_0(url, api_key, prefix, sub_domain)
-Extract News
+> crate::models::InlineResponse2002 extract_news_links(url, api_key, prefix, sub_domain)
+Extract News Links
 
 Extract a news links from a news website. 
 
@@ -62,7 +62,7 @@ Name | Type | Description  | Required | Notes
 
 ### Return type
 
-[**serde_json::Value**](serde_json::Value.md)
+[**crate::models::InlineResponse2002**](inline_response_200_2.md)
 
 ### Authorization
 
@@ -71,14 +71,14 @@ Name | Type | Description  | Required | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: , application/json
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 
 ## geo_coordinates
 
-> crate::models::InlineResponse2002 geo_coordinates(location)
+> crate::models::InlineResponse2003 geo_coordinates(location)
 Get Geo Coordinates
 
 Get the geo coordinates for a location. The location can be an exact address but also just the name of a city or country.
@@ -92,7 +92,7 @@ Name | Type | Description  | Required | Notes
 
 ### Return type
 
-[**crate::models::InlineResponse2002**](inline_response_200_2.md)
+[**crate::models::InlineResponse2003**](inline_response_200_3.md)
 
 ### Authorization
 
@@ -133,7 +133,7 @@ Name | Type | Description  | Required | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: , application/json, application/xml
+- **Accept**: application/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

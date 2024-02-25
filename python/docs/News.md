@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **text** | **str** |  | [optional] 
 **summary** | **str** |  | [optional] 
 **url** | **str** |  | [optional] 
-**image** | **str** |  | [optional] 
+**image** | **str, none_type** |  | [optional] 
 **publish_date** | **str** |  | [optional] 
 **author** | **str** |  | [optional] 
 **language** | **str** |  | [optional] 

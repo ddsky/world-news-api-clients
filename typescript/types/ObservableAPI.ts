@@ -6,6 +6,7 @@ import {mergeMap, map} from  '../rxjsStub';
 import { InlineResponse200 } from '../models/InlineResponse200';
 import { InlineResponse2001 } from '../models/InlineResponse2001';
 import { InlineResponse2002 } from '../models/InlineResponse2002';
+import { InlineResponse2003 } from '../models/InlineResponse2003';
 import { InlineResponse200News } from '../models/InlineResponse200News';
 import { News } from '../models/News';
 
@@ -52,14 +53,14 @@ export class ObservableNewsApi {
 
     /**
      * Extract a news links from a news website. 
-     * Extract News
+     * Extract News Links
      * @param url The url from which links should be extracted.
      * @param apiKey Your API key.
      * @param prefix The prefix the news links must start with.
      * @param subDomain Whether to include links to news on sub-domains.
      */
-    public extractNews_1(url: string, apiKey: string, prefix?: string, subDomain?: boolean, _options?: Configuration): Observable<any> {
-        const requestContextPromise = this.requestFactory.extractNews_1(url, apiKey, prefix, subDomain, _options);
+    public extractNewsLinks(url: string, apiKey: string, prefix?: string, subDomain?: boolean, _options?: Configuration): Observable<InlineResponse2002> {
+        const requestContextPromise = this.requestFactory.extractNewsLinks(url, apiKey, prefix, subDomain, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -73,7 +74,7 @@ export class ObservableNewsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.extractNews_1(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.extractNewsLinks(rsp)));
             }));
     }
 
@@ -82,7 +83,7 @@ export class ObservableNewsApi {
      * Get Geo Coordinates
      * @param location The address or name of the location, e.g. Tokyo, Japan.
      */
-    public geoCoordinates(location: string, _options?: Configuration): Observable<InlineResponse2002> {
+    public geoCoordinates(location: string, _options?: Configuration): Observable<InlineResponse2003> {
         const requestContextPromise = this.requestFactory.geoCoordinates(location, _options);
 
         // build promise chain

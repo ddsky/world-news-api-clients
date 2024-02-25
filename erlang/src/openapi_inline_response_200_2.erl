@@ -5,16 +5,10 @@
 -export_type([openapi_inline_response_200_2/0]).
 
 -type openapi_inline_response_200_2() ::
-    #{ 'latitude' := integer(),
-       'longitude' := integer(),
-       'city' => binary()
+    #{ 'news_links' => list()
      }.
 
-encode(#{ 'latitude' := Latitude,
-          'longitude' := Longitude,
-          'city' := City
+encode(#{ 'news_links' := NewsLinks
         }) ->
-    #{ 'latitude' => Latitude,
-       'longitude' => Longitude,
-       'city' => City
+    #{ 'news_links' => NewsLinks
      }.

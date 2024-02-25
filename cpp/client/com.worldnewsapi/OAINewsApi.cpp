@@ -38,8 +38,12 @@ void OAINewsApi::initializeServerConfigs() {
     QMap<QString, OAIServerVariable>()));
     _serverConfigs.insert("extractNews", defaultConf);
     _serverIndices.insert("extractNews", 0);
+    _serverConfigs.insert("extractNewsLinks", defaultConf);
+    _serverIndices.insert("extractNewsLinks", 0);
     _serverConfigs.insert("geoCoordinates", defaultConf);
     _serverIndices.insert("geoCoordinates", 0);
+    _serverConfigs.insert("newsWebsiteToRSSFeed", defaultConf);
+    _serverIndices.insert("newsWebsiteToRSSFeed", 0);
     _serverConfigs.insert("searchNews", defaultConf);
     _serverIndices.insert("searchNews", 0);
 }
@@ -228,6 +232,10 @@ void OAINewsApi::extractNews(const QString &url, const bool &analyze) {
         fullPath.append("apiKey=").append(_apiKeys.find("apiKey").value());
     }
     
+    if (_apiKeys.contains("headerApiKey")) {
+        addHeaders("headerApiKey",_apiKeys.find("headerApiKey").value());
+    }
+    
     QString queryPrefix, querySuffix, queryDelimiter, queryStyle;
     
     {
@@ -305,6 +313,128 @@ void OAINewsApi::extractNewsCallback(OAIHttpRequestWorker *worker) {
     }
 }
 
+void OAINewsApi::extractNewsLinks(const QString &url, const QString &api_key, const ::OpenAPI::OptionalParam<QString> &prefix, const ::OpenAPI::OptionalParam<bool> &sub_domain) {
+    QString fullPath = QString(_serverConfigs["extractNewsLinks"][_serverIndices.value("extractNewsLinks")].URL()+"/extract-news-links");
+    
+    if (_apiKeys.contains("apiKey")) {
+        if (fullPath.indexOf("?") > 0)
+            fullPath.append("&");
+        else
+            fullPath.append("?");
+        fullPath.append("apiKey=").append(_apiKeys.find("apiKey").value());
+    }
+    
+    if (_apiKeys.contains("headerApiKey")) {
+        addHeaders("headerApiKey",_apiKeys.find("headerApiKey").value());
+    }
+    
+    QString queryPrefix, querySuffix, queryDelimiter, queryStyle;
+    
+    {
+        queryStyle = "form";
+        if (queryStyle == "")
+            queryStyle = "form";
+        queryPrefix = getParamStylePrefix(queryStyle);
+        querySuffix = getParamStyleSuffix(queryStyle);
+        queryDelimiter = getParamStyleDelimiter(queryStyle, "url", false);
+        if (fullPath.indexOf("?") > 0)
+            fullPath.append(queryPrefix);
+        else
+            fullPath.append("?");
+
+        fullPath.append(QUrl::toPercentEncoding("url")).append(querySuffix).append(QUrl::toPercentEncoding(::OpenAPI::toStringValue(url)));
+    }
+    if (prefix.hasValue())
+    {
+        queryStyle = "form";
+        if (queryStyle == "")
+            queryStyle = "form";
+        queryPrefix = getParamStylePrefix(queryStyle);
+        querySuffix = getParamStyleSuffix(queryStyle);
+        queryDelimiter = getParamStyleDelimiter(queryStyle, "prefix", false);
+        if (fullPath.indexOf("?") > 0)
+            fullPath.append(queryPrefix);
+        else
+            fullPath.append("?");
+
+        fullPath.append(QUrl::toPercentEncoding("prefix")).append(querySuffix).append(QUrl::toPercentEncoding(::OpenAPI::toStringValue(prefix.value())));
+    }
+    if (sub_domain.hasValue())
+    {
+        queryStyle = "form";
+        if (queryStyle == "")
+            queryStyle = "form";
+        queryPrefix = getParamStylePrefix(queryStyle);
+        querySuffix = getParamStyleSuffix(queryStyle);
+        queryDelimiter = getParamStyleDelimiter(queryStyle, "sub-domain", false);
+        if (fullPath.indexOf("?") > 0)
+            fullPath.append(queryPrefix);
+        else
+            fullPath.append("?");
+
+        fullPath.append(QUrl::toPercentEncoding("sub-domain")).append(querySuffix).append(QUrl::toPercentEncoding(::OpenAPI::toStringValue(sub_domain.value())));
+    }
+    
+    {
+        queryStyle = "form";
+        if (queryStyle == "")
+            queryStyle = "form";
+        queryPrefix = getParamStylePrefix(queryStyle);
+        querySuffix = getParamStyleSuffix(queryStyle);
+        queryDelimiter = getParamStyleDelimiter(queryStyle, "api-key", false);
+        if (fullPath.indexOf("?") > 0)
+            fullPath.append(queryPrefix);
+        else
+            fullPath.append("?");
+
+        fullPath.append(QUrl::toPercentEncoding("api-key")).append(querySuffix).append(QUrl::toPercentEncoding(::OpenAPI::toStringValue(api_key)));
+    }
+    OAIHttpRequestWorker *worker = new OAIHttpRequestWorker(this, _manager);
+    worker->setTimeOut(_timeOut);
+    worker->setWorkingDirectory(_workingDirectory);
+    OAIHttpRequestInput input(fullPath, "GET");
+
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+    for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
+        input.headers.insert(keyValueIt->first, keyValueIt->second);
+    }
+#else
+    for (auto key : _defaultHeaders.keys()) {
+        input.headers.insert(key, _defaultHeaders[key]);
+    }
+#endif
+
+    connect(worker, &OAIHttpRequestWorker::on_execution_finished, this, &OAINewsApi::extractNewsLinksCallback);
+    connect(this, &OAINewsApi::abortRequestsSignal, worker, &QObject::deleteLater);
+    connect(worker, &QObject::destroyed, this, [this]() {
+        if (findChildren<OAIHttpRequestWorker*>().count() == 0) {
+            emit allPendingRequestsCompleted();
+        }
+    });
+
+    worker->execute(&input);
+}
+
+void OAINewsApi::extractNewsLinksCallback(OAIHttpRequestWorker *worker) {
+    QString error_str = worker->error_str;
+    QNetworkReply::NetworkError error_type = worker->error_type;
+
+    if (worker->error_type != QNetworkReply::NoError) {
+        error_str = QString("%1, %2").arg(worker->error_str, QString(worker->response));
+    }
+    OAIInline_response_200_2 output(QString(worker->response));
+    worker->deleteLater();
+
+    if (worker->error_type == QNetworkReply::NoError) {
+        emit extractNewsLinksSignal(output);
+        emit extractNewsLinksSignalFull(worker, output);
+    } else {
+        emit extractNewsLinksSignalE(output, error_type, error_str);
+        emit extractNewsLinksSignalEFull(worker, error_type, error_str);
+    }
+}
+
 void OAINewsApi::geoCoordinates(const QString &location) {
     QString fullPath = QString(_serverConfigs["geoCoordinates"][_serverIndices.value("geoCoordinates")].URL()+"/geo-coordinates");
     
@@ -314,6 +444,10 @@ void OAINewsApi::geoCoordinates(const QString &location) {
         else
             fullPath.append("?");
         fullPath.append("apiKey=").append(_apiKeys.find("apiKey").value());
+    }
+    
+    if (_apiKeys.contains("headerApiKey")) {
+        addHeaders("headerApiKey",_apiKeys.find("headerApiKey").value());
     }
     
     QString queryPrefix, querySuffix, queryDelimiter, queryStyle;
@@ -366,7 +500,7 @@ void OAINewsApi::geoCoordinatesCallback(OAIHttpRequestWorker *worker) {
     if (worker->error_type != QNetworkReply::NoError) {
         error_str = QString("%1, %2").arg(worker->error_str, QString(worker->response));
     }
-    OAIInline_response_200_2 output(QString(worker->response));
+    OAIInline_response_200_3 output(QString(worker->response));
     worker->deleteLater();
 
     if (worker->error_type == QNetworkReply::NoError) {
@@ -375,6 +509,113 @@ void OAINewsApi::geoCoordinatesCallback(OAIHttpRequestWorker *worker) {
     } else {
         emit geoCoordinatesSignalE(output, error_type, error_str);
         emit geoCoordinatesSignalEFull(worker, error_type, error_str);
+    }
+}
+
+void OAINewsApi::newsWebsiteToRSSFeed(const QString &url, const QString &api_key, const ::OpenAPI::OptionalParam<bool> &extract_news) {
+    QString fullPath = QString(_serverConfigs["newsWebsiteToRSSFeed"][_serverIndices.value("newsWebsiteToRSSFeed")].URL()+"/feed.rss");
+    
+    if (_apiKeys.contains("apiKey")) {
+        if (fullPath.indexOf("?") > 0)
+            fullPath.append("&");
+        else
+            fullPath.append("?");
+        fullPath.append("apiKey=").append(_apiKeys.find("apiKey").value());
+    }
+    
+    if (_apiKeys.contains("headerApiKey")) {
+        addHeaders("headerApiKey",_apiKeys.find("headerApiKey").value());
+    }
+    
+    QString queryPrefix, querySuffix, queryDelimiter, queryStyle;
+    
+    {
+        queryStyle = "form";
+        if (queryStyle == "")
+            queryStyle = "form";
+        queryPrefix = getParamStylePrefix(queryStyle);
+        querySuffix = getParamStyleSuffix(queryStyle);
+        queryDelimiter = getParamStyleDelimiter(queryStyle, "url", false);
+        if (fullPath.indexOf("?") > 0)
+            fullPath.append(queryPrefix);
+        else
+            fullPath.append("?");
+
+        fullPath.append(QUrl::toPercentEncoding("url")).append(querySuffix).append(QUrl::toPercentEncoding(::OpenAPI::toStringValue(url)));
+    }
+    if (extract_news.hasValue())
+    {
+        queryStyle = "form";
+        if (queryStyle == "")
+            queryStyle = "form";
+        queryPrefix = getParamStylePrefix(queryStyle);
+        querySuffix = getParamStyleSuffix(queryStyle);
+        queryDelimiter = getParamStyleDelimiter(queryStyle, "extract-news", false);
+        if (fullPath.indexOf("?") > 0)
+            fullPath.append(queryPrefix);
+        else
+            fullPath.append("?");
+
+        fullPath.append(QUrl::toPercentEncoding("extract-news")).append(querySuffix).append(QUrl::toPercentEncoding(::OpenAPI::toStringValue(extract_news.value())));
+    }
+    
+    {
+        queryStyle = "form";
+        if (queryStyle == "")
+            queryStyle = "form";
+        queryPrefix = getParamStylePrefix(queryStyle);
+        querySuffix = getParamStyleSuffix(queryStyle);
+        queryDelimiter = getParamStyleDelimiter(queryStyle, "api-key", false);
+        if (fullPath.indexOf("?") > 0)
+            fullPath.append(queryPrefix);
+        else
+            fullPath.append("?");
+
+        fullPath.append(QUrl::toPercentEncoding("api-key")).append(querySuffix).append(QUrl::toPercentEncoding(::OpenAPI::toStringValue(api_key)));
+    }
+    OAIHttpRequestWorker *worker = new OAIHttpRequestWorker(this, _manager);
+    worker->setTimeOut(_timeOut);
+    worker->setWorkingDirectory(_workingDirectory);
+    OAIHttpRequestInput input(fullPath, "GET");
+
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+    for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
+        input.headers.insert(keyValueIt->first, keyValueIt->second);
+    }
+#else
+    for (auto key : _defaultHeaders.keys()) {
+        input.headers.insert(key, _defaultHeaders[key]);
+    }
+#endif
+
+    connect(worker, &OAIHttpRequestWorker::on_execution_finished, this, &OAINewsApi::newsWebsiteToRSSFeedCallback);
+    connect(this, &OAINewsApi::abortRequestsSignal, worker, &QObject::deleteLater);
+    connect(worker, &QObject::destroyed, this, [this]() {
+        if (findChildren<OAIHttpRequestWorker*>().count() == 0) {
+            emit allPendingRequestsCompleted();
+        }
+    });
+
+    worker->execute(&input);
+}
+
+void OAINewsApi::newsWebsiteToRSSFeedCallback(OAIHttpRequestWorker *worker) {
+    QString error_str = worker->error_str;
+    QNetworkReply::NetworkError error_type = worker->error_type;
+
+    if (worker->error_type != QNetworkReply::NoError) {
+        error_str = QString("%1, %2").arg(worker->error_str, QString(worker->response));
+    }
+    OAIObject output(QString(worker->response));
+    worker->deleteLater();
+
+    if (worker->error_type == QNetworkReply::NoError) {
+        emit newsWebsiteToRSSFeedSignal(output);
+        emit newsWebsiteToRSSFeedSignalFull(worker, output);
+    } else {
+        emit newsWebsiteToRSSFeedSignalE(output, error_type, error_str);
+        emit newsWebsiteToRSSFeedSignalEFull(worker, error_type, error_str);
     }
 }
 
@@ -387,6 +628,10 @@ void OAINewsApi::searchNews(const ::OpenAPI::OptionalParam<QString> &text, const
         else
             fullPath.append("?");
         fullPath.append("apiKey=").append(_apiKeys.find("apiKey").value());
+    }
+    
+    if (_apiKeys.contains("headerApiKey")) {
+        addHeaders("headerApiKey",_apiKeys.find("headerApiKey").value());
     }
     
     QString queryPrefix, querySuffix, queryDelimiter, queryStyle;

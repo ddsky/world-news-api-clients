@@ -22,15 +22,15 @@ trait DataAccessor {
 
         /**
         * 
-        * @return A Object
+        * @return A InlineResponse2002
         */
-        def News_extractNews_0(url: String, apiKey: String, prefix: Option[String], subDomain: Option[Boolean], authParamapiKey: String, authParamheaderApiKey: String): Either[CommonError,Object] = Left(TODO)
+        def News_extractNewsLinks(url: String, apiKey: String, prefix: Option[String], subDomain: Option[Boolean], authParamapiKey: String, authParamheaderApiKey: String): Either[CommonError,InlineResponse2002] = Left(TODO)
 
         /**
         * 
-        * @return A InlineResponse2002
+        * @return A InlineResponse2003
         */
-        def News_geoCoordinates(location: String, authParamapiKey: String, authParamheaderApiKey: String): Either[CommonError,InlineResponse2002] = Left(TODO)
+        def News_geoCoordinates(location: String, authParamapiKey: String, authParamheaderApiKey: String): Either[CommonError,InlineResponse2003] = Left(TODO)
 
         /**
         * 

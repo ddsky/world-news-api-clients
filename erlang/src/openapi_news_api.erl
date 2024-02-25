@@ -1,7 +1,7 @@
 -module(openapi_news_api).
 
 -export([extract_news/3, extract_news/4,
-         extract_news_0/3, extract_news_0/4,
+         extract_news_links/3, extract_news_links/4,
          geo_coordinates/2, geo_coordinates/3,
          news_website_to_rss_feed/3, news_website_to_rss_feed/4,
          search_news/1, search_news/2]).
@@ -29,14 +29,14 @@ extract_news(Ctx, Url, Analyze, Optional) ->
 
     openapi_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
-%% @doc Extract News
+%% @doc Extract News Links
 %% Extract a news links from a news website. 
--spec extract_news_0(ctx:ctx(), binary(), binary()) -> {ok, maps:map(), openapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), openapi_utils:response_info()}.
-extract_news_0(Ctx, Url, ApiKey) ->
-    extract_news_0(Ctx, Url, ApiKey, #{}).
+-spec extract_news_links(ctx:ctx(), binary(), binary()) -> {ok, openapi_inline_response_200_2:openapi_inline_response_200_2(), openapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), openapi_utils:response_info()}.
+extract_news_links(Ctx, Url, ApiKey) ->
+    extract_news_links(Ctx, Url, ApiKey, #{}).
 
--spec extract_news_0(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, maps:map(), openapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), openapi_utils:response_info()}.
-extract_news_0(Ctx, Url, ApiKey, Optional) ->
+-spec extract_news_links(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, openapi_inline_response_200_2:openapi_inline_response_200_2(), openapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), openapi_utils:response_info()}.
+extract_news_links(Ctx, Url, ApiKey, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
@@ -52,11 +52,11 @@ extract_news_0(Ctx, Url, ApiKey, Optional) ->
 
 %% @doc Get Geo Coordinates
 %% Get the geo coordinates for a location. The location can be an exact address but also just the name of a city or country.
--spec geo_coordinates(ctx:ctx(), binary()) -> {ok, openapi_inline_response_200_2:openapi_inline_response_200_2(), openapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), openapi_utils:response_info()}.
+-spec geo_coordinates(ctx:ctx(), binary()) -> {ok, openapi_inline_response_200_3:openapi_inline_response_200_3(), openapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), openapi_utils:response_info()}.
 geo_coordinates(Ctx, Location) ->
     geo_coordinates(Ctx, Location, #{}).
 
--spec geo_coordinates(ctx:ctx(), binary(), maps:map()) -> {ok, openapi_inline_response_200_2:openapi_inline_response_200_2(), openapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), openapi_utils:response_info()}.
+-spec geo_coordinates(ctx:ctx(), binary(), maps:map()) -> {ok, openapi_inline_response_200_3:openapi_inline_response_200_3(), openapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), openapi_utils:response_info()}.
 geo_coordinates(Ctx, Location, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),

@@ -8,6 +8,7 @@ Rakefile
 docs/InlineResponse200.md
 docs/InlineResponse2001.md
 docs/InlineResponse2002.md
+docs/InlineResponse2003.md
 docs/InlineResponse200News.md
 docs/News.md
 docs/NewsApi.md
@@ -20,6 +21,7 @@ lib/openapi_client/configuration.rb
 lib/openapi_client/models/inline_response200.rb
 lib/openapi_client/models/inline_response2001.rb
 lib/openapi_client/models/inline_response2002.rb
+lib/openapi_client/models/inline_response2003.rb
 lib/openapi_client/models/inline_response200_news.rb
 lib/openapi_client/models/news.rb
 lib/openapi_client/version.rb

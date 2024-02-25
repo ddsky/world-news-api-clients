@@ -5,7 +5,7 @@ All URIs are relative to *https://api.worldnewsapi.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**extractNews**](OAINewsApi.md#extractnews) | **GET** /extract-news | Extract News
-[**extractNews_0**](OAINewsApi.md#extractnews_0) | **GET** /extract-news-links | Extract News
+[**extractNewsLinks**](OAINewsApi.md#extractnewslinks) | **GET** /extract-news-links | Extract News Links
 [**geoCoordinates**](OAINewsApi.md#geocoordinates) | **GET** /geo-coordinates | Get Geo Coordinates
 [**newsWebsiteToRSSFeed**](OAINewsApi.md#newswebsitetorssfeed) | **GET** /feed.rss | News Website to RSS Feed
 [**searchNews**](OAINewsApi.md#searchnews) | **GET** /search-news | Search News
@@ -77,16 +77,16 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **extractNews_0**
+# **extractNewsLinks**
 ```objc
--(NSURLSessionTask*) extractNews_1WithUrl: (NSString*) url
+-(NSURLSessionTask*) extractNewsLinksWithUrl: (NSString*) url
     apiKey: (NSString*) apiKey
     prefix: (NSString*) prefix
     subDomain: (NSNumber*) subDomain
-        completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
+        completionHandler: (void (^)(OAIInlineResponse2002* output, NSError* error)) handler;
 ```
 
-Extract News
+Extract News Links
 
 Extract a news links from a news website. 
 
@@ -112,17 +112,17 @@ NSNumber* subDomain = true; // Whether to include links to news on sub-domains. 
 
 OAINewsApi*apiInstance = [[OAINewsApi alloc] init];
 
-// Extract News
-[apiInstance extractNews_1WithUrl:url
+// Extract News Links
+[apiInstance extractNewsLinksWithUrl:url
               apiKey:apiKey
               prefix:prefix
               subDomain:subDomain
-          completionHandler: ^(NSObject* output, NSError* error) {
+          completionHandler: ^(OAIInlineResponse2002* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
                         if (error) {
-                            NSLog(@"Error calling OAINewsApi->extractNews_0: %@", error);
+                            NSLog(@"Error calling OAINewsApi->extractNewsLinks: %@", error);
                         }
                     }];
 ```
@@ -138,7 +138,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**NSObject***
+[**OAIInlineResponse2002***](OAIInlineResponse2002.md)
 
 ### Authorization
 
@@ -147,14 +147,14 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: , application/json
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **geoCoordinates**
 ```objc
 -(NSURLSessionTask*) geoCoordinatesWithLocation: (NSString*) location
-        completionHandler: (void (^)(OAIInlineResponse2002* output, NSError* error)) handler;
+        completionHandler: (void (^)(OAIInlineResponse2003* output, NSError* error)) handler;
 ```
 
 Get Geo Coordinates
@@ -182,7 +182,7 @@ OAINewsApi*apiInstance = [[OAINewsApi alloc] init];
 
 // Get Geo Coordinates
 [apiInstance geoCoordinatesWithLocation:location
-          completionHandler: ^(OAIInlineResponse2002* output, NSError* error) {
+          completionHandler: ^(OAIInlineResponse2003* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
@@ -200,7 +200,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OAIInlineResponse2002***](OAIInlineResponse2002.md)
+[**OAIInlineResponse2003***](OAIInlineResponse2003.md)
 
 ### Authorization
 
@@ -279,7 +279,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: , application/json, application/xml
+ - **Accept**: application/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

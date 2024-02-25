@@ -9,15 +9,11 @@ defmodule com.worldnewsapi.client.Model.InlineResponse2002 do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"latitude",
-    :"longitude",
-    :"city"
+    :"news_links"
   ]
 
   @type t :: %__MODULE__{
-    :"latitude" => float(),
-    :"longitude" => float(),
-    :"city" => String.t | nil
+    :"news_links" => [String.t] | nil
   }
 end
 

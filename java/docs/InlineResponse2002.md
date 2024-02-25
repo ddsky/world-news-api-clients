@@ -7,9 +7,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**latitude** | **BigDecimal** |  | 
-**longitude** | **BigDecimal** |  | 
-**city** | **String** |  |  [optional]
+**newsLinks** | **List&lt;String&gt;** |  |  [optional]
 
 
 

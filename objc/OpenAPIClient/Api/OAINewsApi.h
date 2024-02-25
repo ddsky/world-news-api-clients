@@ -2,6 +2,7 @@
 #import "OAIInlineResponse200.h"
 #import "OAIInlineResponse2001.h"
 #import "OAIInlineResponse2002.h"
+#import "OAIInlineResponse2003.h"
 #import "OAIApi.h"
 
 /**
@@ -39,7 +40,7 @@ extern NSInteger kOAINewsApiMissingParamErrorCode;
     completionHandler: (void (^)(OAIInlineResponse2001* output, NSError* error)) handler;
 
 
-/// Extract News
+/// Extract News Links
 /// Extract a news links from a news website. 
 ///
 /// @param url The url from which links should be extracted.
@@ -54,12 +55,12 @@ extern NSInteger kOAINewsApiMissingParamErrorCode;
 ///  code:404 message:"Not Found",
 ///  code:429 message:"Too Many Requests"
 ///
-/// @return NSObject*
--(NSURLSessionTask*) extractNews_1WithUrl: (NSString*) url
+/// @return OAIInlineResponse2002*
+-(NSURLSessionTask*) extractNewsLinksWithUrl: (NSString*) url
     apiKey: (NSString*) apiKey
     prefix: (NSString*) prefix
     subDomain: (NSNumber*) subDomain
-    completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
+    completionHandler: (void (^)(OAIInlineResponse2002* output, NSError* error)) handler;
 
 
 /// Get Geo Coordinates
@@ -70,9 +71,9 @@ extern NSInteger kOAINewsApiMissingParamErrorCode;
 ///  code:200 message:"The coordinates of the location.",
 ///  code:404 message:"Not Found"
 ///
-/// @return OAIInlineResponse2002*
+/// @return OAIInlineResponse2003*
 -(NSURLSessionTask*) geoCoordinatesWithLocation: (NSString*) location
-    completionHandler: (void (^)(OAIInlineResponse2002* output, NSError* error)) handler;
+    completionHandler: (void (^)(OAIInlineResponse2003* output, NSError* error)) handler;
 
 
 /// News Website to RSS Feed

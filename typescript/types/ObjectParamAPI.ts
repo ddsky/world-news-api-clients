@@ -5,6 +5,7 @@ import { Configuration} from '../configuration'
 import { InlineResponse200 } from '../models/InlineResponse200';
 import { InlineResponse2001 } from '../models/InlineResponse2001';
 import { InlineResponse2002 } from '../models/InlineResponse2002';
+import { InlineResponse2003 } from '../models/InlineResponse2003';
 import { InlineResponse200News } from '../models/InlineResponse200News';
 import { News } from '../models/News';
 
@@ -26,29 +27,29 @@ export interface NewsApiExtractNewsRequest {
     analyze: boolean
 }
 
-export interface NewsApiExtractNews0Request {
+export interface NewsApiExtractNewsLinksRequest {
     /**
      * The url from which links should be extracted.
      * @type string
-     * @memberof NewsApiextractNews_1
+     * @memberof NewsApiextractNewsLinks
      */
     url: string
     /**
      * Your API key.
      * @type string
-     * @memberof NewsApiextractNews_1
+     * @memberof NewsApiextractNewsLinks
      */
     apiKey: string
     /**
      * The prefix the news links must start with.
      * @type string
-     * @memberof NewsApiextractNews_1
+     * @memberof NewsApiextractNewsLinks
      */
     prefix?: string
     /**
      * Whether to include links to news on sub-domains.
      * @type boolean
-     * @memberof NewsApiextractNews_1
+     * @memberof NewsApiextractNewsLinks
      */
     subDomain?: boolean
 }
@@ -194,11 +195,11 @@ export class ObjectNewsApi {
 
     /**
      * Extract a news links from a news website. 
-     * Extract News
+     * Extract News Links
      * @param param the request object
      */
-    public extractNews_1(param: NewsApiExtractNews0Request, options?: Configuration): Promise<any> {
-        return this.api.extractNews_1(param.url, param.apiKey, param.prefix, param.subDomain,  options).toPromise();
+    public extractNewsLinks(param: NewsApiExtractNewsLinksRequest, options?: Configuration): Promise<InlineResponse2002> {
+        return this.api.extractNewsLinks(param.url, param.apiKey, param.prefix, param.subDomain,  options).toPromise();
     }
 
     /**
@@ -206,7 +207,7 @@ export class ObjectNewsApi {
      * Get Geo Coordinates
      * @param param the request object
      */
-    public geoCoordinates(param: NewsApiGeoCoordinatesRequest, options?: Configuration): Promise<InlineResponse2002> {
+    public geoCoordinates(param: NewsApiGeoCoordinatesRequest, options?: Configuration): Promise<InlineResponse2003> {
         return this.api.geoCoordinates(param.location,  options).toPromise();
     }
 

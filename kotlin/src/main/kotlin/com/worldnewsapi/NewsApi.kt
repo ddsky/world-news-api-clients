@@ -25,6 +25,7 @@ import java.io.IOException
 import com.worldnewsapi.client.model.InlineResponse200
 import com.worldnewsapi.client.model.InlineResponse2001
 import com.worldnewsapi.client.model.InlineResponse2002
+import com.worldnewsapi.client.model.InlineResponse2003
 
 import com.squareup.moshi.Json
 
@@ -127,9 +128,12 @@ class NewsApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath) {
     }
 
     /**
-    * Get Geo Coordinates
-    * Get the geo coordinates for a location. The location can be an exact address but also just the name of a city or country.
-    * @param location The address or name of the location, e.g. Tokyo, Japan. 
+    * Extract News Links
+    * Extract a news links from a news website. 
+    * @param url The url from which links should be extracted. 
+    * @param apiKey Your API key. 
+    * @param prefix The prefix the news links must start with. (optional)
+    * @param subDomain Whether to include links to news on sub-domains. (optional)
     * @return InlineResponse2002
     * @throws IllegalStateException If the request is not correctly configured
     * @throws IOException Rethrows the OkHttp execute method exception
@@ -139,8 +143,8 @@ class NewsApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath) {
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun geoCoordinates(location: kotlin.String) : InlineResponse2002 {
-        val localVarResponse = geoCoordinatesWithHttpInfo(location = location)
+    fun extractNewsLinks(url: kotlin.String, apiKey: kotlin.String, prefix: kotlin.String?, subDomain: kotlin.Boolean?) : InlineResponse2002 {
+        val localVarResponse = extractNewsLinksWithHttpInfo(url = url, apiKey = apiKey, prefix = prefix, subDomain = subDomain)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as InlineResponse2002
@@ -158,19 +162,105 @@ class NewsApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath) {
     }
 
     /**
-    * Get Geo Coordinates
-    * Get the geo coordinates for a location. The location can be an exact address but also just the name of a city or country.
-    * @param location The address or name of the location, e.g. Tokyo, Japan. 
+    * Extract News Links
+    * Extract a news links from a news website. 
+    * @param url The url from which links should be extracted. 
+    * @param apiKey Your API key. 
+    * @param prefix The prefix the news links must start with. (optional)
+    * @param subDomain Whether to include links to news on sub-domains. (optional)
     * @return ApiResponse<InlineResponse2002?>
     * @throws IllegalStateException If the request is not correctly configured
     * @throws IOException Rethrows the OkHttp execute method exception
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun geoCoordinatesWithHttpInfo(location: kotlin.String) : ApiResponse<InlineResponse2002?> {
-        val localVariableConfig = geoCoordinatesRequestConfig(location = location)
+    fun extractNewsLinksWithHttpInfo(url: kotlin.String, apiKey: kotlin.String, prefix: kotlin.String?, subDomain: kotlin.Boolean?) : ApiResponse<InlineResponse2002?> {
+        val localVariableConfig = extractNewsLinksRequestConfig(url = url, apiKey = apiKey, prefix = prefix, subDomain = subDomain)
 
         return request<Unit, InlineResponse2002>(
+            localVariableConfig
+        )
+    }
+
+    /**
+    * To obtain the request config of the operation extractNewsLinks
+    *
+    * @param url The url from which links should be extracted. 
+    * @param apiKey Your API key. 
+    * @param prefix The prefix the news links must start with. (optional)
+    * @param subDomain Whether to include links to news on sub-domains. (optional)
+    * @return RequestConfig
+    */
+    fun extractNewsLinksRequestConfig(url: kotlin.String, apiKey: kotlin.String, prefix: kotlin.String?, subDomain: kotlin.Boolean?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                put("url", listOf(url.toString()))
+                if (prefix != null) {
+                    put("prefix", listOf(prefix.toString()))
+                }
+                if (subDomain != null) {
+                    put("sub-domain", listOf(subDomain.toString()))
+                }
+                put("api-key", listOf(apiKey.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/extract-news-links",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+    * Get Geo Coordinates
+    * Get the geo coordinates for a location. The location can be an exact address but also just the name of a city or country.
+    * @param location The address or name of the location, e.g. Tokyo, Japan. 
+    * @return InlineResponse2003
+    * @throws IllegalStateException If the request is not correctly configured
+    * @throws IOException Rethrows the OkHttp execute method exception
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun geoCoordinates(location: kotlin.String) : InlineResponse2003 {
+        val localVarResponse = geoCoordinatesWithHttpInfo(location = location)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as InlineResponse2003
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * Get Geo Coordinates
+    * Get the geo coordinates for a location. The location can be an exact address but also just the name of a city or country.
+    * @param location The address or name of the location, e.g. Tokyo, Japan. 
+    * @return ApiResponse<InlineResponse2003?>
+    * @throws IllegalStateException If the request is not correctly configured
+    * @throws IOException Rethrows the OkHttp execute method exception
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun geoCoordinatesWithHttpInfo(location: kotlin.String) : ApiResponse<InlineResponse2003?> {
+        val localVariableConfig = geoCoordinatesRequestConfig(location = location)
+
+        return request<Unit, InlineResponse2003>(
             localVariableConfig
         )
     }
@@ -193,6 +283,88 @@ class NewsApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath) {
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/geo-coordinates",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+    * News Website to RSS Feed
+    * Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page. 
+    * @param url The url from which links should be extracted. 
+    * @param apiKey Your API key. 
+    * @param extractNews Whether extract news and add information such as description, publish date, and image to each item. (optional)
+    * @return kotlin.Any
+    * @throws IllegalStateException If the request is not correctly configured
+    * @throws IOException Rethrows the OkHttp execute method exception
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun newsWebsiteToRSSFeed(url: kotlin.String, apiKey: kotlin.String, extractNews: kotlin.Boolean?) : kotlin.Any {
+        val localVarResponse = newsWebsiteToRSSFeedWithHttpInfo(url = url, apiKey = apiKey, extractNews = extractNews)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * News Website to RSS Feed
+    * Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page. 
+    * @param url The url from which links should be extracted. 
+    * @param apiKey Your API key. 
+    * @param extractNews Whether extract news and add information such as description, publish date, and image to each item. (optional)
+    * @return ApiResponse<kotlin.Any?>
+    * @throws IllegalStateException If the request is not correctly configured
+    * @throws IOException Rethrows the OkHttp execute method exception
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun newsWebsiteToRSSFeedWithHttpInfo(url: kotlin.String, apiKey: kotlin.String, extractNews: kotlin.Boolean?) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = newsWebsiteToRSSFeedRequestConfig(url = url, apiKey = apiKey, extractNews = extractNews)
+
+        return request<Unit, kotlin.Any>(
+            localVariableConfig
+        )
+    }
+
+    /**
+    * To obtain the request config of the operation newsWebsiteToRSSFeed
+    *
+    * @param url The url from which links should be extracted. 
+    * @param apiKey Your API key. 
+    * @param extractNews Whether extract news and add information such as description, publish date, and image to each item. (optional)
+    * @return RequestConfig
+    */
+    fun newsWebsiteToRSSFeedRequestConfig(url: kotlin.String, apiKey: kotlin.String, extractNews: kotlin.Boolean?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                put("url", listOf(url.toString()))
+                if (extractNews != null) {
+                    put("extract-news", listOf(extractNews.toString()))
+                }
+                put("api-key", listOf(apiKey.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/feed.rss",
             query = localVariableQuery,
             headers = localVariableHeaders,
             body = localVariableBody

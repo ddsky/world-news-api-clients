@@ -36,7 +36,9 @@ All URIs are relative to *https://api.worldnewsapi.com*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *NewsApi* | [**extractNews**](docs/NewsApi.md#extractnews) | **GET** /extract-news | Extract News
+*NewsApi* | [**extractNewsLinks**](docs/NewsApi.md#extractnewslinks) | **GET** /extract-news-links | Extract News Links
 *NewsApi* | [**geoCoordinates**](docs/NewsApi.md#geocoordinates) | **GET** /geo-coordinates | Get Geo Coordinates
+*NewsApi* | [**newsWebsiteToRSSFeed**](docs/NewsApi.md#newswebsitetorssfeed) | **GET** /feed.rss | News Website to RSS Feed
 *NewsApi* | [**searchNews**](docs/NewsApi.md#searchnews) | **GET** /search-news | Search News
 
 
@@ -46,6 +48,7 @@ Class | Method | HTTP request | Description
  - [com.worldnewsapi.client.model.InlineResponse200](docs/InlineResponse200.md)
  - [com.worldnewsapi.client.model.InlineResponse2001](docs/InlineResponse2001.md)
  - [com.worldnewsapi.client.model.InlineResponse2002](docs/InlineResponse2002.md)
+ - [com.worldnewsapi.client.model.InlineResponse2003](docs/InlineResponse2003.md)
  - [com.worldnewsapi.client.model.InlineResponse200News](docs/InlineResponse200News.md)
  - [com.worldnewsapi.client.model.News](docs/News.md)
 
@@ -59,4 +62,11 @@ Class | Method | HTTP request | Description
 - **Type**: API key
 - **API key parameter name**: api-key
 - **Location**: URL query string
+
+<a name="headerApiKey"></a>
+### headerApiKey
+
+- **Type**: API key
+- **API key parameter name**: x-api-key
+- **Location**: HTTP header
 

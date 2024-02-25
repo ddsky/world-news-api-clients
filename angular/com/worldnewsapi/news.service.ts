@@ -24,6 +24,8 @@ import { InlineResponse200 } from '../com.worldnewsapi.client.model/inlineRespon
 import { InlineResponse2001 } from '../com.worldnewsapi.client.model/inlineResponse2001';
 // @ts-ignore
 import { InlineResponse2002 } from '../com.worldnewsapi.client.model/inlineResponse2002';
+// @ts-ignore
+import { InlineResponse2003 } from '../com.worldnewsapi.client.model/inlineResponse2003';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -178,7 +180,7 @@ export class NewsService {
     }
 
     /**
-     * Extract News
+     * Extract News Links
      * Extract a news links from a news website. 
      * @param url The url from which links should be extracted.
      * @param apiKey Your API key.
@@ -187,15 +189,15 @@ export class NewsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public extractNews_1(url: string, apiKey: string, prefix?: string, subDomain?: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '' | 'application/json', context?: HttpContext}): Observable<object>;
-    public extractNews_1(url: string, apiKey: string, prefix?: string, subDomain?: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '' | 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public extractNews_1(url: string, apiKey: string, prefix?: string, subDomain?: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '' | 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public extractNews_1(url: string, apiKey: string, prefix?: string, subDomain?: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '' | 'application/json', context?: HttpContext}): Observable<any> {
+    public extractNewsLinks(url: string, apiKey: string, prefix?: string, subDomain?: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse2002>;
+    public extractNewsLinks(url: string, apiKey: string, prefix?: string, subDomain?: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse2002>>;
+    public extractNewsLinks(url: string, apiKey: string, prefix?: string, subDomain?: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse2002>>;
+    public extractNewsLinks(url: string, apiKey: string, prefix?: string, subDomain?: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (url === null || url === undefined) {
-            throw new Error('Required parameter url was null or undefined when calling extractNews_1.');
+            throw new Error('Required parameter url was null or undefined when calling extractNewsLinks.');
         }
         if (apiKey === null || apiKey === undefined) {
-            throw new Error('Required parameter apiKey was null or undefined when calling extractNews_1.');
+            throw new Error('Required parameter apiKey was null or undefined when calling extractNewsLinks.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -235,7 +237,6 @@ export class NewsService {
         if (localVarHttpHeaderAcceptSelected === undefined) {
             // to determine the Accept header
             const httpHeaderAccepts: string[] = [
-                '',
                 'application/json'
             ];
             localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
@@ -261,7 +262,7 @@ export class NewsService {
             }
         }
 
-        return this.httpClient.get<object>(`${this.configuration.basePath}/extract-news-links`,
+        return this.httpClient.get<InlineResponse2002>(`${this.configuration.basePath}/extract-news-links`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,
@@ -281,9 +282,9 @@ export class NewsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public geoCoordinates(location: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse2002>;
-    public geoCoordinates(location: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse2002>>;
-    public geoCoordinates(location: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse2002>>;
+    public geoCoordinates(location: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse2003>;
+    public geoCoordinates(location: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse2003>>;
+    public geoCoordinates(location: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse2003>>;
     public geoCoordinates(location: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (location === null || location === undefined) {
             throw new Error('Required parameter location was null or undefined when calling geoCoordinates.');
@@ -339,7 +340,7 @@ export class NewsService {
             }
         }
 
-        return this.httpClient.get<InlineResponse2002>(`${this.configuration.basePath}/geo-coordinates`,
+        return this.httpClient.get<InlineResponse2003>(`${this.configuration.basePath}/geo-coordinates`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,
@@ -361,10 +362,10 @@ export class NewsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public newsWebsiteToRSSFeed(url: string, apiKey: string, extractNews?: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '' | 'application/json' | 'application/xml', context?: HttpContext}): Observable<object>;
-    public newsWebsiteToRSSFeed(url: string, apiKey: string, extractNews?: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '' | 'application/json' | 'application/xml', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public newsWebsiteToRSSFeed(url: string, apiKey: string, extractNews?: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '' | 'application/json' | 'application/xml', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public newsWebsiteToRSSFeed(url: string, apiKey: string, extractNews?: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '' | 'application/json' | 'application/xml', context?: HttpContext}): Observable<any> {
+    public newsWebsiteToRSSFeed(url: string, apiKey: string, extractNews?: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/xml', context?: HttpContext}): Observable<object>;
+    public newsWebsiteToRSSFeed(url: string, apiKey: string, extractNews?: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/xml', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public newsWebsiteToRSSFeed(url: string, apiKey: string, extractNews?: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/xml', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public newsWebsiteToRSSFeed(url: string, apiKey: string, extractNews?: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/xml', context?: HttpContext}): Observable<any> {
         if (url === null || url === undefined) {
             throw new Error('Required parameter url was null or undefined when calling newsWebsiteToRSSFeed.');
         }
@@ -405,8 +406,6 @@ export class NewsService {
         if (localVarHttpHeaderAcceptSelected === undefined) {
             // to determine the Accept header
             const httpHeaderAccepts: string[] = [
-                '',
-                'application/json',
                 'application/xml'
             ];
             localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);

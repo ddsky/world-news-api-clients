@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **text** | **str** |  | [optional] 
 **summary** | **str** |  | [optional] 
 **url** | **str** |  | [optional] 
-**image** | **str** |  | [optional] 
+**image** | **str, none_type** |  | [optional] 
 **author** | **str** |  | [optional] 
 **language** | **str** |  | [optional] 
 **source_country** | **str** |  | [optional] 

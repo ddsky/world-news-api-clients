@@ -4,6 +4,8 @@ pub mod inline_response_200_1;
 pub use self::inline_response_200_1::InlineResponse2001;
 pub mod inline_response_200_2;
 pub use self::inline_response_200_2::InlineResponse2002;
+pub mod inline_response_200_3;
+pub use self::inline_response_200_3::InlineResponse2003;
 pub mod inline_response_200_news;
 pub use self::inline_response_200_news::InlineResponse200News;
 pub mod news;

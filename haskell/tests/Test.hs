@@ -23,6 +23,7 @@ main =
       propMimeEq MimeJSON (Proxy :: Proxy InlineResponse200)
       propMimeEq MimeJSON (Proxy :: Proxy InlineResponse2001)
       propMimeEq MimeJSON (Proxy :: Proxy InlineResponse2002)
+      propMimeEq MimeJSON (Proxy :: Proxy InlineResponse2003)
       propMimeEq MimeJSON (Proxy :: Proxy InlineResponse200News)
       propMimeEq MimeJSON (Proxy :: Proxy News)
       

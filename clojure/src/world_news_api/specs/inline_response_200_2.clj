@@ -7,9 +7,7 @@
 
 (def inline-response-200-2-data
   {
-   (ds/req :latitude) float?
-   (ds/req :longitude) float?
-   (ds/opt :city) string?
+   (ds/opt :news_links) (s/coll-of string?)
    })
 
 (def inline-response-200-2-spec

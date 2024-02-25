@@ -13,29 +13,15 @@
 import { HttpFile } from '../http/http';
 
 export class InlineResponse2002 {
-    'latitude': number;
-    'longitude': number;
-    'city'?: string;
+    'newsLinks'?: Array<string>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "latitude",
-            "baseName": "latitude",
-            "type": "number",
-            "format": ""
-        },
-        {
-            "name": "longitude",
-            "baseName": "longitude",
-            "type": "number",
-            "format": ""
-        },
-        {
-            "name": "city",
-            "baseName": "city",
-            "type": "string",
+            "name": "newsLinks",
+            "baseName": "news_links",
+            "type": "Array<string>",
             "format": ""
         }    ];
 

@@ -87,7 +87,7 @@ class News(ModelNormal):
             'text': (str,),  # noqa: E501
             'summary': (str,),  # noqa: E501
             'url': (str,),  # noqa: E501
-            'image': (str,),  # noqa: E501
+            'image': (str, none_type,),  # noqa: E501
             'publish_date': (str,),  # noqa: E501
             'author': (str,),  # noqa: E501
             'language': (str,),  # noqa: E501
@@ -160,7 +160,7 @@ class News(ModelNormal):
             text (str): [optional]  # noqa: E501
             summary (str): [optional]  # noqa: E501
             url (str): [optional]  # noqa: E501
-            image (str): [optional]  # noqa: E501
+            image (str, none_type): [optional]  # noqa: E501
             publish_date (str): [optional]  # noqa: E501
             author (str): [optional]  # noqa: E501
             language (str): [optional]  # noqa: E501
@@ -252,7 +252,7 @@ class News(ModelNormal):
             text (str): [optional]  # noqa: E501
             summary (str): [optional]  # noqa: E501
             url (str): [optional]  # noqa: E501
-            image (str): [optional]  # noqa: E501
+            image (str, none_type): [optional]  # noqa: E501
             publish_date (str): [optional]  # noqa: E501
             author (str): [optional]  # noqa: E501
             language (str): [optional]  # noqa: E501

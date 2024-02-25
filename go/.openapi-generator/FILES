@@ -8,6 +8,7 @@ configuration.go
 docs/InlineResponse200.md
 docs/InlineResponse2001.md
 docs/InlineResponse2002.md
+docs/InlineResponse2003.md
 docs/InlineResponse200News.md
 docs/News.md
 docs/NewsApi.md
@@ -17,6 +18,7 @@ go.sum
 model_inline_response_200.go
 model_inline_response_200_1.go
 model_inline_response_200_2.go
+model_inline_response_200_3.go
 model_inline_response_200_news.go
 model_news.go
 response.go

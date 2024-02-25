@@ -7,6 +7,7 @@ docs/Api/NewsApi.md
 docs/Model/InlineResponse200.md
 docs/Model/InlineResponse2001.md
 docs/Model/InlineResponse2002.md
+docs/Model/InlineResponse2003.md
 docs/Model/InlineResponse200News.md
 docs/Model/News.md
 git_push.sh
@@ -18,6 +19,7 @@ lib/com/worldnewsapi/NewsApi.php
 lib/model/InlineResponse200.php
 lib/model/InlineResponse2001.php
 lib/model/InlineResponse2002.php
+lib/model/InlineResponse2003.php
 lib/model/InlineResponse200News.php
 lib/model/ModelInterface.php
 lib/model/News.php

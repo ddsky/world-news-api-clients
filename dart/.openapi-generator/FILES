@@ -5,12 +5,14 @@ analysis_options.yaml
 com/worldnewsapi/client/model/inline_response200.dart
 com/worldnewsapi/client/model/inline_response2001.dart
 com/worldnewsapi/client/model/inline_response2002.dart
+com/worldnewsapi/client/model/inline_response2003.dart
 com/worldnewsapi/client/model/inline_response200_news.dart
 com/worldnewsapi/client/model/news.dart
 com/worldnewsapi/news_api.dart
 doc/InlineResponse200.md
 doc/InlineResponse2001.md
 doc/InlineResponse2002.md
+doc/InlineResponse2003.md
 doc/InlineResponse200News.md
 doc/News.md
 doc/NewsApi.md

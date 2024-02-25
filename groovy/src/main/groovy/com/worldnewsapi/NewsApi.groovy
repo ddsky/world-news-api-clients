@@ -4,6 +4,7 @@ import com.worldnewsapi.client.ApiUtils
 import com.worldnewsapi.client.model.InlineResponse200
 import com.worldnewsapi.client.model.InlineResponse2001
 import com.worldnewsapi.client.model.InlineResponse2002
+import com.worldnewsapi.client.model.InlineResponse2003
 
 class NewsApi {
     String basePath = "https://api.worldnewsapi.com"
@@ -44,7 +45,7 @@ class NewsApi {
 
     }
 
-    def extractNews_0 ( String url, String apiKey, String prefix, Boolean subDomain, Closure onSuccess, Closure onFailure)  {
+    def extractNewsLinks ( String url, String apiKey, String prefix, Boolean subDomain, Closure onSuccess, Closure onFailure)  {
         String resourcePath = "/extract-news-links"
 
         // params
@@ -80,7 +81,7 @@ class NewsApi {
 
         apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, contentType,
                     "GET", "",
-                    Object.class )
+                    InlineResponse2002.class )
 
     }
 
@@ -107,7 +108,7 @@ class NewsApi {
 
         apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, contentType,
                     "GET", "",
-                    InlineResponse2002.class )
+                    InlineResponse2003.class )
 
     }
 

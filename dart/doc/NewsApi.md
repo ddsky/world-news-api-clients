@@ -10,7 +10,7 @@ All URIs are relative to *https://api.worldnewsapi.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**extractNews**](NewsApi.md#extractnews) | **GET** /extract-news | Extract News
-[**extractNews_0**](NewsApi.md#extractnews_0) | **GET** /extract-news-links | Extract News
+[**extractNewsLinks**](NewsApi.md#extractnewslinks) | **GET** /extract-news-links | Extract News Links
 [**geoCoordinates**](NewsApi.md#geocoordinates) | **GET** /geo-coordinates | Get Geo Coordinates
 [**newsWebsiteToRSSFeed**](NewsApi.md#newswebsitetorssfeed) | **GET** /feed.rss | News Website to RSS Feed
 [**searchNews**](NewsApi.md#searchnews) | **GET** /search-news | Search News
@@ -69,10 +69,10 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **extractNews_0**
-> Object extractNews_0(url, apiKey, prefix, subDomain)
+# **extractNewsLinks**
+> InlineResponse2002 extractNewsLinks(url, apiKey, prefix, subDomain)
 
-Extract News
+Extract News Links
 
 Extract a news links from a news website. 
 
@@ -95,10 +95,10 @@ final prefix = ; // String | The prefix the news links must start with.
 final subDomain = true; // bool | Whether to include links to news on sub-domains.
 
 try {
-    final result = api_instance.extractNews_0(url, apiKey, prefix, subDomain);
+    final result = api_instance.extractNewsLinks(url, apiKey, prefix, subDomain);
     print(result);
 } catch (e) {
-    print('Exception when calling NewsApi->extractNews_0: $e\n');
+    print('Exception when calling NewsApi->extractNewsLinks: $e\n');
 }
 ```
 
@@ -113,7 +113,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Object**](Object.md)
+[**InlineResponse2002**](InlineResponse2002.md)
 
 ### Authorization
 
@@ -122,12 +122,12 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: , application/json
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **geoCoordinates**
-> InlineResponse2002 geoCoordinates(location)
+> InlineResponse2003 geoCoordinates(location)
 
 Get Geo Coordinates
 
@@ -164,7 +164,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2002**](InlineResponse2002.md)
+[**InlineResponse2003**](InlineResponse2003.md)
 
 ### Authorization
 
@@ -228,7 +228,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: , application/json, application/xml
+ - **Accept**: application/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

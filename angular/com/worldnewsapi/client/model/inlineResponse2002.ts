@@ -12,8 +12,6 @@
 
 
 export interface InlineResponse2002 { 
-    latitude: number;
-    longitude: number;
-    city?: string;
+    news_links?: Array<string>;
 }
 

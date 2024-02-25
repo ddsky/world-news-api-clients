@@ -16,6 +16,7 @@ import ApiClient from "../ApiClient";
 import InlineResponse200 from '../com.worldnewsapi.client.model/InlineResponse200';
 import InlineResponse2001 from '../com.worldnewsapi.client.model/InlineResponse2001';
 import InlineResponse2002 from '../com.worldnewsapi.client.model/InlineResponse2002';
+import InlineResponse2003 from '../com.worldnewsapi.client.model/InlineResponse2003';
 
 /**
 * News service.
@@ -86,34 +87,34 @@ export default class NewsApi {
     }
 
     /**
-     * Callback function to receive the result of the extractNews_0 operation.
-     * @callback module:com.worldnewsapi.client/com.worldnewsapi/NewsApi~extractNews_0Callback
+     * Callback function to receive the result of the extractNewsLinks operation.
+     * @callback module:com.worldnewsapi.client/com.worldnewsapi/NewsApi~extractNewsLinksCallback
      * @param {String} error Error message, if any.
-     * @param {Object} data The data returned by the service call.
+     * @param {module:com.worldnewsapi.client/com.worldnewsapi.client.model/InlineResponse2002} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
      */
 
     /**
-     * Extract News
+     * Extract News Links
      * Extract a news links from a news website. 
      * @param {String} url The url from which links should be extracted.
      * @param {String} apiKey Your API key.
      * @param {Object} opts Optional parameters
      * @param {String} opts.prefix The prefix the news links must start with.
      * @param {Boolean} opts.subDomain Whether to include links to news on sub-domains.
-     * @param {module:com.worldnewsapi.client/com.worldnewsapi/NewsApi~extractNews_0Callback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link Object}
+     * @param {module:com.worldnewsapi.client/com.worldnewsapi/NewsApi~extractNewsLinksCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link module:com.worldnewsapi.client/com.worldnewsapi.client.model/InlineResponse2002}
      */
-    extractNews_0(url, apiKey, opts, callback) {
+    extractNewsLinks(url, apiKey, opts, callback) {
       opts = opts || {};
       let postBody = null;
       // verify the required parameter 'url' is set
       if (url === undefined || url === null) {
-        throw new Error("Missing the required parameter 'url' when calling extractNews_0");
+        throw new Error("Missing the required parameter 'url' when calling extractNewsLinks");
       }
       // verify the required parameter 'apiKey' is set
       if (apiKey === undefined || apiKey === null) {
-        throw new Error("Missing the required parameter 'apiKey' when calling extractNews_0");
+        throw new Error("Missing the required parameter 'apiKey' when calling extractNewsLinks");
       }
 
       let pathParams = {
@@ -131,8 +132,8 @@ export default class NewsApi {
 
       let authNames = ['apiKey', 'headerApiKey'];
       let contentTypes = [];
-      let accepts = ['', 'application/json'];
-      let returnType = Object;
+      let accepts = ['application/json'];
+      let returnType = InlineResponse2002;
       return this.apiClient.callApi(
         '/extract-news-links', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
@@ -144,7 +145,7 @@ export default class NewsApi {
      * Callback function to receive the result of the geoCoordinates operation.
      * @callback module:com.worldnewsapi.client/com.worldnewsapi/NewsApi~geoCoordinatesCallback
      * @param {String} error Error message, if any.
-     * @param {module:com.worldnewsapi.client/com.worldnewsapi.client.model/InlineResponse2002} data The data returned by the service call.
+     * @param {module:com.worldnewsapi.client/com.worldnewsapi.client.model/InlineResponse2003} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
      */
 
@@ -153,7 +154,7 @@ export default class NewsApi {
      * Get the geo coordinates for a location. The location can be an exact address but also just the name of a city or country.
      * @param {String} location The address or name of the location, e.g. Tokyo, Japan.
      * @param {module:com.worldnewsapi.client/com.worldnewsapi/NewsApi~geoCoordinatesCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:com.worldnewsapi.client/com.worldnewsapi.client.model/InlineResponse2002}
+     * data is of type: {@link module:com.worldnewsapi.client/com.worldnewsapi.client.model/InlineResponse2003}
      */
     geoCoordinates(location, callback) {
       let postBody = null;
@@ -175,7 +176,7 @@ export default class NewsApi {
       let authNames = ['apiKey', 'headerApiKey'];
       let contentTypes = [];
       let accepts = ['application/json'];
-      let returnType = InlineResponse2002;
+      let returnType = InlineResponse2003;
       return this.apiClient.callApi(
         '/geo-coordinates', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
@@ -227,7 +228,7 @@ export default class NewsApi {
 
       let authNames = ['apiKey', 'headerApiKey'];
       let contentTypes = [];
-      let accepts = ['', 'application/json', 'application/xml'];
+      let accepts = ['application/xml'];
       let returnType = Object;
       return this.apiClient.callApi(
         '/feed.rss', 'GET',

@@ -1,4 +1,3 @@
-.openapi-generator-ignore
 README.md
 client/CMakeLists.txt
 client/OAIEnum.h
@@ -20,6 +19,8 @@ client/com.worldnewsapi.client.model/OAIInline_response_200_1.cpp
 client/com.worldnewsapi.client.model/OAIInline_response_200_1.h
 client/com.worldnewsapi.client.model/OAIInline_response_200_2.cpp
 client/com.worldnewsapi.client.model/OAIInline_response_200_2.h
+client/com.worldnewsapi.client.model/OAIInline_response_200_3.cpp
+client/com.worldnewsapi.client.model/OAIInline_response_200_3.h
 client/com.worldnewsapi.client.model/OAIInline_response_200_news.cpp
 client/com.worldnewsapi.client.model/OAIInline_response_200_news.h
 client/com.worldnewsapi.client.model/OAINews.cpp

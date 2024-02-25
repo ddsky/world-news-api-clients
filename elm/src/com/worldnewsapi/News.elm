@@ -16,7 +16,7 @@
 
 module Api.Request.News exposing
     ( extractNews
-    , extractNews_0
+    , extractNewsLinks
     , geoCoordinates
     , newsWebsiteToRSSFeed
     , searchNews, Sort(..), sortVariants, Sortdirection(..), sortdirectionVariants
@@ -101,8 +101,8 @@ extractNews url_query analyze_query =
 
 {-| Extract a news links from a news website. 
 -}
-extractNews_0 : String -> String -> Maybe String -> Maybe Bool -> Api.Request (Dict.Dict String Api.Data.Object)
-extractNews_0 url_query apiKey_query prefix_query subDomain_query =
+extractNewsLinks : String -> String -> Maybe String -> Maybe Bool -> Api.Request Api.Data.InlineResponse2002
+extractNewsLinks url_query apiKey_query prefix_query subDomain_query =
     Api.request
         "GET"
         "/extract-news-links"
@@ -110,13 +110,13 @@ extractNews_0 url_query apiKey_query prefix_query subDomain_query =
         [ ( "url", Just <| identity url_query ), ( "prefix", Maybe.map identity prefix_query ), ( "sub-domain", Maybe.map (\val -> if val then "true" else "false") subDomain_query ), ( "api-key", Just <| identity apiKey_query ) ]
         []
         Nothing
-        (Json.Decode.dict )
+        Api.Data.inlineResponse2002Decoder
 
 
 
 {-| Get the geo coordinates for a location. The location can be an exact address but also just the name of a city or country.
 -}
-geoCoordinates : String -> Api.Request Api.Data.InlineResponse2002
+geoCoordinates : String -> Api.Request Api.Data.InlineResponse2003
 geoCoordinates location_query =
     Api.request
         "GET"
@@ -125,7 +125,7 @@ geoCoordinates location_query =
         [ ( "location", Just <| identity location_query ) ]
         []
         Nothing
-        Api.Data.inlineResponse2002Decoder
+        Api.Data.inlineResponse2003Decoder
 
 
 

@@ -5,7 +5,9 @@ All URIs are relative to *https://api.worldnewsapi.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**extractNews**](NewsApi.md#extractNews) | **GET** /extract-news | Extract News
+[**extractNewsLinks**](NewsApi.md#extractNewsLinks) | **GET** /extract-news-links | Extract News Links
 [**geoCoordinates**](NewsApi.md#geoCoordinates) | **GET** /geo-coordinates | Get Geo Coordinates
+[**newsWebsiteToRSSFeed**](NewsApi.md#newsWebsiteToRSSFeed) | **GET** /feed.rss | News Website to RSS Feed
 [**searchNews**](NewsApi.md#searchNews) | **GET** /search-news | Search News
 
 
@@ -55,6 +57,68 @@ Name | Type | Description  | Notes
 Configure apiKey:
     ApiClient.apiKey["api-key"] = ""
     ApiClient.apiKeyPrefix["api-key"] = ""
+Configure headerApiKey:
+    ApiClient.apiKey["x-api-key"] = ""
+    ApiClient.apiKeyPrefix["x-api-key"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="extractNewsLinks"></a>
+# **extractNewsLinks**
+> InlineResponse2002 extractNewsLinks(url, apiKey, prefix, subDomain)
+
+Extract News Links
+
+Extract a news links from a news website. 
+
+### Example
+```kotlin
+// Import classes:
+//import org.openapitools.client.infrastructure.*
+//import com.worldnewsapi.client.model.*
+
+val apiInstance = NewsApi()
+val url : kotlin.String = https://nytimes.com // kotlin.String | The url from which links should be extracted.
+val apiKey : kotlin.String = abcd1234 // kotlin.String | Your API key.
+val prefix : kotlin.String =  // kotlin.String | The prefix the news links must start with.
+val subDomain : kotlin.Boolean = true // kotlin.Boolean | Whether to include links to news on sub-domains.
+try {
+    val result : InlineResponse2002 = apiInstance.extractNewsLinks(url, apiKey, prefix, subDomain)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling NewsApi#extractNewsLinks")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling NewsApi#extractNewsLinks")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **url** | **kotlin.String**| The url from which links should be extracted. |
+ **apiKey** | **kotlin.String**| Your API key. |
+ **prefix** | **kotlin.String**| The prefix the news links must start with. | [optional]
+ **subDomain** | **kotlin.Boolean**| Whether to include links to news on sub-domains. | [optional]
+
+### Return type
+
+[**InlineResponse2002**](InlineResponse2002.md)
+
+### Authorization
+
+
+Configure apiKey:
+    ApiClient.apiKey["api-key"] = ""
+    ApiClient.apiKeyPrefix["api-key"] = ""
+Configure headerApiKey:
+    ApiClient.apiKey["x-api-key"] = ""
+    ApiClient.apiKeyPrefix["x-api-key"] = ""
 
 ### HTTP request headers
 
@@ -63,7 +127,7 @@ Configure apiKey:
 
 <a name="geoCoordinates"></a>
 # **geoCoordinates**
-> InlineResponse2002 geoCoordinates(location)
+> InlineResponse2003 geoCoordinates(location)
 
 Get Geo Coordinates
 
@@ -78,7 +142,7 @@ Get the geo coordinates for a location. The location can be an exact address but
 val apiInstance = NewsApi()
 val location : kotlin.String = Tokyo, Japan // kotlin.String | The address or name of the location, e.g. Tokyo, Japan.
 try {
-    val result : InlineResponse2002 = apiInstance.geoCoordinates(location)
+    val result : InlineResponse2003 = apiInstance.geoCoordinates(location)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling NewsApi#geoCoordinates")
@@ -97,7 +161,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2002**](InlineResponse2002.md)
+[**InlineResponse2003**](InlineResponse2003.md)
 
 ### Authorization
 
@@ -105,11 +169,71 @@ Name | Type | Description  | Notes
 Configure apiKey:
     ApiClient.apiKey["api-key"] = ""
     ApiClient.apiKeyPrefix["api-key"] = ""
+Configure headerApiKey:
+    ApiClient.apiKey["x-api-key"] = ""
+    ApiClient.apiKeyPrefix["x-api-key"] = ""
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
+<a name="newsWebsiteToRSSFeed"></a>
+# **newsWebsiteToRSSFeed**
+> kotlin.Any newsWebsiteToRSSFeed(url, apiKey, extractNews)
+
+News Website to RSS Feed
+
+Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page. 
+
+### Example
+```kotlin
+// Import classes:
+//import org.openapitools.client.infrastructure.*
+//import com.worldnewsapi.client.model.*
+
+val apiInstance = NewsApi()
+val url : kotlin.String = https://nytimes.com // kotlin.String | The url from which links should be extracted.
+val apiKey : kotlin.String = abcd1234 // kotlin.String | Your API key.
+val extractNews : kotlin.Boolean = false // kotlin.Boolean | Whether extract news and add information such as description, publish date, and image to each item.
+try {
+    val result : kotlin.Any = apiInstance.newsWebsiteToRSSFeed(url, apiKey, extractNews)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling NewsApi#newsWebsiteToRSSFeed")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling NewsApi#newsWebsiteToRSSFeed")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **url** | **kotlin.String**| The url from which links should be extracted. |
+ **apiKey** | **kotlin.String**| Your API key. |
+ **extractNews** | **kotlin.Boolean**| Whether extract news and add information such as description, publish date, and image to each item. | [optional]
+
+### Return type
+
+[**kotlin.Any**](kotlin.Any.md)
+
+### Authorization
+
+
+Configure apiKey:
+    ApiClient.apiKey["api-key"] = ""
+    ApiClient.apiKeyPrefix["api-key"] = ""
+Configure headerApiKey:
+    ApiClient.apiKey["x-api-key"] = ""
+    ApiClient.apiKeyPrefix["x-api-key"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
 
 <a name="searchNews"></a>
 # **searchNews**
@@ -127,7 +251,7 @@ Search for news.
 
 val apiInstance = NewsApi()
 val text : kotlin.String = hurricane // kotlin.String | The text to match in the news content.
-val sourceCountries : kotlin.String = gb,us // kotlin.String | A comma-separated list of ISO 3166 country codes from which the news should originate, e.g. gb,us.
+val sourceCountries : kotlin.String = us,uk // kotlin.String | A comma-separated list of ISO 3166 country codes from which the news should originate, e.g. gb,us.
 val language : kotlin.String = en // kotlin.String | The ISO 6391 language code of the news, e.g. \"en\" for English.
 val minSentiment : kotlin.Double = -0.8 // kotlin.Double | The minimal sentiment of the news in range [-1,1].
 val maxSentiment : kotlin.Double = 0.8 // kotlin.Double | The maximal sentiment of the news in range [-1,1].
@@ -183,6 +307,9 @@ Name | Type | Description  | Notes
 Configure apiKey:
     ApiClient.apiKey["api-key"] = ""
     ApiClient.apiKeyPrefix["api-key"] = ""
+Configure headerApiKey:
+    ApiClient.apiKey["x-api-key"] = ""
+    ApiClient.apiKeyPrefix["x-api-key"] = ""
 
 ### HTTP request headers
 

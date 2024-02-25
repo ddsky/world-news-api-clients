@@ -60,9 +60,7 @@ class InlineResponse2002 implements ModelInterface, ArrayAccess, \JsonSerializab
       * @var string[]
       */
     protected static $openAPITypes = [
-        'latitude' => 'float',
-        'longitude' => 'float',
-        'city' => 'string'
+        'news_links' => 'string[]'
     ];
 
     /**
@@ -73,9 +71,7 @@ class InlineResponse2002 implements ModelInterface, ArrayAccess, \JsonSerializab
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'latitude' => null,
-        'longitude' => null,
-        'city' => null
+        'news_links' => null
     ];
 
     /**
@@ -105,9 +101,7 @@ class InlineResponse2002 implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $attributeMap = [
-        'latitude' => 'latitude',
-        'longitude' => 'longitude',
-        'city' => 'city'
+        'news_links' => 'news_links'
     ];
 
     /**
@@ -116,9 +110,7 @@ class InlineResponse2002 implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $setters = [
-        'latitude' => 'setLatitude',
-        'longitude' => 'setLongitude',
-        'city' => 'setCity'
+        'news_links' => 'setNewsLinks'
     ];
 
     /**
@@ -127,9 +119,7 @@ class InlineResponse2002 implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $getters = [
-        'latitude' => 'getLatitude',
-        'longitude' => 'getLongitude',
-        'city' => 'getCity'
+        'news_links' => 'getNewsLinks'
     ];
 
     /**
@@ -189,9 +179,7 @@ class InlineResponse2002 implements ModelInterface, ArrayAccess, \JsonSerializab
      */
     public function __construct(array $data = null)
     {
-        $this->container['latitude'] = $data['latitude'] ?? null;
-        $this->container['longitude'] = $data['longitude'] ?? null;
-        $this->container['city'] = $data['city'] ?? null;
+        $this->container['news_links'] = $data['news_links'] ?? null;
     }
 
     /**
@@ -203,12 +191,6 @@ class InlineResponse2002 implements ModelInterface, ArrayAccess, \JsonSerializab
     {
         $invalidProperties = [];
 
-        if ($this->container['latitude'] === null) {
-            $invalidProperties[] = "'latitude' can't be null";
-        }
-        if ($this->container['longitude'] === null) {
-            $invalidProperties[] = "'longitude' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -225,73 +207,25 @@ class InlineResponse2002 implements ModelInterface, ArrayAccess, \JsonSerializab
 
 
     /**
-     * Gets latitude
+     * Gets news_links
      *
-     * @return float
+     * @return string[]|null
      */
-    public function getLatitude()
+    public function getNewsLinks()
     {
-        return $this->container['latitude'];
+        return $this->container['news_links'];
     }
 
     /**
-     * Sets latitude
+     * Sets news_links
      *
-     * @param float $latitude latitude
+     * @param string[]|null $news_links news_links
      *
      * @return self
      */
-    public function setLatitude($latitude)
+    public function setNewsLinks($news_links)
     {
-        $this->container['latitude'] = $latitude;
-
-        return $this;
-    }
-
-    /**
-     * Gets longitude
-     *
-     * @return float
-     */
-    public function getLongitude()
-    {
-        return $this->container['longitude'];
-    }
-
-    /**
-     * Sets longitude
-     *
-     * @param float $longitude longitude
-     *
-     * @return self
-     */
-    public function setLongitude($longitude)
-    {
-        $this->container['longitude'] = $longitude;
-
-        return $this;
-    }
-
-    /**
-     * Gets city
-     *
-     * @return string|null
-     */
-    public function getCity()
-    {
-        return $this->container['city'];
-    }
-
-    /**
-     * Sets city
-     *
-     * @param string|null $city city
-     *
-     * @return self
-     */
-    public function setCity($city)
-    {
-        $this->container['city'] = $city;
+        $this->container['news_links'] = $news_links;
 
         return $this;
     }

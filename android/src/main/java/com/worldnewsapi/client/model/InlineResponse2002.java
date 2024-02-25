@@ -12,48 +12,24 @@
 
 package com.worldnewsapi.client.model;
 
-import java.math.BigDecimal;
+import java.util.*;
 import io.swagger.annotations.*;
 import com.google.gson.annotations.SerializedName;
 
 @ApiModel(description = "")
 public class InlineResponse2002 {
   
-  @SerializedName("latitude")
-  private BigDecimal latitude = null;
-  @SerializedName("longitude")
-  private BigDecimal longitude = null;
-  @SerializedName("city")
-  private String city = null;
-
-  /**
-   **/
-  @ApiModelProperty(required = true, value = "")
-  public BigDecimal getLatitude() {
-    return latitude;
-  }
-  public void setLatitude(BigDecimal latitude) {
-    this.latitude = latitude;
-  }
-
-  /**
-   **/
-  @ApiModelProperty(required = true, value = "")
-  public BigDecimal getLongitude() {
-    return longitude;
-  }
-  public void setLongitude(BigDecimal longitude) {
-    this.longitude = longitude;
-  }
+  @SerializedName("news_links")
+  private List<String> newsLinks = null;
 
   /**
    **/
   @ApiModelProperty(value = "")
-  public String getCity() {
-    return city;
+  public List<String> getNewsLinks() {
+    return newsLinks;
   }
-  public void setCity(String city) {
-    this.city = city;
+  public void setNewsLinks(List<String> newsLinks) {
+    this.newsLinks = newsLinks;
   }
 
 
@@ -66,17 +42,13 @@ public class InlineResponse2002 {
       return false;
     }
     InlineResponse2002 inlineResponse2002 = (InlineResponse2002) o;
-    return (this.latitude == null ? inlineResponse2002.latitude == null : this.latitude.equals(inlineResponse2002.latitude)) &&
-        (this.longitude == null ? inlineResponse2002.longitude == null : this.longitude.equals(inlineResponse2002.longitude)) &&
-        (this.city == null ? inlineResponse2002.city == null : this.city.equals(inlineResponse2002.city));
+    return (this.newsLinks == null ? inlineResponse2002.newsLinks == null : this.newsLinks.equals(inlineResponse2002.newsLinks));
   }
 
   @Override
   public int hashCode() {
     int result = 17;
-    result = 31 * result + (this.latitude == null ? 0: this.latitude.hashCode());
-    result = 31 * result + (this.longitude == null ? 0: this.longitude.hashCode());
-    result = 31 * result + (this.city == null ? 0: this.city.hashCode());
+    result = 31 * result + (this.newsLinks == null ? 0: this.newsLinks.hashCode());
     return result;
   }
 
@@ -85,9 +57,7 @@ public class InlineResponse2002 {
     StringBuilder sb = new StringBuilder();
     sb.append("class InlineResponse2002 {\n");
     
-    sb.append("  latitude: ").append(latitude).append("\n");
-    sb.append("  longitude: ").append(longitude).append("\n");
-    sb.append("  city: ").append(city).append("\n");
+    sb.append("  newsLinks: ").append(newsLinks).append("\n");
     sb.append("}\n");
     return sb.toString();
   }

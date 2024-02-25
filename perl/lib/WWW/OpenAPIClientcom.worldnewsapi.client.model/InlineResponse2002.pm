@@ -160,23 +160,9 @@ __PACKAGE__->class_documentation({description => '',
 }                                 );
 
 __PACKAGE__->method_documentation({
-    'latitude' => {
-        datatype => 'double',
-        base_name => 'latitude',
-        description => '',
-        format => '',
-        read_only => '',
-            },
-    'longitude' => {
-        datatype => 'double',
-        base_name => 'longitude',
-        description => '',
-        format => '',
-        read_only => '',
-            },
-    'city' => {
-        datatype => 'string',
-        base_name => 'city',
+    'news_links' => {
+        datatype => 'ARRAY[string]',
+        base_name => 'news_links',
         description => '',
         format => '',
         read_only => '',
@@ -184,15 +170,11 @@ __PACKAGE__->method_documentation({
 });
 
 __PACKAGE__->openapi_types( {
-    'latitude' => 'double',
-    'longitude' => 'double',
-    'city' => 'string'
+    'news_links' => 'ARRAY[string]'
 } );
 
 __PACKAGE__->attribute_map( {
-    'latitude' => 'latitude',
-    'longitude' => 'longitude',
-    'city' => 'city'
+    'news_links' => 'news_links'
 } );
 
 __PACKAGE__->mk_accessors(keys %{__PACKAGE__->attribute_map});

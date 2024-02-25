@@ -22,7 +22,7 @@ type InlineResponse200News struct {
 	Text *string `json:"text,omitempty"`
 	Summary *string `json:"summary,omitempty"`
 	Url *string `json:"url,omitempty"`
-	Image *string `json:"image,omitempty"`
+	Image NullableString `json:"image,omitempty"`
 	Author *string `json:"author,omitempty"`
 	Language *string `json:"language,omitempty"`
 	SourceCountry *string `json:"source_country,omitempty"`
@@ -206,36 +206,46 @@ func (o *InlineResponse200News) SetUrl(v string) {
 	o.Url = &v
 }
 
-// GetImage returns the Image field value if set, zero value otherwise.
+// GetImage returns the Image field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *InlineResponse200News) GetImage() string {
-	if o == nil || o.Image == nil {
+	if o == nil || o.Image.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.Image
+	return *o.Image.Get()
 }
 
 // GetImageOk returns a tuple with the Image field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *InlineResponse200News) GetImageOk() (*string, bool) {
-	if o == nil || o.Image == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.Image, true
+	return o.Image.Get(), o.Image.IsSet()
 }
 
 // HasImage returns a boolean if a field has been set.
 func (o *InlineResponse200News) HasImage() bool {
-	if o != nil && o.Image != nil {
+	if o != nil && o.Image.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetImage gets a reference to the given string and assigns it to the Image field.
+// SetImage gets a reference to the given NullableString and assigns it to the Image field.
 func (o *InlineResponse200News) SetImage(v string) {
-	o.Image = &v
+	o.Image.Set(&v)
+}
+// SetImageNil sets the value for Image to be an explicit nil
+func (o *InlineResponse200News) SetImageNil() {
+	o.Image.Set(nil)
+}
+
+// UnsetImage ensures that no value is present for Image, not even an explicit nil
+func (o *InlineResponse200News) UnsetImage() {
+	o.Image.Unset()
 }
 
 // GetAuthor returns the Author field value if set, zero value otherwise.
@@ -383,8 +393,8 @@ func (o InlineResponse200News) MarshalJSON() ([]byte, error) {
 	if o.Url != nil {
 		toSerialize["url"] = o.Url
 	}
-	if o.Image != nil {
-		toSerialize["image"] = o.Image
+	if o.Image.IsSet() {
+		toSerialize["image"] = o.Image.Get()
 	}
 	if o.Author != nil {
 		toSerialize["author"] = o.Author

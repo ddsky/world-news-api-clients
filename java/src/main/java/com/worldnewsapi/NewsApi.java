@@ -30,6 +30,7 @@ import java.io.IOException;
 import com.worldnewsapi.client.model.InlineResponse200;
 import com.worldnewsapi.client.model.InlineResponse2001;
 import com.worldnewsapi.client.model.InlineResponse2002;
+import com.worldnewsapi.client.model.InlineResponse2003;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -219,7 +220,7 @@ public class NewsApi {
         return localVarCall;
     }
     /**
-     * Build call for extractNews_0
+     * Build call for extractNewsLinks
      * @param url The url from which links should be extracted. (required)
      * @param apiKey Your API key. (required)
      * @param prefix The prefix the news links must start with. (optional)
@@ -238,9 +239,9 @@ public class NewsApi {
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
      </table>
      * Read entire docs
-     * @see <a href="https://worldnewsapi.com/docs#Extract-News">Extract News Documentation</a>
+     * @see <a href="https://worldnewsapi.com/docs#Extract-News-Links">Extract News Links Documentation</a>
      */
-    public okhttp3.Call extractNews_0Call(String url, String apiKey, String prefix, Boolean subDomain, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call extractNewsLinksCall(String url, String apiKey, String prefix, Boolean subDomain, final ApiCallback _callback) throws ApiException {
         String basePath = null;
 
         // Operation Servers
@@ -283,7 +284,7 @@ public class NewsApi {
         }
 
         final String[] localVarAccepts = {
-            "", "application/json"
+            "application/json"
         };
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
@@ -303,32 +304,32 @@ public class NewsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call extractNews_0ValidateBeforeCall(String url, String apiKey, String prefix, Boolean subDomain, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call extractNewsLinksValidateBeforeCall(String url, String apiKey, String prefix, Boolean subDomain, final ApiCallback _callback) throws ApiException {
         
         // verify the required parameter 'url' is set
         if (url == null) {
-            throw new ApiException("Missing the required parameter 'url' when calling extractNews_0(Async)");
+            throw new ApiException("Missing the required parameter 'url' when calling extractNewsLinks(Async)");
         }
         
         // verify the required parameter 'apiKey' is set
         if (apiKey == null) {
-            throw new ApiException("Missing the required parameter 'apiKey' when calling extractNews_0(Async)");
+            throw new ApiException("Missing the required parameter 'apiKey' when calling extractNewsLinks(Async)");
         }
         
 
-        okhttp3.Call localVarCall = extractNews_0Call(url, apiKey, prefix, subDomain, _callback);
+        okhttp3.Call localVarCall = extractNewsLinksCall(url, apiKey, prefix, subDomain, _callback);
         return localVarCall;
 
     }
 
     /**
-     * Extract News
+     * Extract News Links
      * Extract a news links from a news website. 
      * @param url The url from which links should be extracted. (required)
      * @param apiKey Your API key. (required)
      * @param prefix The prefix the news links must start with. (optional)
      * @param subDomain Whether to include links to news on sub-domains. (optional)
-     * @return Object
+     * @return InlineResponse2002
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -341,21 +342,21 @@ public class NewsApi {
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
      </table>
      * Read entire docs
-     * @see <a href="https://worldnewsapi.com/docs#Extract-News">Extract News Documentation</a>
+     * @see <a href="https://worldnewsapi.com/docs#Extract-News-Links">Extract News Links Documentation</a>
      */
-    public Object extractNews_0(String url, String apiKey, String prefix, Boolean subDomain) throws ApiException {
-        ApiResponse<Object> localVarResp = extractNews_0WithHttpInfo(url, apiKey, prefix, subDomain);
+    public InlineResponse2002 extractNewsLinks(String url, String apiKey, String prefix, Boolean subDomain) throws ApiException {
+        ApiResponse<InlineResponse2002> localVarResp = extractNewsLinksWithHttpInfo(url, apiKey, prefix, subDomain);
         return localVarResp.getData();
     }
 
     /**
-     * Extract News
+     * Extract News Links
      * Extract a news links from a news website. 
      * @param url The url from which links should be extracted. (required)
      * @param apiKey Your API key. (required)
      * @param prefix The prefix the news links must start with. (optional)
      * @param subDomain Whether to include links to news on sub-domains. (optional)
-     * @return ApiResponse&lt;Object&gt;
+     * @return ApiResponse&lt;InlineResponse2002&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -368,16 +369,16 @@ public class NewsApi {
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
      </table>
      * Read entire docs
-     * @see <a href="https://worldnewsapi.com/docs#Extract-News">Extract News Documentation</a>
+     * @see <a href="https://worldnewsapi.com/docs#Extract-News-Links">Extract News Links Documentation</a>
      */
-    public ApiResponse<Object> extractNews_0WithHttpInfo(String url, String apiKey, String prefix, Boolean subDomain) throws ApiException {
-        okhttp3.Call localVarCall = extractNews_0ValidateBeforeCall(url, apiKey, prefix, subDomain, null);
-        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+    public ApiResponse<InlineResponse2002> extractNewsLinksWithHttpInfo(String url, String apiKey, String prefix, Boolean subDomain) throws ApiException {
+        okhttp3.Call localVarCall = extractNewsLinksValidateBeforeCall(url, apiKey, prefix, subDomain, null);
+        Type localVarReturnType = new TypeToken<InlineResponse2002>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     * Extract News (asynchronously)
+     * Extract News Links (asynchronously)
      * Extract a news links from a news website. 
      * @param url The url from which links should be extracted. (required)
      * @param apiKey Your API key. (required)
@@ -397,12 +398,12 @@ public class NewsApi {
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
      </table>
      * Read entire docs
-     * @see <a href="https://worldnewsapi.com/docs#Extract-News">Extract News Documentation</a>
+     * @see <a href="https://worldnewsapi.com/docs#Extract-News-Links">Extract News Links Documentation</a>
      */
-    public okhttp3.Call extractNews_0Async(String url, String apiKey, String prefix, Boolean subDomain, final ApiCallback<Object> _callback) throws ApiException {
+    public okhttp3.Call extractNewsLinksAsync(String url, String apiKey, String prefix, Boolean subDomain, final ApiCallback<InlineResponse2002> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = extractNews_0ValidateBeforeCall(url, apiKey, prefix, subDomain, _callback);
-        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        okhttp3.Call localVarCall = extractNewsLinksValidateBeforeCall(url, apiKey, prefix, subDomain, _callback);
+        Type localVarReturnType = new TypeToken<InlineResponse2002>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -487,7 +488,7 @@ public class NewsApi {
      * Get Geo Coordinates
      * Get the geo coordinates for a location. The location can be an exact address but also just the name of a city or country.
      * @param location The address or name of the location, e.g. Tokyo, Japan. (required)
-     * @return InlineResponse2002
+     * @return InlineResponse2003
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -496,8 +497,8 @@ public class NewsApi {
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
      </table>
      */
-    public InlineResponse2002 geoCoordinates(String location) throws ApiException {
-        ApiResponse<InlineResponse2002> localVarResp = geoCoordinatesWithHttpInfo(location);
+    public InlineResponse2003 geoCoordinates(String location) throws ApiException {
+        ApiResponse<InlineResponse2003> localVarResp = geoCoordinatesWithHttpInfo(location);
         return localVarResp.getData();
     }
 
@@ -505,7 +506,7 @@ public class NewsApi {
      * Get Geo Coordinates
      * Get the geo coordinates for a location. The location can be an exact address but also just the name of a city or country.
      * @param location The address or name of the location, e.g. Tokyo, Japan. (required)
-     * @return ApiResponse&lt;InlineResponse2002&gt;
+     * @return ApiResponse&lt;InlineResponse2003&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -514,9 +515,9 @@ public class NewsApi {
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<InlineResponse2002> geoCoordinatesWithHttpInfo(String location) throws ApiException {
+    public ApiResponse<InlineResponse2003> geoCoordinatesWithHttpInfo(String location) throws ApiException {
         okhttp3.Call localVarCall = geoCoordinatesValidateBeforeCall(location, null);
-        Type localVarReturnType = new TypeToken<InlineResponse2002>(){}.getType();
+        Type localVarReturnType = new TypeToken<InlineResponse2003>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
@@ -534,10 +535,10 @@ public class NewsApi {
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call geoCoordinatesAsync(String location, final ApiCallback<InlineResponse2002> _callback) throws ApiException {
+    public okhttp3.Call geoCoordinatesAsync(String location, final ApiCallback<InlineResponse2003> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = geoCoordinatesValidateBeforeCall(location, _callback);
-        Type localVarReturnType = new TypeToken<InlineResponse2002>(){}.getType();
+        Type localVarReturnType = new TypeToken<InlineResponse2003>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -601,7 +602,7 @@ public class NewsApi {
         }
 
         final String[] localVarAccepts = {
-            "", "application/json", "application/xml"
+            "application/xml"
         };
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {

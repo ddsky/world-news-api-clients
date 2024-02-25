@@ -5,7 +5,7 @@ All URIs are relative to *https://api.worldnewsapi.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**extractNews**](NewsApi.md#extractNews) | **GET** /extract-news | Extract News
-[**extractNews_0**](NewsApi.md#extractNews_0) | **GET** /extract-news-links | Extract News
+[**extractNewsLinks**](NewsApi.md#extractNewsLinks) | **GET** /extract-news-links | Extract News Links
 [**geoCoordinates**](NewsApi.md#geoCoordinates) | **GET** /geo-coordinates | Get Geo Coordinates
 [**newsWebsiteToRSSFeed**](NewsApi.md#newsWebsiteToRSSFeed) | **GET** /feed.rss | News Website to RSS Feed
 [**searchNews**](NewsApi.md#searchNews) | **GET** /search-news | Search News
@@ -70,11 +70,11 @@ Name | Type | Description  | Notes
 - **Accept**: application/json
 
 
-## extractNews_0
+## extractNewsLinks
 
-> Object extractNews_0(url, apiKey, opts)
+> InlineResponse2002 extractNewsLinks(url, apiKey, opts)
 
-Extract News
+Extract News Links
 
 Extract a news links from a news website. 
 
@@ -101,7 +101,7 @@ let opts = {
   'prefix': , // String | The prefix the news links must start with.
   'subDomain': true // Boolean | Whether to include links to news on sub-domains.
 };
-apiInstance.extractNews_0(url, apiKey, opts, (error, data, response) => {
+apiInstance.extractNewsLinks(url, apiKey, opts, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -122,7 +122,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**Object**
+[**InlineResponse2002**](InlineResponse2002.md)
 
 ### Authorization
 
@@ -131,12 +131,12 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: , application/json
+- **Accept**: application/json
 
 
 ## geoCoordinates
 
-> InlineResponse2002 geoCoordinates(location)
+> InlineResponse2003 geoCoordinates(location)
 
 Get Geo Coordinates
 
@@ -178,7 +178,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2002**](InlineResponse2002.md)
+[**InlineResponse2003**](InlineResponse2003.md)
 
 ### Authorization
 
@@ -249,7 +249,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: , application/json, application/xml
+- **Accept**: application/xml
 
 
 ## searchNews

@@ -7,6 +7,7 @@ lib/com/worldnewsapi/client/deserializer.ex
 lib/com/worldnewsapi/client/model/inline_response_200.ex
 lib/com/worldnewsapi/client/model/inline_response_200_1.ex
 lib/com/worldnewsapi/client/model/inline_response_200_2.ex
+lib/com/worldnewsapi/client/model/inline_response_200_3.ex
 lib/com/worldnewsapi/client/model/inline_response_200_news.ex
 lib/com/worldnewsapi/client/model/news.ex
 lib/com/worldnewsapi/client/request_builder.ex

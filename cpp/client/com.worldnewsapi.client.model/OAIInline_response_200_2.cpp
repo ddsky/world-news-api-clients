@@ -34,14 +34,8 @@ OAIInline_response_200_2::~OAIInline_response_200_2() {}
 
 void OAIInline_response_200_2::initializeModel() {
 
-    m_latitude_isSet = false;
-    m_latitude_isValid = false;
-
-    m_longitude_isSet = false;
-    m_longitude_isValid = false;
-
-    m_city_isSet = false;
-    m_city_isValid = false;
+    m_news_links_isSet = false;
+    m_news_links_isValid = false;
 }
 
 void OAIInline_response_200_2::fromJson(QString jsonString) {
@@ -53,14 +47,8 @@ void OAIInline_response_200_2::fromJson(QString jsonString) {
 
 void OAIInline_response_200_2::fromJsonObject(QJsonObject json) {
 
-    m_latitude_isValid = ::OpenAPI::fromJsonValue(latitude, json[QString("latitude")]);
-    m_latitude_isSet = !json[QString("latitude")].isNull() && m_latitude_isValid;
-
-    m_longitude_isValid = ::OpenAPI::fromJsonValue(longitude, json[QString("longitude")]);
-    m_longitude_isSet = !json[QString("longitude")].isNull() && m_longitude_isValid;
-
-    m_city_isValid = ::OpenAPI::fromJsonValue(city, json[QString("city")]);
-    m_city_isSet = !json[QString("city")].isNull() && m_city_isValid;
+    m_news_links_isValid = ::OpenAPI::fromJsonValue(news_links, json[QString("news_links")]);
+    m_news_links_isSet = !json[QString("news_links")].isNull() && m_news_links_isValid;
 }
 
 QString OAIInline_response_200_2::asJson() const {
@@ -72,80 +60,32 @@ QString OAIInline_response_200_2::asJson() const {
 
 QJsonObject OAIInline_response_200_2::asJsonObject() const {
     QJsonObject obj;
-    if (m_latitude_isSet) {
-        obj.insert(QString("latitude"), ::OpenAPI::toJsonValue(latitude));
-    }
-    if (m_longitude_isSet) {
-        obj.insert(QString("longitude"), ::OpenAPI::toJsonValue(longitude));
-    }
-    if (m_city_isSet) {
-        obj.insert(QString("city"), ::OpenAPI::toJsonValue(city));
+    if (news_links.size() > 0) {
+        obj.insert(QString("news_links"), ::OpenAPI::toJsonValue(news_links));
     }
     return obj;
 }
 
-double OAIInline_response_200_2::getLatitude() const {
-    return latitude;
+QList<QString> OAIInline_response_200_2::getNewsLinks() const {
+    return news_links;
 }
-void OAIInline_response_200_2::setLatitude(const double &latitude) {
-    this->latitude = latitude;
-    this->m_latitude_isSet = true;
-}
-
-bool OAIInline_response_200_2::is_latitude_Set() const{
-    return m_latitude_isSet;
+void OAIInline_response_200_2::setNewsLinks(const QList<QString> &news_links) {
+    this->news_links = news_links;
+    this->m_news_links_isSet = true;
 }
 
-bool OAIInline_response_200_2::is_latitude_Valid() const{
-    return m_latitude_isValid;
+bool OAIInline_response_200_2::is_news_links_Set() const{
+    return m_news_links_isSet;
 }
 
-double OAIInline_response_200_2::getLongitude() const {
-    return longitude;
-}
-void OAIInline_response_200_2::setLongitude(const double &longitude) {
-    this->longitude = longitude;
-    this->m_longitude_isSet = true;
-}
-
-bool OAIInline_response_200_2::is_longitude_Set() const{
-    return m_longitude_isSet;
-}
-
-bool OAIInline_response_200_2::is_longitude_Valid() const{
-    return m_longitude_isValid;
-}
-
-QString OAIInline_response_200_2::getCity() const {
-    return city;
-}
-void OAIInline_response_200_2::setCity(const QString &city) {
-    this->city = city;
-    this->m_city_isSet = true;
-}
-
-bool OAIInline_response_200_2::is_city_Set() const{
-    return m_city_isSet;
-}
-
-bool OAIInline_response_200_2::is_city_Valid() const{
-    return m_city_isValid;
+bool OAIInline_response_200_2::is_news_links_Valid() const{
+    return m_news_links_isValid;
 }
 
 bool OAIInline_response_200_2::isSet() const {
     bool isObjectUpdated = false;
     do {
-        if (m_latitude_isSet) {
-            isObjectUpdated = true;
-            break;
-        }
-
-        if (m_longitude_isSet) {
-            isObjectUpdated = true;
-            break;
-        }
-
-        if (m_city_isSet) {
+        if (news_links.size() > 0) {
             isObjectUpdated = true;
             break;
         }
@@ -155,7 +95,7 @@ bool OAIInline_response_200_2::isSet() const {
 
 bool OAIInline_response_200_2::isValid() const {
     // only required properties are required for the object to be considered valid
-    return m_latitude_isValid && m_longitude_isValid && true;
+    return true;
 }
 
 } // namespace OpenAPI

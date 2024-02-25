@@ -133,7 +133,7 @@ All URIs are relative to *https://api.worldnewsapi.com*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *WorldNewsApi.NewsApi* | [**extractNews**](docs/NewsApi.md#extractNews) | **GET** /extract-news | Extract News
-*WorldNewsApi.NewsApi* | [**extractNews_0**](docs/NewsApi.md#extractNews_0) | **GET** /extract-news-links | Extract News
+*WorldNewsApi.NewsApi* | [**extractNewsLinks**](docs/NewsApi.md#extractNewsLinks) | **GET** /extract-news-links | Extract News Links
 *WorldNewsApi.NewsApi* | [**geoCoordinates**](docs/NewsApi.md#geoCoordinates) | **GET** /geo-coordinates | Get Geo Coordinates
 *WorldNewsApi.NewsApi* | [**newsWebsiteToRSSFeed**](docs/NewsApi.md#newsWebsiteToRSSFeed) | **GET** /feed.rss | News Website to RSS Feed
 *WorldNewsApi.NewsApi* | [**searchNews**](docs/NewsApi.md#searchNews) | **GET** /search-news | Search News
@@ -144,6 +144,7 @@ Class | Method | HTTP request | Description
  - [WorldNewsApi.InlineResponse200](docs/InlineResponse200.md)
  - [WorldNewsApi.InlineResponse2001](docs/InlineResponse2001.md)
  - [WorldNewsApi.InlineResponse2002](docs/InlineResponse2002.md)
+ - [WorldNewsApi.InlineResponse2003](docs/InlineResponse2003.md)
  - [WorldNewsApi.InlineResponse200News](docs/InlineResponse200News.md)
  - [WorldNewsApi.News](docs/News.md)
 

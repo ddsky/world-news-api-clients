@@ -5,7 +5,7 @@ All URIs are relative to *https://api.worldnewsapi.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**extract_news**](NewsApi.md#extract_news) | **GET** /extract-news | Extract News
-[**extract_news_0**](NewsApi.md#extract_news_0) | **GET** /extract-news-links | Extract News
+[**extract_news_links**](NewsApi.md#extract_news_links) | **GET** /extract-news-links | Extract News Links
 [**geo_coordinates**](NewsApi.md#geo_coordinates) | **GET** /geo-coordinates | Get Geo Coordinates
 [**news_website_to_rss_feed**](NewsApi.md#news_website_to_rss_feed) | **GET** /feed.rss | News Website to RSS Feed
 [**search_news**](NewsApi.md#search_news) | **GET** /search-news | Search News
@@ -97,10 +97,10 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **extract_news_0**
-> {str: (bool, date, datetime, dict, float, int, list, str, none_type)} extract_news_0(url, api_key)
+# **extract_news_links**
+> InlineResponse2002 extract_news_links(url, api_key)
 
-Extract News
+Extract News Links
 
 Extract a news links from a news website. 
 
@@ -113,6 +113,7 @@ Extract a news links from a news website.
 import time
 import openapi_client
 from com.worldnewsapi import news_api
+from openapi_client.model.inline_response2002 import InlineResponse2002
 from pprint import pprint
 # Defining the host is optional and defaults to https://api.worldnewsapi.com
 # See configuration.py for a list of all supported configuration parameters.
@@ -148,20 +149,20 @@ with openapi_client.ApiClient(configuration) as api_client:
 
     # example passing only required values which don't have defaults set
     try:
-        # Extract News
-        api_response = api_instance.extract_news_0(url, api_key)
+        # Extract News Links
+        api_response = api_instance.extract_news_links(url, api_key)
         pprint(api_response)
     except openapi_client.ApiException as e:
-        print("Exception when calling NewsApi->extract_news_0: %s\n" % e)
+        print("Exception when calling NewsApi->extract_news_links: %s\n" % e)
 
     # example passing only required values which don't have defaults set
     # and optional values
     try:
-        # Extract News
-        api_response = api_instance.extract_news_0(url, api_key, prefix=prefix, sub_domain=sub_domain)
+        # Extract News Links
+        api_response = api_instance.extract_news_links(url, api_key, prefix=prefix, sub_domain=sub_domain)
         pprint(api_response)
     except openapi_client.ApiException as e:
-        print("Exception when calling NewsApi->extract_news_0: %s\n" % e)
+        print("Exception when calling NewsApi->extract_news_links: %s\n" % e)
 ```
 
 
@@ -176,7 +177,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**{str: (bool, date, datetime, dict, float, int, list, str, none_type)}**
+[**InlineResponse2002**](InlineResponse2002.md)
 
 ### Authorization
 
@@ -185,7 +186,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: , application/json
+ - **Accept**: application/json
 
 
 ### HTTP response details
@@ -202,7 +203,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **geo_coordinates**
-> InlineResponse2002 geo_coordinates(location)
+> InlineResponse2003 geo_coordinates(location)
 
 Get Geo Coordinates
 
@@ -217,7 +218,7 @@ Get the geo coordinates for a location. The location can be an exact address but
 import time
 import openapi_client
 from com.worldnewsapi import news_api
-from openapi_client.model.inline_response2002 import InlineResponse2002
+from openapi_client.model.inline_response2003 import InlineResponse2003
 from pprint import pprint
 # Defining the host is optional and defaults to https://api.worldnewsapi.com
 # See configuration.py for a list of all supported configuration parameters.
@@ -266,7 +267,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2002**](InlineResponse2002.md)
+[**InlineResponse2003**](InlineResponse2003.md)
 
 ### Authorization
 
@@ -373,7 +374,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: , application/json, application/xml
+ - **Accept**: application/xml
 
 
 ### HTTP response details

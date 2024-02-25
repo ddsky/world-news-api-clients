@@ -25,6 +25,7 @@ from openapi_client.model_utils import (  # noqa: F401
 from openapi_client.model.inline_response200 import InlineResponse200
 from openapi_client.model.inline_response2001 import InlineResponse2001
 from openapi_client.model.inline_response2002 import InlineResponse2002
+from openapi_client.model.inline_response2003 import InlineResponse2003
 
 
 class NewsApi(object):
@@ -96,15 +97,15 @@ class NewsApi(object):
             },
             api_client=api_client
         )
-        self.extract_news_0_endpoint = _Endpoint(
+        self.extract_news_links_endpoint = _Endpoint(
             settings={
-                'response_type': ({str: (bool, date, datetime, dict, float, int, list, str, none_type)},),
+                'response_type': (InlineResponse2002,),
                 'auth': [
                     'apiKey',
                     'headerApiKey'
                 ],
                 'endpoint_path': '/extract-news-links',
-                'operation_id': 'extract_news_0',
+                'operation_id': 'extract_news_links',
                 'http_method': 'GET',
                 'servers': None,
             },
@@ -158,7 +159,6 @@ class NewsApi(object):
             },
             headers_map={
                 'accept': [
-                    '',
                     'application/json'
                 ],
                 'content_type': [],
@@ -167,7 +167,7 @@ class NewsApi(object):
         )
         self.geo_coordinates_endpoint = _Endpoint(
             settings={
-                'response_type': (InlineResponse2002,),
+                'response_type': (InlineResponse2003,),
                 'auth': [
                     'apiKey',
                     'headerApiKey'
@@ -274,8 +274,6 @@ class NewsApi(object):
             },
             headers_map={
                 'accept': [
-                    '',
-                    'application/json',
                     'application/xml'
                 ],
                 'content_type': [],
@@ -522,19 +520,19 @@ class NewsApi(object):
             analyze
         return self.extract_news_endpoint.call_with_http_info(**kwargs)
 
-    def extract_news_0(
+    def extract_news_links(
         self,
         url,
         api_key,
         **kwargs
     ):
-        """Extract News  # noqa: E501
+        """Extract News Links  # noqa: E501
 
         Extract a news links from a news website.   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.extract_news_0(url, api_key, async_req=True)
+        >>> thread = api.extract_news_links(url, api_key, async_req=True)
         >>> result = thread.get()
 
         Args:
@@ -572,7 +570,7 @@ class NewsApi(object):
             async_req (bool): execute request asynchronously
 
         Returns:
-            {str: (bool, date, datetime, dict, float, int, list, str, none_type)}
+            InlineResponse2002
                 If the method is called asynchronously, returns the request
                 thread.
         """
@@ -604,7 +602,7 @@ class NewsApi(object):
             url
         kwargs['api_key'] = \
             api_key
-        return self.extract_news_0_endpoint.call_with_http_info(**kwargs)
+        return self.extract_news_links_endpoint.call_with_http_info(**kwargs)
 
     def geo_coordinates(
         self,
@@ -652,7 +650,7 @@ class NewsApi(object):
             async_req (bool): execute request asynchronously
 
         Returns:
-            InlineResponse2002
+            InlineResponse2003
                 If the method is called asynchronously, returns the request
                 thread.
         """

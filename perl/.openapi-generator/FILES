@@ -5,6 +5,7 @@ bin/autodoc
 docs/InlineResponse200.md
 docs/InlineResponse2001.md
 docs/InlineResponse2002.md
+docs/InlineResponse2003.md
 docs/InlineResponse200News.md
 docs/News.md
 docs/NewsApi.md
@@ -17,6 +18,7 @@ lib/WWW/OpenAPIClient/Role/AutoDoc.pm
 lib/WWW/OpenAPIClientcom.worldnewsapi.client.model/InlineResponse200.pm
 lib/WWW/OpenAPIClientcom.worldnewsapi.client.model/InlineResponse2001.pm
 lib/WWW/OpenAPIClientcom.worldnewsapi.client.model/InlineResponse2002.pm
+lib/WWW/OpenAPIClientcom.worldnewsapi.client.model/InlineResponse2003.pm
 lib/WWW/OpenAPIClientcom.worldnewsapi.client.model/InlineResponse200News.pm
 lib/WWW/OpenAPIClientcom.worldnewsapi.client.model/News.pm
 lib/WWW/OpenAPIClientcom.worldnewsapi/NewsApi.pm

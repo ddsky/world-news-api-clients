@@ -90,38 +90,38 @@ module OpenapiClient
       return data, status_code, headers
     end
 
-    # Extract News
+    # Extract News Links
     # Extract a news links from a news website. 
     # @param url [String] The url from which links should be extracted.
     # @param api_key [String] Your API key.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :prefix The prefix the news links must start with.
     # @option opts [Boolean] :sub_domain Whether to include links to news on sub-domains.
-    # @return [Object]
-    def extract_news_0(url, api_key, opts = {})
-      data, _status_code, _headers = extract_news_0_with_http_info(url, api_key, opts)
+    # @return [InlineResponse2002]
+    def extract_news_links(url, api_key, opts = {})
+      data, _status_code, _headers = extract_news_links_with_http_info(url, api_key, opts)
       data
     end
 
-    # Extract News
+    # Extract News Links
     # Extract a news links from a news website. 
     # @param url [String] The url from which links should be extracted.
     # @param api_key [String] Your API key.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :prefix The prefix the news links must start with.
     # @option opts [Boolean] :sub_domain Whether to include links to news on sub-domains.
-    # @return [Array<(Object, Integer, Hash)>] Object data, response status code and response headers
-    def extract_news_0_with_http_info(url, api_key, opts = {})
+    # @return [Array<(InlineResponse2002, Integer, Hash)>] InlineResponse2002 data, response status code and response headers
+    def extract_news_links_with_http_info(url, api_key, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: NewsApi.extract_news_0 ...'
+        @api_client.config.logger.debug 'Calling API: NewsApi.extract_news_links ...'
       end
       # verify the required parameter 'url' is set
       if @api_client.config.client_side_validation && url.nil?
-        fail ArgumentError, "Missing the required parameter 'url' when calling NewsApi.extract_news_0"
+        fail ArgumentError, "Missing the required parameter 'url' when calling NewsApi.extract_news_links"
       end
       # verify the required parameter 'api_key' is set
       if @api_client.config.client_side_validation && api_key.nil?
-        fail ArgumentError, "Missing the required parameter 'api_key' when calling NewsApi.extract_news_0"
+        fail ArgumentError, "Missing the required parameter 'api_key' when calling NewsApi.extract_news_links"
       end
       # resource path
       local_var_path = '/extract-news-links'
@@ -136,7 +136,7 @@ module OpenapiClient
       # header parameters
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['', 'application/json'])
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -145,13 +145,13 @@ module OpenapiClient
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'Object'
+      return_type = opts[:debug_return_type] || 'InlineResponse2002'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['apiKey', 'headerApiKey']
 
       new_options = opts.merge(
-        :operation => :"NewsApi.extract_news_0",
+        :operation => :"NewsApi.extract_news_links",
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
@@ -162,7 +162,7 @@ module OpenapiClient
 
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: NewsApi#extract_news_0\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: NewsApi#extract_news_links\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -171,7 +171,7 @@ module OpenapiClient
     # Get the geo coordinates for a location. The location can be an exact address but also just the name of a city or country.
     # @param location [String] The address or name of the location, e.g. Tokyo, Japan.
     # @param [Hash] opts the optional parameters
-    # @return [InlineResponse2002]
+    # @return [InlineResponse2003]
     def geo_coordinates(location, opts = {})
       data, _status_code, _headers = geo_coordinates_with_http_info(location, opts)
       data
@@ -181,7 +181,7 @@ module OpenapiClient
     # Get the geo coordinates for a location. The location can be an exact address but also just the name of a city or country.
     # @param location [String] The address or name of the location, e.g. Tokyo, Japan.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(InlineResponse2002, Integer, Hash)>] InlineResponse2002 data, response status code and response headers
+    # @return [Array<(InlineResponse2003, Integer, Hash)>] InlineResponse2003 data, response status code and response headers
     def geo_coordinates_with_http_info(location, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: NewsApi.geo_coordinates ...'
@@ -209,7 +209,7 @@ module OpenapiClient
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'InlineResponse2002'
+      return_type = opts[:debug_return_type] || 'InlineResponse2003'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['apiKey', 'headerApiKey']
@@ -274,7 +274,7 @@ module OpenapiClient
       # header parameters
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['', 'application/json', 'application/xml'])
+      header_params['Accept'] = @api_client.select_header_accept(['application/xml'])
 
       # form parameters
       form_params = opts[:form_params] || {}

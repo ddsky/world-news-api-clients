@@ -136,9 +136,17 @@ instance Arbitrary InlineResponse2002 where
 genInlineResponse2002 :: Int -> Gen InlineResponse2002
 genInlineResponse2002 n =
   InlineResponse2002
-    <$> arbitrary -- inlineResponse2002Latitude :: Double
-    <*> arbitrary -- inlineResponse2002Longitude :: Double
-    <*> arbitraryReducedMaybe n -- inlineResponse2002City :: Maybe Text
+    <$> arbitraryReducedMaybe n -- inlineResponse2002NewsLinks :: Maybe [Text]
+  
+instance Arbitrary InlineResponse2003 where
+  arbitrary = sized genInlineResponse2003
+
+genInlineResponse2003 :: Int -> Gen InlineResponse2003
+genInlineResponse2003 n =
+  InlineResponse2003
+    <$> arbitrary -- inlineResponse2003Latitude :: Double
+    <*> arbitrary -- inlineResponse2003Longitude :: Double
+    <*> arbitraryReducedMaybe n -- inlineResponse2003City :: Maybe Text
   
 instance Arbitrary InlineResponse200News where
   arbitrary = sized genInlineResponse200News

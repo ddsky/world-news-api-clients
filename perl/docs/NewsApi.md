@@ -10,7 +10,7 @@ All URIs are relative to *https://api.worldnewsapi.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**extract_news**](NewsApi.md#extract_news) | **GET** /extract-news | Extract News
-[**extract_news_0**](NewsApi.md#extract_news_0) | **GET** /extract-news-links | Extract News
+[**extract_news_links**](NewsApi.md#extract_news_links) | **GET** /extract-news-links | Extract News Links
 [**geo_coordinates**](NewsApi.md#geo_coordinates) | **GET** /geo-coordinates | Get Geo Coordinates
 [**news_website_to_rss_feed**](NewsApi.md#news_website_to_rss_feed) | **GET** /feed.rss | News Website to RSS Feed
 [**search_news**](NewsApi.md#search_news) | **GET** /search-news | Search News
@@ -73,10 +73,10 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **extract_news_0**
-> object extract_news_0(url => $url, api_key => $api_key, prefix => $prefix, sub_domain => $sub_domain)
+# **extract_news_links**
+> InlineResponse2002 extract_news_links(url => $url, api_key => $api_key, prefix => $prefix, sub_domain => $sub_domain)
 
-Extract News
+Extract News Links
 
 Extract a news links from a news website. 
 
@@ -102,11 +102,11 @@ my $prefix = ; # string | The prefix the news links must start with.
 my $sub_domain = true; # boolean | Whether to include links to news on sub-domains.
 
 eval {
-    my $result = $api_instance->extract_news_0(url => $url, api_key => $api_key, prefix => $prefix, sub_domain => $sub_domain);
+    my $result = $api_instance->extract_news_links(url => $url, api_key => $api_key, prefix => $prefix, sub_domain => $sub_domain);
     print Dumper($result);
 };
 if ($@) {
-    warn "Exception when calling NewsApi->extract_news_0: $@\n";
+    warn "Exception when calling NewsApi->extract_news_links: $@\n";
 }
 ```
 
@@ -121,7 +121,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**InlineResponse2002**](InlineResponse2002.md)
 
 ### Authorization
 
@@ -130,12 +130,12 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: , application/json
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **geo_coordinates**
-> InlineResponse2002 geo_coordinates(location => $location)
+> InlineResponse2003 geo_coordinates(location => $location)
 
 Get Geo Coordinates
 
@@ -176,7 +176,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2002**](InlineResponse2002.md)
+[**InlineResponse2003**](InlineResponse2003.md)
 
 ### Authorization
 
@@ -244,7 +244,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: , application/json, application/xml
+ - **Accept**: application/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

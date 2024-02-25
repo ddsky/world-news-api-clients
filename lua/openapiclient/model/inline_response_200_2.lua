@@ -19,11 +19,9 @@ local function cast_inline_response_200_2(t)
 	return setmetatable(t, inline_response_200_2_mt)
 end
 
-local function new_inline_response_200_2(latitude, longitude, city)
+local function new_inline_response_200_2(news_links)
 	return cast_inline_response_200_2({
-		["latitude"] = latitude;
-		["longitude"] = longitude;
-		["city"] = city;
+		["news_links"] = news_links;
 	})
 end
 

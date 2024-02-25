@@ -22,10 +22,10 @@ pub enum ExtractNewsError {
     UnknownValue(serde_json::Value),
 }
 
-/// struct for typed errors of method [`extract_news_0`]
+/// struct for typed errors of method [`extract_news_links`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
-pub enum ExtractNews0Error {
+pub enum ExtractNewsLinksError {
     Status401(),
     Status402(),
     Status403(),
@@ -109,7 +109,7 @@ pub async fn extract_news(configuration: &configuration::Configuration, url: &st
 }
 
 /// Extract a news links from a news website. 
-pub async fn extract_news_0(configuration: &configuration::Configuration, url: &str, api_key: &str, prefix: Option<&str>, sub_domain: Option<bool>) -> Result<serde_json::Value, Error<ExtractNews0Error>> {
+pub async fn extract_news_links(configuration: &configuration::Configuration, url: &str, api_key: &str, prefix: Option<&str>, sub_domain: Option<bool>) -> Result<crate::models::InlineResponse2002, Error<ExtractNewsLinksError>> {
     let local_var_configuration = configuration;
 
     let local_var_client = &local_var_configuration.client;
@@ -154,14 +154,14 @@ pub async fn extract_news_0(configuration: &configuration::Configuration, url: &
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
         serde_json::from_str(&local_var_content).map_err(Error::from)
     } else {
-        let local_var_entity: Option<ExtractNews0Error> = serde_json::from_str(&local_var_content).ok();
+        let local_var_entity: Option<ExtractNewsLinksError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
         Err(Error::ResponseError(local_var_error))
     }
 }
 
 /// Get the geo coordinates for a location. The location can be an exact address but also just the name of a city or country.
-pub async fn geo_coordinates(configuration: &configuration::Configuration, location: &str) -> Result<crate::models::InlineResponse2002, Error<GeoCoordinatesError>> {
+pub async fn geo_coordinates(configuration: &configuration::Configuration, location: &str) -> Result<crate::models::InlineResponse2003, Error<GeoCoordinatesError>> {
     let local_var_configuration = configuration;
 
     let local_var_client = &local_var_configuration.client;

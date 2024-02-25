@@ -27,6 +27,7 @@ build = {
 		["openapiclient.model.inline_response_200"] = "openapiclient/model/inline_response_200.lua";
 		["openapiclient.model.inline_response_200_1"] = "openapiclient/model/inline_response_200_1.lua";
 		["openapiclient.model.inline_response_200_2"] = "openapiclient/model/inline_response_200_2.lua";
+		["openapiclient.model.inline_response_200_3"] = "openapiclient/model/inline_response_200_3.lua";
 		["openapiclient.model.inline_response_200_news"] = "openapiclient/model/inline_response_200_news.lua";
 		["openapiclient.model.news"] = "openapiclient/model/news.lua";
 	}

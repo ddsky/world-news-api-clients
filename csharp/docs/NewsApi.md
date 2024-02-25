@@ -5,7 +5,7 @@ All URIs are relative to *https://api.worldnewsapi.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**ExtractNews**](NewsApi.md#extractnews) | **GET** /extract-news | Extract News
-[**ExtractNews_0**](NewsApi.md#extractnews_0) | **GET** /extract-news-links | Extract News
+[**ExtractNewsLinks**](NewsApi.md#extractnewslinks) | **GET** /extract-news-links | Extract News Links
 [**GeoCoordinates**](NewsApi.md#geocoordinates) | **GET** /geo-coordinates | Get Geo Coordinates
 [**NewsWebsiteToRSSFeed**](NewsApi.md#newswebsitetorssfeed) | **GET** /feed.rss | News Website to RSS Feed
 [**SearchNews**](NewsApi.md#searchnews) | **GET** /search-news | Search News
@@ -83,11 +83,11 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="extractnews_0"></a>
-# **ExtractNews_0**
-> Object ExtractNews_0 (string url, string apiKey, string prefix, bool? subDomain)
+<a name="extractnewslinks"></a>
+# **ExtractNewsLinks**
+> InlineResponse2002 ExtractNewsLinks (string url, string apiKey, string prefix, bool? subDomain)
 
-Extract News
+Extract News Links
 
 Extract a news links from a news website. 
 
@@ -101,7 +101,7 @@ using com.worldnewsapi.client.model;
 
 namespace Example
 {
-    public class ExtractNews_0Example
+    public class ExtractNewsLinksExample
     {
         public void main()
         {
@@ -122,13 +122,13 @@ namespace Example
 
             try
             {
-                // Extract News
-                Object result = apiInstance.ExtractNews_0(url, apiKey, prefix, subDomain);
+                // Extract News Links
+                InlineResponse2002 result = apiInstance.ExtractNewsLinks(url, apiKey, prefix, subDomain);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
             {
-                Debug.Print("Exception when calling NewsApi.ExtractNews_0: " + e.Message );
+                Debug.Print("Exception when calling NewsApi.ExtractNewsLinks: " + e.Message );
             }
         }
     }
@@ -146,7 +146,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**Object**
+[**InlineResponse2002**](InlineResponse2002.md)
 
 ### Authorization
 
@@ -155,13 +155,13 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: , application/json
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 <a name="geocoordinates"></a>
 # **GeoCoordinates**
-> InlineResponse2002 GeoCoordinates (string location)
+> InlineResponse2003 GeoCoordinates (string location)
 
 Get Geo Coordinates
 
@@ -196,7 +196,7 @@ namespace Example
             try
             {
                 // Get Geo Coordinates
-                InlineResponse2002 result = apiInstance.GeoCoordinates(location);
+                InlineResponse2003 result = apiInstance.GeoCoordinates(location);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -216,7 +216,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2002**](InlineResponse2002.md)
+[**InlineResponse2003**](InlineResponse2003.md)
 
 ### Authorization
 
@@ -299,7 +299,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: , application/json, application/xml
+ - **Accept**: application/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

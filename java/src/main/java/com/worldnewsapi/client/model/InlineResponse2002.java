@@ -23,94 +23,49 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * InlineResponse2002
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-10-09T02:36:49.995+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-02-25T21:58:15.961+01:00[Europe/Berlin]")
 public class InlineResponse2002 {
-  public static final String SERIALIZED_NAME_LATITUDE = "latitude";
-  @SerializedName(SERIALIZED_NAME_LATITUDE)
-  private BigDecimal latitude;
-
-  public static final String SERIALIZED_NAME_LONGITUDE = "longitude";
-  @SerializedName(SERIALIZED_NAME_LONGITUDE)
-  private BigDecimal longitude;
-
-  public static final String SERIALIZED_NAME_CITY = "city";
-  @SerializedName(SERIALIZED_NAME_CITY)
-  private String city;
+  public static final String SERIALIZED_NAME_NEWS_LINKS = "news_links";
+  @SerializedName(SERIALIZED_NAME_NEWS_LINKS)
+  private List<String> newsLinks = null;
 
   public InlineResponse2002() { 
   }
 
-  public InlineResponse2002 latitude(BigDecimal latitude) {
+  public InlineResponse2002 newsLinks(List<String> newsLinks) {
     
-    this.latitude = latitude;
+    this.newsLinks = newsLinks;
+    return this;
+  }
+
+  public InlineResponse2002 addNewsLinksItem(String newsLinksItem) {
+    if (this.newsLinks == null) {
+      this.newsLinks = new ArrayList<>();
+    }
+    this.newsLinks.add(newsLinksItem);
     return this;
   }
 
    /**
-   * Get latitude
-   * @return latitude
-  **/
-  @javax.annotation.Nonnull
-  @ApiModelProperty(required = true, value = "")
-
-  public BigDecimal getLatitude() {
-    return latitude;
-  }
-
-
-  public void setLatitude(BigDecimal latitude) {
-    this.latitude = latitude;
-  }
-
-
-  public InlineResponse2002 longitude(BigDecimal longitude) {
-    
-    this.longitude = longitude;
-    return this;
-  }
-
-   /**
-   * Get longitude
-   * @return longitude
-  **/
-  @javax.annotation.Nonnull
-  @ApiModelProperty(required = true, value = "")
-
-  public BigDecimal getLongitude() {
-    return longitude;
-  }
-
-
-  public void setLongitude(BigDecimal longitude) {
-    this.longitude = longitude;
-  }
-
-
-  public InlineResponse2002 city(String city) {
-    
-    this.city = city;
-    return this;
-  }
-
-   /**
-   * Get city
-   * @return city
+   * Get newsLinks
+   * @return newsLinks
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public String getCity() {
-    return city;
+  public List<String> getNewsLinks() {
+    return newsLinks;
   }
 
 
-  public void setCity(String city) {
-    this.city = city;
+  public void setNewsLinks(List<String> newsLinks) {
+    this.newsLinks = newsLinks;
   }
 
 
@@ -123,23 +78,19 @@ public class InlineResponse2002 {
       return false;
     }
     InlineResponse2002 inlineResponse2002 = (InlineResponse2002) o;
-    return Objects.equals(this.latitude, inlineResponse2002.latitude) &&
-        Objects.equals(this.longitude, inlineResponse2002.longitude) &&
-        Objects.equals(this.city, inlineResponse2002.city);
+    return Objects.equals(this.newsLinks, inlineResponse2002.newsLinks);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(latitude, longitude, city);
+    return Objects.hash(newsLinks);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class InlineResponse2002 {\n");
-    sb.append("    latitude: ").append(toIndentedString(latitude)).append("\n");
-    sb.append("    longitude: ").append(toIndentedString(longitude)).append("\n");
-    sb.append("    city: ").append(toIndentedString(city)).append("\n");
+    sb.append("    newsLinks: ").append(toIndentedString(newsLinks)).append("\n");
     sb.append("}");
     return sb.toString();
   }

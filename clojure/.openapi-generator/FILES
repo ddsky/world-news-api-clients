@@ -6,5 +6,6 @@ src/world_news_api/core.clj
 src/world_news_api/specs/inline_response_200.clj
 src/world_news_api/specs/inline_response_200_1.clj
 src/world_news_api/specs/inline_response_200_2.clj
+src/world_news_api/specs/inline_response_200_3.clj
 src/world_news_api/specs/inline_response_200_news.clj
 src/world_news_api/specs/news.clj

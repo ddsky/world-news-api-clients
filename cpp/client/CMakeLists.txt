@@ -18,6 +18,7 @@ add_library(${PROJECT_NAME}
     OAIInline_response_200.cpp
     OAIInline_response_200_1.cpp
     OAIInline_response_200_2.cpp
+    OAIInline_response_200_3.cpp
     OAIInline_response_200_news.cpp
     OAINews.cpp
     OAINewsApi.cpp

@@ -6,6 +6,7 @@ import com.worldnewsapi.client.model._
 import com.worldnewsapi.client.model.InlineResponse200
 import com.worldnewsapi.client.model.InlineResponse2001
 import com.worldnewsapi.client.model.InlineResponse2002
+import com.worldnewsapi.client.model.InlineResponse2003
 import io.finch.circe._
 import io.circe.generic.semiauto._
 import com.twitter.concurrent.AsyncStream
@@ -27,7 +28,7 @@ object NewsApi {
     */
     def endpoints(da: DataAccessor) =
         extractNews(da) :+:
-        extractNews_0(da) :+:
+        extractNewsLinks(da) :+:
         geoCoordinates(da) :+:
         newsWebsiteToRSSFeed(da) :+:
         searchNews(da)
@@ -69,11 +70,11 @@ object NewsApi {
 
         /**
         * 
-        * @return An endpoint representing a Object
+        * @return An endpoint representing a InlineResponse2002
         */
-        private def extractNews_0(da: DataAccessor): Endpoint[Object] =
+        private def extractNewsLinks(da: DataAccessor): Endpoint[InlineResponse2002] =
         get("extract-news-links" :: param("url") :: param("api-key") :: paramOption("prefix") :: paramOption("sub-domain").map(_.map(_.toBoolean)) :: param("api-key") :: header("x-api-key")) { (url: String, apiKey: String, prefix: Option[String], subDomain: Option[Boolean], authParamapiKey: String, authParamheaderApiKey: String) =>
-          da.News_extractNews_0(url, apiKey, prefix, subDomain, authParamapiKey, authParamheaderApiKey) match {
+          da.News_extractNewsLinks(url, apiKey, prefix, subDomain, authParamapiKey, authParamheaderApiKey) match {
             case Left(error) => checkError(error)
             case Right(data) => Ok(data)
           }
@@ -83,9 +84,9 @@ object NewsApi {
 
         /**
         * 
-        * @return An endpoint representing a InlineResponse2002
+        * @return An endpoint representing a InlineResponse2003
         */
-        private def geoCoordinates(da: DataAccessor): Endpoint[InlineResponse2002] =
+        private def geoCoordinates(da: DataAccessor): Endpoint[InlineResponse2003] =
         get("geo-coordinates" :: param("location") :: param("api-key") :: header("x-api-key")) { (location: String, authParamapiKey: String, authParamheaderApiKey: String) =>
           da.News_geoCoordinates(location, authParamapiKey, authParamheaderApiKey) match {
             case Left(error) => checkError(error)

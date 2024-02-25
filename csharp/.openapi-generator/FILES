@@ -4,6 +4,7 @@ compile-mono.sh
 docs/InlineResponse200.md
 docs/InlineResponse2001.md
 docs/InlineResponse2002.md
+docs/InlineResponse2003.md
 docs/InlineResponse200News.md
 docs/News.md
 docs/NewsApi.md
@@ -14,6 +15,7 @@ src/main/CsharpDotNet2/Org/OpenAPITools/Client/Configuration.cs
 src/main/CsharpDotNet2/Org/OpenAPITools/Model/InlineResponse200.cs
 src/main/CsharpDotNet2/Org/OpenAPITools/Model/InlineResponse2001.cs
 src/main/CsharpDotNet2/Org/OpenAPITools/Model/InlineResponse2002.cs
+src/main/CsharpDotNet2/Org/OpenAPITools/Model/InlineResponse2003.cs
 src/main/CsharpDotNet2/Org/OpenAPITools/Model/InlineResponse200News.cs
 src/main/CsharpDotNet2/Org/OpenAPITools/Model/News.cs
 vendor/packages.config

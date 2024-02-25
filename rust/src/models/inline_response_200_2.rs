@@ -13,20 +13,14 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct InlineResponse2002 {
-    #[serde(rename = "latitude")]
-    pub latitude: f32,
-    #[serde(rename = "longitude")]
-    pub longitude: f32,
-    #[serde(rename = "city", skip_serializing_if = "Option::is_none")]
-    pub city: Option<String>,
+    #[serde(rename = "news_links", skip_serializing_if = "Option::is_none")]
+    pub news_links: Option<Vec<String>>,
 }
 
 impl InlineResponse2002 {
-    pub fn new(latitude: f32, longitude: f32) -> InlineResponse2002 {
+    pub fn new() -> InlineResponse2002 {
         InlineResponse2002 {
-            latitude,
-            longitude,
-            city: None,
+            news_links: None,
         }
     }
 }

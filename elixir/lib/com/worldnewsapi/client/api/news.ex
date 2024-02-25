@@ -41,7 +41,7 @@ defmodule com.worldnewsapi.client.Api.News do
   end
 
   @doc """
-  Extract News
+  Extract News Links
   Extract a news links from a news website. 
 
   ## Parameters
@@ -54,11 +54,11 @@ defmodule com.worldnewsapi.client.Api.News do
     - :sub_domain (boolean()): Whether to include links to news on sub-domains.
   ## Returns
 
-  {:ok, map()} on success
+  {:ok, com.worldnewsapi.client.Model.InlineResponse2002.t} on success
   {:error, Tesla.Env.t} on failure
   """
-  @spec extract_news_0(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, nil} | {:ok, Map.t} | {:error, Tesla.Env.t}
-  def extract_news_0(connection, url, api_key, opts \\ []) do
+  @spec extract_news_links(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, nil} | {:ok, com.worldnewsapi.client.Model.InlineResponse2002.t} | {:error, Tesla.Env.t}
+  def extract_news_links(connection, url, api_key, opts \\ []) do
     optional_params = %{
       :"prefix" => :query,
       :"sub-domain" => :query
@@ -72,7 +72,7 @@ defmodule com.worldnewsapi.client.Api.News do
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
     |> evaluate_response([
-      { 200, %{}},
+      { 200, %com.worldnewsapi.client.Model.InlineResponse2002{}},
       { 401, false},
       { 402, false},
       { 403, false},
@@ -92,10 +92,10 @@ defmodule com.worldnewsapi.client.Api.News do
   - opts (KeywordList): [optional] Optional parameters
   ## Returns
 
-  {:ok, com.worldnewsapi.client.Model.InlineResponse2002.t} on success
+  {:ok, com.worldnewsapi.client.Model.InlineResponse2003.t} on success
   {:error, Tesla.Env.t} on failure
   """
-  @spec geo_coordinates(Tesla.Env.client, String.t, keyword()) :: {:ok, nil} | {:ok, com.worldnewsapi.client.Model.InlineResponse2002.t} | {:error, Tesla.Env.t}
+  @spec geo_coordinates(Tesla.Env.client, String.t, keyword()) :: {:ok, nil} | {:ok, com.worldnewsapi.client.Model.InlineResponse2003.t} | {:error, Tesla.Env.t}
   def geo_coordinates(connection, location, _opts \\ []) do
     %{}
     |> method(:get)
@@ -104,7 +104,7 @@ defmodule com.worldnewsapi.client.Api.News do
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
     |> evaluate_response([
-      { 200, %com.worldnewsapi.client.Model.InlineResponse2002{}},
+      { 200, %com.worldnewsapi.client.Model.InlineResponse2003{}},
       { 404, false}
     ])
   end

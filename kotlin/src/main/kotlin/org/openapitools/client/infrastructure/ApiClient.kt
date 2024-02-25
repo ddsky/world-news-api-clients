@@ -153,6 +153,15 @@ open class ApiClient(val baseUrl: String) {
                 }
             }
         }
+        if (requestConfig.headers["x-api-key"].isNullOrEmpty()) {
+            if (apiKey["x-api-key"] != null) {
+                if (apiKeyPrefix["x-api-key"] != null) {
+                    requestConfig.headers["x-api-key"] = apiKeyPrefix["x-api-key"]!! + " " + apiKey["x-api-key"]!!
+                } else {
+                    requestConfig.headers["x-api-key"] = apiKey["x-api-key"]!!
+                }
+            }
+        }
     }
 
     protected inline fun <reified I, reified T: Any?> request(requestConfig: RequestConfig<I>): ApiResponse<T?> {

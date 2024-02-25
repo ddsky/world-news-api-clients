@@ -21,6 +21,7 @@
 
 #include <QJsonObject>
 
+#include <QList>
 #include <QString>
 
 #include "OAIEnum.h"
@@ -39,20 +40,10 @@ public:
     void fromJsonObject(QJsonObject json) override;
     void fromJson(QString jsonString) override;
 
-    double getLatitude() const;
-    void setLatitude(const double &latitude);
-    bool is_latitude_Set() const;
-    bool is_latitude_Valid() const;
-
-    double getLongitude() const;
-    void setLongitude(const double &longitude);
-    bool is_longitude_Set() const;
-    bool is_longitude_Valid() const;
-
-    QString getCity() const;
-    void setCity(const QString &city);
-    bool is_city_Set() const;
-    bool is_city_Valid() const;
+    QList<QString> getNewsLinks() const;
+    void setNewsLinks(const QList<QString> &news_links);
+    bool is_news_links_Set() const;
+    bool is_news_links_Valid() const;
 
     virtual bool isSet() const override;
     virtual bool isValid() const override;
@@ -60,17 +51,9 @@ public:
 private:
     void initializeModel();
 
-    double latitude;
-    bool m_latitude_isSet;
-    bool m_latitude_isValid;
-
-    double longitude;
-    bool m_longitude_isSet;
-    bool m_longitude_isValid;
-
-    QString city;
-    bool m_city_isSet;
-    bool m_city_isValid;
+    QList<QString> news_links;
+    bool m_news_links_isSet;
+    bool m_news_links_isValid;
 };
 
 } // namespace OpenAPI

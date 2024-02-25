@@ -20,7 +20,7 @@ export interface News {
     text?: string;
     summary?: string;
     url?: string;
-    image?: string;
+    image?: string | null;
     publish_date?: string;
     author?: string;
     language?: string;

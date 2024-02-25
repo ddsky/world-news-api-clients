@@ -18,16 +18,19 @@ module Api.Data exposing
     ( InlineResponse200
     , InlineResponse2001
     , InlineResponse2002
+    , InlineResponse2003
     , InlineResponse200News
     , News
     , encodeInlineResponse200
     , encodeInlineResponse2001
     , encodeInlineResponse2002
+    , encodeInlineResponse2003
     , encodeInlineResponse200News
     , encodeNews
     , inlineResponse200Decoder
     , inlineResponse2001Decoder
     , inlineResponse2002Decoder
+    , inlineResponse2003Decoder
     , inlineResponse200NewsDecoder
     , newsDecoder
     )
@@ -62,6 +65,11 @@ type alias InlineResponse2001 =
 
 
 type alias InlineResponse2002 =
+    { newsLinks : Maybe (List (String))
+}
+
+
+type alias InlineResponse2003 =
     { latitude : Float
 , longitude : Float
 , city : Maybe String
@@ -142,7 +150,7 @@ encodeInlineResponse2001Pairs model =
             [ maybeEncode "title" Json.Encode.string model.title
             , maybeEncode "text" Json.Encode.string model.text
             , maybeEncode "url" Json.Encode.string model.url
-            , maybeEncode "image" Json.Encode.string model.image
+            , maybeEncodeNullable "image" Json.Encode.string model.image
             , maybeEncode "author" Json.Encode.string model.author
             , maybeEncode "language" Json.Encode.string model.language
             , maybeEncode "source_country" Json.Encode.string model.sourceCountry
@@ -164,6 +172,26 @@ encodeInlineResponse2002WithTag (tagField, tag) model =
 
 encodeInlineResponse2002Pairs : InlineResponse2002 -> List EncodedField
 encodeInlineResponse2002Pairs model =
+    let
+        pairs =
+            [ maybeEncode "news_links" (Json.Encode.list Json.Encode.string) model.newsLinks
+            ]
+    in
+    pairs
+
+
+encodeInlineResponse2003 : InlineResponse2003 -> Json.Encode.Value
+encodeInlineResponse2003 =
+    encodeObject << encodeInlineResponse2003Pairs
+
+
+encodeInlineResponse2003WithTag : ( String, String ) -> InlineResponse2003 -> Json.Encode.Value
+encodeInlineResponse2003WithTag (tagField, tag) model =
+    encodeObject (encodeInlineResponse2003Pairs model ++ [ encode tagField Json.Encode.string tag ])
+
+
+encodeInlineResponse2003Pairs : InlineResponse2003 -> List EncodedField
+encodeInlineResponse2003Pairs model =
     let
         pairs =
             [ encode "latitude" Json.Encode.float model.latitude
@@ -193,7 +221,7 @@ encodeInlineResponse200NewsPairs model =
             , maybeEncode "text" Json.Encode.string model.text
             , maybeEncode "summary" Json.Encode.string model.summary
             , maybeEncode "url" Json.Encode.string model.url
-            , maybeEncode "image" Json.Encode.string model.image
+            , maybeEncodeNullable "image" Json.Encode.string model.image
             , maybeEncode "author" Json.Encode.string model.author
             , maybeEncode "language" Json.Encode.string model.language
             , maybeEncode "source_country" Json.Encode.string model.sourceCountry
@@ -222,7 +250,7 @@ encodeNewsPairs model =
             , maybeEncode "text" Json.Encode.string model.text
             , maybeEncode "summary" Json.Encode.string model.summary
             , maybeEncode "url" Json.Encode.string model.url
-            , maybeEncode "image" Json.Encode.string model.image
+            , maybeEncodeNullable "image" Json.Encode.string model.image
             , maybeEncode "publish_date" Json.Encode.string model.publishDate
             , maybeEncode "author" Json.Encode.string model.author
             , maybeEncode "language" Json.Encode.string model.language
@@ -251,7 +279,7 @@ inlineResponse2001Decoder =
         |> maybeDecode "title" Json.Decode.string Nothing
         |> maybeDecode "text" Json.Decode.string Nothing
         |> maybeDecode "url" Json.Decode.string Nothing
-        |> maybeDecode "image" Json.Decode.string Nothing
+        |> maybeDecodeNullable "image" Json.Decode.string Nothing
         |> maybeDecode "author" Json.Decode.string Nothing
         |> maybeDecode "language" Json.Decode.string Nothing
         |> maybeDecode "source_country" Json.Decode.string Nothing
@@ -261,6 +289,12 @@ inlineResponse2001Decoder =
 inlineResponse2002Decoder : Json.Decode.Decoder InlineResponse2002
 inlineResponse2002Decoder =
     Json.Decode.succeed InlineResponse2002
+        |> maybeDecode "news_links" (Json.Decode.list Json.Decode.string) Nothing
+
+
+inlineResponse2003Decoder : Json.Decode.Decoder InlineResponse2003
+inlineResponse2003Decoder =
+    Json.Decode.succeed InlineResponse2003
         |> decode "latitude" Json.Decode.float 
         |> decode "longitude" Json.Decode.float 
         |> maybeDecode "city" Json.Decode.string Nothing
@@ -274,7 +308,7 @@ inlineResponse200NewsDecoder =
         |> maybeDecode "text" Json.Decode.string Nothing
         |> maybeDecode "summary" Json.Decode.string Nothing
         |> maybeDecode "url" Json.Decode.string Nothing
-        |> maybeDecode "image" Json.Decode.string Nothing
+        |> maybeDecodeNullable "image" Json.Decode.string Nothing
         |> maybeDecode "author" Json.Decode.string Nothing
         |> maybeDecode "language" Json.Decode.string Nothing
         |> maybeDecode "source_country" Json.Decode.string Nothing
@@ -289,7 +323,7 @@ newsDecoder =
         |> maybeDecode "text" Json.Decode.string Nothing
         |> maybeDecode "summary" Json.Decode.string Nothing
         |> maybeDecode "url" Json.Decode.string Nothing
-        |> maybeDecode "image" Json.Decode.string Nothing
+        |> maybeDecodeNullable "image" Json.Decode.string Nothing
         |> maybeDecode "publish_date" Json.Decode.string Nothing
         |> maybeDecode "author" Json.Decode.string Nothing
         |> maybeDecode "language" Json.Decode.string Nothing

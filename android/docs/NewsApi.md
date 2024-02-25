@@ -5,7 +5,7 @@ All URIs are relative to *https://api.worldnewsapi.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**extractNews**](NewsApi.md#extractNews) | **GET** /extract-news | Extract News
-[**extractNews_0**](NewsApi.md#extractNews_0) | **GET** /extract-news-links | Extract News
+[**extractNewsLinks**](NewsApi.md#extractNewsLinks) | **GET** /extract-news-links | Extract News Links
 [**geoCoordinates**](NewsApi.md#geoCoordinates) | **GET** /geo-coordinates | Get Geo Coordinates
 [**newsWebsiteToRSSFeed**](NewsApi.md#newsWebsiteToRSSFeed) | **GET** /feed.rss | News Website to RSS Feed
 [**searchNews**](NewsApi.md#searchNews) | **GET** /search-news | Search News
@@ -60,11 +60,11 @@ Name | Type | Description  | Notes
 - **Accept**: application/json
 
 
-## extractNews_0
+## extractNewsLinks
 
-> Object extractNews_0(url, apiKey, prefix, subDomain)
+> InlineResponse2002 extractNewsLinks(url, apiKey, prefix, subDomain)
 
-Extract News
+Extract News Links
 
 Extract a news links from a news website. 
 
@@ -80,10 +80,10 @@ String apiKey = abcd1234; // String | Your API key.
 String prefix = ; // String | The prefix the news links must start with.
 Boolean subDomain = true; // Boolean | Whether to include links to news on sub-domains.
 try {
-    Object result = apiInstance.extractNews_0(url, apiKey, prefix, subDomain);
+    InlineResponse2002 result = apiInstance.extractNewsLinks(url, apiKey, prefix, subDomain);
     System.out.println(result);
 } catch (ApiException e) {
-    System.err.println("Exception when calling NewsApi#extractNews_0");
+    System.err.println("Exception when calling NewsApi#extractNewsLinks");
     e.printStackTrace();
 }
 ```
@@ -100,7 +100,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**Object**
+[**InlineResponse2002**](InlineResponse2002.md)
 
 ### Authorization
 
@@ -109,12 +109,12 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: , application/json
+- **Accept**: application/json
 
 
 ## geoCoordinates
 
-> InlineResponse2002 geoCoordinates(location)
+> InlineResponse2003 geoCoordinates(location)
 
 Get Geo Coordinates
 
@@ -129,7 +129,7 @@ Get the geo coordinates for a location. The location can be an exact address but
 NewsApi apiInstance = new NewsApi();
 String location = Tokyo, Japan; // String | The address or name of the location, e.g. Tokyo, Japan.
 try {
-    InlineResponse2002 result = apiInstance.geoCoordinates(location);
+    InlineResponse2003 result = apiInstance.geoCoordinates(location);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling NewsApi#geoCoordinates");
@@ -146,7 +146,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2002**](InlineResponse2002.md)
+[**InlineResponse2003**](InlineResponse2003.md)
 
 ### Authorization
 
@@ -205,7 +205,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: , application/json, application/xml
+- **Accept**: application/xml
 
 
 ## searchNews

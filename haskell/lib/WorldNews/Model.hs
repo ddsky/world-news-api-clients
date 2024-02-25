@@ -239,39 +239,67 @@ mkInlineResponse2001 =
 -- ** InlineResponse2002
 -- | InlineResponse2002
 data InlineResponse2002 = InlineResponse2002
-  { inlineResponse2002Latitude :: !(Double) -- ^ /Required/ "latitude"
-  , inlineResponse2002Longitude :: !(Double) -- ^ /Required/ "longitude"
-  , inlineResponse2002City :: !(Maybe Text) -- ^ "city"
+  { inlineResponse2002NewsLinks :: !(Maybe [Text]) -- ^ "news_links"
   } deriving (P.Show, P.Eq, P.Typeable)
 
 -- | FromJSON InlineResponse2002
 instance A.FromJSON InlineResponse2002 where
   parseJSON = A.withObject "InlineResponse2002" $ \o ->
     InlineResponse2002
-      <$> (o .:  "latitude")
-      <*> (o .:  "longitude")
-      <*> (o .:? "city")
+      <$> (o .:? "news_links")
 
 -- | ToJSON InlineResponse2002
 instance A.ToJSON InlineResponse2002 where
   toJSON InlineResponse2002 {..} =
    _omitNulls
-      [ "latitude" .= inlineResponse2002Latitude
-      , "longitude" .= inlineResponse2002Longitude
-      , "city" .= inlineResponse2002City
+      [ "news_links" .= inlineResponse2002NewsLinks
       ]
 
 
 -- | Construct a value of type 'InlineResponse2002' (by applying it's required fields, if any)
 mkInlineResponse2002
-  :: Double -- ^ 'inlineResponse2002Latitude' 
-  -> Double -- ^ 'inlineResponse2002Longitude' 
-  -> InlineResponse2002
-mkInlineResponse2002 inlineResponse2002Latitude inlineResponse2002Longitude =
+  :: InlineResponse2002
+mkInlineResponse2002 =
   InlineResponse2002
-  { inlineResponse2002Latitude
-  , inlineResponse2002Longitude
-  , inlineResponse2002City = Nothing
+  { inlineResponse2002NewsLinks = Nothing
+  }
+
+-- ** InlineResponse2003
+-- | InlineResponse2003
+data InlineResponse2003 = InlineResponse2003
+  { inlineResponse2003Latitude :: !(Double) -- ^ /Required/ "latitude"
+  , inlineResponse2003Longitude :: !(Double) -- ^ /Required/ "longitude"
+  , inlineResponse2003City :: !(Maybe Text) -- ^ "city"
+  } deriving (P.Show, P.Eq, P.Typeable)
+
+-- | FromJSON InlineResponse2003
+instance A.FromJSON InlineResponse2003 where
+  parseJSON = A.withObject "InlineResponse2003" $ \o ->
+    InlineResponse2003
+      <$> (o .:  "latitude")
+      <*> (o .:  "longitude")
+      <*> (o .:? "city")
+
+-- | ToJSON InlineResponse2003
+instance A.ToJSON InlineResponse2003 where
+  toJSON InlineResponse2003 {..} =
+   _omitNulls
+      [ "latitude" .= inlineResponse2003Latitude
+      , "longitude" .= inlineResponse2003Longitude
+      , "city" .= inlineResponse2003City
+      ]
+
+
+-- | Construct a value of type 'InlineResponse2003' (by applying it's required fields, if any)
+mkInlineResponse2003
+  :: Double -- ^ 'inlineResponse2003Latitude' 
+  -> Double -- ^ 'inlineResponse2003Longitude' 
+  -> InlineResponse2003
+mkInlineResponse2003 inlineResponse2003Latitude inlineResponse2003Longitude =
+  InlineResponse2003
+  { inlineResponse2003Latitude
+  , inlineResponse2003Longitude
+  , inlineResponse2003City = Nothing
   }
 
 -- ** InlineResponse200News

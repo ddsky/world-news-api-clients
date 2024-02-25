@@ -21,6 +21,8 @@
 #include "com.worldnewsapi.client.model\OAIInline_response_200.h"
 #include "com.worldnewsapi.client.model\OAIInline_response_200_1.h"
 #include "com.worldnewsapi.client.model\OAIInline_response_200_2.h"
+#include "com.worldnewsapi.client.model\OAIInline_response_200_3.h"
+#include "com.worldnewsapi.client.model\OAIObject.h"
 #include <QString>
 
 #include <QObject>
@@ -66,9 +68,24 @@ public:
     void extractNews(const QString &url, const bool &analyze);
 
     /**
+    * @param[in]  url QString [required]
+    * @param[in]  api_key QString [required]
+    * @param[in]  prefix QString [optional]
+    * @param[in]  sub_domain bool [optional]
+    */
+    void extractNewsLinks(const QString &url, const QString &api_key, const ::OpenAPI::OptionalParam<QString> &prefix = ::OpenAPI::OptionalParam<QString>(), const ::OpenAPI::OptionalParam<bool> &sub_domain = ::OpenAPI::OptionalParam<bool>());
+
+    /**
     * @param[in]  location QString [required]
     */
     void geoCoordinates(const QString &location);
+
+    /**
+    * @param[in]  url QString [required]
+    * @param[in]  api_key QString [required]
+    * @param[in]  extract_news bool [optional]
+    */
+    void newsWebsiteToRSSFeed(const QString &url, const QString &api_key, const ::OpenAPI::OptionalParam<bool> &extract_news = ::OpenAPI::OptionalParam<bool>());
 
     /**
     * @param[in]  text QString [optional]
@@ -113,25 +130,35 @@ private:
     int _OauthMethod = 0;
 
     void extractNewsCallback(OAIHttpRequestWorker *worker);
+    void extractNewsLinksCallback(OAIHttpRequestWorker *worker);
     void geoCoordinatesCallback(OAIHttpRequestWorker *worker);
+    void newsWebsiteToRSSFeedCallback(OAIHttpRequestWorker *worker);
     void searchNewsCallback(OAIHttpRequestWorker *worker);
 
 signals:
 
     void extractNewsSignal(OAIInline_response_200_1 summary);
-    void geoCoordinatesSignal(OAIInline_response_200_2 summary);
+    void extractNewsLinksSignal(OAIInline_response_200_2 summary);
+    void geoCoordinatesSignal(OAIInline_response_200_3 summary);
+    void newsWebsiteToRSSFeedSignal(OAIObject summary);
     void searchNewsSignal(OAIInline_response_200 summary);
 
     void extractNewsSignalFull(OAIHttpRequestWorker *worker, OAIInline_response_200_1 summary);
-    void geoCoordinatesSignalFull(OAIHttpRequestWorker *worker, OAIInline_response_200_2 summary);
+    void extractNewsLinksSignalFull(OAIHttpRequestWorker *worker, OAIInline_response_200_2 summary);
+    void geoCoordinatesSignalFull(OAIHttpRequestWorker *worker, OAIInline_response_200_3 summary);
+    void newsWebsiteToRSSFeedSignalFull(OAIHttpRequestWorker *worker, OAIObject summary);
     void searchNewsSignalFull(OAIHttpRequestWorker *worker, OAIInline_response_200 summary);
 
     void extractNewsSignalE(OAIInline_response_200_1 summary, QNetworkReply::NetworkError error_type, QString error_str);
-    void geoCoordinatesSignalE(OAIInline_response_200_2 summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void extractNewsLinksSignalE(OAIInline_response_200_2 summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void geoCoordinatesSignalE(OAIInline_response_200_3 summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void newsWebsiteToRSSFeedSignalE(OAIObject summary, QNetworkReply::NetworkError error_type, QString error_str);
     void searchNewsSignalE(OAIInline_response_200 summary, QNetworkReply::NetworkError error_type, QString error_str);
 
     void extractNewsSignalEFull(OAIHttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void extractNewsLinksSignalEFull(OAIHttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
     void geoCoordinatesSignalEFull(OAIHttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void newsWebsiteToRSSFeedSignalEFull(OAIHttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
     void searchNewsSignalEFull(OAIHttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
 
     void abortRequestsSignal();

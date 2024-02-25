@@ -175,7 +175,7 @@ func (a *NewsApiService) ExtractNewsExecute(r ApiExtractNewsRequest) (*InlineRes
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiExtractNews_0Request struct {
+type ApiExtractNewsLinksRequest struct {
 	ctx context.Context
 	ApiService *NewsApiService
 	url *string
@@ -185,56 +185,56 @@ type ApiExtractNews_0Request struct {
 }
 
 // The url from which links should be extracted.
-func (r ApiExtractNews_0Request) Url(url string) ApiExtractNews_0Request {
+func (r ApiExtractNewsLinksRequest) Url(url string) ApiExtractNewsLinksRequest {
 	r.url = &url
 	return r
 }
 // Your API key.
-func (r ApiExtractNews_0Request) ApiKey(apiKey string) ApiExtractNews_0Request {
+func (r ApiExtractNewsLinksRequest) ApiKey(apiKey string) ApiExtractNewsLinksRequest {
 	r.apiKey = &apiKey
 	return r
 }
 // The prefix the news links must start with.
-func (r ApiExtractNews_0Request) Prefix(prefix string) ApiExtractNews_0Request {
+func (r ApiExtractNewsLinksRequest) Prefix(prefix string) ApiExtractNewsLinksRequest {
 	r.prefix = &prefix
 	return r
 }
 // Whether to include links to news on sub-domains.
-func (r ApiExtractNews_0Request) SubDomain(subDomain bool) ApiExtractNews_0Request {
+func (r ApiExtractNewsLinksRequest) SubDomain(subDomain bool) ApiExtractNewsLinksRequest {
 	r.subDomain = &subDomain
 	return r
 }
 
-func (r ApiExtractNews_0Request) Execute() (map[string]interface{}, *http.Response, error) {
-	return r.ApiService.ExtractNews_1Execute(r)
+func (r ApiExtractNewsLinksRequest) Execute() (*InlineResponse2002, *http.Response, error) {
+	return r.ApiService.ExtractNewsLinksExecute(r)
 }
 
 /*
-ExtractNews_0 Extract News
+ExtractNewsLinks Extract News Links
 
 Extract a news links from a news website. 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiExtractNews_0Request
+ @return ApiExtractNewsLinksRequest
 */
-func (a *NewsApiService) ExtractNews_1(ctx context.Context) ApiExtractNews_0Request {
-	return ApiExtractNews_0Request{
+func (a *NewsApiService) ExtractNewsLinks(ctx context.Context) ApiExtractNewsLinksRequest {
+	return ApiExtractNewsLinksRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]interface{}
-func (a *NewsApiService) ExtractNews_1Execute(r ApiExtractNews_0Request) (map[string]interface{}, *http.Response, error) {
+//  @return InlineResponse2002
+func (a *NewsApiService) ExtractNewsLinksExecute(r ApiExtractNewsLinksRequest) (*InlineResponse2002, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  map[string]interface{}
+		localVarReturnValue  *InlineResponse2002
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NewsApiService.ExtractNews_1")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NewsApiService.ExtractNewsLinks")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -269,7 +269,7 @@ func (a *NewsApiService) ExtractNews_1Execute(r ApiExtractNews_0Request) (map[st
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -353,7 +353,7 @@ func (r ApiGeoCoordinatesRequest) Location(location string) ApiGeoCoordinatesReq
 	return r
 }
 
-func (r ApiGeoCoordinatesRequest) Execute() (*InlineResponse2002, *http.Response, error) {
+func (r ApiGeoCoordinatesRequest) Execute() (*InlineResponse2003, *http.Response, error) {
 	return r.ApiService.GeoCoordinatesExecute(r)
 }
 
@@ -373,13 +373,13 @@ func (a *NewsApiService) GeoCoordinates(ctx context.Context) ApiGeoCoordinatesRe
 }
 
 // Execute executes the request
-//  @return InlineResponse2002
-func (a *NewsApiService) GeoCoordinatesExecute(r ApiGeoCoordinatesRequest) (*InlineResponse2002, *http.Response, error) {
+//  @return InlineResponse2003
+func (a *NewsApiService) GeoCoordinatesExecute(r ApiGeoCoordinatesRequest) (*InlineResponse2003, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *InlineResponse2002
+		localVarReturnValue  *InlineResponse2003
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NewsApiService.GeoCoordinates")
@@ -564,7 +564,7 @@ func (a *NewsApiService) NewsWebsiteToRSSFeedExecute(r ApiNewsWebsiteToRSSFeedRe
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"", "application/json", "application/xml"}
+	localVarHTTPHeaderAccepts := []string{"application/xml"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)

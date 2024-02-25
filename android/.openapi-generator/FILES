@@ -4,6 +4,7 @@ build.gradle
 docs/InlineResponse200.md
 docs/InlineResponse2001.md
 docs/InlineResponse2002.md
+docs/InlineResponse2003.md
 docs/InlineResponse200News.md
 docs/News.md
 docs/NewsApi.md
@@ -25,6 +26,7 @@ src/main/java/com/worldnewsapi/client/auth/HttpBasicAuth.java
 src/main/java/com/worldnewsapi/client/model/InlineResponse200.java
 src/main/java/com/worldnewsapi/client/model/InlineResponse2001.java
 src/main/java/com/worldnewsapi/client/model/InlineResponse2002.java
+src/main/java/com/worldnewsapi/client/model/InlineResponse2003.java
 src/main/java/com/worldnewsapi/client/model/InlineResponse200News.java
 src/main/java/com/worldnewsapi/client/model/News.java
 src/main/java/com/worldnewsapi/client/request/DeleteRequest.java

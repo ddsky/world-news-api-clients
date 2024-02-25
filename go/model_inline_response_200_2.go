@@ -17,19 +17,15 @@ import (
 
 // InlineResponse2002 struct for InlineResponse2002
 type InlineResponse2002 struct {
-	Latitude float32 `json:"latitude"`
-	Longitude float32 `json:"longitude"`
-	City *string `json:"city,omitempty"`
+	NewsLinks []string `json:"news_links,omitempty"`
 }
 
 // NewInlineResponse2002 instantiates a new InlineResponse2002 object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInlineResponse2002(latitude float32, longitude float32) *InlineResponse2002 {
+func NewInlineResponse2002() *InlineResponse2002 {
 	this := InlineResponse2002{}
-	this.Latitude = latitude
-	this.Longitude = longitude
 	return &this
 }
 
@@ -41,96 +37,42 @@ func NewInlineResponse2002WithDefaults() *InlineResponse2002 {
 	return &this
 }
 
-// GetLatitude returns the Latitude field value
-func (o *InlineResponse2002) GetLatitude() float32 {
-	if o == nil {
-		var ret float32
+// GetNewsLinks returns the NewsLinks field value if set, zero value otherwise.
+func (o *InlineResponse2002) GetNewsLinks() []string {
+	if o == nil || o.NewsLinks == nil {
+		var ret []string
 		return ret
 	}
-
-	return o.Latitude
+	return o.NewsLinks
 }
 
-// GetLatitudeOk returns a tuple with the Latitude field value
+// GetNewsLinksOk returns a tuple with the NewsLinks field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *InlineResponse2002) GetLatitudeOk() (*float32, bool) {
-	if o == nil  {
+func (o *InlineResponse2002) GetNewsLinksOk() ([]string, bool) {
+	if o == nil || o.NewsLinks == nil {
 		return nil, false
 	}
-	return &o.Latitude, true
+	return o.NewsLinks, true
 }
 
-// SetLatitude sets field value
-func (o *InlineResponse2002) SetLatitude(v float32) {
-	o.Latitude = v
-}
-
-// GetLongitude returns the Longitude field value
-func (o *InlineResponse2002) GetLongitude() float32 {
-	if o == nil {
-		var ret float32
-		return ret
-	}
-
-	return o.Longitude
-}
-
-// GetLongitudeOk returns a tuple with the Longitude field value
-// and a boolean to check if the value has been set.
-func (o *InlineResponse2002) GetLongitudeOk() (*float32, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return &o.Longitude, true
-}
-
-// SetLongitude sets field value
-func (o *InlineResponse2002) SetLongitude(v float32) {
-	o.Longitude = v
-}
-
-// GetCity returns the City field value if set, zero value otherwise.
-func (o *InlineResponse2002) GetCity() string {
-	if o == nil || o.City == nil {
-		var ret string
-		return ret
-	}
-	return *o.City
-}
-
-// GetCityOk returns a tuple with the City field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *InlineResponse2002) GetCityOk() (*string, bool) {
-	if o == nil || o.City == nil {
-		return nil, false
-	}
-	return o.City, true
-}
-
-// HasCity returns a boolean if a field has been set.
-func (o *InlineResponse2002) HasCity() bool {
-	if o != nil && o.City != nil {
+// HasNewsLinks returns a boolean if a field has been set.
+func (o *InlineResponse2002) HasNewsLinks() bool {
+	if o != nil && o.NewsLinks != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetCity gets a reference to the given string and assigns it to the City field.
-func (o *InlineResponse2002) SetCity(v string) {
-	o.City = &v
+// SetNewsLinks gets a reference to the given []string and assigns it to the NewsLinks field.
+func (o *InlineResponse2002) SetNewsLinks(v []string) {
+	o.NewsLinks = v
 }
 
 func (o InlineResponse2002) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["latitude"] = o.Latitude
-	}
-	if true {
-		toSerialize["longitude"] = o.Longitude
-	}
-	if o.City != nil {
-		toSerialize["city"] = o.City
+	if o.NewsLinks != nil {
+		toSerialize["news_links"] = o.NewsLinks
 	}
 	return json.Marshal(toSerialize)
 }

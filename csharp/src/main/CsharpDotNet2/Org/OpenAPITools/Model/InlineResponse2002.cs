@@ -13,25 +13,11 @@ namespace Org.OpenAPITools.Model {
   [DataContract]
   public class InlineResponse2002 {
     /// <summary>
-    /// Gets or Sets Latitude
+    /// Gets or Sets NewsLinks
     /// </summary>
-    [DataMember(Name="latitude", EmitDefaultValue=false)]
-    [JsonProperty(PropertyName = "latitude")]
-    public decimal? Latitude { get; set; }
-
-    /// <summary>
-    /// Gets or Sets Longitude
-    /// </summary>
-    [DataMember(Name="longitude", EmitDefaultValue=false)]
-    [JsonProperty(PropertyName = "longitude")]
-    public decimal? Longitude { get; set; }
-
-    /// <summary>
-    /// Gets or Sets City
-    /// </summary>
-    [DataMember(Name="city", EmitDefaultValue=false)]
-    [JsonProperty(PropertyName = "city")]
-    public string City { get; set; }
+    [DataMember(Name="news_links", EmitDefaultValue=false)]
+    [JsonProperty(PropertyName = "news_links")]
+    public List<string> NewsLinks { get; set; }
 
 
     /// <summary>
@@ -41,9 +27,7 @@ namespace Org.OpenAPITools.Model {
     public override string ToString()  {
       var sb = new StringBuilder();
       sb.Append("class InlineResponse2002 {\n");
-      sb.Append("  Latitude: ").Append(Latitude).Append("\n");
-      sb.Append("  Longitude: ").Append(Longitude).Append("\n");
-      sb.Append("  City: ").Append(City).Append("\n");
+      sb.Append("  NewsLinks: ").Append(NewsLinks).Append("\n");
       sb.Append("}\n");
       return sb.ToString();
     }

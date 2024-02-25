@@ -87,7 +87,7 @@ class InlineResponse200News(ModelNormal):
             'text': (str,),  # noqa: E501
             'summary': (str,),  # noqa: E501
             'url': (str,),  # noqa: E501
-            'image': (str,),  # noqa: E501
+            'image': (str, none_type,),  # noqa: E501
             'author': (str,),  # noqa: E501
             'language': (str,),  # noqa: E501
             'source_country': (str,),  # noqa: E501
@@ -158,7 +158,7 @@ class InlineResponse200News(ModelNormal):
             text (str): [optional]  # noqa: E501
             summary (str): [optional]  # noqa: E501
             url (str): [optional]  # noqa: E501
-            image (str): [optional]  # noqa: E501
+            image (str, none_type): [optional]  # noqa: E501
             author (str): [optional]  # noqa: E501
             language (str): [optional]  # noqa: E501
             source_country (str): [optional]  # noqa: E501
@@ -249,7 +249,7 @@ class InlineResponse200News(ModelNormal):
             text (str): [optional]  # noqa: E501
             summary (str): [optional]  # noqa: E501
             url (str): [optional]  # noqa: E501
-            image (str): [optional]  # noqa: E501
+            image (str, none_type): [optional]  # noqa: E501
             author (str): [optional]  # noqa: E501
             language (str): [optional]  # noqa: E501
             source_country (str): [optional]  # noqa: E501

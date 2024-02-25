@@ -1,12 +1,14 @@
 export * from './InlineResponse200';
 export * from './InlineResponse2001';
 export * from './InlineResponse2002';
+export * from './InlineResponse2003';
 export * from './InlineResponse200News';
 export * from './News';
 
 import { InlineResponse200 } from './InlineResponse200';
 import { InlineResponse2001 } from './InlineResponse2001';
 import { InlineResponse2002 } from './InlineResponse2002';
+import { InlineResponse2003 } from './InlineResponse2003';
 import { InlineResponse200News } from './InlineResponse200News';
 import { News } from './News';
 
@@ -36,6 +38,7 @@ let typeMap: {[index: string]: any} = {
     "InlineResponse200": InlineResponse200,
     "InlineResponse2001": InlineResponse2001,
     "InlineResponse2002": InlineResponse2002,
+    "InlineResponse2003": InlineResponse2003,
     "InlineResponse200News": InlineResponse200News,
     "News": News,
 }

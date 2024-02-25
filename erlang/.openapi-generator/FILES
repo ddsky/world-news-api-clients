@@ -4,6 +4,7 @@ src/openapi.app.src
 src/openapi_inline_response_200.erl
 src/openapi_inline_response_200_1.erl
 src/openapi_inline_response_200_2.erl
+src/openapi_inline_response_200_3.erl
 src/openapi_inline_response_200_news.erl
 src/openapi_news.erl
 src/openapi_news_api.erl

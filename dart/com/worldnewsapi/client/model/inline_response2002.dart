@@ -13,39 +13,27 @@ part of openapi.api;
 class InlineResponse2002 {
   /// Returns a new [InlineResponse2002] instance.
   InlineResponse2002({
-    @required this.latitude,
-    @required this.longitude,
-    this.city,
+    this.newsLinks = const [],
   });
 
-  num latitude;
-
-  num longitude;
-
-  String city;
+  List<String> newsLinks;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is InlineResponse2002 &&
-     other.latitude == latitude &&
-     other.longitude == longitude &&
-     other.city == city;
+     other.newsLinks == newsLinks;
 
   @override
   int get hashCode =>
   // ignore: unnecessary_parenthesis
-    (latitude == null ? 0 : latitude.hashCode) +
-    (longitude == null ? 0 : longitude.hashCode) +
-    (city == null ? 0 : city.hashCode);
+    (newsLinks == null ? 0 : newsLinks.hashCode);
 
   @override
-  String toString() => 'InlineResponse2002[latitude=$latitude, longitude=$longitude, city=$city]';
+  String toString() => 'InlineResponse2002[newsLinks=$newsLinks]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
-      json[r'latitude'] = latitude;
-      json[r'longitude'] = longitude;
-    if (city != null) {
-      json[r'city'] = city;
+    if (newsLinks != null) {
+      json[r'news_links'] = newsLinks;
     }
     return json;
   }
@@ -57,13 +45,9 @@ class InlineResponse2002 {
     if (value is Map) {
       final json = value.cast<String, dynamic>();
       return InlineResponse2002(
-        latitude: json[r'latitude'] == null
-          ? null
-          : num.parse(json[r'latitude'].toString()),
-        longitude: json[r'longitude'] == null
-          ? null
-          : num.parse(json[r'longitude'].toString()),
-        city: mapValueOfType<String>(json, r'city'),
+        newsLinks: json[r'news_links'] is List
+          ? (json[r'news_links'] as List).cast<String>()
+          : null,
       );
     }
     return null;

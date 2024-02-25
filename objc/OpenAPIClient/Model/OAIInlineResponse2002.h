@@ -23,10 +23,6 @@
 @interface OAIInlineResponse2002 : OAIObject
 
 
-@property(nonatomic) NSNumber* latitude;
-
-@property(nonatomic) NSNumber* longitude;
-
-@property(nonatomic) NSString* city;
+@property(nonatomic) NSArray<NSString*>* varNewsLinks;
 
 @end

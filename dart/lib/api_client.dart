@@ -200,6 +200,8 @@ class ApiClient {
           return InlineResponse2001.fromJson(value);
         case 'InlineResponse2002':
           return InlineResponse2002.fromJson(value);
+        case 'InlineResponse2003':
+          return InlineResponse2003.fromJson(value);
         case 'InlineResponse200News':
           return InlineResponse200News.fromJson(value);
         case 'News':

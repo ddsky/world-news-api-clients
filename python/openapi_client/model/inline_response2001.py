@@ -85,7 +85,7 @@ class InlineResponse2001(ModelNormal):
             'title': (str,),  # noqa: E501
             'text': (str,),  # noqa: E501
             'url': (str,),  # noqa: E501
-            'image': (str,),  # noqa: E501
+            'image': (str, none_type,),  # noqa: E501
             'author': (str,),  # noqa: E501
             'language': (str,),  # noqa: E501
             'source_country': (str,),  # noqa: E501
@@ -152,7 +152,7 @@ class InlineResponse2001(ModelNormal):
             title (str): [optional]  # noqa: E501
             text (str): [optional]  # noqa: E501
             url (str): [optional]  # noqa: E501
-            image (str): [optional]  # noqa: E501
+            image (str, none_type): [optional]  # noqa: E501
             author (str): [optional]  # noqa: E501
             language (str): [optional]  # noqa: E501
             source_country (str): [optional]  # noqa: E501
@@ -241,7 +241,7 @@ class InlineResponse2001(ModelNormal):
             title (str): [optional]  # noqa: E501
             text (str): [optional]  # noqa: E501
             url (str): [optional]  # noqa: E501
-            image (str): [optional]  # noqa: E501
+            image (str, none_type): [optional]  # noqa: E501
             author (str): [optional]  # noqa: E501
             language (str): [optional]  # noqa: E501
             source_country (str): [optional]  # noqa: E501

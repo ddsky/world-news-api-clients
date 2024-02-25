@@ -85,7 +85,7 @@ All URIs are relative to *https://api.worldnewsapi.com*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *NewsApi* | [**extractNews**](docs/Api/NewsApi.md#extractnews) | **GET** /extract-news | Extract News
-*NewsApi* | [**extractNews_0**](docs/Api/NewsApi.md#extractnews_0) | **GET** /extract-news-links | Extract News
+*NewsApi* | [**extractNewsLinks**](docs/Api/NewsApi.md#extractnewslinks) | **GET** /extract-news-links | Extract News Links
 *NewsApi* | [**geoCoordinates**](docs/Api/NewsApi.md#geocoordinates) | **GET** /geo-coordinates | Get Geo Coordinates
 *NewsApi* | [**newsWebsiteToRSSFeed**](docs/Api/NewsApi.md#newswebsitetorssfeed) | **GET** /feed.rss | News Website to RSS Feed
 *NewsApi* | [**searchNews**](docs/Api/NewsApi.md#searchnews) | **GET** /search-news | Search News
@@ -95,6 +95,7 @@ Class | Method | HTTP request | Description
 - [InlineResponse200](docs/Model/InlineResponse200.md)
 - [InlineResponse2001](docs/Model/InlineResponse2001.md)
 - [InlineResponse2002](docs/Model/InlineResponse2002.md)
+- [InlineResponse2003](docs/Model/InlineResponse2003.md)
 - [InlineResponse200News](docs/Model/InlineResponse200News.md)
 - [News](docs/Model/News.md)
 

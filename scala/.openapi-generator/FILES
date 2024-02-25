@@ -9,6 +9,7 @@ src/main/scala/com/worldnewsapi/NewsApi.scala
 src/main/scala/com/worldnewsapi/client/model/InlineResponse200.scala
 src/main/scala/com/worldnewsapi/client/model/InlineResponse2001.scala
 src/main/scala/com/worldnewsapi/client/model/InlineResponse2002.scala
+src/main/scala/com/worldnewsapi/client/model/InlineResponse2003.scala
 src/main/scala/com/worldnewsapi/client/model/InlineResponse200News.scala
 src/main/scala/com/worldnewsapi/client/model/News.scala
 src/main/scala/endpoint.scala

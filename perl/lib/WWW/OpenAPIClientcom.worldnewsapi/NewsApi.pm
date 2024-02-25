@@ -130,9 +130,9 @@ sub extract_news {
 }
 
 #
-# extract_news_0
+# extract_news_links
 #
-# Extract News
+# Extract News Links
 #
 # @param string $url The url from which links should be extracted. (required)
 # @param string $api_key Your API key. (required)
@@ -161,25 +161,25 @@ sub extract_news {
         required => '0',
     },
     };
-    __PACKAGE__->method_documentation->{ 'extract_news_0' } = {
-        summary => 'Extract News',
+    __PACKAGE__->method_documentation->{ 'extract_news_links' } = {
+        summary => 'Extract News Links',
         params => $params,
-        returns => 'object',
+        returns => 'InlineResponse2002',
         };
 }
-# @return object
+# @return InlineResponse2002
 #
-sub extract_news_0 {
+sub extract_news_links {
     my ($self, %args) = @_;
 
     # verify the required parameter 'url' is set
     unless (exists $args{'url'}) {
-      croak("Missing the required parameter 'url' when calling extract_news_0");
+      croak("Missing the required parameter 'url' when calling extract_news_links");
     }
 
     # verify the required parameter 'api_key' is set
     unless (exists $args{'api_key'}) {
-      croak("Missing the required parameter 'api_key' when calling extract_news_0");
+      croak("Missing the required parameter 'api_key' when calling extract_news_links");
     }
 
     # parse inputs
@@ -191,7 +191,7 @@ sub extract_news_0 {
     my $form_params = {};
 
     # 'Accept' and 'Content-Type' header
-    my $_header_accept = $self->{api_client}->select_header_accept('', 'application/json');
+    my $_header_accept = $self->{api_client}->select_header_accept('application/json');
     if ($_header_accept) {
         $header_params->{'Accept'} = $_header_accept;
     }
@@ -228,7 +228,7 @@ sub extract_news_0 {
     if (!$response) {
         return;
     }
-    my $_response_object = $self->{api_client}->deserialize('object', $response);
+    my $_response_object = $self->{api_client}->deserialize('InlineResponse2002', $response);
     return $_response_object;
 }
 
@@ -249,10 +249,10 @@ sub extract_news_0 {
     __PACKAGE__->method_documentation->{ 'geo_coordinates' } = {
         summary => 'Get Geo Coordinates',
         params => $params,
-        returns => 'InlineResponse2002',
+        returns => 'InlineResponse2003',
         };
 }
-# @return InlineResponse2002
+# @return InlineResponse2003
 #
 sub geo_coordinates {
     my ($self, %args) = @_;
@@ -293,7 +293,7 @@ sub geo_coordinates {
     if (!$response) {
         return;
     }
-    my $_response_object = $self->{api_client}->deserialize('InlineResponse2002', $response);
+    my $_response_object = $self->{api_client}->deserialize('InlineResponse2003', $response);
     return $_response_object;
 }
 
@@ -353,7 +353,7 @@ sub news_website_to_rss_feed {
     my $form_params = {};
 
     # 'Accept' and 'Content-Type' header
-    my $_header_accept = $self->{api_client}->select_header_accept('', 'application/json', 'application/xml');
+    my $_header_accept = $self->{api_client}->select_header_accept('application/xml');
     if ($_header_accept) {
         $header_params->{'Accept'} = $_header_accept;
     }

@@ -30,6 +30,8 @@ OpenAPIClient/Model/OAIInlineResponse2001.h
 OpenAPIClient/Model/OAIInlineResponse2001.m
 OpenAPIClient/Model/OAIInlineResponse2002.h
 OpenAPIClient/Model/OAIInlineResponse2002.m
+OpenAPIClient/Model/OAIInlineResponse2003.h
+OpenAPIClient/Model/OAIInlineResponse2003.m
 OpenAPIClient/Model/OAIInlineResponse200News.h
 OpenAPIClient/Model/OAIInlineResponse200News.m
 OpenAPIClient/Model/OAINews.h
@@ -38,6 +40,7 @@ README.md
 docs/OAIInlineResponse200.md
 docs/OAIInlineResponse2001.md
 docs/OAIInlineResponse2002.md
+docs/OAIInlineResponse2003.md
 docs/OAIInlineResponse200News.md
 docs/OAINews.md
 docs/OAINewsApi.md

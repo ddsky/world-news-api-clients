@@ -50,3 +50,6 @@ java -jar .\openapi-generator-cli-5.4.0.jar generate -i .\world-news-api-openapi
 .\7za.exe a -tzip .\zips\haskell-client.zip .\haskell\*
 .\7za.exe a -tzip .\zips\kotlin-client.zip .\kotlin\*
 .\7za.exe a -tzip .\zips\elm-client.zip .\elm\*
+
+# copy zips to D:\Software\xampp\htdocs\newsapi\downloads\sdks
+Copy-Item .\zips\* D:\Software\xampp\htdocs\newsapi\downloads\sdks\

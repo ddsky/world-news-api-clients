@@ -61,6 +61,9 @@ void Example::exampleFunction1(){
       // Configure API key authorization: apiKey
       apiInstance.setApiKey("YOUR API KEY NAME","YOUR API KEY");
 
+      // Configure API key authorization: headerApiKey
+      apiInstance.setApiKey("YOUR API KEY NAME","YOUR API KEY");
+
       QEventLoop loop;
       connect(&apiInstance, &OAINewsApi::extractNewsSignal, [&]() {
           loop.quit();
@@ -149,6 +152,13 @@ Authentication schemes defined for the API:
 - **Type**: API key
 - **API key parameter name**: api-key
 - **Location**: URL query string
+
+### headerApiKey
+
+
+- **Type**: API key
+- **API key parameter name**: x-api-key
+- **Location**: HTTP header
 
 
 ## Author

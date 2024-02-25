@@ -85,7 +85,7 @@ All URIs are relative to *https://api.worldnewsapi.com*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *NewsApi* | [**ExtractNews**](docs/NewsApi.md#extractnews) | **GET** /extract-news | Extract News
-*NewsApi* | [**ExtractNews_0**](docs/NewsApi.md#extractnews_0) | **GET** /extract-news-links | Extract News
+*NewsApi* | [**ExtractNewsLinks**](docs/NewsApi.md#extractnewslinks) | **GET** /extract-news-links | Extract News Links
 *NewsApi* | [**GeoCoordinates**](docs/NewsApi.md#geocoordinates) | **GET** /geo-coordinates | Get Geo Coordinates
 *NewsApi* | [**NewsWebsiteToRSSFeed**](docs/NewsApi.md#newswebsitetorssfeed) | **GET** /feed.rss | News Website to RSS Feed
 *NewsApi* | [**SearchNews**](docs/NewsApi.md#searchnews) | **GET** /search-news | Search News
@@ -97,6 +97,7 @@ Class | Method | HTTP request | Description
  - [Org.OpenAPITools.Model.InlineResponse200](docs/InlineResponse200.md)
  - [Org.OpenAPITools.Model.InlineResponse2001](docs/InlineResponse2001.md)
  - [Org.OpenAPITools.Model.InlineResponse2002](docs/InlineResponse2002.md)
+ - [Org.OpenAPITools.Model.InlineResponse2003](docs/InlineResponse2003.md)
  - [Org.OpenAPITools.Model.InlineResponse200News](docs/InlineResponse200News.md)
  - [Org.OpenAPITools.Model.News](docs/News.md)
 

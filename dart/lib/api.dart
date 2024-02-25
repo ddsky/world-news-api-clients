@@ -32,6 +32,7 @@ part 'api/news_api.dart';
 part 'model/inline_response200.dart';
 part 'model/inline_response2001.dart';
 part 'model/inline_response2002.dart';
+part 'model/inline_response2003.dart';
 part 'model/inline_response200_news.dart';
 part 'model/news.dart';
 

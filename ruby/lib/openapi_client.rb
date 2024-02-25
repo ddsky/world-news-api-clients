@@ -20,6 +20,7 @@ require 'openapi_client/configuration'
 require 'openapi_client/models/inline_response200'
 require 'openapi_client/models/inline_response2001'
 require 'openapi_client/models/inline_response2002'
+require 'openapi_client/models/inline_response2003'
 require 'openapi_client/models/inline_response200_news'
 require 'openapi_client/models/news'
 

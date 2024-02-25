@@ -5,7 +5,7 @@ All URIs are relative to *https://api.worldnewsapi.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**ExtractNews**](NewsApi.md#ExtractNews) | **Get** /extract-news | Extract News
-[**ExtractNews_0**](NewsApi.md#ExtractNews_0) | **Get** /extract-news-links | Extract News
+[**ExtractNewsLinks**](NewsApi.md#ExtractNewsLinks) | **Get** /extract-news-links | Extract News Links
 [**GeoCoordinates**](NewsApi.md#GeoCoordinates) | **Get** /geo-coordinates | Get Geo Coordinates
 [**NewsWebsiteToRSSFeed**](NewsApi.md#NewsWebsiteToRSSFeed) | **Get** /feed.rss | News Website to RSS Feed
 [**SearchNews**](NewsApi.md#SearchNews) | **Get** /search-news | Search News
@@ -80,11 +80,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## ExtractNews_0
+## ExtractNewsLinks
 
-> map[string]interface{} ExtractNews_0(ctx).Url(url).ApiKey(apiKey).Prefix(prefix).SubDomain(subDomain).Execute()
+> InlineResponse2002 ExtractNewsLinks(ctx).Url(url).ApiKey(apiKey).Prefix(prefix).SubDomain(subDomain).Execute()
 
-Extract News
+Extract News Links
 
 
 
@@ -108,13 +108,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.NewsApi.ExtractNews_0(context.Background()).Url(url).ApiKey(apiKey).Prefix(prefix).SubDomain(subDomain).Execute()
+    resp, r, err := apiClient.NewsApi.ExtractNewsLinks(context.Background()).Url(url).ApiKey(apiKey).Prefix(prefix).SubDomain(subDomain).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `NewsApi.ExtractNews_0``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `NewsApi.ExtractNewsLinks``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ExtractNews_0`: map[string]interface{}
-    fmt.Fprintf(os.Stdout, "Response from `NewsApi.ExtractNews_0`: %v\n", resp)
+    // response from `ExtractNewsLinks`: InlineResponse2002
+    fmt.Fprintf(os.Stdout, "Response from `NewsApi.ExtractNewsLinks`: %v\n", resp)
 }
 ```
 
@@ -124,7 +124,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiExtractNews_1Request struct via the builder pattern
+Other parameters are passed through a pointer to a apiExtractNewsLinksRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -136,7 +136,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**map[string]interface{}**
+[**InlineResponse2002**](InlineResponse2002.md)
 
 ### Authorization
 
@@ -145,7 +145,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: , application/json
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -154,7 +154,7 @@ Name | Type | Description  | Notes
 
 ## GeoCoordinates
 
-> InlineResponse2002 GeoCoordinates(ctx).Location(location).Execute()
+> InlineResponse2003 GeoCoordinates(ctx).Location(location).Execute()
 
 Get Geo Coordinates
 
@@ -182,7 +182,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `NewsApi.GeoCoordinates``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GeoCoordinates`: InlineResponse2002
+    // response from `GeoCoordinates`: InlineResponse2003
     fmt.Fprintf(os.Stdout, "Response from `NewsApi.GeoCoordinates`: %v\n", resp)
 }
 ```
@@ -202,7 +202,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2002**](InlineResponse2002.md)
+[**InlineResponse2003**](InlineResponse2003.md)
 
 ### Authorization
 
@@ -281,7 +281,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: , application/json, application/xml
+- **Accept**: application/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

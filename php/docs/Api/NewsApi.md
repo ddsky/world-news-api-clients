@@ -5,7 +5,7 @@ All URIs are relative to https://api.worldnewsapi.com.
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**extractNews()**](NewsApi.md#extractNews) | **GET** /extract-news | Extract News
-[**extractNews_0()**](NewsApi.md#extractNews_0) | **GET** /extract-news-links | Extract News
+[**extractNewsLinks()**](NewsApi.md#extractNewsLinks) | **GET** /extract-news-links | Extract News Links
 [**geoCoordinates()**](NewsApi.md#geoCoordinates) | **GET** /geo-coordinates | Get Geo Coordinates
 [**newsWebsiteToRSSFeed()**](NewsApi.md#newsWebsiteToRSSFeed) | **GET** /feed.rss | News Website to RSS Feed
 [**searchNews()**](NewsApi.md#searchNews) | **GET** /search-news | Search News
@@ -80,13 +80,13 @@ Name | Type | Description  | Notes
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
-## `extractNews_0()`
+## `extractNewsLinks()`
 
 ```php
-extractNews_0($url, $api_key, $prefix, $sub_domain): object
+extractNewsLinks($url, $api_key, $prefix, $sub_domain): \com.worldnewsapi.client\com.worldnewsapi.client.model\InlineResponse2002
 ```
 
-Extract News
+Extract News Links
 
 Extract a news links from a news website.
 
@@ -120,10 +120,10 @@ $prefix = ; // string | The prefix the news links must start with.
 $sub_domain = true; // bool | Whether to include links to news on sub-domains.
 
 try {
-    $result = $apiInstance->extractNews_0($url, $api_key, $prefix, $sub_domain);
+    $result = $apiInstance->extractNewsLinks($url, $api_key, $prefix, $sub_domain);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling NewsApi->extractNews_0: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling NewsApi->extractNewsLinks: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -138,7 +138,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**\com.worldnewsapi.client\com.worldnewsapi.client.model\InlineResponse2002**](../Model/InlineResponse2002.md)
 
 ### Authorization
 
@@ -147,7 +147,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: ``, `application/json`
+- **Accept**: `application/json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
 [[Back to Model list]](../../README.md#models)
@@ -156,7 +156,7 @@ Name | Type | Description  | Notes
 ## `geoCoordinates()`
 
 ```php
-geoCoordinates($location): \com.worldnewsapi.client\com.worldnewsapi.client.model\InlineResponse2002
+geoCoordinates($location): \com.worldnewsapi.client\com.worldnewsapi.client.model\InlineResponse2003
 ```
 
 Get Geo Coordinates
@@ -205,7 +205,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\com.worldnewsapi.client\com.worldnewsapi.client.model\InlineResponse2002**](../Model/InlineResponse2002.md)
+[**\com.worldnewsapi.client\com.worldnewsapi.client.model\InlineResponse2003**](../Model/InlineResponse2003.md)
 
 ### Authorization
 
@@ -285,7 +285,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: ``, `application/json`, `application/xml`
+- **Accept**: `application/xml`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
 [[Back to Model list]](../../README.md#models)

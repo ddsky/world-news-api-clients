@@ -20,6 +20,7 @@ local openapiclient_todo_object_mapping = require "openapiclient.model.todo_obje
 local openapiclient_inline_response_200 = require "openapiclient.model.inline_response_200"
 local openapiclient_inline_response_200_1 = require "openapiclient.model.inline_response_200_1"
 local openapiclient_inline_response_200_2 = require "openapiclient.model.inline_response_200_2"
+local openapiclient_inline_response_200_3 = require "openapiclient.model.inline_response_200_3"
 
 local news_api = {}
 local news_api_mt = {
@@ -98,7 +99,7 @@ function news_api:extract_news(url, analyze)
 	end
 end
 
-function news_api:extract_news_0(url, api_key, prefix, sub_domain)
+function news_api:extract_news_links(url, api_key, prefix, sub_domain)
 	local req = http_request.new_from_uri({
 		scheme = self.default_scheme;
 		host = self.host;
@@ -110,8 +111,8 @@ function news_api:extract_news_0(url, api_key, prefix, sub_domain)
 	-- set HTTP verb
 	req.headers:upsert(":method", "GET")
 	-- TODO: create a function to select proper content-type
-	--local var_accept = { "", "application/json" }
-	req.headers:upsert("content-type", "")
+	--local var_accept = { "application/json" }
+	req.headers:upsert("content-type", "application/json")
 
 	-- TODO: api key in query 'api-key'
 	-- api key in headers 'x-api-key'
@@ -137,7 +138,7 @@ function news_api:extract_news_0(url, api_key, prefix, sub_domain)
 		if result == nil then
 			return nil, err3
 		end
-		return openapiclient_TODO_OBJECT_MAPPING.cast(result), headers
+		return openapiclient_inline_response_200_2.cast(result), headers
 	else
 		local body, err, errno2 = stream:get_body_as_string()
 		if not body then
@@ -188,7 +189,7 @@ function news_api:geo_coordinates(location)
 		if result == nil then
 			return nil, err3
 		end
-		return openapiclient_inline_response_200_2.cast(result), headers
+		return openapiclient_inline_response_200_3.cast(result), headers
 	else
 		local body, err, errno2 = stream:get_body_as_string()
 		if not body then
@@ -212,8 +213,8 @@ function news_api:news_website_to_rss_feed(url, api_key, extract_news)
 	-- set HTTP verb
 	req.headers:upsert(":method", "GET")
 	-- TODO: create a function to select proper content-type
-	--local var_accept = { "", "application/json", "application/xml" }
-	req.headers:upsert("content-type", "")
+	--local var_accept = { "application/xml" }
+	req.headers:upsert("content-type", "application/xml")
 
 	-- TODO: api key in query 'api-key'
 	-- api key in headers 'x-api-key'

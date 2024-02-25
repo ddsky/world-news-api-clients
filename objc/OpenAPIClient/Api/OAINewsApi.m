@@ -4,6 +4,7 @@
 #import "OAIInlineResponse200.h"
 #import "OAIInlineResponse2001.h"
 #import "OAIInlineResponse2002.h"
+#import "OAIInlineResponse2003.h"
 
 
 @interface OAINewsApi ()
@@ -137,7 +138,7 @@ NSInteger kOAINewsApiMissingParamErrorCode = 234513;
 }
 
 ///
-/// Extract News
+/// Extract News Links
 /// Extract a news links from a news website. 
 ///  @param url The url from which links should be extracted. 
 ///
@@ -147,13 +148,13 @@ NSInteger kOAINewsApiMissingParamErrorCode = 234513;
 ///
 ///  @param subDomain Whether to include links to news on sub-domains. (optional)
 ///
-///  @returns NSObject*
+///  @returns OAIInlineResponse2002*
 ///
--(NSURLSessionTask*) extractNews_1WithUrl: (NSString*) url
+-(NSURLSessionTask*) extractNewsLinksWithUrl: (NSString*) url
     apiKey: (NSString*) apiKey
     prefix: (NSString*) prefix
     subDomain: (NSNumber*) subDomain
-    completionHandler: (void (^)(NSObject* output, NSError* error)) handler {
+    completionHandler: (void (^)(OAIInlineResponse2002* output, NSError* error)) handler {
     // verify the required parameter 'url' is set
     if (url == nil) {
         NSParameterAssert(url);
@@ -196,7 +197,7 @@ NSInteger kOAINewsApiMissingParamErrorCode = 234513;
     NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
     [headerParams addEntriesFromDictionary:self.defaultHeaders];
     // HTTP header `Accept`
-    NSString *acceptHeader = [self.apiClient.sanitizer selectHeaderAccept:@[@"", @"application/json"]];
+    NSString *acceptHeader = [self.apiClient.sanitizer selectHeaderAccept:@[@"application/json"]];
     if(acceptHeader.length > 0) {
         headerParams[@"Accept"] = acceptHeader;
     }
@@ -225,10 +226,10 @@ NSInteger kOAINewsApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"NSObject*"
+                              responseType: @"OAIInlineResponse2002*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((NSObject*)data, error);
+                                    handler((OAIInlineResponse2002*)data, error);
                                 }
                             }];
 }
@@ -238,10 +239,10 @@ NSInteger kOAINewsApiMissingParamErrorCode = 234513;
 /// Get the geo coordinates for a location. The location can be an exact address but also just the name of a city or country.
 ///  @param location The address or name of the location, e.g. Tokyo, Japan. 
 ///
-///  @returns OAIInlineResponse2002*
+///  @returns OAIInlineResponse2003*
 ///
 -(NSURLSessionTask*) geoCoordinatesWithLocation: (NSString*) location
-    completionHandler: (void (^)(OAIInlineResponse2002* output, NSError* error)) handler {
+    completionHandler: (void (^)(OAIInlineResponse2003* output, NSError* error)) handler {
     // verify the required parameter 'location' is set
     if (location == nil) {
         NSParameterAssert(location);
@@ -293,10 +294,10 @@ NSInteger kOAINewsApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"OAIInlineResponse2002*"
+                              responseType: @"OAIInlineResponse2003*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((OAIInlineResponse2002*)data, error);
+                                    handler((OAIInlineResponse2003*)data, error);
                                 }
                             }];
 }
@@ -355,7 +356,7 @@ NSInteger kOAINewsApiMissingParamErrorCode = 234513;
     NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
     [headerParams addEntriesFromDictionary:self.defaultHeaders];
     // HTTP header `Accept`
-    NSString *acceptHeader = [self.apiClient.sanitizer selectHeaderAccept:@[@"", @"application/json", @"application/xml"]];
+    NSString *acceptHeader = [self.apiClient.sanitizer selectHeaderAccept:@[@"application/xml"]];
     if(acceptHeader.length > 0) {
         headerParams[@"Accept"] = acceptHeader;
     }

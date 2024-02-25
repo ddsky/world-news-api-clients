@@ -93,7 +93,7 @@ class NewsApi {
     return Future<InlineResponse2001>.value();
   }
 
-  /// Extract News
+  /// Extract News Links
   ///
   /// Extract a news links from a news website. 
   ///
@@ -112,7 +112,7 @@ class NewsApi {
   ///
   /// * [bool] subDomain:
   ///   Whether to include links to news on sub-domains.
-  Future<Response> extractNews_1WithHttpInfo(String url, String apiKey, { String prefix, bool subDomain, }) async {
+  Future<Response> extractNewsLinksWithHttpInfo(String url, String apiKey, { String prefix, bool subDomain, }) async {
     // Verify required params are set.
     if (url == null) {
      throw ApiException(HttpStatus.badRequest, 'Missing required param: url');
@@ -156,7 +156,7 @@ class NewsApi {
     );
   }
 
-  /// Extract News
+  /// Extract News Links
   ///
   /// Extract a news links from a news website. 
   ///
@@ -173,8 +173,8 @@ class NewsApi {
   ///
   /// * [bool] subDomain:
   ///   Whether to include links to news on sub-domains.
-  Future<Object> extractNews_1(String url, String apiKey, { String prefix, bool subDomain, }) async {
-    final response = await extractNews_1WithHttpInfo(url, apiKey,  prefix: prefix, subDomain: subDomain, );
+  Future<InlineResponse2002> extractNewsLinks(String url, String apiKey, { String prefix, bool subDomain, }) async {
+    final response = await extractNewsLinksWithHttpInfo(url, apiKey,  prefix: prefix, subDomain: subDomain, );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -182,10 +182,10 @@ class NewsApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Object',) as Object;
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'InlineResponse2002',) as InlineResponse2002;
     
     }
-    return Future<Object>.value();
+    return Future<InlineResponse2002>.value();
   }
 
   /// Get Geo Coordinates
@@ -240,7 +240,7 @@ class NewsApi {
   ///
   /// * [String] location (required):
   ///   The address or name of the location, e.g. Tokyo, Japan.
-  Future<InlineResponse2002> geoCoordinates(String location,) async {
+  Future<InlineResponse2003> geoCoordinates(String location,) async {
     final response = await geoCoordinatesWithHttpInfo(location,);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -249,10 +249,10 @@ class NewsApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.body != null && response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'InlineResponse2002',) as InlineResponse2002;
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'InlineResponse2003',) as InlineResponse2003;
     
     }
-    return Future<InlineResponse2002>.value();
+    return Future<InlineResponse2003>.value();
   }
 
   /// News Website to RSS Feed

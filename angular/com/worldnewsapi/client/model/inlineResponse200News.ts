@@ -17,7 +17,7 @@ export interface InlineResponse200News {
     text?: string;
     summary?: string;
     url?: string;
-    image?: string;
+    image?: string | null;
     author?: string;
     language?: string;
     source_country?: string;

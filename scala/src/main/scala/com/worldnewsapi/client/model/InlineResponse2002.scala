@@ -5,17 +5,13 @@ import io.finch.circe._
 import io.circe.generic.semiauto._
 import io.circe.java8.time._
 import org.openapitools._
-import com.worldnewsapi.client.model.BigDecimal
+import scala.collection.immutable.Seq
 
 /**
  * 
- * @param latitude 
- * @param longitude 
- * @param city 
+ * @param newsUnderscorelinks 
  */
-case class InlineResponse2002(latitude: BigDecimal,
-                longitude: BigDecimal,
-                city: Option[String]
+case class InlineResponse2002(newsUnderscorelinks: Option[Seq[String]]
                 )
 
 object InlineResponse2002 {

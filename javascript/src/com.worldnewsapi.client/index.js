@@ -16,6 +16,7 @@ import ApiClient from './ApiClient';
 import InlineResponse200 from './com.worldnewsapi.client.model/InlineResponse200';
 import InlineResponse2001 from './com.worldnewsapi.client.model/InlineResponse2001';
 import InlineResponse2002 from './com.worldnewsapi.client.model/InlineResponse2002';
+import InlineResponse2003 from './com.worldnewsapi.client.model/InlineResponse2003';
 import InlineResponse200News from './com.worldnewsapi.client.model/InlineResponse200News';
 import News from './com.worldnewsapi.client.model/News';
 import NewsApi from './com.worldnewsapi/NewsApi';
@@ -76,6 +77,12 @@ export {
      * @property {module:com.worldnewsapi.client/com.worldnewsapi.client.model/InlineResponse2002}
      */
     InlineResponse2002,
+
+    /**
+     * The InlineResponse2003 model constructor.
+     * @property {module:com.worldnewsapi.client/com.worldnewsapi.client.model/InlineResponse2003}
+     */
+    InlineResponse2003,
 
     /**
      * The InlineResponse200News model constructor.

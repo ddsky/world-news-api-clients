@@ -26,6 +26,7 @@ import com.android.volley.VolleyError;
 import com.worldnewsapi.client.model.InlineResponse200;
 import com.worldnewsapi.client.model.InlineResponse2001;
 import com.worldnewsapi.client.model.InlineResponse2002;
+import com.worldnewsapi.client.model.InlineResponse2003;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
@@ -200,25 +201,25 @@ public class NewsApi {
     }
   }
   /**
-  * Extract News
+  * Extract News Links
   * Extract a news links from a news website. 
    * @param url The url from which links should be extracted.
    * @param apiKey Your API key.
    * @param prefix The prefix the news links must start with.
    * @param subDomain Whether to include links to news on sub-domains.
-   * @return Object
+   * @return InlineResponse2002
   */
-  public Object extractNews_1 (String url, String apiKey, String prefix, Boolean subDomain) throws TimeoutException, ExecutionException, InterruptedException, ApiException {
+  public InlineResponse2002 extractNewsLinks (String url, String apiKey, String prefix, Boolean subDomain) throws TimeoutException, ExecutionException, InterruptedException, ApiException {
     Object postBody = null;
     // verify the required parameter 'url' is set
     if (url == null) {
-      VolleyError error = new VolleyError("Missing the required parameter 'url' when calling extractNews_1",
-        new ApiException(400, "Missing the required parameter 'url' when calling extractNews_1"));
+      VolleyError error = new VolleyError("Missing the required parameter 'url' when calling extractNewsLinks",
+        new ApiException(400, "Missing the required parameter 'url' when calling extractNewsLinks"));
     }
     // verify the required parameter 'apiKey' is set
     if (apiKey == null) {
-      VolleyError error = new VolleyError("Missing the required parameter 'apiKey' when calling extractNews_1",
-        new ApiException(400, "Missing the required parameter 'apiKey' when calling extractNews_1"));
+      VolleyError error = new VolleyError("Missing the required parameter 'apiKey' when calling extractNewsLinks",
+        new ApiException(400, "Missing the required parameter 'apiKey' when calling extractNewsLinks"));
     }
 
     // create path and map variables
@@ -252,7 +253,7 @@ public class NewsApi {
     try {
       String localVarResponse = apiInvoker.invokeAPI (basePath, path, "GET", queryParams, postBody, headerParams, formParams, contentType, authNames);
       if (localVarResponse != null) {
-         return (Object) ApiInvoker.deserialize(localVarResponse, "", Object.class);
+         return (InlineResponse2002) ApiInvoker.deserialize(localVarResponse, "", InlineResponse2002.class);
       } else {
          return null;
       }
@@ -274,22 +275,22 @@ public class NewsApi {
   }
 
       /**
-   * Extract News
+   * Extract News Links
    * Extract a news links from a news website. 
    * @param url The url from which links should be extracted.   * @param apiKey Your API key.   * @param prefix The prefix the news links must start with.   * @param subDomain Whether to include links to news on sub-domains.
   */
-  public void extractNews_1 (String url, String apiKey, String prefix, Boolean subDomain, final Response.Listener<Object> responseListener, final Response.ErrorListener errorListener) {
+  public void extractNewsLinks (String url, String apiKey, String prefix, Boolean subDomain, final Response.Listener<InlineResponse2002> responseListener, final Response.ErrorListener errorListener) {
     Object postBody = null;
 
     // verify the required parameter 'url' is set
     if (url == null) {
-      VolleyError error = new VolleyError("Missing the required parameter 'url' when calling extractNews_1",
-        new ApiException(400, "Missing the required parameter 'url' when calling extractNews_1"));
+      VolleyError error = new VolleyError("Missing the required parameter 'url' when calling extractNewsLinks",
+        new ApiException(400, "Missing the required parameter 'url' when calling extractNewsLinks"));
     }
     // verify the required parameter 'apiKey' is set
     if (apiKey == null) {
-      VolleyError error = new VolleyError("Missing the required parameter 'apiKey' when calling extractNews_1",
-        new ApiException(400, "Missing the required parameter 'apiKey' when calling extractNews_1"));
+      VolleyError error = new VolleyError("Missing the required parameter 'apiKey' when calling extractNewsLinks",
+        new ApiException(400, "Missing the required parameter 'apiKey' when calling extractNewsLinks"));
     }
 
     // create path and map variables
@@ -332,7 +333,7 @@ public class NewsApi {
           @Override
           public void onResponse(String localVarResponse) {
             try {
-              responseListener.onResponse((Object) ApiInvoker.deserialize(localVarResponse,  "", Object.class));
+              responseListener.onResponse((InlineResponse2002) ApiInvoker.deserialize(localVarResponse,  "", InlineResponse2002.class));
             } catch (ApiException exception) {
                errorListener.onErrorResponse(new VolleyError(exception));
             }
@@ -351,9 +352,9 @@ public class NewsApi {
   * Get Geo Coordinates
   * Get the geo coordinates for a location. The location can be an exact address but also just the name of a city or country.
    * @param location The address or name of the location, e.g. Tokyo, Japan.
-   * @return InlineResponse2002
+   * @return InlineResponse2003
   */
-  public InlineResponse2002 geoCoordinates (String location) throws TimeoutException, ExecutionException, InterruptedException, ApiException {
+  public InlineResponse2003 geoCoordinates (String location) throws TimeoutException, ExecutionException, InterruptedException, ApiException {
     Object postBody = null;
     // verify the required parameter 'location' is set
     if (location == null) {
@@ -389,7 +390,7 @@ public class NewsApi {
     try {
       String localVarResponse = apiInvoker.invokeAPI (basePath, path, "GET", queryParams, postBody, headerParams, formParams, contentType, authNames);
       if (localVarResponse != null) {
-         return (InlineResponse2002) ApiInvoker.deserialize(localVarResponse, "", InlineResponse2002.class);
+         return (InlineResponse2003) ApiInvoker.deserialize(localVarResponse, "", InlineResponse2003.class);
       } else {
          return null;
       }
@@ -415,7 +416,7 @@ public class NewsApi {
    * Get the geo coordinates for a location. The location can be an exact address but also just the name of a city or country.
    * @param location The address or name of the location, e.g. Tokyo, Japan.
   */
-  public void geoCoordinates (String location, final Response.Listener<InlineResponse2002> responseListener, final Response.ErrorListener errorListener) {
+  public void geoCoordinates (String location, final Response.Listener<InlineResponse2003> responseListener, final Response.ErrorListener errorListener) {
     Object postBody = null;
 
     // verify the required parameter 'location' is set
@@ -461,7 +462,7 @@ public class NewsApi {
           @Override
           public void onResponse(String localVarResponse) {
             try {
-              responseListener.onResponse((InlineResponse2002) ApiInvoker.deserialize(localVarResponse,  "", InlineResponse2002.class));
+              responseListener.onResponse((InlineResponse2003) ApiInvoker.deserialize(localVarResponse,  "", InlineResponse2003.class));
             } catch (ApiException exception) {
                errorListener.onErrorResponse(new VolleyError(exception));
             }

@@ -82,9 +82,7 @@ class InlineResponse2002(ModelNormal):
                 and the value is attribute type.
         """
         return {
-            'latitude': (float,),  # noqa: E501
-            'longitude': (float,),  # noqa: E501
-            'city': (str,),  # noqa: E501
+            'news_links': ([str],),  # noqa: E501
         }
 
     @cached_property
@@ -93,9 +91,7 @@ class InlineResponse2002(ModelNormal):
 
 
     attribute_map = {
-        'latitude': 'latitude',  # noqa: E501
-        'longitude': 'longitude',  # noqa: E501
-        'city': 'city',  # noqa: E501
+        'news_links': 'news_links',  # noqa: E501
     }
 
     read_only_vars = {
@@ -105,12 +101,8 @@ class InlineResponse2002(ModelNormal):
 
     @classmethod
     @convert_js_args_to_python_args
-    def _from_openapi_data(cls, latitude, longitude, *args, **kwargs):  # noqa: E501
+    def _from_openapi_data(cls, *args, **kwargs):  # noqa: E501
         """InlineResponse2002 - a model defined in OpenAPI
-
-        Args:
-            latitude (float):
-            longitude (float):
 
         Keyword Args:
             _check_type (bool): if True, values for parameters in openapi_types
@@ -143,7 +135,7 @@ class InlineResponse2002(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            city (str): [optional]  # noqa: E501
+            news_links ([str]): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -171,8 +163,6 @@ class InlineResponse2002(ModelNormal):
         self._configuration = _configuration
         self._visited_composed_classes = _visited_composed_classes + (self.__class__,)
 
-        self.latitude = latitude
-        self.longitude = longitude
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
                         self._configuration is not None and \
@@ -193,12 +183,8 @@ class InlineResponse2002(ModelNormal):
     ])
 
     @convert_js_args_to_python_args
-    def __init__(self, latitude, longitude, *args, **kwargs):  # noqa: E501
+    def __init__(self, *args, **kwargs):  # noqa: E501
         """InlineResponse2002 - a model defined in OpenAPI
-
-        Args:
-            latitude (float):
-            longitude (float):
 
         Keyword Args:
             _check_type (bool): if True, values for parameters in openapi_types
@@ -231,7 +217,7 @@ class InlineResponse2002(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            city (str): [optional]  # noqa: E501
+            news_links ([str]): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -257,8 +243,6 @@ class InlineResponse2002(ModelNormal):
         self._configuration = _configuration
         self._visited_composed_classes = _visited_composed_classes + (self.__class__,)
 
-        self.latitude = latitude
-        self.longitude = longitude
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
                         self._configuration is not None and \

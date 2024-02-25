@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Text** | Pointer to **string** |  | [optional] 
 **Summary** | Pointer to **string** |  | [optional] 
 **Url** | Pointer to **string** |  | [optional] 
-**Image** | Pointer to **string** |  | [optional] 
+**Image** | Pointer to **NullableString** |  | [optional] 
 **PublishDate** | Pointer to **string** |  | [optional] 
 **Author** | Pointer to **string** |  | [optional] 
 **Language** | Pointer to **string** |  | [optional] 
@@ -185,6 +185,16 @@ SetImage sets Image field to given value.
 
 HasImage returns a boolean if a field has been set.
 
+### SetImageNil
+
+`func (o *News) SetImageNil(b bool)`
+
+ SetImageNil sets the value for Image to be an explicit nil
+
+### UnsetImage
+`func (o *News) UnsetImage()`
+
+UnsetImage ensures that no value is present for Image, not even an explicit nil
 ### GetPublishDate
 
 `func (o *News) GetPublishDate() string`

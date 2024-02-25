@@ -44,6 +44,7 @@ Import the following:
 #import <OpenAPIClient/OAIInlineResponse200.h>
 #import <OpenAPIClient/OAIInlineResponse2001.h>
 #import <OpenAPIClient/OAIInlineResponse2002.h>
+#import <OpenAPIClient/OAIInlineResponse2003.h>
 #import <OpenAPIClient/OAIInlineResponse200News.h>
 #import <OpenAPIClient/OAINews.h>
 // load API classes for accessing endpoints
@@ -100,7 +101,7 @@ All URIs are relative to *https://api.worldnewsapi.com*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *OAINewsApi* | [**extractNews**](docs/OAINewsApi.md#extractnews) | **GET** /extract-news | Extract News
-*OAINewsApi* | [**extractNews_0**](docs/OAINewsApi.md#extractnews_0) | **GET** /extract-news-links | Extract News
+*OAINewsApi* | [**extractNewsLinks**](docs/OAINewsApi.md#extractnewslinks) | **GET** /extract-news-links | Extract News Links
 *OAINewsApi* | [**geoCoordinates**](docs/OAINewsApi.md#geocoordinates) | **GET** /geo-coordinates | Get Geo Coordinates
 *OAINewsApi* | [**newsWebsiteToRSSFeed**](docs/OAINewsApi.md#newswebsitetorssfeed) | **GET** /feed.rss | News Website to RSS Feed
 *OAINewsApi* | [**searchNews**](docs/OAINewsApi.md#searchnews) | **GET** /search-news | Search News
@@ -111,6 +112,7 @@ Class | Method | HTTP request | Description
  - [OAIInlineResponse200](docs/OAIInlineResponse200.md)
  - [OAIInlineResponse2001](docs/OAIInlineResponse2001.md)
  - [OAIInlineResponse2002](docs/OAIInlineResponse2002.md)
+ - [OAIInlineResponse2003](docs/OAIInlineResponse2003.md)
  - [OAIInlineResponse200News](docs/OAIInlineResponse200News.md)
  - [OAINews](docs/OAINews.md)
 

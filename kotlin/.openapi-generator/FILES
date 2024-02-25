@@ -1,9 +1,9 @@
-.openapi-generator-ignore
 README.md
 build.gradle
 docs/InlineResponse200.md
 docs/InlineResponse2001.md
 docs/InlineResponse2002.md
+docs/InlineResponse2003.md
 docs/InlineResponse200News.md
 docs/News.md
 docs/NewsApi.md
@@ -16,6 +16,7 @@ src/main/kotlin/com/worldnewsapi/NewsApi.kt
 src/main/kotlin/com/worldnewsapi/client/model/InlineResponse200.kt
 src/main/kotlin/com/worldnewsapi/client/model/InlineResponse2001.kt
 src/main/kotlin/com/worldnewsapi/client/model/InlineResponse2002.kt
+src/main/kotlin/com/worldnewsapi/client/model/InlineResponse2003.kt
 src/main/kotlin/com/worldnewsapi/client/model/InlineResponse200News.kt
 src/main/kotlin/com/worldnewsapi/client/model/News.kt
 src/main/kotlin/org/openapitools/client/infrastructure/ApiAbstractions.kt

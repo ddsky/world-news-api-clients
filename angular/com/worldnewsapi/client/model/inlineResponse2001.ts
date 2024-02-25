@@ -15,7 +15,7 @@ export interface InlineResponse2001 {
     title?: string;
     text?: string;
     url?: string;
-    image?: string;
+    image?: string | null;
     author?: string;
     language?: string;
     source_country?: string;

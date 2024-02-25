@@ -22,12 +22,10 @@ class InlineResponse2002 {
     /**
      * Constructs a new <code>InlineResponse2002</code>.
      * @alias module:com.worldnewsapi.client/com.worldnewsapi.client.model/InlineResponse2002
-     * @param latitude {Number} 
-     * @param longitude {Number} 
      */
-    constructor(latitude, longitude) { 
+    constructor() { 
         
-        InlineResponse2002.initialize(this, latitude, longitude);
+        InlineResponse2002.initialize(this);
     }
 
     /**
@@ -35,9 +33,7 @@ class InlineResponse2002 {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, latitude, longitude) { 
-        obj['latitude'] = latitude;
-        obj['longitude'] = longitude;
+    static initialize(obj) { 
     }
 
     /**
@@ -51,14 +47,8 @@ class InlineResponse2002 {
         if (data) {
             obj = obj || new InlineResponse2002();
 
-            if (data.hasOwnProperty('latitude')) {
-                obj['latitude'] = ApiClient.convertToType(data['latitude'], 'Number');
-            }
-            if (data.hasOwnProperty('longitude')) {
-                obj['longitude'] = ApiClient.convertToType(data['longitude'], 'Number');
-            }
-            if (data.hasOwnProperty('city')) {
-                obj['city'] = ApiClient.convertToType(data['city'], 'String');
+            if (data.hasOwnProperty('news_links')) {
+                obj['news_links'] = ApiClient.convertToType(data['news_links'], ['String']);
             }
         }
         return obj;
@@ -68,19 +58,9 @@ class InlineResponse2002 {
 }
 
 /**
- * @member {Number} latitude
+ * @member {Array.<String>} news_links
  */
-InlineResponse2002.prototype['latitude'] = undefined;
-
-/**
- * @member {Number} longitude
- */
-InlineResponse2002.prototype['longitude'] = undefined;
-
-/**
- * @member {String} city
- */
-InlineResponse2002.prototype['city'] = undefined;
+InlineResponse2002.prototype['news_links'] = undefined;
 
 
 

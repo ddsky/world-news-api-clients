@@ -8,6 +8,7 @@ com/worldnewsapi/client/index.ts
 com/worldnewsapi/client/model/inlineResponse200.ts
 com/worldnewsapi/client/model/inlineResponse2001.ts
 com/worldnewsapi/client/model/inlineResponse2002.ts
+com/worldnewsapi/client/model/inlineResponse2003.ts
 com/worldnewsapi/client/model/inlineResponse200News.ts
 com/worldnewsapi/client/model/models.ts
 com/worldnewsapi/client/model/news.ts

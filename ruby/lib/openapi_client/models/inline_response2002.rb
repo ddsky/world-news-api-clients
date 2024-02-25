@@ -15,18 +15,12 @@ require 'time'
 
 module OpenapiClient
   class InlineResponse2002
-    attr_accessor :latitude
-
-    attr_accessor :longitude
-
-    attr_accessor :city
+    attr_accessor :news_links
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'latitude' => :'latitude',
-        :'longitude' => :'longitude',
-        :'city' => :'city'
+        :'news_links' => :'news_links'
       }
     end
 
@@ -38,9 +32,7 @@ module OpenapiClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'latitude' => :'Float',
-        :'longitude' => :'Float',
-        :'city' => :'String'
+        :'news_links' => :'Array<String>'
       }
     end
 
@@ -65,16 +57,10 @@ module OpenapiClient
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'latitude')
-        self.latitude = attributes[:'latitude']
-      end
-
-      if attributes.key?(:'longitude')
-        self.longitude = attributes[:'longitude']
-      end
-
-      if attributes.key?(:'city')
-        self.city = attributes[:'city']
+      if attributes.key?(:'news_links')
+        if (value = attributes[:'news_links']).is_a?(Array)
+          self.news_links = value
+        end
       end
     end
 
@@ -82,22 +68,12 @@ module OpenapiClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @latitude.nil?
-        invalid_properties.push('invalid value for "latitude", latitude cannot be nil.')
-      end
-
-      if @longitude.nil?
-        invalid_properties.push('invalid value for "longitude", longitude cannot be nil.')
-      end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @latitude.nil?
-      return false if @longitude.nil?
       true
     end
 
@@ -106,9 +82,7 @@ module OpenapiClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          latitude == o.latitude &&
-          longitude == o.longitude &&
-          city == o.city
+          news_links == o.news_links
     end
 
     # @see the `==` method
@@ -120,7 +94,7 @@ module OpenapiClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [latitude, longitude, city].hash
+      [news_links].hash
     end
 
     # Builds the object from hash

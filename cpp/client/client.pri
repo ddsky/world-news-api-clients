@@ -5,6 +5,7 @@ HEADERS += \
     $${PWD}/OAIInline_response_200.h \
     $${PWD}/OAIInline_response_200_1.h \
     $${PWD}/OAIInline_response_200_2.h \
+    $${PWD}/OAIInline_response_200_3.h \
     $${PWD}/OAIInline_response_200_news.h \
     $${PWD}/OAINews.h \
 # APIs
@@ -24,6 +25,7 @@ SOURCES += \
     $${PWD}/OAIInline_response_200.cpp \
     $${PWD}/OAIInline_response_200_1.cpp \
     $${PWD}/OAIInline_response_200_2.cpp \
+    $${PWD}/OAIInline_response_200_3.cpp \
     $${PWD}/OAIInline_response_200_news.cpp \
     $${PWD}/OAINews.cpp \
 # APIs

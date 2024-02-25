@@ -19,20 +19,20 @@ namespace com.worldnewsapi
         /// <returns>InlineResponse2001</returns>
         InlineResponse2001 ExtractNews (string url, bool? analyze);
         /// <summary>
-        /// Extract News Extract a news links from a news website. 
+        /// Extract News Links Extract a news links from a news website. 
         /// </summary>
         /// <param name="url">The url from which links should be extracted.</param>
         /// <param name="apiKey">Your API key.</param>
         /// <param name="prefix">The prefix the news links must start with.</param>
         /// <param name="subDomain">Whether to include links to news on sub-domains.</param>
-        /// <returns>Object</returns>
-        Object ExtractNews_1 (string url, string apiKey, string prefix, bool? subDomain);
+        /// <returns>InlineResponse2002</returns>
+        InlineResponse2002 ExtractNewsLinks (string url, string apiKey, string prefix, bool? subDomain);
         /// <summary>
         /// Get Geo Coordinates Get the geo coordinates for a location. The location can be an exact address but also just the name of a city or country.
         /// </summary>
         /// <param name="location">The address or name of the location, e.g. Tokyo, Japan.</param>
-        /// <returns>InlineResponse2002</returns>
-        InlineResponse2002 GeoCoordinates (string location);
+        /// <returns>InlineResponse2003</returns>
+        InlineResponse2003 GeoCoordinates (string location);
         /// <summary>
         /// News Website to RSS Feed Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page. 
         /// </summary>
@@ -159,21 +159,21 @@ namespace com.worldnewsapi
         }
 
         /// <summary>
-        /// Extract News Extract a news links from a news website. 
+        /// Extract News Links Extract a news links from a news website. 
         /// </summary>
         /// <param name="url">The url from which links should be extracted.</param>
         /// <param name="apiKey">Your API key.</param>
         /// <param name="prefix">The prefix the news links must start with.</param>
         /// <param name="subDomain">Whether to include links to news on sub-domains.</param>
-        /// <returns>Object</returns>
-        public Object ExtractNews_1 (string url, string apiKey, string prefix, bool? subDomain)
+        /// <returns>InlineResponse2002</returns>
+        public InlineResponse2002 ExtractNewsLinks (string url, string apiKey, string prefix, bool? subDomain)
         {
             
             // verify the required parameter 'url' is set
-            if (url == null) throw new ApiException(400, "Missing required parameter 'url' when calling ExtractNews_1");
+            if (url == null) throw new ApiException(400, "Missing required parameter 'url' when calling ExtractNewsLinks");
             
             // verify the required parameter 'apiKey' is set
-            if (apiKey == null) throw new ApiException(400, "Missing required parameter 'apiKey' when calling ExtractNews_1");
+            if (apiKey == null) throw new ApiException(400, "Missing required parameter 'apiKey' when calling ExtractNewsLinks");
             
 
             var path = "/extract-news-links";
@@ -197,19 +197,19 @@ namespace com.worldnewsapi
             IRestResponse response = (IRestResponse) ApiClient.CallApi(path, Method.GET, queryParams, postBody, headerParams, formParams, fileParams, authSettings);
 
             if (((int)response.StatusCode) >= 400)
-                throw new ApiException ((int)response.StatusCode, "Error calling ExtractNews_1: " + response.Content, response.Content);
+                throw new ApiException ((int)response.StatusCode, "Error calling ExtractNewsLinks: " + response.Content, response.Content);
             else if (((int)response.StatusCode) == 0)
-                throw new ApiException ((int)response.StatusCode, "Error calling ExtractNews_1: " + response.ErrorMessage, response.ErrorMessage);
+                throw new ApiException ((int)response.StatusCode, "Error calling ExtractNewsLinks: " + response.ErrorMessage, response.ErrorMessage);
 
-            return (Object) ApiClient.Deserialize(response.Content, typeof(Object), response.Headers);
+            return (InlineResponse2002) ApiClient.Deserialize(response.Content, typeof(InlineResponse2002), response.Headers);
         }
 
         /// <summary>
         /// Get Geo Coordinates Get the geo coordinates for a location. The location can be an exact address but also just the name of a city or country.
         /// </summary>
         /// <param name="location">The address or name of the location, e.g. Tokyo, Japan.</param>
-        /// <returns>InlineResponse2002</returns>
-        public InlineResponse2002 GeoCoordinates (string location)
+        /// <returns>InlineResponse2003</returns>
+        public InlineResponse2003 GeoCoordinates (string location)
         {
             
             // verify the required parameter 'location' is set
@@ -238,7 +238,7 @@ namespace com.worldnewsapi
             else if (((int)response.StatusCode) == 0)
                 throw new ApiException ((int)response.StatusCode, "Error calling GeoCoordinates: " + response.ErrorMessage, response.ErrorMessage);
 
-            return (InlineResponse2002) ApiClient.Deserialize(response.Content, typeof(InlineResponse2002), response.Headers);
+            return (InlineResponse2003) ApiClient.Deserialize(response.Content, typeof(InlineResponse2003), response.Headers);
         }
 
         /// <summary>

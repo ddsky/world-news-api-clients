@@ -5,7 +5,7 @@ All URIs are relative to *https://api.worldnewsapi.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**extractNews**](NewsApi.md#extractNews) | **GET** /extract-news | Extract News
-[**extractNews_0**](NewsApi.md#extractNews_0) | **GET** /extract-news-links | Extract News
+[**extractNewsLinks**](NewsApi.md#extractNewsLinks) | **GET** /extract-news-links | Extract News Links
 [**geoCoordinates**](NewsApi.md#geoCoordinates) | **GET** /geo-coordinates | Get Geo Coordinates
 [**newsWebsiteToRSSFeed**](NewsApi.md#newsWebsiteToRSSFeed) | **GET** /feed.rss | News Website to RSS Feed
 [**searchNews**](NewsApi.md#searchNews) | **GET** /search-news | Search News
@@ -68,8 +68,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-# **extractNews_0**
-> any extractNews_0()
+# **extractNewsLinks**
+> InlineResponse2002 extractNewsLinks()
 
 Extract a news links from a news website. 
 
@@ -83,7 +83,7 @@ import * as fs from 'fs';
 const configuration = .createConfiguration();
 const apiInstance = new .NewsApi(configuration);
 
-let body:.NewsApiExtractNews0Request = {
+let body:.NewsApiExtractNewsLinksRequest = {
   // string | The url from which links should be extracted.
   url: "https://nytimes.com",
   // string | Your API key.
@@ -94,7 +94,7 @@ let body:.NewsApiExtractNews0Request = {
   subDomain: true,
 };
 
-apiInstance.extractNews_0(body).then((data:any) => {
+apiInstance.extractNewsLinks(body).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
 }).catch((error:any) => console.error(error));
 ```
@@ -112,7 +112,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**any**
+**InlineResponse2002**
 
 ### Authorization
 
@@ -121,7 +121,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: , application/json
+ - **Accept**: application/json
 
 
 ### HTTP response details
@@ -137,7 +137,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **geoCoordinates**
-> InlineResponse2002 geoCoordinates()
+> InlineResponse2003 geoCoordinates()
 
 Get the geo coordinates for a location. The location can be an exact address but also just the name of a city or country.
 
@@ -171,7 +171,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**InlineResponse2002**
+**InlineResponse2003**
 
 ### Authorization
 
@@ -241,7 +241,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: , application/json, application/xml
+ - **Accept**: application/xml
 
 
 ### HTTP response details
