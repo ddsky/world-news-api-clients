@@ -10,9 +10,9 @@
  * Do not edit the class manually.
  */
 
-package org.openapitools.client.auth;
+package com.worldnewsapi.client.auth;
 
-import org.openapitools.client.Pair;
+import com.worldnewsapi.client.Pair;
 
 import android.util.Base64;
 

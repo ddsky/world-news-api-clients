@@ -10,23 +10,23 @@
  * Do not edit the class manually.
  */
 
-package org.openapitools.client.api;
+package com.worldnewsapi;
 
-import org.openapitools.client.ApiInvoker;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Pair;
+import com.worldnewsapi.client.ApiInvoker;
+import com.worldnewsapi.client.ApiException;
+import com.worldnewsapi.client.Pair;
 
-import org.openapitools.client.model.*;
+import com.worldnewsapi.client.model.*;
 
 import java.util.*;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 
-import org.openapitools.client.model.ExtractLinksResponse;
-import org.openapitools.client.model.ExtractNewsResponse;
-import org.openapitools.client.model.GeoCoordinatesResponse;
-import org.openapitools.client.model.SearchNewsResponse;
+import com.worldnewsapi.client.model.ExtractLinksResponse;
+import com.worldnewsapi.client.model.ExtractNewsResponse;
+import com.worldnewsapi.client.model.GeoCoordinatesResponse;
+import com.worldnewsapi.client.model.SearchNewsResponse;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.entity.mime.MultipartEntityBuilder;

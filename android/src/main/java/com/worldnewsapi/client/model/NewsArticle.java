@@ -10,23 +10,29 @@
  * Do not edit the class manually.
  */
 
-package org.openapitools.client.model;
+package com.worldnewsapi.client.model;
 
 import java.math.BigDecimal;
 import io.swagger.annotations.*;
 import com.google.gson.annotations.SerializedName;
 
 @ApiModel(description = "")
-public class ExtractNewsResponse {
+public class NewsArticle {
   
+  @SerializedName("id")
+  private Integer id = null;
   @SerializedName("title")
   private String title = null;
   @SerializedName("text")
   private String text = null;
+  @SerializedName("summary")
+  private String summary = null;
   @SerializedName("url")
   private String url = null;
   @SerializedName("image")
   private String image = null;
+  @SerializedName("publish_date")
+  private String publishDate = null;
   @SerializedName("author")
   private String author = null;
   @SerializedName("language")
@@ -35,6 +41,16 @@ public class ExtractNewsResponse {
   private String sourceCountry = null;
   @SerializedName("sentiment")
   private BigDecimal sentiment = null;
+
+  /**
+   **/
+  @ApiModelProperty(value = "")
+  public Integer getId() {
+    return id;
+  }
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
   /**
    **/
@@ -59,6 +75,16 @@ public class ExtractNewsResponse {
   /**
    **/
   @ApiModelProperty(value = "")
+  public String getSummary() {
+    return summary;
+  }
+  public void setSummary(String summary) {
+    this.summary = summary;
+  }
+
+  /**
+   **/
+  @ApiModelProperty(value = "")
   public String getUrl() {
     return url;
   }
@@ -74,6 +100,16 @@ public class ExtractNewsResponse {
   }
   public void setImage(String image) {
     this.image = image;
+  }
+
+  /**
+   **/
+  @ApiModelProperty(value = "")
+  public String getPublishDate() {
+    return publishDate;
+  }
+  public void setPublishDate(String publishDate) {
+    this.publishDate = publishDate;
   }
 
   /**
@@ -125,24 +161,30 @@ public class ExtractNewsResponse {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    ExtractNewsResponse extractNewsResponse = (ExtractNewsResponse) o;
-    return (this.title == null ? extractNewsResponse.title == null : this.title.equals(extractNewsResponse.title)) &&
-        (this.text == null ? extractNewsResponse.text == null : this.text.equals(extractNewsResponse.text)) &&
-        (this.url == null ? extractNewsResponse.url == null : this.url.equals(extractNewsResponse.url)) &&
-        (this.image == null ? extractNewsResponse.image == null : this.image.equals(extractNewsResponse.image)) &&
-        (this.author == null ? extractNewsResponse.author == null : this.author.equals(extractNewsResponse.author)) &&
-        (this.language == null ? extractNewsResponse.language == null : this.language.equals(extractNewsResponse.language)) &&
-        (this.sourceCountry == null ? extractNewsResponse.sourceCountry == null : this.sourceCountry.equals(extractNewsResponse.sourceCountry)) &&
-        (this.sentiment == null ? extractNewsResponse.sentiment == null : this.sentiment.equals(extractNewsResponse.sentiment));
+    NewsArticle newsArticle = (NewsArticle) o;
+    return (this.id == null ? newsArticle.id == null : this.id.equals(newsArticle.id)) &&
+        (this.title == null ? newsArticle.title == null : this.title.equals(newsArticle.title)) &&
+        (this.text == null ? newsArticle.text == null : this.text.equals(newsArticle.text)) &&
+        (this.summary == null ? newsArticle.summary == null : this.summary.equals(newsArticle.summary)) &&
+        (this.url == null ? newsArticle.url == null : this.url.equals(newsArticle.url)) &&
+        (this.image == null ? newsArticle.image == null : this.image.equals(newsArticle.image)) &&
+        (this.publishDate == null ? newsArticle.publishDate == null : this.publishDate.equals(newsArticle.publishDate)) &&
+        (this.author == null ? newsArticle.author == null : this.author.equals(newsArticle.author)) &&
+        (this.language == null ? newsArticle.language == null : this.language.equals(newsArticle.language)) &&
+        (this.sourceCountry == null ? newsArticle.sourceCountry == null : this.sourceCountry.equals(newsArticle.sourceCountry)) &&
+        (this.sentiment == null ? newsArticle.sentiment == null : this.sentiment.equals(newsArticle.sentiment));
   }
 
   @Override
   public int hashCode() {
     int result = 17;
+    result = 31 * result + (this.id == null ? 0: this.id.hashCode());
     result = 31 * result + (this.title == null ? 0: this.title.hashCode());
     result = 31 * result + (this.text == null ? 0: this.text.hashCode());
+    result = 31 * result + (this.summary == null ? 0: this.summary.hashCode());
     result = 31 * result + (this.url == null ? 0: this.url.hashCode());
     result = 31 * result + (this.image == null ? 0: this.image.hashCode());
+    result = 31 * result + (this.publishDate == null ? 0: this.publishDate.hashCode());
     result = 31 * result + (this.author == null ? 0: this.author.hashCode());
     result = 31 * result + (this.language == null ? 0: this.language.hashCode());
     result = 31 * result + (this.sourceCountry == null ? 0: this.sourceCountry.hashCode());
@@ -153,12 +195,15 @@ public class ExtractNewsResponse {
   @Override
   public String toString()  {
     StringBuilder sb = new StringBuilder();
-    sb.append("class ExtractNewsResponse {\n");
+    sb.append("class NewsArticle {\n");
     
+    sb.append("  id: ").append(id).append("\n");
     sb.append("  title: ").append(title).append("\n");
     sb.append("  text: ").append(text).append("\n");
+    sb.append("  summary: ").append(summary).append("\n");
     sb.append("  url: ").append(url).append("\n");
     sb.append("  image: ").append(image).append("\n");
+    sb.append("  publishDate: ").append(publishDate).append("\n");
     sb.append("  author: ").append(author).append("\n");
     sb.append("  language: ").append(language).append("\n");
     sb.append("  sourceCountry: ").append(sourceCountry).append("\n");

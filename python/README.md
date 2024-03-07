@@ -5,7 +5,7 @@ The World News API gives you access to thousands of news sources in over 50 lang
 This is the python-package for easy acccess to the api.
 
 - API version: 1.1
-- Package version: 1.0.9
+- Package version: 1.0.10
 
 ## Resources
 

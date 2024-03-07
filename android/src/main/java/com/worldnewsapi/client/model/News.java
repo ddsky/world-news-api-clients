@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-package org.openapitools.client.model;
+package com.worldnewsapi.client.model;
 
 import java.math.BigDecimal;
 import io.swagger.annotations.*;

@@ -10,10 +10,10 @@
  * Do not edit the class manually.
  */
 
-package org.openapitools.client.model;
+package com.worldnewsapi.client.model;
 
+import com.worldnewsapi.client.model.NewsArticle;
 import java.util.*;
-import org.openapitools.client.model.NewsArticle;
 import io.swagger.annotations.*;
 import com.google.gson.annotations.SerializedName;
 

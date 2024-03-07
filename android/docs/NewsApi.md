@@ -24,7 +24,7 @@ Extract a news entry from a news site.
 
 ```java
 // Import classes:
-//import org.openapitools.client.api.NewsApi;
+//import com.worldnewsapi.NewsApi;
 
 NewsApi apiInstance = new NewsApi();
 String url = https://www.bbc.com/news/world-us-canada-59340789; // String | The url of the news.
@@ -72,7 +72,7 @@ Extract a news links from a news website.
 
 ```java
 // Import classes:
-//import org.openapitools.client.api.NewsApi;
+//import com.worldnewsapi.NewsApi;
 
 NewsApi apiInstance = new NewsApi();
 String url = https://nytimes.com; // String | The url from which links should be extracted.
@@ -124,7 +124,7 @@ Get the geo coordinates for a location. The location can be an exact address but
 
 ```java
 // Import classes:
-//import org.openapitools.client.api.NewsApi;
+//import com.worldnewsapi.NewsApi;
 
 NewsApi apiInstance = new NewsApi();
 String location = Tokyo, Japan; // String | The address or name of the location, e.g. Tokyo, Japan.
@@ -170,7 +170,7 @@ Turn a news website into an RSS feed. Any page of a news website can be turned i
 
 ```java
 // Import classes:
-//import org.openapitools.client.api.NewsApi;
+//import com.worldnewsapi.NewsApi;
 
 NewsApi apiInstance = new NewsApi();
 String url = https://nytimes.com; // String | The url from which links should be extracted.
@@ -220,7 +220,7 @@ Search for news.
 
 ```java
 // Import classes:
-//import org.openapitools.client.api.NewsApi;
+//import com.worldnewsapi.NewsApi;
 
 NewsApi apiInstance = new NewsApi();
 String text = hurricane; // String | The text to match in the news content.

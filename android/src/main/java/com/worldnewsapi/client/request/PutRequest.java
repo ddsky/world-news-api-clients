@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-package org.openapitools.client.request;
+package com.worldnewsapi.client.request;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
@@ -28,7 +28,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PatchRequest extends Request<String> {
+public class PutRequest extends Request<String> {
 
   HttpEntity entity;
 
@@ -36,8 +36,8 @@ public class PatchRequest extends Request<String> {
 
   String contentType;
   Map<String, String> apiHeaders;
-  public PatchRequest(String url, Map<String, String> apiHeaders, String contentType, HttpEntity entity, Response.Listener<String> listener, Response.ErrorListener errorListener) {
-    super(Method.PATCH, url, errorListener);
+  public PutRequest(String url, Map<String, String> apiHeaders, String contentType, HttpEntity entity, Response.Listener<String> listener, Response.ErrorListener errorListener) {
+    super(Method.PUT, url, errorListener);
     mListener = listener;
     this.entity = entity;
     this.contentType = contentType;
@@ -47,7 +47,7 @@ public class PatchRequest extends Request<String> {
   @Override
   public String getBodyContentType() {
     if(entity == null) {
-        return null;
+      return null;
     }
     return entity.getContentType().getValue();
   }
@@ -55,14 +55,14 @@ public class PatchRequest extends Request<String> {
   @Override
   public byte[] getBody() throws AuthFailureError {
     if(entity == null) {
-        return null;
+      return null;
     }
     ByteArrayOutputStream bos = new ByteArrayOutputStream();
     try {
-        entity.writeTo(bos);
+      entity.writeTo(bos);
     }
     catch (IOException e) {
-        VolleyLog.e("IOException writing to ByteArrayOutputStream");
+      VolleyLog.e("IOException writing to ByteArrayOutputStream");
     }
     return bos.toByteArray();
   }

@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-package org.openapitools.client;
+package com.worldnewsapi.client;
 
 public class Pair {
   private String name = "";

@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-package org.openapitools.client;
+package com.worldnewsapi.client;
 
 import com.android.volley.Cache;
 import com.android.volley.DefaultRetryPolicy;
@@ -46,14 +46,14 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import org.openapitools.client.auth.Authentication;
-import org.openapitools.client.auth.ApiKeyAuth;
-import org.openapitools.client.auth.HttpBasicAuth;
-import org.openapitools.client.request.GetRequest;
-import org.openapitools.client.request.PostRequest;
-import org.openapitools.client.request.PutRequest;
-import org.openapitools.client.request.DeleteRequest;
-import org.openapitools.client.request.PatchRequest;
+import com.worldnewsapi.client.auth.Authentication;
+import com.worldnewsapi.client.auth.ApiKeyAuth;
+import com.worldnewsapi.client.auth.HttpBasicAuth;
+import com.worldnewsapi.client.request.GetRequest;
+import com.worldnewsapi.client.request.PostRequest;
+import com.worldnewsapi.client.request.PutRequest;
+import com.worldnewsapi.client.request.DeleteRequest;
+import com.worldnewsapi.client.request.PatchRequest;
 
 public class ApiInvoker {
   private static ApiInvoker INSTANCE;
@@ -199,7 +199,7 @@ public class ApiInvoker {
 
   public static void initializeInstance(Cache cache, Network network, int threadPoolSize, ResponseDelivery delivery, int connectionTimeout) {
     INSTANCE = new ApiInvoker(cache, network, threadPoolSize, delivery, connectionTimeout);
-    setUserAgent("OpenAPI-Generator/1.0.9/android");
+    setUserAgent("OpenAPI-Generator/1.0.10/android");
 
     // Setup authentications (key: authentication name, value: authentication).
     INSTANCE.authentications = new HashMap<String, Authentication>();

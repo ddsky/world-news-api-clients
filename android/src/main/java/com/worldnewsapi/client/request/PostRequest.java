@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-package org.openapitools.client.request;
+package com.worldnewsapi.client.request;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
@@ -28,7 +28,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DeleteRequest extends Request<String> {
+public class PostRequest extends Request<String> {
 
   HttpEntity entity;
 
@@ -36,8 +36,8 @@ public class DeleteRequest extends Request<String> {
 
   String contentType;
   Map<String, String> apiHeaders;
-  public DeleteRequest(String url, Map<String, String> apiHeaders, String contentType, HttpEntity entity, Response.Listener<String> listener, Response.ErrorListener errorListener) {
-    super(Method.DELETE, url, errorListener);
+  public PostRequest(String url, Map<String, String> apiHeaders, String contentType, HttpEntity entity, Response.Listener<String> listener, Response.ErrorListener errorListener) {
+    super(Method.POST, url, errorListener);
     mListener = listener;
     this.entity = entity;
     this.contentType = contentType;
@@ -70,11 +70,11 @@ public class DeleteRequest extends Request<String> {
   @Override
   protected Response<String> parseNetworkResponse(NetworkResponse response) {
     String parsed;
-      try {
-        parsed = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
-      } catch (UnsupportedEncodingException e) {
-        parsed = new String(response.data);
-      }
+    try {
+      parsed = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
+    } catch (UnsupportedEncodingException e) {
+      parsed = new String(response.data);
+    }
     return Response.success(parsed, HttpHeaderParser.parseCacheHeaders(response));
   }
 
@@ -90,13 +90,13 @@ public class DeleteRequest extends Request<String> {
   public Map<String, String> getHeaders() throws AuthFailureError {
     Map<String, String> headers = super.getHeaders();
     if (headers == null || headers.equals(Collections.emptyMap())) {
-      headers = new HashMap<String, String>();
+        headers = new HashMap<String, String>();
     }
     if (apiHeaders != null && !apiHeaders.equals(Collections.emptyMap())) {
-      headers.putAll(apiHeaders);
+        headers.putAll(apiHeaders);
     }
     if(contentType != null) {
-      headers.put("Content-Type", contentType);
+        headers.put("Content-Type", contentType);
     }
 
     return headers;

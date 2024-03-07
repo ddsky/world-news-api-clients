@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-package org.openapitools.client.request;
+package com.worldnewsapi.client.request;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Response;

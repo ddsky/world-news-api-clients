@@ -8,7 +8,7 @@ spec/news_api_spec.lua
 spec/news_article_spec.lua
 spec/news_spec.lua
 spec/search_news_response_spec.lua
-worldnewsapi-1.0.9.rockspec
+worldnewsapi-1.0.10.rockspec
 worldnewsapi/api/news_api.lua
 worldnewsapi/model/extract_links_response.lua
 worldnewsapi/model/extract_news_response.lua

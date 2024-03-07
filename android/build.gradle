@@ -1,5 +1,5 @@
-group = 'org.openapitools'
-project.version = '1.0.9'
+group = 'com.worldnewsapi'
+project.version = '1.0.10'
 
 buildscript {
     repositories {

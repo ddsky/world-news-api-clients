@@ -14,7 +14,7 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-__version__ = "1.0.9"
+__version__ = "1.0.10"
 
 # import apis into sdk package
 from worldnewsapi.api.news_api import NewsApi
