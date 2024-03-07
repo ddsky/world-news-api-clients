@@ -1,5 +1,5 @@
 group = 'org.openapitools'
-project.version = '1.0.8'
+project.version = '1.0.9'
 
 buildscript {
     repositories {

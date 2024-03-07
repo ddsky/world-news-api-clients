@@ -13,7 +13,7 @@
 
 package com.worldnewsapi.client;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-03-07T16:10:59.701327300+01:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-03-07T23:53:17.131657800+01:00[Europe/Berlin]")
 public class Pair {
     private String name = "";
     private String value = "";

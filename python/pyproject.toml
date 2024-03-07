@@ -1,7 +1,7 @@
 
 [tool.poetry]
 name = "worldnewsapi"
-version = "1.0.8"
+version = "1.0.9"
 description = "World News API"
 authors = ["David Urbansky <mail@worldnewsapi.com>"]
 license = "NoLicense"
@@ -73,7 +73,7 @@ disallow_any_generics = true
 # The following section is used by PiPy
 [project]
 name = "worldnewsapi"
-version = "1.0.8"
+version = "1.0.9"
 authors = [
   { name="David Urbansky", email="mail@worldnewsapi.com" },
 ]

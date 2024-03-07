@@ -5,7 +5,7 @@
     <artifactId>java-client</artifactId>
     <packaging>jar</packaging>
     <name>java-client</name>
-    <version>1.0.8</version>
+    <version>1.0.9</version>
     <url>https://worldnewsapi.com/sdks</url>
     <description>Java Client for the World News API</description>
     <scm>
