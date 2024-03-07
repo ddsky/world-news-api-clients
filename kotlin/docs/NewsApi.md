@@ -11,9 +11,9 @@ Method | HTTP request | Description
 [**searchNews**](NewsApi.md#searchNews) | **GET** /search-news | Search News
 
 
-<a name="extractNews"></a>
+<a id="extractNews"></a>
 # **extractNews**
-> InlineResponse2001 extractNews(url, analyze)
+> ExtractNewsResponse extractNews(url, analyze)
 
 Extract News
 
@@ -22,14 +22,14 @@ Extract a news entry from a news site.
 ### Example
 ```kotlin
 // Import classes:
-//import org.openapitools.client.infrastructure.*
-//import com.worldnewsapi.client.model.*
+//import worldnewsapi.infrastructure.*
+//import worldnewsapi.models.*
 
 val apiInstance = NewsApi()
 val url : kotlin.String = https://www.bbc.com/news/world-us-canada-59340789 // kotlin.String | The url of the news.
 val analyze : kotlin.Boolean = true // kotlin.Boolean | Whether to analyze the news (extract entities etc.)
 try {
-    val result : InlineResponse2001 = apiInstance.extractNews(url, analyze)
+    val result : ExtractNewsResponse = apiInstance.extractNews(url, analyze)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling NewsApi#extractNews")
@@ -49,7 +49,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2001**](InlineResponse2001.md)
+[**ExtractNewsResponse**](ExtractNewsResponse.md)
 
 ### Authorization
 
@@ -66,9 +66,9 @@ Configure headerApiKey:
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="extractNewsLinks"></a>
+<a id="extractNewsLinks"></a>
 # **extractNewsLinks**
-> InlineResponse2002 extractNewsLinks(url, apiKey, prefix, subDomain)
+> ExtractLinksResponse extractNewsLinks(url, apiKey, prefix, subDomain)
 
 Extract News Links
 
@@ -77,8 +77,8 @@ Extract a news links from a news website.
 ### Example
 ```kotlin
 // Import classes:
-//import org.openapitools.client.infrastructure.*
-//import com.worldnewsapi.client.model.*
+//import worldnewsapi.infrastructure.*
+//import worldnewsapi.models.*
 
 val apiInstance = NewsApi()
 val url : kotlin.String = https://nytimes.com // kotlin.String | The url from which links should be extracted.
@@ -86,7 +86,7 @@ val apiKey : kotlin.String = abcd1234 // kotlin.String | Your API key.
 val prefix : kotlin.String =  // kotlin.String | The prefix the news links must start with.
 val subDomain : kotlin.Boolean = true // kotlin.Boolean | Whether to include links to news on sub-domains.
 try {
-    val result : InlineResponse2002 = apiInstance.extractNewsLinks(url, apiKey, prefix, subDomain)
+    val result : ExtractLinksResponse = apiInstance.extractNewsLinks(url, apiKey, prefix, subDomain)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling NewsApi#extractNewsLinks")
@@ -108,7 +108,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2002**](InlineResponse2002.md)
+[**ExtractLinksResponse**](ExtractLinksResponse.md)
 
 ### Authorization
 
@@ -125,9 +125,9 @@ Configure headerApiKey:
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="geoCoordinates"></a>
+<a id="geoCoordinates"></a>
 # **geoCoordinates**
-> InlineResponse2003 geoCoordinates(location)
+> GeoCoordinatesResponse geoCoordinates(location)
 
 Get Geo Coordinates
 
@@ -136,13 +136,13 @@ Get the geo coordinates for a location. The location can be an exact address but
 ### Example
 ```kotlin
 // Import classes:
-//import org.openapitools.client.infrastructure.*
-//import com.worldnewsapi.client.model.*
+//import worldnewsapi.infrastructure.*
+//import worldnewsapi.models.*
 
 val apiInstance = NewsApi()
 val location : kotlin.String = Tokyo, Japan // kotlin.String | The address or name of the location, e.g. Tokyo, Japan.
 try {
-    val result : InlineResponse2003 = apiInstance.geoCoordinates(location)
+    val result : GeoCoordinatesResponse = apiInstance.geoCoordinates(location)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling NewsApi#geoCoordinates")
@@ -161,7 +161,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2003**](InlineResponse2003.md)
+[**GeoCoordinatesResponse**](GeoCoordinatesResponse.md)
 
 ### Authorization
 
@@ -178,7 +178,7 @@ Configure headerApiKey:
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="newsWebsiteToRSSFeed"></a>
+<a id="newsWebsiteToRSSFeed"></a>
 # **newsWebsiteToRSSFeed**
 > kotlin.Any newsWebsiteToRSSFeed(url, apiKey, extractNews)
 
@@ -189,8 +189,8 @@ Turn a news website into an RSS feed. Any page of a news website can be turned i
 ### Example
 ```kotlin
 // Import classes:
-//import org.openapitools.client.infrastructure.*
-//import com.worldnewsapi.client.model.*
+//import worldnewsapi.infrastructure.*
+//import worldnewsapi.models.*
 
 val apiInstance = NewsApi()
 val url : kotlin.String = https://nytimes.com // kotlin.String | The url from which links should be extracted.
@@ -235,9 +235,9 @@ Configure headerApiKey:
  - **Content-Type**: Not defined
  - **Accept**: Not defined
 
-<a name="searchNews"></a>
+<a id="searchNews"></a>
 # **searchNews**
-> InlineResponse200 searchNews(text, sourceCountries, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, entities, locationFilter, offset, number, sort, sortDirection)
+> SearchNewsResponse searchNews(text, sourceCountries, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, entities, locationFilter, offset, number, sort, sortDirection)
 
 Search News
 
@@ -246,8 +246,8 @@ Search for news.
 ### Example
 ```kotlin
 // Import classes:
-//import org.openapitools.client.infrastructure.*
-//import com.worldnewsapi.client.model.*
+//import worldnewsapi.infrastructure.*
+//import worldnewsapi.models.*
 
 val apiInstance = NewsApi()
 val text : kotlin.String = hurricane // kotlin.String | The text to match in the news content.
@@ -266,7 +266,7 @@ val number : kotlin.Int = 1 // kotlin.Int | The number of news to return in rang
 val sort : kotlin.String = publish-time // kotlin.String | The sorting criteria.
 val sortDirection : kotlin.String = desc // kotlin.String | Whether to sort ascending or descending.
 try {
-    val result : InlineResponse200 = apiInstance.searchNews(text, sourceCountries, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, entities, locationFilter, offset, number, sort, sortDirection)
+    val result : SearchNewsResponse = apiInstance.searchNews(text, sourceCountries, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, entities, locationFilter, offset, number, sort, sortDirection)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling NewsApi#searchNews")
@@ -299,7 +299,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse200**](InlineResponse200.md)
+[**SearchNewsResponse**](SearchNewsResponse.md)
 
 ### Authorization
 

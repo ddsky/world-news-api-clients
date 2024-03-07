@@ -1,11 +1,12 @@
 .gitignore
+.openapi-generator-ignore
 git_push.sh
 project.clj
 src/world_news_api/api/news.clj
 src/world_news_api/core.clj
-src/world_news_api/specs/inline_response_200.clj
-src/world_news_api/specs/inline_response_200_1.clj
-src/world_news_api/specs/inline_response_200_2.clj
-src/world_news_api/specs/inline_response_200_3.clj
-src/world_news_api/specs/inline_response_200_news.clj
+src/world_news_api/specs/extract_links_response.clj
+src/world_news_api/specs/extract_news_response.clj
+src/world_news_api/specs/geo_coordinates_response.clj
 src/world_news_api/specs/news.clj
+src/world_news_api/specs/news_article.clj
+src/world_news_api/specs/search_news_response.clj

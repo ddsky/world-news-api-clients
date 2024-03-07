@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 ## extractNews
 
-> InlineResponse2001 extractNews(url, analyze)
+> ExtractNewsResponse extractNews(url, analyze)
 
 Extract News
 
@@ -24,13 +24,13 @@ Extract a news entry from a news site.
 
 ```java
 // Import classes:
-//import com.worldnewsapi.NewsApi;
+//import org.openapitools.client.api.NewsApi;
 
 NewsApi apiInstance = new NewsApi();
 String url = https://www.bbc.com/news/world-us-canada-59340789; // String | The url of the news.
 Boolean analyze = true; // Boolean | Whether to analyze the news (extract entities etc.)
 try {
-    InlineResponse2001 result = apiInstance.extractNews(url, analyze);
+    ExtractNewsResponse result = apiInstance.extractNews(url, analyze);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling NewsApi#extractNews");
@@ -48,7 +48,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2001**](InlineResponse2001.md)
+[**ExtractNewsResponse**](ExtractNewsResponse.md)
 
 ### Authorization
 
@@ -62,7 +62,7 @@ Name | Type | Description  | Notes
 
 ## extractNewsLinks
 
-> InlineResponse2002 extractNewsLinks(url, apiKey, prefix, subDomain)
+> ExtractLinksResponse extractNewsLinks(url, apiKey, prefix, subDomain)
 
 Extract News Links
 
@@ -72,7 +72,7 @@ Extract a news links from a news website.
 
 ```java
 // Import classes:
-//import com.worldnewsapi.NewsApi;
+//import org.openapitools.client.api.NewsApi;
 
 NewsApi apiInstance = new NewsApi();
 String url = https://nytimes.com; // String | The url from which links should be extracted.
@@ -80,7 +80,7 @@ String apiKey = abcd1234; // String | Your API key.
 String prefix = ; // String | The prefix the news links must start with.
 Boolean subDomain = true; // Boolean | Whether to include links to news on sub-domains.
 try {
-    InlineResponse2002 result = apiInstance.extractNewsLinks(url, apiKey, prefix, subDomain);
+    ExtractLinksResponse result = apiInstance.extractNewsLinks(url, apiKey, prefix, subDomain);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling NewsApi#extractNewsLinks");
@@ -100,7 +100,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2002**](InlineResponse2002.md)
+[**ExtractLinksResponse**](ExtractLinksResponse.md)
 
 ### Authorization
 
@@ -114,7 +114,7 @@ Name | Type | Description  | Notes
 
 ## geoCoordinates
 
-> InlineResponse2003 geoCoordinates(location)
+> GeoCoordinatesResponse geoCoordinates(location)
 
 Get Geo Coordinates
 
@@ -124,12 +124,12 @@ Get the geo coordinates for a location. The location can be an exact address but
 
 ```java
 // Import classes:
-//import com.worldnewsapi.NewsApi;
+//import org.openapitools.client.api.NewsApi;
 
 NewsApi apiInstance = new NewsApi();
 String location = Tokyo, Japan; // String | The address or name of the location, e.g. Tokyo, Japan.
 try {
-    InlineResponse2003 result = apiInstance.geoCoordinates(location);
+    GeoCoordinatesResponse result = apiInstance.geoCoordinates(location);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling NewsApi#geoCoordinates");
@@ -146,7 +146,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2003**](InlineResponse2003.md)
+[**GeoCoordinatesResponse**](GeoCoordinatesResponse.md)
 
 ### Authorization
 
@@ -170,7 +170,7 @@ Turn a news website into an RSS feed. Any page of a news website can be turned i
 
 ```java
 // Import classes:
-//import com.worldnewsapi.NewsApi;
+//import org.openapitools.client.api.NewsApi;
 
 NewsApi apiInstance = new NewsApi();
 String url = https://nytimes.com; // String | The url from which links should be extracted.
@@ -210,7 +210,7 @@ Name | Type | Description  | Notes
 
 ## searchNews
 
-> InlineResponse200 searchNews(text, sourceCountries, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, entities, locationFilter, offset, number, sort, sortDirection)
+> SearchNewsResponse searchNews(text, sourceCountries, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, entities, locationFilter, offset, number, sort, sortDirection)
 
 Search News
 
@@ -220,7 +220,7 @@ Search for news.
 
 ```java
 // Import classes:
-//import com.worldnewsapi.NewsApi;
+//import org.openapitools.client.api.NewsApi;
 
 NewsApi apiInstance = new NewsApi();
 String text = hurricane; // String | The text to match in the news content.
@@ -239,7 +239,7 @@ Integer number = 1; // Integer | The number of news to return in range [1,100]
 String sort = publish-time; // String | The sorting criteria.
 String sortDirection = desc; // String | Whether to sort ascending or descending.
 try {
-    InlineResponse200 result = apiInstance.searchNews(text, sourceCountries, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, entities, locationFilter, offset, number, sort, sortDirection);
+    SearchNewsResponse result = apiInstance.searchNews(text, sourceCountries, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, entities, locationFilter, offset, number, sort, sortDirection);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling NewsApi#searchNews");
@@ -270,7 +270,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse200**](InlineResponse200.md)
+[**SearchNewsResponse**](SearchNewsResponse.md)
 
 ### Authorization
 

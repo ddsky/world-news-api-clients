@@ -13,7 +13,7 @@ All URIs are relative to *https://api.worldnewsapi.com*
 
 ## extract_news
 
-> <InlineResponse2001> extract_news(url, analyze)
+> <ExtractNewsResponse> extract_news(url, analyze)
 
 Extract News
 
@@ -54,7 +54,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<InlineResponse2001>, Integer, Hash)> extract_news_with_http_info(url, analyze)
+> <Array(<ExtractNewsResponse>, Integer, Hash)> extract_news_with_http_info(url, analyze)
 
 ```ruby
 begin
@@ -62,7 +62,7 @@ begin
   data, status_code, headers = api_instance.extract_news_with_http_info(url, analyze)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <InlineResponse2001>
+  p data # => <ExtractNewsResponse>
 rescue OpenapiClient::ApiError => e
   puts "Error when calling NewsApi->extract_news_with_http_info: #{e}"
 end
@@ -77,7 +77,7 @@ end
 
 ### Return type
 
-[**InlineResponse2001**](InlineResponse2001.md)
+[**ExtractNewsResponse**](ExtractNewsResponse.md)
 
 ### Authorization
 
@@ -91,7 +91,7 @@ end
 
 ## extract_news_links
 
-> <InlineResponse2002> extract_news_links(url, api_key, opts)
+> <ExtractLinksResponse> extract_news_links(url, api_key, opts)
 
 Extract News Links
 
@@ -136,7 +136,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<InlineResponse2002>, Integer, Hash)> extract_news_links_with_http_info(url, api_key, opts)
+> <Array(<ExtractLinksResponse>, Integer, Hash)> extract_news_links_with_http_info(url, api_key, opts)
 
 ```ruby
 begin
@@ -144,7 +144,7 @@ begin
   data, status_code, headers = api_instance.extract_news_links_with_http_info(url, api_key, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <InlineResponse2002>
+  p data # => <ExtractLinksResponse>
 rescue OpenapiClient::ApiError => e
   puts "Error when calling NewsApi->extract_news_links_with_http_info: #{e}"
 end
@@ -161,7 +161,7 @@ end
 
 ### Return type
 
-[**InlineResponse2002**](InlineResponse2002.md)
+[**ExtractLinksResponse**](ExtractLinksResponse.md)
 
 ### Authorization
 
@@ -175,7 +175,7 @@ end
 
 ## geo_coordinates
 
-> <InlineResponse2003> geo_coordinates(location)
+> <GeoCoordinatesResponse> geo_coordinates(location)
 
 Get Geo Coordinates
 
@@ -215,7 +215,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<InlineResponse2003>, Integer, Hash)> geo_coordinates_with_http_info(location)
+> <Array(<GeoCoordinatesResponse>, Integer, Hash)> geo_coordinates_with_http_info(location)
 
 ```ruby
 begin
@@ -223,7 +223,7 @@ begin
   data, status_code, headers = api_instance.geo_coordinates_with_http_info(location)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <InlineResponse2003>
+  p data # => <GeoCoordinatesResponse>
 rescue OpenapiClient::ApiError => e
   puts "Error when calling NewsApi->geo_coordinates_with_http_info: #{e}"
 end
@@ -237,7 +237,7 @@ end
 
 ### Return type
 
-[**InlineResponse2003**](InlineResponse2003.md)
+[**GeoCoordinatesResponse**](GeoCoordinatesResponse.md)
 
 ### Authorization
 
@@ -333,7 +333,7 @@ end
 
 ## search_news
 
-> <InlineResponse200> search_news(opts)
+> <SearchNewsResponse> search_news(opts)
 
 Search News
 
@@ -389,7 +389,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<InlineResponse200>, Integer, Hash)> search_news_with_http_info(opts)
+> <Array(<SearchNewsResponse>, Integer, Hash)> search_news_with_http_info(opts)
 
 ```ruby
 begin
@@ -397,7 +397,7 @@ begin
   data, status_code, headers = api_instance.search_news_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <InlineResponse200>
+  p data # => <SearchNewsResponse>
 rescue OpenapiClient::ApiError => e
   puts "Error when calling NewsApi->search_news_with_http_info: #{e}"
 end
@@ -425,7 +425,7 @@ end
 
 ### Return type
 
-[**InlineResponse200**](InlineResponse200.md)
+[**SearchNewsResponse**](SearchNewsResponse.md)
 
 ### Authorization
 

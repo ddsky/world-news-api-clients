@@ -1,20 +1,20 @@
-# com.worldnewsapi.client\NewsApi
+# \NewsAPI
 
 All URIs are relative to *https://api.worldnewsapi.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**ExtractNews**](NewsApi.md#ExtractNews) | **Get** /extract-news | Extract News
-[**ExtractNewsLinks**](NewsApi.md#ExtractNewsLinks) | **Get** /extract-news-links | Extract News Links
-[**GeoCoordinates**](NewsApi.md#GeoCoordinates) | **Get** /geo-coordinates | Get Geo Coordinates
-[**NewsWebsiteToRSSFeed**](NewsApi.md#NewsWebsiteToRSSFeed) | **Get** /feed.rss | News Website to RSS Feed
-[**SearchNews**](NewsApi.md#SearchNews) | **Get** /search-news | Search News
+[**ExtractNews**](NewsAPI.md#ExtractNews) | **Get** /extract-news | Extract News
+[**ExtractNewsLinks**](NewsAPI.md#ExtractNewsLinks) | **Get** /extract-news-links | Extract News Links
+[**GeoCoordinates**](NewsAPI.md#GeoCoordinates) | **Get** /geo-coordinates | Get Geo Coordinates
+[**NewsWebsiteToRSSFeed**](NewsAPI.md#NewsWebsiteToRSSFeed) | **Get** /feed.rss | News Website to RSS Feed
+[**SearchNews**](NewsAPI.md#SearchNews) | **Get** /search-news | Search News
 
 
 
 ## ExtractNews
 
-> InlineResponse2001 ExtractNews(ctx).Url(url).Analyze(analyze).Execute()
+> ExtractNewsResponse ExtractNews(ctx).Url(url).Analyze(analyze).Execute()
 
 Extract News
 
@@ -26,25 +26,25 @@ Extract News
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/ddsky/world-news-api-clients/tree/main/go/"
 )
 
 func main() {
-    url := "https://www.bbc.com/news/world-us-canada-59340789" // string | The url of the news.
-    analyze := true // bool | Whether to analyze the news (extract entities etc.) (default to false)
+	url := "https://www.bbc.com/news/world-us-canada-59340789" // string | The url of the news.
+	analyze := true // bool | Whether to analyze the news (extract entities etc.) (default to false)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.NewsApi.ExtractNews(context.Background()).Url(url).Analyze(analyze).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `NewsApi.ExtractNews``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ExtractNews`: InlineResponse2001
-    fmt.Fprintf(os.Stdout, "Response from `NewsApi.ExtractNews`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.NewsAPI.ExtractNews(context.Background()).Url(url).Analyze(analyze).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `NewsAPI.ExtractNews``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ExtractNews`: ExtractNewsResponse
+	fmt.Fprintf(os.Stdout, "Response from `NewsAPI.ExtractNews`: %v\n", resp)
 }
 ```
 
@@ -64,7 +64,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2001**](InlineResponse2001.md)
+[**ExtractNewsResponse**](ExtractNewsResponse.md)
 
 ### Authorization
 
@@ -82,7 +82,7 @@ Name | Type | Description  | Notes
 
 ## ExtractNewsLinks
 
-> InlineResponse2002 ExtractNewsLinks(ctx).Url(url).ApiKey(apiKey).Prefix(prefix).SubDomain(subDomain).Execute()
+> ExtractLinksResponse ExtractNewsLinks(ctx).Url(url).ApiKey(apiKey).Prefix(prefix).SubDomain(subDomain).Execute()
 
 Extract News Links
 
@@ -94,27 +94,27 @@ Extract News Links
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/ddsky/world-news-api-clients/tree/main/go/"
 )
 
 func main() {
-    url := "https://nytimes.com" // string | The url from which links should be extracted.
-    apiKey := "abcd1234" // string | Your API key.
-    prefix := "prefix_example" // string | The prefix the news links must start with. (optional)
-    subDomain := true // bool | Whether to include links to news on sub-domains. (optional)
+	url := "https://nytimes.com" // string | The url from which links should be extracted.
+	apiKey := "abcd1234" // string | Your API key.
+	prefix := "prefix_example" // string | The prefix the news links must start with. (optional)
+	subDomain := true // bool | Whether to include links to news on sub-domains. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.NewsApi.ExtractNewsLinks(context.Background()).Url(url).ApiKey(apiKey).Prefix(prefix).SubDomain(subDomain).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `NewsApi.ExtractNewsLinks``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ExtractNewsLinks`: InlineResponse2002
-    fmt.Fprintf(os.Stdout, "Response from `NewsApi.ExtractNewsLinks`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.NewsAPI.ExtractNewsLinks(context.Background()).Url(url).ApiKey(apiKey).Prefix(prefix).SubDomain(subDomain).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `NewsAPI.ExtractNewsLinks``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ExtractNewsLinks`: ExtractLinksResponse
+	fmt.Fprintf(os.Stdout, "Response from `NewsAPI.ExtractNewsLinks`: %v\n", resp)
 }
 ```
 
@@ -136,7 +136,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2002**](InlineResponse2002.md)
+[**ExtractLinksResponse**](ExtractLinksResponse.md)
 
 ### Authorization
 
@@ -154,7 +154,7 @@ Name | Type | Description  | Notes
 
 ## GeoCoordinates
 
-> InlineResponse2003 GeoCoordinates(ctx).Location(location).Execute()
+> GeoCoordinatesResponse GeoCoordinates(ctx).Location(location).Execute()
 
 Get Geo Coordinates
 
@@ -166,24 +166,24 @@ Get Geo Coordinates
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/ddsky/world-news-api-clients/tree/main/go/"
 )
 
 func main() {
-    location := "Tokyo, Japan" // string | The address or name of the location, e.g. Tokyo, Japan.
+	location := "Tokyo, Japan" // string | The address or name of the location, e.g. Tokyo, Japan.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.NewsApi.GeoCoordinates(context.Background()).Location(location).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `NewsApi.GeoCoordinates``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GeoCoordinates`: InlineResponse2003
-    fmt.Fprintf(os.Stdout, "Response from `NewsApi.GeoCoordinates`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.NewsAPI.GeoCoordinates(context.Background()).Location(location).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `NewsAPI.GeoCoordinates``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GeoCoordinates`: GeoCoordinatesResponse
+	fmt.Fprintf(os.Stdout, "Response from `NewsAPI.GeoCoordinates`: %v\n", resp)
 }
 ```
 
@@ -202,7 +202,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2003**](InlineResponse2003.md)
+[**GeoCoordinatesResponse**](GeoCoordinatesResponse.md)
 
 ### Authorization
 
@@ -232,26 +232,26 @@ News Website to RSS Feed
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/ddsky/world-news-api-clients/tree/main/go/"
 )
 
 func main() {
-    url := "https://nytimes.com" // string | The url from which links should be extracted.
-    apiKey := "abcd1234" // string | Your API key.
-    extractNews := false // bool | Whether extract news and add information such as description, publish date, and image to each item. (optional)
+	url := "https://nytimes.com" // string | The url from which links should be extracted.
+	apiKey := "abcd1234" // string | Your API key.
+	extractNews := false // bool | Whether extract news and add information such as description, publish date, and image to each item. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.NewsApi.NewsWebsiteToRSSFeed(context.Background()).Url(url).ApiKey(apiKey).ExtractNews(extractNews).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `NewsApi.NewsWebsiteToRSSFeed``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `NewsWebsiteToRSSFeed`: map[string]interface{}
-    fmt.Fprintf(os.Stdout, "Response from `NewsApi.NewsWebsiteToRSSFeed`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.NewsAPI.NewsWebsiteToRSSFeed(context.Background()).Url(url).ApiKey(apiKey).ExtractNews(extractNews).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `NewsAPI.NewsWebsiteToRSSFeed``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `NewsWebsiteToRSSFeed`: map[string]interface{}
+	fmt.Fprintf(os.Stdout, "Response from `NewsAPI.NewsWebsiteToRSSFeed`: %v\n", resp)
 }
 ```
 
@@ -290,7 +290,7 @@ Name | Type | Description  | Notes
 
 ## SearchNews
 
-> InlineResponse200 SearchNews(ctx).Text(text).SourceCountries(sourceCountries).Language(language).MinSentiment(minSentiment).MaxSentiment(maxSentiment).EarliestPublishDate(earliestPublishDate).LatestPublishDate(latestPublishDate).NewsSources(newsSources).Authors(authors).Entities(entities).LocationFilter(locationFilter).Offset(offset).Number(number).Sort(sort).SortDirection(sortDirection).Execute()
+> SearchNewsResponse SearchNews(ctx).Text(text).SourceCountries(sourceCountries).Language(language).MinSentiment(minSentiment).MaxSentiment(maxSentiment).EarliestPublishDate(earliestPublishDate).LatestPublishDate(latestPublishDate).NewsSources(newsSources).Authors(authors).Entities(entities).LocationFilter(locationFilter).Offset(offset).Number(number).Sort(sort).SortDirection(sortDirection).Execute()
 
 Search News
 
@@ -302,38 +302,38 @@ Search News
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/ddsky/world-news-api-clients/tree/main/go/"
 )
 
 func main() {
-    text := "hurricane" // string | The text to match in the news content. (optional)
-    sourceCountries := "us,uk" // string | A comma-separated list of ISO 3166 country codes from which the news should originate, e.g. gb,us. (optional)
-    language := "en" // string | The ISO 6391 language code of the news, e.g. \"en\" for English. (optional)
-    minSentiment := float64(-0.8) // float64 | The minimal sentiment of the news in range [-1,1]. (optional)
-    maxSentiment := float64(0.8) // float64 | The maximal sentiment of the news in range [-1,1]. (optional)
-    earliestPublishDate := "2022-04-22 16:12:35" // string | The news must have been published after this date. (optional)
-    latestPublishDate := "2022-05-23 24:16:27" // string | The news must have been published before this date. (optional)
-    newsSources := "https://www.bbc.co.uk" // string | A comma-separated list of news sources from which the news should originate, e.g. https://www.bbc.co.uk (optional)
-    authors := "John Doe" // string | A comma-separated list of author names. Only news from any of the given authors will be returned. (optional)
-    entities := "ORG:Tesla" // string | Filter news by entities, e.g. ORG:Tesla. (optional)
-    locationFilter := "51.050407,13.737262,100" // string | Filter news by radius around a certain location. Format is \"latitude,longitude,radius in kilometers\", e.g. 51.050407, 13.737262, 100 (optional)
-    offset := int32(10) // int32 | The number of news to skip in range [0,1000] (optional)
-    number := int32(1) // int32 | The number of news to return in range [1,100] (optional)
-    sort := "publish-time" // string | The sorting criteria. (optional)
-    sortDirection := "desc" // string | Whether to sort ascending or descending. (optional)
+	text := "hurricane" // string | The text to match in the news content. (optional)
+	sourceCountries := "us,uk" // string | A comma-separated list of ISO 3166 country codes from which the news should originate, e.g. gb,us. (optional)
+	language := "en" // string | The ISO 6391 language code of the news, e.g. \"en\" for English. (optional)
+	minSentiment := float64(-0.8) // float64 | The minimal sentiment of the news in range [-1,1]. (optional)
+	maxSentiment := float64(0.8) // float64 | The maximal sentiment of the news in range [-1,1]. (optional)
+	earliestPublishDate := "2022-04-22 16:12:35" // string | The news must have been published after this date. (optional)
+	latestPublishDate := "2022-05-23 24:16:27" // string | The news must have been published before this date. (optional)
+	newsSources := "https://www.bbc.co.uk" // string | A comma-separated list of news sources from which the news should originate, e.g. https://www.bbc.co.uk (optional)
+	authors := "John Doe" // string | A comma-separated list of author names. Only news from any of the given authors will be returned. (optional)
+	entities := "ORG:Tesla" // string | Filter news by entities, e.g. ORG:Tesla. (optional)
+	locationFilter := "51.050407,13.737262,100" // string | Filter news by radius around a certain location. Format is \"latitude,longitude,radius in kilometers\", e.g. 51.050407, 13.737262, 100 (optional)
+	offset := int32(10) // int32 | The number of news to skip in range [0,1000] (optional)
+	number := int32(1) // int32 | The number of news to return in range [1,100] (optional)
+	sort := "publish-time" // string | The sorting criteria. (optional)
+	sortDirection := "desc" // string | Whether to sort ascending or descending. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.NewsApi.SearchNews(context.Background()).Text(text).SourceCountries(sourceCountries).Language(language).MinSentiment(minSentiment).MaxSentiment(maxSentiment).EarliestPublishDate(earliestPublishDate).LatestPublishDate(latestPublishDate).NewsSources(newsSources).Authors(authors).Entities(entities).LocationFilter(locationFilter).Offset(offset).Number(number).Sort(sort).SortDirection(sortDirection).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `NewsApi.SearchNews``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `SearchNews`: InlineResponse200
-    fmt.Fprintf(os.Stdout, "Response from `NewsApi.SearchNews`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.NewsAPI.SearchNews(context.Background()).Text(text).SourceCountries(sourceCountries).Language(language).MinSentiment(minSentiment).MaxSentiment(maxSentiment).EarliestPublishDate(earliestPublishDate).LatestPublishDate(latestPublishDate).NewsSources(newsSources).Authors(authors).Entities(entities).LocationFilter(locationFilter).Offset(offset).Number(number).Sort(sort).SortDirection(sortDirection).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `NewsAPI.SearchNews``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `SearchNews`: SearchNewsResponse
+	fmt.Fprintf(os.Stdout, "Response from `NewsAPI.SearchNews`: %v\n", resp)
 }
 ```
 
@@ -366,7 +366,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse200**](InlineResponse200.md)
+[**SearchNewsResponse**](SearchNewsResponse.md)
 
 ### Authorization
 

@@ -1,9 +1,9 @@
 {
   "name": "world_news_api",
-  "version": "1.0",
-  "description": "The_worlds_news_wrapped_into_a_single_API_",
+  "version": "1.1",
+  "description": "The world's news wrapped into a single API.",
   "license": "Unlicense",
-  "main": "dist/com.worldnewsapi.client/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "babel src -d dist",
     "prepare": "npm run build",

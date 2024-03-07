@@ -1,4 +1,4 @@
-package org.openapitools
+package worldnewsapi
 
 // TODO: properly handle custom imports
 import java.io._
@@ -6,7 +6,7 @@ import java.util.UUID
 import java.time._
 import com.twitter.finagle.http.exp.Multipart.{FileUpload, InMemoryFileUpload, OnDiskFileUpload}
 
-import com.worldnewsapi.client.model._
+import org.openapitools.models._
 
 trait DataAccessor {
     // TODO: apiInfo -> apis -> operations = TODO error
@@ -16,21 +16,21 @@ trait DataAccessor {
 
         /**
         * 
-        * @return A InlineResponse2001
+        * @return A ExtractNewsResponse
         */
-        def News_extractNews(url: String, analyze: Boolean, authParamapiKey: String, authParamheaderApiKey: String): Either[CommonError,InlineResponse2001] = Left(TODO)
+        def News_extractNews(url: String, analyze: Boolean, authParamapiKey: String, authParamheaderApiKey: String): Either[CommonError,ExtractNewsResponse] = Left(TODO)
 
         /**
         * 
-        * @return A InlineResponse2002
+        * @return A ExtractLinksResponse
         */
-        def News_extractNewsLinks(url: String, apiKey: String, prefix: Option[String], subDomain: Option[Boolean], authParamapiKey: String, authParamheaderApiKey: String): Either[CommonError,InlineResponse2002] = Left(TODO)
+        def News_extractNewsLinks(url: String, apiKey: String, prefix: Option[String], subDomain: Option[Boolean], authParamapiKey: String, authParamheaderApiKey: String): Either[CommonError,ExtractLinksResponse] = Left(TODO)
 
         /**
         * 
-        * @return A InlineResponse2003
+        * @return A GeoCoordinatesResponse
         */
-        def News_geoCoordinates(location: String, authParamapiKey: String, authParamheaderApiKey: String): Either[CommonError,InlineResponse2003] = Left(TODO)
+        def News_geoCoordinates(location: String, authParamapiKey: String, authParamheaderApiKey: String): Either[CommonError,GeoCoordinatesResponse] = Left(TODO)
 
         /**
         * 
@@ -40,8 +40,8 @@ trait DataAccessor {
 
         /**
         * 
-        * @return A InlineResponse200
+        * @return A SearchNewsResponse
         */
-        def News_searchNews(text: Option[String], sourceCountries: Option[String], language: Option[String], minSentiment: Option[Double], maxSentiment: Option[Double], earliestPublishDate: Option[String], latestPublishDate: Option[String], newsSources: Option[String], authors: Option[String], entities: Option[String], locationFilter: Option[String], offset: Option[Int], number: Option[Int], sort: Option[String], sortDirection: Option[String], authParamapiKey: String, authParamheaderApiKey: String): Either[CommonError,InlineResponse200] = Left(TODO)
+        def News_searchNews(text: Option[String], sourceCountries: Option[String], language: Option[String], minSentiment: Option[Double], maxSentiment: Option[Double], earliestPublishDate: Option[String], latestPublishDate: Option[String], newsSources: Option[String], authors: Option[String], entities: Option[String], locationFilter: Option[String], offset: Option[Int], number: Option[Int], sort: Option[String], sortDirection: Option[String], authParamapiKey: String, authParamheaderApiKey: String): Either[CommonError,SearchNewsResponse] = Left(TODO)
 
 }

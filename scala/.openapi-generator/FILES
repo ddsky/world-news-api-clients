@@ -1,3 +1,4 @@
+.openapi-generator-ignore
 README.md
 build.sbt
 project/build.properties
@@ -5,12 +6,12 @@ project/plugins.sbt
 sbt
 src/main/scala/DataAccessor.scala
 src/main/scala/Server.scala
-src/main/scala/com/worldnewsapi/NewsApi.scala
-src/main/scala/com/worldnewsapi/client/model/InlineResponse200.scala
-src/main/scala/com/worldnewsapi/client/model/InlineResponse2001.scala
-src/main/scala/com/worldnewsapi/client/model/InlineResponse2002.scala
-src/main/scala/com/worldnewsapi/client/model/InlineResponse2003.scala
-src/main/scala/com/worldnewsapi/client/model/InlineResponse200News.scala
-src/main/scala/com/worldnewsapi/client/model/News.scala
 src/main/scala/endpoint.scala
 src/main/scala/errors.scala
+src/main/scala/org/openapitools/apis/NewsApi.scala
+src/main/scala/org/openapitools/models/ExtractLinksResponse.scala
+src/main/scala/org/openapitools/models/ExtractNewsResponse.scala
+src/main/scala/org/openapitools/models/GeoCoordinatesResponse.scala
+src/main/scala/org/openapitools/models/News.scala
+src/main/scala/org/openapitools/models/NewsArticle.scala
+src/main/scala/org/openapitools/models/SearchNewsResponse.scala

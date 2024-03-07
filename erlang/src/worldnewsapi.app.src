@@ -1,0 +1,18 @@
+{application, worldnewsapi,
+ [{description, "The world&#39;s news wrapped into a single API."},
+  {vsn, "0.1.0"},
+  {registered, []},
+  {applications,
+    [kernel,
+     stdlib,
+     ssl,
+     hackney,
+     ctx
+    ]},
+  {env, [{host, "api.worldnewsapi.com"}]},
+  {modules, []},
+
+  {maintainers, []},
+  {licenses, []},
+  {links, []}
+]}.

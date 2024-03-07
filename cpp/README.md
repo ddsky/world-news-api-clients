@@ -4,7 +4,7 @@
 
 World News API
 
-- API version: 1.0
+- API version: 1.1
 
 The world's news wrapped into a single API.
 
@@ -34,7 +34,7 @@ class Example : public QObject {
     Q_OBJECT
     QString create();
     bool create();
-public slots:
+public Q_SLOTS:
    void exampleFunction1();
 };
 

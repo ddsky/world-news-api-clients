@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 
 # **extractNews**
-> InlineResponse2001 extractNews(url, analyze)
+> ExtractNewsResponse extractNews(url, analyze)
 
 Extract News
 
@@ -56,7 +56,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2001**](InlineResponse2001.md)
+[**ExtractNewsResponse**](ExtractNewsResponse.md)
 
 ### Authorization
 
@@ -70,7 +70,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **extractNewsLinks**
-> InlineResponse2002 extractNewsLinks(url, apiKey, prefix, subDomain)
+> ExtractLinksResponse extractNewsLinks(url, apiKey, prefix, subDomain)
 
 Extract News Links
 
@@ -113,7 +113,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2002**](InlineResponse2002.md)
+[**ExtractLinksResponse**](ExtractLinksResponse.md)
 
 ### Authorization
 
@@ -127,7 +127,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **geoCoordinates**
-> InlineResponse2003 geoCoordinates(location)
+> GeoCoordinatesResponse geoCoordinates(location)
 
 Get Geo Coordinates
 
@@ -164,7 +164,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2003**](InlineResponse2003.md)
+[**GeoCoordinatesResponse**](GeoCoordinatesResponse.md)
 
 ### Authorization
 
@@ -233,7 +233,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **searchNews**
-> InlineResponse200 searchNews(text, sourceCountries, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, entities, locationFilter, offset, number, sort, sortDirection)
+> SearchNewsResponse searchNews(text, sourceCountries, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, entities, locationFilter, offset, number, sort, sortDirection)
 
 Search News
 
@@ -298,7 +298,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse200**](InlineResponse200.md)
+[**SearchNewsResponse**](SearchNewsResponse.md)
 
 ### Authorization
 

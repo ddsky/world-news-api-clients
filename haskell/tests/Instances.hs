@@ -1,3 +1,4 @@
+{-# LANGUAGE CPP #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports -fno-warn-unused-matches #-}
 
 module Instances where
@@ -12,6 +13,7 @@ import qualified Data.Set as Set
 import qualified Data.Text as T
 import qualified Data.Time as TI
 import qualified Data.Vector as V
+import Data.String (fromString)
 
 import Control.Monad
 import Data.Char (isSpace)
@@ -51,9 +53,16 @@ instance Arbitrary Date where
     arbitrary = Date <$> arbitrary
     shrink (Date xs) = Date <$> shrink xs
 
+#if MIN_VERSION_aeson(2,0,0)
+#else
 -- | A naive Arbitrary instance for A.Value:
 instance Arbitrary A.Value where
-  arbitrary = frequency [(3, simpleTypes), (1, arrayTypes), (1, objectTypes)]
+  arbitrary = arbitraryValue
+#endif
+
+arbitraryValue :: Gen A.Value
+arbitraryValue =
+  frequency [(3, simpleTypes), (1, arrayTypes), (1, objectTypes)]
     where
       simpleTypes :: Gen A.Value
       simpleTypes =
@@ -63,7 +72,7 @@ instance Arbitrary A.Value where
           , (2, liftM (A.Number . fromIntegral) (arbitrary :: Gen Int))
           , (2, liftM (A.String . T.pack) (arbitrary :: Gen String))
           ]
-      mapF (k, v) = (T.pack k, v)
+      mapF (k, v) = (fromString k, v)
       simpleAndArrays = frequency [(1, sized sizedArray), (4, simpleTypes)]
       arrayTypes = sized sizedArray
       objectTypes = sized sizedObject
@@ -104,66 +113,38 @@ arbitraryReducedMaybeValue n = do
 
 -- * Models
 
-instance Arbitrary InlineResponse200 where
-  arbitrary = sized genInlineResponse200
+instance Arbitrary ExtractLinksResponse where
+  arbitrary = sized genExtractLinksResponse
 
-genInlineResponse200 :: Int -> Gen InlineResponse200
-genInlineResponse200 n =
-  InlineResponse200
-    <$> arbitrary -- inlineResponse200Offset :: Int
-    <*> arbitrary -- inlineResponse200Number :: Int
-    <*> arbitrary -- inlineResponse200Available :: Int
-    <*> arbitraryReduced n -- inlineResponse200News :: [InlineResponse200News]
+genExtractLinksResponse :: Int -> Gen ExtractLinksResponse
+genExtractLinksResponse n =
+  ExtractLinksResponse
+    <$> arbitraryReducedMaybe n -- extractLinksResponseNewsLinks :: Maybe [Text]
   
-instance Arbitrary InlineResponse2001 where
-  arbitrary = sized genInlineResponse2001
+instance Arbitrary ExtractNewsResponse where
+  arbitrary = sized genExtractNewsResponse
 
-genInlineResponse2001 :: Int -> Gen InlineResponse2001
-genInlineResponse2001 n =
-  InlineResponse2001
-    <$> arbitraryReducedMaybe n -- inlineResponse2001Title :: Maybe Text
-    <*> arbitraryReducedMaybe n -- inlineResponse2001Text :: Maybe Text
-    <*> arbitraryReducedMaybe n -- inlineResponse2001Url :: Maybe Text
-    <*> arbitraryReducedMaybe n -- inlineResponse2001Image :: Maybe Text
-    <*> arbitraryReducedMaybe n -- inlineResponse2001Author :: Maybe Text
-    <*> arbitraryReducedMaybe n -- inlineResponse2001Language :: Maybe Text
-    <*> arbitraryReducedMaybe n -- inlineResponse2001SourceCountry :: Maybe Text
-    <*> arbitraryReducedMaybe n -- inlineResponse2001Sentiment :: Maybe Double
+genExtractNewsResponse :: Int -> Gen ExtractNewsResponse
+genExtractNewsResponse n =
+  ExtractNewsResponse
+    <$> arbitraryReducedMaybe n -- extractNewsResponseTitle :: Maybe Text
+    <*> arbitraryReducedMaybe n -- extractNewsResponseText :: Maybe Text
+    <*> arbitraryReducedMaybe n -- extractNewsResponseUrl :: Maybe Text
+    <*> arbitraryReducedMaybe n -- extractNewsResponseImage :: Maybe Text
+    <*> arbitraryReducedMaybe n -- extractNewsResponseAuthor :: Maybe Text
+    <*> arbitraryReducedMaybe n -- extractNewsResponseLanguage :: Maybe Text
+    <*> arbitraryReducedMaybe n -- extractNewsResponseSourceCountry :: Maybe Text
+    <*> arbitraryReducedMaybe n -- extractNewsResponseSentiment :: Maybe Double
   
-instance Arbitrary InlineResponse2002 where
-  arbitrary = sized genInlineResponse2002
+instance Arbitrary GeoCoordinatesResponse where
+  arbitrary = sized genGeoCoordinatesResponse
 
-genInlineResponse2002 :: Int -> Gen InlineResponse2002
-genInlineResponse2002 n =
-  InlineResponse2002
-    <$> arbitraryReducedMaybe n -- inlineResponse2002NewsLinks :: Maybe [Text]
-  
-instance Arbitrary InlineResponse2003 where
-  arbitrary = sized genInlineResponse2003
-
-genInlineResponse2003 :: Int -> Gen InlineResponse2003
-genInlineResponse2003 n =
-  InlineResponse2003
-    <$> arbitrary -- inlineResponse2003Latitude :: Double
-    <*> arbitrary -- inlineResponse2003Longitude :: Double
-    <*> arbitraryReducedMaybe n -- inlineResponse2003City :: Maybe Text
-  
-instance Arbitrary InlineResponse200News where
-  arbitrary = sized genInlineResponse200News
-
-genInlineResponse200News :: Int -> Gen InlineResponse200News
-genInlineResponse200News n =
-  InlineResponse200News
-    <$> arbitraryReducedMaybe n -- inlineResponse200NewsId :: Maybe Int
-    <*> arbitraryReducedMaybe n -- inlineResponse200NewsTitle :: Maybe Text
-    <*> arbitraryReducedMaybe n -- inlineResponse200NewsText :: Maybe Text
-    <*> arbitraryReducedMaybe n -- inlineResponse200NewsSummary :: Maybe Text
-    <*> arbitraryReducedMaybe n -- inlineResponse200NewsUrl :: Maybe Text
-    <*> arbitraryReducedMaybe n -- inlineResponse200NewsImage :: Maybe Text
-    <*> arbitraryReducedMaybe n -- inlineResponse200NewsAuthor :: Maybe Text
-    <*> arbitraryReducedMaybe n -- inlineResponse200NewsLanguage :: Maybe Text
-    <*> arbitraryReducedMaybe n -- inlineResponse200NewsSourceCountry :: Maybe Text
-    <*> arbitraryReducedMaybe n -- inlineResponse200NewsSentiment :: Maybe Double
+genGeoCoordinatesResponse :: Int -> Gen GeoCoordinatesResponse
+genGeoCoordinatesResponse n =
+  GeoCoordinatesResponse
+    <$> arbitrary -- geoCoordinatesResponseLatitude :: Double
+    <*> arbitrary -- geoCoordinatesResponseLongitude :: Double
+    <*> arbitraryReducedMaybe n -- geoCoordinatesResponseCity :: Maybe Text
   
 instance Arbitrary News where
   arbitrary = sized genNews
@@ -182,6 +163,35 @@ genNews n =
     <*> arbitraryReducedMaybe n -- newsLanguage :: Maybe Text
     <*> arbitraryReducedMaybe n -- newsSourceCountry :: Maybe Text
     <*> arbitraryReducedMaybe n -- newsSentiment :: Maybe Double
+  
+instance Arbitrary NewsArticle where
+  arbitrary = sized genNewsArticle
+
+genNewsArticle :: Int -> Gen NewsArticle
+genNewsArticle n =
+  NewsArticle
+    <$> arbitraryReducedMaybe n -- newsArticleId :: Maybe Int
+    <*> arbitraryReducedMaybe n -- newsArticleTitle :: Maybe Text
+    <*> arbitraryReducedMaybe n -- newsArticleText :: Maybe Text
+    <*> arbitraryReducedMaybe n -- newsArticleSummary :: Maybe Text
+    <*> arbitraryReducedMaybe n -- newsArticleUrl :: Maybe Text
+    <*> arbitraryReducedMaybe n -- newsArticleImage :: Maybe Text
+    <*> arbitraryReducedMaybe n -- newsArticlePublishDate :: Maybe Text
+    <*> arbitraryReducedMaybe n -- newsArticleAuthor :: Maybe Text
+    <*> arbitraryReducedMaybe n -- newsArticleLanguage :: Maybe Text
+    <*> arbitraryReducedMaybe n -- newsArticleSourceCountry :: Maybe Text
+    <*> arbitraryReducedMaybe n -- newsArticleSentiment :: Maybe Double
+  
+instance Arbitrary SearchNewsResponse where
+  arbitrary = sized genSearchNewsResponse
+
+genSearchNewsResponse :: Int -> Gen SearchNewsResponse
+genSearchNewsResponse n =
+  SearchNewsResponse
+    <$> arbitrary -- searchNewsResponseOffset :: Int
+    <*> arbitrary -- searchNewsResponseNumber :: Int
+    <*> arbitrary -- searchNewsResponseAvailable :: Int
+    <*> arbitraryReduced n -- searchNewsResponseNews :: [NewsArticle]
   
 
 

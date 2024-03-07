@@ -1,10 +1,10 @@
 #import "OAINewsApi.h"
 #import "OAIQueryParamCollection.h"
 #import "OAIApiClient.h"
-#import "OAIInlineResponse200.h"
-#import "OAIInlineResponse2001.h"
-#import "OAIInlineResponse2002.h"
-#import "OAIInlineResponse2003.h"
+#import "OAIExtractLinksResponse.h"
+#import "OAIExtractNewsResponse.h"
+#import "OAIGeoCoordinatesResponse.h"
+#import "OAISearchNewsResponse.h"
 
 
 @interface OAINewsApi ()
@@ -59,11 +59,11 @@ NSInteger kOAINewsApiMissingParamErrorCode = 234513;
 ///
 ///  @param analyze Whether to analyze the news (extract entities etc.) 
 ///
-///  @returns OAIInlineResponse2001*
+///  @returns OAIExtractNewsResponse*
 ///
 -(NSURLSessionTask*) extractNewsWithUrl: (NSString*) url
     analyze: (NSNumber*) analyze
-    completionHandler: (void (^)(OAIInlineResponse2001* output, NSError* error)) handler {
+    completionHandler: (void (^)(OAIExtractNewsResponse* output, NSError* error)) handler {
     // verify the required parameter 'url' is set
     if (url == nil) {
         NSParameterAssert(url);
@@ -129,10 +129,10 @@ NSInteger kOAINewsApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"OAIInlineResponse2001*"
+                              responseType: @"OAIExtractNewsResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((OAIInlineResponse2001*)data, error);
+                                    handler((OAIExtractNewsResponse*)data, error);
                                 }
                             }];
 }
@@ -148,13 +148,13 @@ NSInteger kOAINewsApiMissingParamErrorCode = 234513;
 ///
 ///  @param subDomain Whether to include links to news on sub-domains. (optional)
 ///
-///  @returns OAIInlineResponse2002*
+///  @returns OAIExtractLinksResponse*
 ///
 -(NSURLSessionTask*) extractNewsLinksWithUrl: (NSString*) url
     apiKey: (NSString*) apiKey
     prefix: (NSString*) prefix
     subDomain: (NSNumber*) subDomain
-    completionHandler: (void (^)(OAIInlineResponse2002* output, NSError* error)) handler {
+    completionHandler: (void (^)(OAIExtractLinksResponse* output, NSError* error)) handler {
     // verify the required parameter 'url' is set
     if (url == nil) {
         NSParameterAssert(url);
@@ -226,10 +226,10 @@ NSInteger kOAINewsApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"OAIInlineResponse2002*"
+                              responseType: @"OAIExtractLinksResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((OAIInlineResponse2002*)data, error);
+                                    handler((OAIExtractLinksResponse*)data, error);
                                 }
                             }];
 }
@@ -239,10 +239,10 @@ NSInteger kOAINewsApiMissingParamErrorCode = 234513;
 /// Get the geo coordinates for a location. The location can be an exact address but also just the name of a city or country.
 ///  @param location The address or name of the location, e.g. Tokyo, Japan. 
 ///
-///  @returns OAIInlineResponse2003*
+///  @returns OAIGeoCoordinatesResponse*
 ///
 -(NSURLSessionTask*) geoCoordinatesWithLocation: (NSString*) location
-    completionHandler: (void (^)(OAIInlineResponse2003* output, NSError* error)) handler {
+    completionHandler: (void (^)(OAIGeoCoordinatesResponse* output, NSError* error)) handler {
     // verify the required parameter 'location' is set
     if (location == nil) {
         NSParameterAssert(location);
@@ -294,10 +294,10 @@ NSInteger kOAINewsApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"OAIInlineResponse2003*"
+                              responseType: @"OAIGeoCoordinatesResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((OAIInlineResponse2003*)data, error);
+                                    handler((OAIGeoCoordinatesResponse*)data, error);
                                 }
                             }];
 }
@@ -426,7 +426,7 @@ NSInteger kOAINewsApiMissingParamErrorCode = 234513;
 ///
 ///  @param sortDirection Whether to sort ascending or descending. (optional)
 ///
-///  @returns OAIInlineResponse200*
+///  @returns OAISearchNewsResponse*
 ///
 -(NSURLSessionTask*) searchNewsWithText: (NSString*) text
     sourceCountries: (NSString*) sourceCountries
@@ -443,7 +443,7 @@ NSInteger kOAINewsApiMissingParamErrorCode = 234513;
     number: (NSNumber*) number
     sort: (NSString*) sort
     sortDirection: (NSString*) sortDirection
-    completionHandler: (void (^)(OAIInlineResponse200* output, NSError* error)) handler {
+    completionHandler: (void (^)(OAISearchNewsResponse* output, NSError* error)) handler {
     NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/search-news"];
 
     NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
@@ -526,10 +526,10 @@ NSInteger kOAINewsApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"OAIInlineResponse200*"
+                              responseType: @"OAISearchNewsResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((OAIInlineResponse200*)data, error);
+                                    handler((OAISearchNewsResponse*)data, error);
                                 }
                             }];
 }

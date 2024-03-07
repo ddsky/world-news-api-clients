@@ -1,8 +1,8 @@
 # java-client
 
 World News API
-- API version: 1.0
-  - Build date: 2024-02-25T21:58:15.961+01:00[Europe/Berlin]
+- API version: 1.1
+  - Build date: 2024-03-07T16:10:59.701327300+01:00[Europe/Berlin]
 
 The world's news wrapped into a single API.
 
@@ -40,7 +40,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.worldnewsapi</groupId>
   <artifactId>java-client</artifactId>
-  <version>1.0</version>
+  <version>1.0.8</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -56,7 +56,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "com.worldnewsapi:java-client:1.0"
+     implementation "com.worldnewsapi:java-client:1.0.8"
   }
 ```
 
@@ -70,7 +70,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/java-client-1.0.jar`
+* `target/java-client-1.0.8.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
@@ -108,7 +108,7 @@ public class Example {
     String url = "https://www.bbc.com/news/world-us-canada-59340789"; // String | The url of the news.
     Boolean analyze = false; // Boolean | Whether to analyze the news (extract entities etc.)
     try {
-      InlineResponse2001 result = apiInstance.extractNews(url, analyze);
+      ExtractNewsResponse result = apiInstance.extractNews(url, analyze);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling NewsApi#extractNews");
@@ -137,23 +137,27 @@ Class | Method | HTTP request | Description
 
 ## Documentation for Models
 
- - [InlineResponse200](docs/InlineResponse200.md)
- - [InlineResponse2001](docs/InlineResponse2001.md)
- - [InlineResponse2002](docs/InlineResponse2002.md)
- - [InlineResponse2003](docs/InlineResponse2003.md)
- - [InlineResponse200News](docs/InlineResponse200News.md)
+ - [ExtractLinksResponse](docs/ExtractLinksResponse.md)
+ - [ExtractNewsResponse](docs/ExtractNewsResponse.md)
+ - [GeoCoordinatesResponse](docs/GeoCoordinatesResponse.md)
  - [News](docs/News.md)
+ - [NewsArticle](docs/NewsArticle.md)
+ - [SearchNewsResponse](docs/SearchNewsResponse.md)
 
 
+<a id="documentation-for-authorization"></a>
 ## Documentation for Authorization
 
+
 Authentication schemes defined for the API:
+<a id="apiKey"></a>
 ### apiKey
 
 - **Type**: API key
 - **API key parameter name**: api-key
 - **Location**: URL query string
 
+<a id="headerApiKey"></a>
 ### headerApiKey
 
 - **Type**: API key

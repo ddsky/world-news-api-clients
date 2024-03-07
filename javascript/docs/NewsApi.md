@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 ## extractNews
 
-> InlineResponse2001 extractNews(url, analyze)
+> ExtractNewsResponse extractNews(url, analyze)
 
 Extract News
 
@@ -58,7 +58,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2001**](InlineResponse2001.md)
+[**ExtractNewsResponse**](ExtractNewsResponse.md)
 
 ### Authorization
 
@@ -72,7 +72,7 @@ Name | Type | Description  | Notes
 
 ## extractNewsLinks
 
-> InlineResponse2002 extractNewsLinks(url, apiKey, opts)
+> ExtractLinksResponse extractNewsLinks(url, apiKey, opts)
 
 Extract News Links
 
@@ -122,7 +122,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2002**](InlineResponse2002.md)
+[**ExtractLinksResponse**](ExtractLinksResponse.md)
 
 ### Authorization
 
@@ -136,7 +136,7 @@ Name | Type | Description  | Notes
 
 ## geoCoordinates
 
-> InlineResponse2003 geoCoordinates(location)
+> GeoCoordinatesResponse geoCoordinates(location)
 
 Get Geo Coordinates
 
@@ -178,7 +178,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2003**](InlineResponse2003.md)
+[**GeoCoordinatesResponse**](GeoCoordinatesResponse.md)
 
 ### Authorization
 
@@ -254,7 +254,7 @@ Name | Type | Description  | Notes
 
 ## searchNews
 
-> InlineResponse200 searchNews(opts)
+> SearchNewsResponse searchNews(opts)
 
 Search News
 
@@ -326,7 +326,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse200**](InlineResponse200.md)
+[**SearchNewsResponse**](SearchNewsResponse.md)
 
 ### Authorization
 

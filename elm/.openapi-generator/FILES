@@ -1,7 +1,8 @@
 .gitignore
+.openapi-generator-ignore
 README.md
 elm.json
 src/Api.elm
+src/Api/Data.elm
+src/Api/Request/News.elm
 src/Api/Time.elm
-src/com/worldnewsapi/News.elm
-src/com/worldnewsapi/client/model/Data.elm

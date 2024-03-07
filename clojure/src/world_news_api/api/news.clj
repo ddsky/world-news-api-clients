@@ -4,11 +4,11 @@
             [spec-tools.core :as st]
             [orchestra.core :refer [defn-spec]]
             [world-news-api.specs.news :refer :all]
-            [world-news-api.specs.inline-response-200-3 :refer :all]
-            [world-news-api.specs.inline-response-200-2 :refer :all]
-            [world-news-api.specs.inline-response-200-1 :refer :all]
-            [world-news-api.specs.inline-response-200-news :refer :all]
-            [world-news-api.specs.inline-response-200 :refer :all]
+            [world-news-api.specs.geo-coordinates-response :refer :all]
+            [world-news-api.specs.news-article :refer :all]
+            [world-news-api.specs.extract-news-response :refer :all]
+            [world-news-api.specs.extract-links-response :refer :all]
+            [world-news-api.specs.search-news-response :refer :all]
             )
   (:import (java.io File)))
 
@@ -27,13 +27,13 @@
              :accepts       ["application/json"]
              :auth-names    ["apiKey" "headerApiKey"]}))
 
-(defn-spec extract-news inline-response-200-1-spec
+(defn-spec extract-news extract-news-response-spec
   "Extract News
   Extract a news entry from a news site."
   [url string?, analyze boolean?]
   (let [res (:data (extract-news-with-http-info url analyze))]
     (if (:decode-models *api-context*)
-       (st/decode inline-response-200-1-spec res st/string-transformer)
+       (st/decode extract-news-response-spec res st/string-transformer)
        res)))
 
 
@@ -52,14 +52,14 @@
               :accepts       ["application/json"]
               :auth-names    ["apiKey" "headerApiKey"]})))
 
-(defn-spec extract-news-links inline-response-200-2-spec
+(defn-spec extract-news-links extract-links-response-spec
   "Extract News Links
   Extract a news links from a news website."
   ([url string?, api-key string?, ] (extract-news-links url api-key nil))
   ([url string?, api-key string?, optional-params any?]
    (let [res (:data (extract-news-links-with-http-info url api-key optional-params))]
      (if (:decode-models *api-context*)
-        (st/decode inline-response-200-2-spec res st/string-transformer)
+        (st/decode extract-links-response-spec res st/string-transformer)
         res))))
 
 
@@ -77,13 +77,13 @@
              :accepts       ["application/json"]
              :auth-names    ["apiKey" "headerApiKey"]}))
 
-(defn-spec geo-coordinates inline-response-200-3-spec
+(defn-spec geo-coordinates geo-coordinates-response-spec
   "Get Geo Coordinates
   Get the geo coordinates for a location. The location can be an exact address but also just the name of a city or country."
   [location string?]
   (let [res (:data (geo-coordinates-with-http-info location))]
     (if (:decode-models *api-context*)
-       (st/decode inline-response-200-3-spec res st/string-transformer)
+       (st/decode geo-coordinates-response-spec res st/string-transformer)
        res)))
 
 
@@ -127,14 +127,14 @@
               :accepts       ["application/json"]
               :auth-names    ["apiKey" "headerApiKey"]})))
 
-(defn-spec search-news inline-response-200-spec
+(defn-spec search-news search-news-response-spec
   "Search News
   Search for news."
   ([] (search-news nil))
   ([optional-params any?]
    (let [res (:data (search-news-with-http-info optional-params))]
      (if (:decode-models *api-context*)
-        (st/decode inline-response-200-spec res st/string-transformer)
+        (st/decode search-news-response-spec res st/string-transformer)
         res))))
 
 

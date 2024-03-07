@@ -26,9 +26,9 @@ Add this dependency to your project's POM:
 
 ```xml
 <dependency>
-    <groupId>com.worldnewsapi</groupId>
+    <groupId>org.openapitools</groupId>
     <artifactId>android-client</artifactId>
-    <version>1.0</version>
+    <version>1.0.8</version>
     <scope>compile</scope>
 </dependency>
 ```
@@ -38,7 +38,7 @@ Add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-compile "com.worldnewsapi:android-client:1.0"
+compile "org.openapitools:android-client:1.0.8"
 ```
 
 ### Others
@@ -49,7 +49,7 @@ At first generate the JAR by executing:
 
 Then manually install the following JARs:
 
-- target/android-client-1.0.jar
+- target/android-client-1.0.8.jar
 - target/lib/*.jar
 
 ## Getting Started
@@ -58,7 +58,7 @@ Please follow the [installation](#installation) instruction and execute the foll
 
 ```java
 
-import com.worldnewsapi.NewsApi;
+import org.openapitools.client.api.NewsApi;
 
 public class NewsApiExample {
 
@@ -67,7 +67,7 @@ public class NewsApiExample {
         String url = https://www.bbc.com/news/world-us-canada-59340789; // String | The url of the news.
         Boolean analyze = true; // Boolean | Whether to analyze the news (extract entities etc.)
         try {
-            InlineResponse2001 result = apiInstance.extractNews(url, analyze);
+            ExtractNewsResponse result = apiInstance.extractNews(url, analyze);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling NewsApi#extractNews");
@@ -93,12 +93,12 @@ Class | Method | HTTP request | Description
 
 ## Documentation for Models
 
- - [InlineResponse200](docs/InlineResponse200.md)
- - [InlineResponse2001](docs/InlineResponse2001.md)
- - [InlineResponse2002](docs/InlineResponse2002.md)
- - [InlineResponse2003](docs/InlineResponse2003.md)
- - [InlineResponse200News](docs/InlineResponse200News.md)
+ - [ExtractLinksResponse](docs/ExtractLinksResponse.md)
+ - [ExtractNewsResponse](docs/ExtractNewsResponse.md)
+ - [GeoCoordinatesResponse](docs/GeoCoordinatesResponse.md)
  - [News](docs/News.md)
+ - [NewsArticle](docs/NewsArticle.md)
+ - [SearchNewsResponse](docs/SearchNewsResponse.md)
 
 
 ## Documentation for Authorization

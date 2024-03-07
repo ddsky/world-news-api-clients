@@ -15,7 +15,7 @@ Method | HTTP request | Description
 ```objc
 -(NSURLSessionTask*) extractNewsWithUrl: (NSString*) url
     analyze: (NSNumber*) analyze
-        completionHandler: (void (^)(OAIInlineResponse2001* output, NSError* error)) handler;
+        completionHandler: (void (^)(OAIExtractNewsResponse* output, NSError* error)) handler;
 ```
 
 Extract News
@@ -45,7 +45,7 @@ OAINewsApi*apiInstance = [[OAINewsApi alloc] init];
 // Extract News
 [apiInstance extractNewsWithUrl:url
               analyze:analyze
-          completionHandler: ^(OAIInlineResponse2001* output, NSError* error) {
+          completionHandler: ^(OAIExtractNewsResponse* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
@@ -64,7 +64,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OAIInlineResponse2001***](OAIInlineResponse2001.md)
+[**OAIExtractNewsResponse***](OAIExtractNewsResponse.md)
 
 ### Authorization
 
@@ -83,7 +83,7 @@ Name | Type | Description  | Notes
     apiKey: (NSString*) apiKey
     prefix: (NSString*) prefix
     subDomain: (NSNumber*) subDomain
-        completionHandler: (void (^)(OAIInlineResponse2002* output, NSError* error)) handler;
+        completionHandler: (void (^)(OAIExtractLinksResponse* output, NSError* error)) handler;
 ```
 
 Extract News Links
@@ -117,7 +117,7 @@ OAINewsApi*apiInstance = [[OAINewsApi alloc] init];
               apiKey:apiKey
               prefix:prefix
               subDomain:subDomain
-          completionHandler: ^(OAIInlineResponse2002* output, NSError* error) {
+          completionHandler: ^(OAIExtractLinksResponse* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
@@ -138,7 +138,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OAIInlineResponse2002***](OAIInlineResponse2002.md)
+[**OAIExtractLinksResponse***](OAIExtractLinksResponse.md)
 
 ### Authorization
 
@@ -154,7 +154,7 @@ Name | Type | Description  | Notes
 # **geoCoordinates**
 ```objc
 -(NSURLSessionTask*) geoCoordinatesWithLocation: (NSString*) location
-        completionHandler: (void (^)(OAIInlineResponse2003* output, NSError* error)) handler;
+        completionHandler: (void (^)(OAIGeoCoordinatesResponse* output, NSError* error)) handler;
 ```
 
 Get Geo Coordinates
@@ -182,7 +182,7 @@ OAINewsApi*apiInstance = [[OAINewsApi alloc] init];
 
 // Get Geo Coordinates
 [apiInstance geoCoordinatesWithLocation:location
-          completionHandler: ^(OAIInlineResponse2003* output, NSError* error) {
+          completionHandler: ^(OAIGeoCoordinatesResponse* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
@@ -200,7 +200,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OAIInlineResponse2003***](OAIInlineResponse2003.md)
+[**OAIGeoCoordinatesResponse***](OAIGeoCoordinatesResponse.md)
 
 ### Authorization
 
@@ -300,7 +300,7 @@ Name | Type | Description  | Notes
     number: (NSNumber*) number
     sort: (NSString*) sort
     sortDirection: (NSString*) sortDirection
-        completionHandler: (void (^)(OAIInlineResponse200* output, NSError* error)) handler;
+        completionHandler: (void (^)(OAISearchNewsResponse* output, NSError* error)) handler;
 ```
 
 Search News
@@ -356,7 +356,7 @@ OAINewsApi*apiInstance = [[OAINewsApi alloc] init];
               number:number
               sort:sort
               sortDirection:sortDirection
-          completionHandler: ^(OAIInlineResponse200* output, NSError* error) {
+          completionHandler: ^(OAISearchNewsResponse* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
@@ -388,7 +388,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OAIInlineResponse200***](OAIInlineResponse200.md)
+[**OAISearchNewsResponse***](OAISearchNewsResponse.md)
 
 ### Authorization
 

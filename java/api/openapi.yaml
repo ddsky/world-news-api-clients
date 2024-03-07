@@ -6,7 +6,7 @@ info:
   description: The world's news wrapped into a single API.
   termsOfService: https://worldnewsapi.com/terms/
   title: World News API
-  version: "1.0"
+  version: "1.1"
 servers:
 - url: https://api.worldnewsapi.com
 security:
@@ -29,17 +29,17 @@ paths:
           example: hurricane
           type: string
         style: form
-      - description: A comma-separated list of ISO 3166 country codes from which the
-          news should originate, e.g. gb,us.
+      - description: "A comma-separated list of ISO 3166 country codes from which\
+          \ the news should originate, e.g. gb,us."
         explode: true
         in: query
         name: source-countries
         required: false
         schema:
-          example: us,uk
+          example: "us,uk"
           type: string
         style: form
-      - description: The ISO 6391 language code of the news, e.g. "en" for English.
+      - description: "The ISO 6391 language code of the news, e.g. \"en\" for English."
         explode: true
         in: query
         name: language
@@ -48,7 +48,7 @@ paths:
           example: en
           type: string
         style: form
-      - description: The minimal sentiment of the news in range [-1,1].
+      - description: "The minimal sentiment of the news in range [-1,1]."
         explode: true
         in: query
         name: min-sentiment
@@ -60,7 +60,7 @@ paths:
           minimum: -1
           type: number
         style: form
-      - description: The maximal sentiment of the news in range [-1,1].
+      - description: "The maximal sentiment of the news in range [-1,1]."
         explode: true
         in: query
         name: max-sentiment
@@ -90,8 +90,8 @@ paths:
           example: 2022-05-23 24:16:27
           type: string
         style: form
-      - description: A comma-separated list of news sources from which the news should
-          originate, e.g. https://www.bbc.co.uk
+      - description: "A comma-separated list of news sources from which the news should\
+          \ originate, e.g. https://www.bbc.co.uk"
         explode: true
         in: query
         name: news-sources
@@ -110,7 +110,7 @@ paths:
           example: John Doe
           type: string
         style: form
-      - description: Filter news by entities, e.g. ORG:Tesla.
+      - description: "Filter news by entities, e.g. ORG:Tesla."
         explode: true
         in: query
         name: entities
@@ -119,17 +119,17 @@ paths:
           example: ORG:Tesla
           type: string
         style: form
-      - description: Filter news by radius around a certain location. Format is "latitude,longitude,radius
-          in kilometers", e.g. 51.050407, 13.737262, 100
+      - description: "Filter news by radius around a certain location. Format is \"\
+          latitude,longitude,radius in kilometers\", e.g. 51.050407, 13.737262, 100"
         explode: true
         in: query
         name: location-filter
         required: false
         schema:
-          example: 51.050407,13.737262,100
+          example: "51.050407,13.737262,100"
           type: string
         style: form
-      - description: The number of news to skip in range [0,1000]
+      - description: "The number of news to skip in range [0,1000]"
         explode: true
         in: query
         name: offset
@@ -140,7 +140,7 @@ paths:
           minimum: 0
           type: integer
         style: form
-      - description: The number of news to return in range [1,100]
+      - description: "The number of news to return in range [1,100]"
         explode: true
         in: query
         name: number
@@ -189,37 +189,37 @@ paths:
                     news:
                     - id: 28
                       title: Tesla to Release a Four-Motor Version of Cybertruck
-                      text: 'Tesla CEO Elon Musk has revealed new details about the
-                        upcoming Cybertruck electric pickup truck, the mass production
-                        of which was delayed until 2023 because of the lack of components
-                        and a lot of complex technologies that need to be scaled up.
-                        According to Musk, the initial production of the electric
-                        pickup truck will begin with a four-motor variant with “independent,
-                        ultra fast response torque control of each wheel,” the tweet
-                        reads. In response, Twitter users asked if the Cybertruck
-                        could turn like a tank. Musk said that thanks to both the
-                        rear and front wheel steer, the electric truck will not only
-                        be able to turn like a tank, but also drive diagonally like
-                        a crab. According to Electrek, this change could be Tesla''s
-                        reaction to what its competitors do. Since the introduction
-                        of Tesla’s novelty, the market for electric pickup trucks
-                        has significantly evolved. Currently, one electric pickup
-                        on the market can turn like a tank – the Rivian R1T, while
-                        GMC''s Hummer EV can drive diagonally. Following the announcement
-                        of Tesla Cybertruck in 2019, the company announced three configurations
-                        of the pickup truck: the entry-level model with one motor,
-                        the one with two motors, and the one with three. Rumor has
-                        it that the company intends to abandon the single-motor version
-                        altogether. In this case, Tesla Cybertruck will be sold with
-                        two, three, and four motors. Musk has promised to provide
-                        an update on the pickup''s roadmap on the next earnings call.
-                        The production of Tesla Cybertruck is expected to begin at
-                        the end of 2022, and its mass production is slated to start
-                        in 2023.'
-                      summary: Tesla CEO Elon Musk has revealed new details about
-                        the upcoming Cybertruck electric pickup truck. According to
-                        Musk, its initial production will begin with a four-motor
-                        variant.
+                      text: "Tesla CEO Elon Musk has revealed new details about the\
+                        \ upcoming Cybertruck electric pickup truck, the mass production\
+                        \ of which was delayed until 2023 because of the lack of components\
+                        \ and a lot of complex technologies that need to be scaled\
+                        \ up. According to Musk, the initial production of the electric\
+                        \ pickup truck will begin with a four-motor variant with “\
+                        independent, ultra fast response torque control of each wheel,”\
+                        \ the tweet reads. In response, Twitter users asked if the\
+                        \ Cybertruck could turn like a tank. Musk said that thanks\
+                        \ to both the rear and front wheel steer, the electric truck\
+                        \ will not only be able to turn like a tank, but also drive\
+                        \ diagonally like a crab. According to Electrek, this change\
+                        \ could be Tesla's reaction to what its competitors do. Since\
+                        \ the introduction of Tesla’s novelty, the market for electric\
+                        \ pickup trucks has significantly evolved. Currently, one\
+                        \ electric pickup on the market can turn like a tank – the\
+                        \ Rivian R1T, while GMC's Hummer EV can drive diagonally.\
+                        \ Following the announcement of Tesla Cybertruck in 2019,\
+                        \ the company announced three configurations of the pickup\
+                        \ truck: the entry-level model with one motor, the one with\
+                        \ two motors, and the one with three. Rumor has it that the\
+                        \ company intends to abandon the single-motor version altogether.\
+                        \ In this case, Tesla Cybertruck will be sold with two, three,\
+                        \ and four motors. Musk has promised to provide an update\
+                        \ on the pickup's roadmap on the next earnings call. The production\
+                        \ of Tesla Cybertruck is expected to begin at the end of 2022,\
+                        \ and its mass production is slated to start in 2023."
+                      summary: "Tesla CEO Elon Musk has revealed new details about\
+                        \ the upcoming Cybertruck electric pickup truck. According\
+                        \ to Musk, its initial production will begin with a four-motor\
+                        \ variant."
                       url: https://internetprotocol.co/hitech/2021/12/07/tesla-to-release-a-four-motor-cybertruck/
                       image: https://internetprotocol.co/content/images/2021/12/Tesla-to-Release-a-Four-Motor-Version-of-Cybertruck.png
                       author: Kay Lee
@@ -229,30 +229,31 @@ paths:
                     - id: 30
                       title: Elon Musk's Neuralink to Start Implanting Brain Chips
                         in Humans in 2022
-                      text: Elon Musk announced that his neurotechnology company Neuralink
-                        will begin implanting its first microchips in human brains
-                        in 2022. At this point, Neuralink must get the approval of
-                        the US Food and Drug Administration (FDA). Neuralink has been
-                        developing brain chips since 2016 to implant them into human
-                        brains and record and stimulate brain activity simultaneously.
-                        This device is intended for medical purposes and aims to help
-                        partially or fully paralyzed individuals and people with severe
-                        spinal-cord injuries and neurological disorders. Musk claims
-                        that Neuralink's standards for chip implantation are significantly
-                        higher than the FDA requires. "Neuralink's working well in
-                        monkeys, and we're actually doing just a lot of testing and
-                        just confirming that it's very safe and reliable, and the
-                        Neuralink device can be removed safely," he said. The Neuralink
-                        chip performed well during the test with a monkey, Elon Musk
-                        said. In April, the company posted a video on the official
-                        YouTube channel with a monkey playing the classic Pong game
-                        solely with its own mind. The entrepreneur says the first
-                        people to receive the microchips may be patients with severe
-                        spinal-cord injuries, such as tetraplegics or quadriplegics.
-                        In 2019, Elon Musk planned to begin human testing by the end
-                        of 2020. In February 2021, he hoped to start implanting the
-                        chips in humans by the end of 2021. Now the date is being
-                        postponed again.
+                      text: "Elon Musk announced that his neurotechnology company\
+                        \ Neuralink will begin implanting its first microchips in\
+                        \ human brains in 2022. At this point, Neuralink must get\
+                        \ the approval of the US Food and Drug Administration (FDA).\
+                        \ Neuralink has been developing brain chips since 2016 to\
+                        \ implant them into human brains and record and stimulate\
+                        \ brain activity simultaneously. This device is intended for\
+                        \ medical purposes and aims to help partially or fully paralyzed\
+                        \ individuals and people with severe spinal-cord injuries\
+                        \ and neurological disorders. Musk claims that Neuralink's\
+                        \ standards for chip implantation are significantly higher\
+                        \ than the FDA requires. \"Neuralink's working well in monkeys,\
+                        \ and we're actually doing just a lot of testing and just\
+                        \ confirming that it's very safe and reliable, and the Neuralink\
+                        \ device can be removed safely,\" he said. The Neuralink chip\
+                        \ performed well during the test with a monkey, Elon Musk\
+                        \ said. In April, the company posted a video on the official\
+                        \ YouTube channel with a monkey playing the classic Pong game\
+                        \ solely with its own mind. The entrepreneur says the first\
+                        \ people to receive the microchips may be patients with severe\
+                        \ spinal-cord injuries, such as tetraplegics or quadriplegics.\
+                        \ In 2019, Elon Musk planned to begin human testing by the\
+                        \ end of 2020. In February 2021, he hoped to start implanting\
+                        \ the chips in humans by the end of 2021. Now the date is\
+                        \ being postponed again."
                       summary: Neuralink's brain chips are intended for medical purposes
                         and aim to help partially or fully paralyzed individuals and
                         people with severe spinal-cord injuries and neurological disorders.
@@ -264,34 +265,34 @@ paths:
                       sentiment: -0.22859
                     - id: 32
                       title: Twitter Introduced NFT Profile Pictures on iOS
-                      text: 'Twitter announced the launch of a new feature that will
-                        allow premium users to add NFTs from their collection as their
-                        profile pics. The feature is currently available for iOS users
-                        with an active Twitter Blue subscription, which costs $2.99
-                        per month and is currently available in Canada, Australia,
-                        New Zealand, and the US. An NFT token is a blockchain-based
-                        certificate that confirms the ownership of digital art. Unlike
-                        most digital currencies, NFTs are not fungible. That is, each
-                        token is a unique digital asset. NFT profile pictures will
-                        differ from regular profile pics since they will be hexagon-shaped,
-                        not round like the usual ones. In order to set an NFT as their
-                        profile pic, a user will need to connect their crypto wallet
-                        to their Twitter account and select the image they need from
-                        the NFT gallery. If the user tries to set a screenshot of
-                        an NFT not linked to the blockchain as a profile image, it
-                        will be round. There are now six crypto wallets one can connect:
-                        Argent Coinbase Wallet Ledger Live MetaMask Rainbow Trust
-                        Wallet The NFT profile pictures will be clickable – once you
-                        click on them, you''ll get info on the NFT''s creator as well
-                        as its description. Meanwhile, SpaceX and Tesla CEO Elon Musk
-                        has already criticized the new feature in a tweet: Like other
-                        technology companies, Twitter is quick to capitalize on cryptocurrency
-                        trends such as NFTs. In 2021, NFT sales reached about $25
-                        billion.'
-                      summary: The feature is currently available for iOS users with
-                        an active Twitter Blue subscription, which costs $2.99 per
-                        month and is now available in Canada, Australia, New Zealand,
-                        and the US.
+                      text: "Twitter announced the launch of a new feature that will\
+                        \ allow premium users to add NFTs from their collection as\
+                        \ their profile pics. The feature is currently available for\
+                        \ iOS users with an active Twitter Blue subscription, which\
+                        \ costs $2.99 per month and is currently available in Canada,\
+                        \ Australia, New Zealand, and the US. An NFT token is a blockchain-based\
+                        \ certificate that confirms the ownership of digital art.\
+                        \ Unlike most digital currencies, NFTs are not fungible. That\
+                        \ is, each token is a unique digital asset. NFT profile pictures\
+                        \ will differ from regular profile pics since they will be\
+                        \ hexagon-shaped, not round like the usual ones. In order\
+                        \ to set an NFT as their profile pic, a user will need to\
+                        \ connect their crypto wallet to their Twitter account and\
+                        \ select the image they need from the NFT gallery. If the\
+                        \ user tries to set a screenshot of an NFT not linked to the\
+                        \ blockchain as a profile image, it will be round. There are\
+                        \ now six crypto wallets one can connect: Argent Coinbase\
+                        \ Wallet Ledger Live MetaMask Rainbow Trust Wallet The NFT\
+                        \ profile pictures will be clickable – once you click on them,\
+                        \ you'll get info on the NFT's creator as well as its description.\
+                        \ Meanwhile, SpaceX and Tesla CEO Elon Musk has already criticized\
+                        \ the new feature in a tweet: Like other technology companies,\
+                        \ Twitter is quick to capitalize on cryptocurrency trends\
+                        \ such as NFTs. In 2021, NFT sales reached about $25 billion."
+                      summary: "The feature is currently available for iOS users with\
+                        \ an active Twitter Blue subscription, which costs $2.99 per\
+                        \ month and is now available in Canada, Australia, New Zealand,\
+                        \ and the US."
                       url: https://internetprotocol.co/hype-news/2022/01/24/twitter-introduced-nft-profile-pictures-on-ios/
                       image: https://internetprotocol.co/content/images/2022/01/Twitter-Introduced-NFT-Profile-Pictures-on-iOS.png
                       author: Samuel White
@@ -300,25 +301,26 @@ paths:
                       sentiment: 0.709366
                     - id: 37
                       title: Tesla Launches a Microphone for In-Car Karaoke in China
-                      text: Elon Musk's Tesla launched TeslaMic microphones for in-car
-                        karaoke, which were only available for purchase in China.
-                        They were introduced along with a Chinese New Year software
-                        update in China, which allows using the microphones. According
-                        to The Wall Street Journal, all microphones were sold out
-                        within the first day, but new deliveries are expected this
-                        February. Tesla customers in China were offered a set of two
-                        microphones for $188. A recent software update allows you
-                        to sing in a parked electric vehicle and enjoy your favorite
-                        hits while watching videos similar to the ones one can watch
-                        in karaoke bars. The microphone automatically pairs with the
-                        infotainment system and has several sound modes. There is
-                        no information about whether the microphones will be sold
-                        in other countries anytime soon. Karaoke is one of the favorite
-                        entertainments in Asian countries. About 500 million people
-                        used online karaoke services in China last year, according
-                        to iiMedia Research Group. Therefore, Tesla has found itself
-                        unexpectedly lagging behind its competitors since many of
-                        them already offer karaoke systems integrated into their cars.
+                      text: "Elon Musk's Tesla launched TeslaMic microphones for in-car\
+                        \ karaoke, which were only available for purchase in China.\
+                        \ They were introduced along with a Chinese New Year software\
+                        \ update in China, which allows using the microphones. According\
+                        \ to The Wall Street Journal, all microphones were sold out\
+                        \ within the first day, but new deliveries are expected this\
+                        \ February. Tesla customers in China were offered a set of\
+                        \ two microphones for $188. A recent software update allows\
+                        \ you to sing in a parked electric vehicle and enjoy your\
+                        \ favorite hits while watching videos similar to the ones\
+                        \ one can watch in karaoke bars. The microphone automatically\
+                        \ pairs with the infotainment system and has several sound\
+                        \ modes. There is no information about whether the microphones\
+                        \ will be sold in other countries anytime soon. Karaoke is\
+                        \ one of the favorite entertainments in Asian countries. About\
+                        \ 500 million people used online karaoke services in China\
+                        \ last year, according to iiMedia Research Group. Therefore,\
+                        \ Tesla has found itself unexpectedly lagging behind its competitors\
+                        \ since many of them already offer karaoke systems integrated\
+                        \ into their cars."
                       summary: A recent software update allows you to sing in a parked
                         electric vehicle and enjoy your favorite hits. The microphone
                         automatically pairs with the infotainment system and has several
@@ -332,34 +334,35 @@ paths:
                     - id: 270
                       title: Tesla gets the presidential snub as Biden ignores it
                         to laud inroads by GM and Ford in electric vehicles
-                      text: 'Tesla’s CEO Elon Musk during the groundbreaking ceremony
-                        of the carmaker’s Shanghai Gigafactory on January 7, 2019.
-                        Photo: Zuma Press/TNS Tesla + FOLLOW Business / Companies
-                        Tesla gets the presidential snub as Biden ignores it to laud
-                        inroads by GM and Ford in electric vehicles In 2021, Tesla
-                        delivered over 936,000 cars globally while GM sold nearly
-                        480,000 EVs last year, mostly in China Topic | Tesla E3B1C256-BFCB-4CEF-88A6-1DCCD7666635
-                        Bloomberg + FOLLOW Published: 11:36am, 3 Feb, 2022 Updated:
-                        11:36am, 3 Feb, 2022 Why you can trust SCMP Tesla’s CEO Elon
-                        Musk during the groundbreaking ceremony of the carmaker’s
-                        Shanghai Gigafactory on January 7, 2019. Photo: Zuma Press/TNS
-                        READ FULL ARTICLE Link Copied'
-                      summary: 'President Joe Biden calls himself a union guy and
-                        a car guy, and he is embraced electric vehicles as vital to
-                        his economic and climate ambitions.But there’s one US car
-                        company he won’t talk about: Tesla, the world’s most valuable
-                        carmaker and the global brand most clearly associated with
-                        EVs.“I meant it when I said the future was going to be made
-                        right here in America,” Biden said in a tweeted video with
-                        General Motors chair and Chief Executive Officer Mary Barra
-                        on Thursday. “Companies like GM…'
+                      text: "Tesla’s CEO Elon Musk during the groundbreaking ceremony\
+                        \ of the carmaker’s Shanghai Gigafactory on January 7, 2019.\
+                        \ Photo: Zuma Press/TNS Tesla + FOLLOW Business / Companies\
+                        \ Tesla gets the presidential snub as Biden ignores it to\
+                        \ laud inroads by GM and Ford in electric vehicles In 2021,\
+                        \ Tesla delivered over 936,000 cars globally while GM sold\
+                        \ nearly 480,000 EVs last year, mostly in China Topic | Tesla\
+                        \ E3B1C256-BFCB-4CEF-88A6-1DCCD7666635 Bloomberg + FOLLOW\
+                        \ Published: 11:36am, 3 Feb, 2022 Updated: 11:36am, 3 Feb,\
+                        \ 2022 Why you can trust SCMP Tesla’s CEO Elon Musk during\
+                        \ the groundbreaking ceremony of the carmaker’s Shanghai Gigafactory\
+                        \ on January 7, 2019. Photo: Zuma Press/TNS READ FULL ARTICLE\
+                        \ Link Copied"
+                      summary: "President Joe Biden calls himself a union guy and\
+                        \ a car guy, and he is embraced electric vehicles as vital\
+                        \ to his economic and climate ambitions.But there’s one US\
+                        \ car company he won’t talk about: Tesla, the world’s most\
+                        \ valuable carmaker and the global brand most clearly associated\
+                        \ with EVs.“I meant it when I said the future was going to\
+                        \ be made right here in America,” Biden said in a tweeted\
+                        \ video with General Motors chair and Chief Executive Officer\
+                        \ Mary Barra on Thursday. “Companies like GM…"
                       url: https://www.scmp.com/business/companies/article/3165649/tesla-gets-us-presidential-snub-biden-lauds-inroads-gm-and-ford
                       author: Bloomberg
                       language: en
                       source_country: hk
                       sentiment: 0.334821
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/SearchNewsResponse'
           description: List of news.
       summary: Search News
       tags:
@@ -397,32 +400,33 @@ paths:
                 Extracted_News_Example:
                   value:
                     title: Tesla to Release a Four-Motor Version of Cybertruck
-                    text: 'Tesla CEO Elon Musk has revealed new details about the
-                      upcoming Cybertruck electric pickup truck, the mass production
-                      of which was delayed until 2023 because of the lack of components
-                      and a lot of complex technologies that need to be scaled up.
-                      According to Musk, the initial production of the electric pickup
-                      truck will begin with a four-motor variant with “independent,
-                      ultra fast response torque control of each wheel,” the tweet
-                      reads. In response, Twitter users asked if the Cybertruck could
-                      turn like a tank. Musk said that thanks to both the rear and
-                      front wheel steer, the electric truck will not only be able
-                      to turn like a tank, but also drive diagonally like a crab.
-                      According to Electrek, this change could be Tesla''s reaction
-                      to what its competitors do. Since the introduction of Tesla’s
-                      novelty, the market for electric pickup trucks has significantly
-                      evolved. Currently, one electric pickup on the market can turn
-                      like a tank – the Rivian R1T, while GMC''s Hummer EV can drive
-                      diagonally. Following the announcement of Tesla Cybertruck in
-                      2019, the company announced three configurations of the pickup
-                      truck: the entry-level model with one motor, the one with two
-                      motors, and the one with three. Rumor has it that the company
-                      intends to abandon the single-motor version altogether. In this
-                      case, Tesla Cybertruck will be sold with two, three, and four
-                      motors. Musk has promised to provide an update on the pickup''s
-                      roadmap on the next earnings call. The production of Tesla Cybertruck
-                      is expected to begin at the end of 2022, and its mass production
-                      is slated to start in 2023.'
+                    text: "Tesla CEO Elon Musk has revealed new details about the\
+                      \ upcoming Cybertruck electric pickup truck, the mass production\
+                      \ of which was delayed until 2023 because of the lack of components\
+                      \ and a lot of complex technologies that need to be scaled up.\
+                      \ According to Musk, the initial production of the electric\
+                      \ pickup truck will begin with a four-motor variant with “independent,\
+                      \ ultra fast response torque control of each wheel,” the tweet\
+                      \ reads. In response, Twitter users asked if the Cybertruck\
+                      \ could turn like a tank. Musk said that thanks to both the\
+                      \ rear and front wheel steer, the electric truck will not only\
+                      \ be able to turn like a tank, but also drive diagonally like\
+                      \ a crab. According to Electrek, this change could be Tesla's\
+                      \ reaction to what its competitors do. Since the introduction\
+                      \ of Tesla’s novelty, the market for electric pickup trucks\
+                      \ has significantly evolved. Currently, one electric pickup\
+                      \ on the market can turn like a tank – the Rivian R1T, while\
+                      \ GMC's Hummer EV can drive diagonally. Following the announcement\
+                      \ of Tesla Cybertruck in 2019, the company announced three configurations\
+                      \ of the pickup truck: the entry-level model with one motor,\
+                      \ the one with two motors, and the one with three. Rumor has\
+                      \ it that the company intends to abandon the single-motor version\
+                      \ altogether. In this case, Tesla Cybertruck will be sold with\
+                      \ two, three, and four motors. Musk has promised to provide\
+                      \ an update on the pickup's roadmap on the next earnings call.\
+                      \ The production of Tesla Cybertruck is expected to begin at\
+                      \ the end of 2022, and its mass production is slated to start\
+                      \ in 2023."
                     url: https://internetprotocol.co/hitech/2021/12/07/tesla-to-release-a-four-motor-cybertruck/
                     image: https://internetprotocol.co/content/images/2021/12/Tesla-to-Release-a-Four-Motor-Version-of-Cybertruck.png
                     author: Kay Lee
@@ -430,7 +434,7 @@ paths:
                     source_country: co
                     sentiment: 0.712523
               schema:
-                $ref: '#/components/schemas/inline_response_200_1'
+                $ref: '#/components/schemas/ExtractNewsResponse'
           description: Extracted news.
       summary: Extract News
       tags:
@@ -493,7 +497,7 @@ paths:
                     - https://www.nytimes.com/2023/10/08/business/economy/labor-strikes.html
                     - https://www.nytimes.com/2023/10/08/dining/sunday-calls-for-old-fashioned-beef-stew.html
               schema:
-                $ref: '#/components/schemas/inline_response_200_2'
+                $ref: '#/components/schemas/ExtractLinksResponse'
           description: Success
         "401":
           description: Unauthorized
@@ -531,8 +535,8 @@ paths:
           example: https://nytimes.com
           type: string
         style: form
-      - description: Whether extract news and add information such as description,
-          publish date, and image to each item.
+      - description: "Whether extract news and add information such as description,\
+          \ publish date, and image to each item."
         explode: false
         in: query
         name: extract-news
@@ -597,13 +601,13 @@ paths:
         exact address but also just the name of a city or country.
       operationId: geo-coordinates
       parameters:
-      - description: The address or name of the location, e.g. Tokyo, Japan.
+      - description: "The address or name of the location, e.g. Tokyo, Japan."
         explode: true
         in: query
         name: location
         required: true
         schema:
-          example: Tokyo, Japan
+          example: "Tokyo, Japan"
           type: string
         style: form
       responses:
@@ -617,7 +621,7 @@ paths:
                     longitude: 13.7373
                     city: Dresden
               schema:
-                $ref: '#/components/schemas/inline_response_200_3'
+                $ref: '#/components/schemas/GeoCoordinatesResponse'
           description: The coordinates of the location.
         "404":
           description: Not Found
@@ -659,31 +663,32 @@ components:
         News_Entry_Example:
           id: 28
           title: Tesla to Release a Four-Motor Version of Cybertruck
-          text: 'Tesla CEO Elon Musk has revealed new details about the upcoming Cybertruck
-            electric pickup truck, the mass production of which was delayed until
-            2023 because of the lack of components and a lot of complex technologies
-            that need to be scaled up. According to Musk, the initial production of
-            the electric pickup truck will begin with a four-motor variant with “independent,
-            ultra fast response torque control of each wheel,” the tweet reads. In
-            response, Twitter users asked if the Cybertruck could turn like a tank.
-            Musk said that thanks to both the rear and front wheel steer, the electric
-            truck will not only be able to turn like a tank, but also drive diagonally
-            like a crab. According to Electrek, this change could be Tesla''s reaction
-            to what its competitors do. Since the introduction of Tesla’s novelty,
-            the market for electric pickup trucks has significantly evolved. Currently,
-            one electric pickup on the market can turn like a tank – the Rivian R1T,
-            while GMC''s Hummer EV can drive diagonally. Following the announcement
-            of Tesla Cybertruck in 2019, the company announced three configurations
-            of the pickup truck: the entry-level model with one motor, the one with
-            two motors, and the one with three. Rumor has it that the company intends
-            to abandon the single-motor version altogether. In this case, Tesla Cybertruck
-            will be sold with two, three, and four motors. Musk has promised to provide
-            an update on the pickup''s roadmap on the next earnings call. The production
-            of Tesla Cybertruck is expected to begin at the end of 2022, and its mass
-            production is slated to start in 2023.'
-          summary: Tesla CEO Elon Musk has revealed new details about the upcoming
-            Cybertruck electric pickup truck. According to Musk, its initial production
-            will begin with a four-motor variant.
+          text: "Tesla CEO Elon Musk has revealed new details about the upcoming Cybertruck\
+            \ electric pickup truck, the mass production of which was delayed until\
+            \ 2023 because of the lack of components and a lot of complex technologies\
+            \ that need to be scaled up. According to Musk, the initial production\
+            \ of the electric pickup truck will begin with a four-motor variant with\
+            \ “independent, ultra fast response torque control of each wheel,” the\
+            \ tweet reads. In response, Twitter users asked if the Cybertruck could\
+            \ turn like a tank. Musk said that thanks to both the rear and front wheel\
+            \ steer, the electric truck will not only be able to turn like a tank,\
+            \ but also drive diagonally like a crab. According to Electrek, this change\
+            \ could be Tesla's reaction to what its competitors do. Since the introduction\
+            \ of Tesla’s novelty, the market for electric pickup trucks has significantly\
+            \ evolved. Currently, one electric pickup on the market can turn like\
+            \ a tank – the Rivian R1T, while GMC's Hummer EV can drive diagonally.\
+            \ Following the announcement of Tesla Cybertruck in 2019, the company\
+            \ announced three configurations of the pickup truck: the entry-level\
+            \ model with one motor, the one with two motors, and the one with three.\
+            \ Rumor has it that the company intends to abandon the single-motor version\
+            \ altogether. In this case, Tesla Cybertruck will be sold with two, three,\
+            \ and four motors. Musk has promised to provide an update on the pickup's\
+            \ roadmap on the next earnings call. The production of Tesla Cybertruck\
+            \ is expected to begin at the end of 2022, and its mass production is\
+            \ slated to start in 2023."
+          summary: "Tesla CEO Elon Musk has revealed new details about the upcoming\
+            \ Cybertruck electric pickup truck. According to Musk, its initial production\
+            \ will begin with a four-motor variant."
           url: https://internetprotocol.co/hitech/2021/12/07/tesla-to-release-a-four-motor-cybertruck/
           image: https://internetprotocol.co/content/images/2021/12/Tesla-to-Release-a-Four-Motor-Version-of-Cybertruck.png
           publish_date: 2022-09-30 01:07:48
@@ -693,7 +698,7 @@ components:
           sentiment: 0.712523
       x-tags:
       - news
-    inline_response_200_news:
+    NewsArticle:
       example:
         summary: summary
         image: image
@@ -704,6 +709,7 @@ components:
         id: 5
         text: text
         title: title
+        publish_date: publish_date
         url: url
       properties:
         id:
@@ -719,6 +725,8 @@ components:
         image:
           nullable: true
           type: string
+        publish_date:
+          type: string
         author:
           type: string
         language:
@@ -728,7 +736,7 @@ components:
         sentiment:
           type: number
       type: object
-    inline_response_200:
+    SearchNewsResponse:
       example:
         news:
         - summary: summary
@@ -740,6 +748,7 @@ components:
           id: 5
           text: text
           title: title
+          publish_date: publish_date
           url: url
         - summary: summary
           image: image
@@ -750,6 +759,7 @@ components:
           id: 5
           text: text
           title: title
+          publish_date: publish_date
           url: url
         number: 6
         offset: 0
@@ -763,7 +773,7 @@ components:
           type: integer
         news:
           items:
-            $ref: '#/components/schemas/inline_response_200_news'
+            $ref: '#/components/schemas/NewsArticle'
           type: array
       required:
       - available
@@ -779,32 +789,33 @@ components:
           news:
           - id: 28
             title: Tesla to Release a Four-Motor Version of Cybertruck
-            text: 'Tesla CEO Elon Musk has revealed new details about the upcoming
-              Cybertruck electric pickup truck, the mass production of which was delayed
-              until 2023 because of the lack of components and a lot of complex technologies
-              that need to be scaled up. According to Musk, the initial production
-              of the electric pickup truck will begin with a four-motor variant with
-              “independent, ultra fast response torque control of each wheel,” the
-              tweet reads. In response, Twitter users asked if the Cybertruck could
-              turn like a tank. Musk said that thanks to both the rear and front wheel
-              steer, the electric truck will not only be able to turn like a tank,
-              but also drive diagonally like a crab. According to Electrek, this change
-              could be Tesla''s reaction to what its competitors do. Since the introduction
-              of Tesla’s novelty, the market for electric pickup trucks has significantly
-              evolved. Currently, one electric pickup on the market can turn like
-              a tank – the Rivian R1T, while GMC''s Hummer EV can drive diagonally.
-              Following the announcement of Tesla Cybertruck in 2019, the company
-              announced three configurations of the pickup truck: the entry-level
-              model with one motor, the one with two motors, and the one with three.
-              Rumor has it that the company intends to abandon the single-motor version
-              altogether. In this case, Tesla Cybertruck will be sold with two, three,
-              and four motors. Musk has promised to provide an update on the pickup''s
-              roadmap on the next earnings call. The production of Tesla Cybertruck
-              is expected to begin at the end of 2022, and its mass production is
-              slated to start in 2023.'
-            summary: Tesla CEO Elon Musk has revealed new details about the upcoming
-              Cybertruck electric pickup truck. According to Musk, its initial production
-              will begin with a four-motor variant.
+            text: "Tesla CEO Elon Musk has revealed new details about the upcoming\
+              \ Cybertruck electric pickup truck, the mass production of which was\
+              \ delayed until 2023 because of the lack of components and a lot of\
+              \ complex technologies that need to be scaled up. According to Musk,\
+              \ the initial production of the electric pickup truck will begin with\
+              \ a four-motor variant with “independent, ultra fast response torque\
+              \ control of each wheel,” the tweet reads. In response, Twitter users\
+              \ asked if the Cybertruck could turn like a tank. Musk said that thanks\
+              \ to both the rear and front wheel steer, the electric truck will not\
+              \ only be able to turn like a tank, but also drive diagonally like a\
+              \ crab. According to Electrek, this change could be Tesla's reaction\
+              \ to what its competitors do. Since the introduction of Tesla’s novelty,\
+              \ the market for electric pickup trucks has significantly evolved. Currently,\
+              \ one electric pickup on the market can turn like a tank – the Rivian\
+              \ R1T, while GMC's Hummer EV can drive diagonally. Following the announcement\
+              \ of Tesla Cybertruck in 2019, the company announced three configurations\
+              \ of the pickup truck: the entry-level model with one motor, the one\
+              \ with two motors, and the one with three. Rumor has it that the company\
+              \ intends to abandon the single-motor version altogether. In this case,\
+              \ Tesla Cybertruck will be sold with two, three, and four motors. Musk\
+              \ has promised to provide an update on the pickup's roadmap on the next\
+              \ earnings call. The production of Tesla Cybertruck is expected to begin\
+              \ at the end of 2022, and its mass production is slated to start in\
+              \ 2023."
+            summary: "Tesla CEO Elon Musk has revealed new details about the upcoming\
+              \ Cybertruck electric pickup truck. According to Musk, its initial production\
+              \ will begin with a four-motor variant."
             url: https://internetprotocol.co/hitech/2021/12/07/tesla-to-release-a-four-motor-cybertruck/
             image: https://internetprotocol.co/content/images/2021/12/Tesla-to-Release-a-Four-Motor-Version-of-Cybertruck.png
             publish_date: 2022-09-30 01:07:48
@@ -815,26 +826,27 @@ components:
           - id: 30
             title: Elon Musk's Neuralink to Start Implanting Brain Chips in Humans
               in 2022
-            text: Elon Musk announced that his neurotechnology company Neuralink will
-              begin implanting its first microchips in human brains in 2022. At this
-              point, Neuralink must get the approval of the US Food and Drug Administration
-              (FDA). Neuralink has been developing brain chips since 2016 to implant
-              them into human brains and record and stimulate brain activity simultaneously.
-              This device is intended for medical purposes and aims to help partially
-              or fully paralyzed individuals and people with severe spinal-cord injuries
-              and neurological disorders. Musk claims that Neuralink's standards for
-              chip implantation are significantly higher than the FDA requires. "Neuralink's
-              working well in monkeys, and we're actually doing just a lot of testing
-              and just confirming that it's very safe and reliable, and the Neuralink
-              device can be removed safely," he said. The Neuralink chip performed
-              well during the test with a monkey, Elon Musk said. In April, the company
-              posted a video on the official YouTube channel with a monkey playing
-              the classic Pong game solely with its own mind. The entrepreneur says
-              the first people to receive the microchips may be patients with severe
-              spinal-cord injuries, such as tetraplegics or quadriplegics. In 2019,
-              Elon Musk planned to begin human testing by the end of 2020. In February
-              2021, he hoped to start implanting the chips in humans by the end of
-              2021. Now the date is being postponed again.
+            text: "Elon Musk announced that his neurotechnology company Neuralink\
+              \ will begin implanting its first microchips in human brains in 2022.\
+              \ At this point, Neuralink must get the approval of the US Food and\
+              \ Drug Administration (FDA). Neuralink has been developing brain chips\
+              \ since 2016 to implant them into human brains and record and stimulate\
+              \ brain activity simultaneously. This device is intended for medical\
+              \ purposes and aims to help partially or fully paralyzed individuals\
+              \ and people with severe spinal-cord injuries and neurological disorders.\
+              \ Musk claims that Neuralink's standards for chip implantation are significantly\
+              \ higher than the FDA requires. \"Neuralink's working well in monkeys,\
+              \ and we're actually doing just a lot of testing and just confirming\
+              \ that it's very safe and reliable, and the Neuralink device can be\
+              \ removed safely,\" he said. The Neuralink chip performed well during\
+              \ the test with a monkey, Elon Musk said. In April, the company posted\
+              \ a video on the official YouTube channel with a monkey playing the\
+              \ classic Pong game solely with its own mind. The entrepreneur says\
+              \ the first people to receive the microchips may be patients with severe\
+              \ spinal-cord injuries, such as tetraplegics or quadriplegics. In 2019,\
+              \ Elon Musk planned to begin human testing by the end of 2020. In February\
+              \ 2021, he hoped to start implanting the chips in humans by the end\
+              \ of 2021. Now the date is being postponed again."
             summary: Neuralink's brain chips are intended for medical purposes and
               aim to help partially or fully paralyzed individuals and people with
               severe spinal-cord injuries and neurological disorders.
@@ -846,29 +858,30 @@ components:
             sentiment: -0.22859
           - id: 32
             title: Twitter Introduced NFT Profile Pictures on iOS
-            text: 'Twitter announced the launch of a new feature that will allow premium
-              users to add NFTs from their collection as their profile pics. The feature
-              is currently available for iOS users with an active Twitter Blue subscription,
-              which costs $2.99 per month and is currently available in Canada, Australia,
-              New Zealand, and the US. An NFT token is a blockchain-based certificate
-              that confirms the ownership of digital art. Unlike most digital currencies,
-              NFTs are not fungible. That is, each token is a unique digital asset.
-              NFT profile pictures will differ from regular profile pics since they
-              will be hexagon-shaped, not round like the usual ones. In order to set
-              an NFT as their profile pic, a user will need to connect their crypto
-              wallet to their Twitter account and select the image they need from
-              the NFT gallery. If the user tries to set a screenshot of an NFT not
-              linked to the blockchain as a profile image, it will be round. There
-              are now six crypto wallets one can connect: Argent Coinbase Wallet Ledger
-              Live MetaMask Rainbow Trust Wallet The NFT profile pictures will be
-              clickable – once you click on them, you''ll get info on the NFT''s creator
-              as well as its description. Meanwhile, SpaceX and Tesla CEO Elon Musk
-              has already criticized the new feature in a tweet: Like other technology
-              companies, Twitter is quick to capitalize on cryptocurrency trends such
-              as NFTs. In 2021, NFT sales reached about $25 billion.'
-            summary: The feature is currently available for iOS users with an active
-              Twitter Blue subscription, which costs $2.99 per month and is now available
-              in Canada, Australia, New Zealand, and the US.
+            text: "Twitter announced the launch of a new feature that will allow premium\
+              \ users to add NFTs from their collection as their profile pics. The\
+              \ feature is currently available for iOS users with an active Twitter\
+              \ Blue subscription, which costs $2.99 per month and is currently available\
+              \ in Canada, Australia, New Zealand, and the US. An NFT token is a blockchain-based\
+              \ certificate that confirms the ownership of digital art. Unlike most\
+              \ digital currencies, NFTs are not fungible. That is, each token is\
+              \ a unique digital asset. NFT profile pictures will differ from regular\
+              \ profile pics since they will be hexagon-shaped, not round like the\
+              \ usual ones. In order to set an NFT as their profile pic, a user will\
+              \ need to connect their crypto wallet to their Twitter account and select\
+              \ the image they need from the NFT gallery. If the user tries to set\
+              \ a screenshot of an NFT not linked to the blockchain as a profile image,\
+              \ it will be round. There are now six crypto wallets one can connect:\
+              \ Argent Coinbase Wallet Ledger Live MetaMask Rainbow Trust Wallet The\
+              \ NFT profile pictures will be clickable – once you click on them, you'll\
+              \ get info on the NFT's creator as well as its description. Meanwhile,\
+              \ SpaceX and Tesla CEO Elon Musk has already criticized the new feature\
+              \ in a tweet: Like other technology companies, Twitter is quick to capitalize\
+              \ on cryptocurrency trends such as NFTs. In 2021, NFT sales reached\
+              \ about $25 billion."
+            summary: "The feature is currently available for iOS users with an active\
+              \ Twitter Blue subscription, which costs $2.99 per month and is now\
+              \ available in Canada, Australia, New Zealand, and the US."
             url: https://internetprotocol.co/hype-news/2022/01/24/twitter-introduced-nft-profile-pictures-on-ios/
             image: https://internetprotocol.co/content/images/2022/01/Twitter-Introduced-NFT-Profile-Pictures-on-iOS.png
             author: Samuel White
@@ -877,22 +890,23 @@ components:
             sentiment: 0.709366
           - id: 37
             title: Tesla Launches a Microphone for In-Car Karaoke in China
-            text: Elon Musk's Tesla launched TeslaMic microphones for in-car karaoke,
-              which were only available for purchase in China. They were introduced
-              along with a Chinese New Year software update in China, which allows
-              using the microphones. According to The Wall Street Journal, all microphones
-              were sold out within the first day, but new deliveries are expected
-              this February. Tesla customers in China were offered a set of two microphones
-              for $188. A recent software update allows you to sing in a parked electric
-              vehicle and enjoy your favorite hits while watching videos similar to
-              the ones one can watch in karaoke bars. The microphone automatically
-              pairs with the infotainment system and has several sound modes. There
-              is no information about whether the microphones will be sold in other
-              countries anytime soon. Karaoke is one of the favorite entertainments
-              in Asian countries. About 500 million people used online karaoke services
-              in China last year, according to iiMedia Research Group. Therefore,
-              Tesla has found itself unexpectedly lagging behind its competitors since
-              many of them already offer karaoke systems integrated into their cars.
+            text: "Elon Musk's Tesla launched TeslaMic microphones for in-car karaoke,\
+              \ which were only available for purchase in China. They were introduced\
+              \ along with a Chinese New Year software update in China, which allows\
+              \ using the microphones. According to The Wall Street Journal, all microphones\
+              \ were sold out within the first day, but new deliveries are expected\
+              \ this February. Tesla customers in China were offered a set of two\
+              \ microphones for $188. A recent software update allows you to sing\
+              \ in a parked electric vehicle and enjoy your favorite hits while watching\
+              \ videos similar to the ones one can watch in karaoke bars. The microphone\
+              \ automatically pairs with the infotainment system and has several sound\
+              \ modes. There is no information about whether the microphones will\
+              \ be sold in other countries anytime soon. Karaoke is one of the favorite\
+              \ entertainments in Asian countries. About 500 million people used online\
+              \ karaoke services in China last year, according to iiMedia Research\
+              \ Group. Therefore, Tesla has found itself unexpectedly lagging behind\
+              \ its competitors since many of them already offer karaoke systems integrated\
+              \ into their cars."
             summary: A recent software update allows you to sing in a parked electric
               vehicle and enjoy your favorite hits. The microphone automatically pairs
               with the infotainment system and has several sound modes.
@@ -905,24 +919,24 @@ components:
           - id: 270
             title: Tesla gets the presidential snub as Biden ignores it to laud inroads
               by GM and Ford in electric vehicles
-            text: 'Tesla’s CEO Elon Musk during the groundbreaking ceremony of the
-              carmaker’s Shanghai Gigafactory on January 7, 2019. Photo: Zuma Press/TNS
-              Tesla + FOLLOW Business / Companies Tesla gets the presidential snub
-              as Biden ignores it to laud inroads by GM and Ford in electric vehicles
-              In 2021, Tesla delivered over 936,000 cars globally while GM sold nearly
-              480,000 EVs last year, mostly in China Topic | Tesla E3B1C256-BFCB-4CEF-88A6-1DCCD7666635
-              Bloomberg + FOLLOW Published: 11:36am, 3 Feb, 2022 Updated: 11:36am,
-              3 Feb, 2022 Why you can trust SCMP Tesla’s CEO Elon Musk during the
-              groundbreaking ceremony of the carmaker’s Shanghai Gigafactory on January
-              7, 2019. Photo: Zuma Press/TNS READ FULL ARTICLE Link Copied'
-            summary: 'President Joe Biden calls himself a union guy and a car guy,
-              and he is embraced electric vehicles as vital to his economic and climate
-              ambitions.But there’s one US car company he won’t talk about: Tesla,
-              the world’s most valuable carmaker and the global brand most clearly
-              associated with EVs.“I meant it when I said the future was going to
-              be made right here in America,” Biden said in a tweeted video with General
-              Motors chair and Chief Executive Officer Mary Barra on Thursday. “Companies
-              like GM…'
+            text: "Tesla’s CEO Elon Musk during the groundbreaking ceremony of the\
+              \ carmaker’s Shanghai Gigafactory on January 7, 2019. Photo: Zuma Press/TNS\
+              \ Tesla + FOLLOW Business / Companies Tesla gets the presidential snub\
+              \ as Biden ignores it to laud inroads by GM and Ford in electric vehicles\
+              \ In 2021, Tesla delivered over 936,000 cars globally while GM sold\
+              \ nearly 480,000 EVs last year, mostly in China Topic | Tesla E3B1C256-BFCB-4CEF-88A6-1DCCD7666635\
+              \ Bloomberg + FOLLOW Published: 11:36am, 3 Feb, 2022 Updated: 11:36am,\
+              \ 3 Feb, 2022 Why you can trust SCMP Tesla’s CEO Elon Musk during the\
+              \ groundbreaking ceremony of the carmaker’s Shanghai Gigafactory on\
+              \ January 7, 2019. Photo: Zuma Press/TNS READ FULL ARTICLE Link Copied"
+            summary: "President Joe Biden calls himself a union guy and a car guy,\
+              \ and he is embraced electric vehicles as vital to his economic and\
+              \ climate ambitions.But there’s one US car company he won’t talk about:\
+              \ Tesla, the world’s most valuable carmaker and the global brand most\
+              \ clearly associated with EVs.“I meant it when I said the future was\
+              \ going to be made right here in America,” Biden said in a tweeted video\
+              \ with General Motors chair and Chief Executive Officer Mary Barra on\
+              \ Thursday. “Companies like GM…"
             url: https://www.scmp.com/business/companies/article/3165649/tesla-gets-us-presidential-snub-biden-lauds-inroads-gm-and-ford
             image: https://cdn.i-scmp.com/sites/default/files/styles/og_image_scmp_generic/public/d8/images/canvas/2022/02/03/24e4def2-ee07-46be-9b3f-fd6628685c8e_01f59c56.jpg?itok=7FQ4Gdtg&v=1643859354
             author: Bloomberg
@@ -932,95 +946,98 @@ components:
           - id: 576
             title: How a Tesla and Elon Musk sceptic came to see the light on electric
               vehicles
-            text: 'I’m with them. Here’s my position: Tesla is an absurdly overvalued
-              business whose stock is kept artificially high by gangs of fanboys who
-              are in love with Elon Musk. The electric vehicle revolution is never
-              going to work – or if it does, not for decades yet. A while back I wrote
-              that Elon Musk wouldn’t be the second richest man in the world for long,
-              prompting howls of anger from the fanboys, some of whom have as many
-              as five followers on Twitter. And I was right in a way – he went past
-              Jeff Bezos shortly thereafter. Noting my stance, Octopus Electric Vehicles
-              got in touch and suggested I at least give the car and the chargers
-              a chance. So I did, over one long weekend. The short review goes like
-              this: the cars are pretty amazing once you get used to them, and the
-              charging experience is better than I expected while still clunky, but
-              presumably they’ll get there. The longer review is this: The most striking
-              thing about the cars is how fast they are. The acceleration is exhilarating
-              or perhaps alarming, even dangerous. But I guess it isn’t Tesla’s fault
-              that, given the chance, some of us will choose to drive like teenage
-              boys. The flip side of that is that when you take your foot off the
-              accelerator the car slows down remarkably quickly. Over four days, I
-              reckon I used the brakes twice. That’s safer than a petrol car, I suppose,
-              though possibly not for the person behind you. My main journey is 130
-              miles north to Nottingham. My guide says the car will make this easily
-              on one charge. In the end it was a bit nerve racking. Going down to
-              20% on your iphone is a bit worrisome, on your car it is anxiety-making.
-              How far away is Nottingham, anyway? When I arrived at my destination
-              there was 8% left on the battery – way too close for comfort. Is that
-              because I put my foot down, I ask. Octopus reckons consistency of speed
-              is the key to longer battery power; so the trick is not to speed up
-              and slow down the whole time, something you can’t always avoid, especially
-              not when test driving a new toy. Octopus says the nearest charging point
-              to me is at a Morrisons. This turns out to be fenced off, not open yet.
-              After that, most of the convenient charging points seem to be situated
-              in pub car parks. That doesn’t strike me as ideal, since there are some
-              people who might find it difficult not to go into the pub and drink.
-              And charging is a drag, going at a rate of about 1% a minute, so a full
-              charge takes 90 minutes. I never had that long to hang around, so found
-              myself topping up incrementally. You can have a charger installed at
-              your house, but as electricity prices go up, so will the cost of fuelling
-              your car. Octopus reckons the cost at the public charging points should
-              stay low, since the power has been bought forward. The electricity is
-              definitely cheaper than petrol of course – about £30 for a full tank,
-              as it were. Drivers who go electric are likely to save hundreds of pounds
-              a year. Once you are driving a Tesla, you notice how many others there
-              are on the road. Tesla was the best-selling vehicle in the UK in December,
-              so perhaps this is more than a passing fad. On Wednesday night Tesla
-              reported annual profit of $5.5 billion, an eight-fold increase as it
-              delivered 940,000 vehicles in what it called a “breakthrough year”.
-              I’m still not clear how that makes the business worth $1 trillion, but
-              perhaps my views on price-earnings ratios are laughably old-fashioned.
-              Back to the chargers. They are mostly slow, but there are many more
-              of them than you realised when you weren’t looking. Green motoring consultancy
-              New AutoMotive predicts one in seven new cars bought will be pure electric
-              in 2022 so we are going to need some more. New AutoMotive’s State of
-              Switch report shows the UK EV market requires 40 to 50 charge points
-              to be installed per day between now and 2035 to meet demand. Work to
-              be done, then. Where is the electricity in the chargers coming from?
-              The coal field down the road? Octopus says: “The individual electrons
-              are really hard to individually pin down, however all the chargers on
-              the Electric Juice Network have electricity from Octopus Energy. Most
-              other companies have renewable guarantees about the energy going into
-              your car.” Ok, but there still isn’t enough renewable power to go round.
-              So the Tesla driver can only really be green because a bunch of petrol
-              heads are intent on doing things the old way. Fiona Howarth, CEO of
-              Octopus Electric Vehicles, counters. “Just a few short years ago, there
-              was plenty of scepticism around electric cars. You couldn’t read a newspaper
-              or look online without seeing the latest research on why they weren’t
-              going to take off - with a lack of good cars and charge points. “Today,
-              it’s a very different picture. Drivers can choose from 50 different
-              EVs that travel over 150 miles on a single charge, which is plenty when
-              we do just 20 miles a day on average. “Our mindset has changed as we
-              start to realise electricity is everywhere and we can top up our car
-              as we do other things - like sleep! Public chargers have rolled out
-              at pace. It has been a whirlwind few years, and we’re not slowing down
-              now.” Still, for those buying a new car right now, the temptation must
-              be to go for a hybrid and wait to see what happens next. That hesitancy
-              is plainly going to hit the UK’s attempts to hit net zero and maybe
-              it is time for consumers to lead the market where they want it. Back
-              to Elon Musk, and an old quote: "For a long time, the rest of the auto
-              industry was basically calling Tesla and me fools and frauds. They were
-              saying electric cars wouldn’t work." He was right, they were wrong.
-              I have seen the future. It nearly works.'
-            summary: <p>In 2015 <a href="/topic/mercedes-benz-0">Mercedes Benz</a>
-              sold its stake in <a href="/topic/tesla">Tesla</a>, claiming the company
-              had “achieved everything it was going to”.</p>
+            text: "I’m with them. Here’s my position: Tesla is an absurdly overvalued\
+              \ business whose stock is kept artificially high by gangs of fanboys\
+              \ who are in love with Elon Musk. The electric vehicle revolution is\
+              \ never going to work – or if it does, not for decades yet. A while\
+              \ back I wrote that Elon Musk wouldn’t be the second richest man in\
+              \ the world for long, prompting howls of anger from the fanboys, some\
+              \ of whom have as many as five followers on Twitter. And I was right\
+              \ in a way – he went past Jeff Bezos shortly thereafter. Noting my stance,\
+              \ Octopus Electric Vehicles got in touch and suggested I at least give\
+              \ the car and the chargers a chance. So I did, over one long weekend.\
+              \ The short review goes like this: the cars are pretty amazing once\
+              \ you get used to them, and the charging experience is better than I\
+              \ expected while still clunky, but presumably they’ll get there. The\
+              \ longer review is this: The most striking thing about the cars is how\
+              \ fast they are. The acceleration is exhilarating or perhaps alarming,\
+              \ even dangerous. But I guess it isn’t Tesla’s fault that, given the\
+              \ chance, some of us will choose to drive like teenage boys. The flip\
+              \ side of that is that when you take your foot off the accelerator the\
+              \ car slows down remarkably quickly. Over four days, I reckon I used\
+              \ the brakes twice. That’s safer than a petrol car, I suppose, though\
+              \ possibly not for the person behind you. My main journey is 130 miles\
+              \ north to Nottingham. My guide says the car will make this easily on\
+              \ one charge. In the end it was a bit nerve racking. Going down to 20%\
+              \ on your iphone is a bit worrisome, on your car it is anxiety-making.\
+              \ How far away is Nottingham, anyway? When I arrived at my destination\
+              \ there was 8% left on the battery – way too close for comfort. Is that\
+              \ because I put my foot down, I ask. Octopus reckons consistency of\
+              \ speed is the key to longer battery power; so the trick is not to speed\
+              \ up and slow down the whole time, something you can’t always avoid,\
+              \ especially not when test driving a new toy. Octopus says the nearest\
+              \ charging point to me is at a Morrisons. This turns out to be fenced\
+              \ off, not open yet. After that, most of the convenient charging points\
+              \ seem to be situated in pub car parks. That doesn’t strike me as ideal,\
+              \ since there are some people who might find it difficult not to go\
+              \ into the pub and drink. And charging is a drag, going at a rate of\
+              \ about 1% a minute, so a full charge takes 90 minutes. I never had\
+              \ that long to hang around, so found myself topping up incrementally.\
+              \ You can have a charger installed at your house, but as electricity\
+              \ prices go up, so will the cost of fuelling your car. Octopus reckons\
+              \ the cost at the public charging points should stay low, since the\
+              \ power has been bought forward. The electricity is definitely cheaper\
+              \ than petrol of course – about £30 for a full tank, as it were. Drivers\
+              \ who go electric are likely to save hundreds of pounds a year. Once\
+              \ you are driving a Tesla, you notice how many others there are on the\
+              \ road. Tesla was the best-selling vehicle in the UK in December, so\
+              \ perhaps this is more than a passing fad. On Wednesday night Tesla\
+              \ reported annual profit of $5.5 billion, an eight-fold increase as\
+              \ it delivered 940,000 vehicles in what it called a “breakthrough year”\
+              . I’m still not clear how that makes the business worth $1 trillion,\
+              \ but perhaps my views on price-earnings ratios are laughably old-fashioned.\
+              \ Back to the chargers. They are mostly slow, but there are many more\
+              \ of them than you realised when you weren’t looking. Green motoring\
+              \ consultancy New AutoMotive predicts one in seven new cars bought will\
+              \ be pure electric in 2022 so we are going to need some more. New AutoMotive’\
+              s State of Switch report shows the UK EV market requires 40 to 50 charge\
+              \ points to be installed per day between now and 2035 to meet demand.\
+              \ Work to be done, then. Where is the electricity in the chargers coming\
+              \ from? The coal field down the road? Octopus says: “The individual\
+              \ electrons are really hard to individually pin down, however all the\
+              \ chargers on the Electric Juice Network have electricity from Octopus\
+              \ Energy. Most other companies have renewable guarantees about the energy\
+              \ going into your car.” Ok, but there still isn’t enough renewable power\
+              \ to go round. So the Tesla driver can only really be green because\
+              \ a bunch of petrol heads are intent on doing things the old way. Fiona\
+              \ Howarth, CEO of Octopus Electric Vehicles, counters. “Just a few short\
+              \ years ago, there was plenty of scepticism around electric cars. You\
+              \ couldn’t read a newspaper or look online without seeing the latest\
+              \ research on why they weren’t going to take off - with a lack of good\
+              \ cars and charge points. “Today, it’s a very different picture. Drivers\
+              \ can choose from 50 different EVs that travel over 150 miles on a single\
+              \ charge, which is plenty when we do just 20 miles a day on average.\
+              \ “Our mindset has changed as we start to realise electricity is everywhere\
+              \ and we can top up our car as we do other things - like sleep! Public\
+              \ chargers have rolled out at pace. It has been a whirlwind few years,\
+              \ and we’re not slowing down now.” Still, for those buying a new car\
+              \ right now, the temptation must be to go for a hybrid and wait to see\
+              \ what happens next. That hesitancy is plainly going to hit the UK’\
+              s attempts to hit net zero and maybe it is time for consumers to lead\
+              \ the market where they want it. Back to Elon Musk, and an old quote:\
+              \ \"For a long time, the rest of the auto industry was basically calling\
+              \ Tesla and me fools and frauds. They were saying electric cars wouldn’\
+              t work.\" He was right, they were wrong. I have seen the future. It\
+              \ nearly works."
+            summary: "<p>In 2015 <a href=\"/topic/mercedes-benz-0\">Mercedes Benz</a>\
+              \ sold its stake in <a href=\"/topic/tesla\">Tesla</a>, claiming the\
+              \ company had “achieved everything it was going to”.</p>"
             url: https://www.standard.co.uk/business/tesla-elon-musk-ev-chargers-green-net-zero-b979125.html
             author: Simon English
             language: en
             source_country: uk
             sentiment: -0.366847
-    inline_response_200_1:
+    ExtractNewsResponse:
       example:
         image: image
         sentiment: 0.8008281904610115
@@ -1052,35 +1069,36 @@ components:
       x-examples:
         Extracted_News_Example:
           title: Tesla to Release a Four-Motor Version of Cybertruck
-          text: 'Tesla CEO Elon Musk has revealed new details about the upcoming Cybertruck
-            electric pickup truck, the mass production of which was delayed until
-            2023 because of the lack of components and a lot of complex technologies
-            that need to be scaled up. According to Musk, the initial production of
-            the electric pickup truck will begin with a four-motor variant with “independent,
-            ultra fast response torque control of each wheel,” the tweet reads. In
-            response, Twitter users asked if the Cybertruck could turn like a tank.
-            Musk said that thanks to both the rear and front wheel steer, the electric
-            truck will not only be able to turn like a tank, but also drive diagonally
-            like a crab. According to Electrek, this change could be Tesla''s reaction
-            to what its competitors do. Since the introduction of Tesla’s novelty,
-            the market for electric pickup trucks has significantly evolved. Currently,
-            one electric pickup on the market can turn like a tank – the Rivian R1T,
-            while GMC''s Hummer EV can drive diagonally. Following the announcement
-            of Tesla Cybertruck in 2019, the company announced three configurations
-            of the pickup truck: the entry-level model with one motor, the one with
-            two motors, and the one with three. Rumor has it that the company intends
-            to abandon the single-motor version altogether. In this case, Tesla Cybertruck
-            will be sold with two, three, and four motors. Musk has promised to provide
-            an update on the pickup''s roadmap on the next earnings call. The production
-            of Tesla Cybertruck is expected to begin at the end of 2022, and its mass
-            production is slated to start in 2023.'
+          text: "Tesla CEO Elon Musk has revealed new details about the upcoming Cybertruck\
+            \ electric pickup truck, the mass production of which was delayed until\
+            \ 2023 because of the lack of components and a lot of complex technologies\
+            \ that need to be scaled up. According to Musk, the initial production\
+            \ of the electric pickup truck will begin with a four-motor variant with\
+            \ “independent, ultra fast response torque control of each wheel,” the\
+            \ tweet reads. In response, Twitter users asked if the Cybertruck could\
+            \ turn like a tank. Musk said that thanks to both the rear and front wheel\
+            \ steer, the electric truck will not only be able to turn like a tank,\
+            \ but also drive diagonally like a crab. According to Electrek, this change\
+            \ could be Tesla's reaction to what its competitors do. Since the introduction\
+            \ of Tesla’s novelty, the market for electric pickup trucks has significantly\
+            \ evolved. Currently, one electric pickup on the market can turn like\
+            \ a tank – the Rivian R1T, while GMC's Hummer EV can drive diagonally.\
+            \ Following the announcement of Tesla Cybertruck in 2019, the company\
+            \ announced three configurations of the pickup truck: the entry-level\
+            \ model with one motor, the one with two motors, and the one with three.\
+            \ Rumor has it that the company intends to abandon the single-motor version\
+            \ altogether. In this case, Tesla Cybertruck will be sold with two, three,\
+            \ and four motors. Musk has promised to provide an update on the pickup's\
+            \ roadmap on the next earnings call. The production of Tesla Cybertruck\
+            \ is expected to begin at the end of 2022, and its mass production is\
+            \ slated to start in 2023."
           url: https://internetprotocol.co/hitech/2021/12/07/tesla-to-release-a-four-motor-cybertruck/
           image: https://internetprotocol.co/content/images/2021/12/Tesla-to-Release-a-Four-Motor-Version-of-Cybertruck.png
           author: Kay Lee
           language: en
           source_country: co
           sentiment: 0.712523
-    inline_response_200_2:
+    ExtractLinksResponse:
       example:
         news_links:
         - news_links
@@ -1097,7 +1115,7 @@ components:
           - https://www.nytimes.com/2023/10/07/opinion/wnba-liberty-championship.html
           - https://www.nytimes.com/2023/10/08/business/economy/labor-strikes.html
           - https://www.nytimes.com/2023/10/08/dining/sunday-calls-for-old-fashioned-beef-stew.html
-    inline_response_200_3:
+    GeoCoordinatesResponse:
       example:
         city: city
         latitude: 0.8008281904610115

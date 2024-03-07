@@ -2,18 +2,18 @@
 
 All URIs are relative to *https://api.worldnewsapi.com*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**extractNews**](NewsApi.md#extractNews) | **GET** /extract-news | Extract News
-[**extractNewsLinks**](NewsApi.md#extractNewsLinks) | **GET** /extract-news-links | Extract News Links
-[**geoCoordinates**](NewsApi.md#geoCoordinates) | **GET** /geo-coordinates | Get Geo Coordinates
-[**newsWebsiteToRSSFeed**](NewsApi.md#newsWebsiteToRSSFeed) | **GET** /feed.rss | News Website to RSS Feed
-[**searchNews**](NewsApi.md#searchNews) | **GET** /search-news | Search News
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**extractNews**](NewsApi.md#extractNews) | **GET** /extract-news | Extract News |
+| [**extractNewsLinks**](NewsApi.md#extractNewsLinks) | **GET** /extract-news-links | Extract News Links |
+| [**geoCoordinates**](NewsApi.md#geoCoordinates) | **GET** /geo-coordinates | Get Geo Coordinates |
+| [**newsWebsiteToRSSFeed**](NewsApi.md#newsWebsiteToRSSFeed) | **GET** /feed.rss | News Website to RSS Feed |
+| [**searchNews**](NewsApi.md#searchNews) | **GET** /search-news | Search News |
 
 
-<a name="extractNews"></a>
+<a id="extractNews"></a>
 # **extractNews**
-> InlineResponse2001 extractNews(url, analyze)
+> ExtractNewsResponse extractNews(url, analyze)
 
 Extract News
 
@@ -50,7 +50,7 @@ public class Example {
     String url = "https://www.bbc.com/news/world-us-canada-59340789"; // String | The url of the news.
     Boolean analyze = false; // Boolean | Whether to analyze the news (extract entities etc.)
     try {
-      InlineResponse2001 result = apiInstance.extractNews(url, analyze);
+      ExtractNewsResponse result = apiInstance.extractNews(url, analyze);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling NewsApi#extractNews");
@@ -65,14 +65,14 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **url** | **String**| The url of the news. |
- **analyze** | **Boolean**| Whether to analyze the news (extract entities etc.) | [default to false]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **url** | **String**| The url of the news. | |
+| **analyze** | **Boolean**| Whether to analyze the news (extract entities etc.) | [default to false] |
 
 ### Return type
 
-[**InlineResponse2001**](InlineResponse2001.md)
+[**ExtractNewsResponse**](ExtractNewsResponse.md)
 
 ### Authorization
 
@@ -86,11 +86,11 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Extracted news. |  -  |
+| **200** | Extracted news. |  -  |
 
-<a name="extractNewsLinks"></a>
+<a id="extractNewsLinks"></a>
 # **extractNewsLinks**
-> InlineResponse2002 extractNewsLinks(url, apiKey, prefix, subDomain)
+> ExtractLinksResponse extractNewsLinks(url, apiKey, prefix, subDomain)
 
 Extract News Links
 
@@ -129,7 +129,7 @@ public class Example {
     String prefix = ""; // String | The prefix the news links must start with.
     Boolean subDomain = true; // Boolean | Whether to include links to news on sub-domains.
     try {
-      InlineResponse2002 result = apiInstance.extractNewsLinks(url, apiKey, prefix, subDomain);
+      ExtractLinksResponse result = apiInstance.extractNewsLinks(url, apiKey, prefix, subDomain);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling NewsApi#extractNewsLinks");
@@ -144,16 +144,16 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **url** | **String**| The url from which links should be extracted. |
- **apiKey** | **String**| Your API key. |
- **prefix** | **String**| The prefix the news links must start with. | [optional]
- **subDomain** | **Boolean**| Whether to include links to news on sub-domains. | [optional]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **url** | **String**| The url from which links should be extracted. | |
+| **apiKey** | **String**| Your API key. | |
+| **prefix** | **String**| The prefix the news links must start with. | [optional] |
+| **subDomain** | **Boolean**| Whether to include links to news on sub-domains. | [optional] |
 
 ### Return type
 
-[**InlineResponse2002**](InlineResponse2002.md)
+[**ExtractLinksResponse**](ExtractLinksResponse.md)
 
 ### Authorization
 
@@ -167,16 +167,16 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Success |  -  |
-**401** | Unauthorized |  -  |
-**402** | Payment Required |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
-**429** | Too Many Requests |  -  |
+| **200** | Success |  -  |
+| **401** | Unauthorized |  -  |
+| **402** | Payment Required |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not Found |  -  |
+| **429** | Too Many Requests |  -  |
 
-<a name="geoCoordinates"></a>
+<a id="geoCoordinates"></a>
 # **geoCoordinates**
-> InlineResponse2003 geoCoordinates(location)
+> GeoCoordinatesResponse geoCoordinates(location)
 
 Get Geo Coordinates
 
@@ -212,7 +212,7 @@ public class Example {
     NewsApi apiInstance = new NewsApi(defaultClient);
     String location = "Tokyo, Japan"; // String | The address or name of the location, e.g. Tokyo, Japan.
     try {
-      InlineResponse2003 result = apiInstance.geoCoordinates(location);
+      GeoCoordinatesResponse result = apiInstance.geoCoordinates(location);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling NewsApi#geoCoordinates");
@@ -227,13 +227,13 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **location** | **String**| The address or name of the location, e.g. Tokyo, Japan. |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **location** | **String**| The address or name of the location, e.g. Tokyo, Japan. | |
 
 ### Return type
 
-[**InlineResponse2003**](InlineResponse2003.md)
+[**GeoCoordinatesResponse**](GeoCoordinatesResponse.md)
 
 ### Authorization
 
@@ -247,10 +247,10 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | The coordinates of the location. |  -  |
-**404** | Not Found |  -  |
+| **200** | The coordinates of the location. |  -  |
+| **404** | Not Found |  -  |
 
-<a name="newsWebsiteToRSSFeed"></a>
+<a id="newsWebsiteToRSSFeed"></a>
 # **newsWebsiteToRSSFeed**
 > Object newsWebsiteToRSSFeed(url, apiKey, extractNews)
 
@@ -305,11 +305,11 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **url** | **String**| The url from which links should be extracted. |
- **apiKey** | **String**| Your API key. |
- **extractNews** | **Boolean**| Whether extract news and add information such as description, publish date, and image to each item. | [optional]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **url** | **String**| The url from which links should be extracted. | |
+| **apiKey** | **String**| Your API key. | |
+| **extractNews** | **Boolean**| Whether extract news and add information such as description, publish date, and image to each item. | [optional] |
 
 ### Return type
 
@@ -327,16 +327,16 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Success |  -  |
-**401** | Unauthorized |  -  |
-**402** | Payment Required |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
-**429** | Too Many Requests |  -  |
+| **200** | Success |  -  |
+| **401** | Unauthorized |  -  |
+| **402** | Payment Required |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not Found |  -  |
+| **429** | Too Many Requests |  -  |
 
-<a name="searchNews"></a>
+<a id="searchNews"></a>
 # **searchNews**
-> InlineResponse200 searchNews(text, sourceCountries, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, entities, locationFilter, offset, number, sort, sortDirection)
+> SearchNewsResponse searchNews(text, sourceCountries, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, entities, locationFilter, offset, number, sort, sortDirection)
 
 Search News
 
@@ -386,7 +386,7 @@ public class Example {
     String sort = "relevance"; // String | The sorting criteria.
     String sortDirection = "asc"; // String | Whether to sort ascending or descending.
     try {
-      InlineResponse200 result = apiInstance.searchNews(text, sourceCountries, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, entities, locationFilter, offset, number, sort, sortDirection);
+      SearchNewsResponse result = apiInstance.searchNews(text, sourceCountries, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, entities, locationFilter, offset, number, sort, sortDirection);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling NewsApi#searchNews");
@@ -401,27 +401,27 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **text** | **String**| The text to match in the news content. | [optional]
- **sourceCountries** | **String**| A comma-separated list of ISO 3166 country codes from which the news should originate, e.g. gb,us. | [optional]
- **language** | **String**| The ISO 6391 language code of the news, e.g. \&quot;en\&quot; for English. | [optional]
- **minSentiment** | **Double**| The minimal sentiment of the news in range [-1,1]. | [optional]
- **maxSentiment** | **Double**| The maximal sentiment of the news in range [-1,1]. | [optional]
- **earliestPublishDate** | **String**| The news must have been published after this date. | [optional]
- **latestPublishDate** | **String**| The news must have been published before this date. | [optional]
- **newsSources** | **String**| A comma-separated list of news sources from which the news should originate, e.g. https://www.bbc.co.uk | [optional]
- **authors** | **String**| A comma-separated list of author names. Only news from any of the given authors will be returned. | [optional]
- **entities** | **String**| Filter news by entities, e.g. ORG:Tesla. | [optional]
- **locationFilter** | **String**| Filter news by radius around a certain location. Format is \&quot;latitude,longitude,radius in kilometers\&quot;, e.g. 51.050407, 13.737262, 100 | [optional]
- **offset** | **Integer**| The number of news to skip in range [0,1000] | [optional]
- **number** | **Integer**| The number of news to return in range [1,100] | [optional]
- **sort** | **String**| The sorting criteria. | [optional] [enum: relevance, publish-time, sentiment]
- **sortDirection** | **String**| Whether to sort ascending or descending. | [optional] [enum: asc, desc]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **text** | **String**| The text to match in the news content. | [optional] |
+| **sourceCountries** | **String**| A comma-separated list of ISO 3166 country codes from which the news should originate, e.g. gb,us. | [optional] |
+| **language** | **String**| The ISO 6391 language code of the news, e.g. \&quot;en\&quot; for English. | [optional] |
+| **minSentiment** | **Double**| The minimal sentiment of the news in range [-1,1]. | [optional] |
+| **maxSentiment** | **Double**| The maximal sentiment of the news in range [-1,1]. | [optional] |
+| **earliestPublishDate** | **String**| The news must have been published after this date. | [optional] |
+| **latestPublishDate** | **String**| The news must have been published before this date. | [optional] |
+| **newsSources** | **String**| A comma-separated list of news sources from which the news should originate, e.g. https://www.bbc.co.uk | [optional] |
+| **authors** | **String**| A comma-separated list of author names. Only news from any of the given authors will be returned. | [optional] |
+| **entities** | **String**| Filter news by entities, e.g. ORG:Tesla. | [optional] |
+| **locationFilter** | **String**| Filter news by radius around a certain location. Format is \&quot;latitude,longitude,radius in kilometers\&quot;, e.g. 51.050407, 13.737262, 100 | [optional] |
+| **offset** | **Integer**| The number of news to skip in range [0,1000] | [optional] |
+| **number** | **Integer**| The number of news to return in range [1,100] | [optional] |
+| **sort** | **String**| The sorting criteria. | [optional] [enum: relevance, publish-time, sentiment] |
+| **sortDirection** | **String**| Whether to sort ascending or descending. | [optional] [enum: asc, desc] |
 
 ### Return type
 
-[**InlineResponse200**](InlineResponse200.md)
+[**SearchNewsResponse**](SearchNewsResponse.md)
 
 ### Authorization
 
@@ -435,5 +435,5 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | List of news. |  -  |
+| **200** | List of news. |  -  |
 

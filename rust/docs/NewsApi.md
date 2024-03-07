@@ -1,4 +1,4 @@
-# com.worldnewsapi.client\NewsApi
+# \NewsApi
 
 All URIs are relative to *https://api.worldnewsapi.com*
 
@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 ## extract_news
 
-> crate::models::InlineResponse2001 extract_news(url, analyze)
+> crate::models::ExtractNewsResponse extract_news(url, analyze)
 Extract News
 
 Extract a news entry from a news site.
@@ -29,7 +29,7 @@ Name | Type | Description  | Required | Notes
 
 ### Return type
 
-[**crate::models::InlineResponse2001**](inline_response_200_1.md)
+[**crate::models::ExtractNewsResponse**](ExtractNewsResponse.md)
 
 ### Authorization
 
@@ -45,7 +45,7 @@ Name | Type | Description  | Required | Notes
 
 ## extract_news_links
 
-> crate::models::InlineResponse2002 extract_news_links(url, api_key, prefix, sub_domain)
+> crate::models::ExtractLinksResponse extract_news_links(url, api_key, prefix, sub_domain)
 Extract News Links
 
 Extract a news links from a news website. 
@@ -62,7 +62,7 @@ Name | Type | Description  | Required | Notes
 
 ### Return type
 
-[**crate::models::InlineResponse2002**](inline_response_200_2.md)
+[**crate::models::ExtractLinksResponse**](ExtractLinksResponse.md)
 
 ### Authorization
 
@@ -78,7 +78,7 @@ Name | Type | Description  | Required | Notes
 
 ## geo_coordinates
 
-> crate::models::InlineResponse2003 geo_coordinates(location)
+> crate::models::GeoCoordinatesResponse geo_coordinates(location)
 Get Geo Coordinates
 
 Get the geo coordinates for a location. The location can be an exact address but also just the name of a city or country.
@@ -92,7 +92,7 @@ Name | Type | Description  | Required | Notes
 
 ### Return type
 
-[**crate::models::InlineResponse2003**](inline_response_200_3.md)
+[**crate::models::GeoCoordinatesResponse**](GeoCoordinatesResponse.md)
 
 ### Authorization
 
@@ -140,7 +140,7 @@ Name | Type | Description  | Required | Notes
 
 ## search_news
 
-> crate::models::InlineResponse200 search_news(text, source_countries, language, min_sentiment, max_sentiment, earliest_publish_date, latest_publish_date, news_sources, authors, entities, location_filter, offset, number, sort, sort_direction)
+> crate::models::SearchNewsResponse search_news(text, source_countries, language, min_sentiment, max_sentiment, earliest_publish_date, latest_publish_date, news_sources, authors, entities, location_filter, offset, number, sort, sort_direction)
 Search News
 
 Search for news.
@@ -168,7 +168,7 @@ Name | Type | Description  | Required | Notes
 
 ### Return type
 
-[**crate::models::InlineResponse200**](inline_response_200.md)
+[**crate::models::SearchNewsResponse**](SearchNewsResponse.md)
 
 ### Authorization
 

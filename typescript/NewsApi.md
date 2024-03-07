@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 
 # **extractNews**
-> InlineResponse2001 extractNews()
+> ExtractNewsResponse extractNews()
 
 Extract a news entry from a news site.
 
@@ -44,12 +44,12 @@ apiInstance.extractNews(body).then((data:any) => {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **url** | [**string**] | The url of the news. | defaults to undefined
- **analyze** | [**boolean**] | Whether to analyze the news (extract entities etc.) | defaults to undefined
+ **analyze** | [**boolean**] | Whether to analyze the news (extract entities etc.) | defaults to false
 
 
 ### Return type
 
-**InlineResponse2001**
+**ExtractNewsResponse**
 
 ### Authorization
 
@@ -69,7 +69,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **extractNewsLinks**
-> InlineResponse2002 extractNewsLinks()
+> ExtractLinksResponse extractNewsLinks()
 
 Extract a news links from a news website. 
 
@@ -112,7 +112,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**InlineResponse2002**
+**ExtractLinksResponse**
 
 ### Authorization
 
@@ -137,7 +137,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **geoCoordinates**
-> InlineResponse2003 geoCoordinates()
+> GeoCoordinatesResponse geoCoordinates()
 
 Get the geo coordinates for a location. The location can be an exact address but also just the name of a city or country.
 
@@ -171,7 +171,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**InlineResponse2003**
+**GeoCoordinatesResponse**
 
 ### Authorization
 
@@ -257,7 +257,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **searchNews**
-> InlineResponse200 searchNews()
+> SearchNewsResponse searchNews()
 
 Search for news.
 
@@ -333,7 +333,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**InlineResponse200**
+**SearchNewsResponse**
 
 ### Authorization
 
