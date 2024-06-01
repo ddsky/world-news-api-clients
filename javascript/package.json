@@ -1,6 +1,6 @@
 {
-  "name": "world_news_api",
-  "version": "1.1",
+  "name": "worldnewsapi",
+  "version": "1.1.1",
   "description": "The world's news wrapped into a single API.",
   "license": "Unlicense",
   "main": "dist/index.js",

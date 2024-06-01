@@ -1,7 +1,7 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.12
+// @dart=2.18
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
@@ -182,18 +182,22 @@ class ApiClient {
           return valueString == 'true' || valueString == '1';
         case 'DateTime':
           return value is DateTime ? value : DateTime.tryParse(value);
-        case 'ExtractLinksResponse':
-          return ExtractLinksResponse.fromJson(value);
-        case 'ExtractNewsResponse':
-          return ExtractNewsResponse.fromJson(value);
-        case 'GeoCoordinatesResponse':
-          return GeoCoordinatesResponse.fromJson(value);
-        case 'News':
-          return News.fromJson(value);
-        case 'NewsArticle':
-          return NewsArticle.fromJson(value);
-        case 'SearchNewsResponse':
-          return SearchNewsResponse.fromJson(value);
+        case 'ExtractNews200Response':
+          return ExtractNews200Response.fromJson(value);
+        case 'ExtractNewsLinks200Response':
+          return ExtractNewsLinks200Response.fromJson(value);
+        case 'GetGeoCoordinates200Response':
+          return GetGeoCoordinates200Response.fromJson(value);
+        case 'SearchNews200Response':
+          return SearchNews200Response.fromJson(value);
+        case 'SearchNews200ResponseNewsInner':
+          return SearchNews200ResponseNewsInner.fromJson(value);
+        case 'TopNews200Response':
+          return TopNews200Response.fromJson(value);
+        case 'TopNews200ResponseTopNewsInner':
+          return TopNews200ResponseTopNewsInner.fromJson(value);
+        case 'TopNews200ResponseTopNewsInnerNewsInner':
+          return TopNews200ResponseTopNewsInnerNewsInner.fromJson(value);
         default:
           dynamic match;
           if (value is List && (match = _regList.firstMatch(targetType)?.group(1)) != null) {

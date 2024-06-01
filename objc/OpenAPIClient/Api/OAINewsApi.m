@@ -1,10 +1,11 @@
 #import "OAINewsApi.h"
 #import "OAIQueryParamCollection.h"
 #import "OAIApiClient.h"
-#import "OAIExtractLinksResponse.h"
-#import "OAIExtractNewsResponse.h"
-#import "OAIGeoCoordinatesResponse.h"
-#import "OAISearchNewsResponse.h"
+#import "OAIExtractNews200Response.h"
+#import "OAIExtractNewsLinks200Response.h"
+#import "OAIGetGeoCoordinates200Response.h"
+#import "OAISearchNews200Response.h"
+#import "OAITopNews200Response.h"
 
 
 @interface OAINewsApi ()
@@ -54,16 +55,16 @@ NSInteger kOAINewsApiMissingParamErrorCode = 234513;
 
 ///
 /// Extract News
-/// Extract a news entry from a news site.
+/// Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, image, publish date, author, language, source country, and sentiment of the news article.
 ///  @param url The url of the news. 
 ///
 ///  @param analyze Whether to analyze the news (extract entities etc.) 
 ///
-///  @returns OAIExtractNewsResponse*
+///  @returns OAIExtractNews200Response*
 ///
 -(NSURLSessionTask*) extractNewsWithUrl: (NSString*) url
     analyze: (NSNumber*) analyze
-    completionHandler: (void (^)(OAIExtractNewsResponse* output, NSError* error)) handler {
+    completionHandler: (void (^)(OAIExtractNews200Response* output, NSError* error)) handler {
     // verify the required parameter 'url' is set
     if (url == nil) {
         NSParameterAssert(url);
@@ -129,32 +130,26 @@ NSInteger kOAINewsApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"OAIExtractNewsResponse*"
+                              responseType: @"OAIExtractNews200Response*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((OAIExtractNewsResponse*)data, error);
+                                    handler((OAIExtractNews200Response*)data, error);
                                 }
                             }];
 }
 
 ///
 /// Extract News Links
-/// Extract a news links from a news website. 
-///  @param url The url from which links should be extracted. 
+/// Extract news links from a news website.
+///  @param url The url of the news. 
 ///
-///  @param apiKey Your API key. 
+///  @param analyze Whether to analyze the news (extract entities etc.) 
 ///
-///  @param prefix The prefix the news links must start with. (optional)
-///
-///  @param subDomain Whether to include links to news on sub-domains. (optional)
-///
-///  @returns OAIExtractLinksResponse*
+///  @returns OAIExtractNewsLinks200Response*
 ///
 -(NSURLSessionTask*) extractNewsLinksWithUrl: (NSString*) url
-    apiKey: (NSString*) apiKey
-    prefix: (NSString*) prefix
-    subDomain: (NSNumber*) subDomain
-    completionHandler: (void (^)(OAIExtractLinksResponse* output, NSError* error)) handler {
+    analyze: (NSNumber*) analyze
+    completionHandler: (void (^)(OAIExtractNewsLinks200Response* output, NSError* error)) handler {
     // verify the required parameter 'url' is set
     if (url == nil) {
         NSParameterAssert(url);
@@ -166,11 +161,11 @@ NSInteger kOAINewsApiMissingParamErrorCode = 234513;
         return nil;
     }
 
-    // verify the required parameter 'apiKey' is set
-    if (apiKey == nil) {
-        NSParameterAssert(apiKey);
+    // verify the required parameter 'analyze' is set
+    if (analyze == nil) {
+        NSParameterAssert(analyze);
         if(handler) {
-            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"apiKey"] };
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"analyze"] };
             NSError* error = [NSError errorWithDomain:kOAINewsApiErrorDomain code:kOAINewsApiMissingParamErrorCode userInfo:userInfo];
             handler(nil, error);
         }
@@ -185,14 +180,8 @@ NSInteger kOAINewsApiMissingParamErrorCode = 234513;
     if (url != nil) {
         queryParams[@"url"] = url;
     }
-    if (prefix != nil) {
-        queryParams[@"prefix"] = prefix;
-    }
-    if (subDomain != nil) {
-        queryParams[@"sub-domain"] = [subDomain isEqual:@(YES)] ? @"true" : @"false";
-    }
-    if (apiKey != nil) {
-        queryParams[@"api-key"] = apiKey;
+    if (analyze != nil) {
+        queryParams[@"analyze"] = [analyze isEqual:@(YES)] ? @"true" : @"false";
     }
     NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
     [headerParams addEntriesFromDictionary:self.defaultHeaders];
@@ -226,23 +215,23 @@ NSInteger kOAINewsApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"OAIExtractLinksResponse*"
+                              responseType: @"OAIExtractNewsLinks200Response*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((OAIExtractLinksResponse*)data, error);
+                                    handler((OAIExtractNewsLinks200Response*)data, error);
                                 }
                             }];
 }
 
 ///
 /// Get Geo Coordinates
-/// Get the geo coordinates for a location. The location can be an exact address but also just the name of a city or country.
-///  @param location The address or name of the location, e.g. Tokyo, Japan. 
+/// Retrieve the latitude and longitude of a location name. Given this information you can fill the location-filter parameter in the news search endpoint.
+///  @param location The address or name of the location. 
 ///
-///  @returns OAIGeoCoordinatesResponse*
+///  @returns OAIGetGeoCoordinates200Response*
 ///
--(NSURLSessionTask*) geoCoordinatesWithLocation: (NSString*) location
-    completionHandler: (void (^)(OAIGeoCoordinatesResponse* output, NSError* error)) handler {
+-(NSURLSessionTask*) getGeoCoordinatesWithLocation: (NSString*) location
+    completionHandler: (void (^)(OAIGetGeoCoordinates200Response* output, NSError* error)) handler {
     // verify the required parameter 'location' is set
     if (location == nil) {
         NSParameterAssert(location);
@@ -294,28 +283,25 @@ NSInteger kOAINewsApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"OAIGeoCoordinatesResponse*"
+                              responseType: @"OAIGetGeoCoordinates200Response*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((OAIGeoCoordinatesResponse*)data, error);
+                                    handler((OAIGetGeoCoordinates200Response*)data, error);
                                 }
                             }];
 }
 
 ///
 /// News Website to RSS Feed
-/// Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page. 
-///  @param url The url from which links should be extracted. 
+/// Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page.
+///  @param url The url of the news. 
 ///
-///  @param apiKey Your API key. 
-///
-///  @param extractNews Whether extract news and add information such as description, publish date, and image to each item. (optional)
+///  @param analyze Whether to analyze the news (extract entities etc.) 
 ///
 ///  @returns NSObject*
 ///
 -(NSURLSessionTask*) newsWebsiteToRSSFeedWithUrl: (NSString*) url
-    apiKey: (NSString*) apiKey
-    extractNews: (NSNumber*) extractNews
+    analyze: (NSNumber*) analyze
     completionHandler: (void (^)(NSObject* output, NSError* error)) handler {
     // verify the required parameter 'url' is set
     if (url == nil) {
@@ -328,11 +314,11 @@ NSInteger kOAINewsApiMissingParamErrorCode = 234513;
         return nil;
     }
 
-    // verify the required parameter 'apiKey' is set
-    if (apiKey == nil) {
-        NSParameterAssert(apiKey);
+    // verify the required parameter 'analyze' is set
+    if (analyze == nil) {
+        NSParameterAssert(analyze);
         if(handler) {
-            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"apiKey"] };
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"analyze"] };
             NSError* error = [NSError errorWithDomain:kOAINewsApiErrorDomain code:kOAINewsApiMissingParamErrorCode userInfo:userInfo];
             handler(nil, error);
         }
@@ -347,11 +333,8 @@ NSInteger kOAINewsApiMissingParamErrorCode = 234513;
     if (url != nil) {
         queryParams[@"url"] = url;
     }
-    if (extractNews != nil) {
-        queryParams[@"extract-news"] = [extractNews isEqual:@(YES)] ? @"true" : @"false";
-    }
-    if (apiKey != nil) {
-        queryParams[@"api-key"] = apiKey;
+    if (analyze != nil) {
+        queryParams[@"analyze"] = [analyze isEqual:@(YES)] ? @"true" : @"false";
     }
     NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
     [headerParams addEntriesFromDictionary:self.defaultHeaders];
@@ -395,12 +378,12 @@ NSInteger kOAINewsApiMissingParamErrorCode = 234513;
 
 ///
 /// Search News
-/// Search for news.
-///  @param text The text to match in the news content. (optional)
+/// Search and filter news by text, date, location, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
+///  @param text The text to match in the news content (at least 3 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford (optional)
 ///
-///  @param sourceCountries A comma-separated list of ISO 3166 country codes from which the news should originate, e.g. gb,us. (optional)
+///  @param sourceCountries A comma-separated list of ISO 3166 country codes from which the news should originate. (optional)
 ///
-///  @param language The ISO 6391 language code of the news, e.g. \"en\" for English. (optional)
+///  @param language The ISO 6391 language code of the news. (optional)
 ///
 ///  @param minSentiment The minimal sentiment of the news in range [-1,1]. (optional)
 ///
@@ -410,23 +393,23 @@ NSInteger kOAINewsApiMissingParamErrorCode = 234513;
 ///
 ///  @param latestPublishDate The news must have been published before this date. (optional)
 ///
-///  @param varNewsSources A comma-separated list of news sources from which the news should originate, e.g. https://www.bbc.co.uk (optional)
+///  @param varNewsSources A comma-separated list of news sources from which the news should originate. (optional)
 ///
 ///  @param authors A comma-separated list of author names. Only news from any of the given authors will be returned. (optional)
 ///
-///  @param entities Filter news by entities, e.g. ORG:Tesla. (optional)
+///  @param entities Filter news by entities (see semantic types). (optional)
 ///
-///  @param locationFilter Filter news by radius around a certain location. Format is \"latitude,longitude,radius in kilometers\", e.g. 51.050407, 13.737262, 100 (optional)
+///  @param locationFilter Filter news by radius around a certain location. Format is \"latitude,longitude,radius in kilometers\". Radius must be between 1 and 100 kilometers. (optional)
 ///
-///  @param offset The number of news to skip in range [0,1000] (optional)
+///  @param sort The sorting criteria (publish-time or sentiment). (optional)
+///
+///  @param sortDirection Whether to sort ascending or descending (ASC or DESC). (optional)
+///
+///  @param offset The number of news to skip in range [0,10000] (optional)
 ///
 ///  @param number The number of news to return in range [1,100] (optional)
 ///
-///  @param sort The sorting criteria. (optional)
-///
-///  @param sortDirection Whether to sort ascending or descending. (optional)
-///
-///  @returns OAISearchNewsResponse*
+///  @returns OAISearchNews200Response*
 ///
 -(NSURLSessionTask*) searchNewsWithText: (NSString*) text
     sourceCountries: (NSString*) sourceCountries
@@ -439,11 +422,11 @@ NSInteger kOAINewsApiMissingParamErrorCode = 234513;
     authors: (NSString*) authors
     entities: (NSString*) entities
     locationFilter: (NSString*) locationFilter
-    offset: (NSNumber*) offset
-    number: (NSNumber*) number
     sort: (NSString*) sort
     sortDirection: (NSString*) sortDirection
-    completionHandler: (void (^)(OAISearchNewsResponse* output, NSError* error)) handler {
+    offset: (NSNumber*) offset
+    number: (NSNumber*) number
+    completionHandler: (void (^)(OAISearchNews200Response* output, NSError* error)) handler {
     NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/search-news"];
 
     NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
@@ -482,17 +465,17 @@ NSInteger kOAINewsApiMissingParamErrorCode = 234513;
     if (locationFilter != nil) {
         queryParams[@"location-filter"] = locationFilter;
     }
-    if (offset != nil) {
-        queryParams[@"offset"] = offset;
-    }
-    if (number != nil) {
-        queryParams[@"number"] = number;
-    }
     if (sort != nil) {
         queryParams[@"sort"] = sort;
     }
     if (sortDirection != nil) {
         queryParams[@"sort-direction"] = sortDirection;
+    }
+    if (offset != nil) {
+        queryParams[@"offset"] = offset;
+    }
+    if (number != nil) {
+        queryParams[@"number"] = number;
     }
     NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
     [headerParams addEntriesFromDictionary:self.defaultHeaders];
@@ -526,10 +509,107 @@ NSInteger kOAINewsApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"OAISearchNewsResponse*"
+                              responseType: @"OAISearchNews200Response*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((OAISearchNewsResponse*)data, error);
+                                    handler((OAISearchNews200Response*)data, error);
+                                }
+                            }];
+}
+
+///
+/// Top News
+/// Get the top news from a country in a language for a specific date. The top news are clustered from multiple sources in the given country. The more news in a cluster the higher the cluster is ranked.
+///  @param sourceCountry The ISO 3166 country code of the country for which top news should be retrieved. 
+///
+///  @param language The ISO 6391 language code of the top news. The language must be one spoken in the source-country. 
+///
+///  @param date The date for which the top news should be retrieved. If no date is given, the current day is assumed. (optional)
+///
+///  @param headlinesOnly Whether to only return basic information such as id, title, and url of the news. (optional)
+///
+///  @returns OAITopNews200Response*
+///
+-(NSURLSessionTask*) topNewsWithSourceCountry: (NSString*) sourceCountry
+    language: (NSString*) language
+    date: (NSString*) date
+    headlinesOnly: (NSNumber*) headlinesOnly
+    completionHandler: (void (^)(OAITopNews200Response* output, NSError* error)) handler {
+    // verify the required parameter 'sourceCountry' is set
+    if (sourceCountry == nil) {
+        NSParameterAssert(sourceCountry);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"sourceCountry"] };
+            NSError* error = [NSError errorWithDomain:kOAINewsApiErrorDomain code:kOAINewsApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    // verify the required parameter 'language' is set
+    if (language == nil) {
+        NSParameterAssert(language);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"language"] };
+            NSError* error = [NSError errorWithDomain:kOAINewsApiErrorDomain code:kOAINewsApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/top-news"];
+
+    NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
+
+    NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
+    if (sourceCountry != nil) {
+        queryParams[@"source-country"] = sourceCountry;
+    }
+    if (language != nil) {
+        queryParams[@"language"] = language;
+    }
+    if (date != nil) {
+        queryParams[@"date"] = date;
+    }
+    if (headlinesOnly != nil) {
+        queryParams[@"headlines-only"] = [headlinesOnly isEqual:@(YES)] ? @"true" : @"false";
+    }
+    NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
+    [headerParams addEntriesFromDictionary:self.defaultHeaders];
+    // HTTP header `Accept`
+    NSString *acceptHeader = [self.apiClient.sanitizer selectHeaderAccept:@[@"application/json"]];
+    if(acceptHeader.length > 0) {
+        headerParams[@"Accept"] = acceptHeader;
+    }
+
+    // response content type
+    NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
+
+    // request content type
+    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[]];
+
+    // Authentication setting
+    NSArray *authSettings = @[@"apiKey", @"headerApiKey"];
+
+    id bodyParam = nil;
+    NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
+
+    return [self.apiClient requestWithPath: resourcePath
+                                    method: @"GET"
+                                pathParams: pathParams
+                               queryParams: queryParams
+                                formParams: formParams
+                                     files: localVarFiles
+                                      body: bodyParam
+                              headerParams: headerParams
+                              authSettings: authSettings
+                        requestContentType: requestContentType
+                       responseContentType: responseContentType
+                              responseType: @"OAITopNews200Response*"
+                           completionBlock: ^(id data, NSError *error) {
+                                if(handler) {
+                                    handler((OAITopNews200Response*)data, error);
                                 }
                             }];
 }

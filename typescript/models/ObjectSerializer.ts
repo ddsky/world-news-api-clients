@@ -1,16 +1,20 @@
-export * from '../models/ExtractLinksResponse';
-export * from '../models/ExtractNewsResponse';
-export * from '../models/GeoCoordinatesResponse';
-export * from '../models/News';
-export * from '../models/NewsArticle';
-export * from '../models/SearchNewsResponse';
+export * from '../models/ExtractNews200Response';
+export * from '../models/ExtractNewsLinks200Response';
+export * from '../models/GetGeoCoordinates200Response';
+export * from '../models/SearchNews200Response';
+export * from '../models/SearchNews200ResponseNewsInner';
+export * from '../models/TopNews200Response';
+export * from '../models/TopNews200ResponseTopNewsInner';
+export * from '../models/TopNews200ResponseTopNewsInnerNewsInner';
 
-import { ExtractLinksResponse } from '../models/ExtractLinksResponse';
-import { ExtractNewsResponse } from '../models/ExtractNewsResponse';
-import { GeoCoordinatesResponse } from '../models/GeoCoordinatesResponse';
-import { News } from '../models/News';
-import { NewsArticle } from '../models/NewsArticle';
-import { SearchNewsResponse } from '../models/SearchNewsResponse';
+import { ExtractNews200Response } from '../models/ExtractNews200Response';
+import { ExtractNewsLinks200Response } from '../models/ExtractNewsLinks200Response';
+import { GetGeoCoordinates200Response } from '../models/GetGeoCoordinates200Response';
+import { SearchNews200Response } from '../models/SearchNews200Response';
+import { SearchNews200ResponseNewsInner } from '../models/SearchNews200ResponseNewsInner';
+import { TopNews200Response } from '../models/TopNews200Response';
+import { TopNews200ResponseTopNewsInner } from '../models/TopNews200ResponseTopNewsInner';
+import { TopNews200ResponseTopNewsInnerNewsInner } from '../models/TopNews200ResponseTopNewsInnerNewsInner';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -28,12 +32,14 @@ let enumsMap: Set<string> = new Set<string>([
 ]);
 
 let typeMap: {[index: string]: any} = {
-    "ExtractLinksResponse": ExtractLinksResponse,
-    "ExtractNewsResponse": ExtractNewsResponse,
-    "GeoCoordinatesResponse": GeoCoordinatesResponse,
-    "News": News,
-    "NewsArticle": NewsArticle,
-    "SearchNewsResponse": SearchNewsResponse,
+    "ExtractNews200Response": ExtractNews200Response,
+    "ExtractNewsLinks200Response": ExtractNewsLinks200Response,
+    "GetGeoCoordinates200Response": GetGeoCoordinates200Response,
+    "SearchNews200Response": SearchNews200Response,
+    "SearchNews200ResponseNewsInner": SearchNews200ResponseNewsInner,
+    "TopNews200Response": TopNews200Response,
+    "TopNews200ResponseTopNewsInner": TopNews200ResponseTopNewsInner,
+    "TopNews200ResponseTopNewsInnerNewsInner": TopNews200ResponseTopNewsInnerNewsInner,
 }
 
 type MimeTypeDescriptor = {

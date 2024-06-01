@@ -46,11 +46,11 @@ func Test_worldnewsapi_NewsAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test NewsAPIService GeoCoordinates", func(t *testing.T) {
+	t.Run("Test NewsAPIService GetGeoCoordinates", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.NewsAPI.GeoCoordinates(context.Background()).Execute()
+		resp, httpRes, err := apiClient.NewsAPI.GetGeoCoordinates(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -75,6 +75,18 @@ func Test_worldnewsapi_NewsAPIService(t *testing.T) {
 		t.Skip("skip test")  // remove to run test
 
 		resp, httpRes, err := apiClient.NewsAPI.SearchNews(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test NewsAPIService TopNews", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.NewsAPI.TopNews(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

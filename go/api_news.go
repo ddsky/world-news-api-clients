@@ -3,7 +3,7 @@ World News API
 
 The world's news wrapped into a single API.
 
-API version: 1.1
+API version: 1.1.1
 Contact: mail@worldnewsapi.com
 */
 
@@ -42,14 +42,14 @@ func (r ApiExtractNewsRequest) Analyze(analyze bool) ApiExtractNewsRequest {
 	return r
 }
 
-func (r ApiExtractNewsRequest) Execute() (*ExtractNewsResponse, *http.Response, error) {
+func (r ApiExtractNewsRequest) Execute() (*ExtractNews200Response, *http.Response, error) {
 	return r.ApiService.ExtractNewsExecute(r)
 }
 
 /*
 ExtractNews Extract News
 
-Extract a news entry from a news site.
+Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, image, publish date, author, language, source country, and sentiment of the news article.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiExtractNewsRequest
@@ -62,13 +62,13 @@ func (a *NewsAPIService) ExtractNews(ctx context.Context) ApiExtractNewsRequest 
 }
 
 // Execute executes the request
-//  @return ExtractNewsResponse
-func (a *NewsAPIService) ExtractNewsExecute(r ApiExtractNewsRequest) (*ExtractNewsResponse, *http.Response, error) {
+//  @return ExtractNews200Response
+func (a *NewsAPIService) ExtractNewsExecute(r ApiExtractNewsRequest) (*ExtractNews200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ExtractNewsResponse
+		localVarReturnValue  *ExtractNews200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NewsAPIService.ExtractNews")
@@ -83,6 +83,9 @@ func (a *NewsAPIService) ExtractNewsExecute(r ApiExtractNewsRequest) (*ExtractNe
 	localVarFormParams := url.Values{}
 	if r.url == nil {
 		return localVarReturnValue, nil, reportError("url is required and must be specified")
+	}
+	if strlen(*r.url) > 1000 {
+		return localVarReturnValue, nil, reportError("url must have less than 1000 elements")
 	}
 	if r.analyze == nil {
 		return localVarReturnValue, nil, reportError("analyze is required and must be specified")
@@ -176,43 +179,29 @@ type ApiExtractNewsLinksRequest struct {
 	ctx context.Context
 	ApiService *NewsAPIService
 	url *string
-	apiKey *string
-	prefix *string
-	subDomain *bool
+	analyze *bool
 }
 
-// The url from which links should be extracted.
+// The url of the news.
 func (r ApiExtractNewsLinksRequest) Url(url string) ApiExtractNewsLinksRequest {
 	r.url = &url
 	return r
 }
 
-// Your API key.
-func (r ApiExtractNewsLinksRequest) ApiKey(apiKey string) ApiExtractNewsLinksRequest {
-	r.apiKey = &apiKey
+// Whether to analyze the news (extract entities etc.)
+func (r ApiExtractNewsLinksRequest) Analyze(analyze bool) ApiExtractNewsLinksRequest {
+	r.analyze = &analyze
 	return r
 }
 
-// The prefix the news links must start with.
-func (r ApiExtractNewsLinksRequest) Prefix(prefix string) ApiExtractNewsLinksRequest {
-	r.prefix = &prefix
-	return r
-}
-
-// Whether to include links to news on sub-domains.
-func (r ApiExtractNewsLinksRequest) SubDomain(subDomain bool) ApiExtractNewsLinksRequest {
-	r.subDomain = &subDomain
-	return r
-}
-
-func (r ApiExtractNewsLinksRequest) Execute() (*ExtractLinksResponse, *http.Response, error) {
+func (r ApiExtractNewsLinksRequest) Execute() (*ExtractNewsLinks200Response, *http.Response, error) {
 	return r.ApiService.ExtractNewsLinksExecute(r)
 }
 
 /*
 ExtractNewsLinks Extract News Links
 
-Extract a news links from a news website. 
+Extract news links from a news website.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiExtractNewsLinksRequest
@@ -225,13 +214,13 @@ func (a *NewsAPIService) ExtractNewsLinks(ctx context.Context) ApiExtractNewsLin
 }
 
 // Execute executes the request
-//  @return ExtractLinksResponse
-func (a *NewsAPIService) ExtractNewsLinksExecute(r ApiExtractNewsLinksRequest) (*ExtractLinksResponse, *http.Response, error) {
+//  @return ExtractNewsLinks200Response
+func (a *NewsAPIService) ExtractNewsLinksExecute(r ApiExtractNewsLinksRequest) (*ExtractNewsLinks200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ExtractLinksResponse
+		localVarReturnValue  *ExtractNewsLinks200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NewsAPIService.ExtractNewsLinks")
@@ -247,18 +236,15 @@ func (a *NewsAPIService) ExtractNewsLinksExecute(r ApiExtractNewsLinksRequest) (
 	if r.url == nil {
 		return localVarReturnValue, nil, reportError("url is required and must be specified")
 	}
-	if r.apiKey == nil {
-		return localVarReturnValue, nil, reportError("apiKey is required and must be specified")
+	if strlen(*r.url) > 1000 {
+		return localVarReturnValue, nil, reportError("url must have less than 1000 elements")
+	}
+	if r.analyze == nil {
+		return localVarReturnValue, nil, reportError("analyze is required and must be specified")
 	}
 
 	parameterAddToHeaderOrQuery(localVarQueryParams, "url", r.url, "")
-	if r.prefix != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "prefix", r.prefix, "")
-	}
-	if r.subDomain != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "sub-domain", r.subDomain, "")
-	}
-	parameterAddToHeaderOrQuery(localVarQueryParams, "api-key", r.apiKey, "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "analyze", r.analyze, "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -341,48 +327,48 @@ func (a *NewsAPIService) ExtractNewsLinksExecute(r ApiExtractNewsLinksRequest) (
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGeoCoordinatesRequest struct {
+type ApiGetGeoCoordinatesRequest struct {
 	ctx context.Context
 	ApiService *NewsAPIService
 	location *string
 }
 
-// The address or name of the location, e.g. Tokyo, Japan.
-func (r ApiGeoCoordinatesRequest) Location(location string) ApiGeoCoordinatesRequest {
+// The address or name of the location.
+func (r ApiGetGeoCoordinatesRequest) Location(location string) ApiGetGeoCoordinatesRequest {
 	r.location = &location
 	return r
 }
 
-func (r ApiGeoCoordinatesRequest) Execute() (*GeoCoordinatesResponse, *http.Response, error) {
-	return r.ApiService.GeoCoordinatesExecute(r)
+func (r ApiGetGeoCoordinatesRequest) Execute() (*GetGeoCoordinates200Response, *http.Response, error) {
+	return r.ApiService.GetGeoCoordinatesExecute(r)
 }
 
 /*
-GeoCoordinates Get Geo Coordinates
+GetGeoCoordinates Get Geo Coordinates
 
-Get the geo coordinates for a location. The location can be an exact address but also just the name of a city or country.
+Retrieve the latitude and longitude of a location name. Given this information you can fill the location-filter parameter in the news search endpoint.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGeoCoordinatesRequest
+ @return ApiGetGeoCoordinatesRequest
 */
-func (a *NewsAPIService) GeoCoordinates(ctx context.Context) ApiGeoCoordinatesRequest {
-	return ApiGeoCoordinatesRequest{
+func (a *NewsAPIService) GetGeoCoordinates(ctx context.Context) ApiGetGeoCoordinatesRequest {
+	return ApiGetGeoCoordinatesRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GeoCoordinatesResponse
-func (a *NewsAPIService) GeoCoordinatesExecute(r ApiGeoCoordinatesRequest) (*GeoCoordinatesResponse, *http.Response, error) {
+//  @return GetGeoCoordinates200Response
+func (a *NewsAPIService) GetGeoCoordinatesExecute(r ApiGetGeoCoordinatesRequest) (*GetGeoCoordinates200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GeoCoordinatesResponse
+		localVarReturnValue  *GetGeoCoordinates200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NewsAPIService.GeoCoordinates")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NewsAPIService.GetGeoCoordinates")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -394,6 +380,9 @@ func (a *NewsAPIService) GeoCoordinatesExecute(r ApiGeoCoordinatesRequest) (*Geo
 	localVarFormParams := url.Values{}
 	if r.location == nil {
 		return localVarReturnValue, nil, reportError("location is required and must be specified")
+	}
+	if strlen(*r.location) > 1000 {
+		return localVarReturnValue, nil, reportError("location must have less than 1000 elements")
 	}
 
 	parameterAddToHeaderOrQuery(localVarQueryParams, "location", r.location, "")
@@ -483,25 +472,18 @@ type ApiNewsWebsiteToRSSFeedRequest struct {
 	ctx context.Context
 	ApiService *NewsAPIService
 	url *string
-	apiKey *string
-	extractNews *bool
+	analyze *bool
 }
 
-// The url from which links should be extracted.
+// The url of the news.
 func (r ApiNewsWebsiteToRSSFeedRequest) Url(url string) ApiNewsWebsiteToRSSFeedRequest {
 	r.url = &url
 	return r
 }
 
-// Your API key.
-func (r ApiNewsWebsiteToRSSFeedRequest) ApiKey(apiKey string) ApiNewsWebsiteToRSSFeedRequest {
-	r.apiKey = &apiKey
-	return r
-}
-
-// Whether extract news and add information such as description, publish date, and image to each item.
-func (r ApiNewsWebsiteToRSSFeedRequest) ExtractNews(extractNews bool) ApiNewsWebsiteToRSSFeedRequest {
-	r.extractNews = &extractNews
+// Whether to analyze the news (extract entities etc.)
+func (r ApiNewsWebsiteToRSSFeedRequest) Analyze(analyze bool) ApiNewsWebsiteToRSSFeedRequest {
+	r.analyze = &analyze
 	return r
 }
 
@@ -512,7 +494,7 @@ func (r ApiNewsWebsiteToRSSFeedRequest) Execute() (map[string]interface{}, *http
 /*
 NewsWebsiteToRSSFeed News Website to RSS Feed
 
-Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page. 
+Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiNewsWebsiteToRSSFeedRequest
@@ -547,15 +529,15 @@ func (a *NewsAPIService) NewsWebsiteToRSSFeedExecute(r ApiNewsWebsiteToRSSFeedRe
 	if r.url == nil {
 		return localVarReturnValue, nil, reportError("url is required and must be specified")
 	}
-	if r.apiKey == nil {
-		return localVarReturnValue, nil, reportError("apiKey is required and must be specified")
+	if strlen(*r.url) > 1000 {
+		return localVarReturnValue, nil, reportError("url must have less than 1000 elements")
+	}
+	if r.analyze == nil {
+		return localVarReturnValue, nil, reportError("analyze is required and must be specified")
 	}
 
 	parameterAddToHeaderOrQuery(localVarQueryParams, "url", r.url, "")
-	if r.extractNews != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "extract-news", r.extractNews, "")
-	}
-	parameterAddToHeaderOrQuery(localVarQueryParams, "api-key", r.apiKey, "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "analyze", r.analyze, "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -652,25 +634,25 @@ type ApiSearchNewsRequest struct {
 	authors *string
 	entities *string
 	locationFilter *string
-	offset *int32
-	number *int32
 	sort *string
 	sortDirection *string
+	offset *int32
+	number *int32
 }
 
-// The text to match in the news content.
+// The text to match in the news content (at least 3 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford
 func (r ApiSearchNewsRequest) Text(text string) ApiSearchNewsRequest {
 	r.text = &text
 	return r
 }
 
-// A comma-separated list of ISO 3166 country codes from which the news should originate, e.g. gb,us.
+// A comma-separated list of ISO 3166 country codes from which the news should originate.
 func (r ApiSearchNewsRequest) SourceCountries(sourceCountries string) ApiSearchNewsRequest {
 	r.sourceCountries = &sourceCountries
 	return r
 }
 
-// The ISO 6391 language code of the news, e.g. \&quot;en\&quot; for English.
+// The ISO 6391 language code of the news.
 func (r ApiSearchNewsRequest) Language(language string) ApiSearchNewsRequest {
 	r.language = &language
 	return r
@@ -700,7 +682,7 @@ func (r ApiSearchNewsRequest) LatestPublishDate(latestPublishDate string) ApiSea
 	return r
 }
 
-// A comma-separated list of news sources from which the news should originate, e.g. https://www.bbc.co.uk
+// A comma-separated list of news sources from which the news should originate.
 func (r ApiSearchNewsRequest) NewsSources(newsSources string) ApiSearchNewsRequest {
 	r.newsSources = &newsSources
 	return r
@@ -712,19 +694,31 @@ func (r ApiSearchNewsRequest) Authors(authors string) ApiSearchNewsRequest {
 	return r
 }
 
-// Filter news by entities, e.g. ORG:Tesla.
+// Filter news by entities (see semantic types).
 func (r ApiSearchNewsRequest) Entities(entities string) ApiSearchNewsRequest {
 	r.entities = &entities
 	return r
 }
 
-// Filter news by radius around a certain location. Format is \&quot;latitude,longitude,radius in kilometers\&quot;, e.g. 51.050407, 13.737262, 100
+// Filter news by radius around a certain location. Format is \&quot;latitude,longitude,radius in kilometers\&quot;. Radius must be between 1 and 100 kilometers.
 func (r ApiSearchNewsRequest) LocationFilter(locationFilter string) ApiSearchNewsRequest {
 	r.locationFilter = &locationFilter
 	return r
 }
 
-// The number of news to skip in range [0,1000]
+// The sorting criteria (publish-time or sentiment).
+func (r ApiSearchNewsRequest) Sort(sort string) ApiSearchNewsRequest {
+	r.sort = &sort
+	return r
+}
+
+// Whether to sort ascending or descending (ASC or DESC).
+func (r ApiSearchNewsRequest) SortDirection(sortDirection string) ApiSearchNewsRequest {
+	r.sortDirection = &sortDirection
+	return r
+}
+
+// The number of news to skip in range [0,10000]
 func (r ApiSearchNewsRequest) Offset(offset int32) ApiSearchNewsRequest {
 	r.offset = &offset
 	return r
@@ -736,26 +730,14 @@ func (r ApiSearchNewsRequest) Number(number int32) ApiSearchNewsRequest {
 	return r
 }
 
-// The sorting criteria.
-func (r ApiSearchNewsRequest) Sort(sort string) ApiSearchNewsRequest {
-	r.sort = &sort
-	return r
-}
-
-// Whether to sort ascending or descending.
-func (r ApiSearchNewsRequest) SortDirection(sortDirection string) ApiSearchNewsRequest {
-	r.sortDirection = &sortDirection
-	return r
-}
-
-func (r ApiSearchNewsRequest) Execute() (*SearchNewsResponse, *http.Response, error) {
+func (r ApiSearchNewsRequest) Execute() (*SearchNews200Response, *http.Response, error) {
 	return r.ApiService.SearchNewsExecute(r)
 }
 
 /*
 SearchNews Search News
 
-Search for news.
+Search and filter news by text, date, location, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSearchNewsRequest
@@ -768,13 +750,13 @@ func (a *NewsAPIService) SearchNews(ctx context.Context) ApiSearchNewsRequest {
 }
 
 // Execute executes the request
-//  @return SearchNewsResponse
-func (a *NewsAPIService) SearchNewsExecute(r ApiSearchNewsRequest) (*SearchNewsResponse, *http.Response, error) {
+//  @return SearchNews200Response
+func (a *NewsAPIService) SearchNewsExecute(r ApiSearchNewsRequest) (*SearchNews200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *SearchNewsResponse
+		localVarReturnValue  *SearchNews200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NewsAPIService.SearchNews")
@@ -821,17 +803,192 @@ func (a *NewsAPIService) SearchNewsExecute(r ApiSearchNewsRequest) (*SearchNewsR
 	if r.locationFilter != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "location-filter", r.locationFilter, "")
 	}
+	if r.sort != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sort", r.sort, "")
+	}
+	if r.sortDirection != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sort-direction", r.sortDirection, "")
+	}
 	if r.offset != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "")
 	}
 	if r.number != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "number", r.number, "")
 	}
-	if r.sort != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "sort", r.sort, "")
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
 	}
-	if r.sortDirection != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "sort-direction", r.sortDirection, "")
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarQueryParams.Add("api-key", key)
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["headerApiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["x-api-key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiTopNewsRequest struct {
+	ctx context.Context
+	ApiService *NewsAPIService
+	sourceCountry *string
+	language *string
+	date *string
+	headlinesOnly *bool
+}
+
+// The ISO 3166 country code of the country for which top news should be retrieved.
+func (r ApiTopNewsRequest) SourceCountry(sourceCountry string) ApiTopNewsRequest {
+	r.sourceCountry = &sourceCountry
+	return r
+}
+
+// The ISO 6391 language code of the top news. The language must be one spoken in the source-country.
+func (r ApiTopNewsRequest) Language(language string) ApiTopNewsRequest {
+	r.language = &language
+	return r
+}
+
+// The date for which the top news should be retrieved. If no date is given, the current day is assumed.
+func (r ApiTopNewsRequest) Date(date string) ApiTopNewsRequest {
+	r.date = &date
+	return r
+}
+
+// Whether to only return basic information such as id, title, and url of the news.
+func (r ApiTopNewsRequest) HeadlinesOnly(headlinesOnly bool) ApiTopNewsRequest {
+	r.headlinesOnly = &headlinesOnly
+	return r
+}
+
+func (r ApiTopNewsRequest) Execute() (*TopNews200Response, *http.Response, error) {
+	return r.ApiService.TopNewsExecute(r)
+}
+
+/*
+TopNews Top News
+
+Get the top news from a country in a language for a specific date. The top news are clustered from multiple sources in the given country. The more news in a cluster the higher the cluster is ranked.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiTopNewsRequest
+*/
+func (a *NewsAPIService) TopNews(ctx context.Context) ApiTopNewsRequest {
+	return ApiTopNewsRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return TopNews200Response
+func (a *NewsAPIService) TopNewsExecute(r ApiTopNewsRequest) (*TopNews200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *TopNews200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NewsAPIService.TopNews")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/top-news"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.sourceCountry == nil {
+		return localVarReturnValue, nil, reportError("sourceCountry is required and must be specified")
+	}
+	if strlen(*r.sourceCountry) > 2 {
+		return localVarReturnValue, nil, reportError("sourceCountry must have less than 2 elements")
+	}
+	if r.language == nil {
+		return localVarReturnValue, nil, reportError("language is required and must be specified")
+	}
+	if strlen(*r.language) > 2 {
+		return localVarReturnValue, nil, reportError("language must have less than 2 elements")
+	}
+
+	parameterAddToHeaderOrQuery(localVarQueryParams, "source-country", r.sourceCountry, "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "")
+	if r.date != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "date", r.date, "")
+	}
+	if r.headlinesOnly != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "headlines-only", r.headlinesOnly, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

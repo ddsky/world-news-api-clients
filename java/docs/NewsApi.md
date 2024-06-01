@@ -6,18 +6,19 @@ All URIs are relative to *https://api.worldnewsapi.com*
 |------------- | ------------- | -------------|
 | [**extractNews**](NewsApi.md#extractNews) | **GET** /extract-news | Extract News |
 | [**extractNewsLinks**](NewsApi.md#extractNewsLinks) | **GET** /extract-news-links | Extract News Links |
-| [**geoCoordinates**](NewsApi.md#geoCoordinates) | **GET** /geo-coordinates | Get Geo Coordinates |
+| [**getGeoCoordinates**](NewsApi.md#getGeoCoordinates) | **GET** /geo-coordinates | Get Geo Coordinates |
 | [**newsWebsiteToRSSFeed**](NewsApi.md#newsWebsiteToRSSFeed) | **GET** /feed.rss | News Website to RSS Feed |
 | [**searchNews**](NewsApi.md#searchNews) | **GET** /search-news | Search News |
+| [**topNews**](NewsApi.md#topNews) | **GET** /top-news | Top News |
 
 
 <a id="extractNews"></a>
 # **extractNews**
-> ExtractNewsResponse extractNews(url, analyze)
+> ExtractNews200Response extractNews(url, analyze)
 
 Extract News
 
-Extract a news entry from a news site.
+Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, image, publish date, author, language, source country, and sentiment of the news article.
 
 ### Example
 ```java
@@ -48,9 +49,9 @@ public class Example {
 
     NewsApi apiInstance = new NewsApi(defaultClient);
     String url = "https://www.bbc.com/news/world-us-canada-59340789"; // String | The url of the news.
-    Boolean analyze = false; // Boolean | Whether to analyze the news (extract entities etc.)
+    Boolean analyze = true; // Boolean | Whether to analyze the news (extract entities etc.)
     try {
-      ExtractNewsResponse result = apiInstance.extractNews(url, analyze);
+      ExtractNews200Response result = apiInstance.extractNews(url, analyze);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling NewsApi#extractNews");
@@ -68,92 +69,11 @@ public class Example {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **url** | **String**| The url of the news. | |
-| **analyze** | **Boolean**| Whether to analyze the news (extract entities etc.) | [default to false] |
+| **analyze** | **Boolean**| Whether to analyze the news (extract entities etc.) | |
 
 ### Return type
 
-[**ExtractNewsResponse**](ExtractNewsResponse.md)
-
-### Authorization
-
-[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | Extracted news. |  -  |
-
-<a id="extractNewsLinks"></a>
-# **extractNewsLinks**
-> ExtractLinksResponse extractNewsLinks(url, apiKey, prefix, subDomain)
-
-Extract News Links
-
-Extract a news links from a news website. 
-
-### Example
-```java
-// Import classes:
-import com.worldnewsapi.client.ApiClient;
-import com.worldnewsapi.client.ApiException;
-import com.worldnewsapi.client.Configuration;
-import com.worldnewsapi.client.auth.*;
-import com.worldnewsapi.client.models.*;
-import com.worldnewsapi.NewsApi;
-
-public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.worldnewsapi.com");
-    
-    // Configure API key authorization: apiKey
-    ApiKeyAuth apiKey = (ApiKeyAuth) defaultClient.getAuthentication("apiKey");
-    apiKey.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //apiKey.setApiKeyPrefix("Token");
-
-    // Configure API key authorization: headerApiKey
-    ApiKeyAuth headerApiKey = (ApiKeyAuth) defaultClient.getAuthentication("headerApiKey");
-    headerApiKey.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //headerApiKey.setApiKeyPrefix("Token");
-
-    NewsApi apiInstance = new NewsApi(defaultClient);
-    String url = "https://nytimes.com"; // String | The url from which links should be extracted.
-    String apiKey = "abcd1234"; // String | Your API key.
-    String prefix = ""; // String | The prefix the news links must start with.
-    Boolean subDomain = true; // Boolean | Whether to include links to news on sub-domains.
-    try {
-      ExtractLinksResponse result = apiInstance.extractNewsLinks(url, apiKey, prefix, subDomain);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling NewsApi#extractNewsLinks");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
-    }
-  }
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **url** | **String**| The url from which links should be extracted. | |
-| **apiKey** | **String**| Your API key. | |
-| **prefix** | **String**| The prefix the news links must start with. | [optional] |
-| **subDomain** | **Boolean**| Whether to include links to news on sub-domains. | [optional] |
-
-### Return type
-
-[**ExtractLinksResponse**](ExtractLinksResponse.md)
+[**ExtractNews200Response**](ExtractNews200Response.md)
 
 ### Authorization
 
@@ -172,15 +92,16 @@ public class Example {
 | **402** | Payment Required |  -  |
 | **403** | Forbidden |  -  |
 | **404** | Not Found |  -  |
+| **406** | Not Acceptable |  -  |
 | **429** | Too Many Requests |  -  |
 
-<a id="geoCoordinates"></a>
-# **geoCoordinates**
-> GeoCoordinatesResponse geoCoordinates(location)
+<a id="extractNewsLinks"></a>
+# **extractNewsLinks**
+> ExtractNewsLinks200Response extractNewsLinks(url, analyze)
 
-Get Geo Coordinates
+Extract News Links
 
-Get the geo coordinates for a location. The location can be an exact address but also just the name of a city or country.
+Extract news links from a news website.
 
 ### Example
 ```java
@@ -210,12 +131,13 @@ public class Example {
     //headerApiKey.setApiKeyPrefix("Token");
 
     NewsApi apiInstance = new NewsApi(defaultClient);
-    String location = "Tokyo, Japan"; // String | The address or name of the location, e.g. Tokyo, Japan.
+    String url = "https://www.bbc.com/news/world-us-canada-59340789"; // String | The url of the news.
+    Boolean analyze = true; // Boolean | Whether to analyze the news (extract entities etc.)
     try {
-      GeoCoordinatesResponse result = apiInstance.geoCoordinates(location);
+      ExtractNewsLinks200Response result = apiInstance.extractNewsLinks(url, analyze);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling NewsApi#geoCoordinates");
+      System.err.println("Exception when calling NewsApi#extractNewsLinks");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -229,11 +151,12 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **location** | **String**| The address or name of the location, e.g. Tokyo, Japan. | |
+| **url** | **String**| The url of the news. | |
+| **analyze** | **Boolean**| Whether to analyze the news (extract entities etc.) | |
 
 ### Return type
 
-[**GeoCoordinatesResponse**](GeoCoordinatesResponse.md)
+[**ExtractNewsLinks200Response**](ExtractNewsLinks200Response.md)
 
 ### Authorization
 
@@ -247,16 +170,21 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | The coordinates of the location. |  -  |
+| **200** | Success |  -  |
+| **401** | Unauthorized |  -  |
+| **402** | Payment Required |  -  |
+| **403** | Forbidden |  -  |
 | **404** | Not Found |  -  |
+| **406** | Not Acceptable |  -  |
+| **429** | Too Many Requests |  -  |
 
-<a id="newsWebsiteToRSSFeed"></a>
-# **newsWebsiteToRSSFeed**
-> Object newsWebsiteToRSSFeed(url, apiKey, extractNews)
+<a id="getGeoCoordinates"></a>
+# **getGeoCoordinates**
+> GetGeoCoordinates200Response getGeoCoordinates(location)
 
-News Website to RSS Feed
+Get Geo Coordinates
 
-Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page. 
+Retrieve the latitude and longitude of a location name. Given this information you can fill the location-filter parameter in the news search endpoint.
 
 ### Example
 ```java
@@ -286,11 +214,91 @@ public class Example {
     //headerApiKey.setApiKeyPrefix("Token");
 
     NewsApi apiInstance = new NewsApi(defaultClient);
-    String url = "https://nytimes.com"; // String | The url from which links should be extracted.
-    String apiKey = "abcd1234"; // String | Your API key.
-    Boolean extractNews = false; // Boolean | Whether extract news and add information such as description, publish date, and image to each item.
+    String location = "Tokyo, Japan"; // String | The address or name of the location.
     try {
-      Object result = apiInstance.newsWebsiteToRSSFeed(url, apiKey, extractNews);
+      GetGeoCoordinates200Response result = apiInstance.getGeoCoordinates(location);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling NewsApi#getGeoCoordinates");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **location** | **String**| The address or name of the location. | |
+
+### Return type
+
+[**GetGeoCoordinates200Response**](GetGeoCoordinates200Response.md)
+
+### Authorization
+
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Success |  -  |
+| **401** | Unauthorized |  -  |
+| **402** | Payment Required |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not Found |  -  |
+| **406** | Not Acceptable |  -  |
+| **429** | Too Many Requests |  -  |
+
+<a id="newsWebsiteToRSSFeed"></a>
+# **newsWebsiteToRSSFeed**
+> Object newsWebsiteToRSSFeed(url, analyze)
+
+News Website to RSS Feed
+
+Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page.
+
+### Example
+```java
+// Import classes:
+import com.worldnewsapi.client.ApiClient;
+import com.worldnewsapi.client.ApiException;
+import com.worldnewsapi.client.Configuration;
+import com.worldnewsapi.client.auth.*;
+import com.worldnewsapi.client.models.*;
+import com.worldnewsapi.NewsApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://api.worldnewsapi.com");
+    
+    // Configure API key authorization: apiKey
+    ApiKeyAuth apiKey = (ApiKeyAuth) defaultClient.getAuthentication("apiKey");
+    apiKey.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKey.setApiKeyPrefix("Token");
+
+    // Configure API key authorization: headerApiKey
+    ApiKeyAuth headerApiKey = (ApiKeyAuth) defaultClient.getAuthentication("headerApiKey");
+    headerApiKey.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //headerApiKey.setApiKeyPrefix("Token");
+
+    NewsApi apiInstance = new NewsApi(defaultClient);
+    String url = "https://www.bbc.com/news/world-us-canada-59340789"; // String | The url of the news.
+    Boolean analyze = true; // Boolean | Whether to analyze the news (extract entities etc.)
+    try {
+      Object result = apiInstance.newsWebsiteToRSSFeed(url, analyze);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling NewsApi#newsWebsiteToRSSFeed");
@@ -307,9 +315,8 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **url** | **String**| The url from which links should be extracted. | |
-| **apiKey** | **String**| Your API key. | |
-| **extractNews** | **Boolean**| Whether extract news and add information such as description, publish date, and image to each item. | [optional] |
+| **url** | **String**| The url of the news. | |
+| **analyze** | **Boolean**| Whether to analyze the news (extract entities etc.) | |
 
 ### Return type
 
@@ -332,15 +339,16 @@ public class Example {
 | **402** | Payment Required |  -  |
 | **403** | Forbidden |  -  |
 | **404** | Not Found |  -  |
+| **406** | Not Acceptable |  -  |
 | **429** | Too Many Requests |  -  |
 
 <a id="searchNews"></a>
 # **searchNews**
-> SearchNewsResponse searchNews(text, sourceCountries, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, entities, locationFilter, offset, number, sort, sortDirection)
+> SearchNews200Response searchNews(text, sourceCountries, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, entities, locationFilter, sort, sortDirection, offset, number)
 
 Search News
 
-Search for news.
+Search and filter news by text, date, location, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
 
 ### Example
 ```java
@@ -370,23 +378,23 @@ public class Example {
     //headerApiKey.setApiKeyPrefix("Token");
 
     NewsApi apiInstance = new NewsApi(defaultClient);
-    String text = "hurricane"; // String | The text to match in the news content.
-    String sourceCountries = "us,uk"; // String | A comma-separated list of ISO 3166 country codes from which the news should originate, e.g. gb,us.
-    String language = "en"; // String | The ISO 6391 language code of the news, e.g. \"en\" for English.
+    String text = "tesla"; // String | The text to match in the news content (at least 3 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford
+    String sourceCountries = "us,uk"; // String | A comma-separated list of ISO 3166 country codes from which the news should originate.
+    String language = "en"; // String | The ISO 6391 language code of the news.
     Double minSentiment = -0.8D; // Double | The minimal sentiment of the news in range [-1,1].
     Double maxSentiment = 0.8D; // Double | The maximal sentiment of the news in range [-1,1].
     String earliestPublishDate = "2022-04-22 16:12:35"; // String | The news must have been published after this date.
-    String latestPublishDate = "2022-05-23 24:16:27"; // String | The news must have been published before this date.
-    String newsSources = "https://www.bbc.co.uk"; // String | A comma-separated list of news sources from which the news should originate, e.g. https://www.bbc.co.uk
+    String latestPublishDate = "2022-04-22 16:12:35"; // String | The news must have been published before this date.
+    String newsSources = "https://www.bbc.co.uk"; // String | A comma-separated list of news sources from which the news should originate.
     String authors = "John Doe"; // String | A comma-separated list of author names. Only news from any of the given authors will be returned.
-    String entities = "ORG:Tesla"; // String | Filter news by entities, e.g. ORG:Tesla.
-    String locationFilter = "51.050407,13.737262,100"; // String | Filter news by radius around a certain location. Format is \"latitude,longitude,radius in kilometers\", e.g. 51.050407, 13.737262, 100
-    Integer offset = 10; // Integer | The number of news to skip in range [0,1000]
-    Integer number = 1; // Integer | The number of news to return in range [1,100]
-    String sort = "relevance"; // String | The sorting criteria.
-    String sortDirection = "asc"; // String | Whether to sort ascending or descending.
+    String entities = "ORG:Tesla"; // String | Filter news by entities (see semantic types).
+    String locationFilter = "51.050407, 13.737262, 20"; // String | Filter news by radius around a certain location. Format is \"latitude,longitude,radius in kilometers\". Radius must be between 1 and 100 kilometers.
+    String sort = "publish-time"; // String | The sorting criteria (publish-time or sentiment).
+    String sortDirection = "ASC"; // String | Whether to sort ascending or descending (ASC or DESC).
+    Integer offset = 0; // Integer | The number of news to skip in range [0,10000]
+    Integer number = 10; // Integer | The number of news to return in range [1,100]
     try {
-      SearchNewsResponse result = apiInstance.searchNews(text, sourceCountries, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, entities, locationFilter, offset, number, sort, sortDirection);
+      SearchNews200Response result = apiInstance.searchNews(text, sourceCountries, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, entities, locationFilter, sort, sortDirection, offset, number);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling NewsApi#searchNews");
@@ -403,25 +411,25 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **text** | **String**| The text to match in the news content. | [optional] |
-| **sourceCountries** | **String**| A comma-separated list of ISO 3166 country codes from which the news should originate, e.g. gb,us. | [optional] |
-| **language** | **String**| The ISO 6391 language code of the news, e.g. \&quot;en\&quot; for English. | [optional] |
+| **text** | **String**| The text to match in the news content (at least 3 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford | [optional] |
+| **sourceCountries** | **String**| A comma-separated list of ISO 3166 country codes from which the news should originate. | [optional] |
+| **language** | **String**| The ISO 6391 language code of the news. | [optional] |
 | **minSentiment** | **Double**| The minimal sentiment of the news in range [-1,1]. | [optional] |
 | **maxSentiment** | **Double**| The maximal sentiment of the news in range [-1,1]. | [optional] |
 | **earliestPublishDate** | **String**| The news must have been published after this date. | [optional] |
 | **latestPublishDate** | **String**| The news must have been published before this date. | [optional] |
-| **newsSources** | **String**| A comma-separated list of news sources from which the news should originate, e.g. https://www.bbc.co.uk | [optional] |
+| **newsSources** | **String**| A comma-separated list of news sources from which the news should originate. | [optional] |
 | **authors** | **String**| A comma-separated list of author names. Only news from any of the given authors will be returned. | [optional] |
-| **entities** | **String**| Filter news by entities, e.g. ORG:Tesla. | [optional] |
-| **locationFilter** | **String**| Filter news by radius around a certain location. Format is \&quot;latitude,longitude,radius in kilometers\&quot;, e.g. 51.050407, 13.737262, 100 | [optional] |
-| **offset** | **Integer**| The number of news to skip in range [0,1000] | [optional] |
+| **entities** | **String**| Filter news by entities (see semantic types). | [optional] |
+| **locationFilter** | **String**| Filter news by radius around a certain location. Format is \&quot;latitude,longitude,radius in kilometers\&quot;. Radius must be between 1 and 100 kilometers. | [optional] |
+| **sort** | **String**| The sorting criteria (publish-time or sentiment). | [optional] |
+| **sortDirection** | **String**| Whether to sort ascending or descending (ASC or DESC). | [optional] |
+| **offset** | **Integer**| The number of news to skip in range [0,10000] | [optional] |
 | **number** | **Integer**| The number of news to return in range [1,100] | [optional] |
-| **sort** | **String**| The sorting criteria. | [optional] [enum: relevance, publish-time, sentiment] |
-| **sortDirection** | **String**| Whether to sort ascending or descending. | [optional] [enum: asc, desc] |
 
 ### Return type
 
-[**SearchNewsResponse**](SearchNewsResponse.md)
+[**SearchNews200Response**](SearchNews200Response.md)
 
 ### Authorization
 
@@ -435,5 +443,98 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | List of news. |  -  |
+| **200** | Success |  -  |
+| **401** | Unauthorized |  -  |
+| **402** | Payment Required |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not Found |  -  |
+| **406** | Not Acceptable |  -  |
+| **429** | Too Many Requests |  -  |
+
+<a id="topNews"></a>
+# **topNews**
+> TopNews200Response topNews(sourceCountry, language, date, headlinesOnly)
+
+Top News
+
+Get the top news from a country in a language for a specific date. The top news are clustered from multiple sources in the given country. The more news in a cluster the higher the cluster is ranked.
+
+### Example
+```java
+// Import classes:
+import com.worldnewsapi.client.ApiClient;
+import com.worldnewsapi.client.ApiException;
+import com.worldnewsapi.client.Configuration;
+import com.worldnewsapi.client.auth.*;
+import com.worldnewsapi.client.models.*;
+import com.worldnewsapi.NewsApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://api.worldnewsapi.com");
+    
+    // Configure API key authorization: apiKey
+    ApiKeyAuth apiKey = (ApiKeyAuth) defaultClient.getAuthentication("apiKey");
+    apiKey.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKey.setApiKeyPrefix("Token");
+
+    // Configure API key authorization: headerApiKey
+    ApiKeyAuth headerApiKey = (ApiKeyAuth) defaultClient.getAuthentication("headerApiKey");
+    headerApiKey.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //headerApiKey.setApiKeyPrefix("Token");
+
+    NewsApi apiInstance = new NewsApi(defaultClient);
+    String sourceCountry = "us"; // String | The ISO 3166 country code of the country for which top news should be retrieved.
+    String language = "en"; // String | The ISO 6391 language code of the top news. The language must be one spoken in the source-country.
+    String date = "2024-05-30"; // String | The date for which the top news should be retrieved. If no date is given, the current day is assumed.
+    Boolean headlinesOnly = false; // Boolean | Whether to only return basic information such as id, title, and url of the news.
+    try {
+      TopNews200Response result = apiInstance.topNews(sourceCountry, language, date, headlinesOnly);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling NewsApi#topNews");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **sourceCountry** | **String**| The ISO 3166 country code of the country for which top news should be retrieved. | |
+| **language** | **String**| The ISO 6391 language code of the top news. The language must be one spoken in the source-country. | |
+| **date** | **String**| The date for which the top news should be retrieved. If no date is given, the current day is assumed. | [optional] |
+| **headlinesOnly** | **Boolean**| Whether to only return basic information such as id, title, and url of the news. | [optional] |
+
+### Return type
+
+[**TopNews200Response**](TopNews200Response.md)
+
+### Authorization
+
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Success |  -  |
+| **401** | Unauthorized |  -  |
+| **402** | Payment Required |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not Found |  -  |
+| **406** | Not Acceptable |  -  |
+| **429** | Too Many Requests |  -  |
 

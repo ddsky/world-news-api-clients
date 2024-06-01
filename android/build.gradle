@@ -1,5 +1,5 @@
 group = 'com.worldnewsapi'
-project.version = '1.0.10'
+project.version = '1.1.1'
 
 buildscript {
     repositories {

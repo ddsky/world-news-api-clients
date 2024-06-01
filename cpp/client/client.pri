@@ -2,12 +2,14 @@ QT += network
 
 HEADERS += \
 # Models
-    $${PWD}/OAIExtractLinksResponse.h \
-    $${PWD}/OAIExtractNewsResponse.h \
-    $${PWD}/OAIGeoCoordinatesResponse.h \
-    $${PWD}/OAINews.h \
-    $${PWD}/OAINewsArticle.h \
-    $${PWD}/OAISearchNewsResponse.h \
+    $${PWD}/OAIExtractNewsLinks_200_response.h \
+    $${PWD}/OAIExtractNews_200_response.h \
+    $${PWD}/OAIGetGeoCoordinates_200_response.h \
+    $${PWD}/OAISearchNews_200_response.h \
+    $${PWD}/OAISearchNews_200_response_news_inner.h \
+    $${PWD}/OAITopNews_200_response.h \
+    $${PWD}/OAITopNews_200_response_top_news_inner.h \
+    $${PWD}/OAITopNews_200_response_top_news_inner_news_inner.h \
 # APIs
     $${PWD}/OAINewsApi.h \
 # Others
@@ -22,12 +24,14 @@ HEADERS += \
 
 SOURCES += \
 # Models
-    $${PWD}/OAIExtractLinksResponse.cpp \
-    $${PWD}/OAIExtractNewsResponse.cpp \
-    $${PWD}/OAIGeoCoordinatesResponse.cpp \
-    $${PWD}/OAINews.cpp \
-    $${PWD}/OAINewsArticle.cpp \
-    $${PWD}/OAISearchNewsResponse.cpp \
+    $${PWD}/OAIExtractNewsLinks_200_response.cpp \
+    $${PWD}/OAIExtractNews_200_response.cpp \
+    $${PWD}/OAIGetGeoCoordinates_200_response.cpp \
+    $${PWD}/OAISearchNews_200_response.cpp \
+    $${PWD}/OAISearchNews_200_response_news_inner.cpp \
+    $${PWD}/OAITopNews_200_response.cpp \
+    $${PWD}/OAITopNews_200_response_top_news_inner.cpp \
+    $${PWD}/OAITopNews_200_response_top_news_inner_news_inner.cpp \
 # APIs
     $${PWD}/OAINewsApi.cpp \
 # Others

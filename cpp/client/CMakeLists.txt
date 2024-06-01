@@ -11,12 +11,14 @@ include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
 
 add_library(${PROJECT_NAME}
-  OAIExtractLinksResponse.h
-  OAIExtractNewsResponse.h
-  OAIGeoCoordinatesResponse.h
-  OAINews.h
-  OAINewsArticle.h
-  OAISearchNewsResponse.h
+  OAIExtractNewsLinks_200_response.h
+  OAIExtractNews_200_response.h
+  OAIGetGeoCoordinates_200_response.h
+  OAISearchNews_200_response.h
+  OAISearchNews_200_response_news_inner.h
+  OAITopNews_200_response.h
+  OAITopNews_200_response_top_news_inner.h
+  OAITopNews_200_response_top_news_inner_news_inner.h
   OAINewsApi.h
   OAIHelpers.h
   OAIHttpRequest.h
@@ -26,12 +28,14 @@ add_library(${PROJECT_NAME}
   OAIServerConfiguration.h
   OAIServerVariable.h
   OAIOauth.h
-  OAIExtractLinksResponse.cpp
-  OAIExtractNewsResponse.cpp
-  OAIGeoCoordinatesResponse.cpp
-  OAINews.cpp
-  OAINewsArticle.cpp
-  OAISearchNewsResponse.cpp
+  OAIExtractNewsLinks_200_response.cpp
+  OAIExtractNews_200_response.cpp
+  OAIGetGeoCoordinates_200_response.cpp
+  OAISearchNews_200_response.cpp
+  OAISearchNews_200_response_news_inner.cpp
+  OAITopNews_200_response.cpp
+  OAITopNews_200_response_top_news_inner.cpp
+  OAITopNews_200_response_top_news_inner_news_inner.cpp
   OAINewsApi.cpp
   OAIHelpers.cpp
   OAIHttpRequest.cpp

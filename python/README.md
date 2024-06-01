@@ -4,8 +4,8 @@ The World News API gives you access to thousands of news sources in over 50 lang
 
 This is the python-package for easy acccess to the api.
 
-- API version: 1.1
-- Package version: 1.0.10
+- API version: 1.1.1
+- Package version: 1.1.1
 
 ## Resources
 
@@ -88,7 +88,7 @@ with worldnewsapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = worldnewsapi.NewsApi(api_client)
     url = 'https://www.bbc.com/news/world-us-canada-59340789' # str | The url of the news.
-    analyze = False # bool | Whether to analyze the news (extract entities etc.) (default to False)
+    analyze = true # bool | Whether to analyze the news (extract entities etc.)
 
     try:
         # Extract News
@@ -108,19 +108,22 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *NewsApi* | [**extract_news**](docs/NewsApi.md#extract_news) | **GET** /extract-news | Extract News
 *NewsApi* | [**extract_news_links**](docs/NewsApi.md#extract_news_links) | **GET** /extract-news-links | Extract News Links
-*NewsApi* | [**geo_coordinates**](docs/NewsApi.md#geo_coordinates) | **GET** /geo-coordinates | Get Geo Coordinates
+*NewsApi* | [**get_geo_coordinates**](docs/NewsApi.md#get_geo_coordinates) | **GET** /geo-coordinates | Get Geo Coordinates
 *NewsApi* | [**news_website_to_rss_feed**](docs/NewsApi.md#news_website_to_rss_feed) | **GET** /feed.rss | News Website to RSS Feed
 *NewsApi* | [**search_news**](docs/NewsApi.md#search_news) | **GET** /search-news | Search News
+*NewsApi* | [**top_news**](docs/NewsApi.md#top_news) | **GET** /top-news | Top News
 
 
 ## Documentation For Models
 
- - [ExtractLinksResponse](docs/ExtractLinksResponse.md)
- - [ExtractNewsResponse](docs/ExtractNewsResponse.md)
- - [GeoCoordinatesResponse](docs/GeoCoordinatesResponse.md)
- - [News](docs/News.md)
- - [NewsArticle](docs/NewsArticle.md)
- - [SearchNewsResponse](docs/SearchNewsResponse.md)
+ - [ExtractNews200Response](docs/ExtractNews200Response.md)
+ - [ExtractNewsLinks200Response](docs/ExtractNewsLinks200Response.md)
+ - [GetGeoCoordinates200Response](docs/GetGeoCoordinates200Response.md)
+ - [SearchNews200Response](docs/SearchNews200Response.md)
+ - [SearchNews200ResponseNewsInner](docs/SearchNews200ResponseNewsInner.md)
+ - [TopNews200Response](docs/TopNews200Response.md)
+ - [TopNews200ResponseTopNewsInner](docs/TopNews200ResponseTopNewsInner.md)
+ - [TopNews200ResponseTopNewsInnerNewsInner](docs/TopNews200ResponseTopNewsInnerNewsInner.md)
 
 
 <a id="documentation-for-authorization"></a>

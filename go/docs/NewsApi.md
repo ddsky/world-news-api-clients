@@ -6,15 +6,16 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**ExtractNews**](NewsAPI.md#ExtractNews) | **Get** /extract-news | Extract News
 [**ExtractNewsLinks**](NewsAPI.md#ExtractNewsLinks) | **Get** /extract-news-links | Extract News Links
-[**GeoCoordinates**](NewsAPI.md#GeoCoordinates) | **Get** /geo-coordinates | Get Geo Coordinates
+[**GetGeoCoordinates**](NewsAPI.md#GetGeoCoordinates) | **Get** /geo-coordinates | Get Geo Coordinates
 [**NewsWebsiteToRSSFeed**](NewsAPI.md#NewsWebsiteToRSSFeed) | **Get** /feed.rss | News Website to RSS Feed
 [**SearchNews**](NewsAPI.md#SearchNews) | **Get** /search-news | Search News
+[**TopNews**](NewsAPI.md#TopNews) | **Get** /top-news | Top News
 
 
 
 ## ExtractNews
 
-> ExtractNewsResponse ExtractNews(ctx).Url(url).Analyze(analyze).Execute()
+> ExtractNews200Response ExtractNews(ctx).Url(url).Analyze(analyze).Execute()
 
 Extract News
 
@@ -34,7 +35,7 @@ import (
 
 func main() {
 	url := "https://www.bbc.com/news/world-us-canada-59340789" // string | The url of the news.
-	analyze := true // bool | Whether to analyze the news (extract entities etc.) (default to false)
+	analyze := true // bool | Whether to analyze the news (extract entities etc.)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -43,7 +44,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `NewsAPI.ExtractNews``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ExtractNews`: ExtractNewsResponse
+	// response from `ExtractNews`: ExtractNews200Response
 	fmt.Fprintf(os.Stdout, "Response from `NewsAPI.ExtractNews`: %v\n", resp)
 }
 ```
@@ -60,11 +61,11 @@ Other parameters are passed through a pointer to a apiExtractNewsRequest struct 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **url** | **string** | The url of the news. | 
- **analyze** | **bool** | Whether to analyze the news (extract entities etc.) | [default to false]
+ **analyze** | **bool** | Whether to analyze the news (extract entities etc.) | 
 
 ### Return type
 
-[**ExtractNewsResponse**](ExtractNewsResponse.md)
+[**ExtractNews200Response**](ExtractNews200Response.md)
 
 ### Authorization
 
@@ -82,7 +83,7 @@ Name | Type | Description  | Notes
 
 ## ExtractNewsLinks
 
-> ExtractLinksResponse ExtractNewsLinks(ctx).Url(url).ApiKey(apiKey).Prefix(prefix).SubDomain(subDomain).Execute()
+> ExtractNewsLinks200Response ExtractNewsLinks(ctx).Url(url).Analyze(analyze).Execute()
 
 Extract News Links
 
@@ -101,19 +102,17 @@ import (
 )
 
 func main() {
-	url := "https://nytimes.com" // string | The url from which links should be extracted.
-	apiKey := "abcd1234" // string | Your API key.
-	prefix := "prefix_example" // string | The prefix the news links must start with. (optional)
-	subDomain := true // bool | Whether to include links to news on sub-domains. (optional)
+	url := "https://www.bbc.com/news/world-us-canada-59340789" // string | The url of the news.
+	analyze := true // bool | Whether to analyze the news (extract entities etc.)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NewsAPI.ExtractNewsLinks(context.Background()).Url(url).ApiKey(apiKey).Prefix(prefix).SubDomain(subDomain).Execute()
+	resp, r, err := apiClient.NewsAPI.ExtractNewsLinks(context.Background()).Url(url).Analyze(analyze).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NewsAPI.ExtractNewsLinks``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ExtractNewsLinks`: ExtractLinksResponse
+	// response from `ExtractNewsLinks`: ExtractNewsLinks200Response
 	fmt.Fprintf(os.Stdout, "Response from `NewsAPI.ExtractNewsLinks`: %v\n", resp)
 }
 ```
@@ -129,14 +128,12 @@ Other parameters are passed through a pointer to a apiExtractNewsLinksRequest st
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **url** | **string** | The url from which links should be extracted. | 
- **apiKey** | **string** | Your API key. | 
- **prefix** | **string** | The prefix the news links must start with. | 
- **subDomain** | **bool** | Whether to include links to news on sub-domains. | 
+ **url** | **string** | The url of the news. | 
+ **analyze** | **bool** | Whether to analyze the news (extract entities etc.) | 
 
 ### Return type
 
-[**ExtractLinksResponse**](ExtractLinksResponse.md)
+[**ExtractNewsLinks200Response**](ExtractNewsLinks200Response.md)
 
 ### Authorization
 
@@ -152,9 +149,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GeoCoordinates
+## GetGeoCoordinates
 
-> GeoCoordinatesResponse GeoCoordinates(ctx).Location(location).Execute()
+> GetGeoCoordinates200Response GetGeoCoordinates(ctx).Location(location).Execute()
 
 Get Geo Coordinates
 
@@ -173,17 +170,17 @@ import (
 )
 
 func main() {
-	location := "Tokyo, Japan" // string | The address or name of the location, e.g. Tokyo, Japan.
+	location := "Tokyo, Japan" // string | The address or name of the location.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NewsAPI.GeoCoordinates(context.Background()).Location(location).Execute()
+	resp, r, err := apiClient.NewsAPI.GetGeoCoordinates(context.Background()).Location(location).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `NewsAPI.GeoCoordinates``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `NewsAPI.GetGeoCoordinates``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GeoCoordinates`: GeoCoordinatesResponse
-	fmt.Fprintf(os.Stdout, "Response from `NewsAPI.GeoCoordinates`: %v\n", resp)
+	// response from `GetGeoCoordinates`: GetGeoCoordinates200Response
+	fmt.Fprintf(os.Stdout, "Response from `NewsAPI.GetGeoCoordinates`: %v\n", resp)
 }
 ```
 
@@ -193,16 +190,16 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGeoCoordinatesRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetGeoCoordinatesRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **location** | **string** | The address or name of the location, e.g. Tokyo, Japan. | 
+ **location** | **string** | The address or name of the location. | 
 
 ### Return type
 
-[**GeoCoordinatesResponse**](GeoCoordinatesResponse.md)
+[**GetGeoCoordinates200Response**](GetGeoCoordinates200Response.md)
 
 ### Authorization
 
@@ -220,7 +217,7 @@ Name | Type | Description  | Notes
 
 ## NewsWebsiteToRSSFeed
 
-> map[string]interface{} NewsWebsiteToRSSFeed(ctx).Url(url).ApiKey(apiKey).ExtractNews(extractNews).Execute()
+> map[string]interface{} NewsWebsiteToRSSFeed(ctx).Url(url).Analyze(analyze).Execute()
 
 News Website to RSS Feed
 
@@ -239,13 +236,12 @@ import (
 )
 
 func main() {
-	url := "https://nytimes.com" // string | The url from which links should be extracted.
-	apiKey := "abcd1234" // string | Your API key.
-	extractNews := false // bool | Whether extract news and add information such as description, publish date, and image to each item. (optional)
+	url := "https://www.bbc.com/news/world-us-canada-59340789" // string | The url of the news.
+	analyze := true // bool | Whether to analyze the news (extract entities etc.)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NewsAPI.NewsWebsiteToRSSFeed(context.Background()).Url(url).ApiKey(apiKey).ExtractNews(extractNews).Execute()
+	resp, r, err := apiClient.NewsAPI.NewsWebsiteToRSSFeed(context.Background()).Url(url).Analyze(analyze).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NewsAPI.NewsWebsiteToRSSFeed``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -266,9 +262,8 @@ Other parameters are passed through a pointer to a apiNewsWebsiteToRSSFeedReques
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **url** | **string** | The url from which links should be extracted. | 
- **apiKey** | **string** | Your API key. | 
- **extractNews** | **bool** | Whether extract news and add information such as description, publish date, and image to each item. | 
+ **url** | **string** | The url of the news. | 
+ **analyze** | **bool** | Whether to analyze the news (extract entities etc.) | 
 
 ### Return type
 
@@ -290,7 +285,7 @@ Name | Type | Description  | Notes
 
 ## SearchNews
 
-> SearchNewsResponse SearchNews(ctx).Text(text).SourceCountries(sourceCountries).Language(language).MinSentiment(minSentiment).MaxSentiment(maxSentiment).EarliestPublishDate(earliestPublishDate).LatestPublishDate(latestPublishDate).NewsSources(newsSources).Authors(authors).Entities(entities).LocationFilter(locationFilter).Offset(offset).Number(number).Sort(sort).SortDirection(sortDirection).Execute()
+> SearchNews200Response SearchNews(ctx).Text(text).SourceCountries(sourceCountries).Language(language).MinSentiment(minSentiment).MaxSentiment(maxSentiment).EarliestPublishDate(earliestPublishDate).LatestPublishDate(latestPublishDate).NewsSources(newsSources).Authors(authors).Entities(entities).LocationFilter(locationFilter).Sort(sort).SortDirection(sortDirection).Offset(offset).Number(number).Execute()
 
 Search News
 
@@ -309,30 +304,30 @@ import (
 )
 
 func main() {
-	text := "hurricane" // string | The text to match in the news content. (optional)
-	sourceCountries := "us,uk" // string | A comma-separated list of ISO 3166 country codes from which the news should originate, e.g. gb,us. (optional)
-	language := "en" // string | The ISO 6391 language code of the news, e.g. \"en\" for English. (optional)
+	text := "tesla" // string | The text to match in the news content (at least 3 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford (optional)
+	sourceCountries := "us,uk" // string | A comma-separated list of ISO 3166 country codes from which the news should originate. (optional)
+	language := "en" // string | The ISO 6391 language code of the news. (optional)
 	minSentiment := float64(-0.8) // float64 | The minimal sentiment of the news in range [-1,1]. (optional)
 	maxSentiment := float64(0.8) // float64 | The maximal sentiment of the news in range [-1,1]. (optional)
 	earliestPublishDate := "2022-04-22 16:12:35" // string | The news must have been published after this date. (optional)
-	latestPublishDate := "2022-05-23 24:16:27" // string | The news must have been published before this date. (optional)
-	newsSources := "https://www.bbc.co.uk" // string | A comma-separated list of news sources from which the news should originate, e.g. https://www.bbc.co.uk (optional)
+	latestPublishDate := "2022-04-22 16:12:35" // string | The news must have been published before this date. (optional)
+	newsSources := "https://www.bbc.co.uk" // string | A comma-separated list of news sources from which the news should originate. (optional)
 	authors := "John Doe" // string | A comma-separated list of author names. Only news from any of the given authors will be returned. (optional)
-	entities := "ORG:Tesla" // string | Filter news by entities, e.g. ORG:Tesla. (optional)
-	locationFilter := "51.050407,13.737262,100" // string | Filter news by radius around a certain location. Format is \"latitude,longitude,radius in kilometers\", e.g. 51.050407, 13.737262, 100 (optional)
-	offset := int32(10) // int32 | The number of news to skip in range [0,1000] (optional)
-	number := int32(1) // int32 | The number of news to return in range [1,100] (optional)
-	sort := "publish-time" // string | The sorting criteria. (optional)
-	sortDirection := "desc" // string | Whether to sort ascending or descending. (optional)
+	entities := "ORG:Tesla" // string | Filter news by entities (see semantic types). (optional)
+	locationFilter := "51.050407, 13.737262, 20" // string | Filter news by radius around a certain location. Format is \"latitude,longitude,radius in kilometers\". Radius must be between 1 and 100 kilometers. (optional)
+	sort := "publish-time" // string | The sorting criteria (publish-time or sentiment). (optional)
+	sortDirection := "ASC" // string | Whether to sort ascending or descending (ASC or DESC). (optional)
+	offset := int32(0) // int32 | The number of news to skip in range [0,10000] (optional)
+	number := int32(10) // int32 | The number of news to return in range [1,100] (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NewsAPI.SearchNews(context.Background()).Text(text).SourceCountries(sourceCountries).Language(language).MinSentiment(minSentiment).MaxSentiment(maxSentiment).EarliestPublishDate(earliestPublishDate).LatestPublishDate(latestPublishDate).NewsSources(newsSources).Authors(authors).Entities(entities).LocationFilter(locationFilter).Offset(offset).Number(number).Sort(sort).SortDirection(sortDirection).Execute()
+	resp, r, err := apiClient.NewsAPI.SearchNews(context.Background()).Text(text).SourceCountries(sourceCountries).Language(language).MinSentiment(minSentiment).MaxSentiment(maxSentiment).EarliestPublishDate(earliestPublishDate).LatestPublishDate(latestPublishDate).NewsSources(newsSources).Authors(authors).Entities(entities).LocationFilter(locationFilter).Sort(sort).SortDirection(sortDirection).Offset(offset).Number(number).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NewsAPI.SearchNews``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `SearchNews`: SearchNewsResponse
+	// response from `SearchNews`: SearchNews200Response
 	fmt.Fprintf(os.Stdout, "Response from `NewsAPI.SearchNews`: %v\n", resp)
 }
 ```
@@ -348,25 +343,97 @@ Other parameters are passed through a pointer to a apiSearchNewsRequest struct v
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **text** | **string** | The text to match in the news content. | 
- **sourceCountries** | **string** | A comma-separated list of ISO 3166 country codes from which the news should originate, e.g. gb,us. | 
- **language** | **string** | The ISO 6391 language code of the news, e.g. \&quot;en\&quot; for English. | 
+ **text** | **string** | The text to match in the news content (at least 3 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford | 
+ **sourceCountries** | **string** | A comma-separated list of ISO 3166 country codes from which the news should originate. | 
+ **language** | **string** | The ISO 6391 language code of the news. | 
  **minSentiment** | **float64** | The minimal sentiment of the news in range [-1,1]. | 
  **maxSentiment** | **float64** | The maximal sentiment of the news in range [-1,1]. | 
  **earliestPublishDate** | **string** | The news must have been published after this date. | 
  **latestPublishDate** | **string** | The news must have been published before this date. | 
- **newsSources** | **string** | A comma-separated list of news sources from which the news should originate, e.g. https://www.bbc.co.uk | 
+ **newsSources** | **string** | A comma-separated list of news sources from which the news should originate. | 
  **authors** | **string** | A comma-separated list of author names. Only news from any of the given authors will be returned. | 
- **entities** | **string** | Filter news by entities, e.g. ORG:Tesla. | 
- **locationFilter** | **string** | Filter news by radius around a certain location. Format is \&quot;latitude,longitude,radius in kilometers\&quot;, e.g. 51.050407, 13.737262, 100 | 
- **offset** | **int32** | The number of news to skip in range [0,1000] | 
+ **entities** | **string** | Filter news by entities (see semantic types). | 
+ **locationFilter** | **string** | Filter news by radius around a certain location. Format is \&quot;latitude,longitude,radius in kilometers\&quot;. Radius must be between 1 and 100 kilometers. | 
+ **sort** | **string** | The sorting criteria (publish-time or sentiment). | 
+ **sortDirection** | **string** | Whether to sort ascending or descending (ASC or DESC). | 
+ **offset** | **int32** | The number of news to skip in range [0,10000] | 
  **number** | **int32** | The number of news to return in range [1,100] | 
- **sort** | **string** | The sorting criteria. | 
- **sortDirection** | **string** | Whether to sort ascending or descending. | 
 
 ### Return type
 
-[**SearchNewsResponse**](SearchNewsResponse.md)
+[**SearchNews200Response**](SearchNews200Response.md)
+
+### Authorization
+
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## TopNews
+
+> TopNews200Response TopNews(ctx).SourceCountry(sourceCountry).Language(language).Date(date).HeadlinesOnly(headlinesOnly).Execute()
+
+Top News
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/ddsky/world-news-api-clients/tree/main/go/"
+)
+
+func main() {
+	sourceCountry := "us" // string | The ISO 3166 country code of the country for which top news should be retrieved.
+	language := "en" // string | The ISO 6391 language code of the top news. The language must be one spoken in the source-country.
+	date := "2024-05-30" // string | The date for which the top news should be retrieved. If no date is given, the current day is assumed. (optional)
+	headlinesOnly := false // bool | Whether to only return basic information such as id, title, and url of the news. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.NewsAPI.TopNews(context.Background()).SourceCountry(sourceCountry).Language(language).Date(date).HeadlinesOnly(headlinesOnly).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `NewsAPI.TopNews``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `TopNews`: TopNews200Response
+	fmt.Fprintf(os.Stdout, "Response from `NewsAPI.TopNews`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiTopNewsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **sourceCountry** | **string** | The ISO 3166 country code of the country for which top news should be retrieved. | 
+ **language** | **string** | The ISO 6391 language code of the top news. The language must be one spoken in the source-country. | 
+ **date** | **string** | The date for which the top news should be retrieved. If no date is given, the current day is assumed. | 
+ **headlinesOnly** | **bool** | Whether to only return basic information such as id, title, and url of the news. | 
+
+### Return type
+
+[**TopNews200Response**](TopNews200Response.md)
 
 ### Authorization
 

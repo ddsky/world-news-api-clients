@@ -28,7 +28,7 @@ Add this dependency to your project's POM:
 <dependency>
     <groupId>com.worldnewsapi</groupId>
     <artifactId>android-client</artifactId>
-    <version>1.0.10</version>
+    <version>1.1.1</version>
     <scope>compile</scope>
 </dependency>
 ```
@@ -38,7 +38,7 @@ Add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-compile "com.worldnewsapi:android-client:1.0.10"
+compile "com.worldnewsapi:android-client:1.1.1"
 ```
 
 ### Others
@@ -49,7 +49,7 @@ At first generate the JAR by executing:
 
 Then manually install the following JARs:
 
-- target/android-client-1.0.10.jar
+- target/android-client-1.1.1.jar
 - target/lib/*.jar
 
 ## Getting Started
@@ -67,7 +67,7 @@ public class NewsApiExample {
         String url = https://www.bbc.com/news/world-us-canada-59340789; // String | The url of the news.
         Boolean analyze = true; // Boolean | Whether to analyze the news (extract entities etc.)
         try {
-            ExtractNewsResponse result = apiInstance.extractNews(url, analyze);
+            ExtractNews200Response result = apiInstance.extractNews(url, analyze);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling NewsApi#extractNews");
@@ -86,19 +86,22 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *NewsApi* | [**extractNews**](docs/NewsApi.md#extractNews) | **GET** /extract-news | Extract News
 *NewsApi* | [**extractNewsLinks**](docs/NewsApi.md#extractNewsLinks) | **GET** /extract-news-links | Extract News Links
-*NewsApi* | [**geoCoordinates**](docs/NewsApi.md#geoCoordinates) | **GET** /geo-coordinates | Get Geo Coordinates
+*NewsApi* | [**getGeoCoordinates**](docs/NewsApi.md#getGeoCoordinates) | **GET** /geo-coordinates | Get Geo Coordinates
 *NewsApi* | [**newsWebsiteToRSSFeed**](docs/NewsApi.md#newsWebsiteToRSSFeed) | **GET** /feed.rss | News Website to RSS Feed
 *NewsApi* | [**searchNews**](docs/NewsApi.md#searchNews) | **GET** /search-news | Search News
+*NewsApi* | [**topNews**](docs/NewsApi.md#topNews) | **GET** /top-news | Top News
 
 
 ## Documentation for Models
 
- - [ExtractLinksResponse](docs/ExtractLinksResponse.md)
- - [ExtractNewsResponse](docs/ExtractNewsResponse.md)
- - [GeoCoordinatesResponse](docs/GeoCoordinatesResponse.md)
- - [News](docs/News.md)
- - [NewsArticle](docs/NewsArticle.md)
- - [SearchNewsResponse](docs/SearchNewsResponse.md)
+ - [ExtractNews200Response](docs/ExtractNews200Response.md)
+ - [ExtractNewsLinks200Response](docs/ExtractNewsLinks200Response.md)
+ - [GetGeoCoordinates200Response](docs/GetGeoCoordinates200Response.md)
+ - [SearchNews200Response](docs/SearchNews200Response.md)
+ - [SearchNews200ResponseNewsInner](docs/SearchNews200ResponseNewsInner.md)
+ - [TopNews200Response](docs/TopNews200Response.md)
+ - [TopNews200ResponseTopNewsInner](docs/TopNews200ResponseTopNewsInner.md)
+ - [TopNews200ResponseTopNewsInnerNewsInner](docs/TopNews200ResponseTopNewsInnerNewsInner.md)
 
 
 ## Documentation for Authorization

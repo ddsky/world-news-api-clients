@@ -16,32 +16,38 @@ trait DataAccessor {
 
         /**
         * 
-        * @return A ExtractNewsResponse
+        * @return A ExtractNews200Response
         */
-        def News_extractNews(url: String, analyze: Boolean, authParamapiKey: String, authParamheaderApiKey: String): Either[CommonError,ExtractNewsResponse] = Left(TODO)
+        def News_extractNews(url: String, analyze: Boolean, authParamapiKey: String, authParamheaderApiKey: String): Either[CommonError,ExtractNews200Response] = Left(TODO)
 
         /**
         * 
-        * @return A ExtractLinksResponse
+        * @return A ExtractNewsLinks200Response
         */
-        def News_extractNewsLinks(url: String, apiKey: String, prefix: Option[String], subDomain: Option[Boolean], authParamapiKey: String, authParamheaderApiKey: String): Either[CommonError,ExtractLinksResponse] = Left(TODO)
+        def News_extractNewsLinks(url: String, analyze: Boolean, authParamapiKey: String, authParamheaderApiKey: String): Either[CommonError,ExtractNewsLinks200Response] = Left(TODO)
 
         /**
         * 
-        * @return A GeoCoordinatesResponse
+        * @return A GetGeoCoordinates200Response
         */
-        def News_geoCoordinates(location: String, authParamapiKey: String, authParamheaderApiKey: String): Either[CommonError,GeoCoordinatesResponse] = Left(TODO)
+        def News_getGeoCoordinates(location: String, authParamapiKey: String, authParamheaderApiKey: String): Either[CommonError,GetGeoCoordinates200Response] = Left(TODO)
 
         /**
         * 
         * @return A Object
         */
-        def News_newsWebsiteToRSSFeed(url: String, apiKey: String, extractNews: Option[Boolean], authParamapiKey: String, authParamheaderApiKey: String): Either[CommonError,Object] = Left(TODO)
+        def News_newsWebsiteToRSSFeed(url: String, analyze: Boolean, authParamapiKey: String, authParamheaderApiKey: String): Either[CommonError,Object] = Left(TODO)
 
         /**
         * 
-        * @return A SearchNewsResponse
+        * @return A SearchNews200Response
         */
-        def News_searchNews(text: Option[String], sourceCountries: Option[String], language: Option[String], minSentiment: Option[Double], maxSentiment: Option[Double], earliestPublishDate: Option[String], latestPublishDate: Option[String], newsSources: Option[String], authors: Option[String], entities: Option[String], locationFilter: Option[String], offset: Option[Int], number: Option[Int], sort: Option[String], sortDirection: Option[String], authParamapiKey: String, authParamheaderApiKey: String): Either[CommonError,SearchNewsResponse] = Left(TODO)
+        def News_searchNews(text: Option[String], sourceCountries: Option[String], language: Option[String], minSentiment: Option[Double], maxSentiment: Option[Double], earliestPublishDate: Option[String], latestPublishDate: Option[String], newsSources: Option[String], authors: Option[String], entities: Option[String], locationFilter: Option[String], sort: Option[String], sortDirection: Option[String], offset: Option[Int], number: Option[Int], authParamapiKey: String, authParamheaderApiKey: String): Either[CommonError,SearchNews200Response] = Left(TODO)
+
+        /**
+        * 
+        * @return A TopNews200Response
+        */
+        def News_topNews(sourceCountry: String, language: String, date: Option[String], headlinesOnly: Option[Boolean], authParamapiKey: String, authParamheaderApiKey: String): Either[CommonError,TopNews200Response] = Left(TODO)
 
 }

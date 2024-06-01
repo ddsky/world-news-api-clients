@@ -1,7 +1,7 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.12
+// @dart=2.18
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
@@ -18,7 +18,7 @@ class NewsApi {
 
   /// Extract News
   ///
-  /// Extract a news entry from a news site.
+  /// Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, image, publish date, author, language, source country, and sentiment of the news article.
   ///
   /// Note: This method returns the HTTP [Response].
   ///
@@ -59,7 +59,7 @@ class NewsApi {
 
   /// Extract News
   ///
-  /// Extract a news entry from a news site.
+  /// Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, image, publish date, author, language, source country, and sentiment of the news article.
   ///
   /// Parameters:
   ///
@@ -68,7 +68,7 @@ class NewsApi {
   ///
   /// * [bool] analyze (required):
   ///   Whether to analyze the news (extract entities etc.)
-  Future<ExtractNewsResponse?> extractNews(String url, bool analyze,) async {
+  Future<ExtractNews200Response?> extractNews(String url, bool analyze,) async {
     final response = await extractNewsWithHttpInfo(url, analyze,);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -77,7 +77,7 @@ class NewsApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.body.isNotEmpty && response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'ExtractNewsResponse',) as ExtractNewsResponse;
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'ExtractNews200Response',) as ExtractNews200Response;
     
     }
     return null;
@@ -85,24 +85,18 @@ class NewsApi {
 
   /// Extract News Links
   ///
-  /// Extract a news links from a news website. 
+  /// Extract news links from a news website.
   ///
   /// Note: This method returns the HTTP [Response].
   ///
   /// Parameters:
   ///
   /// * [String] url (required):
-  ///   The url from which links should be extracted.
+  ///   The url of the news.
   ///
-  /// * [String] apiKey (required):
-  ///   Your API key.
-  ///
-  /// * [String] prefix:
-  ///   The prefix the news links must start with.
-  ///
-  /// * [bool] subDomain:
-  ///   Whether to include links to news on sub-domains.
-  Future<Response> extractNewsLinksWithHttpInfo(String url, String apiKey, { String? prefix, bool? subDomain, }) async {
+  /// * [bool] analyze (required):
+  ///   Whether to analyze the news (extract entities etc.)
+  Future<Response> extractNewsLinksWithHttpInfo(String url, bool analyze,) async {
     // ignore: prefer_const_declarations
     final path = r'/extract-news-links';
 
@@ -114,13 +108,7 @@ class NewsApi {
     final formParams = <String, String>{};
 
       queryParams.addAll(_queryParams('', 'url', url));
-    if (prefix != null) {
-      queryParams.addAll(_queryParams('', 'prefix', prefix));
-    }
-    if (subDomain != null) {
-      queryParams.addAll(_queryParams('', 'sub-domain', subDomain));
-    }
-      queryParams.addAll(_queryParams('', 'api-key', apiKey));
+      queryParams.addAll(_queryParams('', 'analyze', analyze));
 
     const contentTypes = <String>[];
 
@@ -138,23 +126,17 @@ class NewsApi {
 
   /// Extract News Links
   ///
-  /// Extract a news links from a news website. 
+  /// Extract news links from a news website.
   ///
   /// Parameters:
   ///
   /// * [String] url (required):
-  ///   The url from which links should be extracted.
+  ///   The url of the news.
   ///
-  /// * [String] apiKey (required):
-  ///   Your API key.
-  ///
-  /// * [String] prefix:
-  ///   The prefix the news links must start with.
-  ///
-  /// * [bool] subDomain:
-  ///   Whether to include links to news on sub-domains.
-  Future<ExtractLinksResponse?> extractNewsLinks(String url, String apiKey, { String? prefix, bool? subDomain, }) async {
-    final response = await extractNewsLinksWithHttpInfo(url, apiKey,  prefix: prefix, subDomain: subDomain, );
+  /// * [bool] analyze (required):
+  ///   Whether to analyze the news (extract entities etc.)
+  Future<ExtractNewsLinks200Response?> extractNewsLinks(String url, bool analyze,) async {
+    final response = await extractNewsLinksWithHttpInfo(url, analyze,);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -162,7 +144,7 @@ class NewsApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.body.isNotEmpty && response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'ExtractLinksResponse',) as ExtractLinksResponse;
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'ExtractNewsLinks200Response',) as ExtractNewsLinks200Response;
     
     }
     return null;
@@ -170,15 +152,15 @@ class NewsApi {
 
   /// Get Geo Coordinates
   ///
-  /// Get the geo coordinates for a location. The location can be an exact address but also just the name of a city or country.
+  /// Retrieve the latitude and longitude of a location name. Given this information you can fill the location-filter parameter in the news search endpoint.
   ///
   /// Note: This method returns the HTTP [Response].
   ///
   /// Parameters:
   ///
   /// * [String] location (required):
-  ///   The address or name of the location, e.g. Tokyo, Japan.
-  Future<Response> geoCoordinatesWithHttpInfo(String location,) async {
+  ///   The address or name of the location.
+  Future<Response> getGeoCoordinatesWithHttpInfo(String location,) async {
     // ignore: prefer_const_declarations
     final path = r'/geo-coordinates';
 
@@ -207,14 +189,14 @@ class NewsApi {
 
   /// Get Geo Coordinates
   ///
-  /// Get the geo coordinates for a location. The location can be an exact address but also just the name of a city or country.
+  /// Retrieve the latitude and longitude of a location name. Given this information you can fill the location-filter parameter in the news search endpoint.
   ///
   /// Parameters:
   ///
   /// * [String] location (required):
-  ///   The address or name of the location, e.g. Tokyo, Japan.
-  Future<GeoCoordinatesResponse?> geoCoordinates(String location,) async {
-    final response = await geoCoordinatesWithHttpInfo(location,);
+  ///   The address or name of the location.
+  Future<GetGeoCoordinates200Response?> getGeoCoordinates(String location,) async {
+    final response = await getGeoCoordinatesWithHttpInfo(location,);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -222,7 +204,7 @@ class NewsApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.body.isNotEmpty && response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'GeoCoordinatesResponse',) as GeoCoordinatesResponse;
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'GetGeoCoordinates200Response',) as GetGeoCoordinates200Response;
     
     }
     return null;
@@ -230,21 +212,18 @@ class NewsApi {
 
   /// News Website to RSS Feed
   ///
-  /// Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page. 
+  /// Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page.
   ///
   /// Note: This method returns the HTTP [Response].
   ///
   /// Parameters:
   ///
   /// * [String] url (required):
-  ///   The url from which links should be extracted.
+  ///   The url of the news.
   ///
-  /// * [String] apiKey (required):
-  ///   Your API key.
-  ///
-  /// * [bool] extractNews:
-  ///   Whether extract news and add information such as description, publish date, and image to each item.
-  Future<Response> newsWebsiteToRSSFeedWithHttpInfo(String url, String apiKey, { bool? extractNews, }) async {
+  /// * [bool] analyze (required):
+  ///   Whether to analyze the news (extract entities etc.)
+  Future<Response> newsWebsiteToRSSFeedWithHttpInfo(String url, bool analyze,) async {
     // ignore: prefer_const_declarations
     final path = r'/feed.rss';
 
@@ -256,10 +235,7 @@ class NewsApi {
     final formParams = <String, String>{};
 
       queryParams.addAll(_queryParams('', 'url', url));
-    if (extractNews != null) {
-      queryParams.addAll(_queryParams('', 'extract-news', extractNews));
-    }
-      queryParams.addAll(_queryParams('', 'api-key', apiKey));
+      queryParams.addAll(_queryParams('', 'analyze', analyze));
 
     const contentTypes = <String>[];
 
@@ -277,20 +253,17 @@ class NewsApi {
 
   /// News Website to RSS Feed
   ///
-  /// Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page. 
+  /// Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page.
   ///
   /// Parameters:
   ///
   /// * [String] url (required):
-  ///   The url from which links should be extracted.
+  ///   The url of the news.
   ///
-  /// * [String] apiKey (required):
-  ///   Your API key.
-  ///
-  /// * [bool] extractNews:
-  ///   Whether extract news and add information such as description, publish date, and image to each item.
-  Future<Object?> newsWebsiteToRSSFeed(String url, String apiKey, { bool? extractNews, }) async {
-    final response = await newsWebsiteToRSSFeedWithHttpInfo(url, apiKey,  extractNews: extractNews, );
+  /// * [bool] analyze (required):
+  ///   Whether to analyze the news (extract entities etc.)
+  Future<Object?> newsWebsiteToRSSFeed(String url, bool analyze,) async {
+    final response = await newsWebsiteToRSSFeedWithHttpInfo(url, analyze,);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -306,20 +279,20 @@ class NewsApi {
 
   /// Search News
   ///
-  /// Search for news.
+  /// Search and filter news by text, date, location, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
   ///
   /// Note: This method returns the HTTP [Response].
   ///
   /// Parameters:
   ///
   /// * [String] text:
-  ///   The text to match in the news content.
+  ///   The text to match in the news content (at least 3 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford
   ///
   /// * [String] sourceCountries:
-  ///   A comma-separated list of ISO 3166 country codes from which the news should originate, e.g. gb,us.
+  ///   A comma-separated list of ISO 3166 country codes from which the news should originate.
   ///
   /// * [String] language:
-  ///   The ISO 6391 language code of the news, e.g. \"en\" for English.
+  ///   The ISO 6391 language code of the news.
   ///
   /// * [double] minSentiment:
   ///   The minimal sentiment of the news in range [-1,1].
@@ -334,29 +307,29 @@ class NewsApi {
   ///   The news must have been published before this date.
   ///
   /// * [String] newsSources:
-  ///   A comma-separated list of news sources from which the news should originate, e.g. https://www.bbc.co.uk
+  ///   A comma-separated list of news sources from which the news should originate.
   ///
   /// * [String] authors:
   ///   A comma-separated list of author names. Only news from any of the given authors will be returned.
   ///
   /// * [String] entities:
-  ///   Filter news by entities, e.g. ORG:Tesla.
+  ///   Filter news by entities (see semantic types).
   ///
   /// * [String] locationFilter:
-  ///   Filter news by radius around a certain location. Format is \"latitude,longitude,radius in kilometers\", e.g. 51.050407, 13.737262, 100
+  ///   Filter news by radius around a certain location. Format is \"latitude,longitude,radius in kilometers\". Radius must be between 1 and 100 kilometers.
+  ///
+  /// * [String] sort:
+  ///   The sorting criteria (publish-time or sentiment).
+  ///
+  /// * [String] sortDirection:
+  ///   Whether to sort ascending or descending (ASC or DESC).
   ///
   /// * [int] offset:
-  ///   The number of news to skip in range [0,1000]
+  ///   The number of news to skip in range [0,10000]
   ///
   /// * [int] number:
   ///   The number of news to return in range [1,100]
-  ///
-  /// * [String] sort:
-  ///   The sorting criteria.
-  ///
-  /// * [String] sortDirection:
-  ///   Whether to sort ascending or descending.
-  Future<Response> searchNewsWithHttpInfo({ String? text, String? sourceCountries, String? language, double? minSentiment, double? maxSentiment, String? earliestPublishDate, String? latestPublishDate, String? newsSources, String? authors, String? entities, String? locationFilter, int? offset, int? number, String? sort, String? sortDirection, }) async {
+  Future<Response> searchNewsWithHttpInfo({ String? text, String? sourceCountries, String? language, double? minSentiment, double? maxSentiment, String? earliestPublishDate, String? latestPublishDate, String? newsSources, String? authors, String? entities, String? locationFilter, String? sort, String? sortDirection, int? offset, int? number, }) async {
     // ignore: prefer_const_declarations
     final path = r'/search-news';
 
@@ -400,17 +373,17 @@ class NewsApi {
     if (locationFilter != null) {
       queryParams.addAll(_queryParams('', 'location-filter', locationFilter));
     }
-    if (offset != null) {
-      queryParams.addAll(_queryParams('', 'offset', offset));
-    }
-    if (number != null) {
-      queryParams.addAll(_queryParams('', 'number', number));
-    }
     if (sort != null) {
       queryParams.addAll(_queryParams('', 'sort', sort));
     }
     if (sortDirection != null) {
       queryParams.addAll(_queryParams('', 'sort-direction', sortDirection));
+    }
+    if (offset != null) {
+      queryParams.addAll(_queryParams('', 'offset', offset));
+    }
+    if (number != null) {
+      queryParams.addAll(_queryParams('', 'number', number));
     }
 
     const contentTypes = <String>[];
@@ -429,18 +402,18 @@ class NewsApi {
 
   /// Search News
   ///
-  /// Search for news.
+  /// Search and filter news by text, date, location, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
   ///
   /// Parameters:
   ///
   /// * [String] text:
-  ///   The text to match in the news content.
+  ///   The text to match in the news content (at least 3 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford
   ///
   /// * [String] sourceCountries:
-  ///   A comma-separated list of ISO 3166 country codes from which the news should originate, e.g. gb,us.
+  ///   A comma-separated list of ISO 3166 country codes from which the news should originate.
   ///
   /// * [String] language:
-  ///   The ISO 6391 language code of the news, e.g. \"en\" for English.
+  ///   The ISO 6391 language code of the news.
   ///
   /// * [double] minSentiment:
   ///   The minimal sentiment of the news in range [-1,1].
@@ -455,30 +428,30 @@ class NewsApi {
   ///   The news must have been published before this date.
   ///
   /// * [String] newsSources:
-  ///   A comma-separated list of news sources from which the news should originate, e.g. https://www.bbc.co.uk
+  ///   A comma-separated list of news sources from which the news should originate.
   ///
   /// * [String] authors:
   ///   A comma-separated list of author names. Only news from any of the given authors will be returned.
   ///
   /// * [String] entities:
-  ///   Filter news by entities, e.g. ORG:Tesla.
+  ///   Filter news by entities (see semantic types).
   ///
   /// * [String] locationFilter:
-  ///   Filter news by radius around a certain location. Format is \"latitude,longitude,radius in kilometers\", e.g. 51.050407, 13.737262, 100
+  ///   Filter news by radius around a certain location. Format is \"latitude,longitude,radius in kilometers\". Radius must be between 1 and 100 kilometers.
+  ///
+  /// * [String] sort:
+  ///   The sorting criteria (publish-time or sentiment).
+  ///
+  /// * [String] sortDirection:
+  ///   Whether to sort ascending or descending (ASC or DESC).
   ///
   /// * [int] offset:
-  ///   The number of news to skip in range [0,1000]
+  ///   The number of news to skip in range [0,10000]
   ///
   /// * [int] number:
   ///   The number of news to return in range [1,100]
-  ///
-  /// * [String] sort:
-  ///   The sorting criteria.
-  ///
-  /// * [String] sortDirection:
-  ///   Whether to sort ascending or descending.
-  Future<SearchNewsResponse?> searchNews({ String? text, String? sourceCountries, String? language, double? minSentiment, double? maxSentiment, String? earliestPublishDate, String? latestPublishDate, String? newsSources, String? authors, String? entities, String? locationFilter, int? offset, int? number, String? sort, String? sortDirection, }) async {
-    final response = await searchNewsWithHttpInfo( text: text, sourceCountries: sourceCountries, language: language, minSentiment: minSentiment, maxSentiment: maxSentiment, earliestPublishDate: earliestPublishDate, latestPublishDate: latestPublishDate, newsSources: newsSources, authors: authors, entities: entities, locationFilter: locationFilter, offset: offset, number: number, sort: sort, sortDirection: sortDirection, );
+  Future<SearchNews200Response?> searchNews({ String? text, String? sourceCountries, String? language, double? minSentiment, double? maxSentiment, String? earliestPublishDate, String? latestPublishDate, String? newsSources, String? authors, String? entities, String? locationFilter, String? sort, String? sortDirection, int? offset, int? number, }) async {
+    final response = await searchNewsWithHttpInfo( text: text, sourceCountries: sourceCountries, language: language, minSentiment: minSentiment, maxSentiment: maxSentiment, earliestPublishDate: earliestPublishDate, latestPublishDate: latestPublishDate, newsSources: newsSources, authors: authors, entities: entities, locationFilter: locationFilter, sort: sort, sortDirection: sortDirection, offset: offset, number: number, );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -486,7 +459,92 @@ class NewsApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.body.isNotEmpty && response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'SearchNewsResponse',) as SearchNewsResponse;
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'SearchNews200Response',) as SearchNews200Response;
+    
+    }
+    return null;
+  }
+
+  /// Top News
+  ///
+  /// Get the top news from a country in a language for a specific date. The top news are clustered from multiple sources in the given country. The more news in a cluster the higher the cluster is ranked.
+  ///
+  /// Note: This method returns the HTTP [Response].
+  ///
+  /// Parameters:
+  ///
+  /// * [String] sourceCountry (required):
+  ///   The ISO 3166 country code of the country for which top news should be retrieved.
+  ///
+  /// * [String] language (required):
+  ///   The ISO 6391 language code of the top news. The language must be one spoken in the source-country.
+  ///
+  /// * [String] date:
+  ///   The date for which the top news should be retrieved. If no date is given, the current day is assumed.
+  ///
+  /// * [bool] headlinesOnly:
+  ///   Whether to only return basic information such as id, title, and url of the news.
+  Future<Response> topNewsWithHttpInfo(String sourceCountry, String language, { String? date, bool? headlinesOnly, }) async {
+    // ignore: prefer_const_declarations
+    final path = r'/top-news';
+
+    // ignore: prefer_final_locals
+    Object? postBody;
+
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+      queryParams.addAll(_queryParams('', 'source-country', sourceCountry));
+      queryParams.addAll(_queryParams('', 'language', language));
+    if (date != null) {
+      queryParams.addAll(_queryParams('', 'date', date));
+    }
+    if (headlinesOnly != null) {
+      queryParams.addAll(_queryParams('', 'headlines-only', headlinesOnly));
+    }
+
+    const contentTypes = <String>[];
+
+
+    return apiClient.invokeAPI(
+      path,
+      'GET',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      contentTypes.isEmpty ? null : contentTypes.first,
+    );
+  }
+
+  /// Top News
+  ///
+  /// Get the top news from a country in a language for a specific date. The top news are clustered from multiple sources in the given country. The more news in a cluster the higher the cluster is ranked.
+  ///
+  /// Parameters:
+  ///
+  /// * [String] sourceCountry (required):
+  ///   The ISO 3166 country code of the country for which top news should be retrieved.
+  ///
+  /// * [String] language (required):
+  ///   The ISO 6391 language code of the top news. The language must be one spoken in the source-country.
+  ///
+  /// * [String] date:
+  ///   The date for which the top news should be retrieved. If no date is given, the current day is assumed.
+  ///
+  /// * [bool] headlinesOnly:
+  ///   Whether to only return basic information such as id, title, and url of the news.
+  Future<TopNews200Response?> topNews(String sourceCountry, String language, { String? date, bool? headlinesOnly, }) async {
+    final response = await topNewsWithHttpInfo(sourceCountry, language,  date: date, headlinesOnly: headlinesOnly, );
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
+    }
+    // When a remote server returns no body with a status of 204, we shall not decode it.
+    // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
+    // FormatException when trying to decode an empty string.
+    if (response.body.isNotEmpty && response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'TopNews200Response',) as TopNews200Response;
     
     }
     return null;

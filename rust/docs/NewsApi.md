@@ -6,18 +6,19 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**extract_news**](NewsApi.md#extract_news) | **GET** /extract-news | Extract News
 [**extract_news_links**](NewsApi.md#extract_news_links) | **GET** /extract-news-links | Extract News Links
-[**geo_coordinates**](NewsApi.md#geo_coordinates) | **GET** /geo-coordinates | Get Geo Coordinates
+[**get_geo_coordinates**](NewsApi.md#get_geo_coordinates) | **GET** /geo-coordinates | Get Geo Coordinates
 [**news_website_to_rss_feed**](NewsApi.md#news_website_to_rss_feed) | **GET** /feed.rss | News Website to RSS Feed
 [**search_news**](NewsApi.md#search_news) | **GET** /search-news | Search News
+[**top_news**](NewsApi.md#top_news) | **GET** /top-news | Top News
 
 
 
 ## extract_news
 
-> crate::models::ExtractNewsResponse extract_news(url, analyze)
+> models::ExtractNews200Response extract_news(url, analyze)
 Extract News
 
-Extract a news entry from a news site.
+Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, image, publish date, author, language, source country, and sentiment of the news article.
 
 ### Parameters
 
@@ -25,11 +26,11 @@ Extract a news entry from a news site.
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **url** | **String** | The url of the news. | [required] |
-**analyze** | **bool** | Whether to analyze the news (extract entities etc.) | [required] |[default to false]
+**analyze** | **bool** | Whether to analyze the news (extract entities etc.) | [required] |
 
 ### Return type
 
-[**crate::models::ExtractNewsResponse**](ExtractNewsResponse.md)
+[**models::ExtractNews200Response**](extractNews_200_response.md)
 
 ### Authorization
 
@@ -45,24 +46,22 @@ Name | Type | Description  | Required | Notes
 
 ## extract_news_links
 
-> crate::models::ExtractLinksResponse extract_news_links(url, api_key, prefix, sub_domain)
+> models::ExtractNewsLinks200Response extract_news_links(url, analyze)
 Extract News Links
 
-Extract a news links from a news website. 
+Extract news links from a news website.
 
 ### Parameters
 
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**url** | **String** | The url from which links should be extracted. | [required] |
-**api_key** | **String** | Your API key. | [required] |
-**prefix** | Option<**String**> | The prefix the news links must start with. |  |
-**sub_domain** | Option<**bool**> | Whether to include links to news on sub-domains. |  |
+**url** | **String** | The url of the news. | [required] |
+**analyze** | **bool** | Whether to analyze the news (extract entities etc.) | [required] |
 
 ### Return type
 
-[**crate::models::ExtractLinksResponse**](ExtractLinksResponse.md)
+[**models::ExtractNewsLinks200Response**](extractNewsLinks_200_response.md)
 
 ### Authorization
 
@@ -76,23 +75,23 @@ Name | Type | Description  | Required | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 
-## geo_coordinates
+## get_geo_coordinates
 
-> crate::models::GeoCoordinatesResponse geo_coordinates(location)
+> models::GetGeoCoordinates200Response get_geo_coordinates(location)
 Get Geo Coordinates
 
-Get the geo coordinates for a location. The location can be an exact address but also just the name of a city or country.
+Retrieve the latitude and longitude of a location name. Given this information you can fill the location-filter parameter in the news search endpoint.
 
 ### Parameters
 
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**location** | **String** | The address or name of the location, e.g. Tokyo, Japan. | [required] |
+**location** | **String** | The address or name of the location. | [required] |
 
 ### Return type
 
-[**crate::models::GeoCoordinatesResponse**](GeoCoordinatesResponse.md)
+[**models::GetGeoCoordinates200Response**](getGeoCoordinates_200_response.md)
 
 ### Authorization
 
@@ -108,19 +107,18 @@ Name | Type | Description  | Required | Notes
 
 ## news_website_to_rss_feed
 
-> serde_json::Value news_website_to_rss_feed(url, api_key, extract_news)
+> serde_json::Value news_website_to_rss_feed(url, analyze)
 News Website to RSS Feed
 
-Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page. 
+Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page.
 
 ### Parameters
 
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**url** | **String** | The url from which links should be extracted. | [required] |
-**api_key** | **String** | Your API key. | [required] |
-**extract_news** | Option<**bool**> | Whether extract news and add information such as description, publish date, and image to each item. |  |
+**url** | **String** | The url of the news. | [required] |
+**analyze** | **bool** | Whether to analyze the news (extract entities etc.) | [required] |
 
 ### Return type
 
@@ -140,35 +138,68 @@ Name | Type | Description  | Required | Notes
 
 ## search_news
 
-> crate::models::SearchNewsResponse search_news(text, source_countries, language, min_sentiment, max_sentiment, earliest_publish_date, latest_publish_date, news_sources, authors, entities, location_filter, offset, number, sort, sort_direction)
+> models::SearchNews200Response search_news(text, source_countries, language, min_sentiment, max_sentiment, earliest_publish_date, latest_publish_date, news_sources, authors, entities, location_filter, sort, sort_direction, offset, number)
 Search News
 
-Search for news.
+Search and filter news by text, date, location, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
 
 ### Parameters
 
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**text** | Option<**String**> | The text to match in the news content. |  |
-**source_countries** | Option<**String**> | A comma-separated list of ISO 3166 country codes from which the news should originate, e.g. gb,us. |  |
-**language** | Option<**String**> | The ISO 6391 language code of the news, e.g. \"en\" for English. |  |
+**text** | Option<**String**> | The text to match in the news content (at least 3 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford |  |
+**source_countries** | Option<**String**> | A comma-separated list of ISO 3166 country codes from which the news should originate. |  |
+**language** | Option<**String**> | The ISO 6391 language code of the news. |  |
 **min_sentiment** | Option<**f64**> | The minimal sentiment of the news in range [-1,1]. |  |
 **max_sentiment** | Option<**f64**> | The maximal sentiment of the news in range [-1,1]. |  |
 **earliest_publish_date** | Option<**String**> | The news must have been published after this date. |  |
 **latest_publish_date** | Option<**String**> | The news must have been published before this date. |  |
-**news_sources** | Option<**String**> | A comma-separated list of news sources from which the news should originate, e.g. https://www.bbc.co.uk |  |
+**news_sources** | Option<**String**> | A comma-separated list of news sources from which the news should originate. |  |
 **authors** | Option<**String**> | A comma-separated list of author names. Only news from any of the given authors will be returned. |  |
-**entities** | Option<**String**> | Filter news by entities, e.g. ORG:Tesla. |  |
-**location_filter** | Option<**String**> | Filter news by radius around a certain location. Format is \"latitude,longitude,radius in kilometers\", e.g. 51.050407, 13.737262, 100 |  |
-**offset** | Option<**i32**> | The number of news to skip in range [0,1000] |  |
+**entities** | Option<**String**> | Filter news by entities (see semantic types). |  |
+**location_filter** | Option<**String**> | Filter news by radius around a certain location. Format is \"latitude,longitude,radius in kilometers\". Radius must be between 1 and 100 kilometers. |  |
+**sort** | Option<**String**> | The sorting criteria (publish-time or sentiment). |  |
+**sort_direction** | Option<**String**> | Whether to sort ascending or descending (ASC or DESC). |  |
+**offset** | Option<**i32**> | The number of news to skip in range [0,10000] |  |
 **number** | Option<**i32**> | The number of news to return in range [1,100] |  |
-**sort** | Option<**String**> | The sorting criteria. |  |
-**sort_direction** | Option<**String**> | Whether to sort ascending or descending. |  |
 
 ### Return type
 
-[**crate::models::SearchNewsResponse**](SearchNewsResponse.md)
+[**models::SearchNews200Response**](searchNews_200_response.md)
+
+### Authorization
+
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
+## top_news
+
+> models::TopNews200Response top_news(source_country, language, date, headlines_only)
+Top News
+
+Get the top news from a country in a language for a specific date. The top news are clustered from multiple sources in the given country. The more news in a cluster the higher the cluster is ranked.
+
+### Parameters
+
+
+Name | Type | Description  | Required | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+**source_country** | **String** | The ISO 3166 country code of the country for which top news should be retrieved. | [required] |
+**language** | **String** | The ISO 6391 language code of the top news. The language must be one spoken in the source-country. | [required] |
+**date** | Option<**String**> | The date for which the top news should be retrieved. If no date is given, the current day is assumed. |  |
+**headlines_only** | Option<**bool**> | Whether to only return basic information such as id, title, and url of the news. |  |
+
+### Return type
+
+[**models::TopNews200Response**](topNews_200_response.md)
 
 ### Authorization
 

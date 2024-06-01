@@ -3,9 +3,11 @@ README.md
 build.gradle
 src/main/groovy/org/openapitools/api/ApiUtils.groovy
 src/main/groovy/org/openapitools/api/NewsApi.groovy
-src/main/groovy/org/openapitools/model/ExtractLinksResponse.groovy
-src/main/groovy/org/openapitools/model/ExtractNewsResponse.groovy
-src/main/groovy/org/openapitools/model/GeoCoordinatesResponse.groovy
-src/main/groovy/org/openapitools/model/News.groovy
-src/main/groovy/org/openapitools/model/NewsArticle.groovy
-src/main/groovy/org/openapitools/model/SearchNewsResponse.groovy
+src/main/groovy/org/openapitools/model/ExtractNews200Response.groovy
+src/main/groovy/org/openapitools/model/ExtractNewsLinks200Response.groovy
+src/main/groovy/org/openapitools/model/GetGeoCoordinates200Response.groovy
+src/main/groovy/org/openapitools/model/SearchNews200Response.groovy
+src/main/groovy/org/openapitools/model/SearchNews200ResponseNewsInner.groovy
+src/main/groovy/org/openapitools/model/TopNews200Response.groovy
+src/main/groovy/org/openapitools/model/TopNews200ResponseTopNewsInner.groovy
+src/main/groovy/org/openapitools/model/TopNews200ResponseTopNewsInnerNewsInner.groovy

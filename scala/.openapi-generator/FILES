@@ -9,9 +9,11 @@ src/main/scala/Server.scala
 src/main/scala/endpoint.scala
 src/main/scala/errors.scala
 src/main/scala/org/openapitools/apis/NewsApi.scala
-src/main/scala/org/openapitools/models/ExtractLinksResponse.scala
-src/main/scala/org/openapitools/models/ExtractNewsResponse.scala
-src/main/scala/org/openapitools/models/GeoCoordinatesResponse.scala
-src/main/scala/org/openapitools/models/News.scala
-src/main/scala/org/openapitools/models/NewsArticle.scala
-src/main/scala/org/openapitools/models/SearchNewsResponse.scala
+src/main/scala/org/openapitools/models/ExtractNews200Response.scala
+src/main/scala/org/openapitools/models/ExtractNewsLinks200Response.scala
+src/main/scala/org/openapitools/models/GetGeoCoordinates200Response.scala
+src/main/scala/org/openapitools/models/SearchNews200Response.scala
+src/main/scala/org/openapitools/models/SearchNews200ResponseNewsInner.scala
+src/main/scala/org/openapitools/models/TopNews200Response.scala
+src/main/scala/org/openapitools/models/TopNews200ResponseTopNewsInner.scala
+src/main/scala/org/openapitools/models/TopNews200ResponseTopNewsInnerNewsInner.scala

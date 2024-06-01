@@ -1,12 +1,14 @@
 import { ResponseContext, RequestContext, HttpFile, HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 
-import { ExtractLinksResponse } from '../models/ExtractLinksResponse';
-import { ExtractNewsResponse } from '../models/ExtractNewsResponse';
-import { GeoCoordinatesResponse } from '../models/GeoCoordinatesResponse';
-import { News } from '../models/News';
-import { NewsArticle } from '../models/NewsArticle';
-import { SearchNewsResponse } from '../models/SearchNewsResponse';
+import { ExtractNews200Response } from '../models/ExtractNews200Response';
+import { ExtractNewsLinks200Response } from '../models/ExtractNewsLinks200Response';
+import { GetGeoCoordinates200Response } from '../models/GetGeoCoordinates200Response';
+import { SearchNews200Response } from '../models/SearchNews200Response';
+import { SearchNews200ResponseNewsInner } from '../models/SearchNews200ResponseNewsInner';
+import { TopNews200Response } from '../models/TopNews200Response';
+import { TopNews200ResponseTopNewsInner } from '../models/TopNews200ResponseTopNewsInner';
+import { TopNews200ResponseTopNewsInnerNewsInner } from '../models/TopNews200ResponseTopNewsInnerNewsInner';
 import { ObservableNewsApi } from './ObservableAPI';
 
 import { NewsApiRequestFactory, NewsApiResponseProcessor} from "../apis/NewsApi";
@@ -22,142 +24,162 @@ export class PromiseNewsApi {
     }
 
     /**
-     * Extract a news entry from a news site.
+     * Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, image, publish date, author, language, source country, and sentiment of the news article.
      * Extract News
      * @param url The url of the news.
      * @param analyze Whether to analyze the news (extract entities etc.)
      */
-    public extractNewsWithHttpInfo(url: string, analyze: boolean, _options?: Configuration): Promise<HttpInfo<ExtractNewsResponse>> {
+    public extractNewsWithHttpInfo(url: string, analyze: boolean, _options?: Configuration): Promise<HttpInfo<ExtractNews200Response>> {
         const result = this.api.extractNewsWithHttpInfo(url, analyze, _options);
         return result.toPromise();
     }
 
     /**
-     * Extract a news entry from a news site.
+     * Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, image, publish date, author, language, source country, and sentiment of the news article.
      * Extract News
      * @param url The url of the news.
      * @param analyze Whether to analyze the news (extract entities etc.)
      */
-    public extractNews(url: string, analyze: boolean, _options?: Configuration): Promise<ExtractNewsResponse> {
+    public extractNews(url: string, analyze: boolean, _options?: Configuration): Promise<ExtractNews200Response> {
         const result = this.api.extractNews(url, analyze, _options);
         return result.toPromise();
     }
 
     /**
-     * Extract a news links from a news website. 
+     * Extract news links from a news website.
      * Extract News Links
-     * @param url The url from which links should be extracted.
-     * @param apiKey Your API key.
-     * @param prefix The prefix the news links must start with.
-     * @param subDomain Whether to include links to news on sub-domains.
+     * @param url The url of the news.
+     * @param analyze Whether to analyze the news (extract entities etc.)
      */
-    public extractNewsLinksWithHttpInfo(url: string, apiKey: string, prefix?: string, subDomain?: boolean, _options?: Configuration): Promise<HttpInfo<ExtractLinksResponse>> {
-        const result = this.api.extractNewsLinksWithHttpInfo(url, apiKey, prefix, subDomain, _options);
+    public extractNewsLinksWithHttpInfo(url: string, analyze: boolean, _options?: Configuration): Promise<HttpInfo<ExtractNewsLinks200Response>> {
+        const result = this.api.extractNewsLinksWithHttpInfo(url, analyze, _options);
         return result.toPromise();
     }
 
     /**
-     * Extract a news links from a news website. 
+     * Extract news links from a news website.
      * Extract News Links
-     * @param url The url from which links should be extracted.
-     * @param apiKey Your API key.
-     * @param prefix The prefix the news links must start with.
-     * @param subDomain Whether to include links to news on sub-domains.
+     * @param url The url of the news.
+     * @param analyze Whether to analyze the news (extract entities etc.)
      */
-    public extractNewsLinks(url: string, apiKey: string, prefix?: string, subDomain?: boolean, _options?: Configuration): Promise<ExtractLinksResponse> {
-        const result = this.api.extractNewsLinks(url, apiKey, prefix, subDomain, _options);
+    public extractNewsLinks(url: string, analyze: boolean, _options?: Configuration): Promise<ExtractNewsLinks200Response> {
+        const result = this.api.extractNewsLinks(url, analyze, _options);
         return result.toPromise();
     }
 
     /**
-     * Get the geo coordinates for a location. The location can be an exact address but also just the name of a city or country.
+     * Retrieve the latitude and longitude of a location name. Given this information you can fill the location-filter parameter in the news search endpoint.
      * Get Geo Coordinates
-     * @param location The address or name of the location, e.g. Tokyo, Japan.
+     * @param location The address or name of the location.
      */
-    public geoCoordinatesWithHttpInfo(location: string, _options?: Configuration): Promise<HttpInfo<GeoCoordinatesResponse>> {
-        const result = this.api.geoCoordinatesWithHttpInfo(location, _options);
+    public getGeoCoordinatesWithHttpInfo(location: string, _options?: Configuration): Promise<HttpInfo<GetGeoCoordinates200Response>> {
+        const result = this.api.getGeoCoordinatesWithHttpInfo(location, _options);
         return result.toPromise();
     }
 
     /**
-     * Get the geo coordinates for a location. The location can be an exact address but also just the name of a city or country.
+     * Retrieve the latitude and longitude of a location name. Given this information you can fill the location-filter parameter in the news search endpoint.
      * Get Geo Coordinates
-     * @param location The address or name of the location, e.g. Tokyo, Japan.
+     * @param location The address or name of the location.
      */
-    public geoCoordinates(location: string, _options?: Configuration): Promise<GeoCoordinatesResponse> {
-        const result = this.api.geoCoordinates(location, _options);
+    public getGeoCoordinates(location: string, _options?: Configuration): Promise<GetGeoCoordinates200Response> {
+        const result = this.api.getGeoCoordinates(location, _options);
         return result.toPromise();
     }
 
     /**
-     * Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page. 
+     * Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page.
      * News Website to RSS Feed
-     * @param url The url from which links should be extracted.
-     * @param apiKey Your API key.
-     * @param extractNews Whether extract news and add information such as description, publish date, and image to each item.
+     * @param url The url of the news.
+     * @param analyze Whether to analyze the news (extract entities etc.)
      */
-    public newsWebsiteToRSSFeedWithHttpInfo(url: string, apiKey: string, extractNews?: boolean, _options?: Configuration): Promise<HttpInfo<any>> {
-        const result = this.api.newsWebsiteToRSSFeedWithHttpInfo(url, apiKey, extractNews, _options);
+    public newsWebsiteToRSSFeedWithHttpInfo(url: string, analyze: boolean, _options?: Configuration): Promise<HttpInfo<any>> {
+        const result = this.api.newsWebsiteToRSSFeedWithHttpInfo(url, analyze, _options);
         return result.toPromise();
     }
 
     /**
-     * Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page. 
+     * Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page.
      * News Website to RSS Feed
-     * @param url The url from which links should be extracted.
-     * @param apiKey Your API key.
-     * @param extractNews Whether extract news and add information such as description, publish date, and image to each item.
+     * @param url The url of the news.
+     * @param analyze Whether to analyze the news (extract entities etc.)
      */
-    public newsWebsiteToRSSFeed(url: string, apiKey: string, extractNews?: boolean, _options?: Configuration): Promise<any> {
-        const result = this.api.newsWebsiteToRSSFeed(url, apiKey, extractNews, _options);
+    public newsWebsiteToRSSFeed(url: string, analyze: boolean, _options?: Configuration): Promise<any> {
+        const result = this.api.newsWebsiteToRSSFeed(url, analyze, _options);
         return result.toPromise();
     }
 
     /**
-     * Search for news.
+     * Search and filter news by text, date, location, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
      * Search News
-     * @param text The text to match in the news content.
-     * @param sourceCountries A comma-separated list of ISO 3166 country codes from which the news should originate, e.g. gb,us.
-     * @param language The ISO 6391 language code of the news, e.g. \&quot;en\&quot; for English.
+     * @param text The text to match in the news content (at least 3 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford
+     * @param sourceCountries A comma-separated list of ISO 3166 country codes from which the news should originate.
+     * @param language The ISO 6391 language code of the news.
      * @param minSentiment The minimal sentiment of the news in range [-1,1].
      * @param maxSentiment The maximal sentiment of the news in range [-1,1].
      * @param earliestPublishDate The news must have been published after this date.
      * @param latestPublishDate The news must have been published before this date.
-     * @param newsSources A comma-separated list of news sources from which the news should originate, e.g. https://www.bbc.co.uk
+     * @param newsSources A comma-separated list of news sources from which the news should originate.
      * @param authors A comma-separated list of author names. Only news from any of the given authors will be returned.
-     * @param entities Filter news by entities, e.g. ORG:Tesla.
-     * @param locationFilter Filter news by radius around a certain location. Format is \&quot;latitude,longitude,radius in kilometers\&quot;, e.g. 51.050407, 13.737262, 100
-     * @param offset The number of news to skip in range [0,1000]
+     * @param entities Filter news by entities (see semantic types).
+     * @param locationFilter Filter news by radius around a certain location. Format is \&quot;latitude,longitude,radius in kilometers\&quot;. Radius must be between 1 and 100 kilometers.
+     * @param sort The sorting criteria (publish-time or sentiment).
+     * @param sortDirection Whether to sort ascending or descending (ASC or DESC).
+     * @param offset The number of news to skip in range [0,10000]
      * @param number The number of news to return in range [1,100]
-     * @param sort The sorting criteria.
-     * @param sortDirection Whether to sort ascending or descending.
      */
-    public searchNewsWithHttpInfo(text?: string, sourceCountries?: string, language?: string, minSentiment?: number, maxSentiment?: number, earliestPublishDate?: string, latestPublishDate?: string, newsSources?: string, authors?: string, entities?: string, locationFilter?: string, offset?: number, number?: number, sort?: 'relevance' | 'publish-time' | 'sentiment', sortDirection?: 'asc' | 'desc', _options?: Configuration): Promise<HttpInfo<SearchNewsResponse>> {
-        const result = this.api.searchNewsWithHttpInfo(text, sourceCountries, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, entities, locationFilter, offset, number, sort, sortDirection, _options);
+    public searchNewsWithHttpInfo(text?: string, sourceCountries?: string, language?: string, minSentiment?: number, maxSentiment?: number, earliestPublishDate?: string, latestPublishDate?: string, newsSources?: string, authors?: string, entities?: string, locationFilter?: string, sort?: string, sortDirection?: string, offset?: number, number?: number, _options?: Configuration): Promise<HttpInfo<SearchNews200Response>> {
+        const result = this.api.searchNewsWithHttpInfo(text, sourceCountries, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, entities, locationFilter, sort, sortDirection, offset, number, _options);
         return result.toPromise();
     }
 
     /**
-     * Search for news.
+     * Search and filter news by text, date, location, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
      * Search News
-     * @param text The text to match in the news content.
-     * @param sourceCountries A comma-separated list of ISO 3166 country codes from which the news should originate, e.g. gb,us.
-     * @param language The ISO 6391 language code of the news, e.g. \&quot;en\&quot; for English.
+     * @param text The text to match in the news content (at least 3 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford
+     * @param sourceCountries A comma-separated list of ISO 3166 country codes from which the news should originate.
+     * @param language The ISO 6391 language code of the news.
      * @param minSentiment The minimal sentiment of the news in range [-1,1].
      * @param maxSentiment The maximal sentiment of the news in range [-1,1].
      * @param earliestPublishDate The news must have been published after this date.
      * @param latestPublishDate The news must have been published before this date.
-     * @param newsSources A comma-separated list of news sources from which the news should originate, e.g. https://www.bbc.co.uk
+     * @param newsSources A comma-separated list of news sources from which the news should originate.
      * @param authors A comma-separated list of author names. Only news from any of the given authors will be returned.
-     * @param entities Filter news by entities, e.g. ORG:Tesla.
-     * @param locationFilter Filter news by radius around a certain location. Format is \&quot;latitude,longitude,radius in kilometers\&quot;, e.g. 51.050407, 13.737262, 100
-     * @param offset The number of news to skip in range [0,1000]
+     * @param entities Filter news by entities (see semantic types).
+     * @param locationFilter Filter news by radius around a certain location. Format is \&quot;latitude,longitude,radius in kilometers\&quot;. Radius must be between 1 and 100 kilometers.
+     * @param sort The sorting criteria (publish-time or sentiment).
+     * @param sortDirection Whether to sort ascending or descending (ASC or DESC).
+     * @param offset The number of news to skip in range [0,10000]
      * @param number The number of news to return in range [1,100]
-     * @param sort The sorting criteria.
-     * @param sortDirection Whether to sort ascending or descending.
      */
-    public searchNews(text?: string, sourceCountries?: string, language?: string, minSentiment?: number, maxSentiment?: number, earliestPublishDate?: string, latestPublishDate?: string, newsSources?: string, authors?: string, entities?: string, locationFilter?: string, offset?: number, number?: number, sort?: 'relevance' | 'publish-time' | 'sentiment', sortDirection?: 'asc' | 'desc', _options?: Configuration): Promise<SearchNewsResponse> {
-        const result = this.api.searchNews(text, sourceCountries, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, entities, locationFilter, offset, number, sort, sortDirection, _options);
+    public searchNews(text?: string, sourceCountries?: string, language?: string, minSentiment?: number, maxSentiment?: number, earliestPublishDate?: string, latestPublishDate?: string, newsSources?: string, authors?: string, entities?: string, locationFilter?: string, sort?: string, sortDirection?: string, offset?: number, number?: number, _options?: Configuration): Promise<SearchNews200Response> {
+        const result = this.api.searchNews(text, sourceCountries, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, entities, locationFilter, sort, sortDirection, offset, number, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Get the top news from a country in a language for a specific date. The top news are clustered from multiple sources in the given country. The more news in a cluster the higher the cluster is ranked.
+     * Top News
+     * @param sourceCountry The ISO 3166 country code of the country for which top news should be retrieved.
+     * @param language The ISO 6391 language code of the top news. The language must be one spoken in the source-country.
+     * @param date The date for which the top news should be retrieved. If no date is given, the current day is assumed.
+     * @param headlinesOnly Whether to only return basic information such as id, title, and url of the news.
+     */
+    public topNewsWithHttpInfo(sourceCountry: string, language: string, date?: string, headlinesOnly?: boolean, _options?: Configuration): Promise<HttpInfo<TopNews200Response>> {
+        const result = this.api.topNewsWithHttpInfo(sourceCountry, language, date, headlinesOnly, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Get the top news from a country in a language for a specific date. The top news are clustered from multiple sources in the given country. The more news in a cluster the higher the cluster is ranked.
+     * Top News
+     * @param sourceCountry The ISO 3166 country code of the country for which top news should be retrieved.
+     * @param language The ISO 6391 language code of the top news. The language must be one spoken in the source-country.
+     * @param date The date for which the top news should be retrieved. If no date is given, the current day is assumed.
+     * @param headlinesOnly Whether to only return basic information such as id, title, and url of the news.
+     */
+    public topNews(sourceCountry: string, language: string, date?: string, headlinesOnly?: boolean, _options?: Configuration): Promise<TopNews200Response> {
+        const result = this.api.topNews(sourceCountry, language, date, headlinesOnly, _options);
         return result.toPromise();
     }
 

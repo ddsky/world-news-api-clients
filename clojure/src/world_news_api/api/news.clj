@@ -3,19 +3,21 @@
             [clojure.spec.alpha :as s]
             [spec-tools.core :as st]
             [orchestra.core :refer [defn-spec]]
-            [world-news-api.specs.news :refer :all]
-            [world-news-api.specs.geo-coordinates-response :refer :all]
-            [world-news-api.specs.news-article :refer :all]
-            [world-news-api.specs.extract-news-response :refer :all]
-            [world-news-api.specs.extract-links-response :refer :all]
-            [world-news-api.specs.search-news-response :refer :all]
+            [world-news-api.specs.top-news-200-response-top-news-inner-news-inner :refer :all]
+            [world-news-api.specs.extract-news-links-200-response :refer :all]
+            [world-news-api.specs.top-news-200-response-top-news-inner :refer :all]
+            [world-news-api.specs.extract-news-200-response :refer :all]
+            [world-news-api.specs.search-news-200-response :refer :all]
+            [world-news-api.specs.top-news-200-response :refer :all]
+            [world-news-api.specs.get-geo-coordinates-200-response :refer :all]
+            [world-news-api.specs.search-news-200-response-news-inner :refer :all]
             )
   (:import (java.io File)))
 
 
 (defn-spec extract-news-with-http-info any?
   "Extract News
-  Extract a news entry from a news site."
+  Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, image, publish date, author, language, source country, and sentiment of the news article."
   [url string?, analyze boolean?]
   (check-required-params url analyze)
   (call-api "/extract-news" :get
@@ -27,45 +29,43 @@
              :accepts       ["application/json"]
              :auth-names    ["apiKey" "headerApiKey"]}))
 
-(defn-spec extract-news extract-news-response-spec
+(defn-spec extract-news extract-news-200-response-spec
   "Extract News
-  Extract a news entry from a news site."
+  Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, image, publish date, author, language, source country, and sentiment of the news article."
   [url string?, analyze boolean?]
   (let [res (:data (extract-news-with-http-info url analyze))]
     (if (:decode-models *api-context*)
-       (st/decode extract-news-response-spec res st/string-transformer)
+       (st/decode extract-news-200-response-spec res st/string-transformer)
        res)))
 
 
 (defn-spec extract-news-links-with-http-info any?
   "Extract News Links
-  Extract a news links from a news website."
-  ([url string?, api-key string?, ] (extract-news-links-with-http-info url api-key nil))
-  ([url string?, api-key string?, {:keys [prefix sub-domain]} (s/map-of keyword? any?)]
-   (check-required-params url api-key)
-   (call-api "/extract-news-links" :get
-             {:path-params   {}
-              :header-params {}
-              :query-params  {"url" url "prefix" prefix "sub-domain" sub-domain "api-key" api-key }
-              :form-params   {}
-              :content-types []
-              :accepts       ["application/json"]
-              :auth-names    ["apiKey" "headerApiKey"]})))
+  Extract news links from a news website."
+  [url string?, analyze boolean?]
+  (check-required-params url analyze)
+  (call-api "/extract-news-links" :get
+            {:path-params   {}
+             :header-params {}
+             :query-params  {"url" url "analyze" analyze }
+             :form-params   {}
+             :content-types []
+             :accepts       ["application/json"]
+             :auth-names    ["apiKey" "headerApiKey"]}))
 
-(defn-spec extract-news-links extract-links-response-spec
+(defn-spec extract-news-links extract-news-links-200-response-spec
   "Extract News Links
-  Extract a news links from a news website."
-  ([url string?, api-key string?, ] (extract-news-links url api-key nil))
-  ([url string?, api-key string?, optional-params any?]
-   (let [res (:data (extract-news-links-with-http-info url api-key optional-params))]
-     (if (:decode-models *api-context*)
-        (st/decode extract-links-response-spec res st/string-transformer)
-        res))))
+  Extract news links from a news website."
+  [url string?, analyze boolean?]
+  (let [res (:data (extract-news-links-with-http-info url analyze))]
+    (if (:decode-models *api-context*)
+       (st/decode extract-news-links-200-response-spec res st/string-transformer)
+       res)))
 
 
-(defn-spec geo-coordinates-with-http-info any?
+(defn-spec get-geo-coordinates-with-http-info any?
   "Get Geo Coordinates
-  Get the geo coordinates for a location. The location can be an exact address but also just the name of a city or country."
+  Retrieve the latitude and longitude of a location name. Given this information you can fill the location-filter parameter in the news search endpoint."
   [location string?]
   (check-required-params location)
   (call-api "/geo-coordinates" :get
@@ -77,64 +77,88 @@
              :accepts       ["application/json"]
              :auth-names    ["apiKey" "headerApiKey"]}))
 
-(defn-spec geo-coordinates geo-coordinates-response-spec
+(defn-spec get-geo-coordinates get-geo-coordinates-200-response-spec
   "Get Geo Coordinates
-  Get the geo coordinates for a location. The location can be an exact address but also just the name of a city or country."
+  Retrieve the latitude and longitude of a location name. Given this information you can fill the location-filter parameter in the news search endpoint."
   [location string?]
-  (let [res (:data (geo-coordinates-with-http-info location))]
+  (let [res (:data (get-geo-coordinates-with-http-info location))]
     (if (:decode-models *api-context*)
-       (st/decode geo-coordinates-response-spec res st/string-transformer)
+       (st/decode get-geo-coordinates-200-response-spec res st/string-transformer)
        res)))
 
 
 (defn-spec news-website-to-rss-feed-with-http-info any?
   "News Website to RSS Feed
   Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page."
-  ([url string?, api-key string?, ] (news-website-to-rss-feed-with-http-info url api-key nil))
-  ([url string?, api-key string?, {:keys [extract-news]} (s/map-of keyword? any?)]
-   (check-required-params url api-key)
-   (call-api "/feed.rss" :get
-             {:path-params   {}
-              :header-params {}
-              :query-params  {"url" url "extract-news" extract-news "api-key" api-key }
-              :form-params   {}
-              :content-types []
-              :accepts       ["application/xml"]
-              :auth-names    ["apiKey" "headerApiKey"]})))
+  [url string?, analyze boolean?]
+  (check-required-params url analyze)
+  (call-api "/feed.rss" :get
+            {:path-params   {}
+             :header-params {}
+             :query-params  {"url" url "analyze" analyze }
+             :form-params   {}
+             :content-types []
+             :accepts       ["application/xml"]
+             :auth-names    ["apiKey" "headerApiKey"]}))
 
 (defn-spec news-website-to-rss-feed any?
   "News Website to RSS Feed
   Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page."
-  ([url string?, api-key string?, ] (news-website-to-rss-feed url api-key nil))
-  ([url string?, api-key string?, optional-params any?]
-   (let [res (:data (news-website-to-rss-feed-with-http-info url api-key optional-params))]
-     (if (:decode-models *api-context*)
-        (st/decode any? res st/string-transformer)
-        res))))
+  [url string?, analyze boolean?]
+  (let [res (:data (news-website-to-rss-feed-with-http-info url analyze))]
+    (if (:decode-models *api-context*)
+       (st/decode any? res st/string-transformer)
+       res)))
 
 
 (defn-spec search-news-with-http-info any?
   "Search News
-  Search for news."
+  Search and filter news by text, date, location, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language."
   ([] (search-news-with-http-info nil))
-  ([{:keys [text source-countries language min-sentiment max-sentiment earliest-publish-date latest-publish-date news-sources authors entities location-filter offset number sort sort-direction]} (s/map-of keyword? any?)]
+  ([{:keys [text source-countries language min-sentiment max-sentiment earliest-publish-date latest-publish-date news-sources authors entities location-filter sort sort-direction offset number]} (s/map-of keyword? any?)]
    (call-api "/search-news" :get
              {:path-params   {}
               :header-params {}
-              :query-params  {"text" text "source-countries" source-countries "language" language "min-sentiment" min-sentiment "max-sentiment" max-sentiment "earliest-publish-date" earliest-publish-date "latest-publish-date" latest-publish-date "news-sources" news-sources "authors" authors "entities" entities "location-filter" location-filter "offset" offset "number" number "sort" sort "sort-direction" sort-direction }
+              :query-params  {"text" text "source-countries" source-countries "language" language "min-sentiment" min-sentiment "max-sentiment" max-sentiment "earliest-publish-date" earliest-publish-date "latest-publish-date" latest-publish-date "news-sources" news-sources "authors" authors "entities" entities "location-filter" location-filter "sort" sort "sort-direction" sort-direction "offset" offset "number" number }
               :form-params   {}
               :content-types []
               :accepts       ["application/json"]
               :auth-names    ["apiKey" "headerApiKey"]})))
 
-(defn-spec search-news search-news-response-spec
+(defn-spec search-news search-news-200-response-spec
   "Search News
-  Search for news."
+  Search and filter news by text, date, location, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language."
   ([] (search-news nil))
   ([optional-params any?]
    (let [res (:data (search-news-with-http-info optional-params))]
      (if (:decode-models *api-context*)
-        (st/decode search-news-response-spec res st/string-transformer)
+        (st/decode search-news-200-response-spec res st/string-transformer)
+        res))))
+
+
+(defn-spec top-news-with-http-info any?
+  "Top News
+  Get the top news from a country in a language for a specific date. The top news are clustered from multiple sources in the given country. The more news in a cluster the higher the cluster is ranked."
+  ([source-country string?, language string?, ] (top-news-with-http-info source-country language nil))
+  ([source-country string?, language string?, {:keys [date headlines-only]} (s/map-of keyword? any?)]
+   (check-required-params source-country language)
+   (call-api "/top-news" :get
+             {:path-params   {}
+              :header-params {}
+              :query-params  {"source-country" source-country "language" language "date" date "headlines-only" headlines-only }
+              :form-params   {}
+              :content-types []
+              :accepts       ["application/json"]
+              :auth-names    ["apiKey" "headerApiKey"]})))
+
+(defn-spec top-news top-news-200-response-spec
+  "Top News
+  Get the top news from a country in a language for a specific date. The top news are clustered from multiple sources in the given country. The more news in a cluster the higher the cluster is ranked."
+  ([source-country string?, language string?, ] (top-news source-country language nil))
+  ([source-country string?, language string?, optional-params any?]
+   (let [res (:data (top-news-with-http-info source-country language optional-params))]
+     (if (:decode-models *api-context*)
+        (st/decode top-news-200-response-spec res st/string-transformer)
         res))))
 
 

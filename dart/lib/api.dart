@@ -1,7 +1,7 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.12
+// @dart=2.18
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
@@ -30,12 +30,14 @@ part 'auth/http_bearer_auth.dart';
 
 part 'api/news_api.dart';
 
-part 'model/extract_links_response.dart';
-part 'model/extract_news_response.dart';
-part 'model/geo_coordinates_response.dart';
-part 'model/news.dart';
-part 'model/news_article.dart';
-part 'model/search_news_response.dart';
+part 'model/extract_news200_response.dart';
+part 'model/extract_news_links200_response.dart';
+part 'model/get_geo_coordinates200_response.dart';
+part 'model/search_news200_response.dart';
+part 'model/search_news200_response_news_inner.dart';
+part 'model/top_news200_response.dart';
+part 'model/top_news200_response_top_news_inner.dart';
+part 'model/top_news200_response_top_news_inner_news_inner.dart';
 
 
 /// An [ApiClient] instance that uses the default values obtained from
