@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**ExtractNewsLinks**](NewsAPI.md#ExtractNewsLinks) | **Get** /extract-news-links | Extract News Links
 [**GetGeoCoordinates**](NewsAPI.md#GetGeoCoordinates) | **Get** /geo-coordinates | Get Geo Coordinates
 [**NewsWebsiteToRSSFeed**](NewsAPI.md#NewsWebsiteToRSSFeed) | **Get** /feed.rss | News Website to RSS Feed
+[**RetrieveNewsArticlesByIds**](NewsAPI.md#RetrieveNewsArticlesByIds) | **Get** /retrieve-news | Retrieve News Articles by Ids
 [**SearchNews**](NewsAPI.md#SearchNews) | **Get** /search-news | Search News
 [**TopNews**](NewsAPI.md#TopNews) | **Get** /top-news | Top News
 
@@ -283,6 +284,72 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## RetrieveNewsArticlesByIds
+
+> RetrieveNewsArticlesByIds200Response RetrieveNewsArticlesByIds(ctx).Ids(ids).Execute()
+
+Retrieve News Articles by Ids
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/ddsky/world-news-api-clients/tree/main/go/"
+)
+
+func main() {
+	ids := "2352,2354" // string | A comma separated list of news ids.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.NewsAPI.RetrieveNewsArticlesByIds(context.Background()).Ids(ids).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `NewsAPI.RetrieveNewsArticlesByIds``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `RetrieveNewsArticlesByIds`: RetrieveNewsArticlesByIds200Response
+	fmt.Fprintf(os.Stdout, "Response from `NewsAPI.RetrieveNewsArticlesByIds`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRetrieveNewsArticlesByIdsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ids** | **string** | A comma separated list of news ids. | 
+
+### Return type
+
+[**RetrieveNewsArticlesByIds200Response**](RetrieveNewsArticlesByIds200Response.md)
+
+### Authorization
+
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## SearchNews
 
 > SearchNews200Response SearchNews(ctx).Text(text).SourceCountries(sourceCountries).Language(language).MinSentiment(minSentiment).MaxSentiment(maxSentiment).EarliestPublishDate(earliestPublishDate).LatestPublishDate(latestPublishDate).NewsSources(newsSources).Authors(authors).Entities(entities).LocationFilter(locationFilter).Sort(sort).SortDirection(sortDirection).Offset(offset).Number(number).Execute()
@@ -304,7 +371,7 @@ import (
 )
 
 func main() {
-	text := "tesla" // string | The text to match in the news content (at least 3 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford (optional)
+	text := "tesla" // string | The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford (optional)
 	sourceCountries := "us,uk" // string | A comma-separated list of ISO 3166 country codes from which the news should originate. (optional)
 	language := "en" // string | The ISO 6391 language code of the news. (optional)
 	minSentiment := float64(-0.8) // float64 | The minimal sentiment of the news in range [-1,1]. (optional)
@@ -343,7 +410,7 @@ Other parameters are passed through a pointer to a apiSearchNewsRequest struct v
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **text** | **string** | The text to match in the news content (at least 3 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford | 
+ **text** | **string** | The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford | 
  **sourceCountries** | **string** | A comma-separated list of ISO 3166 country codes from which the news should originate. | 
  **language** | **string** | The ISO 6391 language code of the news. | 
  **minSentiment** | **float64** | The minimal sentiment of the news in range [-1,1]. | 

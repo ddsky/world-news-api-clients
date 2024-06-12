@@ -8,13 +8,15 @@ Name | Type | Description | Notes
 **summary** | **str** |  | [optional] 
 **image** | **str** |  | [optional] 
 **sentiment** | **float** |  | [optional] 
-**source_country** | **str** |  | [optional] 
+**author** | **str** |  | [optional] 
 **language** | **str** |  | [optional] 
+**video** | **str** |  | [optional] 
+**title** | **str** |  | [optional] 
+**url** | **str** |  | [optional] 
+**source_country** | **str** |  | [optional] 
 **id** | **int** |  | [optional] 
 **text** | **str** |  | [optional] 
-**title** | **str** |  | [optional] 
 **publish_date** | **str** |  | [optional] 
-**url** | **str** |  | [optional] 
 **authors** | **List[Optional[str]]** |  | [optional] 
 
 ## Example

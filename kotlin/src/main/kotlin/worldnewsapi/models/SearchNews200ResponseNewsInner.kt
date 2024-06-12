@@ -25,13 +25,15 @@ import com.squareup.moshi.JsonClass
  * @param summary 
  * @param image 
  * @param sentiment 
- * @param sourceCountry 
+ * @param author 
  * @param language 
+ * @param video 
+ * @param title 
+ * @param url 
+ * @param sourceCountry 
  * @param id 
  * @param text 
- * @param title 
  * @param publishDate 
- * @param url 
  * @param authors 
  */
 
@@ -47,11 +49,23 @@ data class SearchNews200ResponseNewsInner (
     @Json(name = "sentiment")
     val sentiment: java.math.BigDecimal? = null,
 
-    @Json(name = "source_country")
-    val sourceCountry: kotlin.String? = null,
+    @Json(name = "author")
+    val author: kotlin.String? = null,
 
     @Json(name = "language")
     val language: kotlin.String? = null,
+
+    @Json(name = "video")
+    val video: kotlin.String? = null,
+
+    @Json(name = "title")
+    val title: kotlin.String? = null,
+
+    @Json(name = "url")
+    val url: kotlin.String? = null,
+
+    @Json(name = "source_country")
+    val sourceCountry: kotlin.String? = null,
 
     @Json(name = "id")
     val id: kotlin.Int? = null,
@@ -59,14 +73,8 @@ data class SearchNews200ResponseNewsInner (
     @Json(name = "text")
     val text: kotlin.String? = null,
 
-    @Json(name = "title")
-    val title: kotlin.String? = null,
-
     @Json(name = "publish_date")
     val publishDate: kotlin.String? = null,
-
-    @Json(name = "url")
-    val url: kotlin.String? = null,
 
     @Json(name = "authors")
     val authors: kotlin.collections.List<kotlin.String>? = null

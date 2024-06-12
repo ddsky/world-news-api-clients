@@ -3,9 +3,13 @@
 README.md
 build.gradle
 docs/ExtractNews200Response.md
+docs/ExtractNews200ResponseImagesInner.md
+docs/ExtractNews200ResponseVideosInner.md
 docs/ExtractNewsLinks200Response.md
 docs/GetGeoCoordinates200Response.md
 docs/NewsApi.md
+docs/RetrieveNewsArticlesByIds200Response.md
+docs/RetrieveNewsArticlesByIds200ResponseNewsInner.md
 docs/SearchNews200Response.md
 docs/SearchNews200ResponseNewsInner.md
 docs/TopNews200Response.md
@@ -27,8 +31,12 @@ src/main/java/com/worldnewsapi/client/auth/ApiKeyAuth.java
 src/main/java/com/worldnewsapi/client/auth/Authentication.java
 src/main/java/com/worldnewsapi/client/auth/HttpBasicAuth.java
 src/main/java/com/worldnewsapi/client/model/ExtractNews200Response.java
+src/main/java/com/worldnewsapi/client/model/ExtractNews200ResponseImagesInner.java
+src/main/java/com/worldnewsapi/client/model/ExtractNews200ResponseVideosInner.java
 src/main/java/com/worldnewsapi/client/model/ExtractNewsLinks200Response.java
 src/main/java/com/worldnewsapi/client/model/GetGeoCoordinates200Response.java
+src/main/java/com/worldnewsapi/client/model/RetrieveNewsArticlesByIds200Response.java
+src/main/java/com/worldnewsapi/client/model/RetrieveNewsArticlesByIds200ResponseNewsInner.java
 src/main/java/com/worldnewsapi/client/model/SearchNews200Response.java
 src/main/java/com/worldnewsapi/client/model/SearchNews200ResponseNewsInner.java
 src/main/java/com/worldnewsapi/client/model/TopNews200Response.java

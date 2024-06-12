@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**extractNewsLinks**](OAINewsApi.md#extractnewslinks) | **GET** /extract-news-links | Extract News Links
 [**getGeoCoordinates**](OAINewsApi.md#getgeocoordinates) | **GET** /geo-coordinates | Get Geo Coordinates
 [**newsWebsiteToRSSFeed**](OAINewsApi.md#newswebsitetorssfeed) | **GET** /feed.rss | News Website to RSS Feed
+[**retrieveNewsArticlesByIds**](OAINewsApi.md#retrievenewsarticlesbyids) | **GET** /retrieve-news | Retrieve News Articles by Ids
 [**searchNews**](OAINewsApi.md#searchnews) | **GET** /search-news | Search News
 [**topNews**](OAINewsApi.md#topnews) | **GET** /top-news | Top News
 
@@ -21,7 +22,7 @@ Method | HTTP request | Description
 
 Extract News
 
-Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, image, publish date, author, language, source country, and sentiment of the news article.
+Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, images, videos, publish date, authors, language, source country, and sentiment of the news article.
 
 ### Example
 ```objc
@@ -272,6 +273,68 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **retrieveNewsArticlesByIds**
+```objc
+-(NSURLSessionTask*) retrieveNewsArticlesByIdsWithIds: (NSString*) ids
+        completionHandler: (void (^)(OAIRetrieveNewsArticlesByIds200Response* output, NSError* error)) handler;
+```
+
+Retrieve News Articles by Ids
+
+Retrieve information about one or more news articles by their ids. The ids can be retrieved from the search news or top news APIs.
+
+### Example
+```objc
+OAIDefaultConfiguration *apiConfig = [OAIDefaultConfiguration sharedConfig];
+
+// Configure API key authorization: (authentication scheme: apiKey)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"api-key"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"api-key"];
+
+// Configure API key authorization: (authentication scheme: headerApiKey)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"x-api-key"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"x-api-key"];
+
+
+NSString* ids = 2352,2354; // A comma separated list of news ids.
+
+OAINewsApi*apiInstance = [[OAINewsApi alloc] init];
+
+// Retrieve News Articles by Ids
+[apiInstance retrieveNewsArticlesByIdsWithIds:ids
+          completionHandler: ^(OAIRetrieveNewsArticlesByIds200Response* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
+                        if (error) {
+                            NSLog(@"Error calling OAINewsApi->retrieveNewsArticlesByIds: %@", error);
+                        }
+                    }];
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ids** | **NSString***| A comma separated list of news ids. | 
+
+### Return type
+
+[**OAIRetrieveNewsArticlesByIds200Response***](OAIRetrieveNewsArticlesByIds200Response.md)
+
+### Authorization
+
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **searchNews**
 ```objc
 -(NSURLSessionTask*) searchNewsWithText: (NSString*) text
@@ -311,7 +374,7 @@ OAIDefaultConfiguration *apiConfig = [OAIDefaultConfiguration sharedConfig];
 //[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"x-api-key"];
 
 
-NSString* text = tesla; // The text to match in the news content (at least 3 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford (optional)
+NSString* text = tesla; // The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford (optional)
 NSString* sourceCountries = us,uk; // A comma-separated list of ISO 3166 country codes from which the news should originate. (optional)
 NSString* language = en; // The ISO 6391 language code of the news. (optional)
 NSNumber* minSentiment = -0.8; // The minimal sentiment of the news in range [-1,1]. (optional)
@@ -359,7 +422,7 @@ OAINewsApi*apiInstance = [[OAINewsApi alloc] init];
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **text** | **NSString***| The text to match in the news content (at least 3 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford | [optional] 
+ **text** | **NSString***| The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford | [optional] 
  **sourceCountries** | **NSString***| A comma-separated list of ISO 3166 country codes from which the news should originate. | [optional] 
  **language** | **NSString***| The ISO 6391 language code of the news. | [optional] 
  **minSentiment** | **NSNumber***| The minimal sentiment of the news in range [-1,1]. | [optional] 

@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **summary** | Option<**String**> |  | [optional]
 **image** | Option<**String**> |  | [optional]
+**author** | Option<**String**> |  | [optional]
 **id** | Option<**i32**> |  | [optional]
 **text** | Option<**String**> |  | [optional]
 **title** | Option<**String**> |  | [optional]

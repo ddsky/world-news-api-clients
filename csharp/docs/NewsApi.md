@@ -8,6 +8,7 @@ All URIs are relative to *https://api.worldnewsapi.com*
 | [**ExtractNewsLinks**](NewsApi.md#extractnewslinks) | **GET** /extract-news-links | Extract News Links |
 | [**GetGeoCoordinates**](NewsApi.md#getgeocoordinates) | **GET** /geo-coordinates | Get Geo Coordinates |
 | [**NewsWebsiteToRSSFeed**](NewsApi.md#newswebsitetorssfeed) | **GET** /feed.rss | News Website to RSS Feed |
+| [**RetrieveNewsArticlesByIds**](NewsApi.md#retrievenewsarticlesbyids) | **GET** /retrieve-news | Retrieve News Articles by Ids |
 | [**SearchNews**](NewsApi.md#searchnews) | **GET** /search-news | Search News |
 | [**TopNews**](NewsApi.md#topnews) | **GET** /top-news | Top News |
 
@@ -17,7 +18,7 @@ All URIs are relative to *https://api.worldnewsapi.com*
 
 Extract News
 
-Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, image, publish date, author, language, source country, and sentiment of the news article.
+Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, images, videos, publish date, authors, language, source country, and sentiment of the news article.
 
 ### Example
 ```csharp
@@ -441,6 +442,112 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+<a id="retrievenewsarticlesbyids"></a>
+# **RetrieveNewsArticlesByIds**
+> RetrieveNewsArticlesByIds200Response RetrieveNewsArticlesByIds (string ids)
+
+Retrieve News Articles by Ids
+
+Retrieve information about one or more news articles by their ids. The ids can be retrieved from the search news or top news APIs.
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using worldnewsapi.Api;
+using worldnewsapi.Client;
+using worldnewsapi.Model;
+
+namespace Example
+{
+    public class RetrieveNewsArticlesByIdsExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://api.worldnewsapi.com";
+            // Configure API key authorization: apiKey
+            config.AddApiKey("api-key", "YOUR_API_KEY");
+            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+            // config.AddApiKeyPrefix("api-key", "Bearer");
+            // Configure API key authorization: headerApiKey
+            config.AddApiKey("x-api-key", "YOUR_API_KEY");
+            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+            // config.AddApiKeyPrefix("x-api-key", "Bearer");
+
+            var apiInstance = new NewsApi(config);
+            var ids = 2352,2354;  // string | A comma separated list of news ids.
+
+            try
+            {
+                // Retrieve News Articles by Ids
+                RetrieveNewsArticlesByIds200Response result = apiInstance.RetrieveNewsArticlesByIds(ids);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling NewsApi.RetrieveNewsArticlesByIds: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the RetrieveNewsArticlesByIdsWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Retrieve News Articles by Ids
+    ApiResponse<RetrieveNewsArticlesByIds200Response> response = apiInstance.RetrieveNewsArticlesByIdsWithHttpInfo(ids);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling NewsApi.RetrieveNewsArticlesByIdsWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **ids** | **string** | A comma separated list of news ids. |  |
+
+### Return type
+
+[**RetrieveNewsArticlesByIds200Response**](RetrieveNewsArticlesByIds200Response.md)
+
+### Authorization
+
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Success |  -  |
+| **401** | Unauthorized |  -  |
+| **402** | Payment Required |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not Found |  -  |
+| **406** | Not Acceptable |  -  |
+| **429** | Too Many Requests |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 <a id="searchnews"></a>
 # **SearchNews**
 > SearchNews200Response SearchNews (string? text = null, string? sourceCountries = null, string? language = null, double? minSentiment = null, double? maxSentiment = null, string? earliestPublishDate = null, string? latestPublishDate = null, string? newsSources = null, string? authors = null, string? entities = null, string? locationFilter = null, string? sort = null, string? sortDirection = null, int? offset = null, int? number = null)
@@ -475,7 +582,7 @@ namespace Example
             // config.AddApiKeyPrefix("x-api-key", "Bearer");
 
             var apiInstance = new NewsApi(config);
-            var text = tesla;  // string? | The text to match in the news content (at least 3 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford (optional) 
+            var text = tesla;  // string? | The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford (optional) 
             var sourceCountries = us,uk;  // string? | A comma-separated list of ISO 3166 country codes from which the news should originate. (optional) 
             var language = en;  // string? | The ISO 6391 language code of the news. (optional) 
             var minSentiment = -0.8;  // double? | The minimal sentiment of the news in range [-1,1]. (optional) 
@@ -532,7 +639,7 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **text** | **string?** | The text to match in the news content (at least 3 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford | [optional]  |
+| **text** | **string?** | The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford | [optional]  |
 | **sourceCountries** | **string?** | A comma-separated list of ISO 3166 country codes from which the news should originate. | [optional]  |
 | **language** | **string?** | The ISO 6391 language code of the news. | [optional]  |
 | **minSentiment** | **double?** | The minimal sentiment of the news in range [-1,1]. | [optional]  |

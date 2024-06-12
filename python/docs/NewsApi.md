@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**extract_news_links**](NewsApi.md#extract_news_links) | **GET** /extract-news-links | Extract News Links
 [**get_geo_coordinates**](NewsApi.md#get_geo_coordinates) | **GET** /geo-coordinates | Get Geo Coordinates
 [**news_website_to_rss_feed**](NewsApi.md#news_website_to_rss_feed) | **GET** /feed.rss | News Website to RSS Feed
+[**retrieve_news_articles_by_ids**](NewsApi.md#retrieve_news_articles_by_ids) | **GET** /retrieve-news | Retrieve News Articles by Ids
 [**search_news**](NewsApi.md#search_news) | **GET** /search-news | Search News
 [**top_news**](NewsApi.md#top_news) | **GET** /top-news | Top News
 
@@ -17,7 +18,7 @@ Method | HTTP request | Description
 
 Extract News
 
-Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, image, publish date, author, language, source country, and sentiment of the news article.
+Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, images, videos, publish date, authors, language, source country, and sentiment of the news article.
 
 ### Example
 
@@ -385,6 +386,98 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **retrieve_news_articles_by_ids**
+> RetrieveNewsArticlesByIds200Response retrieve_news_articles_by_ids(ids)
+
+Retrieve News Articles by Ids
+
+Retrieve information about one or more news articles by their ids. The ids can be retrieved from the search news or top news APIs.
+
+### Example
+
+* Api Key Authentication (apiKey):
+* Api Key Authentication (headerApiKey):
+
+```python
+import worldnewsapi
+from worldnewsapi.models.retrieve_news_articles_by_ids200_response import RetrieveNewsArticlesByIds200Response
+from worldnewsapi.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.worldnewsapi.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = worldnewsapi.Configuration(
+    host = "https://api.worldnewsapi.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKey
+configuration.api_key['apiKey'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKey'] = 'Bearer'
+
+# Configure API key authorization: headerApiKey
+configuration.api_key['headerApiKey'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['headerApiKey'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with worldnewsapi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = worldnewsapi.NewsApi(api_client)
+    ids = '2352,2354' # str | A comma separated list of news ids.
+
+    try:
+        # Retrieve News Articles by Ids
+        api_response = api_instance.retrieve_news_articles_by_ids(ids)
+        print("The response of NewsApi->retrieve_news_articles_by_ids:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling NewsApi->retrieve_news_articles_by_ids: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ids** | **str**| A comma separated list of news ids. | 
+
+### Return type
+
+[**RetrieveNewsArticlesByIds200Response**](RetrieveNewsArticlesByIds200Response.md)
+
+### Authorization
+
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**401** | Unauthorized |  -  |
+**402** | Payment Required |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**406** | Not Acceptable |  -  |
+**429** | Too Many Requests |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **search_news**
 > SearchNews200Response search_news(text=text, source_countries=source_countries, language=language, min_sentiment=min_sentiment, max_sentiment=max_sentiment, earliest_publish_date=earliest_publish_date, latest_publish_date=latest_publish_date, news_sources=news_sources, authors=authors, entities=entities, location_filter=location_filter, sort=sort, sort_direction=sort_direction, offset=offset, number=number)
 
@@ -430,7 +523,7 @@ configuration.api_key['headerApiKey'] = os.environ["API_KEY"]
 with worldnewsapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = worldnewsapi.NewsApi(api_client)
-    text = 'tesla' # str | The text to match in the news content (at least 3 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford (optional)
+    text = 'tesla' # str | The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford (optional)
     source_countries = 'us,uk' # str | A comma-separated list of ISO 3166 country codes from which the news should originate. (optional)
     language = 'en' # str | The ISO 6391 language code of the news. (optional)
     min_sentiment = -0.8 # float | The minimal sentiment of the news in range [-1,1]. (optional)
@@ -462,7 +555,7 @@ with worldnewsapi.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **text** | **str**| The text to match in the news content (at least 3 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford | [optional] 
+ **text** | **str**| The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford | [optional] 
  **source_countries** | **str**| A comma-separated list of ISO 3166 country codes from which the news should originate. | [optional] 
  **language** | **str**| The ISO 6391 language code of the news. | [optional] 
  **min_sentiment** | **float**| The minimal sentiment of the news in range [-1,1]. | [optional] 

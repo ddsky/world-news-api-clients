@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Summary** | **string** |  | [optional] 
 **Image** | **string** |  | [optional] 
+**Author** | **string** |  | [optional] 
 **Id** | **int** |  | [optional] 
 **Text** | **string** |  | [optional] 
 **Title** | **string** |  | [optional] 

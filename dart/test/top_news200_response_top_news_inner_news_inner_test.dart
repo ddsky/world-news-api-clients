@@ -26,6 +26,11 @@ void main() {
       // TODO
     });
 
+    // String author
+    test('to test the property `author`', () async {
+      // TODO
+    });
+
     // int id
     test('to test the property `id`', () async {
       // TODO

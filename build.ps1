@@ -3,7 +3,7 @@ Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser -F
 
 # Setting environment variables
 $env:PYTHON_POST_PROCESS_FILE = "yapf -i"
-$VERSION = "1.1.1"
+$VERSION = "1.2.0"
 
 # Removing the 'python' directory
 Remove-Item -Path python -Recurse -Force
@@ -61,6 +61,7 @@ cd javascript
 npm uninstall babel
 npm run build
 npm publish
+Remove-Item -Path node_modules -Recurse -Force
 cd ..
 
 # create sdk zips

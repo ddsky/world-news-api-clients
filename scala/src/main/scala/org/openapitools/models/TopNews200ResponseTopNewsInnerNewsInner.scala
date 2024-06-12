@@ -11,6 +11,7 @@ import scala.collection.immutable.Seq
  * 
  * @param summary 
  * @param image 
+ * @param author 
  * @param id 
  * @param text 
  * @param title 
@@ -20,6 +21,7 @@ import scala.collection.immutable.Seq
  */
 case class TopNews200ResponseTopNewsInnerNewsInner(summary: Option[String],
                 image: Option[String],
+                author: Option[String],
                 id: Option[Int],
                 text: Option[String],
                 title: Option[String],

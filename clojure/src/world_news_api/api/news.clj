@@ -4,20 +4,24 @@
             [spec-tools.core :as st]
             [orchestra.core :refer [defn-spec]]
             [world-news-api.specs.top-news-200-response-top-news-inner-news-inner :refer :all]
+            [world-news-api.specs.retrieve-news-articles-by-ids-200-response :refer :all]
             [world-news-api.specs.extract-news-links-200-response :refer :all]
+            [world-news-api.specs.retrieve-news-articles-by-ids-200-response-news-inner :refer :all]
             [world-news-api.specs.top-news-200-response-top-news-inner :refer :all]
             [world-news-api.specs.extract-news-200-response :refer :all]
             [world-news-api.specs.search-news-200-response :refer :all]
             [world-news-api.specs.top-news-200-response :refer :all]
+            [world-news-api.specs.extract-news-200-response-images-inner :refer :all]
             [world-news-api.specs.get-geo-coordinates-200-response :refer :all]
             [world-news-api.specs.search-news-200-response-news-inner :refer :all]
+            [world-news-api.specs.extract-news-200-response-videos-inner :refer :all]
             )
   (:import (java.io File)))
 
 
 (defn-spec extract-news-with-http-info any?
   "Extract News
-  Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, image, publish date, author, language, source country, and sentiment of the news article."
+  Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, images, videos, publish date, authors, language, source country, and sentiment of the news article."
   [url string?, analyze boolean?]
   (check-required-params url analyze)
   (call-api "/extract-news" :get
@@ -31,7 +35,7 @@
 
 (defn-spec extract-news extract-news-200-response-spec
   "Extract News
-  Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, image, publish date, author, language, source country, and sentiment of the news article."
+  Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, images, videos, publish date, authors, language, source country, and sentiment of the news article."
   [url string?, analyze boolean?]
   (let [res (:data (extract-news-with-http-info url analyze))]
     (if (:decode-models *api-context*)
@@ -108,6 +112,30 @@
   (let [res (:data (news-website-to-rss-feed-with-http-info url analyze))]
     (if (:decode-models *api-context*)
        (st/decode any? res st/string-transformer)
+       res)))
+
+
+(defn-spec retrieve-news-articles-by-ids-with-http-info any?
+  "Retrieve News Articles by Ids
+  Retrieve information about one or more news articles by their ids. The ids can be retrieved from the search news or top news APIs."
+  [ids string?]
+  (check-required-params ids)
+  (call-api "/retrieve-news" :get
+            {:path-params   {}
+             :header-params {}
+             :query-params  {"ids" ids }
+             :form-params   {}
+             :content-types []
+             :accepts       ["application/json"]
+             :auth-names    ["apiKey" "headerApiKey"]}))
+
+(defn-spec retrieve-news-articles-by-ids retrieve-news-articles-by-ids-200-response-spec
+  "Retrieve News Articles by Ids
+  Retrieve information about one or more news articles by their ids. The ids can be retrieved from the search news or top news APIs."
+  [ids string?]
+  (let [res (:data (retrieve-news-articles-by-ids-with-http-info ids))]
+    (if (:decode-models *api-context*)
+       (st/decode retrieve-news-articles-by-ids-200-response-spec res st/string-transformer)
        res)))
 
 

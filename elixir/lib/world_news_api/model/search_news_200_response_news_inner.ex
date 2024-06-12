@@ -11,13 +11,15 @@ defmodule WorldNewsAPI.Model.SearchNews200ResponseNewsInner do
     :summary,
     :image,
     :sentiment,
-    :source_country,
+    :author,
     :language,
+    :video,
+    :title,
+    :url,
+    :source_country,
     :id,
     :text,
-    :title,
     :publish_date,
-    :url,
     :authors
   ]
 
@@ -25,13 +27,15 @@ defmodule WorldNewsAPI.Model.SearchNews200ResponseNewsInner do
     :summary => String.t | nil,
     :image => String.t | nil,
     :sentiment => float() | nil,
-    :source_country => String.t | nil,
+    :author => String.t | nil,
     :language => String.t | nil,
+    :video => String.t | nil,
+    :title => String.t | nil,
+    :url => String.t | nil,
+    :source_country => String.t | nil,
     :id => integer() | nil,
     :text => String.t | nil,
-    :title => String.t | nil,
     :publish_date => String.t | nil,
-    :url => String.t | nil,
     :authors => [String.t] | nil
   }
 

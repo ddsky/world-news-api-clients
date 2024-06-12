@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**extractNewsLinks**](NewsApi.md#extractNewsLinks) | **GET** /extract-news-links | Extract News Links
 [**getGeoCoordinates**](NewsApi.md#getGeoCoordinates) | **GET** /geo-coordinates | Get Geo Coordinates
 [**newsWebsiteToRSSFeed**](NewsApi.md#newsWebsiteToRSSFeed) | **GET** /feed.rss | News Website to RSS Feed
+[**retrieveNewsArticlesByIds**](NewsApi.md#retrieveNewsArticlesByIds) | **GET** /retrieve-news | Retrieve News Articles by Ids
 [**searchNews**](NewsApi.md#searchNews) | **GET** /search-news | Search News
 [**topNews**](NewsApi.md#topNews) | **GET** /top-news | Top News
 
@@ -19,7 +20,7 @@ Method | HTTP request | Description
 
 Extract News
 
-Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, image, publish date, author, language, source country, and sentiment of the news article.
+Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, images, videos, publish date, authors, language, source country, and sentiment of the news article.
 
 ### Example
 
@@ -203,6 +204,52 @@ Name | Type | Description  | Notes
 - **Accept**: application/xml
 
 
+## retrieveNewsArticlesByIds
+
+> RetrieveNewsArticlesByIds200Response retrieveNewsArticlesByIds(ids)
+
+Retrieve News Articles by Ids
+
+Retrieve information about one or more news articles by their ids. The ids can be retrieved from the search news or top news APIs.
+
+### Example
+
+```java
+// Import classes:
+//import com.worldnewsapi.NewsApi;
+
+NewsApi apiInstance = new NewsApi();
+String ids = 2352,2354; // String | A comma separated list of news ids.
+try {
+    RetrieveNewsArticlesByIds200Response result = apiInstance.retrieveNewsArticlesByIds(ids);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling NewsApi#retrieveNewsArticlesByIds");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ids** | **String**| A comma separated list of news ids. | [default to null]
+
+### Return type
+
+[**RetrieveNewsArticlesByIds200Response**](RetrieveNewsArticlesByIds200Response.md)
+
+### Authorization
+
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## searchNews
 
 > SearchNews200Response searchNews(text, sourceCountries, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, entities, locationFilter, sort, sortDirection, offset, number)
@@ -218,7 +265,7 @@ Search and filter news by text, date, location, language, and more. The API retu
 //import com.worldnewsapi.NewsApi;
 
 NewsApi apiInstance = new NewsApi();
-String text = tesla; // String | The text to match in the news content (at least 3 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford
+String text = tesla; // String | The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford
 String sourceCountries = us,uk; // String | A comma-separated list of ISO 3166 country codes from which the news should originate.
 String language = en; // String | The ISO 6391 language code of the news.
 Double minSentiment = -0.8; // Double | The minimal sentiment of the news in range [-1,1].
@@ -247,7 +294,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **text** | **String**| The text to match in the news content (at least 3 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford | [optional] [default to null]
+ **text** | **String**| The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford | [optional] [default to null]
  **sourceCountries** | **String**| A comma-separated list of ISO 3166 country codes from which the news should originate. | [optional] [default to null]
  **language** | **String**| The ISO 6391 language code of the news. | [optional] [default to null]
  **minSentiment** | **Double**| The minimal sentiment of the news in range [-1,1]. | [optional] [default to null]

@@ -9,11 +9,13 @@ Name | Type | Description | Notes
 **text** | **str** |  | [optional] 
 **url** | **str** |  | [optional] 
 **image** | **str** |  | [optional] 
+**images** | [**List[ExtractNews200ResponseImagesInner]**](ExtractNews200ResponseImagesInner.md) |  | [optional] 
+**video** | **str** |  | [optional] 
+**videos** | [**List[ExtractNews200ResponseVideosInner]**](ExtractNews200ResponseVideosInner.md) |  | [optional] 
 **publish_date** | **str** |  | [optional] 
 **author** | **str** |  | [optional] 
+**authors** | **List[Optional[str]]** |  | [optional] 
 **language** | **str** |  | [optional] 
-**source_country** | **str** |  | [optional] 
-**sentiment** | **float** |  | [optional] 
 
 ## Example
 

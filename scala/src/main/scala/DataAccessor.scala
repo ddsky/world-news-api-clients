@@ -40,6 +40,12 @@ trait DataAccessor {
 
         /**
         * 
+        * @return A RetrieveNewsArticlesByIds200Response
+        */
+        def News_retrieveNewsArticlesByIds(ids: String, authParamapiKey: String, authParamheaderApiKey: String): Either[CommonError,RetrieveNewsArticlesByIds200Response] = Left(TODO)
+
+        /**
+        * 
         * @return A SearchNews200Response
         */
         def News_searchNews(text: Option[String], sourceCountries: Option[String], language: Option[String], minSentiment: Option[Double], maxSentiment: Option[Double], earliestPublishDate: Option[String], latestPublishDate: Option[String], newsSources: Option[String], authors: Option[String], entities: Option[String], locationFilter: Option[String], sort: Option[String], sortDirection: Option[String], offset: Option[Int], number: Option[Int], authParamapiKey: String, authParamheaderApiKey: String): Either[CommonError,SearchNews200Response] = Left(TODO)

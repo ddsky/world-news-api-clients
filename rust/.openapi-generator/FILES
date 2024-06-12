@@ -4,9 +4,13 @@
 Cargo.toml
 README.md
 docs/ExtractNews200Response.md
+docs/ExtractNews200ResponseImagesInner.md
+docs/ExtractNews200ResponseVideosInner.md
 docs/ExtractNewsLinks200Response.md
 docs/GetGeoCoordinates200Response.md
 docs/NewsApi.md
+docs/RetrieveNewsArticlesByIds200Response.md
+docs/RetrieveNewsArticlesByIds200ResponseNewsInner.md
 docs/SearchNews200Response.md
 docs/SearchNews200ResponseNewsInner.md
 docs/TopNews200Response.md
@@ -18,9 +22,13 @@ src/apis/mod.rs
 src/apis/news_api.rs
 src/lib.rs
 src/models/extract_news_200_response.rs
+src/models/extract_news_200_response_images_inner.rs
+src/models/extract_news_200_response_videos_inner.rs
 src/models/extract_news_links_200_response.rs
 src/models/get_geo_coordinates_200_response.rs
 src/models/mod.rs
+src/models/retrieve_news_articles_by_ids_200_response.rs
+src/models/retrieve_news_articles_by_ids_200_response_news_inner.rs
 src/models/search_news_200_response.rs
 src/models/search_news_200_response_news_inner.rs
 src/models/top_news_200_response.rs

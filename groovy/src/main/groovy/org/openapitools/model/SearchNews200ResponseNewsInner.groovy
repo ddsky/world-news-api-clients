@@ -17,19 +17,23 @@ class SearchNews200ResponseNewsInner {
     
     BigDecimal sentiment
     
-    String sourceCountry
+    String author
     
     String language
+    
+    String video
+    
+    String title
+    
+    String url
+    
+    String sourceCountry
     
     Integer id
     
     String text
     
-    String title
-    
     String publishDate
-    
-    String url
     
     List<String> authors = new ArrayList<>()
 }

@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**extractNewsLinks**](NewsApi.md#extractNewsLinks) | **GET** /extract-news-links | Extract News Links
 [**getGeoCoordinates**](NewsApi.md#getGeoCoordinates) | **GET** /geo-coordinates | Get Geo Coordinates
 [**newsWebsiteToRSSFeed**](NewsApi.md#newsWebsiteToRSSFeed) | **GET** /feed.rss | News Website to RSS Feed
+[**retrieveNewsArticlesByIds**](NewsApi.md#retrieveNewsArticlesByIds) | **GET** /retrieve-news | Retrieve News Articles by Ids
 [**searchNews**](NewsApi.md#searchNews) | **GET** /search-news | Search News
 [**topNews**](NewsApi.md#topNews) | **GET** /top-news | Top News
 
@@ -19,7 +20,7 @@ Method | HTTP request | Description
 
 Extract News
 
-Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, image, publish date, author, language, source country, and sentiment of the news article.
+Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, images, videos, publish date, authors, language, source country, and sentiment of the news article.
 
 ### Example
 
@@ -243,6 +244,62 @@ Name | Type | Description  | Notes
 - **Accept**: application/xml
 
 
+## retrieveNewsArticlesByIds
+
+> RetrieveNewsArticlesByIds200Response retrieveNewsArticlesByIds(ids)
+
+Retrieve News Articles by Ids
+
+Retrieve information about one or more news articles by their ids. The ids can be retrieved from the search news or top news APIs.
+
+### Example
+
+```javascript
+import Worldnewsapi from 'worldnewsapi';
+let defaultClient = Worldnewsapi.ApiClient.instance;
+// Configure API key authorization: apiKey
+let apiKey = defaultClient.authentications['apiKey'];
+apiKey.apiKey = 'YOUR API KEY';
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKey.apiKeyPrefix = 'Token';
+// Configure API key authorization: headerApiKey
+let headerApiKey = defaultClient.authentications['headerApiKey'];
+headerApiKey.apiKey = 'YOUR API KEY';
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//headerApiKey.apiKeyPrefix = 'Token';
+
+let apiInstance = new Worldnewsapi.NewsApi();
+let ids = "2352,2354"; // String | A comma separated list of news ids.
+apiInstance.retrieveNewsArticlesByIds(ids, (error, data, response) => {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+});
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ids** | **String**| A comma separated list of news ids. | 
+
+### Return type
+
+[**RetrieveNewsArticlesByIds200Response**](RetrieveNewsArticlesByIds200Response.md)
+
+### Authorization
+
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## searchNews
 
 > SearchNews200Response searchNews(opts)
@@ -269,7 +326,7 @@ headerApiKey.apiKey = 'YOUR API KEY';
 
 let apiInstance = new Worldnewsapi.NewsApi();
 let opts = {
-  'text': "tesla", // String | The text to match in the news content (at least 3 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford
+  'text': "tesla", // String | The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford
   'sourceCountries': "us,uk", // String | A comma-separated list of ISO 3166 country codes from which the news should originate.
   'language': "en", // String | The ISO 6391 language code of the news.
   'minSentiment': -0.8, // Number | The minimal sentiment of the news in range [-1,1].
@@ -299,7 +356,7 @@ apiInstance.searchNews(opts, (error, data, response) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **text** | **String**| The text to match in the news content (at least 3 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford | [optional] 
+ **text** | **String**| The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford | [optional] 
  **sourceCountries** | **String**| A comma-separated list of ISO 3166 country codes from which the news should originate. | [optional] 
  **language** | **String**| The ISO 6391 language code of the news. | [optional] 
  **minSentiment** | **Number**| The minimal sentiment of the news in range [-1,1]. | [optional] 

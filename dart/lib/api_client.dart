@@ -184,10 +184,18 @@ class ApiClient {
           return value is DateTime ? value : DateTime.tryParse(value);
         case 'ExtractNews200Response':
           return ExtractNews200Response.fromJson(value);
+        case 'ExtractNews200ResponseImagesInner':
+          return ExtractNews200ResponseImagesInner.fromJson(value);
+        case 'ExtractNews200ResponseVideosInner':
+          return ExtractNews200ResponseVideosInner.fromJson(value);
         case 'ExtractNewsLinks200Response':
           return ExtractNewsLinks200Response.fromJson(value);
         case 'GetGeoCoordinates200Response':
           return GetGeoCoordinates200Response.fromJson(value);
+        case 'RetrieveNewsArticlesByIds200Response':
+          return RetrieveNewsArticlesByIds200Response.fromJson(value);
+        case 'RetrieveNewsArticlesByIds200ResponseNewsInner':
+          return RetrieveNewsArticlesByIds200ResponseNewsInner.fromJson(value);
         case 'SearchNews200Response':
           return SearchNews200Response.fromJson(value);
         case 'SearchNews200ResponseNewsInner':

@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**extract_news_links**](NewsApi.md#extract_news_links) | **GET** /extract-news-links | Extract News Links
 [**get_geo_coordinates**](NewsApi.md#get_geo_coordinates) | **GET** /geo-coordinates | Get Geo Coordinates
 [**news_website_to_rss_feed**](NewsApi.md#news_website_to_rss_feed) | **GET** /feed.rss | News Website to RSS Feed
+[**retrieve_news_articles_by_ids**](NewsApi.md#retrieve_news_articles_by_ids) | **GET** /retrieve-news | Retrieve News Articles by Ids
 [**search_news**](NewsApi.md#search_news) | **GET** /search-news | Search News
 [**top_news**](NewsApi.md#top_news) | **GET** /top-news | Top News
 
@@ -18,7 +19,7 @@ Method | HTTP request | Description
 > models::ExtractNews200Response extract_news(url, analyze)
 Extract News
 
-Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, image, publish date, author, language, source country, and sentiment of the news article.
+Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, images, videos, publish date, authors, language, source country, and sentiment of the news article.
 
 ### Parameters
 
@@ -136,6 +137,36 @@ Name | Type | Description  | Required | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 
+## retrieve_news_articles_by_ids
+
+> models::RetrieveNewsArticlesByIds200Response retrieve_news_articles_by_ids(ids)
+Retrieve News Articles by Ids
+
+Retrieve information about one or more news articles by their ids. The ids can be retrieved from the search news or top news APIs.
+
+### Parameters
+
+
+Name | Type | Description  | Required | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+**ids** | **String** | A comma separated list of news ids. | [required] |
+
+### Return type
+
+[**models::RetrieveNewsArticlesByIds200Response**](retrieveNewsArticlesByIds_200_response.md)
+
+### Authorization
+
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
 ## search_news
 
 > models::SearchNews200Response search_news(text, source_countries, language, min_sentiment, max_sentiment, earliest_publish_date, latest_publish_date, news_sources, authors, entities, location_filter, sort, sort_direction, offset, number)
@@ -148,7 +179,7 @@ Search and filter news by text, date, location, language, and more. The API retu
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**text** | Option<**String**> | The text to match in the news content (at least 3 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford |  |
+**text** | Option<**String**> | The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford |  |
 **source_countries** | Option<**String**> | A comma-separated list of ISO 3166 country codes from which the news should originate. |  |
 **language** | Option<**String**> | The ISO 6391 language code of the news. |  |
 **min_sentiment** | Option<**f64**> | The minimal sentiment of the news in range [-1,1]. |  |

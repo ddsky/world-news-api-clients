@@ -10,6 +10,7 @@ defmodule WorldNewsAPI.Model.TopNews200ResponseTopNewsInnerNewsInner do
   defstruct [
     :summary,
     :image,
+    :author,
     :id,
     :text,
     :title,
@@ -21,6 +22,7 @@ defmodule WorldNewsAPI.Model.TopNews200ResponseTopNewsInnerNewsInner do
   @type t :: %__MODULE__{
     :summary => String.t | nil,
     :image => String.t | nil,
+    :author => String.t | nil,
     :id => integer() | nil,
     :text => String.t | nil,
     :title => String.t | nil,

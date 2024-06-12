@@ -3,7 +3,7 @@ World News API
 
 The world's news wrapped into a single API.
 
-API version: 1.1.1
+API version: 1.2.0
 Contact: mail@worldnewsapi.com
 */
 
@@ -49,7 +49,7 @@ func (r ApiExtractNewsRequest) Execute() (*ExtractNews200Response, *http.Respons
 /*
 ExtractNews Extract News
 
-Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, image, publish date, author, language, source country, and sentiment of the news article.
+Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, images, videos, publish date, authors, language, source country, and sentiment of the news article.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiExtractNewsRequest
@@ -620,6 +620,147 @@ func (a *NewsAPIService) NewsWebsiteToRSSFeedExecute(r ApiNewsWebsiteToRSSFeedRe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiRetrieveNewsArticlesByIdsRequest struct {
+	ctx context.Context
+	ApiService *NewsAPIService
+	ids *string
+}
+
+// A comma separated list of news ids.
+func (r ApiRetrieveNewsArticlesByIdsRequest) Ids(ids string) ApiRetrieveNewsArticlesByIdsRequest {
+	r.ids = &ids
+	return r
+}
+
+func (r ApiRetrieveNewsArticlesByIdsRequest) Execute() (*RetrieveNewsArticlesByIds200Response, *http.Response, error) {
+	return r.ApiService.RetrieveNewsArticlesByIdsExecute(r)
+}
+
+/*
+RetrieveNewsArticlesByIds Retrieve News Articles by Ids
+
+Retrieve information about one or more news articles by their ids. The ids can be retrieved from the search news or top news APIs.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiRetrieveNewsArticlesByIdsRequest
+*/
+func (a *NewsAPIService) RetrieveNewsArticlesByIds(ctx context.Context) ApiRetrieveNewsArticlesByIdsRequest {
+	return ApiRetrieveNewsArticlesByIdsRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return RetrieveNewsArticlesByIds200Response
+func (a *NewsAPIService) RetrieveNewsArticlesByIdsExecute(r ApiRetrieveNewsArticlesByIdsRequest) (*RetrieveNewsArticlesByIds200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *RetrieveNewsArticlesByIds200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NewsAPIService.RetrieveNewsArticlesByIds")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/retrieve-news"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.ids == nil {
+		return localVarReturnValue, nil, reportError("ids is required and must be specified")
+	}
+	if strlen(*r.ids) > 10000 {
+		return localVarReturnValue, nil, reportError("ids must have less than 10000 elements")
+	}
+
+	parameterAddToHeaderOrQuery(localVarQueryParams, "ids", r.ids, "")
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarQueryParams.Add("api-key", key)
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["headerApiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["x-api-key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiSearchNewsRequest struct {
 	ctx context.Context
 	ApiService *NewsAPIService
@@ -640,7 +781,7 @@ type ApiSearchNewsRequest struct {
 	number *int32
 }
 
-// The text to match in the news content (at least 3 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford
+// The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford
 func (r ApiSearchNewsRequest) Text(text string) ApiSearchNewsRequest {
 	r.text = &text
 	return r

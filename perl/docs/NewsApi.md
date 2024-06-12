@@ -13,6 +13,7 @@ Method | HTTP request | Description
 [**extract_news_links**](NewsApi.md#extract_news_links) | **GET** /extract-news-links | Extract News Links
 [**get_geo_coordinates**](NewsApi.md#get_geo_coordinates) | **GET** /geo-coordinates | Get Geo Coordinates
 [**news_website_to_rss_feed**](NewsApi.md#news_website_to_rss_feed) | **GET** /feed.rss | News Website to RSS Feed
+[**retrieve_news_articles_by_ids**](NewsApi.md#retrieve_news_articles_by_ids) | **GET** /retrieve-news | Retrieve News Articles by Ids
 [**search_news**](NewsApi.md#search_news) | **GET** /search-news | Search News
 [**top_news**](NewsApi.md#top_news) | **GET** /top-news | Top News
 
@@ -22,7 +23,7 @@ Method | HTTP request | Description
 
 Extract News
 
-Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, image, publish date, author, language, source country, and sentiment of the news article.
+Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, images, videos, publish date, authors, language, source country, and sentiment of the news article.
 
 ### Example
 ```perl
@@ -243,6 +244,61 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **retrieve_news_articles_by_ids**
+> RetrieveNewsArticlesByIds200Response retrieve_news_articles_by_ids(ids => $ids)
+
+Retrieve News Articles by Ids
+
+Retrieve information about one or more news articles by their ids. The ids can be retrieved from the search news or top news APIs.
+
+### Example
+```perl
+use Data::Dumper;
+use WWW::OpenAPIClient::NewsApi;
+my $api_instance = WWW::OpenAPIClient::NewsApi->new(
+
+    # Configure API key authorization: apiKey
+    api_key => {'api-key' => 'YOUR_API_KEY'},
+    # uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+    #api_key_prefix => {'api-key' => 'Bearer'},
+    # Configure API key authorization: headerApiKey
+    api_key => {'x-api-key' => 'YOUR_API_KEY'},
+    # uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+    #api_key_prefix => {'x-api-key' => 'Bearer'},
+);
+
+my $ids = 2352,2354; # string | A comma separated list of news ids.
+
+eval {
+    my $result = $api_instance->retrieve_news_articles_by_ids(ids => $ids);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling NewsApi->retrieve_news_articles_by_ids: $@\n";
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ids** | **string**| A comma separated list of news ids. | 
+
+### Return type
+
+[**RetrieveNewsArticlesByIds200Response**](RetrieveNewsArticlesByIds200Response.md)
+
+### Authorization
+
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **search_news**
 > SearchNews200Response search_news(text => $text, source_countries => $source_countries, language => $language, min_sentiment => $min_sentiment, max_sentiment => $max_sentiment, earliest_publish_date => $earliest_publish_date, latest_publish_date => $latest_publish_date, news_sources => $news_sources, authors => $authors, entities => $entities, location_filter => $location_filter, sort => $sort, sort_direction => $sort_direction, offset => $offset, number => $number)
 
@@ -266,7 +322,7 @@ my $api_instance = WWW::OpenAPIClient::NewsApi->new(
     #api_key_prefix => {'x-api-key' => 'Bearer'},
 );
 
-my $text = tesla; # string | The text to match in the news content (at least 3 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford
+my $text = tesla; # string | The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford
 my $source_countries = us,uk; # string | A comma-separated list of ISO 3166 country codes from which the news should originate.
 my $language = en; # string | The ISO 6391 language code of the news.
 my $min_sentiment = -0.8; # double | The minimal sentiment of the news in range [-1,1].
@@ -295,7 +351,7 @@ if ($@) {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **text** | **string**| The text to match in the news content (at least 3 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford | [optional] 
+ **text** | **string**| The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford | [optional] 
  **source_countries** | **string**| A comma-separated list of ISO 3166 country codes from which the news should originate. | [optional] 
  **language** | **string**| The ISO 6391 language code of the news. | [optional] 
  **min_sentiment** | **double**| The minimal sentiment of the news in range [-1,1]. | [optional] 

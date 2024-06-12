@@ -8,6 +8,7 @@ All URIs are relative to *https://api.worldnewsapi.com*
 | [**extractNewsLinks**](NewsApi.md#extractNewsLinks) | **GET** /extract-news-links | Extract News Links |
 | [**getGeoCoordinates**](NewsApi.md#getGeoCoordinates) | **GET** /geo-coordinates | Get Geo Coordinates |
 | [**newsWebsiteToRSSFeed**](NewsApi.md#newsWebsiteToRSSFeed) | **GET** /feed.rss | News Website to RSS Feed |
+| [**retrieveNewsArticlesByIds**](NewsApi.md#retrieveNewsArticlesByIds) | **GET** /retrieve-news | Retrieve News Articles by Ids |
 | [**searchNews**](NewsApi.md#searchNews) | **GET** /search-news | Search News |
 | [**topNews**](NewsApi.md#topNews) | **GET** /top-news | Top News |
 
@@ -18,7 +19,7 @@ All URIs are relative to *https://api.worldnewsapi.com*
 
 Extract News
 
-Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, image, publish date, author, language, source country, and sentiment of the news article.
+Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, images, videos, publish date, authors, language, source country, and sentiment of the news article.
 
 ### Example
 ```java
@@ -342,6 +343,87 @@ public class Example {
 | **406** | Not Acceptable |  -  |
 | **429** | Too Many Requests |  -  |
 
+<a id="retrieveNewsArticlesByIds"></a>
+# **retrieveNewsArticlesByIds**
+> RetrieveNewsArticlesByIds200Response retrieveNewsArticlesByIds(ids)
+
+Retrieve News Articles by Ids
+
+Retrieve information about one or more news articles by their ids. The ids can be retrieved from the search news or top news APIs.
+
+### Example
+```java
+// Import classes:
+import com.worldnewsapi.client.ApiClient;
+import com.worldnewsapi.client.ApiException;
+import com.worldnewsapi.client.Configuration;
+import com.worldnewsapi.client.auth.*;
+import com.worldnewsapi.client.models.*;
+import com.worldnewsapi.NewsApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://api.worldnewsapi.com");
+    
+    // Configure API key authorization: apiKey
+    ApiKeyAuth apiKey = (ApiKeyAuth) defaultClient.getAuthentication("apiKey");
+    apiKey.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKey.setApiKeyPrefix("Token");
+
+    // Configure API key authorization: headerApiKey
+    ApiKeyAuth headerApiKey = (ApiKeyAuth) defaultClient.getAuthentication("headerApiKey");
+    headerApiKey.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //headerApiKey.setApiKeyPrefix("Token");
+
+    NewsApi apiInstance = new NewsApi(defaultClient);
+    String ids = "2352,2354"; // String | A comma separated list of news ids.
+    try {
+      RetrieveNewsArticlesByIds200Response result = apiInstance.retrieveNewsArticlesByIds(ids);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling NewsApi#retrieveNewsArticlesByIds");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **ids** | **String**| A comma separated list of news ids. | |
+
+### Return type
+
+[**RetrieveNewsArticlesByIds200Response**](RetrieveNewsArticlesByIds200Response.md)
+
+### Authorization
+
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Success |  -  |
+| **401** | Unauthorized |  -  |
+| **402** | Payment Required |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not Found |  -  |
+| **406** | Not Acceptable |  -  |
+| **429** | Too Many Requests |  -  |
+
 <a id="searchNews"></a>
 # **searchNews**
 > SearchNews200Response searchNews(text, sourceCountries, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, entities, locationFilter, sort, sortDirection, offset, number)
@@ -378,7 +460,7 @@ public class Example {
     //headerApiKey.setApiKeyPrefix("Token");
 
     NewsApi apiInstance = new NewsApi(defaultClient);
-    String text = "tesla"; // String | The text to match in the news content (at least 3 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford
+    String text = "tesla"; // String | The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford
     String sourceCountries = "us,uk"; // String | A comma-separated list of ISO 3166 country codes from which the news should originate.
     String language = "en"; // String | The ISO 6391 language code of the news.
     Double minSentiment = -0.8D; // Double | The minimal sentiment of the news in range [-1,1].
@@ -411,7 +493,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **text** | **String**| The text to match in the news content (at least 3 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford | [optional] |
+| **text** | **String**| The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford | [optional] |
 | **sourceCountries** | **String**| A comma-separated list of ISO 3166 country codes from which the news should originate. | [optional] |
 | **language** | **String**| The ISO 6391 language code of the news. | [optional] |
 | **minSentiment** | **Double**| The minimal sentiment of the news in range [-1,1]. | [optional] |

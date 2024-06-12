@@ -36,6 +36,21 @@ void main() {
       // TODO
     });
 
+    // List<ExtractNews200ResponseImagesInner> images (default value: const [])
+    test('to test the property `images`', () async {
+      // TODO
+    });
+
+    // String video
+    test('to test the property `video`', () async {
+      // TODO
+    });
+
+    // List<ExtractNews200ResponseVideosInner> videos (default value: const [])
+    test('to test the property `videos`', () async {
+      // TODO
+    });
+
     // String publishDate
     test('to test the property `publishDate`', () async {
       // TODO
@@ -46,18 +61,13 @@ void main() {
       // TODO
     });
 
+    // List<String> authors (default value: const [])
+    test('to test the property `authors`', () async {
+      // TODO
+    });
+
     // String language
     test('to test the property `language`', () async {
-      // TODO
-    });
-
-    // String sourceCountry
-    test('to test the property `sourceCountry`', () async {
-      // TODO
-    });
-
-    // num sentiment
-    test('to test the property `sentiment`', () async {
       // TODO
     });
 

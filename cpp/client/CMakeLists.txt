@@ -13,7 +13,11 @@ include(CMakePackageConfigHelpers)
 add_library(${PROJECT_NAME}
   OAIExtractNewsLinks_200_response.h
   OAIExtractNews_200_response.h
+  OAIExtractNews_200_response_images_inner.h
+  OAIExtractNews_200_response_videos_inner.h
   OAIGetGeoCoordinates_200_response.h
+  OAIRetrieveNewsArticlesByIds_200_response.h
+  OAIRetrieveNewsArticlesByIds_200_response_news_inner.h
   OAISearchNews_200_response.h
   OAISearchNews_200_response_news_inner.h
   OAITopNews_200_response.h
@@ -30,7 +34,11 @@ add_library(${PROJECT_NAME}
   OAIOauth.h
   OAIExtractNewsLinks_200_response.cpp
   OAIExtractNews_200_response.cpp
+  OAIExtractNews_200_response_images_inner.cpp
+  OAIExtractNews_200_response_videos_inner.cpp
   OAIGetGeoCoordinates_200_response.cpp
+  OAIRetrieveNewsArticlesByIds_200_response.cpp
+  OAIRetrieveNewsArticlesByIds_200_response_news_inner.cpp
   OAISearchNews_200_response.cpp
   OAISearchNews_200_response_news_inner.cpp
   OAITopNews_200_response.cpp

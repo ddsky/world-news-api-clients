@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **summary** | **str** |  | [optional] 
 **image** | **str** |  | [optional] 
+**author** | **str** |  | [optional] 
 **id** | **int** |  | [optional] 
 **text** | **str** |  | [optional] 
 **title** | **str** |  | [optional] 

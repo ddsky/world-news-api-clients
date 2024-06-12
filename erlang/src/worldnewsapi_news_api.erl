@@ -4,13 +4,14 @@
          extract_news_links/3, extract_news_links/4,
          get_geo_coordinates/2, get_geo_coordinates/3,
          news_website_to_rss_feed/3, news_website_to_rss_feed/4,
+         retrieve_news_articles_by_ids/2, retrieve_news_articles_by_ids/3,
          search_news/1, search_news/2,
          top_news/3, top_news/4]).
 
 -define(BASE_URL, <<"">>).
 
 %% @doc Extract News
-%% Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, image, publish date, author, language, source country, and sentiment of the news article.
+%% Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, images, videos, publish date, authors, language, source country, and sentiment of the news article.
 -spec extract_news(ctx:ctx(), binary(), boolean()) -> {ok, worldnewsapi_extract_news_200_response:worldnewsapi_extract_news_200_response(), worldnewsapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), worldnewsapi_utils:response_info()}.
 extract_news(Ctx, Url, Analyze) ->
     extract_news(Ctx, Url, Analyze, #{}).
@@ -86,6 +87,27 @@ news_website_to_rss_feed(Ctx, Url, Analyze, Optional) ->
     Method = get,
     Path = [?BASE_URL, "/feed.rss"],
     QS = lists:flatten([{<<"url">>, Url}, {<<"analyze">>, Analyze}])++worldnewsapi_utils:optional_params([], _OptionalParams),
+    Headers = [],
+    Body1 = [],
+    ContentTypeHeader = worldnewsapi_utils:select_header_content_type([]),
+    Opts = maps:get(hackney_opts, Optional, []),
+
+    worldnewsapi_utils:request(Ctx, Method, Path, QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
+
+%% @doc Retrieve News Articles by Ids
+%% Retrieve information about one or more news articles by their ids. The ids can be retrieved from the search news or top news APIs.
+-spec retrieve_news_articles_by_ids(ctx:ctx(), binary()) -> {ok, worldnewsapi_retrieve_news_articles_by_ids_200_response:worldnewsapi_retrieve_news_articles_by_ids_200_response(), worldnewsapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), worldnewsapi_utils:response_info()}.
+retrieve_news_articles_by_ids(Ctx, Ids) ->
+    retrieve_news_articles_by_ids(Ctx, Ids, #{}).
+
+-spec retrieve_news_articles_by_ids(ctx:ctx(), binary(), maps:map()) -> {ok, worldnewsapi_retrieve_news_articles_by_ids_200_response:worldnewsapi_retrieve_news_articles_by_ids_200_response(), worldnewsapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), worldnewsapi_utils:response_info()}.
+retrieve_news_articles_by_ids(Ctx, Ids, Optional) ->
+    _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(worldnewsapi_api, config, #{})),
+
+    Method = get,
+    Path = [?BASE_URL, "/retrieve-news"],
+    QS = lists:flatten([{<<"ids">>, Ids}])++worldnewsapi_utils:optional_params([], _OptionalParams),
     Headers = [],
     Body1 = [],
     ContentTypeHeader = worldnewsapi_utils:select_header_content_type([]),

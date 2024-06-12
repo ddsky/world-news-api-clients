@@ -123,11 +123,36 @@ genExtractNews200Response n =
     <*> arbitraryReducedMaybe n -- extractNews200ResponseText :: Maybe Text
     <*> arbitraryReducedMaybe n -- extractNews200ResponseUrl :: Maybe Text
     <*> arbitraryReducedMaybe n -- extractNews200ResponseImage :: Maybe Text
+    <*> arbitraryReducedMaybe n -- extractNews200ResponseImages :: Maybe [ExtractNews200ResponseImagesInner]
+    <*> arbitraryReducedMaybe n -- extractNews200ResponseVideo :: Maybe Text
+    <*> arbitraryReducedMaybe n -- extractNews200ResponseVideos :: Maybe [ExtractNews200ResponseVideosInner]
     <*> arbitraryReducedMaybe n -- extractNews200ResponsePublishDate :: Maybe Text
     <*> arbitraryReducedMaybe n -- extractNews200ResponseAuthor :: Maybe Text
+    <*> arbitraryReducedMaybe n -- extractNews200ResponseAuthors :: Maybe [Text]
     <*> arbitraryReducedMaybe n -- extractNews200ResponseLanguage :: Maybe Text
-    <*> arbitraryReducedMaybe n -- extractNews200ResponseSourceCountry :: Maybe Text
-    <*> arbitraryReducedMaybe n -- extractNews200ResponseSentiment :: Maybe Double
+  
+instance Arbitrary ExtractNews200ResponseImagesInner where
+  arbitrary = sized genExtractNews200ResponseImagesInner
+
+genExtractNews200ResponseImagesInner :: Int -> Gen ExtractNews200ResponseImagesInner
+genExtractNews200ResponseImagesInner n =
+  ExtractNews200ResponseImagesInner
+    <$> arbitraryReducedMaybe n -- extractNews200ResponseImagesInnerWidth :: Maybe Int
+    <*> arbitraryReducedMaybe n -- extractNews200ResponseImagesInnerTitle :: Maybe Text
+    <*> arbitraryReducedMaybe n -- extractNews200ResponseImagesInnerUrl :: Maybe Text
+    <*> arbitraryReducedMaybe n -- extractNews200ResponseImagesInnerHeight :: Maybe Int
+  
+instance Arbitrary ExtractNews200ResponseVideosInner where
+  arbitrary = sized genExtractNews200ResponseVideosInner
+
+genExtractNews200ResponseVideosInner :: Int -> Gen ExtractNews200ResponseVideosInner
+genExtractNews200ResponseVideosInner n =
+  ExtractNews200ResponseVideosInner
+    <$> arbitraryReducedMaybe n -- extractNews200ResponseVideosInnerSummary :: Maybe Text
+    <*> arbitraryReducedMaybe n -- extractNews200ResponseVideosInnerDuration :: Maybe Int
+    <*> arbitraryReducedMaybe n -- extractNews200ResponseVideosInnerThumbnail :: Maybe Text
+    <*> arbitraryReducedMaybe n -- extractNews200ResponseVideosInnerTitle :: Maybe Text
+    <*> arbitraryReducedMaybe n -- extractNews200ResponseVideosInnerUrl :: Maybe Text
   
 instance Arbitrary ExtractNewsLinks200Response where
   arbitrary = sized genExtractNewsLinks200Response
@@ -146,6 +171,33 @@ genGetGeoCoordinates200Response n =
     <$> arbitraryReducedMaybe n -- getGeoCoordinates200ResponseLatitude :: Maybe Double
     <*> arbitraryReducedMaybe n -- getGeoCoordinates200ResponseLongitude :: Maybe Double
     <*> arbitraryReducedMaybe n -- getGeoCoordinates200ResponseCity :: Maybe Text
+  
+instance Arbitrary RetrieveNewsArticlesByIds200Response where
+  arbitrary = sized genRetrieveNewsArticlesByIds200Response
+
+genRetrieveNewsArticlesByIds200Response :: Int -> Gen RetrieveNewsArticlesByIds200Response
+genRetrieveNewsArticlesByIds200Response n =
+  RetrieveNewsArticlesByIds200Response
+    <$> arbitraryReducedMaybe n -- retrieveNewsArticlesByIds200ResponseNews :: Maybe [RetrieveNewsArticlesByIds200ResponseNewsInner]
+  
+instance Arbitrary RetrieveNewsArticlesByIds200ResponseNewsInner where
+  arbitrary = sized genRetrieveNewsArticlesByIds200ResponseNewsInner
+
+genRetrieveNewsArticlesByIds200ResponseNewsInner :: Int -> Gen RetrieveNewsArticlesByIds200ResponseNewsInner
+genRetrieveNewsArticlesByIds200ResponseNewsInner n =
+  RetrieveNewsArticlesByIds200ResponseNewsInner
+    <$> arbitraryReducedMaybe n -- retrieveNewsArticlesByIds200ResponseNewsInnerSummary :: Maybe Text
+    <*> arbitraryReducedMaybe n -- retrieveNewsArticlesByIds200ResponseNewsInnerImage :: Maybe Text
+    <*> arbitraryReducedMaybe n -- retrieveNewsArticlesByIds200ResponseNewsInnerSentiment :: Maybe Double
+    <*> arbitraryReducedMaybe n -- retrieveNewsArticlesByIds200ResponseNewsInnerCatgory :: Maybe Text
+    <*> arbitraryReducedMaybe n -- retrieveNewsArticlesByIds200ResponseNewsInnerLanguage :: Maybe Text
+    <*> arbitraryReducedMaybe n -- retrieveNewsArticlesByIds200ResponseNewsInnerTitle :: Maybe Text
+    <*> arbitraryReducedMaybe n -- retrieveNewsArticlesByIds200ResponseNewsInnerUrl :: Maybe Text
+    <*> arbitraryReducedMaybe n -- retrieveNewsArticlesByIds200ResponseNewsInnerSourceCountry :: Maybe Text
+    <*> arbitraryReducedMaybe n -- retrieveNewsArticlesByIds200ResponseNewsInnerId :: Maybe Int
+    <*> arbitraryReducedMaybe n -- retrieveNewsArticlesByIds200ResponseNewsInnerText :: Maybe Text
+    <*> arbitraryReducedMaybe n -- retrieveNewsArticlesByIds200ResponseNewsInnerPublishDate :: Maybe Text
+    <*> arbitraryReducedMaybe n -- retrieveNewsArticlesByIds200ResponseNewsInnerAuthors :: Maybe [Text]
   
 instance Arbitrary SearchNews200Response where
   arbitrary = sized genSearchNews200Response
@@ -167,13 +219,15 @@ genSearchNews200ResponseNewsInner n =
     <$> arbitraryReducedMaybe n -- searchNews200ResponseNewsInnerSummary :: Maybe Text
     <*> arbitraryReducedMaybe n -- searchNews200ResponseNewsInnerImage :: Maybe Text
     <*> arbitraryReducedMaybe n -- searchNews200ResponseNewsInnerSentiment :: Maybe Double
-    <*> arbitraryReducedMaybe n -- searchNews200ResponseNewsInnerSourceCountry :: Maybe Text
+    <*> arbitraryReducedMaybe n -- searchNews200ResponseNewsInnerAuthor :: Maybe Text
     <*> arbitraryReducedMaybe n -- searchNews200ResponseNewsInnerLanguage :: Maybe Text
+    <*> arbitraryReducedMaybe n -- searchNews200ResponseNewsInnerVideo :: Maybe Text
+    <*> arbitraryReducedMaybe n -- searchNews200ResponseNewsInnerTitle :: Maybe Text
+    <*> arbitraryReducedMaybe n -- searchNews200ResponseNewsInnerUrl :: Maybe Text
+    <*> arbitraryReducedMaybe n -- searchNews200ResponseNewsInnerSourceCountry :: Maybe Text
     <*> arbitraryReducedMaybe n -- searchNews200ResponseNewsInnerId :: Maybe Int
     <*> arbitraryReducedMaybe n -- searchNews200ResponseNewsInnerText :: Maybe Text
-    <*> arbitraryReducedMaybe n -- searchNews200ResponseNewsInnerTitle :: Maybe Text
     <*> arbitraryReducedMaybe n -- searchNews200ResponseNewsInnerPublishDate :: Maybe Text
-    <*> arbitraryReducedMaybe n -- searchNews200ResponseNewsInnerUrl :: Maybe Text
     <*> arbitraryReducedMaybe n -- searchNews200ResponseNewsInnerAuthors :: Maybe [Text]
   
 instance Arbitrary TopNews200Response where
@@ -202,6 +256,7 @@ genTopNews200ResponseTopNewsInnerNewsInner n =
   TopNews200ResponseTopNewsInnerNewsInner
     <$> arbitraryReducedMaybe n -- topNews200ResponseTopNewsInnerNewsInnerSummary :: Maybe Text
     <*> arbitraryReducedMaybe n -- topNews200ResponseTopNewsInnerNewsInnerImage :: Maybe Text
+    <*> arbitraryReducedMaybe n -- topNews200ResponseTopNewsInnerNewsInnerAuthor :: Maybe Text
     <*> arbitraryReducedMaybe n -- topNews200ResponseTopNewsInnerNewsInnerId :: Maybe Int
     <*> arbitraryReducedMaybe n -- topNews200ResponseTopNewsInnerNewsInnerText :: Maybe Text
     <*> arbitraryReducedMaybe n -- topNews200ResponseTopNewsInnerNewsInnerTitle :: Maybe Text

@@ -8,6 +8,7 @@ All URIs are relative to *https://api.worldnewsapi.com*
 | [**extract_news_links**](NewsApi.md#extract_news_links) | **GET** /extract-news-links | Extract News Links |
 | [**get_geo_coordinates**](NewsApi.md#get_geo_coordinates) | **GET** /geo-coordinates | Get Geo Coordinates |
 | [**news_website_to_rss_feed**](NewsApi.md#news_website_to_rss_feed) | **GET** /feed.rss | News Website to RSS Feed |
+| [**retrieve_news_articles_by_ids**](NewsApi.md#retrieve_news_articles_by_ids) | **GET** /retrieve-news | Retrieve News Articles by Ids |
 | [**search_news**](NewsApi.md#search_news) | **GET** /search-news | Search News |
 | [**top_news**](NewsApi.md#top_news) | **GET** /top-news | Top News |
 
@@ -18,7 +19,7 @@ All URIs are relative to *https://api.worldnewsapi.com*
 
 Extract News
 
-Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, image, publish date, author, language, source country, and sentiment of the news article.
+Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, images, videos, publish date, authors, language, source country, and sentiment of the news article.
 
 ### Examples
 
@@ -322,6 +323,82 @@ end
 - **Accept**: application/xml
 
 
+## retrieve_news_articles_by_ids
+
+> <RetrieveNewsArticlesByIds200Response> retrieve_news_articles_by_ids(ids)
+
+Retrieve News Articles by Ids
+
+Retrieve information about one or more news articles by their ids. The ids can be retrieved from the search news or top news APIs.
+
+### Examples
+
+```ruby
+require 'time'
+require 'openapi_client'
+# setup authorization
+OpenapiClient.configure do |config|
+  # Configure API key authorization: apiKey
+  config.api_key['apiKey'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['apiKey'] = 'Bearer'
+
+  # Configure API key authorization: headerApiKey
+  config.api_key['headerApiKey'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['headerApiKey'] = 'Bearer'
+end
+
+api_instance = OpenapiClient::NewsApi.new
+ids = '2352,2354' # String | A comma separated list of news ids.
+
+begin
+  # Retrieve News Articles by Ids
+  result = api_instance.retrieve_news_articles_by_ids(ids)
+  p result
+rescue OpenapiClient::ApiError => e
+  puts "Error when calling NewsApi->retrieve_news_articles_by_ids: #{e}"
+end
+```
+
+#### Using the retrieve_news_articles_by_ids_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<RetrieveNewsArticlesByIds200Response>, Integer, Hash)> retrieve_news_articles_by_ids_with_http_info(ids)
+
+```ruby
+begin
+  # Retrieve News Articles by Ids
+  data, status_code, headers = api_instance.retrieve_news_articles_by_ids_with_http_info(ids)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <RetrieveNewsArticlesByIds200Response>
+rescue OpenapiClient::ApiError => e
+  puts "Error when calling NewsApi->retrieve_news_articles_by_ids_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **ids** | **String** | A comma separated list of news ids. |  |
+
+### Return type
+
+[**RetrieveNewsArticlesByIds200Response**](RetrieveNewsArticlesByIds200Response.md)
+
+### Authorization
+
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## search_news
 
 > <SearchNews200Response> search_news(opts)
@@ -350,7 +427,7 @@ end
 
 api_instance = OpenapiClient::NewsApi.new
 opts = {
-  text: 'tesla', # String | The text to match in the news content (at least 3 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford
+  text: 'tesla', # String | The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford
   source_countries: 'us,uk', # String | A comma-separated list of ISO 3166 country codes from which the news should originate.
   language: 'en', # String | The ISO 6391 language code of the news.
   min_sentiment: -0.8, # Float | The minimal sentiment of the news in range [-1,1].
@@ -398,7 +475,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **text** | **String** | The text to match in the news content (at least 3 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford | [optional] |
+| **text** | **String** | The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford | [optional] |
 | **source_countries** | **String** | A comma-separated list of ISO 3166 country codes from which the news should originate. | [optional] |
 | **language** | **String** | The ISO 6391 language code of the news. | [optional] |
 | **min_sentiment** | **Float** | The minimal sentiment of the news in range [-1,1]. | [optional] |

@@ -4,7 +4,7 @@ defmodule WorldNewsAPI.Mixfile do
   def project do
     [
       app: :worldnewsapi,
-      version: "1.1.1",
+      version: "1.2.0",
       elixir: "~> 1.10",
       build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,

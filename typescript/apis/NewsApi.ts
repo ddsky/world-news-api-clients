@@ -11,6 +11,7 @@ import {SecurityAuthentication} from '../auth/auth';
 import { ExtractNews200Response } from '../models/ExtractNews200Response';
 import { ExtractNewsLinks200Response } from '../models/ExtractNewsLinks200Response';
 import { GetGeoCoordinates200Response } from '../models/GetGeoCoordinates200Response';
+import { RetrieveNewsArticlesByIds200Response } from '../models/RetrieveNewsArticlesByIds200Response';
 import { SearchNews200Response } from '../models/SearchNews200Response';
 import { TopNews200Response } from '../models/TopNews200Response';
 
@@ -20,7 +21,7 @@ import { TopNews200Response } from '../models/TopNews200Response';
 export class NewsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, image, publish date, author, language, source country, and sentiment of the news article.
+     * Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, images, videos, publish date, authors, language, source country, and sentiment of the news article.
      * Extract News
      * @param url The url of the news.
      * @param analyze Whether to analyze the news (extract entities etc.)
@@ -244,9 +245,56 @@ export class NewsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Retrieve information about one or more news articles by their ids. The ids can be retrieved from the search news or top news APIs.
+     * Retrieve News Articles by Ids
+     * @param ids A comma separated list of news ids.
+     */
+    public async retrieveNewsArticlesByIds(ids: string, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'ids' is not null or undefined
+        if (ids === null || ids === undefined) {
+            throw new RequiredError("NewsApi", "retrieveNewsArticlesByIds", "ids");
+        }
+
+
+        // Path Params
+        const localVarPath = '/retrieve-news';
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+        // Query Params
+        if (ids !== undefined) {
+            requestContext.setQueryParam("ids", ObjectSerializer.serialize(ids, "string", ""));
+        }
+
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["apiKey"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        // Apply auth methods
+        authMethod = _config.authMethods["headerApiKey"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
      * Search and filter news by text, date, location, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
      * Search News
-     * @param text The text to match in the news content (at least 3 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford
+     * @param text The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford
      * @param sourceCountries A comma-separated list of ISO 3166 country codes from which the news should originate.
      * @param language The ISO 6391 language code of the news.
      * @param minSentiment The minimal sentiment of the news in range [-1,1].
@@ -642,6 +690,53 @@ export class NewsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "any", ""
             ) as any;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+        }
+
+        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to retrieveNewsArticlesByIds
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async retrieveNewsArticlesByIdsWithHttpInfo(response: ResponseContext): Promise<HttpInfo<RetrieveNewsArticlesByIds200Response >> {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: RetrieveNewsArticlesByIds200Response = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "RetrieveNewsArticlesByIds200Response", ""
+            ) as RetrieveNewsArticlesByIds200Response;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Unauthorized", undefined, response.headers);
+        }
+        if (isCodeInRange("402", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Payment Required", undefined, response.headers);
+        }
+        if (isCodeInRange("403", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Forbidden", undefined, response.headers);
+        }
+        if (isCodeInRange("404", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Not Found", undefined, response.headers);
+        }
+        if (isCodeInRange("406", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Not Acceptable", undefined, response.headers);
+        }
+        if (isCodeInRange("429", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Too Many Requests", undefined, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: RetrieveNewsArticlesByIds200Response = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "RetrieveNewsArticlesByIds200Response", ""
+            ) as RetrieveNewsArticlesByIds200Response;
             return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 

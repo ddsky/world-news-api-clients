@@ -4,6 +4,7 @@
 #import "OAIExtractNews200Response.h"
 #import "OAIExtractNewsLinks200Response.h"
 #import "OAIGetGeoCoordinates200Response.h"
+#import "OAIRetrieveNewsArticlesByIds200Response.h"
 #import "OAISearchNews200Response.h"
 #import "OAITopNews200Response.h"
 
@@ -55,7 +56,7 @@ NSInteger kOAINewsApiMissingParamErrorCode = 234513;
 
 ///
 /// Extract News
-/// Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, image, publish date, author, language, source country, and sentiment of the news article.
+/// Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, images, videos, publish date, authors, language, source country, and sentiment of the news article.
 ///  @param url The url of the news. 
 ///
 ///  @param analyze Whether to analyze the news (extract entities etc.) 
@@ -377,9 +378,77 @@ NSInteger kOAINewsApiMissingParamErrorCode = 234513;
 }
 
 ///
+/// Retrieve News Articles by Ids
+/// Retrieve information about one or more news articles by their ids. The ids can be retrieved from the search news or top news APIs.
+///  @param ids A comma separated list of news ids. 
+///
+///  @returns OAIRetrieveNewsArticlesByIds200Response*
+///
+-(NSURLSessionTask*) retrieveNewsArticlesByIdsWithIds: (NSString*) ids
+    completionHandler: (void (^)(OAIRetrieveNewsArticlesByIds200Response* output, NSError* error)) handler {
+    // verify the required parameter 'ids' is set
+    if (ids == nil) {
+        NSParameterAssert(ids);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"ids"] };
+            NSError* error = [NSError errorWithDomain:kOAINewsApiErrorDomain code:kOAINewsApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/retrieve-news"];
+
+    NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
+
+    NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
+    if (ids != nil) {
+        queryParams[@"ids"] = ids;
+    }
+    NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
+    [headerParams addEntriesFromDictionary:self.defaultHeaders];
+    // HTTP header `Accept`
+    NSString *acceptHeader = [self.apiClient.sanitizer selectHeaderAccept:@[@"application/json"]];
+    if(acceptHeader.length > 0) {
+        headerParams[@"Accept"] = acceptHeader;
+    }
+
+    // response content type
+    NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
+
+    // request content type
+    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[]];
+
+    // Authentication setting
+    NSArray *authSettings = @[@"apiKey", @"headerApiKey"];
+
+    id bodyParam = nil;
+    NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
+
+    return [self.apiClient requestWithPath: resourcePath
+                                    method: @"GET"
+                                pathParams: pathParams
+                               queryParams: queryParams
+                                formParams: formParams
+                                     files: localVarFiles
+                                      body: bodyParam
+                              headerParams: headerParams
+                              authSettings: authSettings
+                        requestContentType: requestContentType
+                       responseContentType: responseContentType
+                              responseType: @"OAIRetrieveNewsArticlesByIds200Response*"
+                           completionBlock: ^(id data, NSError *error) {
+                                if(handler) {
+                                    handler((OAIRetrieveNewsArticlesByIds200Response*)data, error);
+                                }
+                            }];
+}
+
+///
 /// Search News
 /// Search and filter news by text, date, location, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
-///  @param text The text to match in the news content (at least 3 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford (optional)
+///  @param text The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford (optional)
 ///
 ///  @param sourceCountries A comma-separated list of ISO 3166 country codes from which the news should originate. (optional)
 ///

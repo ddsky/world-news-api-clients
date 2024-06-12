@@ -9,9 +9,13 @@ encoder.ts
 git_push.sh
 index.ts
 model/extractNews200Response.ts
+model/extractNews200ResponseImagesInner.ts
+model/extractNews200ResponseVideosInner.ts
 model/extractNewsLinks200Response.ts
 model/getGeoCoordinates200Response.ts
 model/models.ts
+model/retrieveNewsArticlesByIds200Response.ts
+model/retrieveNewsArticlesByIds200ResponseNewsInner.ts
 model/searchNews200Response.ts
 model/searchNews200ResponseNewsInner.ts
 model/topNews200Response.ts

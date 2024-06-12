@@ -3,7 +3,7 @@ World News API
 
 The world's news wrapped into a single API.
 
-API version: 1.1.1
+API version: 1.2.0
 Contact: mail@worldnewsapi.com
 */
 
@@ -22,6 +22,7 @@ var _ MappedNullable = &TopNews200ResponseTopNewsInnerNewsInner{}
 type TopNews200ResponseTopNewsInnerNewsInner struct {
 	Summary NullableString `json:"summary,omitempty"`
 	Image NullableString `json:"image,omitempty"`
+	Author NullableString `json:"author,omitempty"`
 	Id *int32 `json:"id,omitempty"`
 	Text NullableString `json:"text,omitempty"`
 	Title NullableString `json:"title,omitempty"`
@@ -129,6 +130,48 @@ func (o *TopNews200ResponseTopNewsInnerNewsInner) SetImageNil() {
 // UnsetImage ensures that no value is present for Image, not even an explicit nil
 func (o *TopNews200ResponseTopNewsInnerNewsInner) UnsetImage() {
 	o.Image.Unset()
+}
+
+// GetAuthor returns the Author field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TopNews200ResponseTopNewsInnerNewsInner) GetAuthor() string {
+	if o == nil || IsNil(o.Author.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.Author.Get()
+}
+
+// GetAuthorOk returns a tuple with the Author field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TopNews200ResponseTopNewsInnerNewsInner) GetAuthorOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Author.Get(), o.Author.IsSet()
+}
+
+// HasAuthor returns a boolean if a field has been set.
+func (o *TopNews200ResponseTopNewsInnerNewsInner) HasAuthor() bool {
+	if o != nil && o.Author.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAuthor gets a reference to the given NullableString and assigns it to the Author field.
+func (o *TopNews200ResponseTopNewsInnerNewsInner) SetAuthor(v string) {
+	o.Author.Set(&v)
+}
+// SetAuthorNil sets the value for Author to be an explicit nil
+func (o *TopNews200ResponseTopNewsInnerNewsInner) SetAuthorNil() {
+	o.Author.Set(nil)
+}
+
+// UnsetAuthor ensures that no value is present for Author, not even an explicit nil
+func (o *TopNews200ResponseTopNewsInnerNewsInner) UnsetAuthor() {
+	o.Author.Unset()
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
@@ -378,6 +421,9 @@ func (o TopNews200ResponseTopNewsInnerNewsInner) ToMap() (map[string]interface{}
 	}
 	if o.Image.IsSet() {
 		toSerialize["image"] = o.Image.Get()
+	}
+	if o.Author.IsSet() {
+		toSerialize["author"] = o.Author.Get()
 	}
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id

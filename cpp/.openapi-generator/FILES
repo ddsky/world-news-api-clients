@@ -7,6 +7,10 @@ client/OAIExtractNewsLinks_200_response.cpp
 client/OAIExtractNewsLinks_200_response.h
 client/OAIExtractNews_200_response.cpp
 client/OAIExtractNews_200_response.h
+client/OAIExtractNews_200_response_images_inner.cpp
+client/OAIExtractNews_200_response_images_inner.h
+client/OAIExtractNews_200_response_videos_inner.cpp
+client/OAIExtractNews_200_response_videos_inner.h
 client/OAIGetGeoCoordinates_200_response.cpp
 client/OAIGetGeoCoordinates_200_response.h
 client/OAIHelpers.cpp
@@ -20,6 +24,10 @@ client/OAINewsApi.h
 client/OAIOauth.cpp
 client/OAIOauth.h
 client/OAIObject.h
+client/OAIRetrieveNewsArticlesByIds_200_response.cpp
+client/OAIRetrieveNewsArticlesByIds_200_response.h
+client/OAIRetrieveNewsArticlesByIds_200_response_news_inner.cpp
+client/OAIRetrieveNewsArticlesByIds_200_response_news_inner.h
 client/OAISearchNews_200_response.cpp
 client/OAISearchNews_200_response.h
 client/OAISearchNews_200_response_news_inner.cpp

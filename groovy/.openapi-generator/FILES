@@ -4,8 +4,12 @@ build.gradle
 src/main/groovy/org/openapitools/api/ApiUtils.groovy
 src/main/groovy/org/openapitools/api/NewsApi.groovy
 src/main/groovy/org/openapitools/model/ExtractNews200Response.groovy
+src/main/groovy/org/openapitools/model/ExtractNews200ResponseImagesInner.groovy
+src/main/groovy/org/openapitools/model/ExtractNews200ResponseVideosInner.groovy
 src/main/groovy/org/openapitools/model/ExtractNewsLinks200Response.groovy
 src/main/groovy/org/openapitools/model/GetGeoCoordinates200Response.groovy
+src/main/groovy/org/openapitools/model/RetrieveNewsArticlesByIds200Response.groovy
+src/main/groovy/org/openapitools/model/RetrieveNewsArticlesByIds200ResponseNewsInner.groovy
 src/main/groovy/org/openapitools/model/SearchNews200Response.groovy
 src/main/groovy/org/openapitools/model/SearchNews200ResponseNewsInner.groovy
 src/main/groovy/org/openapitools/model/TopNews200Response.groovy

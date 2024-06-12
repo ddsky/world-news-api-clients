@@ -1,8 +1,8 @@
 # java-client
 
 World News API
-- API version: 1.1.1
-  - Build date: 2024-06-01T02:45:11.032422500+02:00[Europe/Berlin]
+- API version: 1.2.0
+  - Build date: 2024-06-12T23:41:33.855027+02:00[Europe/Berlin]
   - Generator version: 7.5.0
 
 The world's news wrapped into a single API.
@@ -41,7 +41,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.worldnewsapi</groupId>
   <artifactId>java-client</artifactId>
-  <version>1.1.1</version>
+  <version>1.2.0</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -57,7 +57,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "com.worldnewsapi:java-client:1.1.1"
+     implementation "com.worldnewsapi:java-client:1.2.0"
   }
 ```
 
@@ -71,7 +71,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/java-client-1.1.1.jar`
+* `target/java-client-1.2.0.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
@@ -133,6 +133,7 @@ Class | Method | HTTP request | Description
 *NewsApi* | [**extractNewsLinks**](docs/NewsApi.md#extractNewsLinks) | **GET** /extract-news-links | Extract News Links
 *NewsApi* | [**getGeoCoordinates**](docs/NewsApi.md#getGeoCoordinates) | **GET** /geo-coordinates | Get Geo Coordinates
 *NewsApi* | [**newsWebsiteToRSSFeed**](docs/NewsApi.md#newsWebsiteToRSSFeed) | **GET** /feed.rss | News Website to RSS Feed
+*NewsApi* | [**retrieveNewsArticlesByIds**](docs/NewsApi.md#retrieveNewsArticlesByIds) | **GET** /retrieve-news | Retrieve News Articles by Ids
 *NewsApi* | [**searchNews**](docs/NewsApi.md#searchNews) | **GET** /search-news | Search News
 *NewsApi* | [**topNews**](docs/NewsApi.md#topNews) | **GET** /top-news | Top News
 
@@ -140,8 +141,12 @@ Class | Method | HTTP request | Description
 ## Documentation for Models
 
  - [ExtractNews200Response](docs/ExtractNews200Response.md)
+ - [ExtractNews200ResponseImagesInner](docs/ExtractNews200ResponseImagesInner.md)
+ - [ExtractNews200ResponseVideosInner](docs/ExtractNews200ResponseVideosInner.md)
  - [ExtractNewsLinks200Response](docs/ExtractNewsLinks200Response.md)
  - [GetGeoCoordinates200Response](docs/GetGeoCoordinates200Response.md)
+ - [RetrieveNewsArticlesByIds200Response](docs/RetrieveNewsArticlesByIds200Response.md)
+ - [RetrieveNewsArticlesByIds200ResponseNewsInner](docs/RetrieveNewsArticlesByIds200ResponseNewsInner.md)
  - [SearchNews200Response](docs/SearchNews200Response.md)
  - [SearchNews200ResponseNewsInner](docs/SearchNews200ResponseNewsInner.md)
  - [TopNews200Response](docs/TopNews200Response.md)

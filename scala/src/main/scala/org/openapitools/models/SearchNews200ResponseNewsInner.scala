@@ -13,25 +13,29 @@ import scala.collection.immutable.Seq
  * @param summary 
  * @param image 
  * @param sentiment 
- * @param sourceUnderscorecountry 
+ * @param author 
  * @param language 
+ * @param video 
+ * @param title 
+ * @param url 
+ * @param sourceUnderscorecountry 
  * @param id 
  * @param text 
- * @param title 
  * @param publishUnderscoredate 
- * @param url 
  * @param authors 
  */
 case class SearchNews200ResponseNewsInner(summary: Option[String],
                 image: Option[String],
                 sentiment: Option[BigDecimal],
-                sourceUnderscorecountry: Option[String],
+                author: Option[String],
                 language: Option[String],
+                video: Option[String],
+                title: Option[String],
+                url: Option[String],
+                sourceUnderscorecountry: Option[String],
                 id: Option[Int],
                 text: Option[String],
-                title: Option[String],
                 publishUnderscoredate: Option[String],
-                url: Option[String],
                 authors: Option[Seq[String]]
                 )
 

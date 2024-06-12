@@ -6,7 +6,7 @@ info:
   description: The world's news wrapped into a single API.
   termsOfService: https://worldnewsapi.com/terms
   title: World News API
-  version: 1.1.1
+  version: 1.2.0
 servers:
 - url: https://api.worldnewsapi.com
 security:
@@ -25,16 +25,16 @@ paths:
         url: https://worldnewsapi.com/docs/search-news/
       operationId: searchNews
       parameters:
-      - description: "The text to match in the news content (at least 3 characters).\
-          \ By default all query terms are expected, you can use an uppercase OR to\
-          \ search for any terms, e.g. tesla OR ford"
+      - description: "The text to match in the news content (at least 3 characters,\
+          \ maximum 100 characters). By default all query terms are expected, you\
+          \ can use an uppercase OR to search for any terms, e.g. tesla OR ford"
         explode: false
         in: query
         name: text
         required: false
         schema:
           example: tesla
-          maxLength: 300
+          maxLength: 100
           pattern: "."
           type: string
         style: form
@@ -212,48 +212,87 @@ paths:
                     number: 10
                     available: 83
                     news:
-                    - summary: "Tesla CEO Elon Musk has revealed new details about\
-                        \ the upcoming Cybertruck electric pickup truck. According\
-                        \ to Musk, its initial production will begin with a four-motor\
-                        \ variant."
-                      image: https://internetprotocol.co/content/images/2021/12/Tesla-to-Release-a-Four-Motor-Version-of-Cybertruck.png
-                      sentiment: 0.712523
-                      source_country: co
+                    - summary: "Twenty nine areas around Whitehouse Station, NJ, which\
+                        \ was the epicenter of the quake, have since reported rumbles."
+                      image: https://nypost.com/wp-content/uploads/sites/2/2024/04/79582612.jpg?quality=75&strip=all&w=1200
+                      sentiment: -0.545
+                      author: Deirdre Bardolf
                       language: en
-                      id: 28
-                      text: "Tesla CEO Elon Musk has revealed new details about the\
-                        \ upcoming Cybertruck electric pickup truck, the mass production\
-                        \ of which was delayed until 2023 because of the lack of components\
-                        \ and a lot of complex technologies that need to be scaled\
-                        \ up. According to Musk, the initial production of the electric\
-                        \ pickup truck will begin with a four-motor variant with “\
-                        independent, ultra fast response torque control of each wheel,”\
-                        \ the tweet reads. In response, Twitter users asked if the\
-                        \ Cybertruck could turn like a tank. Musk said that thanks\
-                        \ to both the rear and front wheel steer, the electric truck\
-                        \ will not only be able to turn like a tank, but also drive\
-                        \ diagonally like a crab. According to Electrek, this change\
-                        \ could be Tesla's reaction to what its competitors do. Since\
-                        \ the introduction of Tesla’s novelty, the market for electric\
-                        \ pickup trucks has significantly evolved. Currently, one\
-                        \ electric pickup on the market can turn like a tank – the\
-                        \ Rivian R1T, while GMC's Hummer EV can drive diagonally.\
-                        \ Following the announcement of Tesla Cybertruck in 2019,\
-                        \ the company announced three configurations of the pickup\
-                        \ truck: the entry-level model with one motor, the one with\
-                        \ two motors, and the one with three. Rumor has it that the\
-                        \ company intends to abandon the single-motor version altogether.\
-                        \ In this case, Tesla Cybertruck will be sold with two, three,\
-                        \ and four motors. Musk has promised to provide an update\
-                        \ on the pickup's roadmap on the next earnings call. The production\
-                        \ of Tesla Cybertruck is expected to begin at the end of 2022,\
-                        \ and its mass production is slated to start in 2023."
-                      title: Tesla to Release a Four-Motor Version of Cybertruck
-                      publish_date: 2022-09-30 01:07:48
-                      url: https://internetprotocol.co/hitech/2021/12/07/tesla-to-release-a-four-motor-cybertruck/
+                      video: https://cdn.jwplayer.com/videos/70lDQJpg-RyIcpnTz.mp4
+                      title: Nearly 30 aftershocks recorded around NJ quake epicenter
+                        since Friday
+                      url: https://nypost.com/2024/04/06/us-news/nearly-30-aftershocks-recorded-around-nj-quake-epicenter/
+                      source_country: us
+                      id: 206030983
+                      text: "New Jersey continues to shake after Friday’s 4.8-magnitude\
+                        \ earthquake and likely will continue to do so for some time.\
+                        \ Dozens of aftershocks were recorded in the Garden State\
+                        \ since the rare quake hit, including one tremor of 3.8 after\
+                        \ the initial event. But residents of NYC shouldn’t expect\
+                        \ anything beyond possibly a light shake in the coming days.\
+                        \ Rumbles were measured in 29 nine areas around Whitehouse\
+                        \ Station, NJ, which was the epicenter of the quake, including\
+                        \ near Tewksbury and Bedminster, according to the United States\
+                        \ Geological Survey. The smaller temblors hit as far as 13\
+                        \ miles away from the epicenter. One clocked in at 1.9 just\
+                        \ after 1 a.m. Saturday morning just north of Whitehouse Station\
+                        \ — about 45 miles west of NYC — and another at 2.5 just before\
+                        \ 7 a.m. near Gladstone, northeast of the epicenter. Over\
+                        \ the next week, there is a 74% chance of additional 3-plus\
+                        \ magnitude aftershocks, but the USGS does not foresee more\
+                        \ than five occurring. There is just a 14% chance of a quake\
+                        \ clocking in at a magnitude of 4 or higher, and likely only\
+                        \ one will come this week. Over the course of the next month,\
+                        \ however, the chance of a 3-plus magnitude quake rises to\
+                        \ 84%, while a the chance of a 4 or greater is 18%. It’s almost\
+                        \ certain — 98% — that more 3-plus magnitude shakers will\
+                        \ come in the next year, the USGS said. The nearly 30 rumbles\
+                        \ that followed the first quake aren’t a shock to geologists,\
+                        \ though. “We do expect aftershocks like this to occur in\
+                        \ the days, weeks and months after the main shock, so this\
+                        \ is fully within the realm of what is expected,” USGS research\
+                        \ geologist Alex Hatem told The Post. The chance of NYC feeling\
+                        \ another rattle, however, is low. A light shake could be\
+                        \ possible in the coming days, Hatem said, but nothing like\
+                        \ the quake that rocked the Statue of Liberty and City Hall\
+                        \ Friday or the aftershock that rippled through later that\
+                        \ evening. The quake grounded flights and halted traffic around\
+                        \ the Big Apple. “Should this sequence continue as it is,\
+                        \ which we expect it to, there won’t be anything greater than\
+                        \ what already happened,” Hatem said. Though researchers expect\
+                        \ earthquakes to happen “anytime, anywhere,” it is a rare\
+                        \ occurrence for New Jersey, which doesn’t lie on an active\
+                        \ plate boundary, Hatem said. The incident did occur, however,\
+                        \ near the Ramapo Fault, which is an ancient crack in the\
+                        \ Earth’s crust. Faults lie on the edges of plates and can\
+                        \ sometimes be the site of quakes. New Jersey Gov. Phil Murphy\
+                        \ posted on X Saturday that the state’s emergency operations\
+                        \ center was deactivated that morning. “We have had no reports\
+                        \ of major damage to structures, roadways, or infrastructure\
+                        \ as a result of yesterday’s earthquake,” Murphy said. Residents\
+                        \ in several homes in Newark were able to return to their\
+                        \ homes Friday night after being evacuated over concerns about\
+                        \ possible structural damage. Gov. Hochul and Mayor Adams\
+                        \ said there were no initial reports of injuries or damage\
+                        \ in New York, though it later emerged that the walls of a\
+                        \ school gym in Brooklyn suffered several cracks. Engineers\
+                        \ with the city Department of Buildings ordered the gymnasium\
+                        \ at J.H.S. 218 in East New York shut down until repairs are\
+                        \ made. The earthquake was the biggest for the tri-state area\
+                        \ since 1884. The USGS recently released a study that showed\
+                        \ that about 75% of the US that could experience a damaging\
+                        \ earthquake in the next 100 years. Friday’s rattle should\
+                        \ be a “gentle reminder” to those on the East Coast, however,\
+                        \ to be prepared and familiar with “drop, cover and hold on”\
+                        \ actions to stay safe in the event of another quake. New\
+                        \ York City officials were blasted for emergency alerts that\
+                        \ didn’t go out until 25 minutes after the earthquake struck.\
+                        \ Some NYC public school alerts didn’t go out until an hour\
+                        \ and a half after the shock — and were resent Saturday morning,\
+                        \ telling parents that dismissal would proceed as usual."
+                      publish_date: 2024-04-06 22:44:18
                       authors:
-                      - Iwan Stone
-                      - Zahna Eklund
+                      - Deirdre Bardolf
               schema:
                 $ref: '#/components/schemas/searchNews_200_response'
           description: Success
@@ -340,12 +379,14 @@ paths:
                     - news:
                       - summary: '...'
                         image: https://politicalwire.com/wp-content/uploads/2018/02/PW-podcast-logo.jpg
+                        author: Taegan Goddard
                         id: 224767206
                         text: '...'
                         title: Jury to Begin Deliberations In Trump Trial
                         publish_date: 2024-05-29 00:10:48
                         url: https://politicalwire.com/2024/05/28/jury-to-begin-deliberations-in-trump-trial/
-                        authors: []
+                        authors:
+                        - Taegan Goddard
                       - summary: '...'
                         image: https://dims.apnews.com/dims4/default/3446536/2147483647/strip/true/crop/6195x3485+0+323/resize/1440x810!/quality/90/?url=https%3A%2F%2Fassets.apnews.com%2Fec%2Fd5%2Ff56fdc38f86e38b6217b50083d19%2Fd5ef4afe1cb64825be1349de8fd40df0
                         id: 224839780
@@ -393,13 +434,15 @@ paths:
                         authors: []
                     - news:
                       - image: https://cdn.vox-cdn.com/thumbor/WBEMdSSOD_jHJGnNV7hLX88zANk=/0x444:5601x3376/fit-in/1200x630/cdn.vox-cdn.com/uploads/chorus_asset/file/25469085/2152809074.jpg
+                        author: Brendan Porath
                         id: 225109966
                         text: '...'
                         title: Scottie Scheffler PGA Championship charges set to get
                           dropped
                         publish_date: 2024-05-29 15:24:34
                         url: https://www.sbnation.com/golf/2024/5/29/24167024/scottie-scheffler-pga-championship-louisville-police-drop-charges
-                        authors: []
+                        authors:
+                        - Brendan Porath
                       - summary: '...'
                         image: https://www.pilotonline.com/wp-content/uploads/2024/05/Scheffler_Arrest_Golf_86723_6d56d8.jpg?w=1024
                         id: 225118216
@@ -473,12 +516,88 @@ paths:
       summary: Top News
       tags:
       - News
+  /retrieve-news:
+    get:
+      deprecated: false
+      description: Retrieve information about one or more news articles by their ids.
+        The ids can be retrieved from the search news or top news APIs.
+      externalDocs:
+        description: Read entire docs
+        url: https://worldnewsapi.com/docs/retrieve-news/
+      operationId: retrieveNewsArticlesByIds
+      parameters:
+      - description: A comma separated list of news ids.
+        explode: false
+        in: query
+        name: ids
+        required: true
+        schema:
+          example: "2352,2354"
+          maxLength: 10000
+          pattern: "."
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Response:
+                  value:
+                    news:
+                    - summary: '...'
+                      image: https://www.amnesty.org/en/wp-content/uploads/2021/06/272748-1024x433.jpg
+                      sentiment: -0.176
+                      catgory: politics
+                      language: en
+                      title: "While China and the US squabble, the world’s debt and\
+                        \ climate crises worsen - Amnesty International"
+                      url: https://www.amnesty.org/en/latest/news/2020/09/while-china-and-the-us-squabble-the-world-debt-and-climate-crises-worsen/
+                      source_country: mx
+                      id: 2352
+                      text: '...'
+                      publish_date: 2020-09-11 18:05:26
+                      authors:
+                      - Amnesty International
+                      - William Nee
+                    - summary: '...'
+                      image: https://www.amnesty.org/en/wp-content/uploads/2021/06/264281-1024x433.jpg
+                      sentiment: -0.449
+                      catgory: politics
+                      language: en
+                      title: Sexual violence against Hong Kong protesters – what’s
+                        going on? - Amnesty International
+                      url: https://www.amnesty.org/en/latest/news/2019/12/sexual-violence-against-hong-kong-protesters/
+                      source_country: mx
+                      id: 2354
+                      text: '...'
+                      publish_date: 2019-12-20 11:14:17
+                      authors:
+                      - Amnesty International
+              schema:
+                $ref: '#/components/schemas/retrieveNewsArticlesByIds_200_response'
+          description: Success
+        "401":
+          description: Unauthorized
+        "402":
+          description: Payment Required
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "406":
+          description: Not Acceptable
+        "429":
+          description: Too Many Requests
+      summary: Retrieve News Articles by Ids
+      tags:
+      - News
   /extract-news:
     get:
       deprecated: false
       description: "Extract a news article from a website to a well structure JSON\
-        \ object. The API will return the title, text, URL, image, publish date, author,\
-        \ language, source country, and sentiment of the news article."
+        \ object. The API will return the title, text, URL, images, videos, publish\
+        \ date, authors, language, source country, and sentiment of the news article."
       externalDocs:
         description: Read entire docs
         url: https://worldnewsapi.com/docs/extract-news/
@@ -511,41 +630,111 @@ paths:
               examples:
                 Response:
                   value:
-                    title: Tesla to Release a Four-Motor Version of Cybertruck
-                    text: "Tesla CEO Elon Musk has revealed new details about the\
-                      \ upcoming Cybertruck electric pickup truck, the mass production\
-                      \ of which was delayed until 2023 because of the lack of components\
-                      \ and a lot of complex technologies that need to be scaled up.\
-                      \ According to Musk, the initial production of the electric\
-                      \ pickup truck will begin with a four-motor variant with “independent,\
-                      \ ultra fast response torque control of each wheel,” the tweet\
-                      \ reads. In response, Twitter users asked if the Cybertruck\
-                      \ could turn like a tank. Musk said that thanks to both the\
-                      \ rear and front wheel steer, the electric truck will not only\
-                      \ be able to turn like a tank, but also drive diagonally like\
-                      \ a crab. According to Electrek, this change could be Tesla's\
-                      \ reaction to what its competitors do. Since the introduction\
-                      \ of Tesla’s novelty, the market for electric pickup trucks\
-                      \ has significantly evolved. Currently, one electric pickup\
-                      \ on the market can turn like a tank – the Rivian R1T, while\
-                      \ GMC's Hummer EV can drive diagonally. Following the announcement\
-                      \ of Tesla Cybertruck in 2019, the company announced three configurations\
-                      \ of the pickup truck: the entry-level model with one motor,\
-                      \ the one with two motors, and the one with three. Rumor has\
-                      \ it that the company intends to abandon the single-motor version\
-                      \ altogether. In this case, Tesla Cybertruck will be sold with\
-                      \ two, three, and four motors. Musk has promised to provide\
-                      \ an update on the pickup's roadmap on the next earnings call.\
-                      \ The production of Tesla Cybertruck is expected to begin at\
-                      \ the end of 2022, and its mass production is slated to start\
-                      \ in 2023."
-                    url: https://internetprotocol.co/hitech/2021/12/07/tesla-to-release-a-four-motor-cybertruck/
-                    image: https://internetprotocol.co/content/images/2021/12/Tesla-to-Release-a-Four-Motor-Version-of-Cybertruck.png
-                    publish_date: 2022-09-30 01:07:48
-                    author: Kay Lee
+                    title: Known terrorist spent year in US after being wrongly released
+                      by feds — and GOP lawmakers demand answers
+                    text: "A Somali terrorist was allowed into the country and was\
+                      \ able to operate freely for almost a year before authorities\
+                      \ realized their error and rearrested him. Republican lawmakers\
+                      \ are demanding information from Homeland Security Secretary\
+                      \ Alejandro Mayorkas about what happened to the man — and whether\
+                      \ US citizens funded any part of his journey to or stay in the\
+                      \ US. The 27-year-old Somalian — who so far has not been identified\
+                      \ by name — was on the watchlist as “a confirmed member of al\
+                      \ Shabaab” involved in the use, manufacture or transportation\
+                      \ of explosives or firearms, but a border bungle meant he was\
+                      \ released after initially being arrested for crossing into\
+                      \ the country illegally in California in March 2023. A letter\
+                      \ from Republican lawmakers seeks to find the al-Shabaab member’\
+                      s path from illegally crossing the border to Minnesota, were\
+                      \ he was eventually rearrested in January, and whether he received\
+                      \ any government benefits. It also seeks to find if he took\
+                      \ a commercial flight with US citizens to reach their state\
+                      \ and if his travel was funded with taxpayer dollars, according\
+                      \ to the Tuesday letter, first obtained by The Post. The letter\
+                      \ states: “Due to Minnesota’s far distance from the border,\
+                      \ it is not an easy task for migrants to travel to the state\
+                      \ … “Did the al-Shabbab terrorist travel to Minnesota with the\
+                      \ assistance, either direct or indirect of an [Non-Governmental\
+                      \ Organization]? If so, which NGO was responsible for transporting\
+                      \ the individual to Minnesota?” The terrorist organization member\
+                      \ had initially crossed into California and been arrested by\
+                      \ the Border Patrol. However, the Terrorist Screening Center\
+                      \ determined he was a “mismatch” to the terror watchlist, leading\
+                      \ to his release. Nearly a year later, Immigration and Customs\
+                      \ Enforcement (ICE) nabbed him after federal authorities made\
+                      \ a “redetermination” and realized he was associated with the\
+                      \ Somalian militant group. Al-Shabaab was formed as the militant\
+                      \ wing of the Somali Council of Islamic Courts, which controlled\
+                      \ the southern part of the country in late 2006. Its rule was\
+                      \ defeated in 2007, according to the Office of the Director\
+                      \ of National Intelligence, but it has since operated as an\
+                      \ underground network and is involved in wars in and around\
+                      \ Somalia. It was designated a terrorist organization in 2008\
+                      \ by the US government and is notorious for carrying out bombings\
+                      \ and suicide attacks. In 2013, al-Shabaab was responsible for\
+                      \ a massacre at the Westgate mall in Kenya, killing 67 individuals.\
+                      \ US forces have conducted six strikes in Somalia against al-Shabaab\
+                      \ already this year, killing two dozen militants in the latest\
+                      \ actions, according to CNN. In a February press conference,\
+                      \ ICE Acting Director Patrick Lechleitner said his agency arrested\
+                      \ the individual “within 48 hours” of learning his true identity.\
+                      \ “The Biden administration’s open-borders agenda allowed a\
+                      \ known terrorist to roam freely throughout our state, and now\
+                      \ they must answer for their inexcusable negligence,” House\
+                      \ Majority Whip Tom Emmer (R-Minn.) said in a statement to The\
+                      \ Post regarding the probe. The Border Patrol has recorded an\
+                      \ ever-growing number of migrants listed on the terror watchlist\
+                      \ attempting to enter the US illegally in recent years. Between\
+                      \ October 2023 and February, agents have already recorded 70\
+                      \ encounters at both the southern and northern borders, according\
+                      \ to federal data. There were 172 such encounters recorded in\
+                      \ fiscal year 2023, which ran from October 2022 to September\
+                      \ 2023, 98 in fiscal year 2022, 16 in fiscal year 2021 and 14\
+                      \ between fiscal years 2017 and 2020. In March, Border Patrol\
+                      \ agents apprehended Lebanese national Basel Bassel Ebbadi,\
+                      \ 22, who told personnel that he came to the US “to try to make\
+                      \ a bomb,” according to internal federal documents first obtained\
+                      \ by The Post. Ebbadi admitted to a border agent that he is\
+                      \ a member of Hezbollah and was later confirmed as a “positive\
+                      \ match” on the terror watchlist."
+                    url: https://nypost.com/2024/04/02/us-news/lawmakers-demand-to-know-if-taxpayers-funded-al-shabaab-terrorist/
+                    image: https://nypost.com/wp-content/uploads/sites/2/2024/04/al-shabaab-terrorist-migrant-border-crossing-california-minnesota-mayorkas-comp-02.jpg?quality=75&strip=all&w=1200
+                    images:
+                    - width: 879
+                      title: Masked al-Shabaab members hold up weapons
+                      url: https://nypost.com/wp-content/uploads/sites/2/2024/04/2010-somalias-hardline-islamist-rebel-39796525.jpg?w=1024
+                      height: 590
+                    - width: 787
+                      title: Members of al-Shabaab
+                      url: https://nypost.com/wp-content/uploads/sites/2/2024/04/2010-al-shabaab-said-friday-39807171.jpg?w=1024
+                      height: 590
+                    - width: 943
+                      title: Border Patrol agents apprehend migrants
+                      url: https://nypost.com/wp-content/uploads/sites/2/2024/04/migrants-placed-vans-u-s-78334041.jpg?w=1024
+                      height: 590
+                    - width: 885
+                      title: Migrants await to be transported by Border Patrol agents
+                      url: https://nypost.com/wp-content/uploads/sites/2/2024/04/asylum-seeking-migrants-stand-line-71972565.jpg?w=1024
+                      height: 590
+                    - width: 885
+                      title: Border Patrol vehicle
+                      url: https://nypost.com/wp-content/uploads/sites/2/2024/04/u-s-border-patrol-vehicle-56717052.jpg?w=1024
+                      height: 590
+                    - width: 1200
+                      url: https://nypost.com/wp-content/uploads/sites/2/2024/04/al-shabaab-terrorist-migrant-border-crossing-california-minnesota-mayorkas-comp-02.jpg?quality=75&strip=all&w=1200
+                      height: 800
+                    video: https://cdn.jwplayer.com/videos/Den1Nq47-RyIcpnTz.mp4
+                    videos:
+                    - summary: "Today's Video Headlines: 4/2/24"
+                      duration: 61
+                      thumbnail: https://cdn.jwplayer.com/v2/media/Den1Nq47/poster.jpg?width=720
+                      title: Today's Video Headlines
+                      url: https://cdn.jwplayer.com/videos/Den1Nq47-RyIcpnTz.mp4
+                    publish_date: 2024-04-02 17:13:12
+                    author: Jennie Taer
+                    authors:
+                    - Jennie Taer
                     language: en
-                    source_country: co
-                    sentiment: 0.712523
               schema:
                 $ref: '#/components/schemas/extractNews_200_response'
           description: Success
@@ -732,13 +921,15 @@ components:
         summary: summary
         image: image
         sentiment: 5.962133916683182
-        source_country: source_country
+        author: author
         language: language
+        video: video
+        title: title
+        url: url
+        source_country: source_country
         id: 5
         text: text
-        title: title
         publish_date: publish_date
-        url: url
         authors:
         - authors
         - authors
@@ -751,10 +942,22 @@ components:
           type: string
         sentiment:
           type: number
-        source_country:
+        author:
           nullable: true
           type: string
         language:
+          nullable: true
+          type: string
+        video:
+          nullable: true
+          type: string
+        title:
+          nullable: true
+          type: string
+        url:
+          nullable: true
+          type: string
+        source_country:
           nullable: true
           type: string
         id:
@@ -762,13 +965,7 @@ components:
         text:
           nullable: true
           type: string
-        title:
-          nullable: true
-          type: string
         publish_date:
-          nullable: true
-          type: string
-        url:
           nullable: true
           type: string
         authors:
@@ -783,26 +980,30 @@ components:
         - summary: summary
           image: image
           sentiment: 5.962133916683182
-          source_country: source_country
+          author: author
           language: language
+          video: video
+          title: title
+          url: url
+          source_country: source_country
           id: 5
           text: text
-          title: title
           publish_date: publish_date
-          url: url
           authors:
           - authors
           - authors
         - summary: summary
           image: image
           sentiment: 5.962133916683182
-          source_country: source_country
+          author: author
           language: language
+          video: video
+          title: title
+          url: url
+          source_country: source_country
           id: 5
           text: text
-          title: title
           publish_date: publish_date
-          url: url
           authors:
           - authors
           - authors
@@ -825,6 +1026,7 @@ components:
       example:
         summary: summary
         image: image
+        author: author
         id: 0
         text: text
         title: title
@@ -838,6 +1040,9 @@ components:
           nullable: true
           type: string
         image:
+          nullable: true
+          type: string
+        author:
           nullable: true
           type: string
         id:
@@ -865,6 +1070,7 @@ components:
         news:
         - summary: summary
           image: image
+          author: author
           id: 0
           text: text
           title: title
@@ -875,6 +1081,7 @@ components:
           - authors
         - summary: summary
           image: image
+          author: author
           id: 0
           text: text
           title: title
@@ -896,6 +1103,7 @@ components:
         - news:
           - summary: summary
             image: image
+            author: author
             id: 0
             text: text
             title: title
@@ -906,6 +1114,7 @@ components:
             - authors
           - summary: summary
             image: image
+            author: author
             id: 0
             text: text
             title: title
@@ -917,6 +1126,7 @@ components:
         - news:
           - summary: summary
             image: image
+            author: author
             id: 0
             text: text
             title: title
@@ -927,6 +1137,7 @@ components:
             - authors
           - summary: summary
             image: image
+            author: author
             id: 0
             text: text
             title: title
@@ -948,17 +1159,171 @@ components:
           nullable: true
           type: string
       type: object
-    extractNews_200_response:
+    retrieveNewsArticlesByIds_200_response_news_inner:
       example:
+        summary: summary
         image: image
         sentiment: 0.8008281904610115
         source_country: source_country
-        author: author
+        catgory: catgory
         language: language
+        id: 6
         text: text
         title: title
         publish_date: publish_date
         url: url
+        authors:
+        - authors
+        - authors
+      properties:
+        summary:
+          nullable: true
+          type: string
+        image:
+          nullable: true
+          type: string
+        sentiment:
+          type: number
+        catgory:
+          nullable: true
+          type: string
+        language:
+          nullable: true
+          type: string
+        title:
+          nullable: true
+          type: string
+        url:
+          nullable: true
+          type: string
+        source_country:
+          nullable: true
+          type: string
+        id:
+          type: integer
+        text:
+          nullable: true
+          type: string
+        publish_date:
+          nullable: true
+          type: string
+        authors:
+          items:
+            nullable: true
+            type: string
+          type: array
+      type: object
+    retrieveNewsArticlesByIds_200_response:
+      example:
+        news:
+        - summary: summary
+          image: image
+          sentiment: 0.8008281904610115
+          source_country: source_country
+          catgory: catgory
+          language: language
+          id: 6
+          text: text
+          title: title
+          publish_date: publish_date
+          url: url
+          authors:
+          - authors
+          - authors
+        - summary: summary
+          image: image
+          sentiment: 0.8008281904610115
+          source_country: source_country
+          catgory: catgory
+          language: language
+          id: 6
+          text: text
+          title: title
+          publish_date: publish_date
+          url: url
+          authors:
+          - authors
+          - authors
+      properties:
+        news:
+          items:
+            $ref: '#/components/schemas/retrieveNewsArticlesByIds_200_response_news_inner'
+          type: array
+      type: object
+    extractNews_200_response_images_inner:
+      example:
+        width: 0
+        title: title
+        url: url
+        height: 6
+      properties:
+        width:
+          type: integer
+        title:
+          nullable: true
+          type: string
+        url:
+          nullable: true
+          type: string
+        height:
+          type: integer
+      type: object
+    extractNews_200_response_videos_inner:
+      example:
+        summary: summary
+        duration: 1
+        thumbnail: thumbnail
+        title: title
+        url: url
+      properties:
+        summary:
+          nullable: true
+          type: string
+        duration:
+          type: integer
+        thumbnail:
+          nullable: true
+          type: string
+        title:
+          nullable: true
+          type: string
+        url:
+          nullable: true
+          type: string
+      type: object
+    extractNews_200_response:
+      example:
+        image: image
+        images:
+        - width: 0
+          title: title
+          url: url
+          height: 6
+        - width: 0
+          title: title
+          url: url
+          height: 6
+        author: author
+        videos:
+        - summary: summary
+          duration: 1
+          thumbnail: thumbnail
+          title: title
+          url: url
+        - summary: summary
+          duration: 1
+          thumbnail: thumbnail
+          title: title
+          url: url
+        language: language
+        text: text
+        video: video
+        title: title
+        publish_date: publish_date
+        url: url
+        authors:
+        - authors
+        - authors
       properties:
         title:
           nullable: true
@@ -972,20 +1337,31 @@ components:
         image:
           nullable: true
           type: string
+        images:
+          items:
+            $ref: '#/components/schemas/extractNews_200_response_images_inner'
+          type: array
+        video:
+          nullable: true
+          type: string
+        videos:
+          items:
+            $ref: '#/components/schemas/extractNews_200_response_videos_inner'
+          type: array
         publish_date:
           nullable: true
           type: string
         author:
           nullable: true
           type: string
+        authors:
+          items:
+            nullable: true
+            type: string
+          type: array
         language:
           nullable: true
           type: string
-        source_country:
-          nullable: true
-          type: string
-        sentiment:
-          type: number
       type: object
     extractNewsLinks_200_response:
       example:

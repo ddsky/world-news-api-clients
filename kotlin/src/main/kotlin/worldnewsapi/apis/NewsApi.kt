@@ -22,6 +22,7 @@ import okhttp3.HttpUrl
 import worldnewsapi.models.ExtractNews200Response
 import worldnewsapi.models.ExtractNewsLinks200Response
 import worldnewsapi.models.GetGeoCoordinates200Response
+import worldnewsapi.models.RetrieveNewsArticlesByIds200Response
 import worldnewsapi.models.SearchNews200Response
 import worldnewsapi.models.TopNews200Response
 
@@ -51,7 +52,7 @@ class NewsApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClient = 
 
     /**
      * Extract News
-     * Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, image, publish date, author, language, source country, and sentiment of the news article.
+     * Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, images, videos, publish date, authors, language, source country, and sentiment of the news article.
      * @param url The url of the news.
      * @param analyze Whether to analyze the news (extract entities etc.)
      * @return ExtractNews200Response
@@ -83,7 +84,7 @@ class NewsApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClient = 
 
     /**
      * Extract News
-     * Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, image, publish date, author, language, source country, and sentiment of the news article.
+     * Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, images, videos, publish date, authors, language, source country, and sentiment of the news article.
      * @param url The url of the news.
      * @param analyze Whether to analyze the news (extract entities etc.)
      * @return ApiResponse<ExtractNews200Response?>
@@ -357,9 +358,83 @@ class NewsApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClient = 
     }
 
     /**
+     * Retrieve News Articles by Ids
+     * Retrieve information about one or more news articles by their ids. The ids can be retrieved from the search news or top news APIs.
+     * @param ids A comma separated list of news ids.
+     * @return RetrieveNewsArticlesByIds200Response
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun retrieveNewsArticlesByIds(ids: kotlin.String) : RetrieveNewsArticlesByIds200Response {
+        val localVarResponse = retrieveNewsArticlesByIdsWithHttpInfo(ids = ids)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RetrieveNewsArticlesByIds200Response
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * Retrieve News Articles by Ids
+     * Retrieve information about one or more news articles by their ids. The ids can be retrieved from the search news or top news APIs.
+     * @param ids A comma separated list of news ids.
+     * @return ApiResponse<RetrieveNewsArticlesByIds200Response?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun retrieveNewsArticlesByIdsWithHttpInfo(ids: kotlin.String) : ApiResponse<RetrieveNewsArticlesByIds200Response?> {
+        val localVariableConfig = retrieveNewsArticlesByIdsRequestConfig(ids = ids)
+
+        return request<Unit, RetrieveNewsArticlesByIds200Response>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation retrieveNewsArticlesByIds
+     *
+     * @param ids A comma separated list of news ids.
+     * @return RequestConfig
+     */
+    fun retrieveNewsArticlesByIdsRequestConfig(ids: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                put("ids", listOf(ids.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/retrieve-news",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
      * Search News
      * Search and filter news by text, date, location, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
-     * @param text The text to match in the news content (at least 3 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford (optional)
+     * @param text The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford (optional)
      * @param sourceCountries A comma-separated list of ISO 3166 country codes from which the news should originate. (optional)
      * @param language The ISO 6391 language code of the news. (optional)
      * @param minSentiment The minimal sentiment of the news in range [-1,1]. (optional)
@@ -404,7 +479,7 @@ class NewsApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClient = 
     /**
      * Search News
      * Search and filter news by text, date, location, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
-     * @param text The text to match in the news content (at least 3 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford (optional)
+     * @param text The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford (optional)
      * @param sourceCountries A comma-separated list of ISO 3166 country codes from which the news should originate. (optional)
      * @param language The ISO 6391 language code of the news. (optional)
      * @param minSentiment The minimal sentiment of the news in range [-1,1]. (optional)
@@ -436,7 +511,7 @@ class NewsApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClient = 
     /**
      * To obtain the request config of the operation searchNews
      *
-     * @param text The text to match in the news content (at least 3 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford (optional)
+     * @param text The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford (optional)
      * @param sourceCountries A comma-separated list of ISO 3166 country codes from which the news should originate. (optional)
      * @param language The ISO 6391 language code of the news. (optional)
      * @param minSentiment The minimal sentiment of the news in range [-1,1]. (optional)

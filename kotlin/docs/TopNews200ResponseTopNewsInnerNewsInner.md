@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **summary** | **kotlin.String** |  |  [optional]
 **image** | **kotlin.String** |  |  [optional]
+**author** | **kotlin.String** |  |  [optional]
 **id** | **kotlin.Int** |  |  [optional]
 **text** | **kotlin.String** |  |  [optional]
 **title** | **kotlin.String** |  |  [optional]

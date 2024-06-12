@@ -4,6 +4,7 @@ import org.openapitools.api.ApiUtils
 import org.openapitools.model.ExtractNews200Response
 import org.openapitools.model.ExtractNewsLinks200Response
 import org.openapitools.model.GetGeoCoordinates200Response
+import org.openapitools.model.RetrieveNewsArticlesByIds200Response
 import org.openapitools.model.SearchNews200Response
 import org.openapitools.model.TopNews200Response
 
@@ -138,6 +139,33 @@ class NewsApi {
         apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, contentType,
                     "GET", "",
                     Object.class )
+
+    }
+
+    def retrieveNewsArticlesByIds ( String ids, Closure onSuccess, Closure onFailure)  {
+        String resourcePath = "/retrieve-news"
+
+        // params
+        def queryParams = [:]
+        def headerParams = [:]
+        def bodyParams
+        def contentType
+
+        // verify required params are set
+        if (ids == null) {
+            throw new RuntimeException("missing required params ids")
+        }
+
+        if (ids != null) {
+            queryParams.put("ids", ids)
+        }
+
+
+
+
+        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, contentType,
+                    "GET", "",
+                    RetrieveNewsArticlesByIds200Response.class )
 
     }
 

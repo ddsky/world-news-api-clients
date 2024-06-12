@@ -22,6 +22,7 @@ import worldnewsapi.apis.NewsApi
 import worldnewsapi.models.ExtractNews200Response
 import worldnewsapi.models.ExtractNewsLinks200Response
 import worldnewsapi.models.GetGeoCoordinates200Response
+import worldnewsapi.models.RetrieveNewsArticlesByIds200Response
 import worldnewsapi.models.SearchNews200Response
 import worldnewsapi.models.TopNews200Response
 
@@ -65,10 +66,18 @@ class NewsApiTest : ShouldSpec() {
             //result shouldBe ("TODO")
         }
 
+        // to test retrieveNewsArticlesByIds
+        should("test retrieveNewsArticlesByIds") {
+            // uncomment below to test retrieveNewsArticlesByIds
+            //val ids : kotlin.String = 2352,2354 // kotlin.String | A comma separated list of news ids.
+            //val result : RetrieveNewsArticlesByIds200Response = apiInstance.retrieveNewsArticlesByIds(ids)
+            //result shouldBe ("TODO")
+        }
+
         // to test searchNews
         should("test searchNews") {
             // uncomment below to test searchNews
-            //val text : kotlin.String = tesla // kotlin.String | The text to match in the news content (at least 3 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford
+            //val text : kotlin.String = tesla // kotlin.String | The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford
             //val sourceCountries : kotlin.String = us,uk // kotlin.String | A comma-separated list of ISO 3166 country codes from which the news should originate.
             //val language : kotlin.String = en // kotlin.String | The ISO 6391 language code of the news.
             //val minSentiment : kotlin.Double = -0.8 // kotlin.Double | The minimal sentiment of the news in range [-1,1].

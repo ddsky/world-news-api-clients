@@ -2,8 +2,12 @@ import { ResponseContext, RequestContext, HttpFile, HttpInfo } from '../http/htt
 import { Configuration} from '../configuration'
 
 import { ExtractNews200Response } from '../models/ExtractNews200Response';
+import { ExtractNews200ResponseImagesInner } from '../models/ExtractNews200ResponseImagesInner';
+import { ExtractNews200ResponseVideosInner } from '../models/ExtractNews200ResponseVideosInner';
 import { ExtractNewsLinks200Response } from '../models/ExtractNewsLinks200Response';
 import { GetGeoCoordinates200Response } from '../models/GetGeoCoordinates200Response';
+import { RetrieveNewsArticlesByIds200Response } from '../models/RetrieveNewsArticlesByIds200Response';
+import { RetrieveNewsArticlesByIds200ResponseNewsInner } from '../models/RetrieveNewsArticlesByIds200ResponseNewsInner';
 import { SearchNews200Response } from '../models/SearchNews200Response';
 import { SearchNews200ResponseNewsInner } from '../models/SearchNews200ResponseNewsInner';
 import { TopNews200Response } from '../models/TopNews200Response';
@@ -24,7 +28,7 @@ export class PromiseNewsApi {
     }
 
     /**
-     * Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, image, publish date, author, language, source country, and sentiment of the news article.
+     * Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, images, videos, publish date, authors, language, source country, and sentiment of the news article.
      * Extract News
      * @param url The url of the news.
      * @param analyze Whether to analyze the news (extract entities etc.)
@@ -35,7 +39,7 @@ export class PromiseNewsApi {
     }
 
     /**
-     * Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, image, publish date, author, language, source country, and sentiment of the news article.
+     * Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, images, videos, publish date, authors, language, source country, and sentiment of the news article.
      * Extract News
      * @param url The url of the news.
      * @param analyze Whether to analyze the news (extract entities etc.)
@@ -110,9 +114,29 @@ export class PromiseNewsApi {
     }
 
     /**
+     * Retrieve information about one or more news articles by their ids. The ids can be retrieved from the search news or top news APIs.
+     * Retrieve News Articles by Ids
+     * @param ids A comma separated list of news ids.
+     */
+    public retrieveNewsArticlesByIdsWithHttpInfo(ids: string, _options?: Configuration): Promise<HttpInfo<RetrieveNewsArticlesByIds200Response>> {
+        const result = this.api.retrieveNewsArticlesByIdsWithHttpInfo(ids, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Retrieve information about one or more news articles by their ids. The ids can be retrieved from the search news or top news APIs.
+     * Retrieve News Articles by Ids
+     * @param ids A comma separated list of news ids.
+     */
+    public retrieveNewsArticlesByIds(ids: string, _options?: Configuration): Promise<RetrieveNewsArticlesByIds200Response> {
+        const result = this.api.retrieveNewsArticlesByIds(ids, _options);
+        return result.toPromise();
+    }
+
+    /**
      * Search and filter news by text, date, location, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
      * Search News
-     * @param text The text to match in the news content (at least 3 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford
+     * @param text The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford
      * @param sourceCountries A comma-separated list of ISO 3166 country codes from which the news should originate.
      * @param language The ISO 6391 language code of the news.
      * @param minSentiment The minimal sentiment of the news in range [-1,1].
@@ -136,7 +160,7 @@ export class PromiseNewsApi {
     /**
      * Search and filter news by text, date, location, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
      * Search News
-     * @param text The text to match in the news content (at least 3 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford
+     * @param text The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford
      * @param sourceCountries A comma-separated list of ISO 3166 country codes from which the news should originate.
      * @param language The ISO 6391 language code of the news.
      * @param minSentiment The minimal sentiment of the news in range [-1,1].

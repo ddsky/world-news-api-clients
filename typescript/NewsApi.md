@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**extractNewsLinks**](NewsApi.md#extractNewsLinks) | **GET** /extract-news-links | Extract News Links
 [**getGeoCoordinates**](NewsApi.md#getGeoCoordinates) | **GET** /geo-coordinates | Get Geo Coordinates
 [**newsWebsiteToRSSFeed**](NewsApi.md#newsWebsiteToRSSFeed) | **GET** /feed.rss | News Website to RSS Feed
+[**retrieveNewsArticlesByIds**](NewsApi.md#retrieveNewsArticlesByIds) | **GET** /retrieve-news | Retrieve News Articles by Ids
 [**searchNews**](NewsApi.md#searchNews) | **GET** /search-news | Search News
 [**topNews**](NewsApi.md#topNews) | **GET** /top-news | Top News
 
@@ -15,7 +16,7 @@ Method | HTTP request | Description
 # **extractNews**
 > ExtractNews200Response extractNews()
 
-Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, image, publish date, author, language, source country, and sentiment of the news article.
+Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, images, videos, publish date, authors, language, source country, and sentiment of the news article.
 
 ### Example
 
@@ -261,6 +262,66 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
+# **retrieveNewsArticlesByIds**
+> RetrieveNewsArticlesByIds200Response retrieveNewsArticlesByIds()
+
+Retrieve information about one or more news articles by their ids. The ids can be retrieved from the search news or top news APIs.
+
+### Example
+
+
+```typescript
+import {  } from '';
+import * as fs from 'fs';
+
+const configuration = .createConfiguration();
+const apiInstance = new .NewsApi(configuration);
+
+let body:.NewsApiRetrieveNewsArticlesByIdsRequest = {
+  // string | A comma separated list of news ids.
+  ids: "2352,2354",
+};
+
+apiInstance.retrieveNewsArticlesByIds(body).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ids** | [**string**] | A comma separated list of news ids. | defaults to undefined
+
+
+### Return type
+
+**RetrieveNewsArticlesByIds200Response**
+
+### Authorization
+
+[apiKey](README.md#apiKey), [headerApiKey](README.md#headerApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**401** | Unauthorized |  -  |
+**402** | Payment Required |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**406** | Not Acceptable |  -  |
+**429** | Too Many Requests |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
 # **searchNews**
 > SearchNews200Response searchNews()
 
@@ -277,7 +338,7 @@ const configuration = .createConfiguration();
 const apiInstance = new .NewsApi(configuration);
 
 let body:.NewsApiSearchNewsRequest = {
-  // string | The text to match in the news content (at least 3 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford (optional)
+  // string | The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford (optional)
   text: "tesla",
   // string | A comma-separated list of ISO 3166 country codes from which the news should originate. (optional)
   sourceCountries: "us,uk",
@@ -319,7 +380,7 @@ apiInstance.searchNews(body).then((data:any) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **text** | [**string**] | The text to match in the news content (at least 3 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford | (optional) defaults to undefined
+ **text** | [**string**] | The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford | (optional) defaults to undefined
  **sourceCountries** | [**string**] | A comma-separated list of ISO 3166 country codes from which the news should originate. | (optional) defaults to undefined
  **language** | [**string**] | The ISO 6391 language code of the news. | (optional) defaults to undefined
  **minSentiment** | [**number**] | The minimal sentiment of the news in range [-1,1]. | (optional) defaults to undefined

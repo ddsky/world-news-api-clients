@@ -14,6 +14,8 @@ class TopNews200ResponseTopNewsInnerNewsInner {
     
     String image
     
+    String author
+    
     Integer id
     
     String text

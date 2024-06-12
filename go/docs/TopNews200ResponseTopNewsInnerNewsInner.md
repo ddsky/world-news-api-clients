@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Summary** | Pointer to **NullableString** |  | [optional] 
 **Image** | Pointer to **NullableString** |  | [optional] 
+**Author** | Pointer to **NullableString** |  | [optional] 
 **Id** | Pointer to **int32** |  | [optional] 
 **Text** | Pointer to **NullableString** |  | [optional] 
 **Title** | Pointer to **NullableString** |  | [optional] 
@@ -102,6 +103,41 @@ HasImage returns a boolean if a field has been set.
 `func (o *TopNews200ResponseTopNewsInnerNewsInner) UnsetImage()`
 
 UnsetImage ensures that no value is present for Image, not even an explicit nil
+### GetAuthor
+
+`func (o *TopNews200ResponseTopNewsInnerNewsInner) GetAuthor() string`
+
+GetAuthor returns the Author field if non-nil, zero value otherwise.
+
+### GetAuthorOk
+
+`func (o *TopNews200ResponseTopNewsInnerNewsInner) GetAuthorOk() (*string, bool)`
+
+GetAuthorOk returns a tuple with the Author field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAuthor
+
+`func (o *TopNews200ResponseTopNewsInnerNewsInner) SetAuthor(v string)`
+
+SetAuthor sets Author field to given value.
+
+### HasAuthor
+
+`func (o *TopNews200ResponseTopNewsInnerNewsInner) HasAuthor() bool`
+
+HasAuthor returns a boolean if a field has been set.
+
+### SetAuthorNil
+
+`func (o *TopNews200ResponseTopNewsInnerNewsInner) SetAuthorNil(b bool)`
+
+ SetAuthorNil sets the value for Author to be an explicit nil
+
+### UnsetAuthor
+`func (o *TopNews200ResponseTopNewsInnerNewsInner) UnsetAuthor()`
+
+UnsetAuthor ensures that no value is present for Author, not even an explicit nil
 ### GetId
 
 `func (o *TopNews200ResponseTopNewsInnerNewsInner) GetId() int32`

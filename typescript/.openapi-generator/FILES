@@ -13,9 +13,13 @@ http/isomorphic-fetch.ts
 index.ts
 middleware.ts
 models/ExtractNews200Response.ts
+models/ExtractNews200ResponseImagesInner.ts
+models/ExtractNews200ResponseVideosInner.ts
 models/ExtractNewsLinks200Response.ts
 models/GetGeoCoordinates200Response.ts
 models/ObjectSerializer.ts
+models/RetrieveNewsArticlesByIds200Response.ts
+models/RetrieveNewsArticlesByIds200ResponseNewsInner.ts
 models/SearchNews200Response.ts
 models/SearchNews200ResponseNewsInner.ts
 models/TopNews200Response.ts

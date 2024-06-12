@@ -7,13 +7,15 @@
 | **summary** | **String** |  | [optional] |
 | **image** | **String** |  | [optional] |
 | **sentiment** | **Float** |  | [optional] |
-| **source_country** | **String** |  | [optional] |
+| **author** | **String** |  | [optional] |
 | **language** | **String** |  | [optional] |
+| **video** | **String** |  | [optional] |
+| **title** | **String** |  | [optional] |
+| **url** | **String** |  | [optional] |
+| **source_country** | **String** |  | [optional] |
 | **id** | **Integer** |  | [optional] |
 | **text** | **String** |  | [optional] |
-| **title** | **String** |  | [optional] |
 | **publish_date** | **String** |  | [optional] |
-| **url** | **String** |  | [optional] |
 | **authors** | **Array&lt;String&gt;** |  | [optional] |
 
 ## Example
@@ -25,13 +27,15 @@ instance = OpenapiClient::SearchNews200ResponseNewsInner.new(
   summary: null,
   image: null,
   sentiment: null,
-  source_country: null,
+  author: null,
   language: null,
+  video: null,
+  title: null,
+  url: null,
+  source_country: null,
   id: null,
   text: null,
-  title: null,
   publish_date: null,
-  url: null,
   authors: null
 )
 ```

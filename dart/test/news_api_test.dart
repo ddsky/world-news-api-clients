@@ -19,7 +19,7 @@ void main() {
   group('tests for NewsApi', () {
     // Extract News
     //
-    // Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, image, publish date, author, language, source country, and sentiment of the news article.
+    // Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, images, videos, publish date, authors, language, source country, and sentiment of the news article.
     //
     //Future<ExtractNews200Response> extractNews(String url, bool analyze) async
     test('test extractNews', () async {
@@ -50,6 +50,15 @@ void main() {
     //
     //Future<Object> newsWebsiteToRSSFeed(String url, bool analyze) async
     test('test newsWebsiteToRSSFeed', () async {
+      // TODO
+    });
+
+    // Retrieve News Articles by Ids
+    //
+    // Retrieve information about one or more news articles by their ids. The ids can be retrieved from the search news or top news APIs.
+    //
+    //Future<RetrieveNewsArticlesByIds200Response> retrieveNewsArticlesByIds(String ids) async
+    test('test retrieveNewsArticlesByIds', () async {
       // TODO
     });
 

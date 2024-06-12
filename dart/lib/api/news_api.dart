@@ -18,7 +18,7 @@ class NewsApi {
 
   /// Extract News
   ///
-  /// Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, image, publish date, author, language, source country, and sentiment of the news article.
+  /// Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, images, videos, publish date, authors, language, source country, and sentiment of the news article.
   ///
   /// Note: This method returns the HTTP [Response].
   ///
@@ -59,7 +59,7 @@ class NewsApi {
 
   /// Extract News
   ///
-  /// Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, image, publish date, author, language, source country, and sentiment of the news article.
+  /// Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, images, videos, publish date, authors, language, source country, and sentiment of the news article.
   ///
   /// Parameters:
   ///
@@ -277,6 +277,66 @@ class NewsApi {
     return null;
   }
 
+  /// Retrieve News Articles by Ids
+  ///
+  /// Retrieve information about one or more news articles by their ids. The ids can be retrieved from the search news or top news APIs.
+  ///
+  /// Note: This method returns the HTTP [Response].
+  ///
+  /// Parameters:
+  ///
+  /// * [String] ids (required):
+  ///   A comma separated list of news ids.
+  Future<Response> retrieveNewsArticlesByIdsWithHttpInfo(String ids,) async {
+    // ignore: prefer_const_declarations
+    final path = r'/retrieve-news';
+
+    // ignore: prefer_final_locals
+    Object? postBody;
+
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+      queryParams.addAll(_queryParams('', 'ids', ids));
+
+    const contentTypes = <String>[];
+
+
+    return apiClient.invokeAPI(
+      path,
+      'GET',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      contentTypes.isEmpty ? null : contentTypes.first,
+    );
+  }
+
+  /// Retrieve News Articles by Ids
+  ///
+  /// Retrieve information about one or more news articles by their ids. The ids can be retrieved from the search news or top news APIs.
+  ///
+  /// Parameters:
+  ///
+  /// * [String] ids (required):
+  ///   A comma separated list of news ids.
+  Future<RetrieveNewsArticlesByIds200Response?> retrieveNewsArticlesByIds(String ids,) async {
+    final response = await retrieveNewsArticlesByIdsWithHttpInfo(ids,);
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
+    }
+    // When a remote server returns no body with a status of 204, we shall not decode it.
+    // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
+    // FormatException when trying to decode an empty string.
+    if (response.body.isNotEmpty && response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'RetrieveNewsArticlesByIds200Response',) as RetrieveNewsArticlesByIds200Response;
+    
+    }
+    return null;
+  }
+
   /// Search News
   ///
   /// Search and filter news by text, date, location, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
@@ -286,7 +346,7 @@ class NewsApi {
   /// Parameters:
   ///
   /// * [String] text:
-  ///   The text to match in the news content (at least 3 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford
+  ///   The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford
   ///
   /// * [String] sourceCountries:
   ///   A comma-separated list of ISO 3166 country codes from which the news should originate.
@@ -407,7 +467,7 @@ class NewsApi {
   /// Parameters:
   ///
   /// * [String] text:
-  ///   The text to match in the news content (at least 3 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford
+  ///   The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford
   ///
   /// * [String] sourceCountries:
   ///   A comma-separated list of ISO 3166 country codes from which the news should originate.

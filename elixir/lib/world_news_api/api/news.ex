@@ -11,7 +11,7 @@ defmodule WorldNewsAPI.Api.News do
 
   @doc """
   Extract News
-  Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, image, publish date, author, language, source country, and sentiment of the news article.
+  Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, images, videos, publish date, authors, language, source country, and sentiment of the news article.
 
   ### Parameters
 
@@ -164,6 +164,43 @@ defmodule WorldNewsAPI.Api.News do
   end
 
   @doc """
+  Retrieve News Articles by Ids
+  Retrieve information about one or more news articles by their ids. The ids can be retrieved from the search news or top news APIs.
+
+  ### Parameters
+
+  - `connection` (WorldNewsAPI.Connection): Connection to server
+  - `ids` (String.t): A comma separated list of news ids.
+  - `opts` (keyword): Optional parameters
+
+  ### Returns
+
+  - `{:ok, WorldNewsAPI.Model.RetrieveNewsArticlesByIds200Response.t}` on success
+  - `{:error, Tesla.Env.t}` on failure
+  """
+  @spec retrieve_news_articles_by_ids(Tesla.Env.client, String.t, keyword()) :: {:ok, nil} | {:ok, WorldNewsAPI.Model.RetrieveNewsArticlesByIds200Response.t} | {:error, Tesla.Env.t}
+  def retrieve_news_articles_by_ids(connection, ids, _opts \\ []) do
+    request =
+      %{}
+      |> method(:get)
+      |> url("/retrieve-news")
+      |> add_param(:query, :ids, ids)
+      |> Enum.into([])
+
+    connection
+    |> Connection.request(request)
+    |> evaluate_response([
+      {200, WorldNewsAPI.Model.RetrieveNewsArticlesByIds200Response},
+      {401, false},
+      {402, false},
+      {403, false},
+      {404, false},
+      {406, false},
+      {429, false}
+    ])
+  end
+
+  @doc """
   Search News
   Search and filter news by text, date, location, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
 
@@ -171,7 +208,7 @@ defmodule WorldNewsAPI.Api.News do
 
   - `connection` (WorldNewsAPI.Connection): Connection to server
   - `opts` (keyword): Optional parameters
-    - `:text` (String.t): The text to match in the news content (at least 3 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford
+    - `:text` (String.t): The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford
     - `:"source-countries"` (String.t): A comma-separated list of ISO 3166 country codes from which the news should originate.
     - `:language` (String.t): The ISO 6391 language code of the news.
     - `:"min-sentiment"` (float()): The minimal sentiment of the news in range [-1,1].

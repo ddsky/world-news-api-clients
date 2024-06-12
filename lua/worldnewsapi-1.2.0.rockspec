@@ -1,5 +1,5 @@
 package = "worldnewsapi"
-version = "1.1.1"
+version = "1.2.0"
 source = {
 	url = "https://github.com/ddsky/world-news-api-clients/tree/main/lua/.git"
 }
@@ -25,8 +25,12 @@ build = {
 	modules = {
 		["worldnewsapi.api.news_api"] = "worldnewsapi/api/news_api.lua";
 		["worldnewsapi.model.extract_news_200_response"] = "worldnewsapi/model/extract_news_200_response.lua";
+		["worldnewsapi.model.extract_news_200_response_images_inner"] = "worldnewsapi/model/extract_news_200_response_images_inner.lua";
+		["worldnewsapi.model.extract_news_200_response_videos_inner"] = "worldnewsapi/model/extract_news_200_response_videos_inner.lua";
 		["worldnewsapi.model.extract_news_links_200_response"] = "worldnewsapi/model/extract_news_links_200_response.lua";
 		["worldnewsapi.model.get_geo_coordinates_200_response"] = "worldnewsapi/model/get_geo_coordinates_200_response.lua";
+		["worldnewsapi.model.retrieve_news_articles_by_ids_200_response"] = "worldnewsapi/model/retrieve_news_articles_by_ids_200_response.lua";
+		["worldnewsapi.model.retrieve_news_articles_by_ids_200_response_news_inner"] = "worldnewsapi/model/retrieve_news_articles_by_ids_200_response_news_inner.lua";
 		["worldnewsapi.model.search_news_200_response"] = "worldnewsapi/model/search_news_200_response.lua";
 		["worldnewsapi.model.search_news_200_response_news_inner"] = "worldnewsapi/model/search_news_200_response_news_inner.lua";
 		["worldnewsapi.model.top_news_200_response"] = "worldnewsapi/model/top_news_200_response.lua";

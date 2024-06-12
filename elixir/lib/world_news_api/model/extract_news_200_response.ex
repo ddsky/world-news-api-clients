@@ -12,11 +12,13 @@ defmodule WorldNewsAPI.Model.ExtractNews200Response do
     :text,
     :url,
     :image,
+    :images,
+    :video,
+    :videos,
     :publish_date,
     :author,
-    :language,
-    :source_country,
-    :sentiment
+    :authors,
+    :language
   ]
 
   @type t :: %__MODULE__{
@@ -24,15 +26,21 @@ defmodule WorldNewsAPI.Model.ExtractNews200Response do
     :text => String.t | nil,
     :url => String.t | nil,
     :image => String.t | nil,
+    :images => [WorldNewsAPI.Model.ExtractNews200ResponseImagesInner.t] | nil,
+    :video => String.t | nil,
+    :videos => [WorldNewsAPI.Model.ExtractNews200ResponseVideosInner.t] | nil,
     :publish_date => String.t | nil,
     :author => String.t | nil,
-    :language => String.t | nil,
-    :source_country => String.t | nil,
-    :sentiment => float() | nil
+    :authors => [String.t] | nil,
+    :language => String.t | nil
   }
+
+  alias WorldNewsAPI.Deserializer
 
   def decode(value) do
     value
+     |> Deserializer.deserialize(:images, :list, WorldNewsAPI.Model.ExtractNews200ResponseImagesInner)
+     |> Deserializer.deserialize(:videos, :list, WorldNewsAPI.Model.ExtractNews200ResponseVideosInner)
   end
 end
 

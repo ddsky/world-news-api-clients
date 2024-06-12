@@ -8,11 +8,13 @@ Name | Type | Description | Notes
 **Text** | **string** |  | [optional] 
 **Url** | **string** |  | [optional] 
 **Image** | **string** |  | [optional] 
+**Images** | [**List&lt;ExtractNews200ResponseImagesInner&gt;**](ExtractNews200ResponseImagesInner.md) |  | [optional] 
+**Video** | **string** |  | [optional] 
+**Videos** | [**List&lt;ExtractNews200ResponseVideosInner&gt;**](ExtractNews200ResponseVideosInner.md) |  | [optional] 
 **PublishDate** | **string** |  | [optional] 
 **Author** | **string** |  | [optional] 
+**Authors** | **List&lt;string&gt;** |  | [optional] 
 **Language** | **string** |  | [optional] 
-**SourceCountry** | **string** |  | [optional] 
-**Sentiment** | **decimal** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

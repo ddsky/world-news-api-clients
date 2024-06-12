@@ -16,13 +16,15 @@ class SearchNews200ResponseNewsInner {
     this.summary,
     this.image,
     this.sentiment,
-    this.sourceCountry,
+    this.author,
     this.language,
+    this.video,
+    this.title,
+    this.url,
+    this.sourceCountry,
     this.id,
     this.text,
-    this.title,
     this.publishDate,
-    this.url,
     this.authors = const [],
   });
 
@@ -38,9 +40,17 @@ class SearchNews200ResponseNewsInner {
   ///
   num? sentiment;
 
-  String? sourceCountry;
+  String? author;
 
   String? language;
+
+  String? video;
+
+  String? title;
+
+  String? url;
+
+  String? sourceCountry;
 
   ///
   /// Please note: This property should have been non-nullable! Since the specification file
@@ -52,11 +62,7 @@ class SearchNews200ResponseNewsInner {
 
   String? text;
 
-  String? title;
-
   String? publishDate;
-
-  String? url;
 
   List<String> authors;
 
@@ -65,13 +71,15 @@ class SearchNews200ResponseNewsInner {
     other.summary == summary &&
     other.image == image &&
     other.sentiment == sentiment &&
-    other.sourceCountry == sourceCountry &&
+    other.author == author &&
     other.language == language &&
+    other.video == video &&
+    other.title == title &&
+    other.url == url &&
+    other.sourceCountry == sourceCountry &&
     other.id == id &&
     other.text == text &&
-    other.title == title &&
     other.publishDate == publishDate &&
-    other.url == url &&
     _deepEquality.equals(other.authors, authors);
 
   @override
@@ -80,17 +88,19 @@ class SearchNews200ResponseNewsInner {
     (summary == null ? 0 : summary!.hashCode) +
     (image == null ? 0 : image!.hashCode) +
     (sentiment == null ? 0 : sentiment!.hashCode) +
-    (sourceCountry == null ? 0 : sourceCountry!.hashCode) +
+    (author == null ? 0 : author!.hashCode) +
     (language == null ? 0 : language!.hashCode) +
+    (video == null ? 0 : video!.hashCode) +
+    (title == null ? 0 : title!.hashCode) +
+    (url == null ? 0 : url!.hashCode) +
+    (sourceCountry == null ? 0 : sourceCountry!.hashCode) +
     (id == null ? 0 : id!.hashCode) +
     (text == null ? 0 : text!.hashCode) +
-    (title == null ? 0 : title!.hashCode) +
     (publishDate == null ? 0 : publishDate!.hashCode) +
-    (url == null ? 0 : url!.hashCode) +
     (authors.hashCode);
 
   @override
-  String toString() => 'SearchNews200ResponseNewsInner[summary=$summary, image=$image, sentiment=$sentiment, sourceCountry=$sourceCountry, language=$language, id=$id, text=$text, title=$title, publishDate=$publishDate, url=$url, authors=$authors]';
+  String toString() => 'SearchNews200ResponseNewsInner[summary=$summary, image=$image, sentiment=$sentiment, author=$author, language=$language, video=$video, title=$title, url=$url, sourceCountry=$sourceCountry, id=$id, text=$text, publishDate=$publishDate, authors=$authors]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
@@ -109,15 +119,35 @@ class SearchNews200ResponseNewsInner {
     } else {
       json[r'sentiment'] = null;
     }
-    if (this.sourceCountry != null) {
-      json[r'source_country'] = this.sourceCountry;
+    if (this.author != null) {
+      json[r'author'] = this.author;
     } else {
-      json[r'source_country'] = null;
+      json[r'author'] = null;
     }
     if (this.language != null) {
       json[r'language'] = this.language;
     } else {
       json[r'language'] = null;
+    }
+    if (this.video != null) {
+      json[r'video'] = this.video;
+    } else {
+      json[r'video'] = null;
+    }
+    if (this.title != null) {
+      json[r'title'] = this.title;
+    } else {
+      json[r'title'] = null;
+    }
+    if (this.url != null) {
+      json[r'url'] = this.url;
+    } else {
+      json[r'url'] = null;
+    }
+    if (this.sourceCountry != null) {
+      json[r'source_country'] = this.sourceCountry;
+    } else {
+      json[r'source_country'] = null;
     }
     if (this.id != null) {
       json[r'id'] = this.id;
@@ -129,20 +159,10 @@ class SearchNews200ResponseNewsInner {
     } else {
       json[r'text'] = null;
     }
-    if (this.title != null) {
-      json[r'title'] = this.title;
-    } else {
-      json[r'title'] = null;
-    }
     if (this.publishDate != null) {
       json[r'publish_date'] = this.publishDate;
     } else {
       json[r'publish_date'] = null;
-    }
-    if (this.url != null) {
-      json[r'url'] = this.url;
-    } else {
-      json[r'url'] = null;
     }
       json[r'authors'] = this.authors;
     return json;
@@ -170,13 +190,15 @@ class SearchNews200ResponseNewsInner {
         summary: mapValueOfType<String>(json, r'summary'),
         image: mapValueOfType<String>(json, r'image'),
         sentiment: num.parse('${json[r'sentiment']}'),
-        sourceCountry: mapValueOfType<String>(json, r'source_country'),
+        author: mapValueOfType<String>(json, r'author'),
         language: mapValueOfType<String>(json, r'language'),
+        video: mapValueOfType<String>(json, r'video'),
+        title: mapValueOfType<String>(json, r'title'),
+        url: mapValueOfType<String>(json, r'url'),
+        sourceCountry: mapValueOfType<String>(json, r'source_country'),
         id: mapValueOfType<int>(json, r'id'),
         text: mapValueOfType<String>(json, r'text'),
-        title: mapValueOfType<String>(json, r'title'),
         publishDate: mapValueOfType<String>(json, r'publish_date'),
-        url: mapValueOfType<String>(json, r'url'),
         authors: json[r'authors'] is Iterable
             ? (json[r'authors'] as Iterable).cast<String>().toList(growable: false)
             : const [],

@@ -6,6 +6,7 @@ import org.openapitools.models._
 import org.openapitools.models.ExtractNews200Response
 import org.openapitools.models.ExtractNewsLinks200Response
 import org.openapitools.models.GetGeoCoordinates200Response
+import org.openapitools.models.RetrieveNewsArticlesByIds200Response
 import org.openapitools.models.SearchNews200Response
 import org.openapitools.models.TopNews200Response
 import io.finch.circe._
@@ -32,6 +33,7 @@ object NewsApi {
         extractNewsLinks(da) :+:
         getGeoCoordinates(da) :+:
         newsWebsiteToRSSFeed(da) :+:
+        retrieveNewsArticlesByIds(da) :+:
         searchNews(da) :+:
         topNews(da)
 
@@ -105,6 +107,20 @@ object NewsApi {
         private def newsWebsiteToRSSFeed(da: DataAccessor): Endpoint[Object] =
         get("feed.rss" :: param("url") :: param("analyze").map(_.toBoolean) :: param("api-key") :: header("x-api-key")) { (url: String, analyze: Boolean, authParamapiKey: String, authParamheaderApiKey: String) =>
           da.News_newsWebsiteToRSSFeed(url, analyze, authParamapiKey, authParamheaderApiKey) match {
+            case Left(error) => checkError(error)
+            case Right(data) => Ok(data)
+          }
+        } handle {
+          case e: Exception => BadRequest(e)
+        }
+
+        /**
+        * 
+        * @return An endpoint representing a RetrieveNewsArticlesByIds200Response
+        */
+        private def retrieveNewsArticlesByIds(da: DataAccessor): Endpoint[RetrieveNewsArticlesByIds200Response] =
+        get("retrieve-news" :: param("ids") :: param("api-key") :: header("x-api-key")) { (ids: String, authParamapiKey: String, authParamheaderApiKey: String) =>
+          da.News_retrieveNewsArticlesByIds(ids, authParamapiKey, authParamheaderApiKey) match {
             case Left(error) => checkError(error)
             case Right(data) => Ok(data)
           }
