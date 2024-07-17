@@ -6,10 +6,10 @@ import { ExtractNews200ResponseImagesInner } from '../models/ExtractNews200Respo
 import { ExtractNews200ResponseVideosInner } from '../models/ExtractNews200ResponseVideosInner';
 import { ExtractNewsLinks200Response } from '../models/ExtractNewsLinks200Response';
 import { GetGeoCoordinates200Response } from '../models/GetGeoCoordinates200Response';
-import { NewspaperFrontPages200Response } from '../models/NewspaperFrontPages200Response';
-import { NewspaperFrontPages200ResponseFrontPage } from '../models/NewspaperFrontPages200ResponseFrontPage';
 import { RetrieveNewsArticlesByIds200Response } from '../models/RetrieveNewsArticlesByIds200Response';
 import { RetrieveNewsArticlesByIds200ResponseNewsInner } from '../models/RetrieveNewsArticlesByIds200ResponseNewsInner';
+import { RetrieveNewspaperFrontPage200Response } from '../models/RetrieveNewspaperFrontPage200Response';
+import { RetrieveNewspaperFrontPage200ResponseFrontPage } from '../models/RetrieveNewspaperFrontPage200ResponseFrontPage';
 import { SearchNews200Response } from '../models/SearchNews200Response';
 import { SearchNews200ResponseNewsInner } from '../models/SearchNews200ResponseNewsInner';
 import { TopNews200Response } from '../models/TopNews200Response';
@@ -73,27 +73,6 @@ export interface NewsApiNewsWebsiteToRSSFeedRequest {
     analyze: boolean
 }
 
-export interface NewsApiNewspaperFrontPagesRequest {
-    /**
-     * The ISO 3166 country code of the newspaper publication.
-     * @type string
-     * @memberof NewsApinewspaperFrontPages
-     */
-    sourceCountry?: string
-    /**
-     * The identifier of the publication see attached list.
-     * @type string
-     * @memberof NewsApinewspaperFrontPages
-     */
-    sourceName?: string
-    /**
-     * The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09.
-     * @type string
-     * @memberof NewsApinewspaperFrontPages
-     */
-    date?: string
-}
-
 export interface NewsApiRetrieveNewsArticlesByIdsRequest {
     /**
      * A comma separated list of news ids.
@@ -101,6 +80,27 @@ export interface NewsApiRetrieveNewsArticlesByIdsRequest {
      * @memberof NewsApiretrieveNewsArticlesByIds
      */
     ids: string
+}
+
+export interface NewsApiRetrieveNewspaperFrontPageRequest {
+    /**
+     * The ISO 3166 country code of the newspaper publication.
+     * @type string
+     * @memberof NewsApiretrieveNewspaperFrontPage
+     */
+    sourceCountry?: string
+    /**
+     * The identifier of the publication see attached list.
+     * @type string
+     * @memberof NewsApiretrieveNewspaperFrontPage
+     */
+    sourceName?: string
+    /**
+     * The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09.
+     * @type string
+     * @memberof NewsApiretrieveNewspaperFrontPage
+     */
+    date?: string
 }
 
 export interface NewsApiSearchNewsRequest {
@@ -309,24 +309,6 @@ export class ObjectNewsApi {
     }
 
     /**
-     * Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here\'s an example of some of today\'s newspapers:
-     * Newspaper Front Pages
-     * @param param the request object
-     */
-    public newspaperFrontPagesWithHttpInfo(param: NewsApiNewspaperFrontPagesRequest = {}, options?: Configuration): Promise<HttpInfo<NewspaperFrontPages200Response>> {
-        return this.api.newspaperFrontPagesWithHttpInfo(param.sourceCountry, param.sourceName, param.date,  options).toPromise();
-    }
-
-    /**
-     * Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here\'s an example of some of today\'s newspapers:
-     * Newspaper Front Pages
-     * @param param the request object
-     */
-    public newspaperFrontPages(param: NewsApiNewspaperFrontPagesRequest = {}, options?: Configuration): Promise<NewspaperFrontPages200Response> {
-        return this.api.newspaperFrontPages(param.sourceCountry, param.sourceName, param.date,  options).toPromise();
-    }
-
-    /**
      * Retrieve information about one or more news articles by their ids. The ids can be retrieved from the search news or top news APIs.
      * Retrieve News Articles by Ids
      * @param param the request object
@@ -342,6 +324,24 @@ export class ObjectNewsApi {
      */
     public retrieveNewsArticlesByIds(param: NewsApiRetrieveNewsArticlesByIdsRequest, options?: Configuration): Promise<RetrieveNewsArticlesByIds200Response> {
         return this.api.retrieveNewsArticlesByIds(param.ids,  options).toPromise();
+    }
+
+    /**
+     * Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here\'s an example of some of today\'s newspapers:
+     * Retrieve Newspaper Front Page
+     * @param param the request object
+     */
+    public retrieveNewspaperFrontPageWithHttpInfo(param: NewsApiRetrieveNewspaperFrontPageRequest = {}, options?: Configuration): Promise<HttpInfo<RetrieveNewspaperFrontPage200Response>> {
+        return this.api.retrieveNewspaperFrontPageWithHttpInfo(param.sourceCountry, param.sourceName, param.date,  options).toPromise();
+    }
+
+    /**
+     * Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here\'s an example of some of today\'s newspapers:
+     * Retrieve Newspaper Front Page
+     * @param param the request object
+     */
+    public retrieveNewspaperFrontPage(param: NewsApiRetrieveNewspaperFrontPageRequest = {}, options?: Configuration): Promise<RetrieveNewspaperFrontPage200Response> {
+        return this.api.retrieveNewspaperFrontPage(param.sourceCountry, param.sourceName, param.date,  options).toPromise();
     }
 
     /**

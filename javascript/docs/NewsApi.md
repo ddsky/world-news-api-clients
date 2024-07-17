@@ -8,8 +8,8 @@ Method | HTTP request | Description
 [**extractNewsLinks**](NewsApi.md#extractNewsLinks) | **GET** /extract-news-links | Extract News Links
 [**getGeoCoordinates**](NewsApi.md#getGeoCoordinates) | **GET** /geo-coordinates | Get Geo Coordinates
 [**newsWebsiteToRSSFeed**](NewsApi.md#newsWebsiteToRSSFeed) | **GET** /feed.rss | News Website to RSS Feed
-[**newspaperFrontPages**](NewsApi.md#newspaperFrontPages) | **GET** /retrieve-front-page | Newspaper Front Pages
 [**retrieveNewsArticlesByIds**](NewsApi.md#retrieveNewsArticlesByIds) | **GET** /retrieve-news | Retrieve News Articles by Ids
+[**retrieveNewspaperFrontPage**](NewsApi.md#retrieveNewspaperFrontPage) | **GET** /retrieve-front-page | Retrieve Newspaper Front Page
 [**searchNews**](NewsApi.md#searchNews) | **GET** /search-news | Search News
 [**topNews**](NewsApi.md#topNews) | **GET** /top-news | Top News
 
@@ -245,68 +245,6 @@ Name | Type | Description  | Notes
 - **Accept**: application/xml
 
 
-## newspaperFrontPages
-
-> NewspaperFrontPages200Response newspaperFrontPages(opts)
-
-Newspaper Front Pages
-
-Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here&#39;s an example of some of today&#39;s newspapers:
-
-### Example
-
-```javascript
-import Worldnewsapi from 'worldnewsapi';
-let defaultClient = Worldnewsapi.ApiClient.instance;
-// Configure API key authorization: apiKey
-let apiKey = defaultClient.authentications['apiKey'];
-apiKey.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKey.apiKeyPrefix = 'Token';
-// Configure API key authorization: headerApiKey
-let headerApiKey = defaultClient.authentications['headerApiKey'];
-headerApiKey.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//headerApiKey.apiKeyPrefix = 'Token';
-
-let apiInstance = new Worldnewsapi.NewsApi();
-let opts = {
-  'sourceCountry': "au", // String | The ISO 3166 country code of the newspaper publication.
-  'sourceName': "herald-sun", // String | The identifier of the publication see attached list.
-  'date': "2024-07-09" // String | The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09.
-};
-apiInstance.newspaperFrontPages(opts, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
-```
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **sourceCountry** | **String**| The ISO 3166 country code of the newspaper publication. | [optional] 
- **sourceName** | **String**| The identifier of the publication see attached list. | [optional] 
- **date** | **String**| The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09. | [optional] 
-
-### Return type
-
-[**NewspaperFrontPages200Response**](NewspaperFrontPages200Response.md)
-
-### Authorization
-
-[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
 ## retrieveNewsArticlesByIds
 
 > RetrieveNewsArticlesByIds200Response retrieveNewsArticlesByIds(ids)
@@ -352,6 +290,68 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**RetrieveNewsArticlesByIds200Response**](RetrieveNewsArticlesByIds200Response.md)
+
+### Authorization
+
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## retrieveNewspaperFrontPage
+
+> RetrieveNewspaperFrontPage200Response retrieveNewspaperFrontPage(opts)
+
+Retrieve Newspaper Front Page
+
+Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here&#39;s an example of some of today&#39;s newspapers:
+
+### Example
+
+```javascript
+import Worldnewsapi from 'worldnewsapi';
+let defaultClient = Worldnewsapi.ApiClient.instance;
+// Configure API key authorization: apiKey
+let apiKey = defaultClient.authentications['apiKey'];
+apiKey.apiKey = 'YOUR API KEY';
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKey.apiKeyPrefix = 'Token';
+// Configure API key authorization: headerApiKey
+let headerApiKey = defaultClient.authentications['headerApiKey'];
+headerApiKey.apiKey = 'YOUR API KEY';
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//headerApiKey.apiKeyPrefix = 'Token';
+
+let apiInstance = new Worldnewsapi.NewsApi();
+let opts = {
+  'sourceCountry': "au", // String | The ISO 3166 country code of the newspaper publication.
+  'sourceName': "herald-sun", // String | The identifier of the publication see attached list.
+  'date': "2024-07-09" // String | The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09.
+};
+apiInstance.retrieveNewspaperFrontPage(opts, (error, data, response) => {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+});
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **sourceCountry** | **String**| The ISO 3166 country code of the newspaper publication. | [optional] 
+ **sourceName** | **String**| The identifier of the publication see attached list. | [optional] 
+ **date** | **String**| The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09. | [optional] 
+
+### Return type
+
+[**RetrieveNewspaperFrontPage200Response**](RetrieveNewspaperFrontPage200Response.md)
 
 ### Authorization
 

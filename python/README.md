@@ -4,8 +4,8 @@ The World News API gives you access to thousands of news sources in over 50 lang
 
 This is the python-package for easy acccess to the api.
 
-- API version: 1.3.1
-- Package version: 1.3.1
+- API version: 1.3.2
+- Package version: 1.3.2
 
 ## Resources
 
@@ -110,8 +110,8 @@ Class | Method | HTTP request | Description
 *NewsApi* | [**extract_news_links**](docs/NewsApi.md#extract_news_links) | **GET** /extract-news-links | Extract News Links
 *NewsApi* | [**get_geo_coordinates**](docs/NewsApi.md#get_geo_coordinates) | **GET** /geo-coordinates | Get Geo Coordinates
 *NewsApi* | [**news_website_to_rss_feed**](docs/NewsApi.md#news_website_to_rss_feed) | **GET** /feed.rss | News Website to RSS Feed
-*NewsApi* | [**newspaper_front_pages**](docs/NewsApi.md#newspaper_front_pages) | **GET** /retrieve-front-page | Newspaper Front Pages
 *NewsApi* | [**retrieve_news_articles_by_ids**](docs/NewsApi.md#retrieve_news_articles_by_ids) | **GET** /retrieve-news | Retrieve News Articles by Ids
+*NewsApi* | [**retrieve_newspaper_front_page**](docs/NewsApi.md#retrieve_newspaper_front_page) | **GET** /retrieve-front-page | Retrieve Newspaper Front Page
 *NewsApi* | [**search_news**](docs/NewsApi.md#search_news) | **GET** /search-news | Search News
 *NewsApi* | [**top_news**](docs/NewsApi.md#top_news) | **GET** /top-news | Top News
 
@@ -123,10 +123,10 @@ Class | Method | HTTP request | Description
  - [ExtractNews200ResponseVideosInner](docs/ExtractNews200ResponseVideosInner.md)
  - [ExtractNewsLinks200Response](docs/ExtractNewsLinks200Response.md)
  - [GetGeoCoordinates200Response](docs/GetGeoCoordinates200Response.md)
- - [NewspaperFrontPages200Response](docs/NewspaperFrontPages200Response.md)
- - [NewspaperFrontPages200ResponseFrontPage](docs/NewspaperFrontPages200ResponseFrontPage.md)
  - [RetrieveNewsArticlesByIds200Response](docs/RetrieveNewsArticlesByIds200Response.md)
  - [RetrieveNewsArticlesByIds200ResponseNewsInner](docs/RetrieveNewsArticlesByIds200ResponseNewsInner.md)
+ - [RetrieveNewspaperFrontPage200Response](docs/RetrieveNewspaperFrontPage200Response.md)
+ - [RetrieveNewspaperFrontPage200ResponseFrontPage](docs/RetrieveNewspaperFrontPage200ResponseFrontPage.md)
  - [SearchNews200Response](docs/SearchNews200Response.md)
  - [SearchNews200ResponseNewsInner](docs/SearchNews200ResponseNewsInner.md)
  - [TopNews200Response](docs/TopNews200Response.md)

@@ -8,8 +8,8 @@ Method | HTTP request | Description
 [**extractNewsLinks**](NewsApi.md#extractNewsLinks) | **GET** /extract-news-links | Extract News Links
 [**getGeoCoordinates**](NewsApi.md#getGeoCoordinates) | **GET** /geo-coordinates | Get Geo Coordinates
 [**newsWebsiteToRSSFeed**](NewsApi.md#newsWebsiteToRSSFeed) | **GET** /feed.rss | News Website to RSS Feed
-[**newspaperFrontPages**](NewsApi.md#newspaperFrontPages) | **GET** /retrieve-front-page | Newspaper Front Pages
 [**retrieveNewsArticlesByIds**](NewsApi.md#retrieveNewsArticlesByIds) | **GET** /retrieve-news | Retrieve News Articles by Ids
+[**retrieveNewspaperFrontPage**](NewsApi.md#retrieveNewspaperFrontPage) | **GET** /retrieve-front-page | Retrieve Newspaper Front Page
 [**searchNews**](NewsApi.md#searchNews) | **GET** /search-news | Search News
 [**topNews**](NewsApi.md#topNews) | **GET** /top-news | Top News
 
@@ -263,72 +263,6 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-# **newspaperFrontPages**
-> NewspaperFrontPages200Response newspaperFrontPages()
-
-Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here\'s an example of some of today\'s newspapers:
-
-### Example
-
-
-```typescript
-import {  } from '';
-import * as fs from 'fs';
-
-const configuration = .createConfiguration();
-const apiInstance = new .NewsApi(configuration);
-
-let body:.NewsApiNewspaperFrontPagesRequest = {
-  // string | The ISO 3166 country code of the newspaper publication. (optional)
-  sourceCountry: "au",
-  // string | The identifier of the publication see attached list. (optional)
-  sourceName: "herald-sun",
-  // string | The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09. (optional)
-  date: "2024-07-09",
-};
-
-apiInstance.newspaperFrontPages(body).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
-```
-
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **sourceCountry** | [**string**] | The ISO 3166 country code of the newspaper publication. | (optional) defaults to undefined
- **sourceName** | [**string**] | The identifier of the publication see attached list. | (optional) defaults to undefined
- **date** | [**string**] | The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09. | (optional) defaults to undefined
-
-
-### Return type
-
-**NewspaperFrontPages200Response**
-
-### Authorization
-
-[apiKey](README.md#apiKey), [headerApiKey](README.md#headerApiKey)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Success |  -  |
-**401** | Unauthorized |  -  |
-**402** | Payment Required |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
-**406** | Not Acceptable |  -  |
-**429** | Too Many Requests |  -  |
-
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
-
 # **retrieveNewsArticlesByIds**
 > RetrieveNewsArticlesByIds200Response retrieveNewsArticlesByIds()
 
@@ -365,6 +299,72 @@ Name | Type | Description  | Notes
 ### Return type
 
 **RetrieveNewsArticlesByIds200Response**
+
+### Authorization
+
+[apiKey](README.md#apiKey), [headerApiKey](README.md#headerApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**401** | Unauthorized |  -  |
+**402** | Payment Required |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**406** | Not Acceptable |  -  |
+**429** | Too Many Requests |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **retrieveNewspaperFrontPage**
+> RetrieveNewspaperFrontPage200Response retrieveNewspaperFrontPage()
+
+Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here\'s an example of some of today\'s newspapers:
+
+### Example
+
+
+```typescript
+import {  } from '';
+import * as fs from 'fs';
+
+const configuration = .createConfiguration();
+const apiInstance = new .NewsApi(configuration);
+
+let body:.NewsApiRetrieveNewspaperFrontPageRequest = {
+  // string | The ISO 3166 country code of the newspaper publication. (optional)
+  sourceCountry: "au",
+  // string | The identifier of the publication see attached list. (optional)
+  sourceName: "herald-sun",
+  // string | The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09. (optional)
+  date: "2024-07-09",
+};
+
+apiInstance.retrieveNewspaperFrontPage(body).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **sourceCountry** | [**string**] | The ISO 3166 country code of the newspaper publication. | (optional) defaults to undefined
+ **sourceName** | [**string**] | The identifier of the publication see attached list. | (optional) defaults to undefined
+ **date** | [**string**] | The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09. | (optional) defaults to undefined
+
+
+### Return type
+
+**RetrieveNewspaperFrontPage200Response**
 
 ### Authorization
 

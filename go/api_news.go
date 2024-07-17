@@ -3,7 +3,7 @@ World News API
 
 The world's news wrapped into a single API.
 
-API version: 1.3.1
+API version: 1.3.2
 Contact: mail@worldnewsapi.com
 */
 
@@ -620,81 +620,65 @@ func (a *NewsAPIService) NewsWebsiteToRSSFeedExecute(r ApiNewsWebsiteToRSSFeedRe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiNewspaperFrontPagesRequest struct {
+type ApiRetrieveNewsArticlesByIdsRequest struct {
 	ctx context.Context
 	ApiService *NewsAPIService
-	sourceCountry *string
-	sourceName *string
-	date *string
+	ids *string
 }
 
-// The ISO 3166 country code of the newspaper publication.
-func (r ApiNewspaperFrontPagesRequest) SourceCountry(sourceCountry string) ApiNewspaperFrontPagesRequest {
-	r.sourceCountry = &sourceCountry
+// A comma separated list of news ids.
+func (r ApiRetrieveNewsArticlesByIdsRequest) Ids(ids string) ApiRetrieveNewsArticlesByIdsRequest {
+	r.ids = &ids
 	return r
 }
 
-// The identifier of the publication see attached list.
-func (r ApiNewspaperFrontPagesRequest) SourceName(sourceName string) ApiNewspaperFrontPagesRequest {
-	r.sourceName = &sourceName
-	return r
-}
-
-// The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09.
-func (r ApiNewspaperFrontPagesRequest) Date(date string) ApiNewspaperFrontPagesRequest {
-	r.date = &date
-	return r
-}
-
-func (r ApiNewspaperFrontPagesRequest) Execute() (*NewspaperFrontPages200Response, *http.Response, error) {
-	return r.ApiService.NewspaperFrontPagesExecute(r)
+func (r ApiRetrieveNewsArticlesByIdsRequest) Execute() (*RetrieveNewsArticlesByIds200Response, *http.Response, error) {
+	return r.ApiService.RetrieveNewsArticlesByIdsExecute(r)
 }
 
 /*
-NewspaperFrontPages Newspaper Front Pages
+RetrieveNewsArticlesByIds Retrieve News Articles by Ids
 
-Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here's an example of some of today's newspapers:
+Retrieve information about one or more news articles by their ids. The ids can be retrieved from the search news or top news APIs.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiNewspaperFrontPagesRequest
+ @return ApiRetrieveNewsArticlesByIdsRequest
 */
-func (a *NewsAPIService) NewspaperFrontPages(ctx context.Context) ApiNewspaperFrontPagesRequest {
-	return ApiNewspaperFrontPagesRequest{
+func (a *NewsAPIService) RetrieveNewsArticlesByIds(ctx context.Context) ApiRetrieveNewsArticlesByIdsRequest {
+	return ApiRetrieveNewsArticlesByIdsRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return NewspaperFrontPages200Response
-func (a *NewsAPIService) NewspaperFrontPagesExecute(r ApiNewspaperFrontPagesRequest) (*NewspaperFrontPages200Response, *http.Response, error) {
+//  @return RetrieveNewsArticlesByIds200Response
+func (a *NewsAPIService) RetrieveNewsArticlesByIdsExecute(r ApiRetrieveNewsArticlesByIdsRequest) (*RetrieveNewsArticlesByIds200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *NewspaperFrontPages200Response
+		localVarReturnValue  *RetrieveNewsArticlesByIds200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NewsAPIService.NewspaperFrontPages")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NewsAPIService.RetrieveNewsArticlesByIds")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/retrieve-front-page"
+	localVarPath := localBasePath + "/retrieve-news"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.ids == nil {
+		return localVarReturnValue, nil, reportError("ids is required and must be specified")
+	}
+	if strlen(*r.ids) > 10000 {
+		return localVarReturnValue, nil, reportError("ids must have less than 10000 elements")
+	}
 
-	if r.sourceCountry != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "source-country", r.sourceCountry, "")
-	}
-	if r.sourceName != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "source-name", r.sourceName, "")
-	}
-	if r.date != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "date", r.date, "")
-	}
+	parameterAddToHeaderOrQuery(localVarQueryParams, "ids", r.ids, "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -777,65 +761,81 @@ func (a *NewsAPIService) NewspaperFrontPagesExecute(r ApiNewspaperFrontPagesRequ
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiRetrieveNewsArticlesByIdsRequest struct {
+type ApiRetrieveNewspaperFrontPageRequest struct {
 	ctx context.Context
 	ApiService *NewsAPIService
-	ids *string
+	sourceCountry *string
+	sourceName *string
+	date *string
 }
 
-// A comma separated list of news ids.
-func (r ApiRetrieveNewsArticlesByIdsRequest) Ids(ids string) ApiRetrieveNewsArticlesByIdsRequest {
-	r.ids = &ids
+// The ISO 3166 country code of the newspaper publication.
+func (r ApiRetrieveNewspaperFrontPageRequest) SourceCountry(sourceCountry string) ApiRetrieveNewspaperFrontPageRequest {
+	r.sourceCountry = &sourceCountry
 	return r
 }
 
-func (r ApiRetrieveNewsArticlesByIdsRequest) Execute() (*RetrieveNewsArticlesByIds200Response, *http.Response, error) {
-	return r.ApiService.RetrieveNewsArticlesByIdsExecute(r)
+// The identifier of the publication see attached list.
+func (r ApiRetrieveNewspaperFrontPageRequest) SourceName(sourceName string) ApiRetrieveNewspaperFrontPageRequest {
+	r.sourceName = &sourceName
+	return r
+}
+
+// The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09.
+func (r ApiRetrieveNewspaperFrontPageRequest) Date(date string) ApiRetrieveNewspaperFrontPageRequest {
+	r.date = &date
+	return r
+}
+
+func (r ApiRetrieveNewspaperFrontPageRequest) Execute() (*RetrieveNewspaperFrontPage200Response, *http.Response, error) {
+	return r.ApiService.RetrieveNewspaperFrontPageExecute(r)
 }
 
 /*
-RetrieveNewsArticlesByIds Retrieve News Articles by Ids
+RetrieveNewspaperFrontPage Retrieve Newspaper Front Page
 
-Retrieve information about one or more news articles by their ids. The ids can be retrieved from the search news or top news APIs.
+Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here's an example of some of today's newspapers:
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiRetrieveNewsArticlesByIdsRequest
+ @return ApiRetrieveNewspaperFrontPageRequest
 */
-func (a *NewsAPIService) RetrieveNewsArticlesByIds(ctx context.Context) ApiRetrieveNewsArticlesByIdsRequest {
-	return ApiRetrieveNewsArticlesByIdsRequest{
+func (a *NewsAPIService) RetrieveNewspaperFrontPage(ctx context.Context) ApiRetrieveNewspaperFrontPageRequest {
+	return ApiRetrieveNewspaperFrontPageRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return RetrieveNewsArticlesByIds200Response
-func (a *NewsAPIService) RetrieveNewsArticlesByIdsExecute(r ApiRetrieveNewsArticlesByIdsRequest) (*RetrieveNewsArticlesByIds200Response, *http.Response, error) {
+//  @return RetrieveNewspaperFrontPage200Response
+func (a *NewsAPIService) RetrieveNewspaperFrontPageExecute(r ApiRetrieveNewspaperFrontPageRequest) (*RetrieveNewspaperFrontPage200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *RetrieveNewsArticlesByIds200Response
+		localVarReturnValue  *RetrieveNewspaperFrontPage200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NewsAPIService.RetrieveNewsArticlesByIds")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NewsAPIService.RetrieveNewspaperFrontPage")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/retrieve-news"
+	localVarPath := localBasePath + "/retrieve-front-page"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.ids == nil {
-		return localVarReturnValue, nil, reportError("ids is required and must be specified")
-	}
-	if strlen(*r.ids) > 10000 {
-		return localVarReturnValue, nil, reportError("ids must have less than 10000 elements")
-	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "ids", r.ids, "")
+	if r.sourceCountry != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "source-country", r.sourceCountry, "")
+	}
+	if r.sourceName != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "source-name", r.sourceName, "")
+	}
+	if r.date != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "date", r.date, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

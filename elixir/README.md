@@ -18,7 +18,7 @@ your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
-  [{:worldnewsapi, "~> 1.3.1"}]
+  [{:worldnewsapi, "~> 1.3.2"}]
 end
 ```
 

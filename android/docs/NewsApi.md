@@ -8,8 +8,8 @@ Method | HTTP request | Description
 [**extractNewsLinks**](NewsApi.md#extractNewsLinks) | **GET** /extract-news-links | Extract News Links
 [**getGeoCoordinates**](NewsApi.md#getGeoCoordinates) | **GET** /geo-coordinates | Get Geo Coordinates
 [**newsWebsiteToRSSFeed**](NewsApi.md#newsWebsiteToRSSFeed) | **GET** /feed.rss | News Website to RSS Feed
-[**newspaperFrontPages**](NewsApi.md#newspaperFrontPages) | **GET** /retrieve-front-page | Newspaper Front Pages
 [**retrieveNewsArticlesByIds**](NewsApi.md#retrieveNewsArticlesByIds) | **GET** /retrieve-news | Retrieve News Articles by Ids
+[**retrieveNewspaperFrontPage**](NewsApi.md#retrieveNewspaperFrontPage) | **GET** /retrieve-front-page | Retrieve Newspaper Front Page
 [**searchNews**](NewsApi.md#searchNews) | **GET** /search-news | Search News
 [**topNews**](NewsApi.md#topNews) | **GET** /top-news | Top News
 
@@ -205,56 +205,6 @@ Name | Type | Description  | Notes
 - **Accept**: application/xml
 
 
-## newspaperFrontPages
-
-> NewspaperFrontPages200Response newspaperFrontPages(sourceCountry, sourceName, date)
-
-Newspaper Front Pages
-
-Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here&#39;s an example of some of today&#39;s newspapers:
-
-### Example
-
-```java
-// Import classes:
-//import com.worldnewsapi.NewsApi;
-
-NewsApi apiInstance = new NewsApi();
-String sourceCountry = au; // String | The ISO 3166 country code of the newspaper publication.
-String sourceName = herald-sun; // String | The identifier of the publication see attached list.
-String date = 2024-07-09; // String | The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09.
-try {
-    NewspaperFrontPages200Response result = apiInstance.newspaperFrontPages(sourceCountry, sourceName, date);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling NewsApi#newspaperFrontPages");
-    e.printStackTrace();
-}
-```
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **sourceCountry** | **String**| The ISO 3166 country code of the newspaper publication. | [optional] [default to null]
- **sourceName** | **String**| The identifier of the publication see attached list. | [optional] [default to null]
- **date** | **String**| The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09. | [optional] [default to null]
-
-### Return type
-
-[**NewspaperFrontPages200Response**](NewspaperFrontPages200Response.md)
-
-### Authorization
-
-[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
 ## retrieveNewsArticlesByIds
 
 > RetrieveNewsArticlesByIds200Response retrieveNewsArticlesByIds(ids)
@@ -290,6 +240,56 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**RetrieveNewsArticlesByIds200Response**](RetrieveNewsArticlesByIds200Response.md)
+
+### Authorization
+
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## retrieveNewspaperFrontPage
+
+> RetrieveNewspaperFrontPage200Response retrieveNewspaperFrontPage(sourceCountry, sourceName, date)
+
+Retrieve Newspaper Front Page
+
+Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here&#39;s an example of some of today&#39;s newspapers:
+
+### Example
+
+```java
+// Import classes:
+//import com.worldnewsapi.NewsApi;
+
+NewsApi apiInstance = new NewsApi();
+String sourceCountry = au; // String | The ISO 3166 country code of the newspaper publication.
+String sourceName = herald-sun; // String | The identifier of the publication see attached list.
+String date = 2024-07-09; // String | The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09.
+try {
+    RetrieveNewspaperFrontPage200Response result = apiInstance.retrieveNewspaperFrontPage(sourceCountry, sourceName, date);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling NewsApi#retrieveNewspaperFrontPage");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **sourceCountry** | **String**| The ISO 3166 country code of the newspaper publication. | [optional] [default to null]
+ **sourceName** | **String**| The identifier of the publication see attached list. | [optional] [default to null]
+ **date** | **String**| The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09. | [optional] [default to null]
+
+### Return type
+
+[**RetrieveNewspaperFrontPage200Response**](RetrieveNewspaperFrontPage200Response.md)
 
 ### Authorization
 

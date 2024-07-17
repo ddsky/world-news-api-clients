@@ -3,7 +3,7 @@ World News API
 
 The world's news wrapped into a single API.
 
-API version: 1.3.1
+API version: 1.3.2
 Contact: mail@worldnewsapi.com
 */
 
@@ -90,7 +90,7 @@ type Configuration struct {
 func NewConfiguration() *Configuration {
 	cfg := &Configuration{
 		DefaultHeader:    make(map[string]string),
-		UserAgent:        "OpenAPI-Generator/1.3.1/go",
+		UserAgent:        "OpenAPI-Generator/1.3.2/go",
 		Debug:            false,
 		Servers:          ServerConfigurations{
 			{

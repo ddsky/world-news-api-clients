@@ -8,8 +8,8 @@ All URIs are relative to *https://api.worldnewsapi.com*
 | [**extractNewsLinks**](NewsApi.md#extractNewsLinks) | **GET** /extract-news-links | Extract News Links |
 | [**getGeoCoordinates**](NewsApi.md#getGeoCoordinates) | **GET** /geo-coordinates | Get Geo Coordinates |
 | [**newsWebsiteToRSSFeed**](NewsApi.md#newsWebsiteToRSSFeed) | **GET** /feed.rss | News Website to RSS Feed |
-| [**newspaperFrontPages**](NewsApi.md#newspaperFrontPages) | **GET** /retrieve-front-page | Newspaper Front Pages |
 | [**retrieveNewsArticlesByIds**](NewsApi.md#retrieveNewsArticlesByIds) | **GET** /retrieve-news | Retrieve News Articles by Ids |
+| [**retrieveNewspaperFrontPage**](NewsApi.md#retrieveNewspaperFrontPage) | **GET** /retrieve-front-page | Retrieve Newspaper Front Page |
 | [**searchNews**](NewsApi.md#searchNews) | **GET** /search-news | Search News |
 | [**topNews**](NewsApi.md#topNews) | **GET** /top-news | Top News |
 
@@ -228,62 +228,6 @@ Configure headerApiKey:
  - **Content-Type**: Not defined
  - **Accept**: Not defined
 
-<a id="newspaperFrontPages"></a>
-# **newspaperFrontPages**
-> NewspaperFrontPages200Response newspaperFrontPages(sourceCountry, sourceName, date)
-
-Newspaper Front Pages
-
-Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here&#39;s an example of some of today&#39;s newspapers:
-
-### Example
-```kotlin
-// Import classes:
-//import worldnewsapi.infrastructure.*
-//import worldnewsapi.models.*
-
-val apiInstance = NewsApi()
-val sourceCountry : kotlin.String = au // kotlin.String | The ISO 3166 country code of the newspaper publication.
-val sourceName : kotlin.String = herald-sun // kotlin.String | The identifier of the publication see attached list.
-val date : kotlin.String = 2024-07-09 // kotlin.String | The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09.
-try {
-    val result : NewspaperFrontPages200Response = apiInstance.newspaperFrontPages(sourceCountry, sourceName, date)
-    println(result)
-} catch (e: ClientException) {
-    println("4xx response calling NewsApi#newspaperFrontPages")
-    e.printStackTrace()
-} catch (e: ServerException) {
-    println("5xx response calling NewsApi#newspaperFrontPages")
-    e.printStackTrace()
-}
-```
-
-### Parameters
-| **sourceCountry** | **kotlin.String**| The ISO 3166 country code of the newspaper publication. | [optional] |
-| **sourceName** | **kotlin.String**| The identifier of the publication see attached list. | [optional] |
-| Name | Type | Description  | Notes |
-| ------------- | ------------- | ------------- | ------------- |
-| **date** | **kotlin.String**| The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09. | [optional] |
-
-### Return type
-
-[**NewspaperFrontPages200Response**](NewspaperFrontPages200Response.md)
-
-### Authorization
-
-
-Configure apiKey:
-    ApiClient.apiKey["api-key"] = ""
-    ApiClient.apiKeyPrefix["api-key"] = ""
-Configure headerApiKey:
-    ApiClient.apiKey["x-api-key"] = ""
-    ApiClient.apiKeyPrefix["x-api-key"] = ""
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
 <a id="retrieveNewsArticlesByIds"></a>
 # **retrieveNewsArticlesByIds**
 > RetrieveNewsArticlesByIds200Response retrieveNewsArticlesByIds(ids)
@@ -320,6 +264,62 @@ try {
 ### Return type
 
 [**RetrieveNewsArticlesByIds200Response**](RetrieveNewsArticlesByIds200Response.md)
+
+### Authorization
+
+
+Configure apiKey:
+    ApiClient.apiKey["api-key"] = ""
+    ApiClient.apiKeyPrefix["api-key"] = ""
+Configure headerApiKey:
+    ApiClient.apiKey["x-api-key"] = ""
+    ApiClient.apiKeyPrefix["x-api-key"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a id="retrieveNewspaperFrontPage"></a>
+# **retrieveNewspaperFrontPage**
+> RetrieveNewspaperFrontPage200Response retrieveNewspaperFrontPage(sourceCountry, sourceName, date)
+
+Retrieve Newspaper Front Page
+
+Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here&#39;s an example of some of today&#39;s newspapers:
+
+### Example
+```kotlin
+// Import classes:
+//import worldnewsapi.infrastructure.*
+//import worldnewsapi.models.*
+
+val apiInstance = NewsApi()
+val sourceCountry : kotlin.String = au // kotlin.String | The ISO 3166 country code of the newspaper publication.
+val sourceName : kotlin.String = herald-sun // kotlin.String | The identifier of the publication see attached list.
+val date : kotlin.String = 2024-07-09 // kotlin.String | The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09.
+try {
+    val result : RetrieveNewspaperFrontPage200Response = apiInstance.retrieveNewspaperFrontPage(sourceCountry, sourceName, date)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling NewsApi#retrieveNewspaperFrontPage")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling NewsApi#retrieveNewspaperFrontPage")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+| **sourceCountry** | **kotlin.String**| The ISO 3166 country code of the newspaper publication. | [optional] |
+| **sourceName** | **kotlin.String**| The identifier of the publication see attached list. | [optional] |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **date** | **kotlin.String**| The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09. | [optional] |
+
+### Return type
+
+[**RetrieveNewspaperFrontPage200Response**](RetrieveNewspaperFrontPage200Response.md)
 
 ### Authorization
 

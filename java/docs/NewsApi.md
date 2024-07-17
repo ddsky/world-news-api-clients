@@ -8,8 +8,8 @@ All URIs are relative to *https://api.worldnewsapi.com*
 | [**extractNewsLinks**](NewsApi.md#extractNewsLinks) | **GET** /extract-news-links | Extract News Links |
 | [**getGeoCoordinates**](NewsApi.md#getGeoCoordinates) | **GET** /geo-coordinates | Get Geo Coordinates |
 | [**newsWebsiteToRSSFeed**](NewsApi.md#newsWebsiteToRSSFeed) | **GET** /feed.rss | News Website to RSS Feed |
-| [**newspaperFrontPages**](NewsApi.md#newspaperFrontPages) | **GET** /retrieve-front-page | Newspaper Front Pages |
 | [**retrieveNewsArticlesByIds**](NewsApi.md#retrieveNewsArticlesByIds) | **GET** /retrieve-news | Retrieve News Articles by Ids |
+| [**retrieveNewspaperFrontPage**](NewsApi.md#retrieveNewspaperFrontPage) | **GET** /retrieve-front-page | Retrieve Newspaper Front Page |
 | [**searchNews**](NewsApi.md#searchNews) | **GET** /search-news | Search News |
 | [**topNews**](NewsApi.md#topNews) | **GET** /top-news | Top News |
 
@@ -344,91 +344,6 @@ public class Example {
 | **406** | Not Acceptable |  -  |
 | **429** | Too Many Requests |  -  |
 
-<a id="newspaperFrontPages"></a>
-# **newspaperFrontPages**
-> NewspaperFrontPages200Response newspaperFrontPages(sourceCountry, sourceName, date)
-
-Newspaper Front Pages
-
-Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here&#39;s an example of some of today&#39;s newspapers:
-
-### Example
-```java
-// Import classes:
-import com.worldnewsapi.client.ApiClient;
-import com.worldnewsapi.client.ApiException;
-import com.worldnewsapi.client.Configuration;
-import com.worldnewsapi.client.auth.*;
-import com.worldnewsapi.client.models.*;
-import com.worldnewsapi.NewsApi;
-
-public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.worldnewsapi.com");
-    
-    // Configure API key authorization: apiKey
-    ApiKeyAuth apiKey = (ApiKeyAuth) defaultClient.getAuthentication("apiKey");
-    apiKey.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //apiKey.setApiKeyPrefix("Token");
-
-    // Configure API key authorization: headerApiKey
-    ApiKeyAuth headerApiKey = (ApiKeyAuth) defaultClient.getAuthentication("headerApiKey");
-    headerApiKey.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //headerApiKey.setApiKeyPrefix("Token");
-
-    NewsApi apiInstance = new NewsApi(defaultClient);
-    String sourceCountry = "au"; // String | The ISO 3166 country code of the newspaper publication.
-    String sourceName = "herald-sun"; // String | The identifier of the publication see attached list.
-    String date = "2024-07-09"; // String | The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09.
-    try {
-      NewspaperFrontPages200Response result = apiInstance.newspaperFrontPages(sourceCountry, sourceName, date);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling NewsApi#newspaperFrontPages");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
-    }
-  }
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **sourceCountry** | **String**| The ISO 3166 country code of the newspaper publication. | [optional] |
-| **sourceName** | **String**| The identifier of the publication see attached list. | [optional] |
-| **date** | **String**| The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09. | [optional] |
-
-### Return type
-
-[**NewspaperFrontPages200Response**](NewspaperFrontPages200Response.md)
-
-### Authorization
-
-[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | Success |  -  |
-| **401** | Unauthorized |  -  |
-| **402** | Payment Required |  -  |
-| **403** | Forbidden |  -  |
-| **404** | Not Found |  -  |
-| **406** | Not Acceptable |  -  |
-| **429** | Too Many Requests |  -  |
-
 <a id="retrieveNewsArticlesByIds"></a>
 # **retrieveNewsArticlesByIds**
 > RetrieveNewsArticlesByIds200Response retrieveNewsArticlesByIds(ids)
@@ -489,6 +404,91 @@ public class Example {
 ### Return type
 
 [**RetrieveNewsArticlesByIds200Response**](RetrieveNewsArticlesByIds200Response.md)
+
+### Authorization
+
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Success |  -  |
+| **401** | Unauthorized |  -  |
+| **402** | Payment Required |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not Found |  -  |
+| **406** | Not Acceptable |  -  |
+| **429** | Too Many Requests |  -  |
+
+<a id="retrieveNewspaperFrontPage"></a>
+# **retrieveNewspaperFrontPage**
+> RetrieveNewspaperFrontPage200Response retrieveNewspaperFrontPage(sourceCountry, sourceName, date)
+
+Retrieve Newspaper Front Page
+
+Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here&#39;s an example of some of today&#39;s newspapers:
+
+### Example
+```java
+// Import classes:
+import com.worldnewsapi.client.ApiClient;
+import com.worldnewsapi.client.ApiException;
+import com.worldnewsapi.client.Configuration;
+import com.worldnewsapi.client.auth.*;
+import com.worldnewsapi.client.models.*;
+import com.worldnewsapi.NewsApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://api.worldnewsapi.com");
+    
+    // Configure API key authorization: apiKey
+    ApiKeyAuth apiKey = (ApiKeyAuth) defaultClient.getAuthentication("apiKey");
+    apiKey.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKey.setApiKeyPrefix("Token");
+
+    // Configure API key authorization: headerApiKey
+    ApiKeyAuth headerApiKey = (ApiKeyAuth) defaultClient.getAuthentication("headerApiKey");
+    headerApiKey.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //headerApiKey.setApiKeyPrefix("Token");
+
+    NewsApi apiInstance = new NewsApi(defaultClient);
+    String sourceCountry = "au"; // String | The ISO 3166 country code of the newspaper publication.
+    String sourceName = "herald-sun"; // String | The identifier of the publication see attached list.
+    String date = "2024-07-09"; // String | The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09.
+    try {
+      RetrieveNewspaperFrontPage200Response result = apiInstance.retrieveNewspaperFrontPage(sourceCountry, sourceName, date);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling NewsApi#retrieveNewspaperFrontPage");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **sourceCountry** | **String**| The ISO 3166 country code of the newspaper publication. | [optional] |
+| **sourceName** | **String**| The identifier of the publication see attached list. | [optional] |
+| **date** | **String**| The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09. | [optional] |
+
+### Return type
+
+[**RetrieveNewspaperFrontPage200Response**](RetrieveNewspaperFrontPage200Response.md)
 
 ### Authorization
 

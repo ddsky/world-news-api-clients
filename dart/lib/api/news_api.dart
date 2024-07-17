@@ -277,86 +277,6 @@ class NewsApi {
     return null;
   }
 
-  /// Newspaper Front Pages
-  ///
-  /// Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here's an example of some of today's newspapers:
-  ///
-  /// Note: This method returns the HTTP [Response].
-  ///
-  /// Parameters:
-  ///
-  /// * [String] sourceCountry:
-  ///   The ISO 3166 country code of the newspaper publication.
-  ///
-  /// * [String] sourceName:
-  ///   The identifier of the publication see attached list.
-  ///
-  /// * [String] date:
-  ///   The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09.
-  Future<Response> newspaperFrontPagesWithHttpInfo({ String? sourceCountry, String? sourceName, String? date, }) async {
-    // ignore: prefer_const_declarations
-    final path = r'/retrieve-front-page';
-
-    // ignore: prefer_final_locals
-    Object? postBody;
-
-    final queryParams = <QueryParam>[];
-    final headerParams = <String, String>{};
-    final formParams = <String, String>{};
-
-    if (sourceCountry != null) {
-      queryParams.addAll(_queryParams('', 'source-country', sourceCountry));
-    }
-    if (sourceName != null) {
-      queryParams.addAll(_queryParams('', 'source-name', sourceName));
-    }
-    if (date != null) {
-      queryParams.addAll(_queryParams('', 'date', date));
-    }
-
-    const contentTypes = <String>[];
-
-
-    return apiClient.invokeAPI(
-      path,
-      'GET',
-      queryParams,
-      postBody,
-      headerParams,
-      formParams,
-      contentTypes.isEmpty ? null : contentTypes.first,
-    );
-  }
-
-  /// Newspaper Front Pages
-  ///
-  /// Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here's an example of some of today's newspapers:
-  ///
-  /// Parameters:
-  ///
-  /// * [String] sourceCountry:
-  ///   The ISO 3166 country code of the newspaper publication.
-  ///
-  /// * [String] sourceName:
-  ///   The identifier of the publication see attached list.
-  ///
-  /// * [String] date:
-  ///   The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09.
-  Future<NewspaperFrontPages200Response?> newspaperFrontPages({ String? sourceCountry, String? sourceName, String? date, }) async {
-    final response = await newspaperFrontPagesWithHttpInfo( sourceCountry: sourceCountry, sourceName: sourceName, date: date, );
-    if (response.statusCode >= HttpStatus.badRequest) {
-      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
-    }
-    // When a remote server returns no body with a status of 204, we shall not decode it.
-    // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
-    // FormatException when trying to decode an empty string.
-    if (response.body.isNotEmpty && response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'NewspaperFrontPages200Response',) as NewspaperFrontPages200Response;
-    
-    }
-    return null;
-  }
-
   /// Retrieve News Articles by Ids
   ///
   /// Retrieve information about one or more news articles by their ids. The ids can be retrieved from the search news or top news APIs.
@@ -412,6 +332,86 @@ class NewsApi {
     // FormatException when trying to decode an empty string.
     if (response.body.isNotEmpty && response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'RetrieveNewsArticlesByIds200Response',) as RetrieveNewsArticlesByIds200Response;
+    
+    }
+    return null;
+  }
+
+  /// Retrieve Newspaper Front Page
+  ///
+  /// Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here's an example of some of today's newspapers:
+  ///
+  /// Note: This method returns the HTTP [Response].
+  ///
+  /// Parameters:
+  ///
+  /// * [String] sourceCountry:
+  ///   The ISO 3166 country code of the newspaper publication.
+  ///
+  /// * [String] sourceName:
+  ///   The identifier of the publication see attached list.
+  ///
+  /// * [String] date:
+  ///   The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09.
+  Future<Response> retrieveNewspaperFrontPageWithHttpInfo({ String? sourceCountry, String? sourceName, String? date, }) async {
+    // ignore: prefer_const_declarations
+    final path = r'/retrieve-front-page';
+
+    // ignore: prefer_final_locals
+    Object? postBody;
+
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+    if (sourceCountry != null) {
+      queryParams.addAll(_queryParams('', 'source-country', sourceCountry));
+    }
+    if (sourceName != null) {
+      queryParams.addAll(_queryParams('', 'source-name', sourceName));
+    }
+    if (date != null) {
+      queryParams.addAll(_queryParams('', 'date', date));
+    }
+
+    const contentTypes = <String>[];
+
+
+    return apiClient.invokeAPI(
+      path,
+      'GET',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      contentTypes.isEmpty ? null : contentTypes.first,
+    );
+  }
+
+  /// Retrieve Newspaper Front Page
+  ///
+  /// Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here's an example of some of today's newspapers:
+  ///
+  /// Parameters:
+  ///
+  /// * [String] sourceCountry:
+  ///   The ISO 3166 country code of the newspaper publication.
+  ///
+  /// * [String] sourceName:
+  ///   The identifier of the publication see attached list.
+  ///
+  /// * [String] date:
+  ///   The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09.
+  Future<RetrieveNewspaperFrontPage200Response?> retrieveNewspaperFrontPage({ String? sourceCountry, String? sourceName, String? date, }) async {
+    final response = await retrieveNewspaperFrontPageWithHttpInfo( sourceCountry: sourceCountry, sourceName: sourceName, date: date, );
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
+    }
+    // When a remote server returns no body with a status of 204, we shall not decode it.
+    // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
+    // FormatException when trying to decode an empty string.
+    if (response.body.isNotEmpty && response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'RetrieveNewspaperFrontPage200Response',) as RetrieveNewspaperFrontPage200Response;
     
     }
     return null;

@@ -7,10 +7,10 @@ import { ExtractNews200ResponseImagesInner } from '../models/ExtractNews200Respo
 import { ExtractNews200ResponseVideosInner } from '../models/ExtractNews200ResponseVideosInner';
 import { ExtractNewsLinks200Response } from '../models/ExtractNewsLinks200Response';
 import { GetGeoCoordinates200Response } from '../models/GetGeoCoordinates200Response';
-import { NewspaperFrontPages200Response } from '../models/NewspaperFrontPages200Response';
-import { NewspaperFrontPages200ResponseFrontPage } from '../models/NewspaperFrontPages200ResponseFrontPage';
 import { RetrieveNewsArticlesByIds200Response } from '../models/RetrieveNewsArticlesByIds200Response';
 import { RetrieveNewsArticlesByIds200ResponseNewsInner } from '../models/RetrieveNewsArticlesByIds200ResponseNewsInner';
+import { RetrieveNewspaperFrontPage200Response } from '../models/RetrieveNewspaperFrontPage200Response';
+import { RetrieveNewspaperFrontPage200ResponseFrontPage } from '../models/RetrieveNewspaperFrontPage200ResponseFrontPage';
 import { SearchNews200Response } from '../models/SearchNews200Response';
 import { SearchNews200ResponseNewsInner } from '../models/SearchNews200ResponseNewsInner';
 import { TopNews200Response } from '../models/TopNews200Response';
@@ -172,43 +172,6 @@ export class ObservableNewsApi {
     }
 
     /**
-     * Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here\'s an example of some of today\'s newspapers:
-     * Newspaper Front Pages
-     * @param sourceCountry The ISO 3166 country code of the newspaper publication.
-     * @param sourceName The identifier of the publication see attached list.
-     * @param date The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09.
-     */
-    public newspaperFrontPagesWithHttpInfo(sourceCountry?: string, sourceName?: string, date?: string, _options?: Configuration): Observable<HttpInfo<NewspaperFrontPages200Response>> {
-        const requestContextPromise = this.requestFactory.newspaperFrontPages(sourceCountry, sourceName, date, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.newspaperFrontPagesWithHttpInfo(rsp)));
-            }));
-    }
-
-    /**
-     * Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here\'s an example of some of today\'s newspapers:
-     * Newspaper Front Pages
-     * @param sourceCountry The ISO 3166 country code of the newspaper publication.
-     * @param sourceName The identifier of the publication see attached list.
-     * @param date The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09.
-     */
-    public newspaperFrontPages(sourceCountry?: string, sourceName?: string, date?: string, _options?: Configuration): Observable<NewspaperFrontPages200Response> {
-        return this.newspaperFrontPagesWithHttpInfo(sourceCountry, sourceName, date, _options).pipe(map((apiResponse: HttpInfo<NewspaperFrontPages200Response>) => apiResponse.data));
-    }
-
-    /**
      * Retrieve information about one or more news articles by their ids. The ids can be retrieved from the search news or top news APIs.
      * Retrieve News Articles by Ids
      * @param ids A comma separated list of news ids.
@@ -239,6 +202,43 @@ export class ObservableNewsApi {
      */
     public retrieveNewsArticlesByIds(ids: string, _options?: Configuration): Observable<RetrieveNewsArticlesByIds200Response> {
         return this.retrieveNewsArticlesByIdsWithHttpInfo(ids, _options).pipe(map((apiResponse: HttpInfo<RetrieveNewsArticlesByIds200Response>) => apiResponse.data));
+    }
+
+    /**
+     * Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here\'s an example of some of today\'s newspapers:
+     * Retrieve Newspaper Front Page
+     * @param sourceCountry The ISO 3166 country code of the newspaper publication.
+     * @param sourceName The identifier of the publication see attached list.
+     * @param date The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09.
+     */
+    public retrieveNewspaperFrontPageWithHttpInfo(sourceCountry?: string, sourceName?: string, date?: string, _options?: Configuration): Observable<HttpInfo<RetrieveNewspaperFrontPage200Response>> {
+        const requestContextPromise = this.requestFactory.retrieveNewspaperFrontPage(sourceCountry, sourceName, date, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.retrieveNewspaperFrontPageWithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here\'s an example of some of today\'s newspapers:
+     * Retrieve Newspaper Front Page
+     * @param sourceCountry The ISO 3166 country code of the newspaper publication.
+     * @param sourceName The identifier of the publication see attached list.
+     * @param date The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09.
+     */
+    public retrieveNewspaperFrontPage(sourceCountry?: string, sourceName?: string, date?: string, _options?: Configuration): Observable<RetrieveNewspaperFrontPage200Response> {
+        return this.retrieveNewspaperFrontPageWithHttpInfo(sourceCountry, sourceName, date, _options).pipe(map((apiResponse: HttpInfo<RetrieveNewspaperFrontPage200Response>) => apiResponse.data));
     }
 
     /**

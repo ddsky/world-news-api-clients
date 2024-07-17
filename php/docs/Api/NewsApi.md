@@ -8,8 +8,8 @@ All URIs are relative to https://api.worldnewsapi.com, except if the operation d
 | [**extractNewsLinks()**](NewsApi.md#extractNewsLinks) | **GET** /extract-news-links | Extract News Links |
 | [**getGeoCoordinates()**](NewsApi.md#getGeoCoordinates) | **GET** /geo-coordinates | Get Geo Coordinates |
 | [**newsWebsiteToRSSFeed()**](NewsApi.md#newsWebsiteToRSSFeed) | **GET** /feed.rss | News Website to RSS Feed |
-| [**newspaperFrontPages()**](NewsApi.md#newspaperFrontPages) | **GET** /retrieve-front-page | Newspaper Front Pages |
 | [**retrieveNewsArticlesByIds()**](NewsApi.md#retrieveNewsArticlesByIds) | **GET** /retrieve-news | Retrieve News Articles by Ids |
+| [**retrieveNewspaperFrontPage()**](NewsApi.md#retrieveNewspaperFrontPage) | **GET** /retrieve-front-page | Retrieve Newspaper Front Page |
 | [**searchNews()**](NewsApi.md#searchNews) | **GET** /search-news | Search News |
 | [**topNews()**](NewsApi.md#topNews) | **GET** /top-news | Top News |
 
@@ -288,77 +288,6 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
-## `newspaperFrontPages()`
-
-```php
-newspaperFrontPages($source_country, $source_name, $date): \OpenAPI\Client\Model\NewspaperFrontPages200Response
-```
-
-Newspaper Front Pages
-
-Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here's an example of some of today's newspapers:
-
-### Example
-
-```php
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-
-// Configure API key authorization: apiKey
-$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setApiKey('api-key', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('api-key', 'Bearer');
-
-// Configure API key authorization: headerApiKey
-$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setApiKey('x-api-key', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('x-api-key', 'Bearer');
-
-
-$apiInstance = new OpenAPI\Client\Api\NewsApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client(),
-    $config
-);
-$source_country = au; // string | The ISO 3166 country code of the newspaper publication.
-$source_name = herald-sun; // string | The identifier of the publication see attached list.
-$date = 2024-07-09; // string | The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09.
-
-try {
-    $result = $apiInstance->newspaperFrontPages($source_country, $source_name, $date);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling NewsApi->newspaperFrontPages: ', $e->getMessage(), PHP_EOL;
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-| ------------- | ------------- | ------------- | ------------- |
-| **source_country** | **string**| The ISO 3166 country code of the newspaper publication. | [optional] |
-| **source_name** | **string**| The identifier of the publication see attached list. | [optional] |
-| **date** | **string**| The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09. | [optional] |
-
-### Return type
-
-[**\OpenAPI\Client\Model\NewspaperFrontPages200Response**](../Model/NewspaperFrontPages200Response.md)
-
-### Authorization
-
-[apiKey](../../README.md#apiKey), [headerApiKey](../../README.md#headerApiKey)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: `application/json`
-
-[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
-[[Back to Model list]](../../README.md#models)
-[[Back to README]](../../README.md)
-
 ## `retrieveNewsArticlesByIds()`
 
 ```php
@@ -412,6 +341,77 @@ try {
 ### Return type
 
 [**\OpenAPI\Client\Model\RetrieveNewsArticlesByIds200Response**](../Model/RetrieveNewsArticlesByIds200Response.md)
+
+### Authorization
+
+[apiKey](../../README.md#apiKey), [headerApiKey](../../README.md#headerApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `retrieveNewspaperFrontPage()`
+
+```php
+retrieveNewspaperFrontPage($source_country, $source_name, $date): \OpenAPI\Client\Model\RetrieveNewspaperFrontPage200Response
+```
+
+Retrieve Newspaper Front Page
+
+Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here's an example of some of today's newspapers:
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKey
+$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setApiKey('api-key', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('api-key', 'Bearer');
+
+// Configure API key authorization: headerApiKey
+$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setApiKey('x-api-key', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('x-api-key', 'Bearer');
+
+
+$apiInstance = new OpenAPI\Client\Api\NewsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$source_country = au; // string | The ISO 3166 country code of the newspaper publication.
+$source_name = herald-sun; // string | The identifier of the publication see attached list.
+$date = 2024-07-09; // string | The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09.
+
+try {
+    $result = $apiInstance->retrieveNewspaperFrontPage($source_country, $source_name, $date);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling NewsApi->retrieveNewspaperFrontPage: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **source_country** | **string**| The ISO 3166 country code of the newspaper publication. | [optional] |
+| **source_name** | **string**| The identifier of the publication see attached list. | [optional] |
+| **date** | **string**| The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09. | [optional] |
+
+### Return type
+
+[**\OpenAPI\Client\Model\RetrieveNewspaperFrontPage200Response**](../Model/RetrieveNewspaperFrontPage200Response.md)
 
 ### Authorization
 

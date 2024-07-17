@@ -53,21 +53,21 @@ void main() {
       // TODO
     });
 
-    // Newspaper Front Pages
-    //
-    // Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here's an example of some of today's newspapers:
-    //
-    //Future<NewspaperFrontPages200Response> newspaperFrontPages({ String sourceCountry, String sourceName, String date }) async
-    test('test newspaperFrontPages', () async {
-      // TODO
-    });
-
     // Retrieve News Articles by Ids
     //
     // Retrieve information about one or more news articles by their ids. The ids can be retrieved from the search news or top news APIs.
     //
     //Future<RetrieveNewsArticlesByIds200Response> retrieveNewsArticlesByIds(String ids) async
     test('test retrieveNewsArticlesByIds', () async {
+      // TODO
+    });
+
+    // Retrieve Newspaper Front Page
+    //
+    // Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here's an example of some of today's newspapers:
+    //
+    //Future<RetrieveNewspaperFrontPage200Response> retrieveNewspaperFrontPage({ String sourceCountry, String sourceName, String date }) async
+    test('test retrieveNewspaperFrontPage', () async {
       // TODO
     });
 

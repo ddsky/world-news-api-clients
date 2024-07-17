@@ -164,51 +164,6 @@ defmodule WorldNewsAPI.Api.News do
   end
 
   @doc """
-  Newspaper Front Pages
-  Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here's an example of some of today's newspapers:
-
-  ### Parameters
-
-  - `connection` (WorldNewsAPI.Connection): Connection to server
-  - `opts` (keyword): Optional parameters
-    - `:"source-country"` (String.t): The ISO 3166 country code of the newspaper publication.
-    - `:"source-name"` (String.t): The identifier of the publication see attached list.
-    - `:date` (String.t): The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09.
-
-  ### Returns
-
-  - `{:ok, WorldNewsAPI.Model.NewspaperFrontPages200Response.t}` on success
-  - `{:error, Tesla.Env.t}` on failure
-  """
-  @spec newspaper_front_pages(Tesla.Env.client, keyword()) :: {:ok, nil} | {:ok, WorldNewsAPI.Model.NewspaperFrontPages200Response.t} | {:error, Tesla.Env.t}
-  def newspaper_front_pages(connection, opts \\ []) do
-    optional_params = %{
-      :"source-country" => :query,
-      :"source-name" => :query,
-      :date => :query
-    }
-
-    request =
-      %{}
-      |> method(:get)
-      |> url("/retrieve-front-page")
-      |> add_optional_params(optional_params, opts)
-      |> Enum.into([])
-
-    connection
-    |> Connection.request(request)
-    |> evaluate_response([
-      {200, WorldNewsAPI.Model.NewspaperFrontPages200Response},
-      {401, false},
-      {402, false},
-      {403, false},
-      {404, false},
-      {406, false},
-      {429, false}
-    ])
-  end
-
-  @doc """
   Retrieve News Articles by Ids
   Retrieve information about one or more news articles by their ids. The ids can be retrieved from the search news or top news APIs.
 
@@ -236,6 +191,51 @@ defmodule WorldNewsAPI.Api.News do
     |> Connection.request(request)
     |> evaluate_response([
       {200, WorldNewsAPI.Model.RetrieveNewsArticlesByIds200Response},
+      {401, false},
+      {402, false},
+      {403, false},
+      {404, false},
+      {406, false},
+      {429, false}
+    ])
+  end
+
+  @doc """
+  Retrieve Newspaper Front Page
+  Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here's an example of some of today's newspapers:
+
+  ### Parameters
+
+  - `connection` (WorldNewsAPI.Connection): Connection to server
+  - `opts` (keyword): Optional parameters
+    - `:"source-country"` (String.t): The ISO 3166 country code of the newspaper publication.
+    - `:"source-name"` (String.t): The identifier of the publication see attached list.
+    - `:date` (String.t): The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09.
+
+  ### Returns
+
+  - `{:ok, WorldNewsAPI.Model.RetrieveNewspaperFrontPage200Response.t}` on success
+  - `{:error, Tesla.Env.t}` on failure
+  """
+  @spec retrieve_newspaper_front_page(Tesla.Env.client, keyword()) :: {:ok, nil} | {:ok, WorldNewsAPI.Model.RetrieveNewspaperFrontPage200Response.t} | {:error, Tesla.Env.t}
+  def retrieve_newspaper_front_page(connection, opts \\ []) do
+    optional_params = %{
+      :"source-country" => :query,
+      :"source-name" => :query,
+      :date => :query
+    }
+
+    request =
+      %{}
+      |> method(:get)
+      |> url("/retrieve-front-page")
+      |> add_optional_params(optional_params, opts)
+      |> Enum.into([])
+
+    connection
+    |> Connection.request(request)
+    |> evaluate_response([
+      {200, WorldNewsAPI.Model.RetrieveNewspaperFrontPage200Response},
       {401, false},
       {402, false},
       {403, false},

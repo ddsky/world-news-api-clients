@@ -8,8 +8,8 @@ All URIs are relative to *https://api.worldnewsapi.com*
 | [**ExtractNewsLinks**](NewsApi.md#extractnewslinks) | **GET** /extract-news-links | Extract News Links |
 | [**GetGeoCoordinates**](NewsApi.md#getgeocoordinates) | **GET** /geo-coordinates | Get Geo Coordinates |
 | [**NewsWebsiteToRSSFeed**](NewsApi.md#newswebsitetorssfeed) | **GET** /feed.rss | News Website to RSS Feed |
-| [**NewspaperFrontPages**](NewsApi.md#newspaperfrontpages) | **GET** /retrieve-front-page | Newspaper Front Pages |
 | [**RetrieveNewsArticlesByIds**](NewsApi.md#retrievenewsarticlesbyids) | **GET** /retrieve-news | Retrieve News Articles by Ids |
+| [**RetrieveNewspaperFrontPage**](NewsApi.md#retrievenewspaperfrontpage) | **GET** /retrieve-front-page | Retrieve Newspaper Front Page |
 | [**SearchNews**](NewsApi.md#searchnews) | **GET** /search-news | Search News |
 | [**TopNews**](NewsApi.md#topnews) | **GET** /top-news | Top News |
 
@@ -443,116 +443,6 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a id="newspaperfrontpages"></a>
-# **NewspaperFrontPages**
-> NewspaperFrontPages200Response NewspaperFrontPages (string? sourceCountry = null, string? sourceName = null, string? date = null)
-
-Newspaper Front Pages
-
-Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here's an example of some of today's newspapers:
-
-### Example
-```csharp
-using System.Collections.Generic;
-using System.Diagnostics;
-using worldnewsapi.Api;
-using worldnewsapi.Client;
-using worldnewsapi.Model;
-
-namespace Example
-{
-    public class NewspaperFrontPagesExample
-    {
-        public static void Main()
-        {
-            Configuration config = new Configuration();
-            config.BasePath = "https://api.worldnewsapi.com";
-            // Configure API key authorization: apiKey
-            config.AddApiKey("api-key", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("api-key", "Bearer");
-            // Configure API key authorization: headerApiKey
-            config.AddApiKey("x-api-key", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("x-api-key", "Bearer");
-
-            var apiInstance = new NewsApi(config);
-            var sourceCountry = au;  // string? | The ISO 3166 country code of the newspaper publication. (optional) 
-            var sourceName = herald-sun;  // string? | The identifier of the publication see attached list. (optional) 
-            var date = 2024-07-09;  // string? | The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09. (optional) 
-
-            try
-            {
-                // Newspaper Front Pages
-                NewspaperFrontPages200Response result = apiInstance.NewspaperFrontPages(sourceCountry, sourceName, date);
-                Debug.WriteLine(result);
-            }
-            catch (ApiException  e)
-            {
-                Debug.Print("Exception when calling NewsApi.NewspaperFrontPages: " + e.Message);
-                Debug.Print("Status Code: " + e.ErrorCode);
-                Debug.Print(e.StackTrace);
-            }
-        }
-    }
-}
-```
-
-#### Using the NewspaperFrontPagesWithHttpInfo variant
-This returns an ApiResponse object which contains the response data, status code and headers.
-
-```csharp
-try
-{
-    // Newspaper Front Pages
-    ApiResponse<NewspaperFrontPages200Response> response = apiInstance.NewspaperFrontPagesWithHttpInfo(sourceCountry, sourceName, date);
-    Debug.Write("Status Code: " + response.StatusCode);
-    Debug.Write("Response Headers: " + response.Headers);
-    Debug.Write("Response Body: " + response.Data);
-}
-catch (ApiException e)
-{
-    Debug.Print("Exception when calling NewsApi.NewspaperFrontPagesWithHttpInfo: " + e.Message);
-    Debug.Print("Status Code: " + e.ErrorCode);
-    Debug.Print(e.StackTrace);
-}
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-|------|------|-------------|-------|
-| **sourceCountry** | **string?** | The ISO 3166 country code of the newspaper publication. | [optional]  |
-| **sourceName** | **string?** | The identifier of the publication see attached list. | [optional]  |
-| **date** | **string?** | The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09. | [optional]  |
-
-### Return type
-
-[**NewspaperFrontPages200Response**](NewspaperFrontPages200Response.md)
-
-### Authorization
-
-[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | Success |  -  |
-| **401** | Unauthorized |  -  |
-| **402** | Payment Required |  -  |
-| **403** | Forbidden |  -  |
-| **404** | Not Found |  -  |
-| **406** | Not Acceptable |  -  |
-| **429** | Too Many Requests |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 <a id="retrievenewsarticlesbyids"></a>
 # **RetrieveNewsArticlesByIds**
 > RetrieveNewsArticlesByIds200Response RetrieveNewsArticlesByIds (string ids)
@@ -635,6 +525,116 @@ catch (ApiException e)
 ### Return type
 
 [**RetrieveNewsArticlesByIds200Response**](RetrieveNewsArticlesByIds200Response.md)
+
+### Authorization
+
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Success |  -  |
+| **401** | Unauthorized |  -  |
+| **402** | Payment Required |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not Found |  -  |
+| **406** | Not Acceptable |  -  |
+| **429** | Too Many Requests |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="retrievenewspaperfrontpage"></a>
+# **RetrieveNewspaperFrontPage**
+> RetrieveNewspaperFrontPage200Response RetrieveNewspaperFrontPage (string? sourceCountry = null, string? sourceName = null, string? date = null)
+
+Retrieve Newspaper Front Page
+
+Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here's an example of some of today's newspapers:
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using worldnewsapi.Api;
+using worldnewsapi.Client;
+using worldnewsapi.Model;
+
+namespace Example
+{
+    public class RetrieveNewspaperFrontPageExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://api.worldnewsapi.com";
+            // Configure API key authorization: apiKey
+            config.AddApiKey("api-key", "YOUR_API_KEY");
+            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+            // config.AddApiKeyPrefix("api-key", "Bearer");
+            // Configure API key authorization: headerApiKey
+            config.AddApiKey("x-api-key", "YOUR_API_KEY");
+            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+            // config.AddApiKeyPrefix("x-api-key", "Bearer");
+
+            var apiInstance = new NewsApi(config);
+            var sourceCountry = au;  // string? | The ISO 3166 country code of the newspaper publication. (optional) 
+            var sourceName = herald-sun;  // string? | The identifier of the publication see attached list. (optional) 
+            var date = 2024-07-09;  // string? | The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09. (optional) 
+
+            try
+            {
+                // Retrieve Newspaper Front Page
+                RetrieveNewspaperFrontPage200Response result = apiInstance.RetrieveNewspaperFrontPage(sourceCountry, sourceName, date);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling NewsApi.RetrieveNewspaperFrontPage: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the RetrieveNewspaperFrontPageWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Retrieve Newspaper Front Page
+    ApiResponse<RetrieveNewspaperFrontPage200Response> response = apiInstance.RetrieveNewspaperFrontPageWithHttpInfo(sourceCountry, sourceName, date);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling NewsApi.RetrieveNewspaperFrontPageWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **sourceCountry** | **string?** | The ISO 3166 country code of the newspaper publication. | [optional]  |
+| **sourceName** | **string?** | The identifier of the publication see attached list. | [optional]  |
+| **date** | **string?** | The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09. | [optional]  |
+
+### Return type
+
+[**RetrieveNewspaperFrontPage200Response**](RetrieveNewspaperFrontPage200Response.md)
 
 ### Authorization
 

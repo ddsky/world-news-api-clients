@@ -7,11 +7,11 @@
             [world-news-api.specs.retrieve-news-articles-by-ids-200-response-news-inner :refer :all]
             [world-news-api.specs.top-news-200-response :refer :all]
             [world-news-api.specs.search-news-200-response-news-inner :refer :all]
-            [world-news-api.specs.newspaper-front-pages-200-response-front-page :refer :all]
             [world-news-api.specs.extract-news-200-response-videos-inner :refer :all]
-            [world-news-api.specs.newspaper-front-pages-200-response :refer :all]
             [world-news-api.specs.top-news-200-response-top-news-inner-news-inner :refer :all]
+            [world-news-api.specs.retrieve-newspaper-front-page-200-response :refer :all]
             [world-news-api.specs.extract-news-links-200-response :refer :all]
+            [world-news-api.specs.retrieve-newspaper-front-page-200-response-front-page :refer :all]
             [world-news-api.specs.top-news-200-response-top-news-inner :refer :all]
             [world-news-api.specs.extract-news-200-response :refer :all]
             [world-news-api.specs.search-news-200-response :refer :all]
@@ -117,31 +117,6 @@
        res)))
 
 
-(defn-spec newspaper-front-pages-with-http-info any?
-  "Newspaper Front Pages
-  Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here's an example of some of today's newspapers:"
-  ([] (newspaper-front-pages-with-http-info nil))
-  ([{:keys [source-country source-name date]} (s/map-of keyword? any?)]
-   (call-api "/retrieve-front-page" :get
-             {:path-params   {}
-              :header-params {}
-              :query-params  {"source-country" source-country "source-name" source-name "date" date }
-              :form-params   {}
-              :content-types []
-              :accepts       ["application/json"]
-              :auth-names    ["apiKey" "headerApiKey"]})))
-
-(defn-spec newspaper-front-pages newspaper-front-pages-200-response-spec
-  "Newspaper Front Pages
-  Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here's an example of some of today's newspapers:"
-  ([] (newspaper-front-pages nil))
-  ([optional-params any?]
-   (let [res (:data (newspaper-front-pages-with-http-info optional-params))]
-     (if (:decode-models *api-context*)
-        (st/decode newspaper-front-pages-200-response-spec res st/string-transformer)
-        res))))
-
-
 (defn-spec retrieve-news-articles-by-ids-with-http-info any?
   "Retrieve News Articles by Ids
   Retrieve information about one or more news articles by their ids. The ids can be retrieved from the search news or top news APIs."
@@ -164,6 +139,31 @@
     (if (:decode-models *api-context*)
        (st/decode retrieve-news-articles-by-ids-200-response-spec res st/string-transformer)
        res)))
+
+
+(defn-spec retrieve-newspaper-front-page-with-http-info any?
+  "Retrieve Newspaper Front Page
+  Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here's an example of some of today's newspapers:"
+  ([] (retrieve-newspaper-front-page-with-http-info nil))
+  ([{:keys [source-country source-name date]} (s/map-of keyword? any?)]
+   (call-api "/retrieve-front-page" :get
+             {:path-params   {}
+              :header-params {}
+              :query-params  {"source-country" source-country "source-name" source-name "date" date }
+              :form-params   {}
+              :content-types []
+              :accepts       ["application/json"]
+              :auth-names    ["apiKey" "headerApiKey"]})))
+
+(defn-spec retrieve-newspaper-front-page retrieve-newspaper-front-page-200-response-spec
+  "Retrieve Newspaper Front Page
+  Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here's an example of some of today's newspapers:"
+  ([] (retrieve-newspaper-front-page nil))
+  ([optional-params any?]
+   (let [res (:data (retrieve-newspaper-front-page-with-http-info optional-params))]
+     (if (:decode-models *api-context*)
+        (st/decode retrieve-newspaper-front-page-200-response-spec res st/string-transformer)
+        res))))
 
 
 (defn-spec search-news-with-http-info any?

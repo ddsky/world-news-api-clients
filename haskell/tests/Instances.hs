@@ -172,26 +172,6 @@ genGetGeoCoordinates200Response n =
     <*> arbitraryReducedMaybe n -- getGeoCoordinates200ResponseLongitude :: Maybe Double
     <*> arbitraryReducedMaybe n -- getGeoCoordinates200ResponseCity :: Maybe Text
   
-instance Arbitrary NewspaperFrontPages200Response where
-  arbitrary = sized genNewspaperFrontPages200Response
-
-genNewspaperFrontPages200Response :: Int -> Gen NewspaperFrontPages200Response
-genNewspaperFrontPages200Response n =
-  NewspaperFrontPages200Response
-    <$> arbitraryReducedMaybe n -- newspaperFrontPages200ResponseFrontPage :: Maybe NewspaperFrontPages200ResponseFrontPage
-  
-instance Arbitrary NewspaperFrontPages200ResponseFrontPage where
-  arbitrary = sized genNewspaperFrontPages200ResponseFrontPage
-
-genNewspaperFrontPages200ResponseFrontPage :: Int -> Gen NewspaperFrontPages200ResponseFrontPage
-genNewspaperFrontPages200ResponseFrontPage n =
-  NewspaperFrontPages200ResponseFrontPage
-    <$> arbitraryReducedMaybe n -- newspaperFrontPages200ResponseFrontPageName :: Maybe Text
-    <*> arbitraryReducedMaybe n -- newspaperFrontPages200ResponseFrontPageDate :: Maybe Text
-    <*> arbitraryReducedMaybe n -- newspaperFrontPages200ResponseFrontPageCountry :: Maybe Text
-    <*> arbitraryReducedMaybe n -- newspaperFrontPages200ResponseFrontPageImage :: Maybe Text
-    <*> arbitraryReducedMaybe n -- newspaperFrontPages200ResponseFrontPageLanguage :: Maybe Text
-  
 instance Arbitrary RetrieveNewsArticlesByIds200Response where
   arbitrary = sized genRetrieveNewsArticlesByIds200Response
 
@@ -218,6 +198,26 @@ genRetrieveNewsArticlesByIds200ResponseNewsInner n =
     <*> arbitraryReducedMaybe n -- retrieveNewsArticlesByIds200ResponseNewsInnerCategory :: Maybe Text
     <*> arbitraryReducedMaybe n -- retrieveNewsArticlesByIds200ResponseNewsInnerPublishDate :: Maybe Text
     <*> arbitraryReducedMaybe n -- retrieveNewsArticlesByIds200ResponseNewsInnerAuthors :: Maybe [Text]
+  
+instance Arbitrary RetrieveNewspaperFrontPage200Response where
+  arbitrary = sized genRetrieveNewspaperFrontPage200Response
+
+genRetrieveNewspaperFrontPage200Response :: Int -> Gen RetrieveNewspaperFrontPage200Response
+genRetrieveNewspaperFrontPage200Response n =
+  RetrieveNewspaperFrontPage200Response
+    <$> arbitraryReducedMaybe n -- retrieveNewspaperFrontPage200ResponseFrontPage :: Maybe RetrieveNewspaperFrontPage200ResponseFrontPage
+  
+instance Arbitrary RetrieveNewspaperFrontPage200ResponseFrontPage where
+  arbitrary = sized genRetrieveNewspaperFrontPage200ResponseFrontPage
+
+genRetrieveNewspaperFrontPage200ResponseFrontPage :: Int -> Gen RetrieveNewspaperFrontPage200ResponseFrontPage
+genRetrieveNewspaperFrontPage200ResponseFrontPage n =
+  RetrieveNewspaperFrontPage200ResponseFrontPage
+    <$> arbitraryReducedMaybe n -- retrieveNewspaperFrontPage200ResponseFrontPageName :: Maybe Text
+    <*> arbitraryReducedMaybe n -- retrieveNewspaperFrontPage200ResponseFrontPageDate :: Maybe Text
+    <*> arbitraryReducedMaybe n -- retrieveNewspaperFrontPage200ResponseFrontPageCountry :: Maybe Text
+    <*> arbitraryReducedMaybe n -- retrieveNewspaperFrontPage200ResponseFrontPageImage :: Maybe Text
+    <*> arbitraryReducedMaybe n -- retrieveNewspaperFrontPage200ResponseFrontPageLanguage :: Maybe Text
   
 instance Arbitrary SearchNews200Response where
   arbitrary = sized genSearchNews200Response

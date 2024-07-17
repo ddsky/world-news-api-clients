@@ -22,8 +22,8 @@ import worldnewsapi.apis.NewsApi
 import worldnewsapi.models.ExtractNews200Response
 import worldnewsapi.models.ExtractNewsLinks200Response
 import worldnewsapi.models.GetGeoCoordinates200Response
-import worldnewsapi.models.NewspaperFrontPages200Response
 import worldnewsapi.models.RetrieveNewsArticlesByIds200Response
+import worldnewsapi.models.RetrieveNewspaperFrontPage200Response
 import worldnewsapi.models.SearchNews200Response
 import worldnewsapi.models.TopNews200Response
 
@@ -67,21 +67,21 @@ class NewsApiTest : ShouldSpec() {
             //result shouldBe ("TODO")
         }
 
-        // to test newspaperFrontPages
-        should("test newspaperFrontPages") {
-            // uncomment below to test newspaperFrontPages
-            //val sourceCountry : kotlin.String = au // kotlin.String | The ISO 3166 country code of the newspaper publication.
-            //val sourceName : kotlin.String = herald-sun // kotlin.String | The identifier of the publication see attached list.
-            //val date : kotlin.String = 2024-07-09 // kotlin.String | The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09.
-            //val result : NewspaperFrontPages200Response = apiInstance.newspaperFrontPages(sourceCountry, sourceName, date)
-            //result shouldBe ("TODO")
-        }
-
         // to test retrieveNewsArticlesByIds
         should("test retrieveNewsArticlesByIds") {
             // uncomment below to test retrieveNewsArticlesByIds
             //val ids : kotlin.String = 2352,2354 // kotlin.String | A comma separated list of news ids.
             //val result : RetrieveNewsArticlesByIds200Response = apiInstance.retrieveNewsArticlesByIds(ids)
+            //result shouldBe ("TODO")
+        }
+
+        // to test retrieveNewspaperFrontPage
+        should("test retrieveNewspaperFrontPage") {
+            // uncomment below to test retrieveNewspaperFrontPage
+            //val sourceCountry : kotlin.String = au // kotlin.String | The ISO 3166 country code of the newspaper publication.
+            //val sourceName : kotlin.String = herald-sun // kotlin.String | The identifier of the publication see attached list.
+            //val date : kotlin.String = 2024-07-09 // kotlin.String | The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09.
+            //val result : RetrieveNewspaperFrontPage200Response = apiInstance.retrieveNewspaperFrontPage(sourceCountry, sourceName, date)
             //result shouldBe ("TODO")
         }
 

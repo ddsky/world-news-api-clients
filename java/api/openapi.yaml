@@ -6,7 +6,7 @@ info:
   description: The world's news wrapped into a single API.
   termsOfService: https://worldnewsapi.com/terms
   title: World News API
-  version: 1.3.1
+  version: 1.3.2
 servers:
 - url: https://api.worldnewsapi.com
 security:
@@ -544,7 +544,7 @@ paths:
       externalDocs:
         description: Read entire docs
         url: https://worldnewsapi.com/docs/newspaper-front-pages/
-      operationId: newspaperFrontPages
+      operationId: retrieveNewspaperFrontPage
       parameters:
       - description: The ISO 3166 country code of the newspaper publication.
         explode: false
@@ -594,7 +594,7 @@ paths:
                       image: https://img.worldnewsapi.com/front-pages/herald-sun-2024-07-09-ota3mg51.jpg
                       language: en
               schema:
-                $ref: '#/components/schemas/newspaperFrontPages_200_response'
+                $ref: '#/components/schemas/retrieveNewspaperFrontPage_200_response'
           description: Success
         "401":
           description: Unauthorized
@@ -608,7 +608,7 @@ paths:
           description: Not Acceptable
         "429":
           description: Too Many Requests
-      summary: Newspaper Front Pages
+      summary: Retrieve Newspaper Front Page
       tags:
       - News
       x-accepts:
@@ -1272,7 +1272,7 @@ components:
           nullable: true
           type: string
       type: object
-    newspaperFrontPages_200_response_front_page:
+    retrieveNewspaperFrontPage_200_response_front_page:
       example:
         date: date
         country: country
@@ -1296,7 +1296,7 @@ components:
           nullable: true
           type: string
       type: object
-    newspaperFrontPages_200_response:
+    retrieveNewspaperFrontPage_200_response:
       example:
         front_page:
           date: date
@@ -1306,7 +1306,7 @@ components:
           language: language
       properties:
         front_page:
-          $ref: '#/components/schemas/newspaperFrontPages_200_response_front_page'
+          $ref: '#/components/schemas/retrieveNewspaperFrontPage_200_response_front_page'
       type: object
     retrieveNewsArticlesByIds_200_response_news_inner:
       example:

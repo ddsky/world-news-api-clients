@@ -8,8 +8,8 @@ Method | HTTP request | Description
 [**extract_news_links**](NewsApi.md#extract_news_links) | **GET** /extract-news-links | Extract News Links
 [**get_geo_coordinates**](NewsApi.md#get_geo_coordinates) | **GET** /geo-coordinates | Get Geo Coordinates
 [**news_website_to_rss_feed**](NewsApi.md#news_website_to_rss_feed) | **GET** /feed.rss | News Website to RSS Feed
-[**newspaper_front_pages**](NewsApi.md#newspaper_front_pages) | **GET** /retrieve-front-page | Newspaper Front Pages
 [**retrieve_news_articles_by_ids**](NewsApi.md#retrieve_news_articles_by_ids) | **GET** /retrieve-news | Retrieve News Articles by Ids
+[**retrieve_newspaper_front_page**](NewsApi.md#retrieve_newspaper_front_page) | **GET** /retrieve-front-page | Retrieve Newspaper Front Page
 [**search_news**](NewsApi.md#search_news) | **GET** /search-news | Search News
 [**top_news**](NewsApi.md#top_news) | **GET** /top-news | Top News
 
@@ -138,38 +138,6 @@ Name | Type | Description  | Required | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 
-## newspaper_front_pages
-
-> models::NewspaperFrontPages200Response newspaper_front_pages(source_country, source_name, date)
-Newspaper Front Pages
-
-Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here's an example of some of today's newspapers:
-
-### Parameters
-
-
-Name | Type | Description  | Required | Notes
-------------- | ------------- | ------------- | ------------- | -------------
-**source_country** | Option<**String**> | The ISO 3166 country code of the newspaper publication. |  |
-**source_name** | Option<**String**> | The identifier of the publication see attached list. |  |
-**date** | Option<**String**> | The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09. |  |
-
-### Return type
-
-[**models::NewspaperFrontPages200Response**](newspaperFrontPages_200_response.md)
-
-### Authorization
-
-[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-
 ## retrieve_news_articles_by_ids
 
 > models::RetrieveNewsArticlesByIds200Response retrieve_news_articles_by_ids(ids)
@@ -187,6 +155,38 @@ Name | Type | Description  | Required | Notes
 ### Return type
 
 [**models::RetrieveNewsArticlesByIds200Response**](retrieveNewsArticlesByIds_200_response.md)
+
+### Authorization
+
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
+## retrieve_newspaper_front_page
+
+> models::RetrieveNewspaperFrontPage200Response retrieve_newspaper_front_page(source_country, source_name, date)
+Retrieve Newspaper Front Page
+
+Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here's an example of some of today's newspapers:
+
+### Parameters
+
+
+Name | Type | Description  | Required | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+**source_country** | Option<**String**> | The ISO 3166 country code of the newspaper publication. |  |
+**source_name** | Option<**String**> | The identifier of the publication see attached list. |  |
+**date** | Option<**String**> | The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09. |  |
+
+### Return type
+
+[**models::RetrieveNewspaperFrontPage200Response**](retrieveNewspaperFrontPage_200_response.md)
 
 ### Authorization
 

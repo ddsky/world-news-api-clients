@@ -22,8 +22,8 @@ import okhttp3.HttpUrl
 import worldnewsapi.models.ExtractNews200Response
 import worldnewsapi.models.ExtractNewsLinks200Response
 import worldnewsapi.models.GetGeoCoordinates200Response
-import worldnewsapi.models.NewspaperFrontPages200Response
 import worldnewsapi.models.RetrieveNewsArticlesByIds200Response
+import worldnewsapi.models.RetrieveNewspaperFrontPage200Response
 import worldnewsapi.models.SearchNews200Response
 import worldnewsapi.models.TopNews200Response
 
@@ -359,94 +359,6 @@ class NewsApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClient = 
     }
 
     /**
-     * Newspaper Front Pages
-     * Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here&#39;s an example of some of today&#39;s newspapers:
-     * @param sourceCountry The ISO 3166 country code of the newspaper publication. (optional)
-     * @param sourceName The identifier of the publication see attached list. (optional)
-     * @param date The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09. (optional)
-     * @return NewspaperFrontPages200Response
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun newspaperFrontPages(sourceCountry: kotlin.String? = null, sourceName: kotlin.String? = null, date: kotlin.String? = null) : NewspaperFrontPages200Response {
-        val localVarResponse = newspaperFrontPagesWithHttpInfo(sourceCountry = sourceCountry, sourceName = sourceName, date = date)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as NewspaperFrontPages200Response
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * Newspaper Front Pages
-     * Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here&#39;s an example of some of today&#39;s newspapers:
-     * @param sourceCountry The ISO 3166 country code of the newspaper publication. (optional)
-     * @param sourceName The identifier of the publication see attached list. (optional)
-     * @param date The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09. (optional)
-     * @return ApiResponse<NewspaperFrontPages200Response?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun newspaperFrontPagesWithHttpInfo(sourceCountry: kotlin.String?, sourceName: kotlin.String?, date: kotlin.String?) : ApiResponse<NewspaperFrontPages200Response?> {
-        val localVariableConfig = newspaperFrontPagesRequestConfig(sourceCountry = sourceCountry, sourceName = sourceName, date = date)
-
-        return request<Unit, NewspaperFrontPages200Response>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation newspaperFrontPages
-     *
-     * @param sourceCountry The ISO 3166 country code of the newspaper publication. (optional)
-     * @param sourceName The identifier of the publication see attached list. (optional)
-     * @param date The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09. (optional)
-     * @return RequestConfig
-     */
-    fun newspaperFrontPagesRequestConfig(sourceCountry: kotlin.String?, sourceName: kotlin.String?, date: kotlin.String?) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
-            .apply {
-                if (sourceCountry != null) {
-                    put("source-country", listOf(sourceCountry.toString()))
-                }
-                if (sourceName != null) {
-                    put("source-name", listOf(sourceName.toString()))
-                }
-                if (date != null) {
-                    put("date", listOf(date.toString()))
-                }
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/retrieve-front-page",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
      * Retrieve News Articles by Ids
      * Retrieve information about one or more news articles by their ids. The ids can be retrieved from the search news or top news APIs.
      * @param ids A comma separated list of news ids.
@@ -513,6 +425,94 @@ class NewsApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClient = 
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/retrieve-news",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * Retrieve Newspaper Front Page
+     * Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here&#39;s an example of some of today&#39;s newspapers:
+     * @param sourceCountry The ISO 3166 country code of the newspaper publication. (optional)
+     * @param sourceName The identifier of the publication see attached list. (optional)
+     * @param date The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09. (optional)
+     * @return RetrieveNewspaperFrontPage200Response
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun retrieveNewspaperFrontPage(sourceCountry: kotlin.String? = null, sourceName: kotlin.String? = null, date: kotlin.String? = null) : RetrieveNewspaperFrontPage200Response {
+        val localVarResponse = retrieveNewspaperFrontPageWithHttpInfo(sourceCountry = sourceCountry, sourceName = sourceName, date = date)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RetrieveNewspaperFrontPage200Response
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * Retrieve Newspaper Front Page
+     * Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here&#39;s an example of some of today&#39;s newspapers:
+     * @param sourceCountry The ISO 3166 country code of the newspaper publication. (optional)
+     * @param sourceName The identifier of the publication see attached list. (optional)
+     * @param date The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09. (optional)
+     * @return ApiResponse<RetrieveNewspaperFrontPage200Response?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun retrieveNewspaperFrontPageWithHttpInfo(sourceCountry: kotlin.String?, sourceName: kotlin.String?, date: kotlin.String?) : ApiResponse<RetrieveNewspaperFrontPage200Response?> {
+        val localVariableConfig = retrieveNewspaperFrontPageRequestConfig(sourceCountry = sourceCountry, sourceName = sourceName, date = date)
+
+        return request<Unit, RetrieveNewspaperFrontPage200Response>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation retrieveNewspaperFrontPage
+     *
+     * @param sourceCountry The ISO 3166 country code of the newspaper publication. (optional)
+     * @param sourceName The identifier of the publication see attached list. (optional)
+     * @param date The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09. (optional)
+     * @return RequestConfig
+     */
+    fun retrieveNewspaperFrontPageRequestConfig(sourceCountry: kotlin.String?, sourceName: kotlin.String?, date: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (sourceCountry != null) {
+                    put("source-country", listOf(sourceCountry.toString()))
+                }
+                if (sourceName != null) {
+                    put("source-name", listOf(sourceName.toString()))
+                }
+                if (date != null) {
+                    put("date", listOf(date.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/retrieve-front-page",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,

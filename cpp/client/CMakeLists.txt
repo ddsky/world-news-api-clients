@@ -16,10 +16,10 @@ add_library(${PROJECT_NAME}
   OAIExtractNews_200_response_images_inner.h
   OAIExtractNews_200_response_videos_inner.h
   OAIGetGeoCoordinates_200_response.h
-  OAINewspaperFrontPages_200_response.h
-  OAINewspaperFrontPages_200_response_front_page.h
   OAIRetrieveNewsArticlesByIds_200_response.h
   OAIRetrieveNewsArticlesByIds_200_response_news_inner.h
+  OAIRetrieveNewspaperFrontPage_200_response.h
+  OAIRetrieveNewspaperFrontPage_200_response_front_page.h
   OAISearchNews_200_response.h
   OAISearchNews_200_response_news_inner.h
   OAITopNews_200_response.h
@@ -39,10 +39,10 @@ add_library(${PROJECT_NAME}
   OAIExtractNews_200_response_images_inner.cpp
   OAIExtractNews_200_response_videos_inner.cpp
   OAIGetGeoCoordinates_200_response.cpp
-  OAINewspaperFrontPages_200_response.cpp
-  OAINewspaperFrontPages_200_response_front_page.cpp
   OAIRetrieveNewsArticlesByIds_200_response.cpp
   OAIRetrieveNewsArticlesByIds_200_response_news_inner.cpp
+  OAIRetrieveNewspaperFrontPage_200_response.cpp
+  OAIRetrieveNewspaperFrontPage_200_response_front_page.cpp
   OAISearchNews_200_response.cpp
   OAISearchNews_200_response_news_inner.cpp
   OAITopNews_200_response.cpp

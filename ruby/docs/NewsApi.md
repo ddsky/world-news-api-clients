@@ -8,8 +8,8 @@ All URIs are relative to *https://api.worldnewsapi.com*
 | [**extract_news_links**](NewsApi.md#extract_news_links) | **GET** /extract-news-links | Extract News Links |
 | [**get_geo_coordinates**](NewsApi.md#get_geo_coordinates) | **GET** /geo-coordinates | Get Geo Coordinates |
 | [**news_website_to_rss_feed**](NewsApi.md#news_website_to_rss_feed) | **GET** /feed.rss | News Website to RSS Feed |
-| [**newspaper_front_pages**](NewsApi.md#newspaper_front_pages) | **GET** /retrieve-front-page | Newspaper Front Pages |
 | [**retrieve_news_articles_by_ids**](NewsApi.md#retrieve_news_articles_by_ids) | **GET** /retrieve-news | Retrieve News Articles by Ids |
+| [**retrieve_newspaper_front_page**](NewsApi.md#retrieve_newspaper_front_page) | **GET** /retrieve-front-page | Retrieve Newspaper Front Page |
 | [**search_news**](NewsApi.md#search_news) | **GET** /search-news | Search News |
 | [**top_news**](NewsApi.md#top_news) | **GET** /top-news | Top News |
 
@@ -324,88 +324,6 @@ end
 - **Accept**: application/xml
 
 
-## newspaper_front_pages
-
-> <NewspaperFrontPages200Response> newspaper_front_pages(opts)
-
-Newspaper Front Pages
-
-Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here's an example of some of today's newspapers:
-
-### Examples
-
-```ruby
-require 'time'
-require 'openapi_client'
-# setup authorization
-OpenapiClient.configure do |config|
-  # Configure API key authorization: apiKey
-  config.api_key['apiKey'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['apiKey'] = 'Bearer'
-
-  # Configure API key authorization: headerApiKey
-  config.api_key['headerApiKey'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['headerApiKey'] = 'Bearer'
-end
-
-api_instance = OpenapiClient::NewsApi.new
-opts = {
-  source_country: 'au', # String | The ISO 3166 country code of the newspaper publication.
-  source_name: 'herald-sun', # String | The identifier of the publication see attached list.
-  date: '2024-07-09' # String | The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09.
-}
-
-begin
-  # Newspaper Front Pages
-  result = api_instance.newspaper_front_pages(opts)
-  p result
-rescue OpenapiClient::ApiError => e
-  puts "Error when calling NewsApi->newspaper_front_pages: #{e}"
-end
-```
-
-#### Using the newspaper_front_pages_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<NewspaperFrontPages200Response>, Integer, Hash)> newspaper_front_pages_with_http_info(opts)
-
-```ruby
-begin
-  # Newspaper Front Pages
-  data, status_code, headers = api_instance.newspaper_front_pages_with_http_info(opts)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <NewspaperFrontPages200Response>
-rescue OpenapiClient::ApiError => e
-  puts "Error when calling NewsApi->newspaper_front_pages_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **source_country** | **String** | The ISO 3166 country code of the newspaper publication. | [optional] |
-| **source_name** | **String** | The identifier of the publication see attached list. | [optional] |
-| **date** | **String** | The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09. | [optional] |
-
-### Return type
-
-[**NewspaperFrontPages200Response**](NewspaperFrontPages200Response.md)
-
-### Authorization
-
-[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
 ## retrieve_news_articles_by_ids
 
 > <RetrieveNewsArticlesByIds200Response> retrieve_news_articles_by_ids(ids)
@@ -471,6 +389,88 @@ end
 ### Return type
 
 [**RetrieveNewsArticlesByIds200Response**](RetrieveNewsArticlesByIds200Response.md)
+
+### Authorization
+
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## retrieve_newspaper_front_page
+
+> <RetrieveNewspaperFrontPage200Response> retrieve_newspaper_front_page(opts)
+
+Retrieve Newspaper Front Page
+
+Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here's an example of some of today's newspapers:
+
+### Examples
+
+```ruby
+require 'time'
+require 'openapi_client'
+# setup authorization
+OpenapiClient.configure do |config|
+  # Configure API key authorization: apiKey
+  config.api_key['apiKey'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['apiKey'] = 'Bearer'
+
+  # Configure API key authorization: headerApiKey
+  config.api_key['headerApiKey'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['headerApiKey'] = 'Bearer'
+end
+
+api_instance = OpenapiClient::NewsApi.new
+opts = {
+  source_country: 'au', # String | The ISO 3166 country code of the newspaper publication.
+  source_name: 'herald-sun', # String | The identifier of the publication see attached list.
+  date: '2024-07-09' # String | The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09.
+}
+
+begin
+  # Retrieve Newspaper Front Page
+  result = api_instance.retrieve_newspaper_front_page(opts)
+  p result
+rescue OpenapiClient::ApiError => e
+  puts "Error when calling NewsApi->retrieve_newspaper_front_page: #{e}"
+end
+```
+
+#### Using the retrieve_newspaper_front_page_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<RetrieveNewspaperFrontPage200Response>, Integer, Hash)> retrieve_newspaper_front_page_with_http_info(opts)
+
+```ruby
+begin
+  # Retrieve Newspaper Front Page
+  data, status_code, headers = api_instance.retrieve_newspaper_front_page_with_http_info(opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <RetrieveNewspaperFrontPage200Response>
+rescue OpenapiClient::ApiError => e
+  puts "Error when calling NewsApi->retrieve_newspaper_front_page_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **source_country** | **String** | The ISO 3166 country code of the newspaper publication. | [optional] |
+| **source_name** | **String** | The identifier of the publication see attached list. | [optional] |
+| **date** | **String** | The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09. | [optional] |
+
+### Return type
+
+[**RetrieveNewspaperFrontPage200Response**](RetrieveNewspaperFrontPage200Response.md)
 
 ### Authorization
 

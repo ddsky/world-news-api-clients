@@ -9,10 +9,10 @@ docs/ExtractNews200ResponseVideosInner.md
 docs/ExtractNewsLinks200Response.md
 docs/GetGeoCoordinates200Response.md
 docs/NewsApi.md
-docs/NewspaperFrontPages200Response.md
-docs/NewspaperFrontPages200ResponseFrontPage.md
 docs/RetrieveNewsArticlesByIds200Response.md
 docs/RetrieveNewsArticlesByIds200ResponseNewsInner.md
+docs/RetrieveNewspaperFrontPage200Response.md
+docs/RetrieveNewspaperFrontPage200ResponseFrontPage.md
 docs/SearchNews200Response.md
 docs/SearchNews200ResponseNewsInner.md
 docs/TopNews200Response.md
@@ -29,10 +29,10 @@ src/models/extract_news_200_response_videos_inner.rs
 src/models/extract_news_links_200_response.rs
 src/models/get_geo_coordinates_200_response.rs
 src/models/mod.rs
-src/models/newspaper_front_pages_200_response.rs
-src/models/newspaper_front_pages_200_response_front_page.rs
 src/models/retrieve_news_articles_by_ids_200_response.rs
 src/models/retrieve_news_articles_by_ids_200_response_news_inner.rs
+src/models/retrieve_newspaper_front_page_200_response.rs
+src/models/retrieve_newspaper_front_page_200_response_front_page.rs
 src/models/search_news_200_response.rs
 src/models/search_news_200_response_news_inner.rs
 src/models/top_news_200_response.rs

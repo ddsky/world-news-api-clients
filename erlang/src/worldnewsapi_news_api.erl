@@ -4,8 +4,8 @@
          extract_news_links/3, extract_news_links/4,
          get_geo_coordinates/2, get_geo_coordinates/3,
          news_website_to_rss_feed/3, news_website_to_rss_feed/4,
-         newspaper_front_pages/1, newspaper_front_pages/2,
          retrieve_news_articles_by_ids/2, retrieve_news_articles_by_ids/3,
+         retrieve_newspaper_front_page/1, retrieve_newspaper_front_page/2,
          search_news/1, search_news/2,
          top_news/3, top_news/4]).
 
@@ -95,27 +95,6 @@ news_website_to_rss_feed(Ctx, Url, Analyze, Optional) ->
 
     worldnewsapi_utils:request(Ctx, Method, Path, QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
-%% @doc Newspaper Front Pages
-%% Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here's an example of some of today's newspapers:
--spec newspaper_front_pages(ctx:ctx()) -> {ok, worldnewsapi_newspaper_front_pages_200_response:worldnewsapi_newspaper_front_pages_200_response(), worldnewsapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), worldnewsapi_utils:response_info()}.
-newspaper_front_pages(Ctx) ->
-    newspaper_front_pages(Ctx, #{}).
-
--spec newspaper_front_pages(ctx:ctx(), maps:map()) -> {ok, worldnewsapi_newspaper_front_pages_200_response:worldnewsapi_newspaper_front_pages_200_response(), worldnewsapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), worldnewsapi_utils:response_info()}.
-newspaper_front_pages(Ctx, Optional) ->
-    _OptionalParams = maps:get(params, Optional, #{}),
-    Cfg = maps:get(cfg, Optional, application:get_env(worldnewsapi_api, config, #{})),
-
-    Method = get,
-    Path = [?BASE_URL, "/retrieve-front-page"],
-    QS = lists:flatten([])++worldnewsapi_utils:optional_params(['source-country', 'source-name', 'date'], _OptionalParams),
-    Headers = [],
-    Body1 = [],
-    ContentTypeHeader = worldnewsapi_utils:select_header_content_type([]),
-    Opts = maps:get(hackney_opts, Optional, []),
-
-    worldnewsapi_utils:request(Ctx, Method, Path, QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
-
 %% @doc Retrieve News Articles by Ids
 %% Retrieve information about one or more news articles by their ids. The ids can be retrieved from the search news or top news APIs.
 -spec retrieve_news_articles_by_ids(ctx:ctx(), binary()) -> {ok, worldnewsapi_retrieve_news_articles_by_ids_200_response:worldnewsapi_retrieve_news_articles_by_ids_200_response(), worldnewsapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), worldnewsapi_utils:response_info()}.
@@ -130,6 +109,27 @@ retrieve_news_articles_by_ids(Ctx, Ids, Optional) ->
     Method = get,
     Path = [?BASE_URL, "/retrieve-news"],
     QS = lists:flatten([{<<"ids">>, Ids}])++worldnewsapi_utils:optional_params([], _OptionalParams),
+    Headers = [],
+    Body1 = [],
+    ContentTypeHeader = worldnewsapi_utils:select_header_content_type([]),
+    Opts = maps:get(hackney_opts, Optional, []),
+
+    worldnewsapi_utils:request(Ctx, Method, Path, QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
+
+%% @doc Retrieve Newspaper Front Page
+%% Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here's an example of some of today's newspapers:
+-spec retrieve_newspaper_front_page(ctx:ctx()) -> {ok, worldnewsapi_retrieve_newspaper_front_page_200_response:worldnewsapi_retrieve_newspaper_front_page_200_response(), worldnewsapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), worldnewsapi_utils:response_info()}.
+retrieve_newspaper_front_page(Ctx) ->
+    retrieve_newspaper_front_page(Ctx, #{}).
+
+-spec retrieve_newspaper_front_page(ctx:ctx(), maps:map()) -> {ok, worldnewsapi_retrieve_newspaper_front_page_200_response:worldnewsapi_retrieve_newspaper_front_page_200_response(), worldnewsapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), worldnewsapi_utils:response_info()}.
+retrieve_newspaper_front_page(Ctx, Optional) ->
+    _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(worldnewsapi_api, config, #{})),
+
+    Method = get,
+    Path = [?BASE_URL, "/retrieve-front-page"],
+    QS = lists:flatten([])++worldnewsapi_utils:optional_params(['source-country', 'source-name', 'date'], _OptionalParams),
     Headers = [],
     Body1 = [],
     ContentTypeHeader = worldnewsapi_utils:select_header_content_type([]),

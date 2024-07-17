@@ -3,10 +3,10 @@ export * from '../models/ExtractNews200ResponseImagesInner';
 export * from '../models/ExtractNews200ResponseVideosInner';
 export * from '../models/ExtractNewsLinks200Response';
 export * from '../models/GetGeoCoordinates200Response';
-export * from '../models/NewspaperFrontPages200Response';
-export * from '../models/NewspaperFrontPages200ResponseFrontPage';
 export * from '../models/RetrieveNewsArticlesByIds200Response';
 export * from '../models/RetrieveNewsArticlesByIds200ResponseNewsInner';
+export * from '../models/RetrieveNewspaperFrontPage200Response';
+export * from '../models/RetrieveNewspaperFrontPage200ResponseFrontPage';
 export * from '../models/SearchNews200Response';
 export * from '../models/SearchNews200ResponseNewsInner';
 export * from '../models/TopNews200Response';
@@ -18,10 +18,10 @@ import { ExtractNews200ResponseImagesInner } from '../models/ExtractNews200Respo
 import { ExtractNews200ResponseVideosInner } from '../models/ExtractNews200ResponseVideosInner';
 import { ExtractNewsLinks200Response } from '../models/ExtractNewsLinks200Response';
 import { GetGeoCoordinates200Response } from '../models/GetGeoCoordinates200Response';
-import { NewspaperFrontPages200Response } from '../models/NewspaperFrontPages200Response';
-import { NewspaperFrontPages200ResponseFrontPage } from '../models/NewspaperFrontPages200ResponseFrontPage';
 import { RetrieveNewsArticlesByIds200Response } from '../models/RetrieveNewsArticlesByIds200Response';
 import { RetrieveNewsArticlesByIds200ResponseNewsInner } from '../models/RetrieveNewsArticlesByIds200ResponseNewsInner';
+import { RetrieveNewspaperFrontPage200Response } from '../models/RetrieveNewspaperFrontPage200Response';
+import { RetrieveNewspaperFrontPage200ResponseFrontPage } from '../models/RetrieveNewspaperFrontPage200ResponseFrontPage';
 import { SearchNews200Response } from '../models/SearchNews200Response';
 import { SearchNews200ResponseNewsInner } from '../models/SearchNews200ResponseNewsInner';
 import { TopNews200Response } from '../models/TopNews200Response';
@@ -49,10 +49,10 @@ let typeMap: {[index: string]: any} = {
     "ExtractNews200ResponseVideosInner": ExtractNews200ResponseVideosInner,
     "ExtractNewsLinks200Response": ExtractNewsLinks200Response,
     "GetGeoCoordinates200Response": GetGeoCoordinates200Response,
-    "NewspaperFrontPages200Response": NewspaperFrontPages200Response,
-    "NewspaperFrontPages200ResponseFrontPage": NewspaperFrontPages200ResponseFrontPage,
     "RetrieveNewsArticlesByIds200Response": RetrieveNewsArticlesByIds200Response,
     "RetrieveNewsArticlesByIds200ResponseNewsInner": RetrieveNewsArticlesByIds200ResponseNewsInner,
+    "RetrieveNewspaperFrontPage200Response": RetrieveNewspaperFrontPage200Response,
+    "RetrieveNewspaperFrontPage200ResponseFrontPage": RetrieveNewspaperFrontPage200ResponseFrontPage,
     "SearchNews200Response": SearchNews200Response,
     "SearchNews200ResponseNewsInner": SearchNews200ResponseNewsInner,
     "TopNews200Response": TopNews200Response,

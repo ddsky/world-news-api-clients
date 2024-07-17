@@ -14,10 +14,10 @@ model/extractNews200ResponseVideosInner.ts
 model/extractNewsLinks200Response.ts
 model/getGeoCoordinates200Response.ts
 model/models.ts
-model/newspaperFrontPages200Response.ts
-model/newspaperFrontPages200ResponseFrontPage.ts
 model/retrieveNewsArticlesByIds200Response.ts
 model/retrieveNewsArticlesByIds200ResponseNewsInner.ts
+model/retrieveNewspaperFrontPage200Response.ts
+model/retrieveNewspaperFrontPage200ResponseFrontPage.ts
 model/searchNews200Response.ts
 model/searchNews200ResponseNewsInner.ts
 model/topNews200Response.ts

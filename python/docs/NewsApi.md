@@ -8,8 +8,8 @@ Method | HTTP request | Description
 [**extract_news_links**](NewsApi.md#extract_news_links) | **GET** /extract-news-links | Extract News Links
 [**get_geo_coordinates**](NewsApi.md#get_geo_coordinates) | **GET** /geo-coordinates | Get Geo Coordinates
 [**news_website_to_rss_feed**](NewsApi.md#news_website_to_rss_feed) | **GET** /feed.rss | News Website to RSS Feed
-[**newspaper_front_pages**](NewsApi.md#newspaper_front_pages) | **GET** /retrieve-front-page | Newspaper Front Pages
 [**retrieve_news_articles_by_ids**](NewsApi.md#retrieve_news_articles_by_ids) | **GET** /retrieve-news | Retrieve News Articles by Ids
+[**retrieve_newspaper_front_page**](NewsApi.md#retrieve_newspaper_front_page) | **GET** /retrieve-front-page | Retrieve Newspaper Front Page
 [**search_news**](NewsApi.md#search_news) | **GET** /search-news | Search News
 [**top_news**](NewsApi.md#top_news) | **GET** /top-news | Top News
 
@@ -387,102 +387,6 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **newspaper_front_pages**
-> NewspaperFrontPages200Response newspaper_front_pages(source_country=source_country, source_name=source_name, var_date=var_date)
-
-Newspaper Front Pages
-
-Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here's an example of some of today's newspapers:
-
-### Example
-
-* Api Key Authentication (apiKey):
-* Api Key Authentication (headerApiKey):
-
-```python
-import worldnewsapi
-from worldnewsapi.models.newspaper_front_pages200_response import NewspaperFrontPages200Response
-from worldnewsapi.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://api.worldnewsapi.com
-# See configuration.py for a list of all supported configuration parameters.
-configuration = worldnewsapi.Configuration(
-    host = "https://api.worldnewsapi.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: apiKey
-configuration.api_key['apiKey'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['apiKey'] = 'Bearer'
-
-# Configure API key authorization: headerApiKey
-configuration.api_key['headerApiKey'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['headerApiKey'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with worldnewsapi.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = worldnewsapi.NewsApi(api_client)
-    source_country = 'au' # str | The ISO 3166 country code of the newspaper publication. (optional)
-    source_name = 'herald-sun' # str | The identifier of the publication see attached list. (optional)
-    var_date = '2024-07-09' # str | The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09. (optional)
-
-    try:
-        # Newspaper Front Pages
-        api_response = api_instance.newspaper_front_pages(source_country=source_country, source_name=source_name, var_date=var_date)
-        print("The response of NewsApi->newspaper_front_pages:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling NewsApi->newspaper_front_pages: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **source_country** | **str**| The ISO 3166 country code of the newspaper publication. | [optional] 
- **source_name** | **str**| The identifier of the publication see attached list. | [optional] 
- **var_date** | **str**| The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09. | [optional] 
-
-### Return type
-
-[**NewspaperFrontPages200Response**](NewspaperFrontPages200Response.md)
-
-### Authorization
-
-[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Success |  -  |
-**401** | Unauthorized |  -  |
-**402** | Payment Required |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
-**406** | Not Acceptable |  -  |
-**429** | Too Many Requests |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **retrieve_news_articles_by_ids**
 > RetrieveNewsArticlesByIds200Response retrieve_news_articles_by_ids(ids)
 
@@ -551,6 +455,102 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**RetrieveNewsArticlesByIds200Response**](RetrieveNewsArticlesByIds200Response.md)
+
+### Authorization
+
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**401** | Unauthorized |  -  |
+**402** | Payment Required |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**406** | Not Acceptable |  -  |
+**429** | Too Many Requests |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **retrieve_newspaper_front_page**
+> RetrieveNewspaperFrontPage200Response retrieve_newspaper_front_page(source_country=source_country, source_name=source_name, var_date=var_date)
+
+Retrieve Newspaper Front Page
+
+Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here's an example of some of today's newspapers:
+
+### Example
+
+* Api Key Authentication (apiKey):
+* Api Key Authentication (headerApiKey):
+
+```python
+import worldnewsapi
+from worldnewsapi.models.retrieve_newspaper_front_page200_response import RetrieveNewspaperFrontPage200Response
+from worldnewsapi.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.worldnewsapi.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = worldnewsapi.Configuration(
+    host = "https://api.worldnewsapi.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKey
+configuration.api_key['apiKey'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKey'] = 'Bearer'
+
+# Configure API key authorization: headerApiKey
+configuration.api_key['headerApiKey'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['headerApiKey'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with worldnewsapi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = worldnewsapi.NewsApi(api_client)
+    source_country = 'au' # str | The ISO 3166 country code of the newspaper publication. (optional)
+    source_name = 'herald-sun' # str | The identifier of the publication see attached list. (optional)
+    var_date = '2024-07-09' # str | The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09. (optional)
+
+    try:
+        # Retrieve Newspaper Front Page
+        api_response = api_instance.retrieve_newspaper_front_page(source_country=source_country, source_name=source_name, var_date=var_date)
+        print("The response of NewsApi->retrieve_newspaper_front_page:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling NewsApi->retrieve_newspaper_front_page: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **source_country** | **str**| The ISO 3166 country code of the newspaper publication. | [optional] 
+ **source_name** | **str**| The identifier of the publication see attached list. | [optional] 
+ **var_date** | **str**| The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09. | [optional] 
+
+### Return type
+
+[**RetrieveNewspaperFrontPage200Response**](RetrieveNewspaperFrontPage200Response.md)
 
 ### Authorization
 

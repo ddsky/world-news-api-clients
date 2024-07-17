@@ -11,8 +11,8 @@ import {SecurityAuthentication} from '../auth/auth';
 import { ExtractNews200Response } from '../models/ExtractNews200Response';
 import { ExtractNewsLinks200Response } from '../models/ExtractNewsLinks200Response';
 import { GetGeoCoordinates200Response } from '../models/GetGeoCoordinates200Response';
-import { NewspaperFrontPages200Response } from '../models/NewspaperFrontPages200Response';
 import { RetrieveNewsArticlesByIds200Response } from '../models/RetrieveNewsArticlesByIds200Response';
+import { RetrieveNewspaperFrontPage200Response } from '../models/RetrieveNewspaperFrontPage200Response';
 import { SearchNews200Response } from '../models/SearchNews200Response';
 import { TopNews200Response } from '../models/TopNews200Response';
 
@@ -246,13 +246,60 @@ export class NewsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Retrieve information about one or more news articles by their ids. The ids can be retrieved from the search news or top news APIs.
+     * Retrieve News Articles by Ids
+     * @param ids A comma separated list of news ids.
+     */
+    public async retrieveNewsArticlesByIds(ids: string, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'ids' is not null or undefined
+        if (ids === null || ids === undefined) {
+            throw new RequiredError("NewsApi", "retrieveNewsArticlesByIds", "ids");
+        }
+
+
+        // Path Params
+        const localVarPath = '/retrieve-news';
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+        // Query Params
+        if (ids !== undefined) {
+            requestContext.setQueryParam("ids", ObjectSerializer.serialize(ids, "string", ""));
+        }
+
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["apiKey"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        // Apply auth methods
+        authMethod = _config.authMethods["headerApiKey"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
      * Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here\'s an example of some of today\'s newspapers:
-     * Newspaper Front Pages
+     * Retrieve Newspaper Front Page
      * @param sourceCountry The ISO 3166 country code of the newspaper publication.
      * @param sourceName The identifier of the publication see attached list.
      * @param date The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09.
      */
-    public async newspaperFrontPages(sourceCountry?: string, sourceName?: string, date?: string, _options?: Configuration): Promise<RequestContext> {
+    public async retrieveNewspaperFrontPage(sourceCountry?: string, sourceName?: string, date?: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
 
@@ -278,53 +325,6 @@ export class NewsApiRequestFactory extends BaseAPIRequestFactory {
         // Query Params
         if (date !== undefined) {
             requestContext.setQueryParam("date", ObjectSerializer.serialize(date, "string", ""));
-        }
-
-
-        let authMethod: SecurityAuthentication | undefined;
-        // Apply auth methods
-        authMethod = _config.authMethods["apiKey"]
-        if (authMethod?.applySecurityAuthentication) {
-            await authMethod?.applySecurityAuthentication(requestContext);
-        }
-        // Apply auth methods
-        authMethod = _config.authMethods["headerApiKey"]
-        if (authMethod?.applySecurityAuthentication) {
-            await authMethod?.applySecurityAuthentication(requestContext);
-        }
-        
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
-        if (defaultAuth?.applySecurityAuthentication) {
-            await defaultAuth?.applySecurityAuthentication(requestContext);
-        }
-
-        return requestContext;
-    }
-
-    /**
-     * Retrieve information about one or more news articles by their ids. The ids can be retrieved from the search news or top news APIs.
-     * Retrieve News Articles by Ids
-     * @param ids A comma separated list of news ids.
-     */
-    public async retrieveNewsArticlesByIds(ids: string, _options?: Configuration): Promise<RequestContext> {
-        let _config = _options || this.configuration;
-
-        // verify required parameter 'ids' is not null or undefined
-        if (ids === null || ids === undefined) {
-            throw new RequiredError("NewsApi", "retrieveNewsArticlesByIds", "ids");
-        }
-
-
-        // Path Params
-        const localVarPath = '/retrieve-news';
-
-        // Make Request Context
-        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
-        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-
-        // Query Params
-        if (ids !== undefined) {
-            requestContext.setQueryParam("ids", ObjectSerializer.serialize(ids, "string", ""));
         }
 
 
@@ -764,53 +764,6 @@ export class NewsApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to newspaperFrontPages
-     * @throws ApiException if the response code was not in [200, 299]
-     */
-     public async newspaperFrontPagesWithHttpInfo(response: ResponseContext): Promise<HttpInfo<NewspaperFrontPages200Response >> {
-        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: NewspaperFrontPages200Response = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "NewspaperFrontPages200Response", ""
-            ) as NewspaperFrontPages200Response;
-            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
-        }
-        if (isCodeInRange("401", response.httpStatusCode)) {
-            throw new ApiException<undefined>(response.httpStatusCode, "Unauthorized", undefined, response.headers);
-        }
-        if (isCodeInRange("402", response.httpStatusCode)) {
-            throw new ApiException<undefined>(response.httpStatusCode, "Payment Required", undefined, response.headers);
-        }
-        if (isCodeInRange("403", response.httpStatusCode)) {
-            throw new ApiException<undefined>(response.httpStatusCode, "Forbidden", undefined, response.headers);
-        }
-        if (isCodeInRange("404", response.httpStatusCode)) {
-            throw new ApiException<undefined>(response.httpStatusCode, "Not Found", undefined, response.headers);
-        }
-        if (isCodeInRange("406", response.httpStatusCode)) {
-            throw new ApiException<undefined>(response.httpStatusCode, "Not Acceptable", undefined, response.headers);
-        }
-        if (isCodeInRange("429", response.httpStatusCode)) {
-            throw new ApiException<undefined>(response.httpStatusCode, "Too Many Requests", undefined, response.headers);
-        }
-
-        // Work around for missing responses in specification, e.g. for petstore.yaml
-        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: NewspaperFrontPages200Response = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "NewspaperFrontPages200Response", ""
-            ) as NewspaperFrontPages200Response;
-            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
-        }
-
-        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
-    }
-
-    /**
-     * Unwraps the actual response sent by the server from the response context and deserializes the response content
-     * to the expected objects
-     *
      * @params response Response returned by the server for a request to retrieveNewsArticlesByIds
      * @throws ApiException if the response code was not in [200, 299]
      */
@@ -848,6 +801,53 @@ export class NewsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "RetrieveNewsArticlesByIds200Response", ""
             ) as RetrieveNewsArticlesByIds200Response;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+        }
+
+        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to retrieveNewspaperFrontPage
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async retrieveNewspaperFrontPageWithHttpInfo(response: ResponseContext): Promise<HttpInfo<RetrieveNewspaperFrontPage200Response >> {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: RetrieveNewspaperFrontPage200Response = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "RetrieveNewspaperFrontPage200Response", ""
+            ) as RetrieveNewspaperFrontPage200Response;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Unauthorized", undefined, response.headers);
+        }
+        if (isCodeInRange("402", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Payment Required", undefined, response.headers);
+        }
+        if (isCodeInRange("403", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Forbidden", undefined, response.headers);
+        }
+        if (isCodeInRange("404", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Not Found", undefined, response.headers);
+        }
+        if (isCodeInRange("406", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Not Acceptable", undefined, response.headers);
+        }
+        if (isCodeInRange("429", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Too Many Requests", undefined, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: RetrieveNewspaperFrontPage200Response = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "RetrieveNewspaperFrontPage200Response", ""
+            ) as RetrieveNewspaperFrontPage200Response;
             return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
