@@ -176,7 +176,7 @@ export class ObservableNewsApi {
      * Newspaper Front Pages
      * @param sourceCountry The ISO 3166 country code of the newspaper publication.
      * @param sourceName The identifier of the publication see attached list.
-     * @param date The date for which the front page should be retrieved.
+     * @param date The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09.
      */
     public newspaperFrontPagesWithHttpInfo(sourceCountry?: string, sourceName?: string, date?: string, _options?: Configuration): Observable<HttpInfo<NewspaperFrontPages200Response>> {
         const requestContextPromise = this.requestFactory.newspaperFrontPages(sourceCountry, sourceName, date, _options);
@@ -202,7 +202,7 @@ export class ObservableNewsApi {
      * Newspaper Front Pages
      * @param sourceCountry The ISO 3166 country code of the newspaper publication.
      * @param sourceName The identifier of the publication see attached list.
-     * @param date The date for which the front page should be retrieved.
+     * @param date The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09.
      */
     public newspaperFrontPages(sourceCountry?: string, sourceName?: string, date?: string, _options?: Configuration): Observable<NewspaperFrontPages200Response> {
         return this.newspaperFrontPagesWithHttpInfo(sourceCountry, sourceName, date, _options).pipe(map((apiResponse: HttpInfo<NewspaperFrontPages200Response>) => apiResponse.data));

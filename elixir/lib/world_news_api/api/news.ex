@@ -173,7 +173,7 @@ defmodule WorldNewsAPI.Api.News do
   - `opts` (keyword): Optional parameters
     - `:"source-country"` (String.t): The ISO 3166 country code of the newspaper publication.
     - `:"source-name"` (String.t): The identifier of the publication see attached list.
-    - `:date` (String.t): The date for which the front page should be retrieved.
+    - `:date` (String.t): The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09.
 
   ### Returns
 
@@ -191,7 +191,7 @@ defmodule WorldNewsAPI.Api.News do
     request =
       %{}
       |> method(:get)
-      |> url("/front-pages")
+      |> url("/retrieve-front-page")
       |> add_optional_params(optional_params, opts)
       |> Enum.into([])
 

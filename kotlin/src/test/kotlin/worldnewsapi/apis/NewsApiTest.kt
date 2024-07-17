@@ -72,7 +72,7 @@ class NewsApiTest : ShouldSpec() {
             // uncomment below to test newspaperFrontPages
             //val sourceCountry : kotlin.String = au // kotlin.String | The ISO 3166 country code of the newspaper publication.
             //val sourceName : kotlin.String = herald-sun // kotlin.String | The identifier of the publication see attached list.
-            //val date : kotlin.String = 2024-07-09 // kotlin.String | The date for which the front page should be retrieved.
+            //val date : kotlin.String = 2024-07-09 // kotlin.String | The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09.
             //val result : NewspaperFrontPages200Response = apiInstance.newspaperFrontPages(sourceCountry, sourceName, date)
             //result shouldBe ("TODO")
         }

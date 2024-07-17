@@ -363,7 +363,7 @@ class NewsApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClient = 
      * Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here&#39;s an example of some of today&#39;s newspapers:
      * @param sourceCountry The ISO 3166 country code of the newspaper publication. (optional)
      * @param sourceName The identifier of the publication see attached list. (optional)
-     * @param date The date for which the front page should be retrieved. (optional)
+     * @param date The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09. (optional)
      * @return NewspaperFrontPages200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -396,7 +396,7 @@ class NewsApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClient = 
      * Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here&#39;s an example of some of today&#39;s newspapers:
      * @param sourceCountry The ISO 3166 country code of the newspaper publication. (optional)
      * @param sourceName The identifier of the publication see attached list. (optional)
-     * @param date The date for which the front page should be retrieved. (optional)
+     * @param date The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09. (optional)
      * @return ApiResponse<NewspaperFrontPages200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -416,7 +416,7 @@ class NewsApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClient = 
      *
      * @param sourceCountry The ISO 3166 country code of the newspaper publication. (optional)
      * @param sourceName The identifier of the publication see attached list. (optional)
-     * @param date The date for which the front page should be retrieved. (optional)
+     * @param date The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09. (optional)
      * @return RequestConfig
      */
     fun newspaperFrontPagesRequestConfig(sourceCountry: kotlin.String?, sourceName: kotlin.String?, date: kotlin.String?) : RequestConfig<Unit> {
@@ -438,7 +438,7 @@ class NewsApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClient = 
 
         return RequestConfig(
             method = RequestMethod.GET,
-            path = "/front-pages",
+            path = "/retrieve-front-page",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,

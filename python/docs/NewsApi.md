@@ -8,7 +8,7 @@ Method | HTTP request | Description
 [**extract_news_links**](NewsApi.md#extract_news_links) | **GET** /extract-news-links | Extract News Links
 [**get_geo_coordinates**](NewsApi.md#get_geo_coordinates) | **GET** /geo-coordinates | Get Geo Coordinates
 [**news_website_to_rss_feed**](NewsApi.md#news_website_to_rss_feed) | **GET** /feed.rss | News Website to RSS Feed
-[**newspaper_front_pages**](NewsApi.md#newspaper_front_pages) | **GET** /front-pages | Newspaper Front Pages
+[**newspaper_front_pages**](NewsApi.md#newspaper_front_pages) | **GET** /retrieve-front-page | Newspaper Front Pages
 [**retrieve_news_articles_by_ids**](NewsApi.md#retrieve_news_articles_by_ids) | **GET** /retrieve-news | Retrieve News Articles by Ids
 [**search_news**](NewsApi.md#search_news) | **GET** /search-news | Search News
 [**top_news**](NewsApi.md#top_news) | **GET** /top-news | Top News
@@ -434,7 +434,7 @@ with worldnewsapi.ApiClient(configuration) as api_client:
     api_instance = worldnewsapi.NewsApi(api_client)
     source_country = 'au' # str | The ISO 3166 country code of the newspaper publication. (optional)
     source_name = 'herald-sun' # str | The identifier of the publication see attached list. (optional)
-    var_date = '2024-07-09' # str | The date for which the front page should be retrieved. (optional)
+    var_date = '2024-07-09' # str | The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09. (optional)
 
     try:
         # Newspaper Front Pages
@@ -454,7 +454,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **source_country** | **str**| The ISO 3166 country code of the newspaper publication. | [optional] 
  **source_name** | **str**| The identifier of the publication see attached list. | [optional] 
- **var_date** | **str**| The date for which the front page should be retrieved. | [optional] 
+ **var_date** | **str**| The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09. | [optional] 
 
 ### Return type
 

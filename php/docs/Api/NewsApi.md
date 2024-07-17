@@ -8,7 +8,7 @@ All URIs are relative to https://api.worldnewsapi.com, except if the operation d
 | [**extractNewsLinks()**](NewsApi.md#extractNewsLinks) | **GET** /extract-news-links | Extract News Links |
 | [**getGeoCoordinates()**](NewsApi.md#getGeoCoordinates) | **GET** /geo-coordinates | Get Geo Coordinates |
 | [**newsWebsiteToRSSFeed()**](NewsApi.md#newsWebsiteToRSSFeed) | **GET** /feed.rss | News Website to RSS Feed |
-| [**newspaperFrontPages()**](NewsApi.md#newspaperFrontPages) | **GET** /front-pages | Newspaper Front Pages |
+| [**newspaperFrontPages()**](NewsApi.md#newspaperFrontPages) | **GET** /retrieve-front-page | Newspaper Front Pages |
 | [**retrieveNewsArticlesByIds()**](NewsApi.md#retrieveNewsArticlesByIds) | **GET** /retrieve-news | Retrieve News Articles by Ids |
 | [**searchNews()**](NewsApi.md#searchNews) | **GET** /search-news | Search News |
 | [**topNews()**](NewsApi.md#topNews) | **GET** /top-news | Top News |
@@ -324,7 +324,7 @@ $apiInstance = new OpenAPI\Client\Api\NewsApi(
 );
 $source_country = au; // string | The ISO 3166 country code of the newspaper publication.
 $source_name = herald-sun; // string | The identifier of the publication see attached list.
-$date = 2024-07-09; // string | The date for which the front page should be retrieved.
+$date = 2024-07-09; // string | The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09.
 
 try {
     $result = $apiInstance->newspaperFrontPages($source_country, $source_name, $date);
@@ -340,7 +340,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **source_country** | **string**| The ISO 3166 country code of the newspaper publication. | [optional] |
 | **source_name** | **string**| The identifier of the publication see attached list. | [optional] |
-| **date** | **string**| The date for which the front page should be retrieved. | [optional] |
+| **date** | **string**| The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09. | [optional] |
 
 ### Return type
 

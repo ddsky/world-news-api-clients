@@ -3,7 +3,7 @@ World News API
 
 The world's news wrapped into a single API.
 
-API version: 1.3.0
+API version: 1.3.1
 Contact: mail@worldnewsapi.com
 */
 
@@ -640,7 +640,7 @@ func (r ApiNewspaperFrontPagesRequest) SourceName(sourceName string) ApiNewspape
 	return r
 }
 
-// The date for which the front page should be retrieved.
+// The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09.
 func (r ApiNewspaperFrontPagesRequest) Date(date string) ApiNewspaperFrontPagesRequest {
 	r.date = &date
 	return r
@@ -680,7 +680,7 @@ func (a *NewsAPIService) NewspaperFrontPagesExecute(r ApiNewspaperFrontPagesRequ
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/front-pages"
+	localVarPath := localBasePath + "/retrieve-front-page"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

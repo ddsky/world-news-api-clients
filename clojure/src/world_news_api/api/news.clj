@@ -122,7 +122,7 @@
   Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here's an example of some of today's newspapers:"
   ([] (newspaper-front-pages-with-http-info nil))
   ([{:keys [source-country source-name date]} (s/map-of keyword? any?)]
-   (call-api "/front-pages" :get
+   (call-api "/retrieve-front-page" :get
              {:path-params   {}
               :header-params {}
               :query-params  {"source-country" source-country "source-name" source-name "date" date }

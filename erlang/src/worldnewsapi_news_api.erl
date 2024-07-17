@@ -107,7 +107,7 @@ newspaper_front_pages(Ctx, Optional) ->
     Cfg = maps:get(cfg, Optional, application:get_env(worldnewsapi_api, config, #{})),
 
     Method = get,
-    Path = [?BASE_URL, "/front-pages"],
+    Path = [?BASE_URL, "/retrieve-front-page"],
     QS = lists:flatten([])++worldnewsapi_utils:optional_params(['source-country', 'source-name', 'date'], _OptionalParams),
     Headers = [],
     Body1 = [],

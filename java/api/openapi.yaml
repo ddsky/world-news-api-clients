@@ -6,7 +6,7 @@ info:
   description: The world's news wrapped into a single API.
   termsOfService: https://worldnewsapi.com/terms
   title: World News API
-  version: 1.3.0
+  version: 1.3.1
 servers:
 - url: https://api.worldnewsapi.com
 security:
@@ -535,7 +535,7 @@ paths:
       - News
       x-accepts:
       - application/json
-  /front-pages:
+  /retrieve-front-page:
     get:
       deprecated: false
       description: 'Get the front pages of newspapers from around the world. The API
@@ -568,7 +568,8 @@ paths:
           pattern: "."
           type: string
         style: form
-      - description: The date for which the front page should be retrieved.
+      - description: "The date for which the front page should be retrieved. You can\
+          \ also go into the past, the earliest date is 2024-07-09."
         explode: false
         in: query
         name: date

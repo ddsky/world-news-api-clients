@@ -8,7 +8,7 @@ Method | HTTP request | Description
 [**extractNewsLinks**](NewsApi.md#extractNewsLinks) | **GET** /extract-news-links | Extract News Links
 [**getGeoCoordinates**](NewsApi.md#getGeoCoordinates) | **GET** /geo-coordinates | Get Geo Coordinates
 [**newsWebsiteToRSSFeed**](NewsApi.md#newsWebsiteToRSSFeed) | **GET** /feed.rss | News Website to RSS Feed
-[**newspaperFrontPages**](NewsApi.md#newspaperFrontPages) | **GET** /front-pages | Newspaper Front Pages
+[**newspaperFrontPages**](NewsApi.md#newspaperFrontPages) | **GET** /retrieve-front-page | Newspaper Front Pages
 [**retrieveNewsArticlesByIds**](NewsApi.md#retrieveNewsArticlesByIds) | **GET** /retrieve-news | Retrieve News Articles by Ids
 [**searchNews**](NewsApi.md#searchNews) | **GET** /search-news | Search News
 [**topNews**](NewsApi.md#topNews) | **GET** /top-news | Top News
@@ -283,7 +283,7 @@ let body:.NewsApiNewspaperFrontPagesRequest = {
   sourceCountry: "au",
   // string | The identifier of the publication see attached list. (optional)
   sourceName: "herald-sun",
-  // string | The date for which the front page should be retrieved. (optional)
+  // string | The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09. (optional)
   date: "2024-07-09",
 };
 
@@ -299,7 +299,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **sourceCountry** | [**string**] | The ISO 3166 country code of the newspaper publication. | (optional) defaults to undefined
  **sourceName** | [**string**] | The identifier of the publication see attached list. | (optional) defaults to undefined
- **date** | [**string**] | The date for which the front page should be retrieved. | (optional) defaults to undefined
+ **date** | [**string**] | The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09. | (optional) defaults to undefined
 
 
 ### Return type

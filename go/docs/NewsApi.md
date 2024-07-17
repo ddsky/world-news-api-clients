@@ -8,7 +8,7 @@ Method | HTTP request | Description
 [**ExtractNewsLinks**](NewsAPI.md#ExtractNewsLinks) | **Get** /extract-news-links | Extract News Links
 [**GetGeoCoordinates**](NewsAPI.md#GetGeoCoordinates) | **Get** /geo-coordinates | Get Geo Coordinates
 [**NewsWebsiteToRSSFeed**](NewsAPI.md#NewsWebsiteToRSSFeed) | **Get** /feed.rss | News Website to RSS Feed
-[**NewspaperFrontPages**](NewsAPI.md#NewspaperFrontPages) | **Get** /front-pages | Newspaper Front Pages
+[**NewspaperFrontPages**](NewsAPI.md#NewspaperFrontPages) | **Get** /retrieve-front-page | Newspaper Front Pages
 [**RetrieveNewsArticlesByIds**](NewsAPI.md#RetrieveNewsArticlesByIds) | **Get** /retrieve-news | Retrieve News Articles by Ids
 [**SearchNews**](NewsAPI.md#SearchNews) | **Get** /search-news | Search News
 [**TopNews**](NewsAPI.md#TopNews) | **Get** /top-news | Top News
@@ -308,7 +308,7 @@ import (
 func main() {
 	sourceCountry := "au" // string | The ISO 3166 country code of the newspaper publication. (optional)
 	sourceName := "herald-sun" // string | The identifier of the publication see attached list. (optional)
-	date := "2024-07-09" // string | The date for which the front page should be retrieved. (optional)
+	date := "2024-07-09" // string | The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -335,7 +335,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **sourceCountry** | **string** | The ISO 3166 country code of the newspaper publication. | 
  **sourceName** | **string** | The identifier of the publication see attached list. | 
- **date** | **string** | The date for which the front page should be retrieved. | 
+ **date** | **string** | The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09. | 
 
 ### Return type
 

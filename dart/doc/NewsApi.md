@@ -13,7 +13,7 @@ Method | HTTP request | Description
 [**extractNewsLinks**](NewsApi.md#extractnewslinks) | **GET** /extract-news-links | Extract News Links
 [**getGeoCoordinates**](NewsApi.md#getgeocoordinates) | **GET** /geo-coordinates | Get Geo Coordinates
 [**newsWebsiteToRSSFeed**](NewsApi.md#newswebsitetorssfeed) | **GET** /feed.rss | News Website to RSS Feed
-[**newspaperFrontPages**](NewsApi.md#newspaperfrontpages) | **GET** /front-pages | Newspaper Front Pages
+[**newspaperFrontPages**](NewsApi.md#newspaperfrontpages) | **GET** /retrieve-front-page | Newspaper Front Pages
 [**retrieveNewsArticlesByIds**](NewsApi.md#retrievenewsarticlesbyids) | **GET** /retrieve-news | Retrieve News Articles by Ids
 [**searchNews**](NewsApi.md#searchnews) | **GET** /search-news | Search News
 [**topNews**](NewsApi.md#topnews) | **GET** /top-news | Top News
@@ -251,7 +251,7 @@ import 'package:openapi/api.dart';
 final api_instance = NewsApi();
 final sourceCountry = au; // String | The ISO 3166 country code of the newspaper publication.
 final sourceName = herald-sun; // String | The identifier of the publication see attached list.
-final date = 2024-07-09; // String | The date for which the front page should be retrieved.
+final date = 2024-07-09; // String | The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09.
 
 try {
     final result = api_instance.newspaperFrontPages(sourceCountry, sourceName, date);
@@ -267,7 +267,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **sourceCountry** | **String**| The ISO 3166 country code of the newspaper publication. | [optional] 
  **sourceName** | **String**| The identifier of the publication see attached list. | [optional] 
- **date** | **String**| The date for which the front page should be retrieved. | [optional] 
+ **date** | **String**| The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09. | [optional] 
 
 ### Return type
 

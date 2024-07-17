@@ -250,7 +250,7 @@ export class NewsApiRequestFactory extends BaseAPIRequestFactory {
      * Newspaper Front Pages
      * @param sourceCountry The ISO 3166 country code of the newspaper publication.
      * @param sourceName The identifier of the publication see attached list.
-     * @param date The date for which the front page should be retrieved.
+     * @param date The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09.
      */
     public async newspaperFrontPages(sourceCountry?: string, sourceName?: string, date?: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -259,7 +259,7 @@ export class NewsApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/front-pages';
+        const localVarPath = '/retrieve-front-page';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);

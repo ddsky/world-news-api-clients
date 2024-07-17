@@ -8,7 +8,7 @@ All URIs are relative to *https://api.worldnewsapi.com*
 | [**extractNewsLinks**](NewsApi.md#extractNewsLinks) | **GET** /extract-news-links | Extract News Links |
 | [**getGeoCoordinates**](NewsApi.md#getGeoCoordinates) | **GET** /geo-coordinates | Get Geo Coordinates |
 | [**newsWebsiteToRSSFeed**](NewsApi.md#newsWebsiteToRSSFeed) | **GET** /feed.rss | News Website to RSS Feed |
-| [**newspaperFrontPages**](NewsApi.md#newspaperFrontPages) | **GET** /front-pages | Newspaper Front Pages |
+| [**newspaperFrontPages**](NewsApi.md#newspaperFrontPages) | **GET** /retrieve-front-page | Newspaper Front Pages |
 | [**retrieveNewsArticlesByIds**](NewsApi.md#retrieveNewsArticlesByIds) | **GET** /retrieve-news | Retrieve News Articles by Ids |
 | [**searchNews**](NewsApi.md#searchNews) | **GET** /search-news | Search News |
 | [**topNews**](NewsApi.md#topNews) | **GET** /top-news | Top News |
@@ -382,7 +382,7 @@ public class Example {
     NewsApi apiInstance = new NewsApi(defaultClient);
     String sourceCountry = "au"; // String | The ISO 3166 country code of the newspaper publication.
     String sourceName = "herald-sun"; // String | The identifier of the publication see attached list.
-    String date = "2024-07-09"; // String | The date for which the front page should be retrieved.
+    String date = "2024-07-09"; // String | The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09.
     try {
       NewspaperFrontPages200Response result = apiInstance.newspaperFrontPages(sourceCountry, sourceName, date);
       System.out.println(result);
@@ -403,7 +403,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **sourceCountry** | **String**| The ISO 3166 country code of the newspaper publication. | [optional] |
 | **sourceName** | **String**| The identifier of the publication see attached list. | [optional] |
-| **date** | **String**| The date for which the front page should be retrieved. | [optional] |
+| **date** | **String**| The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09. | [optional] |
 
 ### Return type
 

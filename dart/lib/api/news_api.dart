@@ -292,10 +292,10 @@ class NewsApi {
   ///   The identifier of the publication see attached list.
   ///
   /// * [String] date:
-  ///   The date for which the front page should be retrieved.
+  ///   The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09.
   Future<Response> newspaperFrontPagesWithHttpInfo({ String? sourceCountry, String? sourceName, String? date, }) async {
     // ignore: prefer_const_declarations
-    final path = r'/front-pages';
+    final path = r'/retrieve-front-page';
 
     // ignore: prefer_final_locals
     Object? postBody;
@@ -341,7 +341,7 @@ class NewsApi {
   ///   The identifier of the publication see attached list.
   ///
   /// * [String] date:
-  ///   The date for which the front page should be retrieved.
+  ///   The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09.
   Future<NewspaperFrontPages200Response?> newspaperFrontPages({ String? sourceCountry, String? sourceName, String? date, }) async {
     final response = await newspaperFrontPagesWithHttpInfo( sourceCountry: sourceCountry, sourceName: sourceName, date: date, );
     if (response.statusCode >= HttpStatus.badRequest) {

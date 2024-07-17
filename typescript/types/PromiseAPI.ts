@@ -120,7 +120,7 @@ export class PromiseNewsApi {
      * Newspaper Front Pages
      * @param sourceCountry The ISO 3166 country code of the newspaper publication.
      * @param sourceName The identifier of the publication see attached list.
-     * @param date The date for which the front page should be retrieved.
+     * @param date The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09.
      */
     public newspaperFrontPagesWithHttpInfo(sourceCountry?: string, sourceName?: string, date?: string, _options?: Configuration): Promise<HttpInfo<NewspaperFrontPages200Response>> {
         const result = this.api.newspaperFrontPagesWithHttpInfo(sourceCountry, sourceName, date, _options);
@@ -132,7 +132,7 @@ export class PromiseNewsApi {
      * Newspaper Front Pages
      * @param sourceCountry The ISO 3166 country code of the newspaper publication.
      * @param sourceName The identifier of the publication see attached list.
-     * @param date The date for which the front page should be retrieved.
+     * @param date The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09.
      */
     public newspaperFrontPages(sourceCountry?: string, sourceName?: string, date?: string, _options?: Configuration): Promise<NewspaperFrontPages200Response> {
         const result = this.api.newspaperFrontPages(sourceCountry, sourceName, date, _options);

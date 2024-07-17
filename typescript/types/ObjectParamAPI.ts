@@ -87,7 +87,7 @@ export interface NewsApiNewspaperFrontPagesRequest {
      */
     sourceName?: string
     /**
-     * The date for which the front page should be retrieved.
+     * The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09.
      * @type string
      * @memberof NewsApinewspaperFrontPages
      */

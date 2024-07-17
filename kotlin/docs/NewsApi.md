@@ -8,7 +8,7 @@ All URIs are relative to *https://api.worldnewsapi.com*
 | [**extractNewsLinks**](NewsApi.md#extractNewsLinks) | **GET** /extract-news-links | Extract News Links |
 | [**getGeoCoordinates**](NewsApi.md#getGeoCoordinates) | **GET** /geo-coordinates | Get Geo Coordinates |
 | [**newsWebsiteToRSSFeed**](NewsApi.md#newsWebsiteToRSSFeed) | **GET** /feed.rss | News Website to RSS Feed |
-| [**newspaperFrontPages**](NewsApi.md#newspaperFrontPages) | **GET** /front-pages | Newspaper Front Pages |
+| [**newspaperFrontPages**](NewsApi.md#newspaperFrontPages) | **GET** /retrieve-front-page | Newspaper Front Pages |
 | [**retrieveNewsArticlesByIds**](NewsApi.md#retrieveNewsArticlesByIds) | **GET** /retrieve-news | Retrieve News Articles by Ids |
 | [**searchNews**](NewsApi.md#searchNews) | **GET** /search-news | Search News |
 | [**topNews**](NewsApi.md#topNews) | **GET** /top-news | Top News |
@@ -245,7 +245,7 @@ Get the front pages of newspapers from around the world. The API provides images
 val apiInstance = NewsApi()
 val sourceCountry : kotlin.String = au // kotlin.String | The ISO 3166 country code of the newspaper publication.
 val sourceName : kotlin.String = herald-sun // kotlin.String | The identifier of the publication see attached list.
-val date : kotlin.String = 2024-07-09 // kotlin.String | The date for which the front page should be retrieved.
+val date : kotlin.String = 2024-07-09 // kotlin.String | The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09.
 try {
     val result : NewspaperFrontPages200Response = apiInstance.newspaperFrontPages(sourceCountry, sourceName, date)
     println(result)
@@ -263,7 +263,7 @@ try {
 | **sourceName** | **kotlin.String**| The identifier of the publication see attached list. | [optional] |
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **date** | **kotlin.String**| The date for which the front page should be retrieved. | [optional] |
+| **date** | **kotlin.String**| The date for which the front page should be retrieved. You can also go into the past, the earliest date is 2024-07-09. | [optional] |
 
 ### Return type
 
