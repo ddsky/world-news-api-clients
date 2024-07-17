@@ -10,6 +10,8 @@ docs/ExtractNews200ResponseVideosInner.md
 docs/ExtractNewsLinks200Response.md
 docs/GetGeoCoordinates200Response.md
 docs/NewsApi.md
+docs/NewspaperFrontPages200Response.md
+docs/NewspaperFrontPages200ResponseFrontPage.md
 docs/RetrieveNewsArticlesByIds200Response.md
 docs/RetrieveNewsArticlesByIds200ResponseNewsInner.md
 docs/SearchNews200Response.md
@@ -30,6 +32,8 @@ test/test_extract_news200_response_videos_inner.py
 test/test_extract_news_links200_response.py
 test/test_get_geo_coordinates200_response.py
 test/test_news_api.py
+test/test_newspaper_front_pages200_response.py
+test/test_newspaper_front_pages200_response_front_page.py
 test/test_retrieve_news_articles_by_ids200_response.py
 test/test_retrieve_news_articles_by_ids200_response_news_inner.py
 test/test_search_news200_response.py
@@ -51,6 +55,8 @@ worldnewsapi/models/extract_news200_response_images_inner.py
 worldnewsapi/models/extract_news200_response_videos_inner.py
 worldnewsapi/models/extract_news_links200_response.py
 worldnewsapi/models/get_geo_coordinates200_response.py
+worldnewsapi/models/newspaper_front_pages200_response.py
+worldnewsapi/models/newspaper_front_pages200_response_front_page.py
 worldnewsapi/models/retrieve_news_articles_by_ids200_response.py
 worldnewsapi/models/retrieve_news_articles_by_ids200_response_news_inner.py
 worldnewsapi/models/search_news200_response.py

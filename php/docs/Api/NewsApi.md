@@ -8,6 +8,7 @@ All URIs are relative to https://api.worldnewsapi.com, except if the operation d
 | [**extractNewsLinks()**](NewsApi.md#extractNewsLinks) | **GET** /extract-news-links | Extract News Links |
 | [**getGeoCoordinates()**](NewsApi.md#getGeoCoordinates) | **GET** /geo-coordinates | Get Geo Coordinates |
 | [**newsWebsiteToRSSFeed()**](NewsApi.md#newsWebsiteToRSSFeed) | **GET** /feed.rss | News Website to RSS Feed |
+| [**newspaperFrontPages()**](NewsApi.md#newspaperFrontPages) | **GET** /front-pages | Newspaper Front Pages |
 | [**retrieveNewsArticlesByIds()**](NewsApi.md#retrieveNewsArticlesByIds) | **GET** /retrieve-news | Retrieve News Articles by Ids |
 | [**searchNews()**](NewsApi.md#searchNews) | **GET** /search-news | Search News |
 | [**topNews()**](NewsApi.md#topNews) | **GET** /top-news | Top News |
@@ -287,6 +288,77 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `newspaperFrontPages()`
+
+```php
+newspaperFrontPages($source_country, $source_name, $date): \OpenAPI\Client\Model\NewspaperFrontPages200Response
+```
+
+Newspaper Front Pages
+
+Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here's an example of some of today's newspapers:
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKey
+$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setApiKey('api-key', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('api-key', 'Bearer');
+
+// Configure API key authorization: headerApiKey
+$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setApiKey('x-api-key', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('x-api-key', 'Bearer');
+
+
+$apiInstance = new OpenAPI\Client\Api\NewsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$source_country = au; // string | The ISO 3166 country code of the newspaper publication.
+$source_name = herald-sun; // string | The identifier of the publication see attached list.
+$date = 2024-07-09; // string | The date for which the front page should be retrieved.
+
+try {
+    $result = $apiInstance->newspaperFrontPages($source_country, $source_name, $date);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling NewsApi->newspaperFrontPages: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **source_country** | **string**| The ISO 3166 country code of the newspaper publication. | [optional] |
+| **source_name** | **string**| The identifier of the publication see attached list. | [optional] |
+| **date** | **string**| The date for which the front page should be retrieved. | [optional] |
+
+### Return type
+
+[**\OpenAPI\Client\Model\NewspaperFrontPages200Response**](../Model/NewspaperFrontPages200Response.md)
+
+### Authorization
+
+[apiKey](../../README.md#apiKey), [headerApiKey](../../README.md#headerApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `retrieveNewsArticlesByIds()`
 
 ```php
@@ -357,12 +429,12 @@ try {
 ## `searchNews()`
 
 ```php
-searchNews($text, $source_countries, $language, $min_sentiment, $max_sentiment, $earliest_publish_date, $latest_publish_date, $news_sources, $authors, $entities, $location_filter, $sort, $sort_direction, $offset, $number): \OpenAPI\Client\Model\SearchNews200Response
+searchNews($text, $source_countries, $language, $min_sentiment, $max_sentiment, $earliest_publish_date, $latest_publish_date, $news_sources, $authors, $categories, $entities, $location_filter, $sort, $sort_direction, $offset, $number): \OpenAPI\Client\Model\SearchNews200Response
 ```
 
 Search News
 
-Search and filter news by text, date, location, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
+Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
 
 ### Example
 
@@ -397,15 +469,16 @@ $earliest_publish_date = 2022-04-22 16:12:35; // string | The news must have bee
 $latest_publish_date = 2022-04-22 16:12:35; // string | The news must have been published before this date.
 $news_sources = https://www.bbc.co.uk; // string | A comma-separated list of news sources from which the news should originate.
 $authors = John Doe; // string | A comma-separated list of author names. Only news from any of the given authors will be returned.
+$categories = politics,sports; // string | A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other.
 $entities = ORG:Tesla; // string | Filter news by entities (see semantic types).
 $location_filter = 51.050407, 13.737262, 20; // string | Filter news by radius around a certain location. Format is \"latitude,longitude,radius in kilometers\". Radius must be between 1 and 100 kilometers.
-$sort = publish-time; // string | The sorting criteria (publish-time or sentiment).
+$sort = publish-time; // string | The sorting criteria (publish-time).
 $sort_direction = ASC; // string | Whether to sort ascending or descending (ASC or DESC).
 $offset = 0; // int | The number of news to skip in range [0,10000]
 $number = 10; // int | The number of news to return in range [1,100]
 
 try {
-    $result = $apiInstance->searchNews($text, $source_countries, $language, $min_sentiment, $max_sentiment, $earliest_publish_date, $latest_publish_date, $news_sources, $authors, $entities, $location_filter, $sort, $sort_direction, $offset, $number);
+    $result = $apiInstance->searchNews($text, $source_countries, $language, $min_sentiment, $max_sentiment, $earliest_publish_date, $latest_publish_date, $news_sources, $authors, $categories, $entities, $location_filter, $sort, $sort_direction, $offset, $number);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling NewsApi->searchNews: ', $e->getMessage(), PHP_EOL;
@@ -425,9 +498,10 @@ try {
 | **latest_publish_date** | **string**| The news must have been published before this date. | [optional] |
 | **news_sources** | **string**| A comma-separated list of news sources from which the news should originate. | [optional] |
 | **authors** | **string**| A comma-separated list of author names. Only news from any of the given authors will be returned. | [optional] |
+| **categories** | **string**| A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other. | [optional] |
 | **entities** | **string**| Filter news by entities (see semantic types). | [optional] |
 | **location_filter** | **string**| Filter news by radius around a certain location. Format is \&quot;latitude,longitude,radius in kilometers\&quot;. Radius must be between 1 and 100 kilometers. | [optional] |
-| **sort** | **string**| The sorting criteria (publish-time or sentiment). | [optional] |
+| **sort** | **string**| The sorting criteria (publish-time). | [optional] |
 | **sort_direction** | **string**| Whether to sort ascending or descending (ASC or DESC). | [optional] |
 | **offset** | **int**| The number of news to skip in range [0,10000] | [optional] |
 | **number** | **int**| The number of news to return in range [1,100] | [optional] |

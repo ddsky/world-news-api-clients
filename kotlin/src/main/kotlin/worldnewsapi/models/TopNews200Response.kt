@@ -40,5 +40,8 @@ data class TopNews200Response (
     @Json(name = "country")
     val country: kotlin.String? = null
 
-)
+) {
+
+
+}
 

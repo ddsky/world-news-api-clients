@@ -4,6 +4,7 @@
          extract_news_links/3, extract_news_links/4,
          get_geo_coordinates/2, get_geo_coordinates/3,
          news_website_to_rss_feed/3, news_website_to_rss_feed/4,
+         newspaper_front_pages/1, newspaper_front_pages/2,
          retrieve_news_articles_by_ids/2, retrieve_news_articles_by_ids/3,
          search_news/1, search_news/2,
          top_news/3, top_news/4]).
@@ -94,6 +95,27 @@ news_website_to_rss_feed(Ctx, Url, Analyze, Optional) ->
 
     worldnewsapi_utils:request(Ctx, Method, Path, QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
+%% @doc Newspaper Front Pages
+%% Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here's an example of some of today's newspapers:
+-spec newspaper_front_pages(ctx:ctx()) -> {ok, worldnewsapi_newspaper_front_pages_200_response:worldnewsapi_newspaper_front_pages_200_response(), worldnewsapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), worldnewsapi_utils:response_info()}.
+newspaper_front_pages(Ctx) ->
+    newspaper_front_pages(Ctx, #{}).
+
+-spec newspaper_front_pages(ctx:ctx(), maps:map()) -> {ok, worldnewsapi_newspaper_front_pages_200_response:worldnewsapi_newspaper_front_pages_200_response(), worldnewsapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), worldnewsapi_utils:response_info()}.
+newspaper_front_pages(Ctx, Optional) ->
+    _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(worldnewsapi_api, config, #{})),
+
+    Method = get,
+    Path = [?BASE_URL, "/front-pages"],
+    QS = lists:flatten([])++worldnewsapi_utils:optional_params(['source-country', 'source-name', 'date'], _OptionalParams),
+    Headers = [],
+    Body1 = [],
+    ContentTypeHeader = worldnewsapi_utils:select_header_content_type([]),
+    Opts = maps:get(hackney_opts, Optional, []),
+
+    worldnewsapi_utils:request(Ctx, Method, Path, QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
+
 %% @doc Retrieve News Articles by Ids
 %% Retrieve information about one or more news articles by their ids. The ids can be retrieved from the search news or top news APIs.
 -spec retrieve_news_articles_by_ids(ctx:ctx(), binary()) -> {ok, worldnewsapi_retrieve_news_articles_by_ids_200_response:worldnewsapi_retrieve_news_articles_by_ids_200_response(), worldnewsapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), worldnewsapi_utils:response_info()}.
@@ -116,7 +138,7 @@ retrieve_news_articles_by_ids(Ctx, Ids, Optional) ->
     worldnewsapi_utils:request(Ctx, Method, Path, QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc Search News
-%% Search and filter news by text, date, location, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
+%% Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
 -spec search_news(ctx:ctx()) -> {ok, worldnewsapi_search_news_200_response:worldnewsapi_search_news_200_response(), worldnewsapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), worldnewsapi_utils:response_info()}.
 search_news(Ctx) ->
     search_news(Ctx, #{}).
@@ -128,7 +150,7 @@ search_news(Ctx, Optional) ->
 
     Method = get,
     Path = [?BASE_URL, "/search-news"],
-    QS = lists:flatten([])++worldnewsapi_utils:optional_params(['text', 'source-countries', 'language', 'min-sentiment', 'max-sentiment', 'earliest-publish-date', 'latest-publish-date', 'news-sources', 'authors', 'entities', 'location-filter', 'sort', 'sort-direction', 'offset', 'number'], _OptionalParams),
+    QS = lists:flatten([])++worldnewsapi_utils:optional_params(['text', 'source-countries', 'language', 'min-sentiment', 'max-sentiment', 'earliest-publish-date', 'latest-publish-date', 'news-sources', 'authors', 'categories', 'entities', 'location-filter', 'sort', 'sort-direction', 'offset', 'number'], _OptionalParams),
     Headers = [],
     Body1 = [],
     ContentTypeHeader = worldnewsapi_utils:select_header_content_type([]),

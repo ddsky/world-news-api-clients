@@ -47,5 +47,8 @@ data class ExtractNews200ResponseVideosInner (
     @Json(name = "url")
     val url: kotlin.String? = null
 
-)
+) {
+
+
+}
 

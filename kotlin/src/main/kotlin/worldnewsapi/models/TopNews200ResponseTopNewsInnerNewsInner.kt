@@ -63,5 +63,8 @@ data class TopNews200ResponseTopNewsInnerNewsInner (
     @Json(name = "authors")
     val authors: kotlin.collections.List<kotlin.String>? = null
 
-)
+) {
+
+
+}
 

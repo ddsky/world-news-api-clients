@@ -53,6 +53,15 @@ void main() {
       // TODO
     });
 
+    // Newspaper Front Pages
+    //
+    // Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here's an example of some of today's newspapers:
+    //
+    //Future<NewspaperFrontPages200Response> newspaperFrontPages({ String sourceCountry, String sourceName, String date }) async
+    test('test newspaperFrontPages', () async {
+      // TODO
+    });
+
     // Retrieve News Articles by Ids
     //
     // Retrieve information about one or more news articles by their ids. The ids can be retrieved from the search news or top news APIs.
@@ -64,9 +73,9 @@ void main() {
 
     // Search News
     //
-    // Search and filter news by text, date, location, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
+    // Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
     //
-    //Future<SearchNews200Response> searchNews({ String text, String sourceCountries, String language, double minSentiment, double maxSentiment, String earliestPublishDate, String latestPublishDate, String newsSources, String authors, String entities, String locationFilter, String sort, String sortDirection, int offset, int number }) async
+    //Future<SearchNews200Response> searchNews({ String text, String sourceCountries, String language, double minSentiment, double maxSentiment, String earliestPublishDate, String latestPublishDate, String newsSources, String authors, String categories, String entities, String locationFilter, String sort, String sortDirection, int offset, int number }) async
     test('test searchNews', () async {
       // TODO
     });

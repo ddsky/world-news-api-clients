@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **source_country** | **str** |  | [optional] 
 **id** | **int** |  | [optional] 
 **text** | **str** |  | [optional] 
+**category** | **str** |  | [optional] 
 **publish_date** | **str** |  | [optional] 
 **authors** | **List[Optional[str]]** |  | [optional] 
 

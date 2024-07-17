@@ -8,6 +8,8 @@ docs/ExtractNews200ResponseVideosInner.md
 docs/ExtractNewsLinks200Response.md
 docs/GetGeoCoordinates200Response.md
 docs/NewsApi.md
+docs/NewspaperFrontPages200Response.md
+docs/NewspaperFrontPages200ResponseFrontPage.md
 docs/RetrieveNewsArticlesByIds200Response.md
 docs/RetrieveNewsArticlesByIds200ResponseNewsInner.md
 docs/SearchNews200Response.md
@@ -21,6 +23,7 @@ gradle/wrapper/gradle-wrapper.properties
 gradlew
 gradlew.bat
 pom.xml
+settings.gradle
 src/main/AndroidManifest.xml
 src/main/java/com/worldnewsapi/NewsApi.java
 src/main/java/com/worldnewsapi/client/ApiException.java
@@ -35,6 +38,8 @@ src/main/java/com/worldnewsapi/client/model/ExtractNews200ResponseImagesInner.ja
 src/main/java/com/worldnewsapi/client/model/ExtractNews200ResponseVideosInner.java
 src/main/java/com/worldnewsapi/client/model/ExtractNewsLinks200Response.java
 src/main/java/com/worldnewsapi/client/model/GetGeoCoordinates200Response.java
+src/main/java/com/worldnewsapi/client/model/NewspaperFrontPages200Response.java
+src/main/java/com/worldnewsapi/client/model/NewspaperFrontPages200ResponseFrontPage.java
 src/main/java/com/worldnewsapi/client/model/RetrieveNewsArticlesByIds200Response.java
 src/main/java/com/worldnewsapi/client/model/RetrieveNewsArticlesByIds200ResponseNewsInner.java
 src/main/java/com/worldnewsapi/client/model/SearchNews200Response.java

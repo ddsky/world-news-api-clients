@@ -3,7 +3,7 @@ World News API
 
 The world's news wrapped into a single API.
 
-API version: 1.2.0
+API version: 1.3.0
 Contact: mail@worldnewsapi.com
 */
 
@@ -42,7 +42,7 @@ var (
 	queryDescape    = strings.NewReplacer( "%5B", "[", "%5D", "]" )
 )
 
-// APIClient manages communication with the World News API API v1.2.0
+// APIClient manages communication with the World News API API v1.3.0
 // In most cases there should be only one, shared, APIClient.
 type APIClient struct {
 	cfg    *Configuration
@@ -163,7 +163,7 @@ func parameterAddToHeaderOrQuery(headerOrQueryParams interface{}, keyPrefix stri
 					return
 				}
 				if t, ok := obj.(time.Time); ok {
-					parameterAddToHeaderOrQuery(headerOrQueryParams, keyPrefix, t.Format(time.RFC3339), collectionType)
+					parameterAddToHeaderOrQuery(headerOrQueryParams, keyPrefix, t.Format(time.RFC3339Nano), collectionType)
 					return
 				}
 				value = v.Type().String() + " value"
@@ -492,18 +492,6 @@ func addFile(w *multipart.Writer, fieldName, path string) error {
 	_, err = io.Copy(part, file)
 
 	return err
-}
-
-// Prevent trying to import "fmt"
-func reportError(format string, a ...interface{}) error {
-	return fmt.Errorf(format, a...)
-}
-
-// A wrapper for strict JSON decoding
-func newStrictDecoder(data []byte) *json.Decoder {
-	dec := json.NewDecoder(bytes.NewBuffer(data))
-	dec.DisallowUnknownFields()
-	return dec
 }
 
 // Set request body from an interface{}

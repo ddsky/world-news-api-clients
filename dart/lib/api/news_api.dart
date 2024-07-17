@@ -277,6 +277,86 @@ class NewsApi {
     return null;
   }
 
+  /// Newspaper Front Pages
+  ///
+  /// Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here's an example of some of today's newspapers:
+  ///
+  /// Note: This method returns the HTTP [Response].
+  ///
+  /// Parameters:
+  ///
+  /// * [String] sourceCountry:
+  ///   The ISO 3166 country code of the newspaper publication.
+  ///
+  /// * [String] sourceName:
+  ///   The identifier of the publication see attached list.
+  ///
+  /// * [String] date:
+  ///   The date for which the front page should be retrieved.
+  Future<Response> newspaperFrontPagesWithHttpInfo({ String? sourceCountry, String? sourceName, String? date, }) async {
+    // ignore: prefer_const_declarations
+    final path = r'/front-pages';
+
+    // ignore: prefer_final_locals
+    Object? postBody;
+
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+    if (sourceCountry != null) {
+      queryParams.addAll(_queryParams('', 'source-country', sourceCountry));
+    }
+    if (sourceName != null) {
+      queryParams.addAll(_queryParams('', 'source-name', sourceName));
+    }
+    if (date != null) {
+      queryParams.addAll(_queryParams('', 'date', date));
+    }
+
+    const contentTypes = <String>[];
+
+
+    return apiClient.invokeAPI(
+      path,
+      'GET',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      contentTypes.isEmpty ? null : contentTypes.first,
+    );
+  }
+
+  /// Newspaper Front Pages
+  ///
+  /// Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here's an example of some of today's newspapers:
+  ///
+  /// Parameters:
+  ///
+  /// * [String] sourceCountry:
+  ///   The ISO 3166 country code of the newspaper publication.
+  ///
+  /// * [String] sourceName:
+  ///   The identifier of the publication see attached list.
+  ///
+  /// * [String] date:
+  ///   The date for which the front page should be retrieved.
+  Future<NewspaperFrontPages200Response?> newspaperFrontPages({ String? sourceCountry, String? sourceName, String? date, }) async {
+    final response = await newspaperFrontPagesWithHttpInfo( sourceCountry: sourceCountry, sourceName: sourceName, date: date, );
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
+    }
+    // When a remote server returns no body with a status of 204, we shall not decode it.
+    // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
+    // FormatException when trying to decode an empty string.
+    if (response.body.isNotEmpty && response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'NewspaperFrontPages200Response',) as NewspaperFrontPages200Response;
+    
+    }
+    return null;
+  }
+
   /// Retrieve News Articles by Ids
   ///
   /// Retrieve information about one or more news articles by their ids. The ids can be retrieved from the search news or top news APIs.
@@ -339,7 +419,7 @@ class NewsApi {
 
   /// Search News
   ///
-  /// Search and filter news by text, date, location, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
+  /// Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
   ///
   /// Note: This method returns the HTTP [Response].
   ///
@@ -372,6 +452,9 @@ class NewsApi {
   /// * [String] authors:
   ///   A comma-separated list of author names. Only news from any of the given authors will be returned.
   ///
+  /// * [String] categories:
+  ///   A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other.
+  ///
   /// * [String] entities:
   ///   Filter news by entities (see semantic types).
   ///
@@ -379,7 +462,7 @@ class NewsApi {
   ///   Filter news by radius around a certain location. Format is \"latitude,longitude,radius in kilometers\". Radius must be between 1 and 100 kilometers.
   ///
   /// * [String] sort:
-  ///   The sorting criteria (publish-time or sentiment).
+  ///   The sorting criteria (publish-time).
   ///
   /// * [String] sortDirection:
   ///   Whether to sort ascending or descending (ASC or DESC).
@@ -389,7 +472,7 @@ class NewsApi {
   ///
   /// * [int] number:
   ///   The number of news to return in range [1,100]
-  Future<Response> searchNewsWithHttpInfo({ String? text, String? sourceCountries, String? language, double? minSentiment, double? maxSentiment, String? earliestPublishDate, String? latestPublishDate, String? newsSources, String? authors, String? entities, String? locationFilter, String? sort, String? sortDirection, int? offset, int? number, }) async {
+  Future<Response> searchNewsWithHttpInfo({ String? text, String? sourceCountries, String? language, double? minSentiment, double? maxSentiment, String? earliestPublishDate, String? latestPublishDate, String? newsSources, String? authors, String? categories, String? entities, String? locationFilter, String? sort, String? sortDirection, int? offset, int? number, }) async {
     // ignore: prefer_const_declarations
     final path = r'/search-news';
 
@@ -427,6 +510,9 @@ class NewsApi {
     if (authors != null) {
       queryParams.addAll(_queryParams('', 'authors', authors));
     }
+    if (categories != null) {
+      queryParams.addAll(_queryParams('', 'categories', categories));
+    }
     if (entities != null) {
       queryParams.addAll(_queryParams('', 'entities', entities));
     }
@@ -462,7 +548,7 @@ class NewsApi {
 
   /// Search News
   ///
-  /// Search and filter news by text, date, location, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
+  /// Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
   ///
   /// Parameters:
   ///
@@ -493,6 +579,9 @@ class NewsApi {
   /// * [String] authors:
   ///   A comma-separated list of author names. Only news from any of the given authors will be returned.
   ///
+  /// * [String] categories:
+  ///   A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other.
+  ///
   /// * [String] entities:
   ///   Filter news by entities (see semantic types).
   ///
@@ -500,7 +589,7 @@ class NewsApi {
   ///   Filter news by radius around a certain location. Format is \"latitude,longitude,radius in kilometers\". Radius must be between 1 and 100 kilometers.
   ///
   /// * [String] sort:
-  ///   The sorting criteria (publish-time or sentiment).
+  ///   The sorting criteria (publish-time).
   ///
   /// * [String] sortDirection:
   ///   Whether to sort ascending or descending (ASC or DESC).
@@ -510,8 +599,8 @@ class NewsApi {
   ///
   /// * [int] number:
   ///   The number of news to return in range [1,100]
-  Future<SearchNews200Response?> searchNews({ String? text, String? sourceCountries, String? language, double? minSentiment, double? maxSentiment, String? earliestPublishDate, String? latestPublishDate, String? newsSources, String? authors, String? entities, String? locationFilter, String? sort, String? sortDirection, int? offset, int? number, }) async {
-    final response = await searchNewsWithHttpInfo( text: text, sourceCountries: sourceCountries, language: language, minSentiment: minSentiment, maxSentiment: maxSentiment, earliestPublishDate: earliestPublishDate, latestPublishDate: latestPublishDate, newsSources: newsSources, authors: authors, entities: entities, locationFilter: locationFilter, sort: sort, sortDirection: sortDirection, offset: offset, number: number, );
+  Future<SearchNews200Response?> searchNews({ String? text, String? sourceCountries, String? language, double? minSentiment, double? maxSentiment, String? earliestPublishDate, String? latestPublishDate, String? newsSources, String? authors, String? categories, String? entities, String? locationFilter, String? sort, String? sortDirection, int? offset, int? number, }) async {
+    final response = await searchNewsWithHttpInfo( text: text, sourceCountries: sourceCountries, language: language, minSentiment: minSentiment, maxSentiment: maxSentiment, earliestPublishDate: earliestPublishDate, latestPublishDate: latestPublishDate, newsSources: newsSources, authors: authors, categories: categories, entities: entities, locationFilter: locationFilter, sort: sort, sortDirection: sortDirection, offset: offset, number: number, );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }

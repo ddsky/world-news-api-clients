@@ -32,5 +32,8 @@ data class RetrieveNewsArticlesByIds200Response (
     @Json(name = "news")
     val news: kotlin.collections.List<RetrieveNewsArticlesByIds200ResponseNewsInner>? = null
 
-)
+) {
+
+
+}
 

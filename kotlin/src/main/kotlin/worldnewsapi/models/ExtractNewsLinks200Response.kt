@@ -31,5 +31,8 @@ data class ExtractNewsLinks200Response (
     @Json(name = "news_links")
     val newsLinks: kotlin.collections.List<kotlin.String>? = null
 
-)
+) {
+
+
+}
 

@@ -9,6 +9,8 @@ doc/ExtractNews200ResponseVideosInner.md
 doc/ExtractNewsLinks200Response.md
 doc/GetGeoCoordinates200Response.md
 doc/NewsApi.md
+doc/NewspaperFrontPages200Response.md
+doc/NewspaperFrontPages200ResponseFrontPage.md
 doc/RetrieveNewsArticlesByIds200Response.md
 doc/RetrieveNewsArticlesByIds200ResponseNewsInner.md
 doc/SearchNews200Response.md
@@ -32,6 +34,8 @@ lib/model/extract_news200_response_images_inner.dart
 lib/model/extract_news200_response_videos_inner.dart
 lib/model/extract_news_links200_response.dart
 lib/model/get_geo_coordinates200_response.dart
+lib/model/newspaper_front_pages200_response.dart
+lib/model/newspaper_front_pages200_response_front_page.dart
 lib/model/retrieve_news_articles_by_ids200_response.dart
 lib/model/retrieve_news_articles_by_ids200_response_news_inner.dart
 lib/model/search_news200_response.dart
@@ -46,6 +50,8 @@ test/extract_news200_response_videos_inner_test.dart
 test/extract_news_links200_response_test.dart
 test/get_geo_coordinates200_response_test.dart
 test/news_api_test.dart
+test/newspaper_front_pages200_response_front_page_test.dart
+test/newspaper_front_pages200_response_test.dart
 test/retrieve_news_articles_by_ids200_response_news_inner_test.dart
 test/retrieve_news_articles_by_ids200_response_test.dart
 test/search_news200_response_news_inner_test.dart

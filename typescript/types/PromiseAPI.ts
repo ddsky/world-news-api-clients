@@ -6,6 +6,8 @@ import { ExtractNews200ResponseImagesInner } from '../models/ExtractNews200Respo
 import { ExtractNews200ResponseVideosInner } from '../models/ExtractNews200ResponseVideosInner';
 import { ExtractNewsLinks200Response } from '../models/ExtractNewsLinks200Response';
 import { GetGeoCoordinates200Response } from '../models/GetGeoCoordinates200Response';
+import { NewspaperFrontPages200Response } from '../models/NewspaperFrontPages200Response';
+import { NewspaperFrontPages200ResponseFrontPage } from '../models/NewspaperFrontPages200ResponseFrontPage';
 import { RetrieveNewsArticlesByIds200Response } from '../models/RetrieveNewsArticlesByIds200Response';
 import { RetrieveNewsArticlesByIds200ResponseNewsInner } from '../models/RetrieveNewsArticlesByIds200ResponseNewsInner';
 import { SearchNews200Response } from '../models/SearchNews200Response';
@@ -114,6 +116,30 @@ export class PromiseNewsApi {
     }
 
     /**
+     * Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here\'s an example of some of today\'s newspapers:
+     * Newspaper Front Pages
+     * @param sourceCountry The ISO 3166 country code of the newspaper publication.
+     * @param sourceName The identifier of the publication see attached list.
+     * @param date The date for which the front page should be retrieved.
+     */
+    public newspaperFrontPagesWithHttpInfo(sourceCountry?: string, sourceName?: string, date?: string, _options?: Configuration): Promise<HttpInfo<NewspaperFrontPages200Response>> {
+        const result = this.api.newspaperFrontPagesWithHttpInfo(sourceCountry, sourceName, date, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here\'s an example of some of today\'s newspapers:
+     * Newspaper Front Pages
+     * @param sourceCountry The ISO 3166 country code of the newspaper publication.
+     * @param sourceName The identifier of the publication see attached list.
+     * @param date The date for which the front page should be retrieved.
+     */
+    public newspaperFrontPages(sourceCountry?: string, sourceName?: string, date?: string, _options?: Configuration): Promise<NewspaperFrontPages200Response> {
+        const result = this.api.newspaperFrontPages(sourceCountry, sourceName, date, _options);
+        return result.toPromise();
+    }
+
+    /**
      * Retrieve information about one or more news articles by their ids. The ids can be retrieved from the search news or top news APIs.
      * Retrieve News Articles by Ids
      * @param ids A comma separated list of news ids.
@@ -134,7 +160,7 @@ export class PromiseNewsApi {
     }
 
     /**
-     * Search and filter news by text, date, location, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
+     * Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
      * Search News
      * @param text The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford
      * @param sourceCountries A comma-separated list of ISO 3166 country codes from which the news should originate.
@@ -145,20 +171,21 @@ export class PromiseNewsApi {
      * @param latestPublishDate The news must have been published before this date.
      * @param newsSources A comma-separated list of news sources from which the news should originate.
      * @param authors A comma-separated list of author names. Only news from any of the given authors will be returned.
+     * @param categories A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other.
      * @param entities Filter news by entities (see semantic types).
      * @param locationFilter Filter news by radius around a certain location. Format is \&quot;latitude,longitude,radius in kilometers\&quot;. Radius must be between 1 and 100 kilometers.
-     * @param sort The sorting criteria (publish-time or sentiment).
+     * @param sort The sorting criteria (publish-time).
      * @param sortDirection Whether to sort ascending or descending (ASC or DESC).
      * @param offset The number of news to skip in range [0,10000]
      * @param number The number of news to return in range [1,100]
      */
-    public searchNewsWithHttpInfo(text?: string, sourceCountries?: string, language?: string, minSentiment?: number, maxSentiment?: number, earliestPublishDate?: string, latestPublishDate?: string, newsSources?: string, authors?: string, entities?: string, locationFilter?: string, sort?: string, sortDirection?: string, offset?: number, number?: number, _options?: Configuration): Promise<HttpInfo<SearchNews200Response>> {
-        const result = this.api.searchNewsWithHttpInfo(text, sourceCountries, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, entities, locationFilter, sort, sortDirection, offset, number, _options);
+    public searchNewsWithHttpInfo(text?: string, sourceCountries?: string, language?: string, minSentiment?: number, maxSentiment?: number, earliestPublishDate?: string, latestPublishDate?: string, newsSources?: string, authors?: string, categories?: string, entities?: string, locationFilter?: string, sort?: string, sortDirection?: string, offset?: number, number?: number, _options?: Configuration): Promise<HttpInfo<SearchNews200Response>> {
+        const result = this.api.searchNewsWithHttpInfo(text, sourceCountries, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, categories, entities, locationFilter, sort, sortDirection, offset, number, _options);
         return result.toPromise();
     }
 
     /**
-     * Search and filter news by text, date, location, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
+     * Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
      * Search News
      * @param text The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford
      * @param sourceCountries A comma-separated list of ISO 3166 country codes from which the news should originate.
@@ -169,15 +196,16 @@ export class PromiseNewsApi {
      * @param latestPublishDate The news must have been published before this date.
      * @param newsSources A comma-separated list of news sources from which the news should originate.
      * @param authors A comma-separated list of author names. Only news from any of the given authors will be returned.
+     * @param categories A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other.
      * @param entities Filter news by entities (see semantic types).
      * @param locationFilter Filter news by radius around a certain location. Format is \&quot;latitude,longitude,radius in kilometers\&quot;. Radius must be between 1 and 100 kilometers.
-     * @param sort The sorting criteria (publish-time or sentiment).
+     * @param sort The sorting criteria (publish-time).
      * @param sortDirection Whether to sort ascending or descending (ASC or DESC).
      * @param offset The number of news to skip in range [0,10000]
      * @param number The number of news to return in range [1,100]
      */
-    public searchNews(text?: string, sourceCountries?: string, language?: string, minSentiment?: number, maxSentiment?: number, earliestPublishDate?: string, latestPublishDate?: string, newsSources?: string, authors?: string, entities?: string, locationFilter?: string, sort?: string, sortDirection?: string, offset?: number, number?: number, _options?: Configuration): Promise<SearchNews200Response> {
-        const result = this.api.searchNews(text, sourceCountries, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, entities, locationFilter, sort, sortDirection, offset, number, _options);
+    public searchNews(text?: string, sourceCountries?: string, language?: string, minSentiment?: number, maxSentiment?: number, earliestPublishDate?: string, latestPublishDate?: string, newsSources?: string, authors?: string, categories?: string, entities?: string, locationFilter?: string, sort?: string, sortDirection?: string, offset?: number, number?: number, _options?: Configuration): Promise<SearchNews200Response> {
+        const result = this.api.searchNews(text, sourceCountries, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, categories, entities, locationFilter, sort, sortDirection, offset, number, _options);
         return result.toPromise();
     }
 

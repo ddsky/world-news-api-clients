@@ -3,18 +3,20 @@
             [clojure.spec.alpha :as s]
             [spec-tools.core :as st]
             [orchestra.core :refer [defn-spec]]
-            [world-news-api.specs.top-news-200-response-top-news-inner-news-inner :refer :all]
             [world-news-api.specs.retrieve-news-articles-by-ids-200-response :refer :all]
-            [world-news-api.specs.extract-news-links-200-response :refer :all]
             [world-news-api.specs.retrieve-news-articles-by-ids-200-response-news-inner :refer :all]
+            [world-news-api.specs.top-news-200-response :refer :all]
+            [world-news-api.specs.search-news-200-response-news-inner :refer :all]
+            [world-news-api.specs.newspaper-front-pages-200-response-front-page :refer :all]
+            [world-news-api.specs.extract-news-200-response-videos-inner :refer :all]
+            [world-news-api.specs.newspaper-front-pages-200-response :refer :all]
+            [world-news-api.specs.top-news-200-response-top-news-inner-news-inner :refer :all]
+            [world-news-api.specs.extract-news-links-200-response :refer :all]
             [world-news-api.specs.top-news-200-response-top-news-inner :refer :all]
             [world-news-api.specs.extract-news-200-response :refer :all]
             [world-news-api.specs.search-news-200-response :refer :all]
-            [world-news-api.specs.top-news-200-response :refer :all]
             [world-news-api.specs.extract-news-200-response-images-inner :refer :all]
             [world-news-api.specs.get-geo-coordinates-200-response :refer :all]
-            [world-news-api.specs.search-news-200-response-news-inner :refer :all]
-            [world-news-api.specs.extract-news-200-response-videos-inner :refer :all]
             )
   (:import (java.io File)))
 
@@ -115,6 +117,31 @@
        res)))
 
 
+(defn-spec newspaper-front-pages-with-http-info any?
+  "Newspaper Front Pages
+  Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here's an example of some of today's newspapers:"
+  ([] (newspaper-front-pages-with-http-info nil))
+  ([{:keys [source-country source-name date]} (s/map-of keyword? any?)]
+   (call-api "/front-pages" :get
+             {:path-params   {}
+              :header-params {}
+              :query-params  {"source-country" source-country "source-name" source-name "date" date }
+              :form-params   {}
+              :content-types []
+              :accepts       ["application/json"]
+              :auth-names    ["apiKey" "headerApiKey"]})))
+
+(defn-spec newspaper-front-pages newspaper-front-pages-200-response-spec
+  "Newspaper Front Pages
+  Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here's an example of some of today's newspapers:"
+  ([] (newspaper-front-pages nil))
+  ([optional-params any?]
+   (let [res (:data (newspaper-front-pages-with-http-info optional-params))]
+     (if (:decode-models *api-context*)
+        (st/decode newspaper-front-pages-200-response-spec res st/string-transformer)
+        res))))
+
+
 (defn-spec retrieve-news-articles-by-ids-with-http-info any?
   "Retrieve News Articles by Ids
   Retrieve information about one or more news articles by their ids. The ids can be retrieved from the search news or top news APIs."
@@ -141,13 +168,13 @@
 
 (defn-spec search-news-with-http-info any?
   "Search News
-  Search and filter news by text, date, location, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language."
+  Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language."
   ([] (search-news-with-http-info nil))
-  ([{:keys [text source-countries language min-sentiment max-sentiment earliest-publish-date latest-publish-date news-sources authors entities location-filter sort sort-direction offset number]} (s/map-of keyword? any?)]
+  ([{:keys [text source-countries language min-sentiment max-sentiment earliest-publish-date latest-publish-date news-sources authors categories entities location-filter sort sort-direction offset number]} (s/map-of keyword? any?)]
    (call-api "/search-news" :get
              {:path-params   {}
               :header-params {}
-              :query-params  {"text" text "source-countries" source-countries "language" language "min-sentiment" min-sentiment "max-sentiment" max-sentiment "earliest-publish-date" earliest-publish-date "latest-publish-date" latest-publish-date "news-sources" news-sources "authors" authors "entities" entities "location-filter" location-filter "sort" sort "sort-direction" sort-direction "offset" offset "number" number }
+              :query-params  {"text" text "source-countries" source-countries "language" language "min-sentiment" min-sentiment "max-sentiment" max-sentiment "earliest-publish-date" earliest-publish-date "latest-publish-date" latest-publish-date "news-sources" news-sources "authors" authors "categories" categories "entities" entities "location-filter" location-filter "sort" sort "sort-direction" sort-direction "offset" offset "number" number }
               :form-params   {}
               :content-types []
               :accepts       ["application/json"]
@@ -155,7 +182,7 @@
 
 (defn-spec search-news search-news-200-response-spec
   "Search News
-  Search and filter news by text, date, location, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language."
+  Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language."
   ([] (search-news nil))
   ([optional-params any?]
    (let [res (:data (search-news-with-http-info optional-params))]

@@ -39,5 +39,8 @@ data class GetGeoCoordinates200Response (
     @Json(name = "city")
     val city: kotlin.String? = null
 
-)
+) {
+
+
+}
 

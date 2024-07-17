@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**extract_news_links**](NewsApi.md#extract_news_links) | **GET** /extract-news-links | Extract News Links
 [**get_geo_coordinates**](NewsApi.md#get_geo_coordinates) | **GET** /geo-coordinates | Get Geo Coordinates
 [**news_website_to_rss_feed**](NewsApi.md#news_website_to_rss_feed) | **GET** /feed.rss | News Website to RSS Feed
+[**newspaper_front_pages**](NewsApi.md#newspaper_front_pages) | **GET** /front-pages | Newspaper Front Pages
 [**retrieve_news_articles_by_ids**](NewsApi.md#retrieve_news_articles_by_ids) | **GET** /retrieve-news | Retrieve News Articles by Ids
 [**search_news**](NewsApi.md#search_news) | **GET** /search-news | Search News
 [**top_news**](NewsApi.md#top_news) | **GET** /top-news | Top News
@@ -137,6 +138,38 @@ Name | Type | Description  | Required | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 
+## newspaper_front_pages
+
+> models::NewspaperFrontPages200Response newspaper_front_pages(source_country, source_name, date)
+Newspaper Front Pages
+
+Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here's an example of some of today's newspapers:
+
+### Parameters
+
+
+Name | Type | Description  | Required | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+**source_country** | Option<**String**> | The ISO 3166 country code of the newspaper publication. |  |
+**source_name** | Option<**String**> | The identifier of the publication see attached list. |  |
+**date** | Option<**String**> | The date for which the front page should be retrieved. |  |
+
+### Return type
+
+[**models::NewspaperFrontPages200Response**](newspaperFrontPages_200_response.md)
+
+### Authorization
+
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
 ## retrieve_news_articles_by_ids
 
 > models::RetrieveNewsArticlesByIds200Response retrieve_news_articles_by_ids(ids)
@@ -169,10 +202,10 @@ Name | Type | Description  | Required | Notes
 
 ## search_news
 
-> models::SearchNews200Response search_news(text, source_countries, language, min_sentiment, max_sentiment, earliest_publish_date, latest_publish_date, news_sources, authors, entities, location_filter, sort, sort_direction, offset, number)
+> models::SearchNews200Response search_news(text, source_countries, language, min_sentiment, max_sentiment, earliest_publish_date, latest_publish_date, news_sources, authors, categories, entities, location_filter, sort, sort_direction, offset, number)
 Search News
 
-Search and filter news by text, date, location, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
+Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
 
 ### Parameters
 
@@ -188,9 +221,10 @@ Name | Type | Description  | Required | Notes
 **latest_publish_date** | Option<**String**> | The news must have been published before this date. |  |
 **news_sources** | Option<**String**> | A comma-separated list of news sources from which the news should originate. |  |
 **authors** | Option<**String**> | A comma-separated list of author names. Only news from any of the given authors will be returned. |  |
+**categories** | Option<**String**> | A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other. |  |
 **entities** | Option<**String**> | Filter news by entities (see semantic types). |  |
 **location_filter** | Option<**String**> | Filter news by radius around a certain location. Format is \"latitude,longitude,radius in kilometers\". Radius must be between 1 and 100 kilometers. |  |
-**sort** | Option<**String**> | The sorting criteria (publish-time or sentiment). |  |
+**sort** | Option<**String**> | The sorting criteria (publish-time). |  |
 **sort_direction** | Option<**String**> | Whether to sort ascending or descending (ASC or DESC). |  |
 **offset** | Option<**i32**> | The number of news to skip in range [0,10000] |  |
 **number** | Option<**i32**> | The number of news to return in range [1,100] |  |

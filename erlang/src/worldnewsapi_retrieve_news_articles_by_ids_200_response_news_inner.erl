@@ -8,13 +8,13 @@
     #{ 'summary' => binary(),
        'image' => binary(),
        'sentiment' => integer(),
-       'catgory' => binary(),
        'language' => binary(),
        'title' => binary(),
        'url' => binary(),
        'source_country' => binary(),
        'id' => integer(),
        'text' => binary(),
+       'category' => binary(),
        'publish_date' => binary(),
        'authors' => list()
      }.
@@ -22,26 +22,26 @@
 encode(#{ 'summary' := Summary,
           'image' := Image,
           'sentiment' := Sentiment,
-          'catgory' := Catgory,
           'language' := Language,
           'title' := Title,
           'url' := Url,
           'source_country' := SourceCountry,
           'id' := Id,
           'text' := Text,
+          'category' := Category,
           'publish_date' := PublishDate,
           'authors' := Authors
         }) ->
     #{ 'summary' => Summary,
        'image' => Image,
        'sentiment' => Sentiment,
-       'catgory' => Catgory,
        'language' => Language,
        'title' => Title,
        'url' => Url,
        'source_country' => SourceCountry,
        'id' => Id,
        'text' => Text,
+       'category' => Category,
        'publish_date' => PublishDate,
        'authors' => Authors
      }.

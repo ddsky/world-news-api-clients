@@ -13,6 +13,7 @@ Method | HTTP request | Description
 [**extractNewsLinks**](NewsApi.md#extractnewslinks) | **GET** /extract-news-links | Extract News Links
 [**getGeoCoordinates**](NewsApi.md#getgeocoordinates) | **GET** /geo-coordinates | Get Geo Coordinates
 [**newsWebsiteToRSSFeed**](NewsApi.md#newswebsitetorssfeed) | **GET** /feed.rss | News Website to RSS Feed
+[**newspaperFrontPages**](NewsApi.md#newspaperfrontpages) | **GET** /front-pages | Newspaper Front Pages
 [**retrieveNewsArticlesByIds**](NewsApi.md#retrievenewsarticlesbyids) | **GET** /retrieve-news | Retrieve News Articles by Ids
 [**searchNews**](NewsApi.md#searchnews) | **GET** /search-news | Search News
 [**topNews**](NewsApi.md#topnews) | **GET** /top-news | Top News
@@ -228,6 +229,61 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **newspaperFrontPages**
+> NewspaperFrontPages200Response newspaperFrontPages(sourceCountry, sourceName, date)
+
+Newspaper Front Pages
+
+Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here's an example of some of today's newspapers:
+
+### Example
+```dart
+import 'package:openapi/api.dart';
+// TODO Configure API key authorization: apiKey
+//defaultApiClient.getAuthentication<ApiKeyAuth>('apiKey').apiKey = 'YOUR_API_KEY';
+// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//defaultApiClient.getAuthentication<ApiKeyAuth>('apiKey').apiKeyPrefix = 'Bearer';
+// TODO Configure API key authorization: headerApiKey
+//defaultApiClient.getAuthentication<ApiKeyAuth>('headerApiKey').apiKey = 'YOUR_API_KEY';
+// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//defaultApiClient.getAuthentication<ApiKeyAuth>('headerApiKey').apiKeyPrefix = 'Bearer';
+
+final api_instance = NewsApi();
+final sourceCountry = au; // String | The ISO 3166 country code of the newspaper publication.
+final sourceName = herald-sun; // String | The identifier of the publication see attached list.
+final date = 2024-07-09; // String | The date for which the front page should be retrieved.
+
+try {
+    final result = api_instance.newspaperFrontPages(sourceCountry, sourceName, date);
+    print(result);
+} catch (e) {
+    print('Exception when calling NewsApi->newspaperFrontPages: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **sourceCountry** | **String**| The ISO 3166 country code of the newspaper publication. | [optional] 
+ **sourceName** | **String**| The identifier of the publication see attached list. | [optional] 
+ **date** | **String**| The date for which the front page should be retrieved. | [optional] 
+
+### Return type
+
+[**NewspaperFrontPages200Response**](NewspaperFrontPages200Response.md)
+
+### Authorization
+
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **retrieveNewsArticlesByIds**
 > RetrieveNewsArticlesByIds200Response retrieveNewsArticlesByIds(ids)
 
@@ -280,11 +336,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **searchNews**
-> SearchNews200Response searchNews(text, sourceCountries, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, entities, locationFilter, sort, sortDirection, offset, number)
+> SearchNews200Response searchNews(text, sourceCountries, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, categories, entities, locationFilter, sort, sortDirection, offset, number)
 
 Search News
 
-Search and filter news by text, date, location, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
+Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
 
 ### Example
 ```dart
@@ -308,15 +364,16 @@ final earliestPublishDate = 2022-04-22 16:12:35; // String | The news must have 
 final latestPublishDate = 2022-04-22 16:12:35; // String | The news must have been published before this date.
 final newsSources = https://www.bbc.co.uk; // String | A comma-separated list of news sources from which the news should originate.
 final authors = John Doe; // String | A comma-separated list of author names. Only news from any of the given authors will be returned.
+final categories = politics,sports; // String | A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other.
 final entities = ORG:Tesla; // String | Filter news by entities (see semantic types).
 final locationFilter = 51.050407, 13.737262, 20; // String | Filter news by radius around a certain location. Format is \"latitude,longitude,radius in kilometers\". Radius must be between 1 and 100 kilometers.
-final sort = publish-time; // String | The sorting criteria (publish-time or sentiment).
+final sort = publish-time; // String | The sorting criteria (publish-time).
 final sortDirection = ASC; // String | Whether to sort ascending or descending (ASC or DESC).
 final offset = 0; // int | The number of news to skip in range [0,10000]
 final number = 10; // int | The number of news to return in range [1,100]
 
 try {
-    final result = api_instance.searchNews(text, sourceCountries, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, entities, locationFilter, sort, sortDirection, offset, number);
+    final result = api_instance.searchNews(text, sourceCountries, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, categories, entities, locationFilter, sort, sortDirection, offset, number);
     print(result);
 } catch (e) {
     print('Exception when calling NewsApi->searchNews: $e\n');
@@ -336,9 +393,10 @@ Name | Type | Description  | Notes
  **latestPublishDate** | **String**| The news must have been published before this date. | [optional] 
  **newsSources** | **String**| A comma-separated list of news sources from which the news should originate. | [optional] 
  **authors** | **String**| A comma-separated list of author names. Only news from any of the given authors will be returned. | [optional] 
+ **categories** | **String**| A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other. | [optional] 
  **entities** | **String**| Filter news by entities (see semantic types). | [optional] 
  **locationFilter** | **String**| Filter news by radius around a certain location. Format is \"latitude,longitude,radius in kilometers\". Radius must be between 1 and 100 kilometers. | [optional] 
- **sort** | **String**| The sorting criteria (publish-time or sentiment). | [optional] 
+ **sort** | **String**| The sorting criteria (publish-time). | [optional] 
  **sortDirection** | **String**| Whether to sort ascending or descending (ASC or DESC). | [optional] 
  **offset** | **int**| The number of news to skip in range [0,10000] | [optional] 
  **number** | **int**| The number of news to return in range [1,100] | [optional] 

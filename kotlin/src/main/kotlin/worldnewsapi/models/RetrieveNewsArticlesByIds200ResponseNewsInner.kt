@@ -25,13 +25,13 @@ import com.squareup.moshi.JsonClass
  * @param summary 
  * @param image 
  * @param sentiment 
- * @param catgory 
  * @param language 
  * @param title 
  * @param url 
  * @param sourceCountry 
  * @param id 
  * @param text 
+ * @param category 
  * @param publishDate 
  * @param authors 
  */
@@ -47,9 +47,6 @@ data class RetrieveNewsArticlesByIds200ResponseNewsInner (
 
     @Json(name = "sentiment")
     val sentiment: java.math.BigDecimal? = null,
-
-    @Json(name = "catgory")
-    val catgory: kotlin.String? = null,
 
     @Json(name = "language")
     val language: kotlin.String? = null,
@@ -69,11 +66,17 @@ data class RetrieveNewsArticlesByIds200ResponseNewsInner (
     @Json(name = "text")
     val text: kotlin.String? = null,
 
+    @Json(name = "category")
+    val category: kotlin.String? = null,
+
     @Json(name = "publish_date")
     val publishDate: kotlin.String? = null,
 
     @Json(name = "authors")
     val authors: kotlin.collections.List<kotlin.String>? = null
 
-)
+) {
+
+
+}
 

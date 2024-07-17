@@ -8,6 +8,7 @@ All URIs are relative to *https://api.worldnewsapi.com*
 | [**extract_news_links**](NewsApi.md#extract_news_links) | **GET** /extract-news-links | Extract News Links |
 | [**get_geo_coordinates**](NewsApi.md#get_geo_coordinates) | **GET** /geo-coordinates | Get Geo Coordinates |
 | [**news_website_to_rss_feed**](NewsApi.md#news_website_to_rss_feed) | **GET** /feed.rss | News Website to RSS Feed |
+| [**newspaper_front_pages**](NewsApi.md#newspaper_front_pages) | **GET** /front-pages | Newspaper Front Pages |
 | [**retrieve_news_articles_by_ids**](NewsApi.md#retrieve_news_articles_by_ids) | **GET** /retrieve-news | Retrieve News Articles by Ids |
 | [**search_news**](NewsApi.md#search_news) | **GET** /search-news | Search News |
 | [**top_news**](NewsApi.md#top_news) | **GET** /top-news | Top News |
@@ -323,6 +324,88 @@ end
 - **Accept**: application/xml
 
 
+## newspaper_front_pages
+
+> <NewspaperFrontPages200Response> newspaper_front_pages(opts)
+
+Newspaper Front Pages
+
+Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here's an example of some of today's newspapers:
+
+### Examples
+
+```ruby
+require 'time'
+require 'openapi_client'
+# setup authorization
+OpenapiClient.configure do |config|
+  # Configure API key authorization: apiKey
+  config.api_key['apiKey'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['apiKey'] = 'Bearer'
+
+  # Configure API key authorization: headerApiKey
+  config.api_key['headerApiKey'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['headerApiKey'] = 'Bearer'
+end
+
+api_instance = OpenapiClient::NewsApi.new
+opts = {
+  source_country: 'au', # String | The ISO 3166 country code of the newspaper publication.
+  source_name: 'herald-sun', # String | The identifier of the publication see attached list.
+  date: '2024-07-09' # String | The date for which the front page should be retrieved.
+}
+
+begin
+  # Newspaper Front Pages
+  result = api_instance.newspaper_front_pages(opts)
+  p result
+rescue OpenapiClient::ApiError => e
+  puts "Error when calling NewsApi->newspaper_front_pages: #{e}"
+end
+```
+
+#### Using the newspaper_front_pages_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<NewspaperFrontPages200Response>, Integer, Hash)> newspaper_front_pages_with_http_info(opts)
+
+```ruby
+begin
+  # Newspaper Front Pages
+  data, status_code, headers = api_instance.newspaper_front_pages_with_http_info(opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <NewspaperFrontPages200Response>
+rescue OpenapiClient::ApiError => e
+  puts "Error when calling NewsApi->newspaper_front_pages_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **source_country** | **String** | The ISO 3166 country code of the newspaper publication. | [optional] |
+| **source_name** | **String** | The identifier of the publication see attached list. | [optional] |
+| **date** | **String** | The date for which the front page should be retrieved. | [optional] |
+
+### Return type
+
+[**NewspaperFrontPages200Response**](NewspaperFrontPages200Response.md)
+
+### Authorization
+
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## retrieve_news_articles_by_ids
 
 > <RetrieveNewsArticlesByIds200Response> retrieve_news_articles_by_ids(ids)
@@ -405,7 +488,7 @@ end
 
 Search News
 
-Search and filter news by text, date, location, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
+Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
 
 ### Examples
 
@@ -436,9 +519,10 @@ opts = {
   latest_publish_date: '2022-04-22 16:12:35', # String | The news must have been published before this date.
   news_sources: 'https://www.bbc.co.uk', # String | A comma-separated list of news sources from which the news should originate.
   authors: 'John Doe', # String | A comma-separated list of author names. Only news from any of the given authors will be returned.
+  categories: 'politics,sports', # String | A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other.
   entities: 'ORG:Tesla', # String | Filter news by entities (see semantic types).
   location_filter: '51.050407, 13.737262, 20', # String | Filter news by radius around a certain location. Format is \"latitude,longitude,radius in kilometers\". Radius must be between 1 and 100 kilometers.
-  sort: 'publish-time', # String | The sorting criteria (publish-time or sentiment).
+  sort: 'publish-time', # String | The sorting criteria (publish-time).
   sort_direction: 'ASC', # String | Whether to sort ascending or descending (ASC or DESC).
   offset: 0, # Integer | The number of news to skip in range [0,10000]
   number: 10 # Integer | The number of news to return in range [1,100]
@@ -484,9 +568,10 @@ end
 | **latest_publish_date** | **String** | The news must have been published before this date. | [optional] |
 | **news_sources** | **String** | A comma-separated list of news sources from which the news should originate. | [optional] |
 | **authors** | **String** | A comma-separated list of author names. Only news from any of the given authors will be returned. | [optional] |
+| **categories** | **String** | A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other. | [optional] |
 | **entities** | **String** | Filter news by entities (see semantic types). | [optional] |
 | **location_filter** | **String** | Filter news by radius around a certain location. Format is \&quot;latitude,longitude,radius in kilometers\&quot;. Radius must be between 1 and 100 kilometers. | [optional] |
-| **sort** | **String** | The sorting criteria (publish-time or sentiment). | [optional] |
+| **sort** | **String** | The sorting criteria (publish-time). | [optional] |
 | **sort_direction** | **String** | Whether to sort ascending or descending (ASC or DESC). | [optional] |
 | **offset** | **Integer** | The number of news to skip in range [0,10000] | [optional] |
 | **number** | **Integer** | The number of news to return in range [1,100] | [optional] |

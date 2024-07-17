@@ -7,13 +7,13 @@ Name | Type | Description | Notes
 **Summary** | Pointer to **NullableString** |  | [optional] 
 **Image** | Pointer to **NullableString** |  | [optional] 
 **Sentiment** | Pointer to **float32** |  | [optional] 
-**Catgory** | Pointer to **NullableString** |  | [optional] 
 **Language** | Pointer to **NullableString** |  | [optional] 
 **Title** | Pointer to **NullableString** |  | [optional] 
 **Url** | Pointer to **NullableString** |  | [optional] 
 **SourceCountry** | Pointer to **NullableString** |  | [optional] 
 **Id** | Pointer to **int32** |  | [optional] 
 **Text** | Pointer to **NullableString** |  | [optional] 
+**Category** | Pointer to **NullableString** |  | [optional] 
 **PublishDate** | Pointer to **NullableString** |  | [optional] 
 **Authors** | Pointer to **[]string** |  | [optional] 
 
@@ -131,41 +131,6 @@ SetSentiment sets Sentiment field to given value.
 
 HasSentiment returns a boolean if a field has been set.
 
-### GetCatgory
-
-`func (o *RetrieveNewsArticlesByIds200ResponseNewsInner) GetCatgory() string`
-
-GetCatgory returns the Catgory field if non-nil, zero value otherwise.
-
-### GetCatgoryOk
-
-`func (o *RetrieveNewsArticlesByIds200ResponseNewsInner) GetCatgoryOk() (*string, bool)`
-
-GetCatgoryOk returns a tuple with the Catgory field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCatgory
-
-`func (o *RetrieveNewsArticlesByIds200ResponseNewsInner) SetCatgory(v string)`
-
-SetCatgory sets Catgory field to given value.
-
-### HasCatgory
-
-`func (o *RetrieveNewsArticlesByIds200ResponseNewsInner) HasCatgory() bool`
-
-HasCatgory returns a boolean if a field has been set.
-
-### SetCatgoryNil
-
-`func (o *RetrieveNewsArticlesByIds200ResponseNewsInner) SetCatgoryNil(b bool)`
-
- SetCatgoryNil sets the value for Catgory to be an explicit nil
-
-### UnsetCatgory
-`func (o *RetrieveNewsArticlesByIds200ResponseNewsInner) UnsetCatgory()`
-
-UnsetCatgory ensures that no value is present for Catgory, not even an explicit nil
 ### GetLanguage
 
 `func (o *RetrieveNewsArticlesByIds200ResponseNewsInner) GetLanguage() string`
@@ -366,6 +331,41 @@ HasText returns a boolean if a field has been set.
 `func (o *RetrieveNewsArticlesByIds200ResponseNewsInner) UnsetText()`
 
 UnsetText ensures that no value is present for Text, not even an explicit nil
+### GetCategory
+
+`func (o *RetrieveNewsArticlesByIds200ResponseNewsInner) GetCategory() string`
+
+GetCategory returns the Category field if non-nil, zero value otherwise.
+
+### GetCategoryOk
+
+`func (o *RetrieveNewsArticlesByIds200ResponseNewsInner) GetCategoryOk() (*string, bool)`
+
+GetCategoryOk returns a tuple with the Category field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCategory
+
+`func (o *RetrieveNewsArticlesByIds200ResponseNewsInner) SetCategory(v string)`
+
+SetCategory sets Category field to given value.
+
+### HasCategory
+
+`func (o *RetrieveNewsArticlesByIds200ResponseNewsInner) HasCategory() bool`
+
+HasCategory returns a boolean if a field has been set.
+
+### SetCategoryNil
+
+`func (o *RetrieveNewsArticlesByIds200ResponseNewsInner) SetCategoryNil(b bool)`
+
+ SetCategoryNil sets the value for Category to be an explicit nil
+
+### UnsetCategory
+`func (o *RetrieveNewsArticlesByIds200ResponseNewsInner) UnsetCategory()`
+
+UnsetCategory ensures that no value is present for Category, not even an explicit nil
 ### GetPublishDate
 
 `func (o *RetrieveNewsArticlesByIds200ResponseNewsInner) GetPublishDate() string`

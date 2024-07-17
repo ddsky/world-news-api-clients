@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **SourceCountry** | Pointer to **NullableString** |  | [optional] 
 **Id** | Pointer to **int32** |  | [optional] 
 **Text** | Pointer to **NullableString** |  | [optional] 
+**Category** | Pointer to **NullableString** |  | [optional] 
 **PublishDate** | Pointer to **NullableString** |  | [optional] 
 **Authors** | Pointer to **[]string** |  | [optional] 
 
@@ -402,6 +403,41 @@ HasText returns a boolean if a field has been set.
 `func (o *SearchNews200ResponseNewsInner) UnsetText()`
 
 UnsetText ensures that no value is present for Text, not even an explicit nil
+### GetCategory
+
+`func (o *SearchNews200ResponseNewsInner) GetCategory() string`
+
+GetCategory returns the Category field if non-nil, zero value otherwise.
+
+### GetCategoryOk
+
+`func (o *SearchNews200ResponseNewsInner) GetCategoryOk() (*string, bool)`
+
+GetCategoryOk returns a tuple with the Category field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCategory
+
+`func (o *SearchNews200ResponseNewsInner) SetCategory(v string)`
+
+SetCategory sets Category field to given value.
+
+### HasCategory
+
+`func (o *SearchNews200ResponseNewsInner) HasCategory() bool`
+
+HasCategory returns a boolean if a field has been set.
+
+### SetCategoryNil
+
+`func (o *SearchNews200ResponseNewsInner) SetCategoryNil(b bool)`
+
+ SetCategoryNil sets the value for Category to be an explicit nil
+
+### UnsetCategory
+`func (o *SearchNews200ResponseNewsInner) UnsetCategory()`
+
+UnsetCategory ensures that no value is present for Category, not even an explicit nil
 ### GetPublishDate
 
 `func (o *SearchNews200ResponseNewsInner) GetPublishDate() string`

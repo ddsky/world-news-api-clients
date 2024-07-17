@@ -11,6 +11,7 @@ import {SecurityAuthentication} from '../auth/auth';
 import { ExtractNews200Response } from '../models/ExtractNews200Response';
 import { ExtractNewsLinks200Response } from '../models/ExtractNewsLinks200Response';
 import { GetGeoCoordinates200Response } from '../models/GetGeoCoordinates200Response';
+import { NewspaperFrontPages200Response } from '../models/NewspaperFrontPages200Response';
 import { RetrieveNewsArticlesByIds200Response } from '../models/RetrieveNewsArticlesByIds200Response';
 import { SearchNews200Response } from '../models/SearchNews200Response';
 import { TopNews200Response } from '../models/TopNews200Response';
@@ -245,6 +246,62 @@ export class NewsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here\'s an example of some of today\'s newspapers:
+     * Newspaper Front Pages
+     * @param sourceCountry The ISO 3166 country code of the newspaper publication.
+     * @param sourceName The identifier of the publication see attached list.
+     * @param date The date for which the front page should be retrieved.
+     */
+    public async newspaperFrontPages(sourceCountry?: string, sourceName?: string, date?: string, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+
+
+
+        // Path Params
+        const localVarPath = '/front-pages';
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+        // Query Params
+        if (sourceCountry !== undefined) {
+            requestContext.setQueryParam("source-country", ObjectSerializer.serialize(sourceCountry, "string", ""));
+        }
+
+        // Query Params
+        if (sourceName !== undefined) {
+            requestContext.setQueryParam("source-name", ObjectSerializer.serialize(sourceName, "string", ""));
+        }
+
+        // Query Params
+        if (date !== undefined) {
+            requestContext.setQueryParam("date", ObjectSerializer.serialize(date, "string", ""));
+        }
+
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["apiKey"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        // Apply auth methods
+        authMethod = _config.authMethods["headerApiKey"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
      * Retrieve information about one or more news articles by their ids. The ids can be retrieved from the search news or top news APIs.
      * Retrieve News Articles by Ids
      * @param ids A comma separated list of news ids.
@@ -292,7 +349,7 @@ export class NewsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Search and filter news by text, date, location, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
+     * Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
      * Search News
      * @param text The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford
      * @param sourceCountries A comma-separated list of ISO 3166 country codes from which the news should originate.
@@ -303,15 +360,17 @@ export class NewsApiRequestFactory extends BaseAPIRequestFactory {
      * @param latestPublishDate The news must have been published before this date.
      * @param newsSources A comma-separated list of news sources from which the news should originate.
      * @param authors A comma-separated list of author names. Only news from any of the given authors will be returned.
+     * @param categories A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other.
      * @param entities Filter news by entities (see semantic types).
      * @param locationFilter Filter news by radius around a certain location. Format is \&quot;latitude,longitude,radius in kilometers\&quot;. Radius must be between 1 and 100 kilometers.
-     * @param sort The sorting criteria (publish-time or sentiment).
+     * @param sort The sorting criteria (publish-time).
      * @param sortDirection Whether to sort ascending or descending (ASC or DESC).
      * @param offset The number of news to skip in range [0,10000]
      * @param number The number of news to return in range [1,100]
      */
-    public async searchNews(text?: string, sourceCountries?: string, language?: string, minSentiment?: number, maxSentiment?: number, earliestPublishDate?: string, latestPublishDate?: string, newsSources?: string, authors?: string, entities?: string, locationFilter?: string, sort?: string, sortDirection?: string, offset?: number, number?: number, _options?: Configuration): Promise<RequestContext> {
+    public async searchNews(text?: string, sourceCountries?: string, language?: string, minSentiment?: number, maxSentiment?: number, earliestPublishDate?: string, latestPublishDate?: string, newsSources?: string, authors?: string, categories?: string, entities?: string, locationFilter?: string, sort?: string, sortDirection?: string, offset?: number, number?: number, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
 
 
 
@@ -378,6 +437,11 @@ export class NewsApiRequestFactory extends BaseAPIRequestFactory {
         // Query Params
         if (authors !== undefined) {
             requestContext.setQueryParam("authors", ObjectSerializer.serialize(authors, "string", ""));
+        }
+
+        // Query Params
+        if (categories !== undefined) {
+            requestContext.setQueryParam("categories", ObjectSerializer.serialize(categories, "string", ""));
         }
 
         // Query Params
@@ -690,6 +754,53 @@ export class NewsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "any", ""
             ) as any;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+        }
+
+        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to newspaperFrontPages
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async newspaperFrontPagesWithHttpInfo(response: ResponseContext): Promise<HttpInfo<NewspaperFrontPages200Response >> {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: NewspaperFrontPages200Response = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "NewspaperFrontPages200Response", ""
+            ) as NewspaperFrontPages200Response;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Unauthorized", undefined, response.headers);
+        }
+        if (isCodeInRange("402", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Payment Required", undefined, response.headers);
+        }
+        if (isCodeInRange("403", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Forbidden", undefined, response.headers);
+        }
+        if (isCodeInRange("404", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Not Found", undefined, response.headers);
+        }
+        if (isCodeInRange("406", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Not Acceptable", undefined, response.headers);
+        }
+        if (isCodeInRange("429", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Too Many Requests", undefined, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: NewspaperFrontPages200Response = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "NewspaperFrontPages200Response", ""
+            ) as NewspaperFrontPages200Response;
             return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 

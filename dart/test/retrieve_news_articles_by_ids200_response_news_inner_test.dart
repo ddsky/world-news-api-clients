@@ -31,11 +31,6 @@ void main() {
       // TODO
     });
 
-    // String catgory
-    test('to test the property `catgory`', () async {
-      // TODO
-    });
-
     // String language
     test('to test the property `language`', () async {
       // TODO
@@ -63,6 +58,11 @@ void main() {
 
     // String text
     test('to test the property `text`', () async {
+      // TODO
+    });
+
+    // String category
+    test('to test the property `category`', () async {
       // TODO
     });
 

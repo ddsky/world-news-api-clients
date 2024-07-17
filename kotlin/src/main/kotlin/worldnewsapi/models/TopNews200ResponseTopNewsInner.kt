@@ -32,5 +32,8 @@ data class TopNews200ResponseTopNewsInner (
     @Json(name = "news")
     val news: kotlin.collections.List<TopNews200ResponseTopNewsInnerNewsInner>? = null
 
-)
+) {
+
+
+}
 

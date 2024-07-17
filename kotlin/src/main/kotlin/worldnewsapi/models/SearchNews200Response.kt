@@ -44,5 +44,8 @@ data class SearchNews200Response (
     @Json(name = "news")
     val news: kotlin.collections.List<SearchNews200ResponseNewsInner>? = null
 
-)
+) {
+
+
+}
 

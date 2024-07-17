@@ -33,6 +33,7 @@ import com.squareup.moshi.JsonClass
  * @param sourceCountry 
  * @param id 
  * @param text 
+ * @param category 
  * @param publishDate 
  * @param authors 
  */
@@ -73,11 +74,17 @@ data class SearchNews200ResponseNewsInner (
     @Json(name = "text")
     val text: kotlin.String? = null,
 
+    @Json(name = "category")
+    val category: kotlin.String? = null,
+
     @Json(name = "publish_date")
     val publishDate: kotlin.String? = null,
 
     @Json(name = "authors")
     val authors: kotlin.collections.List<kotlin.String>? = null
 
-)
+) {
+
+
+}
 

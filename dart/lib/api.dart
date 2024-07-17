@@ -35,6 +35,8 @@ part 'model/extract_news200_response_images_inner.dart';
 part 'model/extract_news200_response_videos_inner.dart';
 part 'model/extract_news_links200_response.dart';
 part 'model/get_geo_coordinates200_response.dart';
+part 'model/newspaper_front_pages200_response.dart';
+part 'model/newspaper_front_pages200_response_front_page.dart';
 part 'model/retrieve_news_articles_by_ids200_response.dart';
 part 'model/retrieve_news_articles_by_ids200_response_news_inner.dart';
 part 'model/search_news200_response.dart';

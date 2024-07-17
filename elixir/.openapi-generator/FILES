@@ -12,6 +12,8 @@ lib/world_news_api/model/extract_news_200_response_images_inner.ex
 lib/world_news_api/model/extract_news_200_response_videos_inner.ex
 lib/world_news_api/model/extract_news_links_200_response.ex
 lib/world_news_api/model/get_geo_coordinates_200_response.ex
+lib/world_news_api/model/newspaper_front_pages_200_response.ex
+lib/world_news_api/model/newspaper_front_pages_200_response_front_page.ex
 lib/world_news_api/model/retrieve_news_articles_by_ids_200_response.ex
 lib/world_news_api/model/retrieve_news_articles_by_ids_200_response_news_inner.ex
 lib/world_news_api/model/search_news_200_response.ex

@@ -8,6 +8,7 @@ All URIs are relative to *https://api.worldnewsapi.com*
 | [**ExtractNewsLinks**](NewsApi.md#extractnewslinks) | **GET** /extract-news-links | Extract News Links |
 | [**GetGeoCoordinates**](NewsApi.md#getgeocoordinates) | **GET** /geo-coordinates | Get Geo Coordinates |
 | [**NewsWebsiteToRSSFeed**](NewsApi.md#newswebsitetorssfeed) | **GET** /feed.rss | News Website to RSS Feed |
+| [**NewspaperFrontPages**](NewsApi.md#newspaperfrontpages) | **GET** /front-pages | Newspaper Front Pages |
 | [**RetrieveNewsArticlesByIds**](NewsApi.md#retrievenewsarticlesbyids) | **GET** /retrieve-news | Retrieve News Articles by Ids |
 | [**SearchNews**](NewsApi.md#searchnews) | **GET** /search-news | Search News |
 | [**TopNews**](NewsApi.md#topnews) | **GET** /top-news | Top News |
@@ -442,6 +443,116 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+<a id="newspaperfrontpages"></a>
+# **NewspaperFrontPages**
+> NewspaperFrontPages200Response NewspaperFrontPages (string? sourceCountry = null, string? sourceName = null, string? date = null)
+
+Newspaper Front Pages
+
+Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here's an example of some of today's newspapers:
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using worldnewsapi.Api;
+using worldnewsapi.Client;
+using worldnewsapi.Model;
+
+namespace Example
+{
+    public class NewspaperFrontPagesExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://api.worldnewsapi.com";
+            // Configure API key authorization: apiKey
+            config.AddApiKey("api-key", "YOUR_API_KEY");
+            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+            // config.AddApiKeyPrefix("api-key", "Bearer");
+            // Configure API key authorization: headerApiKey
+            config.AddApiKey("x-api-key", "YOUR_API_KEY");
+            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+            // config.AddApiKeyPrefix("x-api-key", "Bearer");
+
+            var apiInstance = new NewsApi(config);
+            var sourceCountry = au;  // string? | The ISO 3166 country code of the newspaper publication. (optional) 
+            var sourceName = herald-sun;  // string? | The identifier of the publication see attached list. (optional) 
+            var date = 2024-07-09;  // string? | The date for which the front page should be retrieved. (optional) 
+
+            try
+            {
+                // Newspaper Front Pages
+                NewspaperFrontPages200Response result = apiInstance.NewspaperFrontPages(sourceCountry, sourceName, date);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling NewsApi.NewspaperFrontPages: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the NewspaperFrontPagesWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Newspaper Front Pages
+    ApiResponse<NewspaperFrontPages200Response> response = apiInstance.NewspaperFrontPagesWithHttpInfo(sourceCountry, sourceName, date);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling NewsApi.NewspaperFrontPagesWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **sourceCountry** | **string?** | The ISO 3166 country code of the newspaper publication. | [optional]  |
+| **sourceName** | **string?** | The identifier of the publication see attached list. | [optional]  |
+| **date** | **string?** | The date for which the front page should be retrieved. | [optional]  |
+
+### Return type
+
+[**NewspaperFrontPages200Response**](NewspaperFrontPages200Response.md)
+
+### Authorization
+
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Success |  -  |
+| **401** | Unauthorized |  -  |
+| **402** | Payment Required |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not Found |  -  |
+| **406** | Not Acceptable |  -  |
+| **429** | Too Many Requests |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 <a id="retrievenewsarticlesbyids"></a>
 # **RetrieveNewsArticlesByIds**
 > RetrieveNewsArticlesByIds200Response RetrieveNewsArticlesByIds (string ids)
@@ -550,11 +661,11 @@ catch (ApiException e)
 
 <a id="searchnews"></a>
 # **SearchNews**
-> SearchNews200Response SearchNews (string? text = null, string? sourceCountries = null, string? language = null, double? minSentiment = null, double? maxSentiment = null, string? earliestPublishDate = null, string? latestPublishDate = null, string? newsSources = null, string? authors = null, string? entities = null, string? locationFilter = null, string? sort = null, string? sortDirection = null, int? offset = null, int? number = null)
+> SearchNews200Response SearchNews (string? text = null, string? sourceCountries = null, string? language = null, double? minSentiment = null, double? maxSentiment = null, string? earliestPublishDate = null, string? latestPublishDate = null, string? newsSources = null, string? authors = null, string? categories = null, string? entities = null, string? locationFilter = null, string? sort = null, string? sortDirection = null, int? offset = null, int? number = null)
 
 Search News
 
-Search and filter news by text, date, location, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
+Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
 
 ### Example
 ```csharp
@@ -591,9 +702,10 @@ namespace Example
             var latestPublishDate = 2022-04-22 16:12:35;  // string? | The news must have been published before this date. (optional) 
             var newsSources = https://www.bbc.co.uk;  // string? | A comma-separated list of news sources from which the news should originate. (optional) 
             var authors = John Doe;  // string? | A comma-separated list of author names. Only news from any of the given authors will be returned. (optional) 
+            var categories = politics,sports;  // string? | A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other. (optional) 
             var entities = ORG:Tesla;  // string? | Filter news by entities (see semantic types). (optional) 
             var locationFilter = 51.050407, 13.737262, 20;  // string? | Filter news by radius around a certain location. Format is \"latitude,longitude,radius in kilometers\". Radius must be between 1 and 100 kilometers. (optional) 
-            var sort = publish-time;  // string? | The sorting criteria (publish-time or sentiment). (optional) 
+            var sort = publish-time;  // string? | The sorting criteria (publish-time). (optional) 
             var sortDirection = ASC;  // string? | Whether to sort ascending or descending (ASC or DESC). (optional) 
             var offset = 0;  // int? | The number of news to skip in range [0,10000] (optional) 
             var number = 10;  // int? | The number of news to return in range [1,100] (optional) 
@@ -601,7 +713,7 @@ namespace Example
             try
             {
                 // Search News
-                SearchNews200Response result = apiInstance.SearchNews(text, sourceCountries, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, entities, locationFilter, sort, sortDirection, offset, number);
+                SearchNews200Response result = apiInstance.SearchNews(text, sourceCountries, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, categories, entities, locationFilter, sort, sortDirection, offset, number);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -622,7 +734,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Search News
-    ApiResponse<SearchNews200Response> response = apiInstance.SearchNewsWithHttpInfo(text, sourceCountries, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, entities, locationFilter, sort, sortDirection, offset, number);
+    ApiResponse<SearchNews200Response> response = apiInstance.SearchNewsWithHttpInfo(text, sourceCountries, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, categories, entities, locationFilter, sort, sortDirection, offset, number);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -648,9 +760,10 @@ catch (ApiException e)
 | **latestPublishDate** | **string?** | The news must have been published before this date. | [optional]  |
 | **newsSources** | **string?** | A comma-separated list of news sources from which the news should originate. | [optional]  |
 | **authors** | **string?** | A comma-separated list of author names. Only news from any of the given authors will be returned. | [optional]  |
+| **categories** | **string?** | A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other. | [optional]  |
 | **entities** | **string?** | Filter news by entities (see semantic types). | [optional]  |
 | **locationFilter** | **string?** | Filter news by radius around a certain location. Format is \&quot;latitude,longitude,radius in kilometers\&quot;. Radius must be between 1 and 100 kilometers. | [optional]  |
-| **sort** | **string?** | The sorting criteria (publish-time or sentiment). | [optional]  |
+| **sort** | **string?** | The sorting criteria (publish-time). | [optional]  |
 | **sortDirection** | **string?** | Whether to sort ascending or descending (ASC or DESC). | [optional]  |
 | **offset** | **int?** | The number of news to skip in range [0,10000] | [optional]  |
 | **number** | **int?** | The number of news to return in range [1,100] | [optional]  |

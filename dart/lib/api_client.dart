@@ -192,6 +192,10 @@ class ApiClient {
           return ExtractNewsLinks200Response.fromJson(value);
         case 'GetGeoCoordinates200Response':
           return GetGeoCoordinates200Response.fromJson(value);
+        case 'NewspaperFrontPages200Response':
+          return NewspaperFrontPages200Response.fromJson(value);
+        case 'NewspaperFrontPages200ResponseFrontPage':
+          return NewspaperFrontPages200ResponseFrontPage.fromJson(value);
         case 'RetrieveNewsArticlesByIds200Response':
           return RetrieveNewsArticlesByIds200Response.fromJson(value);
         case 'RetrieveNewsArticlesByIds200ResponseNewsInner':

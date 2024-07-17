@@ -2,15 +2,16 @@
 
 All URIs are relative to *https://api.worldnewsapi.com*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**extractNews**](NewsApi.md#extractNews) | **GET** /extract-news | Extract News
-[**extractNewsLinks**](NewsApi.md#extractNewsLinks) | **GET** /extract-news-links | Extract News Links
-[**getGeoCoordinates**](NewsApi.md#getGeoCoordinates) | **GET** /geo-coordinates | Get Geo Coordinates
-[**newsWebsiteToRSSFeed**](NewsApi.md#newsWebsiteToRSSFeed) | **GET** /feed.rss | News Website to RSS Feed
-[**retrieveNewsArticlesByIds**](NewsApi.md#retrieveNewsArticlesByIds) | **GET** /retrieve-news | Retrieve News Articles by Ids
-[**searchNews**](NewsApi.md#searchNews) | **GET** /search-news | Search News
-[**topNews**](NewsApi.md#topNews) | **GET** /top-news | Top News
+| Method | HTTP request | Description |
+| ------------- | ------------- | ------------- |
+| [**extractNews**](NewsApi.md#extractNews) | **GET** /extract-news | Extract News |
+| [**extractNewsLinks**](NewsApi.md#extractNewsLinks) | **GET** /extract-news-links | Extract News Links |
+| [**getGeoCoordinates**](NewsApi.md#getGeoCoordinates) | **GET** /geo-coordinates | Get Geo Coordinates |
+| [**newsWebsiteToRSSFeed**](NewsApi.md#newsWebsiteToRSSFeed) | **GET** /feed.rss | News Website to RSS Feed |
+| [**newspaperFrontPages**](NewsApi.md#newspaperFrontPages) | **GET** /front-pages | Newspaper Front Pages |
+| [**retrieveNewsArticlesByIds**](NewsApi.md#retrieveNewsArticlesByIds) | **GET** /retrieve-news | Retrieve News Articles by Ids |
+| [**searchNews**](NewsApi.md#searchNews) | **GET** /search-news | Search News |
+| [**topNews**](NewsApi.md#topNews) | **GET** /top-news | Top News |
 
 
 <a id="extractNews"></a>
@@ -43,11 +44,10 @@ try {
 ```
 
 ### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **url** | **kotlin.String**| The url of the news. |
- **analyze** | **kotlin.Boolean**| Whether to analyze the news (extract entities etc.) |
+| **url** | **kotlin.String**| The url of the news. | |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **analyze** | **kotlin.Boolean**| Whether to analyze the news (extract entities etc.) | |
 
 ### Return type
 
@@ -98,11 +98,10 @@ try {
 ```
 
 ### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **url** | **kotlin.String**| The url of the news. |
- **analyze** | **kotlin.Boolean**| Whether to analyze the news (extract entities etc.) |
+| **url** | **kotlin.String**| The url of the news. | |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **analyze** | **kotlin.Boolean**| Whether to analyze the news (extract entities etc.) | |
 
 ### Return type
 
@@ -152,10 +151,9 @@ try {
 ```
 
 ### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **location** | **kotlin.String**| The address or name of the location. |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **location** | **kotlin.String**| The address or name of the location. | |
 
 ### Return type
 
@@ -206,11 +204,10 @@ try {
 ```
 
 ### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **url** | **kotlin.String**| The url of the news. |
- **analyze** | **kotlin.Boolean**| Whether to analyze the news (extract entities etc.) |
+| **url** | **kotlin.String**| The url of the news. | |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **analyze** | **kotlin.Boolean**| Whether to analyze the news (extract entities etc.) | |
 
 ### Return type
 
@@ -230,6 +227,62 @@ Configure headerApiKey:
 
  - **Content-Type**: Not defined
  - **Accept**: Not defined
+
+<a id="newspaperFrontPages"></a>
+# **newspaperFrontPages**
+> NewspaperFrontPages200Response newspaperFrontPages(sourceCountry, sourceName, date)
+
+Newspaper Front Pages
+
+Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here&#39;s an example of some of today&#39;s newspapers:
+
+### Example
+```kotlin
+// Import classes:
+//import worldnewsapi.infrastructure.*
+//import worldnewsapi.models.*
+
+val apiInstance = NewsApi()
+val sourceCountry : kotlin.String = au // kotlin.String | The ISO 3166 country code of the newspaper publication.
+val sourceName : kotlin.String = herald-sun // kotlin.String | The identifier of the publication see attached list.
+val date : kotlin.String = 2024-07-09 // kotlin.String | The date for which the front page should be retrieved.
+try {
+    val result : NewspaperFrontPages200Response = apiInstance.newspaperFrontPages(sourceCountry, sourceName, date)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling NewsApi#newspaperFrontPages")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling NewsApi#newspaperFrontPages")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+| **sourceCountry** | **kotlin.String**| The ISO 3166 country code of the newspaper publication. | [optional] |
+| **sourceName** | **kotlin.String**| The identifier of the publication see attached list. | [optional] |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **date** | **kotlin.String**| The date for which the front page should be retrieved. | [optional] |
+
+### Return type
+
+[**NewspaperFrontPages200Response**](NewspaperFrontPages200Response.md)
+
+### Authorization
+
+
+Configure apiKey:
+    ApiClient.apiKey["api-key"] = ""
+    ApiClient.apiKeyPrefix["api-key"] = ""
+Configure headerApiKey:
+    ApiClient.apiKey["x-api-key"] = ""
+    ApiClient.apiKeyPrefix["x-api-key"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 <a id="retrieveNewsArticlesByIds"></a>
 # **retrieveNewsArticlesByIds**
@@ -260,10 +313,9 @@ try {
 ```
 
 ### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ids** | **kotlin.String**| A comma separated list of news ids. |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **ids** | **kotlin.String**| A comma separated list of news ids. | |
 
 ### Return type
 
@@ -286,11 +338,11 @@ Configure headerApiKey:
 
 <a id="searchNews"></a>
 # **searchNews**
-> SearchNews200Response searchNews(text, sourceCountries, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, entities, locationFilter, sort, sortDirection, offset, number)
+> SearchNews200Response searchNews(text, sourceCountries, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, categories, entities, locationFilter, sort, sortDirection, offset, number)
 
 Search News
 
-Search and filter news by text, date, location, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
+Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
 
 ### Example
 ```kotlin
@@ -308,14 +360,15 @@ val earliestPublishDate : kotlin.String = 2022-04-22 16:12:35 // kotlin.String |
 val latestPublishDate : kotlin.String = 2022-04-22 16:12:35 // kotlin.String | The news must have been published before this date.
 val newsSources : kotlin.String = https://www.bbc.co.uk // kotlin.String | A comma-separated list of news sources from which the news should originate.
 val authors : kotlin.String = John Doe // kotlin.String | A comma-separated list of author names. Only news from any of the given authors will be returned.
+val categories : kotlin.String = politics,sports // kotlin.String | A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other.
 val entities : kotlin.String = ORG:Tesla // kotlin.String | Filter news by entities (see semantic types).
 val locationFilter : kotlin.String = 51.050407, 13.737262, 20 // kotlin.String | Filter news by radius around a certain location. Format is \"latitude,longitude,radius in kilometers\". Radius must be between 1 and 100 kilometers.
-val sort : kotlin.String = publish-time // kotlin.String | The sorting criteria (publish-time or sentiment).
+val sort : kotlin.String = publish-time // kotlin.String | The sorting criteria (publish-time).
 val sortDirection : kotlin.String = ASC // kotlin.String | Whether to sort ascending or descending (ASC or DESC).
 val offset : kotlin.Int = 0 // kotlin.Int | The number of news to skip in range [0,10000]
 val number : kotlin.Int = 10 // kotlin.Int | The number of news to return in range [1,100]
 try {
-    val result : SearchNews200Response = apiInstance.searchNews(text, sourceCountries, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, entities, locationFilter, sort, sortDirection, offset, number)
+    val result : SearchNews200Response = apiInstance.searchNews(text, sourceCountries, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, categories, entities, locationFilter, sort, sortDirection, offset, number)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling NewsApi#searchNews")
@@ -327,24 +380,24 @@ try {
 ```
 
 ### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **text** | **kotlin.String**| The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford | [optional]
- **sourceCountries** | **kotlin.String**| A comma-separated list of ISO 3166 country codes from which the news should originate. | [optional]
- **language** | **kotlin.String**| The ISO 6391 language code of the news. | [optional]
- **minSentiment** | **kotlin.Double**| The minimal sentiment of the news in range [-1,1]. | [optional]
- **maxSentiment** | **kotlin.Double**| The maximal sentiment of the news in range [-1,1]. | [optional]
- **earliestPublishDate** | **kotlin.String**| The news must have been published after this date. | [optional]
- **latestPublishDate** | **kotlin.String**| The news must have been published before this date. | [optional]
- **newsSources** | **kotlin.String**| A comma-separated list of news sources from which the news should originate. | [optional]
- **authors** | **kotlin.String**| A comma-separated list of author names. Only news from any of the given authors will be returned. | [optional]
- **entities** | **kotlin.String**| Filter news by entities (see semantic types). | [optional]
- **locationFilter** | **kotlin.String**| Filter news by radius around a certain location. Format is \&quot;latitude,longitude,radius in kilometers\&quot;. Radius must be between 1 and 100 kilometers. | [optional]
- **sort** | **kotlin.String**| The sorting criteria (publish-time or sentiment). | [optional]
- **sortDirection** | **kotlin.String**| Whether to sort ascending or descending (ASC or DESC). | [optional]
- **offset** | **kotlin.Int**| The number of news to skip in range [0,10000] | [optional]
- **number** | **kotlin.Int**| The number of news to return in range [1,100] | [optional]
+| **text** | **kotlin.String**| The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford | [optional] |
+| **sourceCountries** | **kotlin.String**| A comma-separated list of ISO 3166 country codes from which the news should originate. | [optional] |
+| **language** | **kotlin.String**| The ISO 6391 language code of the news. | [optional] |
+| **minSentiment** | **kotlin.Double**| The minimal sentiment of the news in range [-1,1]. | [optional] |
+| **maxSentiment** | **kotlin.Double**| The maximal sentiment of the news in range [-1,1]. | [optional] |
+| **earliestPublishDate** | **kotlin.String**| The news must have been published after this date. | [optional] |
+| **latestPublishDate** | **kotlin.String**| The news must have been published before this date. | [optional] |
+| **newsSources** | **kotlin.String**| A comma-separated list of news sources from which the news should originate. | [optional] |
+| **authors** | **kotlin.String**| A comma-separated list of author names. Only news from any of the given authors will be returned. | [optional] |
+| **categories** | **kotlin.String**| A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other. | [optional] |
+| **entities** | **kotlin.String**| Filter news by entities (see semantic types). | [optional] |
+| **locationFilter** | **kotlin.String**| Filter news by radius around a certain location. Format is \&quot;latitude,longitude,radius in kilometers\&quot;. Radius must be between 1 and 100 kilometers. | [optional] |
+| **sort** | **kotlin.String**| The sorting criteria (publish-time). | [optional] |
+| **sortDirection** | **kotlin.String**| Whether to sort ascending or descending (ASC or DESC). | [optional] |
+| **offset** | **kotlin.Int**| The number of news to skip in range [0,10000] | [optional] |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **number** | **kotlin.Int**| The number of news to return in range [1,100] | [optional] |
 
 ### Return type
 
@@ -397,13 +450,12 @@ try {
 ```
 
 ### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **sourceCountry** | **kotlin.String**| The ISO 3166 country code of the country for which top news should be retrieved. |
- **language** | **kotlin.String**| The ISO 6391 language code of the top news. The language must be one spoken in the source-country. |
- **date** | **kotlin.String**| The date for which the top news should be retrieved. If no date is given, the current day is assumed. | [optional]
- **headlinesOnly** | **kotlin.Boolean**| Whether to only return basic information such as id, title, and url of the news. | [optional]
+| **sourceCountry** | **kotlin.String**| The ISO 3166 country code of the country for which top news should be retrieved. | |
+| **language** | **kotlin.String**| The ISO 6391 language code of the top news. The language must be one spoken in the source-country. | |
+| **date** | **kotlin.String**| The date for which the top news should be retrieved. If no date is given, the current day is assumed. | [optional] |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **headlinesOnly** | **kotlin.Boolean**| Whether to only return basic information such as id, title, and url of the news. | [optional] |
 
 ### Return type
 

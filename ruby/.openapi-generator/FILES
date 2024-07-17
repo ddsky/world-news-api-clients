@@ -13,6 +13,8 @@ docs/ExtractNews200ResponseVideosInner.md
 docs/ExtractNewsLinks200Response.md
 docs/GetGeoCoordinates200Response.md
 docs/NewsApi.md
+docs/NewspaperFrontPages200Response.md
+docs/NewspaperFrontPages200ResponseFrontPage.md
 docs/RetrieveNewsArticlesByIds200Response.md
 docs/RetrieveNewsArticlesByIds200ResponseNewsInner.md
 docs/SearchNews200Response.md
@@ -31,6 +33,8 @@ lib/openapi_client/models/extract_news200_response_images_inner.rb
 lib/openapi_client/models/extract_news200_response_videos_inner.rb
 lib/openapi_client/models/extract_news_links200_response.rb
 lib/openapi_client/models/get_geo_coordinates200_response.rb
+lib/openapi_client/models/newspaper_front_pages200_response.rb
+lib/openapi_client/models/newspaper_front_pages200_response_front_page.rb
 lib/openapi_client/models/retrieve_news_articles_by_ids200_response.rb
 lib/openapi_client/models/retrieve_news_articles_by_ids200_response_news_inner.rb
 lib/openapi_client/models/search_news200_response.rb
@@ -46,6 +50,8 @@ spec/models/extract_news200_response_spec.rb
 spec/models/extract_news200_response_videos_inner_spec.rb
 spec/models/extract_news_links200_response_spec.rb
 spec/models/get_geo_coordinates200_response_spec.rb
+spec/models/newspaper_front_pages200_response_front_page_spec.rb
+spec/models/newspaper_front_pages200_response_spec.rb
 spec/models/retrieve_news_articles_by_ids200_response_news_inner_spec.rb
 spec/models/retrieve_news_articles_by_ids200_response_spec.rb
 spec/models/search_news200_response_news_inner_spec.rb

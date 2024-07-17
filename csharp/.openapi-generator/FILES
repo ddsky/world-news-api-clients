@@ -9,6 +9,8 @@ docs/ExtractNews200ResponseVideosInner.md
 docs/ExtractNewsLinks200Response.md
 docs/GetGeoCoordinates200Response.md
 docs/NewsApi.md
+docs/NewspaperFrontPages200Response.md
+docs/NewspaperFrontPages200ResponseFrontPage.md
 docs/RetrieveNewsArticlesByIds200Response.md
 docs/RetrieveNewsArticlesByIds200ResponseNewsInner.md
 docs/SearchNews200Response.md
@@ -23,6 +25,8 @@ src/worldnewsapi.Test/Model/ExtractNews200ResponseTests.cs
 src/worldnewsapi.Test/Model/ExtractNews200ResponseVideosInnerTests.cs
 src/worldnewsapi.Test/Model/ExtractNewsLinks200ResponseTests.cs
 src/worldnewsapi.Test/Model/GetGeoCoordinates200ResponseTests.cs
+src/worldnewsapi.Test/Model/NewspaperFrontPages200ResponseFrontPageTests.cs
+src/worldnewsapi.Test/Model/NewspaperFrontPages200ResponseTests.cs
 src/worldnewsapi.Test/Model/RetrieveNewsArticlesByIds200ResponseNewsInnerTests.cs
 src/worldnewsapi.Test/Model/RetrieveNewsArticlesByIds200ResponseTests.cs
 src/worldnewsapi.Test/Model/SearchNews200ResponseNewsInnerTests.cs
@@ -54,6 +58,8 @@ src/worldnewsapi/Model/ExtractNews200ResponseImagesInner.cs
 src/worldnewsapi/Model/ExtractNews200ResponseVideosInner.cs
 src/worldnewsapi/Model/ExtractNewsLinks200Response.cs
 src/worldnewsapi/Model/GetGeoCoordinates200Response.cs
+src/worldnewsapi/Model/NewspaperFrontPages200Response.cs
+src/worldnewsapi/Model/NewspaperFrontPages200ResponseFrontPage.cs
 src/worldnewsapi/Model/RetrieveNewsArticlesByIds200Response.cs
 src/worldnewsapi/Model/RetrieveNewsArticlesByIds200ResponseNewsInner.cs
 src/worldnewsapi/Model/SearchNews200Response.cs

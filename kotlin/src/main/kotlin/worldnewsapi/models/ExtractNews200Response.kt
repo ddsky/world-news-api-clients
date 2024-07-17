@@ -73,5 +73,8 @@ data class ExtractNews200Response (
     @Json(name = "language")
     val language: kotlin.String? = null
 
-)
+) {
+
+
+}
 

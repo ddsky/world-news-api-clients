@@ -25,6 +25,8 @@ main =
       propMimeEq MimeJSON (Proxy :: Proxy ExtractNews200ResponseVideosInner)
       propMimeEq MimeJSON (Proxy :: Proxy ExtractNewsLinks200Response)
       propMimeEq MimeJSON (Proxy :: Proxy GetGeoCoordinates200Response)
+      propMimeEq MimeJSON (Proxy :: Proxy NewspaperFrontPages200Response)
+      propMimeEq MimeJSON (Proxy :: Proxy NewspaperFrontPages200ResponseFrontPage)
       propMimeEq MimeJSON (Proxy :: Proxy RetrieveNewsArticlesByIds200Response)
       propMimeEq MimeJSON (Proxy :: Proxy RetrieveNewsArticlesByIds200ResponseNewsInner)
       propMimeEq MimeJSON (Proxy :: Proxy SearchNews200Response)

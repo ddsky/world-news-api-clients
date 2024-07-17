@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**extractNewsLinks**](NewsApi.md#extractNewsLinks) | **GET** /extract-news-links | Extract News Links
 [**getGeoCoordinates**](NewsApi.md#getGeoCoordinates) | **GET** /geo-coordinates | Get Geo Coordinates
 [**newsWebsiteToRSSFeed**](NewsApi.md#newsWebsiteToRSSFeed) | **GET** /feed.rss | News Website to RSS Feed
+[**newspaperFrontPages**](NewsApi.md#newspaperFrontPages) | **GET** /front-pages | Newspaper Front Pages
 [**retrieveNewsArticlesByIds**](NewsApi.md#retrieveNewsArticlesByIds) | **GET** /retrieve-news | Retrieve News Articles by Ids
 [**searchNews**](NewsApi.md#searchNews) | **GET** /search-news | Search News
 [**topNews**](NewsApi.md#topNews) | **GET** /top-news | Top News
@@ -204,6 +205,56 @@ Name | Type | Description  | Notes
 - **Accept**: application/xml
 
 
+## newspaperFrontPages
+
+> NewspaperFrontPages200Response newspaperFrontPages(sourceCountry, sourceName, date)
+
+Newspaper Front Pages
+
+Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here&#39;s an example of some of today&#39;s newspapers:
+
+### Example
+
+```java
+// Import classes:
+//import com.worldnewsapi.NewsApi;
+
+NewsApi apiInstance = new NewsApi();
+String sourceCountry = au; // String | The ISO 3166 country code of the newspaper publication.
+String sourceName = herald-sun; // String | The identifier of the publication see attached list.
+String date = 2024-07-09; // String | The date for which the front page should be retrieved.
+try {
+    NewspaperFrontPages200Response result = apiInstance.newspaperFrontPages(sourceCountry, sourceName, date);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling NewsApi#newspaperFrontPages");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **sourceCountry** | **String**| The ISO 3166 country code of the newspaper publication. | [optional] [default to null]
+ **sourceName** | **String**| The identifier of the publication see attached list. | [optional] [default to null]
+ **date** | **String**| The date for which the front page should be retrieved. | [optional] [default to null]
+
+### Return type
+
+[**NewspaperFrontPages200Response**](NewspaperFrontPages200Response.md)
+
+### Authorization
+
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## retrieveNewsArticlesByIds
 
 > RetrieveNewsArticlesByIds200Response retrieveNewsArticlesByIds(ids)
@@ -252,11 +303,11 @@ Name | Type | Description  | Notes
 
 ## searchNews
 
-> SearchNews200Response searchNews(text, sourceCountries, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, entities, locationFilter, sort, sortDirection, offset, number)
+> SearchNews200Response searchNews(text, sourceCountries, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, categories, entities, locationFilter, sort, sortDirection, offset, number)
 
 Search News
 
-Search and filter news by text, date, location, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
+Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
 
 ### Example
 
@@ -274,14 +325,15 @@ String earliestPublishDate = 2022-04-22 16:12:35; // String | The news must have
 String latestPublishDate = 2022-04-22 16:12:35; // String | The news must have been published before this date.
 String newsSources = https://www.bbc.co.uk; // String | A comma-separated list of news sources from which the news should originate.
 String authors = John Doe; // String | A comma-separated list of author names. Only news from any of the given authors will be returned.
+String categories = politics,sports; // String | A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other.
 String entities = ORG:Tesla; // String | Filter news by entities (see semantic types).
 String locationFilter = 51.050407, 13.737262, 20; // String | Filter news by radius around a certain location. Format is \"latitude,longitude,radius in kilometers\". Radius must be between 1 and 100 kilometers.
-String sort = publish-time; // String | The sorting criteria (publish-time or sentiment).
+String sort = publish-time; // String | The sorting criteria (publish-time).
 String sortDirection = ASC; // String | Whether to sort ascending or descending (ASC or DESC).
 Integer offset = 0; // Integer | The number of news to skip in range [0,10000]
 Integer number = 10; // Integer | The number of news to return in range [1,100]
 try {
-    SearchNews200Response result = apiInstance.searchNews(text, sourceCountries, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, entities, locationFilter, sort, sortDirection, offset, number);
+    SearchNews200Response result = apiInstance.searchNews(text, sourceCountries, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, categories, entities, locationFilter, sort, sortDirection, offset, number);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling NewsApi#searchNews");
@@ -303,9 +355,10 @@ Name | Type | Description  | Notes
  **latestPublishDate** | **String**| The news must have been published before this date. | [optional] [default to null]
  **newsSources** | **String**| A comma-separated list of news sources from which the news should originate. | [optional] [default to null]
  **authors** | **String**| A comma-separated list of author names. Only news from any of the given authors will be returned. | [optional] [default to null]
+ **categories** | **String**| A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other. | [optional] [default to null]
  **entities** | **String**| Filter news by entities (see semantic types). | [optional] [default to null]
  **locationFilter** | **String**| Filter news by radius around a certain location. Format is \&quot;latitude,longitude,radius in kilometers\&quot;. Radius must be between 1 and 100 kilometers. | [optional] [default to null]
- **sort** | **String**| The sorting criteria (publish-time or sentiment). | [optional] [default to null]
+ **sort** | **String**| The sorting criteria (publish-time). | [optional] [default to null]
  **sortDirection** | **String**| Whether to sort ascending or descending (ASC or DESC). | [optional] [default to null]
  **offset** | **Integer**| The number of news to skip in range [0,10000] | [optional] [default to null]
  **number** | **Integer**| The number of news to return in range [1,100] | [optional] [default to null]

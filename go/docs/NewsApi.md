@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**ExtractNewsLinks**](NewsAPI.md#ExtractNewsLinks) | **Get** /extract-news-links | Extract News Links
 [**GetGeoCoordinates**](NewsAPI.md#GetGeoCoordinates) | **Get** /geo-coordinates | Get Geo Coordinates
 [**NewsWebsiteToRSSFeed**](NewsAPI.md#NewsWebsiteToRSSFeed) | **Get** /feed.rss | News Website to RSS Feed
+[**NewspaperFrontPages**](NewsAPI.md#NewspaperFrontPages) | **Get** /front-pages | Newspaper Front Pages
 [**RetrieveNewsArticlesByIds**](NewsAPI.md#RetrieveNewsArticlesByIds) | **Get** /retrieve-news | Retrieve News Articles by Ids
 [**SearchNews**](NewsAPI.md#SearchNews) | **Get** /search-news | Search News
 [**TopNews**](NewsAPI.md#TopNews) | **Get** /top-news | Top News
@@ -284,6 +285,76 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## NewspaperFrontPages
+
+> NewspaperFrontPages200Response NewspaperFrontPages(ctx).SourceCountry(sourceCountry).SourceName(sourceName).Date(date).Execute()
+
+Newspaper Front Pages
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/ddsky/world-news-api-clients/tree/main/go/"
+)
+
+func main() {
+	sourceCountry := "au" // string | The ISO 3166 country code of the newspaper publication. (optional)
+	sourceName := "herald-sun" // string | The identifier of the publication see attached list. (optional)
+	date := "2024-07-09" // string | The date for which the front page should be retrieved. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.NewsAPI.NewspaperFrontPages(context.Background()).SourceCountry(sourceCountry).SourceName(sourceName).Date(date).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `NewsAPI.NewspaperFrontPages``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `NewspaperFrontPages`: NewspaperFrontPages200Response
+	fmt.Fprintf(os.Stdout, "Response from `NewsAPI.NewspaperFrontPages`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiNewspaperFrontPagesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **sourceCountry** | **string** | The ISO 3166 country code of the newspaper publication. | 
+ **sourceName** | **string** | The identifier of the publication see attached list. | 
+ **date** | **string** | The date for which the front page should be retrieved. | 
+
+### Return type
+
+[**NewspaperFrontPages200Response**](NewspaperFrontPages200Response.md)
+
+### Authorization
+
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## RetrieveNewsArticlesByIds
 
 > RetrieveNewsArticlesByIds200Response RetrieveNewsArticlesByIds(ctx).Ids(ids).Execute()
@@ -352,7 +423,7 @@ Name | Type | Description  | Notes
 
 ## SearchNews
 
-> SearchNews200Response SearchNews(ctx).Text(text).SourceCountries(sourceCountries).Language(language).MinSentiment(minSentiment).MaxSentiment(maxSentiment).EarliestPublishDate(earliestPublishDate).LatestPublishDate(latestPublishDate).NewsSources(newsSources).Authors(authors).Entities(entities).LocationFilter(locationFilter).Sort(sort).SortDirection(sortDirection).Offset(offset).Number(number).Execute()
+> SearchNews200Response SearchNews(ctx).Text(text).SourceCountries(sourceCountries).Language(language).MinSentiment(minSentiment).MaxSentiment(maxSentiment).EarliestPublishDate(earliestPublishDate).LatestPublishDate(latestPublishDate).NewsSources(newsSources).Authors(authors).Categories(categories).Entities(entities).LocationFilter(locationFilter).Sort(sort).SortDirection(sortDirection).Offset(offset).Number(number).Execute()
 
 Search News
 
@@ -380,16 +451,17 @@ func main() {
 	latestPublishDate := "2022-04-22 16:12:35" // string | The news must have been published before this date. (optional)
 	newsSources := "https://www.bbc.co.uk" // string | A comma-separated list of news sources from which the news should originate. (optional)
 	authors := "John Doe" // string | A comma-separated list of author names. Only news from any of the given authors will be returned. (optional)
+	categories := "politics,sports" // string | A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other. (optional)
 	entities := "ORG:Tesla" // string | Filter news by entities (see semantic types). (optional)
 	locationFilter := "51.050407, 13.737262, 20" // string | Filter news by radius around a certain location. Format is \"latitude,longitude,radius in kilometers\". Radius must be between 1 and 100 kilometers. (optional)
-	sort := "publish-time" // string | The sorting criteria (publish-time or sentiment). (optional)
+	sort := "publish-time" // string | The sorting criteria (publish-time). (optional)
 	sortDirection := "ASC" // string | Whether to sort ascending or descending (ASC or DESC). (optional)
 	offset := int32(0) // int32 | The number of news to skip in range [0,10000] (optional)
 	number := int32(10) // int32 | The number of news to return in range [1,100] (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NewsAPI.SearchNews(context.Background()).Text(text).SourceCountries(sourceCountries).Language(language).MinSentiment(minSentiment).MaxSentiment(maxSentiment).EarliestPublishDate(earliestPublishDate).LatestPublishDate(latestPublishDate).NewsSources(newsSources).Authors(authors).Entities(entities).LocationFilter(locationFilter).Sort(sort).SortDirection(sortDirection).Offset(offset).Number(number).Execute()
+	resp, r, err := apiClient.NewsAPI.SearchNews(context.Background()).Text(text).SourceCountries(sourceCountries).Language(language).MinSentiment(minSentiment).MaxSentiment(maxSentiment).EarliestPublishDate(earliestPublishDate).LatestPublishDate(latestPublishDate).NewsSources(newsSources).Authors(authors).Categories(categories).Entities(entities).LocationFilter(locationFilter).Sort(sort).SortDirection(sortDirection).Offset(offset).Number(number).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NewsAPI.SearchNews``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -419,9 +491,10 @@ Name | Type | Description  | Notes
  **latestPublishDate** | **string** | The news must have been published before this date. | 
  **newsSources** | **string** | A comma-separated list of news sources from which the news should originate. | 
  **authors** | **string** | A comma-separated list of author names. Only news from any of the given authors will be returned. | 
+ **categories** | **string** | A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other. | 
  **entities** | **string** | Filter news by entities (see semantic types). | 
  **locationFilter** | **string** | Filter news by radius around a certain location. Format is \&quot;latitude,longitude,radius in kilometers\&quot;. Radius must be between 1 and 100 kilometers. | 
- **sort** | **string** | The sorting criteria (publish-time or sentiment). | 
+ **sort** | **string** | The sorting criteria (publish-time). | 
  **sortDirection** | **string** | Whether to sort ascending or descending (ASC or DESC). | 
  **offset** | **int32** | The number of news to skip in range [0,10000] | 
  **number** | **int32** | The number of news to return in range [1,100] | 

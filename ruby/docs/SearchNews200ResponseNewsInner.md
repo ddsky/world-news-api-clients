@@ -15,6 +15,7 @@
 | **source_country** | **String** |  | [optional] |
 | **id** | **Integer** |  | [optional] |
 | **text** | **String** |  | [optional] |
+| **category** | **String** |  | [optional] |
 | **publish_date** | **String** |  | [optional] |
 | **authors** | **Array&lt;String&gt;** |  | [optional] |
 
@@ -35,6 +36,7 @@ instance = OpenapiClient::SearchNews200ResponseNewsInner.new(
   source_country: null,
   id: null,
   text: null,
+  category: null,
   publish_date: null,
   authors: null
 )

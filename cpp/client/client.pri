@@ -7,6 +7,8 @@ HEADERS += \
     $${PWD}/OAIExtractNews_200_response_images_inner.h \
     $${PWD}/OAIExtractNews_200_response_videos_inner.h \
     $${PWD}/OAIGetGeoCoordinates_200_response.h \
+    $${PWD}/OAINewspaperFrontPages_200_response.h \
+    $${PWD}/OAINewspaperFrontPages_200_response_front_page.h \
     $${PWD}/OAIRetrieveNewsArticlesByIds_200_response.h \
     $${PWD}/OAIRetrieveNewsArticlesByIds_200_response_news_inner.h \
     $${PWD}/OAISearchNews_200_response.h \
@@ -33,6 +35,8 @@ SOURCES += \
     $${PWD}/OAIExtractNews_200_response_images_inner.cpp \
     $${PWD}/OAIExtractNews_200_response_videos_inner.cpp \
     $${PWD}/OAIGetGeoCoordinates_200_response.cpp \
+    $${PWD}/OAINewspaperFrontPages_200_response.cpp \
+    $${PWD}/OAINewspaperFrontPages_200_response_front_page.cpp \
     $${PWD}/OAIRetrieveNewsArticlesByIds_200_response.cpp \
     $${PWD}/OAIRetrieveNewsArticlesByIds_200_response_news_inner.cpp \
     $${PWD}/OAISearchNews_200_response.cpp \

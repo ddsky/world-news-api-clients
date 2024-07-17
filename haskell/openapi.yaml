@@ -6,7 +6,7 @@ info:
   description: The world's news wrapped into a single API.
   termsOfService: https://worldnewsapi.com/terms
   title: World News API
-  version: 1.2.0
+  version: 1.3.0
 servers:
 - url: https://api.worldnewsapi.com
 security:
@@ -16,8 +16,8 @@ paths:
   /search-news:
     get:
       deprecated: false
-      description: "Search and filter news by text, date, location, language, and\
-        \ more. The API returns a list of news articles matching the given criteria.\
+      description: "Search and filter news by text, date, location, category, language,\
+        \ and more. The API returns a list of news articles matching the given criteria.\
         \ You can set as many filtering parameters as you like, but you have to set\
         \ at least one, e.g. text or language."
       externalDocs:
@@ -131,6 +131,20 @@ paths:
           pattern: "."
           type: string
         style: form
+      - description: "A comma-separated list of categories. Only news from any of\
+          \ the given categories will be returned. Possible categories are politics,\
+          \ sports, business, technology, entertainment, health, science, lifestyle,\
+          \ travel, culture, education, environment, other."
+        explode: false
+        in: query
+        name: categories
+        required: false
+        schema:
+          example: "politics,sports"
+          maxLength: 300
+          pattern: "."
+          type: string
+        style: form
       - description: Filter news by entities (see semantic types).
         explode: false
         in: query
@@ -155,7 +169,7 @@ paths:
           pattern: "."
           type: string
         style: form
-      - description: The sorting criteria (publish-time or sentiment).
+      - description: The sorting criteria (publish-time).
         explode: false
         in: query
         name: sort
@@ -290,6 +304,7 @@ paths:
                         \ Some NYC public school alerts didn’t go out until an hour\
                         \ and a half after the shock — and were resent Saturday morning,\
                         \ telling parents that dismissal would proceed as usual."
+                      category: environment
                       publish_date: 2024-04-06 22:44:18
                       authors:
                       - Deirdre Bardolf
@@ -516,6 +531,81 @@ paths:
       summary: Top News
       tags:
       - News
+  /front-pages:
+    get:
+      deprecated: false
+      description: 'Get the front pages of newspapers from around the world. The API
+        provides images of the front pages of newspapers from different countries.
+        Here''s an example of some of today''s newspapers:'
+      externalDocs:
+        description: Read entire docs
+        url: https://worldnewsapi.com/docs/newspaper-front-pages/
+      operationId: newspaperFrontPages
+      parameters:
+      - description: The ISO 3166 country code of the newspaper publication.
+        explode: false
+        in: query
+        name: source-country
+        required: false
+        schema:
+          example: au
+          maxLength: 2
+          pattern: "."
+          type: string
+        style: form
+      - description: The identifier of the publication see attached list.
+        explode: false
+        in: query
+        name: source-name
+        required: false
+        schema:
+          example: herald-sun
+          maxLength: 100
+          pattern: "."
+          type: string
+        style: form
+      - description: The date for which the front page should be retrieved.
+        explode: false
+        in: query
+        name: date
+        required: false
+        schema:
+          example: 2024-07-09
+          maxLength: 10
+          pattern: "."
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Response:
+                  value:
+                    front_page:
+                      name: Herald Sun
+                      date: 2024-07-09
+                      country: au
+                      image: https://img.worldnewsapi.com/front-pages/herald-sun-2024-07-09-ota3mg51.jpg
+                      language: en
+              schema:
+                $ref: '#/components/schemas/newspaperFrontPages_200_response'
+          description: Success
+        "401":
+          description: Unauthorized
+        "402":
+          description: Payment Required
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "406":
+          description: Not Acceptable
+        "429":
+          description: Too Many Requests
+      summary: Newspaper Front Pages
+      tags:
+      - News
   /retrieve-news:
     get:
       deprecated: false
@@ -548,7 +638,6 @@ paths:
                     - summary: '...'
                       image: https://www.amnesty.org/en/wp-content/uploads/2021/06/272748-1024x433.jpg
                       sentiment: -0.176
-                      catgory: politics
                       language: en
                       title: "While China and the US squabble, the world’s debt and\
                         \ climate crises worsen - Amnesty International"
@@ -556,6 +645,7 @@ paths:
                       source_country: mx
                       id: 2352
                       text: '...'
+                      category: politics
                       publish_date: 2020-09-11 18:05:26
                       authors:
                       - Amnesty International
@@ -563,7 +653,6 @@ paths:
                     - summary: '...'
                       image: https://www.amnesty.org/en/wp-content/uploads/2021/06/264281-1024x433.jpg
                       sentiment: -0.449
-                      catgory: politics
                       language: en
                       title: Sexual violence against Hong Kong protesters – what’s
                         going on? - Amnesty International
@@ -571,6 +660,7 @@ paths:
                       source_country: mx
                       id: 2354
                       text: '...'
+                      category: politics
                       publish_date: 2019-12-20 11:14:17
                       authors:
                       - Amnesty International
@@ -929,6 +1019,7 @@ components:
         source_country: source_country
         id: 5
         text: text
+        category: category
         publish_date: publish_date
         authors:
         - authors
@@ -965,6 +1056,9 @@ components:
         text:
           nullable: true
           type: string
+        category:
+          nullable: true
+          type: string
         publish_date:
           nullable: true
           type: string
@@ -988,6 +1082,7 @@ components:
           source_country: source_country
           id: 5
           text: text
+          category: category
           publish_date: publish_date
           authors:
           - authors
@@ -1003,6 +1098,7 @@ components:
           source_country: source_country
           id: 5
           text: text
+          category: category
           publish_date: publish_date
           authors:
           - authors
@@ -1159,17 +1255,53 @@ components:
           nullable: true
           type: string
       type: object
+    newspaperFrontPages_200_response_front_page:
+      example:
+        date: date
+        country: country
+        image: image
+        name: name
+        language: language
+      properties:
+        name:
+          nullable: true
+          type: string
+        date:
+          nullable: true
+          type: string
+        country:
+          nullable: true
+          type: string
+        image:
+          nullable: true
+          type: string
+        language:
+          nullable: true
+          type: string
+      type: object
+    newspaperFrontPages_200_response:
+      example:
+        front_page:
+          date: date
+          country: country
+          image: image
+          name: name
+          language: language
+      properties:
+        front_page:
+          $ref: '#/components/schemas/newspaperFrontPages_200_response_front_page'
+      type: object
     retrieveNewsArticlesByIds_200_response_news_inner:
       example:
         summary: summary
         image: image
         sentiment: 0.8008281904610115
         source_country: source_country
-        catgory: catgory
         language: language
         id: 6
         text: text
         title: title
+        category: category
         publish_date: publish_date
         url: url
         authors:
@@ -1184,9 +1316,6 @@ components:
           type: string
         sentiment:
           type: number
-        catgory:
-          nullable: true
-          type: string
         language:
           nullable: true
           type: string
@@ -1202,6 +1331,9 @@ components:
         id:
           type: integer
         text:
+          nullable: true
+          type: string
+        category:
           nullable: true
           type: string
         publish_date:
@@ -1220,11 +1352,11 @@ components:
           image: image
           sentiment: 0.8008281904610115
           source_country: source_country
-          catgory: catgory
           language: language
           id: 6
           text: text
           title: title
+          category: category
           publish_date: publish_date
           url: url
           authors:
@@ -1234,11 +1366,11 @@ components:
           image: image
           sentiment: 0.8008281904610115
           source_country: source_country
-          catgory: catgory
           language: language
           id: 6
           text: text
           title: title
+          category: category
           publish_date: publish_date
           url: url
           authors:

@@ -91,6 +91,12 @@ class SearchNews200ResponseNewsInnerTest : ShouldSpec() {
             //modelInstance.text shouldBe ("TODO")
         }
 
+        // to test the property `category`
+        should("test category") {
+            // uncomment below to test the property
+            //modelInstance.category shouldBe ("TODO")
+        }
+
         // to test the property `publishDate`
         should("test publishDate") {
             // uncomment below to test the property

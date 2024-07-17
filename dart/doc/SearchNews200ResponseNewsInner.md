@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **sourceCountry** | **String** |  | [optional] 
 **id** | **int** |  | [optional] 
 **text** | **String** |  | [optional] 
+**category** | **String** |  | [optional] 
 **publishDate** | **String** |  | [optional] 
 **authors** | **List<String>** |  | [optional] [default to const []]
 

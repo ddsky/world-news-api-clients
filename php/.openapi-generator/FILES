@@ -10,6 +10,8 @@ docs/Model/ExtractNews200ResponseImagesInner.md
 docs/Model/ExtractNews200ResponseVideosInner.md
 docs/Model/ExtractNewsLinks200Response.md
 docs/Model/GetGeoCoordinates200Response.md
+docs/Model/NewspaperFrontPages200Response.md
+docs/Model/NewspaperFrontPages200ResponseFrontPage.md
 docs/Model/RetrieveNewsArticlesByIds200Response.md
 docs/Model/RetrieveNewsArticlesByIds200ResponseNewsInner.md
 docs/Model/SearchNews200Response.md
@@ -28,6 +30,8 @@ lib/Model/ExtractNews200ResponseVideosInner.php
 lib/Model/ExtractNewsLinks200Response.php
 lib/Model/GetGeoCoordinates200Response.php
 lib/Model/ModelInterface.php
+lib/Model/NewspaperFrontPages200Response.php
+lib/Model/NewspaperFrontPages200ResponseFrontPage.php
 lib/Model/RetrieveNewsArticlesByIds200Response.php
 lib/Model/RetrieveNewsArticlesByIds200ResponseNewsInner.php
 lib/Model/SearchNews200Response.php
@@ -43,6 +47,8 @@ test/Model/ExtractNews200ResponseTest.php
 test/Model/ExtractNews200ResponseVideosInnerTest.php
 test/Model/ExtractNewsLinks200ResponseTest.php
 test/Model/GetGeoCoordinates200ResponseTest.php
+test/Model/NewspaperFrontPages200ResponseFrontPageTest.php
+test/Model/NewspaperFrontPages200ResponseTest.php
 test/Model/RetrieveNewsArticlesByIds200ResponseNewsInnerTest.php
 test/Model/RetrieveNewsArticlesByIds200ResponseTest.php
 test/Model/SearchNews200ResponseNewsInnerTest.php

@@ -21,6 +21,10 @@ client/OAIHttpRequest.cpp
 client/OAIHttpRequest.h
 client/OAINewsApi.cpp
 client/OAINewsApi.h
+client/OAINewspaperFrontPages_200_response.cpp
+client/OAINewspaperFrontPages_200_response.h
+client/OAINewspaperFrontPages_200_response_front_page.cpp
+client/OAINewspaperFrontPages_200_response_front_page.h
 client/OAIOauth.cpp
 client/OAIOauth.h
 client/OAIObject.h

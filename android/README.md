@@ -28,7 +28,7 @@ Add this dependency to your project's POM:
 <dependency>
     <groupId>com.worldnewsapi</groupId>
     <artifactId>android-client</artifactId>
-    <version>1.2.0</version>
+    <version>1.3.0</version>
     <scope>compile</scope>
 </dependency>
 ```
@@ -38,7 +38,7 @@ Add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-compile "com.worldnewsapi:android-client:1.2.0"
+compile "com.worldnewsapi:android-client:1.3.0"
 ```
 
 ### Others
@@ -49,7 +49,7 @@ At first generate the JAR by executing:
 
 Then manually install the following JARs:
 
-- target/android-client-1.2.0.jar
+- target/android-client-1.3.0.jar
 - target/lib/*.jar
 
 ## Getting Started
@@ -88,6 +88,7 @@ Class | Method | HTTP request | Description
 *NewsApi* | [**extractNewsLinks**](docs/NewsApi.md#extractNewsLinks) | **GET** /extract-news-links | Extract News Links
 *NewsApi* | [**getGeoCoordinates**](docs/NewsApi.md#getGeoCoordinates) | **GET** /geo-coordinates | Get Geo Coordinates
 *NewsApi* | [**newsWebsiteToRSSFeed**](docs/NewsApi.md#newsWebsiteToRSSFeed) | **GET** /feed.rss | News Website to RSS Feed
+*NewsApi* | [**newspaperFrontPages**](docs/NewsApi.md#newspaperFrontPages) | **GET** /front-pages | Newspaper Front Pages
 *NewsApi* | [**retrieveNewsArticlesByIds**](docs/NewsApi.md#retrieveNewsArticlesByIds) | **GET** /retrieve-news | Retrieve News Articles by Ids
 *NewsApi* | [**searchNews**](docs/NewsApi.md#searchNews) | **GET** /search-news | Search News
 *NewsApi* | [**topNews**](docs/NewsApi.md#topNews) | **GET** /top-news | Top News
@@ -100,6 +101,8 @@ Class | Method | HTTP request | Description
  - [ExtractNews200ResponseVideosInner](docs/ExtractNews200ResponseVideosInner.md)
  - [ExtractNewsLinks200Response](docs/ExtractNewsLinks200Response.md)
  - [GetGeoCoordinates200Response](docs/GetGeoCoordinates200Response.md)
+ - [NewspaperFrontPages200Response](docs/NewspaperFrontPages200Response.md)
+ - [NewspaperFrontPages200ResponseFrontPage](docs/NewspaperFrontPages200ResponseFrontPage.md)
  - [RetrieveNewsArticlesByIds200Response](docs/RetrieveNewsArticlesByIds200Response.md)
  - [RetrieveNewsArticlesByIds200ResponseNewsInner](docs/RetrieveNewsArticlesByIds200ResponseNewsInner.md)
  - [SearchNews200Response](docs/SearchNews200Response.md)

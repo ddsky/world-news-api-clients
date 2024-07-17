@@ -43,12 +43,6 @@ class RetrieveNewsArticlesByIds200ResponseNewsInnerTest : ShouldSpec() {
             //modelInstance.sentiment shouldBe ("TODO")
         }
 
-        // to test the property `catgory`
-        should("test catgory") {
-            // uncomment below to test the property
-            //modelInstance.catgory shouldBe ("TODO")
-        }
-
         // to test the property `language`
         should("test language") {
             // uncomment below to test the property
@@ -83,6 +77,12 @@ class RetrieveNewsArticlesByIds200ResponseNewsInnerTest : ShouldSpec() {
         should("test text") {
             // uncomment below to test the property
             //modelInstance.text shouldBe ("TODO")
+        }
+
+        // to test the property `category`
+        should("test category") {
+            // uncomment below to test the property
+            //modelInstance.category shouldBe ("TODO")
         }
 
         // to test the property `publishDate`

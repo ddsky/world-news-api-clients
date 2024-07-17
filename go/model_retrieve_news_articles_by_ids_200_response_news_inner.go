@@ -3,7 +3,7 @@ World News API
 
 The world's news wrapped into a single API.
 
-API version: 1.2.0
+API version: 1.3.0
 Contact: mail@worldnewsapi.com
 */
 
@@ -23,13 +23,13 @@ type RetrieveNewsArticlesByIds200ResponseNewsInner struct {
 	Summary NullableString `json:"summary,omitempty"`
 	Image NullableString `json:"image,omitempty"`
 	Sentiment *float32 `json:"sentiment,omitempty"`
-	Catgory NullableString `json:"catgory,omitempty"`
 	Language NullableString `json:"language,omitempty"`
 	Title NullableString `json:"title,omitempty"`
 	Url NullableString `json:"url,omitempty"`
 	SourceCountry NullableString `json:"source_country,omitempty"`
 	Id *int32 `json:"id,omitempty"`
 	Text NullableString `json:"text,omitempty"`
+	Category NullableString `json:"category,omitempty"`
 	PublishDate NullableString `json:"publish_date,omitempty"`
 	Authors []*string `json:"authors,omitempty"`
 }
@@ -165,48 +165,6 @@ func (o *RetrieveNewsArticlesByIds200ResponseNewsInner) HasSentiment() bool {
 // SetSentiment gets a reference to the given float32 and assigns it to the Sentiment field.
 func (o *RetrieveNewsArticlesByIds200ResponseNewsInner) SetSentiment(v float32) {
 	o.Sentiment = &v
-}
-
-// GetCatgory returns the Catgory field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *RetrieveNewsArticlesByIds200ResponseNewsInner) GetCatgory() string {
-	if o == nil || IsNil(o.Catgory.Get()) {
-		var ret string
-		return ret
-	}
-	return *o.Catgory.Get()
-}
-
-// GetCatgoryOk returns a tuple with the Catgory field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *RetrieveNewsArticlesByIds200ResponseNewsInner) GetCatgoryOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Catgory.Get(), o.Catgory.IsSet()
-}
-
-// HasCatgory returns a boolean if a field has been set.
-func (o *RetrieveNewsArticlesByIds200ResponseNewsInner) HasCatgory() bool {
-	if o != nil && o.Catgory.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetCatgory gets a reference to the given NullableString and assigns it to the Catgory field.
-func (o *RetrieveNewsArticlesByIds200ResponseNewsInner) SetCatgory(v string) {
-	o.Catgory.Set(&v)
-}
-// SetCatgoryNil sets the value for Catgory to be an explicit nil
-func (o *RetrieveNewsArticlesByIds200ResponseNewsInner) SetCatgoryNil() {
-	o.Catgory.Set(nil)
-}
-
-// UnsetCatgory ensures that no value is present for Catgory, not even an explicit nil
-func (o *RetrieveNewsArticlesByIds200ResponseNewsInner) UnsetCatgory() {
-	o.Catgory.Unset()
 }
 
 // GetLanguage returns the Language field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -451,6 +409,48 @@ func (o *RetrieveNewsArticlesByIds200ResponseNewsInner) UnsetText() {
 	o.Text.Unset()
 }
 
+// GetCategory returns the Category field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *RetrieveNewsArticlesByIds200ResponseNewsInner) GetCategory() string {
+	if o == nil || IsNil(o.Category.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.Category.Get()
+}
+
+// GetCategoryOk returns a tuple with the Category field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *RetrieveNewsArticlesByIds200ResponseNewsInner) GetCategoryOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Category.Get(), o.Category.IsSet()
+}
+
+// HasCategory returns a boolean if a field has been set.
+func (o *RetrieveNewsArticlesByIds200ResponseNewsInner) HasCategory() bool {
+	if o != nil && o.Category.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCategory gets a reference to the given NullableString and assigns it to the Category field.
+func (o *RetrieveNewsArticlesByIds200ResponseNewsInner) SetCategory(v string) {
+	o.Category.Set(&v)
+}
+// SetCategoryNil sets the value for Category to be an explicit nil
+func (o *RetrieveNewsArticlesByIds200ResponseNewsInner) SetCategoryNil() {
+	o.Category.Set(nil)
+}
+
+// UnsetCategory ensures that no value is present for Category, not even an explicit nil
+func (o *RetrieveNewsArticlesByIds200ResponseNewsInner) UnsetCategory() {
+	o.Category.Unset()
+}
+
 // GetPublishDate returns the PublishDate field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RetrieveNewsArticlesByIds200ResponseNewsInner) GetPublishDate() string {
 	if o == nil || IsNil(o.PublishDate.Get()) {
@@ -544,9 +544,6 @@ func (o RetrieveNewsArticlesByIds200ResponseNewsInner) ToMap() (map[string]inter
 	if !IsNil(o.Sentiment) {
 		toSerialize["sentiment"] = o.Sentiment
 	}
-	if o.Catgory.IsSet() {
-		toSerialize["catgory"] = o.Catgory.Get()
-	}
 	if o.Language.IsSet() {
 		toSerialize["language"] = o.Language.Get()
 	}
@@ -564,6 +561,9 @@ func (o RetrieveNewsArticlesByIds200ResponseNewsInner) ToMap() (map[string]inter
 	}
 	if o.Text.IsSet() {
 		toSerialize["text"] = o.Text.Get()
+	}
+	if o.Category.IsSet() {
+		toSerialize["category"] = o.Category.Get()
 	}
 	if o.PublishDate.IsSet() {
 		toSerialize["publish_date"] = o.PublishDate.Get()

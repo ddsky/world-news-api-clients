@@ -3,7 +3,7 @@ World News API
 
 The world's news wrapped into a single API.
 
-API version: 1.2.0
+API version: 1.3.0
 Contact: mail@worldnewsapi.com
 */
 
@@ -31,6 +31,7 @@ type SearchNews200ResponseNewsInner struct {
 	SourceCountry NullableString `json:"source_country,omitempty"`
 	Id *int32 `json:"id,omitempty"`
 	Text NullableString `json:"text,omitempty"`
+	Category NullableString `json:"category,omitempty"`
 	PublishDate NullableString `json:"publish_date,omitempty"`
 	Authors []*string `json:"authors,omitempty"`
 }
@@ -494,6 +495,48 @@ func (o *SearchNews200ResponseNewsInner) UnsetText() {
 	o.Text.Unset()
 }
 
+// GetCategory returns the Category field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *SearchNews200ResponseNewsInner) GetCategory() string {
+	if o == nil || IsNil(o.Category.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.Category.Get()
+}
+
+// GetCategoryOk returns a tuple with the Category field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *SearchNews200ResponseNewsInner) GetCategoryOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Category.Get(), o.Category.IsSet()
+}
+
+// HasCategory returns a boolean if a field has been set.
+func (o *SearchNews200ResponseNewsInner) HasCategory() bool {
+	if o != nil && o.Category.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCategory gets a reference to the given NullableString and assigns it to the Category field.
+func (o *SearchNews200ResponseNewsInner) SetCategory(v string) {
+	o.Category.Set(&v)
+}
+// SetCategoryNil sets the value for Category to be an explicit nil
+func (o *SearchNews200ResponseNewsInner) SetCategoryNil() {
+	o.Category.Set(nil)
+}
+
+// UnsetCategory ensures that no value is present for Category, not even an explicit nil
+func (o *SearchNews200ResponseNewsInner) UnsetCategory() {
+	o.Category.Unset()
+}
+
 // GetPublishDate returns the PublishDate field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *SearchNews200ResponseNewsInner) GetPublishDate() string {
 	if o == nil || IsNil(o.PublishDate.Get()) {
@@ -610,6 +653,9 @@ func (o SearchNews200ResponseNewsInner) ToMap() (map[string]interface{}, error) 
 	}
 	if o.Text.IsSet() {
 		toSerialize["text"] = o.Text.Get()
+	}
+	if o.Category.IsSet() {
+		toSerialize["category"] = o.Category.Get()
 	}
 	if o.PublishDate.IsSet() {
 		toSerialize["publish_date"] = o.PublishDate.Get()

@@ -10,6 +10,8 @@ docs/ExtractNews200ResponseVideosInner.md
 docs/ExtractNewsLinks200Response.md
 docs/GetGeoCoordinates200Response.md
 docs/NewsApi.md
+docs/NewspaperFrontPages200Response.md
+docs/NewspaperFrontPages200ResponseFrontPage.md
 docs/RetrieveNewsArticlesByIds200Response.md
 docs/RetrieveNewsArticlesByIds200ResponseNewsInner.md
 docs/SearchNews200Response.md
@@ -27,6 +29,8 @@ lib/WWW/OpenAPIClient/Object/ExtractNews200ResponseImagesInner.pm
 lib/WWW/OpenAPIClient/Object/ExtractNews200ResponseVideosInner.pm
 lib/WWW/OpenAPIClient/Object/ExtractNewsLinks200Response.pm
 lib/WWW/OpenAPIClient/Object/GetGeoCoordinates200Response.pm
+lib/WWW/OpenAPIClient/Object/NewspaperFrontPages200Response.pm
+lib/WWW/OpenAPIClient/Object/NewspaperFrontPages200ResponseFrontPage.pm
 lib/WWW/OpenAPIClient/Object/RetrieveNewsArticlesByIds200Response.pm
 lib/WWW/OpenAPIClient/Object/RetrieveNewsArticlesByIds200ResponseNewsInner.pm
 lib/WWW/OpenAPIClient/Object/SearchNews200Response.pm
@@ -42,6 +46,8 @@ t/ExtractNews200ResponseVideosInnerTest.t
 t/ExtractNewsLinks200ResponseTest.t
 t/GetGeoCoordinates200ResponseTest.t
 t/NewsApiTest.t
+t/NewspaperFrontPages200ResponseFrontPageTest.t
+t/NewspaperFrontPages200ResponseTest.t
 t/RetrieveNewsArticlesByIds200ResponseNewsInnerTest.t
 t/RetrieveNewsArticlesByIds200ResponseTest.t
 t/SearchNews200ResponseNewsInnerTest.t

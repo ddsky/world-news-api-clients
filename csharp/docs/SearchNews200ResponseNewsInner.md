@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **SourceCountry** | **string** |  | [optional] 
 **Id** | **int** |  | [optional] 
 **Text** | **string** |  | [optional] 
+**Category** | **string** |  | [optional] 
 **PublishDate** | **string** |  | [optional] 
 **Authors** | **List&lt;string&gt;** |  | [optional] 
 

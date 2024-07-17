@@ -22,6 +22,7 @@ import okhttp3.HttpUrl
 import worldnewsapi.models.ExtractNews200Response
 import worldnewsapi.models.ExtractNewsLinks200Response
 import worldnewsapi.models.GetGeoCoordinates200Response
+import worldnewsapi.models.NewspaperFrontPages200Response
 import worldnewsapi.models.RetrieveNewsArticlesByIds200Response
 import worldnewsapi.models.SearchNews200Response
 import worldnewsapi.models.TopNews200Response
@@ -358,6 +359,94 @@ class NewsApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClient = 
     }
 
     /**
+     * Newspaper Front Pages
+     * Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here&#39;s an example of some of today&#39;s newspapers:
+     * @param sourceCountry The ISO 3166 country code of the newspaper publication. (optional)
+     * @param sourceName The identifier of the publication see attached list. (optional)
+     * @param date The date for which the front page should be retrieved. (optional)
+     * @return NewspaperFrontPages200Response
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun newspaperFrontPages(sourceCountry: kotlin.String? = null, sourceName: kotlin.String? = null, date: kotlin.String? = null) : NewspaperFrontPages200Response {
+        val localVarResponse = newspaperFrontPagesWithHttpInfo(sourceCountry = sourceCountry, sourceName = sourceName, date = date)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as NewspaperFrontPages200Response
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * Newspaper Front Pages
+     * Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here&#39;s an example of some of today&#39;s newspapers:
+     * @param sourceCountry The ISO 3166 country code of the newspaper publication. (optional)
+     * @param sourceName The identifier of the publication see attached list. (optional)
+     * @param date The date for which the front page should be retrieved. (optional)
+     * @return ApiResponse<NewspaperFrontPages200Response?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun newspaperFrontPagesWithHttpInfo(sourceCountry: kotlin.String?, sourceName: kotlin.String?, date: kotlin.String?) : ApiResponse<NewspaperFrontPages200Response?> {
+        val localVariableConfig = newspaperFrontPagesRequestConfig(sourceCountry = sourceCountry, sourceName = sourceName, date = date)
+
+        return request<Unit, NewspaperFrontPages200Response>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation newspaperFrontPages
+     *
+     * @param sourceCountry The ISO 3166 country code of the newspaper publication. (optional)
+     * @param sourceName The identifier of the publication see attached list. (optional)
+     * @param date The date for which the front page should be retrieved. (optional)
+     * @return RequestConfig
+     */
+    fun newspaperFrontPagesRequestConfig(sourceCountry: kotlin.String?, sourceName: kotlin.String?, date: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (sourceCountry != null) {
+                    put("source-country", listOf(sourceCountry.toString()))
+                }
+                if (sourceName != null) {
+                    put("source-name", listOf(sourceName.toString()))
+                }
+                if (date != null) {
+                    put("date", listOf(date.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/front-pages",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
      * Retrieve News Articles by Ids
      * Retrieve information about one or more news articles by their ids. The ids can be retrieved from the search news or top news APIs.
      * @param ids A comma separated list of news ids.
@@ -433,7 +522,7 @@ class NewsApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClient = 
 
     /**
      * Search News
-     * Search and filter news by text, date, location, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
+     * Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
      * @param text The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford (optional)
      * @param sourceCountries A comma-separated list of ISO 3166 country codes from which the news should originate. (optional)
      * @param language The ISO 6391 language code of the news. (optional)
@@ -443,9 +532,10 @@ class NewsApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClient = 
      * @param latestPublishDate The news must have been published before this date. (optional)
      * @param newsSources A comma-separated list of news sources from which the news should originate. (optional)
      * @param authors A comma-separated list of author names. Only news from any of the given authors will be returned. (optional)
+     * @param categories A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other. (optional)
      * @param entities Filter news by entities (see semantic types). (optional)
      * @param locationFilter Filter news by radius around a certain location. Format is \&quot;latitude,longitude,radius in kilometers\&quot;. Radius must be between 1 and 100 kilometers. (optional)
-     * @param sort The sorting criteria (publish-time or sentiment). (optional)
+     * @param sort The sorting criteria (publish-time). (optional)
      * @param sortDirection Whether to sort ascending or descending (ASC or DESC). (optional)
      * @param offset The number of news to skip in range [0,10000] (optional)
      * @param number The number of news to return in range [1,100] (optional)
@@ -458,8 +548,8 @@ class NewsApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClient = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun searchNews(text: kotlin.String? = null, sourceCountries: kotlin.String? = null, language: kotlin.String? = null, minSentiment: kotlin.Double? = null, maxSentiment: kotlin.Double? = null, earliestPublishDate: kotlin.String? = null, latestPublishDate: kotlin.String? = null, newsSources: kotlin.String? = null, authors: kotlin.String? = null, entities: kotlin.String? = null, locationFilter: kotlin.String? = null, sort: kotlin.String? = null, sortDirection: kotlin.String? = null, offset: kotlin.Int? = null, number: kotlin.Int? = null) : SearchNews200Response {
-        val localVarResponse = searchNewsWithHttpInfo(text = text, sourceCountries = sourceCountries, language = language, minSentiment = minSentiment, maxSentiment = maxSentiment, earliestPublishDate = earliestPublishDate, latestPublishDate = latestPublishDate, newsSources = newsSources, authors = authors, entities = entities, locationFilter = locationFilter, sort = sort, sortDirection = sortDirection, offset = offset, number = number)
+    fun searchNews(text: kotlin.String? = null, sourceCountries: kotlin.String? = null, language: kotlin.String? = null, minSentiment: kotlin.Double? = null, maxSentiment: kotlin.Double? = null, earliestPublishDate: kotlin.String? = null, latestPublishDate: kotlin.String? = null, newsSources: kotlin.String? = null, authors: kotlin.String? = null, categories: kotlin.String? = null, entities: kotlin.String? = null, locationFilter: kotlin.String? = null, sort: kotlin.String? = null, sortDirection: kotlin.String? = null, offset: kotlin.Int? = null, number: kotlin.Int? = null) : SearchNews200Response {
+        val localVarResponse = searchNewsWithHttpInfo(text = text, sourceCountries = sourceCountries, language = language, minSentiment = minSentiment, maxSentiment = maxSentiment, earliestPublishDate = earliestPublishDate, latestPublishDate = latestPublishDate, newsSources = newsSources, authors = authors, categories = categories, entities = entities, locationFilter = locationFilter, sort = sort, sortDirection = sortDirection, offset = offset, number = number)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as SearchNews200Response
@@ -478,7 +568,7 @@ class NewsApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClient = 
 
     /**
      * Search News
-     * Search and filter news by text, date, location, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
+     * Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
      * @param text The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford (optional)
      * @param sourceCountries A comma-separated list of ISO 3166 country codes from which the news should originate. (optional)
      * @param language The ISO 6391 language code of the news. (optional)
@@ -488,9 +578,10 @@ class NewsApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClient = 
      * @param latestPublishDate The news must have been published before this date. (optional)
      * @param newsSources A comma-separated list of news sources from which the news should originate. (optional)
      * @param authors A comma-separated list of author names. Only news from any of the given authors will be returned. (optional)
+     * @param categories A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other. (optional)
      * @param entities Filter news by entities (see semantic types). (optional)
      * @param locationFilter Filter news by radius around a certain location. Format is \&quot;latitude,longitude,radius in kilometers\&quot;. Radius must be between 1 and 100 kilometers. (optional)
-     * @param sort The sorting criteria (publish-time or sentiment). (optional)
+     * @param sort The sorting criteria (publish-time). (optional)
      * @param sortDirection Whether to sort ascending or descending (ASC or DESC). (optional)
      * @param offset The number of news to skip in range [0,10000] (optional)
      * @param number The number of news to return in range [1,100] (optional)
@@ -500,8 +591,8 @@ class NewsApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClient = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun searchNewsWithHttpInfo(text: kotlin.String?, sourceCountries: kotlin.String?, language: kotlin.String?, minSentiment: kotlin.Double?, maxSentiment: kotlin.Double?, earliestPublishDate: kotlin.String?, latestPublishDate: kotlin.String?, newsSources: kotlin.String?, authors: kotlin.String?, entities: kotlin.String?, locationFilter: kotlin.String?, sort: kotlin.String?, sortDirection: kotlin.String?, offset: kotlin.Int?, number: kotlin.Int?) : ApiResponse<SearchNews200Response?> {
-        val localVariableConfig = searchNewsRequestConfig(text = text, sourceCountries = sourceCountries, language = language, minSentiment = minSentiment, maxSentiment = maxSentiment, earliestPublishDate = earliestPublishDate, latestPublishDate = latestPublishDate, newsSources = newsSources, authors = authors, entities = entities, locationFilter = locationFilter, sort = sort, sortDirection = sortDirection, offset = offset, number = number)
+    fun searchNewsWithHttpInfo(text: kotlin.String?, sourceCountries: kotlin.String?, language: kotlin.String?, minSentiment: kotlin.Double?, maxSentiment: kotlin.Double?, earliestPublishDate: kotlin.String?, latestPublishDate: kotlin.String?, newsSources: kotlin.String?, authors: kotlin.String?, categories: kotlin.String?, entities: kotlin.String?, locationFilter: kotlin.String?, sort: kotlin.String?, sortDirection: kotlin.String?, offset: kotlin.Int?, number: kotlin.Int?) : ApiResponse<SearchNews200Response?> {
+        val localVariableConfig = searchNewsRequestConfig(text = text, sourceCountries = sourceCountries, language = language, minSentiment = minSentiment, maxSentiment = maxSentiment, earliestPublishDate = earliestPublishDate, latestPublishDate = latestPublishDate, newsSources = newsSources, authors = authors, categories = categories, entities = entities, locationFilter = locationFilter, sort = sort, sortDirection = sortDirection, offset = offset, number = number)
 
         return request<Unit, SearchNews200Response>(
             localVariableConfig
@@ -520,15 +611,16 @@ class NewsApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClient = 
      * @param latestPublishDate The news must have been published before this date. (optional)
      * @param newsSources A comma-separated list of news sources from which the news should originate. (optional)
      * @param authors A comma-separated list of author names. Only news from any of the given authors will be returned. (optional)
+     * @param categories A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other. (optional)
      * @param entities Filter news by entities (see semantic types). (optional)
      * @param locationFilter Filter news by radius around a certain location. Format is \&quot;latitude,longitude,radius in kilometers\&quot;. Radius must be between 1 and 100 kilometers. (optional)
-     * @param sort The sorting criteria (publish-time or sentiment). (optional)
+     * @param sort The sorting criteria (publish-time). (optional)
      * @param sortDirection Whether to sort ascending or descending (ASC or DESC). (optional)
      * @param offset The number of news to skip in range [0,10000] (optional)
      * @param number The number of news to return in range [1,100] (optional)
      * @return RequestConfig
      */
-    fun searchNewsRequestConfig(text: kotlin.String?, sourceCountries: kotlin.String?, language: kotlin.String?, minSentiment: kotlin.Double?, maxSentiment: kotlin.Double?, earliestPublishDate: kotlin.String?, latestPublishDate: kotlin.String?, newsSources: kotlin.String?, authors: kotlin.String?, entities: kotlin.String?, locationFilter: kotlin.String?, sort: kotlin.String?, sortDirection: kotlin.String?, offset: kotlin.Int?, number: kotlin.Int?) : RequestConfig<Unit> {
+    fun searchNewsRequestConfig(text: kotlin.String?, sourceCountries: kotlin.String?, language: kotlin.String?, minSentiment: kotlin.Double?, maxSentiment: kotlin.Double?, earliestPublishDate: kotlin.String?, latestPublishDate: kotlin.String?, newsSources: kotlin.String?, authors: kotlin.String?, categories: kotlin.String?, entities: kotlin.String?, locationFilter: kotlin.String?, sort: kotlin.String?, sortDirection: kotlin.String?, offset: kotlin.Int?, number: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -558,6 +650,9 @@ class NewsApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClient = 
                 }
                 if (authors != null) {
                     put("authors", listOf(authors.toString()))
+                }
+                if (categories != null) {
+                    put("categories", listOf(categories.toString()))
                 }
                 if (entities != null) {
                     put("entities", listOf(entities.toString()))

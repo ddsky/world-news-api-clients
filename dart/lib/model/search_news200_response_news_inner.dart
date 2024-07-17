@@ -24,6 +24,7 @@ class SearchNews200ResponseNewsInner {
     this.sourceCountry,
     this.id,
     this.text,
+    this.category,
     this.publishDate,
     this.authors = const [],
   });
@@ -62,6 +63,8 @@ class SearchNews200ResponseNewsInner {
 
   String? text;
 
+  String? category;
+
   String? publishDate;
 
   List<String> authors;
@@ -79,6 +82,7 @@ class SearchNews200ResponseNewsInner {
     other.sourceCountry == sourceCountry &&
     other.id == id &&
     other.text == text &&
+    other.category == category &&
     other.publishDate == publishDate &&
     _deepEquality.equals(other.authors, authors);
 
@@ -96,11 +100,12 @@ class SearchNews200ResponseNewsInner {
     (sourceCountry == null ? 0 : sourceCountry!.hashCode) +
     (id == null ? 0 : id!.hashCode) +
     (text == null ? 0 : text!.hashCode) +
+    (category == null ? 0 : category!.hashCode) +
     (publishDate == null ? 0 : publishDate!.hashCode) +
     (authors.hashCode);
 
   @override
-  String toString() => 'SearchNews200ResponseNewsInner[summary=$summary, image=$image, sentiment=$sentiment, author=$author, language=$language, video=$video, title=$title, url=$url, sourceCountry=$sourceCountry, id=$id, text=$text, publishDate=$publishDate, authors=$authors]';
+  String toString() => 'SearchNews200ResponseNewsInner[summary=$summary, image=$image, sentiment=$sentiment, author=$author, language=$language, video=$video, title=$title, url=$url, sourceCountry=$sourceCountry, id=$id, text=$text, category=$category, publishDate=$publishDate, authors=$authors]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
@@ -159,6 +164,11 @@ class SearchNews200ResponseNewsInner {
     } else {
       json[r'text'] = null;
     }
+    if (this.category != null) {
+      json[r'category'] = this.category;
+    } else {
+      json[r'category'] = null;
+    }
     if (this.publishDate != null) {
       json[r'publish_date'] = this.publishDate;
     } else {
@@ -198,6 +208,7 @@ class SearchNews200ResponseNewsInner {
         sourceCountry: mapValueOfType<String>(json, r'source_country'),
         id: mapValueOfType<int>(json, r'id'),
         text: mapValueOfType<String>(json, r'text'),
+        category: mapValueOfType<String>(json, r'category'),
         publishDate: mapValueOfType<String>(json, r'publish_date'),
         authors: json[r'authors'] is Iterable
             ? (json[r'authors'] as Iterable).cast<String>().toList(growable: false)

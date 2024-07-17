@@ -16,13 +16,13 @@ class RetrieveNewsArticlesByIds200ResponseNewsInner {
     this.summary,
     this.image,
     this.sentiment,
-    this.catgory,
     this.language,
     this.title,
     this.url,
     this.sourceCountry,
     this.id,
     this.text,
+    this.category,
     this.publishDate,
     this.authors = const [],
   });
@@ -38,8 +38,6 @@ class RetrieveNewsArticlesByIds200ResponseNewsInner {
   /// Consider adding a "default:" property in the specification file to hide this note.
   ///
   num? sentiment;
-
-  String? catgory;
 
   String? language;
 
@@ -59,6 +57,8 @@ class RetrieveNewsArticlesByIds200ResponseNewsInner {
 
   String? text;
 
+  String? category;
+
   String? publishDate;
 
   List<String> authors;
@@ -68,13 +68,13 @@ class RetrieveNewsArticlesByIds200ResponseNewsInner {
     other.summary == summary &&
     other.image == image &&
     other.sentiment == sentiment &&
-    other.catgory == catgory &&
     other.language == language &&
     other.title == title &&
     other.url == url &&
     other.sourceCountry == sourceCountry &&
     other.id == id &&
     other.text == text &&
+    other.category == category &&
     other.publishDate == publishDate &&
     _deepEquality.equals(other.authors, authors);
 
@@ -84,18 +84,18 @@ class RetrieveNewsArticlesByIds200ResponseNewsInner {
     (summary == null ? 0 : summary!.hashCode) +
     (image == null ? 0 : image!.hashCode) +
     (sentiment == null ? 0 : sentiment!.hashCode) +
-    (catgory == null ? 0 : catgory!.hashCode) +
     (language == null ? 0 : language!.hashCode) +
     (title == null ? 0 : title!.hashCode) +
     (url == null ? 0 : url!.hashCode) +
     (sourceCountry == null ? 0 : sourceCountry!.hashCode) +
     (id == null ? 0 : id!.hashCode) +
     (text == null ? 0 : text!.hashCode) +
+    (category == null ? 0 : category!.hashCode) +
     (publishDate == null ? 0 : publishDate!.hashCode) +
     (authors.hashCode);
 
   @override
-  String toString() => 'RetrieveNewsArticlesByIds200ResponseNewsInner[summary=$summary, image=$image, sentiment=$sentiment, catgory=$catgory, language=$language, title=$title, url=$url, sourceCountry=$sourceCountry, id=$id, text=$text, publishDate=$publishDate, authors=$authors]';
+  String toString() => 'RetrieveNewsArticlesByIds200ResponseNewsInner[summary=$summary, image=$image, sentiment=$sentiment, language=$language, title=$title, url=$url, sourceCountry=$sourceCountry, id=$id, text=$text, category=$category, publishDate=$publishDate, authors=$authors]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
@@ -113,11 +113,6 @@ class RetrieveNewsArticlesByIds200ResponseNewsInner {
       json[r'sentiment'] = this.sentiment;
     } else {
       json[r'sentiment'] = null;
-    }
-    if (this.catgory != null) {
-      json[r'catgory'] = this.catgory;
-    } else {
-      json[r'catgory'] = null;
     }
     if (this.language != null) {
       json[r'language'] = this.language;
@@ -148,6 +143,11 @@ class RetrieveNewsArticlesByIds200ResponseNewsInner {
       json[r'text'] = this.text;
     } else {
       json[r'text'] = null;
+    }
+    if (this.category != null) {
+      json[r'category'] = this.category;
+    } else {
+      json[r'category'] = null;
     }
     if (this.publishDate != null) {
       json[r'publish_date'] = this.publishDate;
@@ -180,13 +180,13 @@ class RetrieveNewsArticlesByIds200ResponseNewsInner {
         summary: mapValueOfType<String>(json, r'summary'),
         image: mapValueOfType<String>(json, r'image'),
         sentiment: num.parse('${json[r'sentiment']}'),
-        catgory: mapValueOfType<String>(json, r'catgory'),
         language: mapValueOfType<String>(json, r'language'),
         title: mapValueOfType<String>(json, r'title'),
         url: mapValueOfType<String>(json, r'url'),
         sourceCountry: mapValueOfType<String>(json, r'source_country'),
         id: mapValueOfType<int>(json, r'id'),
         text: mapValueOfType<String>(json, r'text'),
+        category: mapValueOfType<String>(json, r'category'),
         publishDate: mapValueOfType<String>(json, r'publish_date'),
         authors: json[r'authors'] is Iterable
             ? (json[r'authors'] as Iterable).cast<String>().toList(growable: false)

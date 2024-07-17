@@ -6,6 +6,8 @@ import { ExtractNews200ResponseImagesInner } from '../models/ExtractNews200Respo
 import { ExtractNews200ResponseVideosInner } from '../models/ExtractNews200ResponseVideosInner';
 import { ExtractNewsLinks200Response } from '../models/ExtractNewsLinks200Response';
 import { GetGeoCoordinates200Response } from '../models/GetGeoCoordinates200Response';
+import { NewspaperFrontPages200Response } from '../models/NewspaperFrontPages200Response';
+import { NewspaperFrontPages200ResponseFrontPage } from '../models/NewspaperFrontPages200ResponseFrontPage';
 import { RetrieveNewsArticlesByIds200Response } from '../models/RetrieveNewsArticlesByIds200Response';
 import { RetrieveNewsArticlesByIds200ResponseNewsInner } from '../models/RetrieveNewsArticlesByIds200ResponseNewsInner';
 import { SearchNews200Response } from '../models/SearchNews200Response';
@@ -69,6 +71,27 @@ export interface NewsApiNewsWebsiteToRSSFeedRequest {
      * @memberof NewsApinewsWebsiteToRSSFeed
      */
     analyze: boolean
+}
+
+export interface NewsApiNewspaperFrontPagesRequest {
+    /**
+     * The ISO 3166 country code of the newspaper publication.
+     * @type string
+     * @memberof NewsApinewspaperFrontPages
+     */
+    sourceCountry?: string
+    /**
+     * The identifier of the publication see attached list.
+     * @type string
+     * @memberof NewsApinewspaperFrontPages
+     */
+    sourceName?: string
+    /**
+     * The date for which the front page should be retrieved.
+     * @type string
+     * @memberof NewsApinewspaperFrontPages
+     */
+    date?: string
 }
 
 export interface NewsApiRetrieveNewsArticlesByIdsRequest {
@@ -136,6 +159,12 @@ export interface NewsApiSearchNewsRequest {
      */
     authors?: string
     /**
+     * A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other.
+     * @type string
+     * @memberof NewsApisearchNews
+     */
+    categories?: string
+    /**
      * Filter news by entities (see semantic types).
      * @type string
      * @memberof NewsApisearchNews
@@ -148,7 +177,7 @@ export interface NewsApiSearchNewsRequest {
      */
     locationFilter?: string
     /**
-     * The sorting criteria (publish-time or sentiment).
+     * The sorting criteria (publish-time).
      * @type string
      * @memberof NewsApisearchNews
      */
@@ -280,6 +309,24 @@ export class ObjectNewsApi {
     }
 
     /**
+     * Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here\'s an example of some of today\'s newspapers:
+     * Newspaper Front Pages
+     * @param param the request object
+     */
+    public newspaperFrontPagesWithHttpInfo(param: NewsApiNewspaperFrontPagesRequest = {}, options?: Configuration): Promise<HttpInfo<NewspaperFrontPages200Response>> {
+        return this.api.newspaperFrontPagesWithHttpInfo(param.sourceCountry, param.sourceName, param.date,  options).toPromise();
+    }
+
+    /**
+     * Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here\'s an example of some of today\'s newspapers:
+     * Newspaper Front Pages
+     * @param param the request object
+     */
+    public newspaperFrontPages(param: NewsApiNewspaperFrontPagesRequest = {}, options?: Configuration): Promise<NewspaperFrontPages200Response> {
+        return this.api.newspaperFrontPages(param.sourceCountry, param.sourceName, param.date,  options).toPromise();
+    }
+
+    /**
      * Retrieve information about one or more news articles by their ids. The ids can be retrieved from the search news or top news APIs.
      * Retrieve News Articles by Ids
      * @param param the request object
@@ -298,21 +345,21 @@ export class ObjectNewsApi {
     }
 
     /**
-     * Search and filter news by text, date, location, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
+     * Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
      * Search News
      * @param param the request object
      */
     public searchNewsWithHttpInfo(param: NewsApiSearchNewsRequest = {}, options?: Configuration): Promise<HttpInfo<SearchNews200Response>> {
-        return this.api.searchNewsWithHttpInfo(param.text, param.sourceCountries, param.language, param.minSentiment, param.maxSentiment, param.earliestPublishDate, param.latestPublishDate, param.newsSources, param.authors, param.entities, param.locationFilter, param.sort, param.sortDirection, param.offset, param.number,  options).toPromise();
+        return this.api.searchNewsWithHttpInfo(param.text, param.sourceCountries, param.language, param.minSentiment, param.maxSentiment, param.earliestPublishDate, param.latestPublishDate, param.newsSources, param.authors, param.categories, param.entities, param.locationFilter, param.sort, param.sortDirection, param.offset, param.number,  options).toPromise();
     }
 
     /**
-     * Search and filter news by text, date, location, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
+     * Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
      * Search News
      * @param param the request object
      */
     public searchNews(param: NewsApiSearchNewsRequest = {}, options?: Configuration): Promise<SearchNews200Response> {
-        return this.api.searchNews(param.text, param.sourceCountries, param.language, param.minSentiment, param.maxSentiment, param.earliestPublishDate, param.latestPublishDate, param.newsSources, param.authors, param.entities, param.locationFilter, param.sort, param.sortDirection, param.offset, param.number,  options).toPromise();
+        return this.api.searchNews(param.text, param.sourceCountries, param.language, param.minSentiment, param.maxSentiment, param.earliestPublishDate, param.latestPublishDate, param.newsSources, param.authors, param.categories, param.entities, param.locationFilter, param.sort, param.sortDirection, param.offset, param.number,  options).toPromise();
     }
 
     /**

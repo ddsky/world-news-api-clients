@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **source_country** | **string** |  | [optional] 
 **id** | **int** |  | [optional] 
 **text** | **string** |  | [optional] 
+**category** | **string** |  | [optional] 
 **publish_date** | **string** |  | [optional] 
 **authors** | **ARRAY[string]** |  | [optional] 
 

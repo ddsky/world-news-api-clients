@@ -18,6 +18,7 @@
    (ds/opt :source_country) string?
    (ds/opt :id) int?
    (ds/opt :text) string?
+   (ds/opt :category) string?
    (ds/opt :publish_date) string?
    (ds/opt :authors) (s/coll-of string?)
    })

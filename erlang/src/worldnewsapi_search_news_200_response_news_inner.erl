@@ -16,6 +16,7 @@
        'source_country' => binary(),
        'id' => integer(),
        'text' => binary(),
+       'category' => binary(),
        'publish_date' => binary(),
        'authors' => list()
      }.
@@ -31,6 +32,7 @@ encode(#{ 'summary' := Summary,
           'source_country' := SourceCountry,
           'id' := Id,
           'text' := Text,
+          'category' := Category,
           'publish_date' := PublishDate,
           'authors' := Authors
         }) ->
@@ -45,6 +47,7 @@ encode(#{ 'summary' := Summary,
        'source_country' => SourceCountry,
        'id' => Id,
        'text' => Text,
+       'category' => Category,
        'publish_date' => PublishDate,
        'authors' => Authors
      }.

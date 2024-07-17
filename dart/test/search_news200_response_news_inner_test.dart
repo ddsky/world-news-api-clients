@@ -71,6 +71,11 @@ void main() {
       // TODO
     });
 
+    // String category
+    test('to test the property `category`', () async {
+      // TODO
+    });
+
     // String publishDate
     test('to test the property `publishDate`', () async {
       // TODO

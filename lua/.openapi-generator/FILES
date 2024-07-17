@@ -7,6 +7,8 @@ spec/extract_news_200_response_videos_inner_spec.lua
 spec/extract_news_links_200_response_spec.lua
 spec/get_geo_coordinates_200_response_spec.lua
 spec/news_api_spec.lua
+spec/newspaper_front_pages_200_response_front_page_spec.lua
+spec/newspaper_front_pages_200_response_spec.lua
 spec/retrieve_news_articles_by_ids_200_response_news_inner_spec.lua
 spec/retrieve_news_articles_by_ids_200_response_spec.lua
 spec/search_news_200_response_news_inner_spec.lua
@@ -14,13 +16,15 @@ spec/search_news_200_response_spec.lua
 spec/top_news_200_response_spec.lua
 spec/top_news_200_response_top_news_inner_news_inner_spec.lua
 spec/top_news_200_response_top_news_inner_spec.lua
-worldnewsapi-1.2.0.rockspec
+worldnewsapi-1.3.0.rockspec
 worldnewsapi/api/news_api.lua
 worldnewsapi/model/extract_news_200_response.lua
 worldnewsapi/model/extract_news_200_response_images_inner.lua
 worldnewsapi/model/extract_news_200_response_videos_inner.lua
 worldnewsapi/model/extract_news_links_200_response.lua
 worldnewsapi/model/get_geo_coordinates_200_response.lua
+worldnewsapi/model/newspaper_front_pages_200_response.lua
+worldnewsapi/model/newspaper_front_pages_200_response_front_page.lua
 worldnewsapi/model/retrieve_news_articles_by_ids_200_response.lua
 worldnewsapi/model/retrieve_news_articles_by_ids_200_response_news_inner.lua
 worldnewsapi/model/search_news_200_response.lua

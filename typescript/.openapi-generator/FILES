@@ -17,6 +17,8 @@ models/ExtractNews200ResponseImagesInner.ts
 models/ExtractNews200ResponseVideosInner.ts
 models/ExtractNewsLinks200Response.ts
 models/GetGeoCoordinates200Response.ts
+models/NewspaperFrontPages200Response.ts
+models/NewspaperFrontPages200ResponseFrontPage.ts
 models/ObjectSerializer.ts
 models/RetrieveNewsArticlesByIds200Response.ts
 models/RetrieveNewsArticlesByIds200ResponseNewsInner.ts

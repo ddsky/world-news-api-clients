@@ -22,6 +22,7 @@ import worldnewsapi.apis.NewsApi
 import worldnewsapi.models.ExtractNews200Response
 import worldnewsapi.models.ExtractNewsLinks200Response
 import worldnewsapi.models.GetGeoCoordinates200Response
+import worldnewsapi.models.NewspaperFrontPages200Response
 import worldnewsapi.models.RetrieveNewsArticlesByIds200Response
 import worldnewsapi.models.SearchNews200Response
 import worldnewsapi.models.TopNews200Response
@@ -66,6 +67,16 @@ class NewsApiTest : ShouldSpec() {
             //result shouldBe ("TODO")
         }
 
+        // to test newspaperFrontPages
+        should("test newspaperFrontPages") {
+            // uncomment below to test newspaperFrontPages
+            //val sourceCountry : kotlin.String = au // kotlin.String | The ISO 3166 country code of the newspaper publication.
+            //val sourceName : kotlin.String = herald-sun // kotlin.String | The identifier of the publication see attached list.
+            //val date : kotlin.String = 2024-07-09 // kotlin.String | The date for which the front page should be retrieved.
+            //val result : NewspaperFrontPages200Response = apiInstance.newspaperFrontPages(sourceCountry, sourceName, date)
+            //result shouldBe ("TODO")
+        }
+
         // to test retrieveNewsArticlesByIds
         should("test retrieveNewsArticlesByIds") {
             // uncomment below to test retrieveNewsArticlesByIds
@@ -86,13 +97,14 @@ class NewsApiTest : ShouldSpec() {
             //val latestPublishDate : kotlin.String = 2022-04-22 16:12:35 // kotlin.String | The news must have been published before this date.
             //val newsSources : kotlin.String = https://www.bbc.co.uk // kotlin.String | A comma-separated list of news sources from which the news should originate.
             //val authors : kotlin.String = John Doe // kotlin.String | A comma-separated list of author names. Only news from any of the given authors will be returned.
+            //val categories : kotlin.String = politics,sports // kotlin.String | A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other.
             //val entities : kotlin.String = ORG:Tesla // kotlin.String | Filter news by entities (see semantic types).
             //val locationFilter : kotlin.String = 51.050407, 13.737262, 20 // kotlin.String | Filter news by radius around a certain location. Format is \"latitude,longitude,radius in kilometers\". Radius must be between 1 and 100 kilometers.
-            //val sort : kotlin.String = publish-time // kotlin.String | The sorting criteria (publish-time or sentiment).
+            //val sort : kotlin.String = publish-time // kotlin.String | The sorting criteria (publish-time).
             //val sortDirection : kotlin.String = ASC // kotlin.String | Whether to sort ascending or descending (ASC or DESC).
             //val offset : kotlin.Int = 0 // kotlin.Int | The number of news to skip in range [0,10000]
             //val number : kotlin.Int = 10 // kotlin.Int | The number of news to return in range [1,100]
-            //val result : SearchNews200Response = apiInstance.searchNews(text, sourceCountries, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, entities, locationFilter, sort, sortDirection, offset, number)
+            //val result : SearchNews200Response = apiInstance.searchNews(text, sourceCountries, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, categories, entities, locationFilter, sort, sortDirection, offset, number)
             //result shouldBe ("TODO")
         }
 

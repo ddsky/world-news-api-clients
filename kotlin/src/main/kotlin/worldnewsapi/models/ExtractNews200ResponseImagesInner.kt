@@ -43,5 +43,8 @@ data class ExtractNews200ResponseImagesInner (
     @Json(name = "height")
     val height: kotlin.Int? = null
 
-)
+) {
+
+
+}
 

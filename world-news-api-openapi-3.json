@@ -4,7 +4,7 @@
     "title": "World News API",
     "description": "The world's news wrapped into a single API.",
     "termsOfService": "https://worldnewsapi.com/terms",
-    "version": "1.2.0",
+    "version": "1.3.0",
     "contact": {
       "name": "David Urbansky",
       "email": "mail@worldnewsapi.com"
@@ -83,6 +83,10 @@
                             "type": "string",
                             "nullable": true
                           },
+                          "category": {
+                            "type": "string",
+                            "nullable": true
+                          },
                           "publish_date": {
                             "type": "string",
                             "nullable": true
@@ -118,6 +122,7 @@
                           "source_country": "us",
                           "id": 206030983,
                           "text": "New Jersey continues to shake after Friday\u2019s 4.8-magnitude earthquake and likely will continue to do so for some time. Dozens of aftershocks were recorded in the Garden State since the rare quake hit, including one tremor of 3.8 after the initial event. But residents of NYC shouldn\u2019t expect anything beyond possibly a light shake in the coming days. Rumbles were measured in 29 nine areas around Whitehouse Station, NJ, which was the epicenter of the quake, including near Tewksbury and Bedminster, according to the United States Geological Survey. The smaller temblors hit as far as 13 miles away from the epicenter. One clocked in at 1.9 just after 1 a.m. Saturday morning just north of Whitehouse Station \u2014 about 45 miles west of NYC \u2014 and another at 2.5 just before 7 a.m. near Gladstone, northeast of the epicenter. Over the next week, there is a 74% chance of additional 3-plus magnitude aftershocks, but the USGS does not foresee more than five occurring. There is just a 14% chance of a quake clocking in at a magnitude of 4 or higher, and likely only one will come this week. Over the course of the next month, however, the chance of a 3-plus magnitude quake rises to 84%, while a the chance of a 4 or greater is 18%. It\u2019s almost certain \u2014 98% \u2014 that more 3-plus magnitude shakers will come in the next year, the USGS said. The nearly 30 rumbles that followed the first quake aren\u2019t a shock to geologists, though. \u201cWe do expect aftershocks like this to occur in the days, weeks and months after the main shock, so this is fully within the realm of what is expected,\u201d USGS research geologist Alex Hatem told The Post. The chance of NYC feeling another rattle, however, is low. A light shake could be possible in the coming days, Hatem said, but nothing like the quake that rocked the Statue of Liberty and City Hall Friday or the aftershock that rippled through later that evening. The quake grounded flights and halted traffic around the Big Apple. \u201cShould this sequence continue as it is, which we expect it to, there won\u2019t be anything greater than what already happened,\u201d Hatem said. Though researchers expect earthquakes to happen \u201canytime, anywhere,\u201d it is a rare occurrence for New Jersey, which doesn\u2019t lie on an active plate boundary, Hatem said. The incident did occur, however, near the Ramapo Fault, which is an ancient crack in the Earth\u2019s crust. Faults lie on the edges of plates and can sometimes be the site of quakes. New Jersey Gov. Phil Murphy posted on X Saturday that the state\u2019s emergency operations center was deactivated that morning. \u201cWe have had no reports of major damage to structures, roadways, or infrastructure as a result of yesterday\u2019s earthquake,\u201d Murphy said. Residents in several homes in Newark were able to return to their homes Friday night after being evacuated over concerns about possible structural damage. Gov. Hochul and Mayor Adams said there were no initial reports of injuries or damage in New York, though it later emerged that the walls of a school gym in Brooklyn suffered several cracks. Engineers with the city Department of Buildings ordered the gymnasium at J.H.S. 218 in East New York shut down until repairs are made. The earthquake was the biggest for the tri-state area since 1884. The USGS recently released a study that showed that about 75% of the US that could experience a damaging earthquake in the next 100 years. Friday\u2019s rattle should be a \u201cgentle reminder\u201d to those on the East Coast, however, to be prepared and familiar with \u201cdrop, cover and hold on\u201d actions to stay safe in the event of another quake. New York City officials were blasted for emergency alerts that didn\u2019t go out until 25 minutes after the earthquake struck. Some NYC public school alerts didn\u2019t go out until an hour and a half after the shock \u2014 and were resent Saturday morning, telling parents that dismissal would proceed as usual.",
+                          "category": "environment",
                           "publish_date": "2024-04-06 22:44:18",
                           "authors": [
                             "Deirdre Bardolf"
@@ -279,6 +284,20 @@
             "in": "query"
           },
           {
+            "name": "categories",
+            "description": "A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other.",
+            "schema": {
+              "pattern": ".",
+              "maxLength": 300,
+              "type": "string",
+              "example": "politics,sports"
+            },
+            "required": false,
+            "style": "form",
+            "explode": false,
+            "in": "query"
+          },
+          {
             "name": "entities",
             "description": "Filter news by entities (see semantic types).",
             "schema": {
@@ -308,7 +327,7 @@
           },
           {
             "name": "sort",
-            "description": "The sorting criteria (publish-time or sentiment).",
+            "description": "The sorting criteria (publish-time).",
             "schema": {
               "pattern": ".",
               "maxLength": 100,
@@ -373,7 +392,7 @@
         "tags": [
           "News"
         ],
-        "description": "Search and filter news by text, date, location, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.",
+        "description": "Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.",
         "operationId": "searchNews",
         "deprecated": false
       }
@@ -702,6 +721,136 @@
         "deprecated": false
       }
     },
+    "/front-pages": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success",
+            "headers": {},
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "front_page": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "date": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "country": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "image": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "language": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Response": {
+                    "value": {
+                      "front_page": {
+                        "name": "Herald Sun",
+                        "date": "2024-07-09",
+                        "country": "au",
+                        "image": "https://img.worldnewsapi.com/front-pages/herald-sun-2024-07-09-ota3mg51.jpg",
+                        "language": "en"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "402": {
+            "description": "Payment Required"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "406": {
+            "description": "Not Acceptable"
+          },
+          "429": {
+            "description": "Too Many Requests"
+          }
+        },
+        "parameters": [
+          {
+            "name": "source-country",
+            "description": "The ISO 3166 country code of the newspaper publication.",
+            "schema": {
+              "pattern": ".",
+              "maxLength": 2,
+              "type": "string",
+              "example": "au"
+            },
+            "required": false,
+            "style": "form",
+            "explode": false,
+            "in": "query"
+          },
+          {
+            "name": "source-name",
+            "description": "The identifier of the publication see attached list.",
+            "schema": {
+              "pattern": ".",
+              "maxLength": 100,
+              "type": "string",
+              "example": "herald-sun"
+            },
+            "required": false,
+            "style": "form",
+            "explode": false,
+            "in": "query"
+          },
+          {
+            "name": "date",
+            "description": "The date for which the front page should be retrieved.",
+            "schema": {
+              "pattern": ".",
+              "maxLength": 10,
+              "type": "string",
+              "example": "2024-07-09"
+            },
+            "required": false,
+            "style": "form",
+            "explode": false,
+            "in": "query"
+          }
+        ],
+        "externalDocs": {
+          "description": "Read entire docs",
+          "url": "https://worldnewsapi.com/docs/newspaper-front-pages/"
+        },
+        "summary": "Newspaper Front Pages",
+        "tags": [
+          "News"
+        ],
+        "description": "Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here's an example of some of today's newspapers:",
+        "operationId": "newspaperFrontPages",
+        "deprecated": false
+      }
+    },
     "/retrieve-news": {
       "get": {
         "responses": {
@@ -729,10 +878,6 @@
                           "sentiment": {
                             "type": "number"
                           },
-                          "catgory": {
-                            "type": "string",
-                            "nullable": true
-                          },
                           "language": {
                             "type": "string",
                             "nullable": true
@@ -753,6 +898,10 @@
                             "type": "integer"
                           },
                           "text": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "category": {
                             "type": "string",
                             "nullable": true
                           },
@@ -780,13 +929,13 @@
                           "summary": "...",
                           "image": "https://www.amnesty.org/en/wp-content/uploads/2021/06/272748-1024x433.jpg",
                           "sentiment": -0.176,
-                          "catgory": "politics",
                           "language": "en",
                           "title": "While China and the US squabble, the world\u2019s debt and climate crises worsen - Amnesty International",
                           "url": "https://www.amnesty.org/en/latest/news/2020/09/while-china-and-the-us-squabble-the-world-debt-and-climate-crises-worsen/",
                           "source_country": "mx",
                           "id": 2352,
                           "text": "...",
+                          "category": "politics",
                           "publish_date": "2020-09-11 18:05:26",
                           "authors": [
                             "Amnesty International",
@@ -797,13 +946,13 @@
                           "summary": "...",
                           "image": "https://www.amnesty.org/en/wp-content/uploads/2021/06/264281-1024x433.jpg",
                           "sentiment": -0.449,
-                          "catgory": "politics",
                           "language": "en",
                           "title": "Sexual violence against Hong Kong protesters \u2013 what\u2019s going on? - Amnesty International",
                           "url": "https://www.amnesty.org/en/latest/news/2019/12/sexual-violence-against-hong-kong-protesters/",
                           "source_country": "mx",
                           "id": 2354,
                           "text": "...",
+                          "category": "politics",
                           "publish_date": "2019-12-20 11:14:17",
                           "authors": [
                             "Amnesty International"

@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**extractNewsLinks**](NewsApi.md#extractNewsLinks) | **GET** /extract-news-links | Extract News Links
 [**getGeoCoordinates**](NewsApi.md#getGeoCoordinates) | **GET** /geo-coordinates | Get Geo Coordinates
 [**newsWebsiteToRSSFeed**](NewsApi.md#newsWebsiteToRSSFeed) | **GET** /feed.rss | News Website to RSS Feed
+[**newspaperFrontPages**](NewsApi.md#newspaperFrontPages) | **GET** /front-pages | Newspaper Front Pages
 [**retrieveNewsArticlesByIds**](NewsApi.md#retrieveNewsArticlesByIds) | **GET** /retrieve-news | Retrieve News Articles by Ids
 [**searchNews**](NewsApi.md#searchNews) | **GET** /search-news | Search News
 [**topNews**](NewsApi.md#topNews) | **GET** /top-news | Top News
@@ -262,6 +263,72 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
+# **newspaperFrontPages**
+> NewspaperFrontPages200Response newspaperFrontPages()
+
+Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here\'s an example of some of today\'s newspapers:
+
+### Example
+
+
+```typescript
+import {  } from '';
+import * as fs from 'fs';
+
+const configuration = .createConfiguration();
+const apiInstance = new .NewsApi(configuration);
+
+let body:.NewsApiNewspaperFrontPagesRequest = {
+  // string | The ISO 3166 country code of the newspaper publication. (optional)
+  sourceCountry: "au",
+  // string | The identifier of the publication see attached list. (optional)
+  sourceName: "herald-sun",
+  // string | The date for which the front page should be retrieved. (optional)
+  date: "2024-07-09",
+};
+
+apiInstance.newspaperFrontPages(body).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **sourceCountry** | [**string**] | The ISO 3166 country code of the newspaper publication. | (optional) defaults to undefined
+ **sourceName** | [**string**] | The identifier of the publication see attached list. | (optional) defaults to undefined
+ **date** | [**string**] | The date for which the front page should be retrieved. | (optional) defaults to undefined
+
+
+### Return type
+
+**NewspaperFrontPages200Response**
+
+### Authorization
+
+[apiKey](README.md#apiKey), [headerApiKey](README.md#headerApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**401** | Unauthorized |  -  |
+**402** | Payment Required |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**406** | Not Acceptable |  -  |
+**429** | Too Many Requests |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
 # **retrieveNewsArticlesByIds**
 > RetrieveNewsArticlesByIds200Response retrieveNewsArticlesByIds()
 
@@ -325,7 +392,7 @@ Name | Type | Description  | Notes
 # **searchNews**
 > SearchNews200Response searchNews()
 
-Search and filter news by text, date, location, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
+Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
 
 ### Example
 
@@ -356,11 +423,13 @@ let body:.NewsApiSearchNewsRequest = {
   newsSources: "https://www.bbc.co.uk",
   // string | A comma-separated list of author names. Only news from any of the given authors will be returned. (optional)
   authors: "John Doe",
+  // string | A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other. (optional)
+  categories: "politics,sports",
   // string | Filter news by entities (see semantic types). (optional)
   entities: "ORG:Tesla",
   // string | Filter news by radius around a certain location. Format is \"latitude,longitude,radius in kilometers\". Radius must be between 1 and 100 kilometers. (optional)
   locationFilter: "51.050407, 13.737262, 20",
-  // string | The sorting criteria (publish-time or sentiment). (optional)
+  // string | The sorting criteria (publish-time). (optional)
   sort: "publish-time",
   // string | Whether to sort ascending or descending (ASC or DESC). (optional)
   sortDirection: "ASC",
@@ -389,9 +458,10 @@ Name | Type | Description  | Notes
  **latestPublishDate** | [**string**] | The news must have been published before this date. | (optional) defaults to undefined
  **newsSources** | [**string**] | A comma-separated list of news sources from which the news should originate. | (optional) defaults to undefined
  **authors** | [**string**] | A comma-separated list of author names. Only news from any of the given authors will be returned. | (optional) defaults to undefined
+ **categories** | [**string**] | A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other. | (optional) defaults to undefined
  **entities** | [**string**] | Filter news by entities (see semantic types). | (optional) defaults to undefined
  **locationFilter** | [**string**] | Filter news by radius around a certain location. Format is \&quot;latitude,longitude,radius in kilometers\&quot;. Radius must be between 1 and 100 kilometers. | (optional) defaults to undefined
- **sort** | [**string**] | The sorting criteria (publish-time or sentiment). | (optional) defaults to undefined
+ **sort** | [**string**] | The sorting criteria (publish-time). | (optional) defaults to undefined
  **sortDirection** | [**string**] | Whether to sort ascending or descending (ASC or DESC). | (optional) defaults to undefined
  **offset** | [**number**] | The number of news to skip in range [0,10000] | (optional) defaults to undefined
  **number** | [**number**] | The number of news to return in range [1,100] | (optional) defaults to undefined

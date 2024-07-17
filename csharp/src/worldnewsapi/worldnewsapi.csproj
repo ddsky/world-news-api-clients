@@ -12,12 +12,13 @@
     <Description>A library generated from a OpenAPI doc</Description>
     <Copyright>No Copyright</Copyright>
     <RootNamespace>worldnewsapi</RootNamespace>
-    <Version>1.2.0</Version>
+    <Version>1.3.0</Version>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\worldnewsapi.xml</DocumentationFile>
     <RepositoryUrl>https://github.com/ddsky/world-news-api-clients/tree/main/csharp/.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageReleaseNotes>Minor update</PackageReleaseNotes>
     <Nullable>annotations</Nullable>
+    <ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
   </PropertyGroup>
 
   <ItemGroup>
@@ -28,9 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="System.Web" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="System.Web" />
   </ItemGroup>
 </Project>

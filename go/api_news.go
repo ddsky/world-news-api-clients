@@ -3,7 +3,7 @@ World News API
 
 The world's news wrapped into a single API.
 
-API version: 1.2.0
+API version: 1.3.0
 Contact: mail@worldnewsapi.com
 */
 
@@ -620,6 +620,163 @@ func (a *NewsAPIService) NewsWebsiteToRSSFeedExecute(r ApiNewsWebsiteToRSSFeedRe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiNewspaperFrontPagesRequest struct {
+	ctx context.Context
+	ApiService *NewsAPIService
+	sourceCountry *string
+	sourceName *string
+	date *string
+}
+
+// The ISO 3166 country code of the newspaper publication.
+func (r ApiNewspaperFrontPagesRequest) SourceCountry(sourceCountry string) ApiNewspaperFrontPagesRequest {
+	r.sourceCountry = &sourceCountry
+	return r
+}
+
+// The identifier of the publication see attached list.
+func (r ApiNewspaperFrontPagesRequest) SourceName(sourceName string) ApiNewspaperFrontPagesRequest {
+	r.sourceName = &sourceName
+	return r
+}
+
+// The date for which the front page should be retrieved.
+func (r ApiNewspaperFrontPagesRequest) Date(date string) ApiNewspaperFrontPagesRequest {
+	r.date = &date
+	return r
+}
+
+func (r ApiNewspaperFrontPagesRequest) Execute() (*NewspaperFrontPages200Response, *http.Response, error) {
+	return r.ApiService.NewspaperFrontPagesExecute(r)
+}
+
+/*
+NewspaperFrontPages Newspaper Front Pages
+
+Get the front pages of newspapers from around the world. The API provides images of the front pages of newspapers from different countries. Here's an example of some of today's newspapers:
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiNewspaperFrontPagesRequest
+*/
+func (a *NewsAPIService) NewspaperFrontPages(ctx context.Context) ApiNewspaperFrontPagesRequest {
+	return ApiNewspaperFrontPagesRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return NewspaperFrontPages200Response
+func (a *NewsAPIService) NewspaperFrontPagesExecute(r ApiNewspaperFrontPagesRequest) (*NewspaperFrontPages200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *NewspaperFrontPages200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NewsAPIService.NewspaperFrontPages")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/front-pages"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.sourceCountry != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "source-country", r.sourceCountry, "")
+	}
+	if r.sourceName != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "source-name", r.sourceName, "")
+	}
+	if r.date != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "date", r.date, "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarQueryParams.Add("api-key", key)
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["headerApiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["x-api-key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiRetrieveNewsArticlesByIdsRequest struct {
 	ctx context.Context
 	ApiService *NewsAPIService
@@ -773,6 +930,7 @@ type ApiSearchNewsRequest struct {
 	latestPublishDate *string
 	newsSources *string
 	authors *string
+	categories *string
 	entities *string
 	locationFilter *string
 	sort *string
@@ -835,6 +993,12 @@ func (r ApiSearchNewsRequest) Authors(authors string) ApiSearchNewsRequest {
 	return r
 }
 
+// A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other.
+func (r ApiSearchNewsRequest) Categories(categories string) ApiSearchNewsRequest {
+	r.categories = &categories
+	return r
+}
+
 // Filter news by entities (see semantic types).
 func (r ApiSearchNewsRequest) Entities(entities string) ApiSearchNewsRequest {
 	r.entities = &entities
@@ -847,7 +1011,7 @@ func (r ApiSearchNewsRequest) LocationFilter(locationFilter string) ApiSearchNew
 	return r
 }
 
-// The sorting criteria (publish-time or sentiment).
+// The sorting criteria (publish-time).
 func (r ApiSearchNewsRequest) Sort(sort string) ApiSearchNewsRequest {
 	r.sort = &sort
 	return r
@@ -878,7 +1042,7 @@ func (r ApiSearchNewsRequest) Execute() (*SearchNews200Response, *http.Response,
 /*
 SearchNews Search News
 
-Search and filter news by text, date, location, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
+Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSearchNewsRequest
@@ -937,6 +1101,9 @@ func (a *NewsAPIService) SearchNewsExecute(r ApiSearchNewsRequest) (*SearchNews2
 	}
 	if r.authors != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "authors", r.authors, "")
+	}
+	if r.categories != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "categories", r.categories, "")
 	}
 	if r.entities != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "entities", r.entities, "")

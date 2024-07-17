@@ -7,13 +7,13 @@
 | **summary** | **String** |  | [optional] |
 | **image** | **String** |  | [optional] |
 | **sentiment** | **Float** |  | [optional] |
-| **catgory** | **String** |  | [optional] |
 | **language** | **String** |  | [optional] |
 | **title** | **String** |  | [optional] |
 | **url** | **String** |  | [optional] |
 | **source_country** | **String** |  | [optional] |
 | **id** | **Integer** |  | [optional] |
 | **text** | **String** |  | [optional] |
+| **category** | **String** |  | [optional] |
 | **publish_date** | **String** |  | [optional] |
 | **authors** | **Array&lt;String&gt;** |  | [optional] |
 
@@ -26,13 +26,13 @@ instance = OpenapiClient::RetrieveNewsArticlesByIds200ResponseNewsInner.new(
   summary: null,
   image: null,
   sentiment: null,
-  catgory: null,
   language: null,
   title: null,
   url: null,
   source_country: null,
   id: null,
   text: null,
+  category: null,
   publish_date: null,
   authors: null
 )

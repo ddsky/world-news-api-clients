@@ -3,6 +3,8 @@ export * from './extractNews200ResponseImagesInner';
 export * from './extractNews200ResponseVideosInner';
 export * from './extractNewsLinks200Response';
 export * from './getGeoCoordinates200Response';
+export * from './newspaperFrontPages200Response';
+export * from './newspaperFrontPages200ResponseFrontPage';
 export * from './retrieveNewsArticlesByIds200Response';
 export * from './retrieveNewsArticlesByIds200ResponseNewsInner';
 export * from './searchNews200Response';
