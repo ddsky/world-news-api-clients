@@ -202,7 +202,7 @@ Name | Type | Description  | Required | Notes
 
 ## search_news
 
-> models::SearchNews200Response search_news(text, source_countries, language, min_sentiment, max_sentiment, earliest_publish_date, latest_publish_date, news_sources, authors, categories, entities, location_filter, sort, sort_direction, offset, number)
+> models::SearchNews200Response search_news(text, source_country, language, min_sentiment, max_sentiment, earliest_publish_date, latest_publish_date, news_sources, authors, categories, entities, location_filter, sort, sort_direction, offset, number)
 Search News
 
 Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
@@ -213,7 +213,7 @@ Search and filter news by text, date, location, category, language, and more. Th
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **text** | Option<**String**> | The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford |  |
-**source_countries** | Option<**String**> | A comma-separated list of ISO 3166 country codes from which the news should originate. |  |
+**source_country** | Option<**String**> | The ISO 3166 country code from which the news should originate. |  |
 **language** | Option<**String**> | The ISO 6391 language code of the news. |  |
 **min_sentiment** | Option<**f64**> | The minimal sentiment of the news in range [-1,1]. |  |
 **max_sentiment** | Option<**f64**> | The maximal sentiment of the news in range [-1,1]. |  |
@@ -221,7 +221,7 @@ Name | Type | Description  | Required | Notes
 **latest_publish_date** | Option<**String**> | The news must have been published before this date. |  |
 **news_sources** | Option<**String**> | A comma-separated list of news sources from which the news should originate. |  |
 **authors** | Option<**String**> | A comma-separated list of author names. Only news from any of the given authors will be returned. |  |
-**categories** | Option<**String**> | A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other. |  |
+**categories** | Option<**String**> | A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other. Please note that the filter might leave out news, especially in non-English languages. If too few results are returned, use the text parameter instead. |  |
 **entities** | Option<**String**> | Filter news by entities (see semantic types). |  |
 **location_filter** | Option<**String**> | Filter news by radius around a certain location. Format is \"latitude,longitude,radius in kilometers\". Radius must be between 1 and 100 kilometers. |  |
 **sort** | Option<**String**> | The sorting criteria (publish-time). |  |

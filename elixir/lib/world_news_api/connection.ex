@@ -96,7 +96,7 @@ defmodule WorldNewsAPI.Connection do
         Keyword.get(
           tesla_options,
           :user_agent,
-          "openapi-generator - WorldNewsAPI 1.3.2 - elixir"
+          "openapi-generator - WorldNewsAPI 2.0.0 - elixir"
         )
       )
 

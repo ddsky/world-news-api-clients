@@ -1,8 +1,8 @@
 # java-client
 
 World News API
-- API version: 1.3.2
-  - Build date: 2024-07-17T14:39:04.107860+02:00[Europe/Berlin]
+- API version: 2.0.0
+  - Build date: 2024-10-20T17:03:50.740378100+02:00[Europe/Berlin]
   - Generator version: 7.8.0-SNAPSHOT
 
 The world's news wrapped into a single API.
@@ -41,7 +41,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.worldnewsapi</groupId>
   <artifactId>java-client</artifactId>
-  <version>1.3.2</version>
+  <version>2.0.0</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -57,7 +57,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "com.worldnewsapi:java-client:1.3.2"
+     implementation "com.worldnewsapi:java-client:2.0.0"
   }
 ```
 
@@ -71,7 +71,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/java-client-1.3.2.jar`
+* `target/java-client-2.0.0.jar`
 * `target/lib/*.jar`
 
 ## Getting Started

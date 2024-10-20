@@ -661,7 +661,7 @@ catch (ApiException e)
 
 <a id="searchnews"></a>
 # **SearchNews**
-> SearchNews200Response SearchNews (string? text = null, string? sourceCountries = null, string? language = null, double? minSentiment = null, double? maxSentiment = null, string? earliestPublishDate = null, string? latestPublishDate = null, string? newsSources = null, string? authors = null, string? categories = null, string? entities = null, string? locationFilter = null, string? sort = null, string? sortDirection = null, int? offset = null, int? number = null)
+> SearchNews200Response SearchNews (string? text = null, string? sourceCountry = null, string? language = null, double? minSentiment = null, double? maxSentiment = null, string? earliestPublishDate = null, string? latestPublishDate = null, string? newsSources = null, string? authors = null, string? categories = null, string? entities = null, string? locationFilter = null, string? sort = null, string? sortDirection = null, int? offset = null, int? number = null)
 
 Search News
 
@@ -694,7 +694,7 @@ namespace Example
 
             var apiInstance = new NewsApi(config);
             var text = tesla;  // string? | The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford (optional) 
-            var sourceCountries = us,uk;  // string? | A comma-separated list of ISO 3166 country codes from which the news should originate. (optional) 
+            var sourceCountry = us;  // string? | The ISO 3166 country code from which the news should originate. (optional) 
             var language = en;  // string? | The ISO 6391 language code of the news. (optional) 
             var minSentiment = -0.8;  // double? | The minimal sentiment of the news in range [-1,1]. (optional) 
             var maxSentiment = 0.8;  // double? | The maximal sentiment of the news in range [-1,1]. (optional) 
@@ -702,7 +702,7 @@ namespace Example
             var latestPublishDate = 2022-04-22 16:12:35;  // string? | The news must have been published before this date. (optional) 
             var newsSources = https://www.bbc.co.uk;  // string? | A comma-separated list of news sources from which the news should originate. (optional) 
             var authors = John Doe;  // string? | A comma-separated list of author names. Only news from any of the given authors will be returned. (optional) 
-            var categories = politics,sports;  // string? | A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other. (optional) 
+            var categories = politics,sports;  // string? | A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other. Please note that the filter might leave out news, especially in non-English languages. If too few results are returned, use the text parameter instead. (optional) 
             var entities = ORG:Tesla;  // string? | Filter news by entities (see semantic types). (optional) 
             var locationFilter = 51.050407, 13.737262, 20;  // string? | Filter news by radius around a certain location. Format is \"latitude,longitude,radius in kilometers\". Radius must be between 1 and 100 kilometers. (optional) 
             var sort = publish-time;  // string? | The sorting criteria (publish-time). (optional) 
@@ -713,7 +713,7 @@ namespace Example
             try
             {
                 // Search News
-                SearchNews200Response result = apiInstance.SearchNews(text, sourceCountries, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, categories, entities, locationFilter, sort, sortDirection, offset, number);
+                SearchNews200Response result = apiInstance.SearchNews(text, sourceCountry, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, categories, entities, locationFilter, sort, sortDirection, offset, number);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -734,7 +734,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Search News
-    ApiResponse<SearchNews200Response> response = apiInstance.SearchNewsWithHttpInfo(text, sourceCountries, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, categories, entities, locationFilter, sort, sortDirection, offset, number);
+    ApiResponse<SearchNews200Response> response = apiInstance.SearchNewsWithHttpInfo(text, sourceCountry, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, categories, entities, locationFilter, sort, sortDirection, offset, number);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -752,7 +752,7 @@ catch (ApiException e)
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **text** | **string?** | The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford | [optional]  |
-| **sourceCountries** | **string?** | A comma-separated list of ISO 3166 country codes from which the news should originate. | [optional]  |
+| **sourceCountry** | **string?** | The ISO 3166 country code from which the news should originate. | [optional]  |
 | **language** | **string?** | The ISO 6391 language code of the news. | [optional]  |
 | **minSentiment** | **double?** | The minimal sentiment of the news in range [-1,1]. | [optional]  |
 | **maxSentiment** | **double?** | The maximal sentiment of the news in range [-1,1]. | [optional]  |
@@ -760,7 +760,7 @@ catch (ApiException e)
 | **latestPublishDate** | **string?** | The news must have been published before this date. | [optional]  |
 | **newsSources** | **string?** | A comma-separated list of news sources from which the news should originate. | [optional]  |
 | **authors** | **string?** | A comma-separated list of author names. Only news from any of the given authors will be returned. | [optional]  |
-| **categories** | **string?** | A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other. | [optional]  |
+| **categories** | **string?** | A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other. Please note that the filter might leave out news, especially in non-English languages. If too few results are returned, use the text parameter instead. | [optional]  |
 | **entities** | **string?** | Filter news by entities (see semantic types). | [optional]  |
 | **locationFilter** | **string?** | Filter news by radius around a certain location. Format is \&quot;latitude,longitude,radius in kilometers\&quot;. Radius must be between 1 and 100 kilometers. | [optional]  |
 | **sort** | **string?** | The sorting criteria (publish-time). | [optional]  |

@@ -1,5 +1,5 @@
 package = "worldnewsapi"
-version = "1.3.2"
+version = "2.0.0"
 source = {
 	url = "https://github.com/ddsky/world-news-api-clients/tree/main/lua/.git"
 }

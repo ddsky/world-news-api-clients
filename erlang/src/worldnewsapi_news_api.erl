@@ -150,7 +150,7 @@ search_news(Ctx, Optional) ->
 
     Method = get,
     Path = [?BASE_URL, "/search-news"],
-    QS = lists:flatten([])++worldnewsapi_utils:optional_params(['text', 'source-countries', 'language', 'min-sentiment', 'max-sentiment', 'earliest-publish-date', 'latest-publish-date', 'news-sources', 'authors', 'categories', 'entities', 'location-filter', 'sort', 'sort-direction', 'offset', 'number'], _OptionalParams),
+    QS = lists:flatten([])++worldnewsapi_utils:optional_params(['text', 'source-country', 'language', 'min-sentiment', 'max-sentiment', 'earliest-publish-date', 'latest-publish-date', 'news-sources', 'authors', 'categories', 'entities', 'location-filter', 'sort', 'sort-direction', 'offset', 'number'], _OptionalParams),
     Headers = [],
     Body1 = [],
     ContentTypeHeader = worldnewsapi_utils:select_header_content_type([]),

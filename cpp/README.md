@@ -4,7 +4,7 @@
 
 World News API
 
-- API version: 1.3.2
+- API version: 2.0.0
 - Generator version: 7.8.0-SNAPSHOT
 
 The world's news wrapped into a single API.

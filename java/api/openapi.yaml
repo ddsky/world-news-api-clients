@@ -6,7 +6,7 @@ info:
   description: The world's news wrapped into a single API.
   termsOfService: https://worldnewsapi.com/terms
   title: World News API
-  version: 1.3.2
+  version: 2.0.0
 servers:
 - url: https://api.worldnewsapi.com
 security:
@@ -38,14 +38,13 @@ paths:
           pattern: "."
           type: string
         style: form
-      - description: A comma-separated list of ISO 3166 country codes from which the
-          news should originate.
+      - description: The ISO 3166 country code from which the news should originate.
         explode: false
         in: query
-        name: source-countries
+        name: source-country
         required: false
         schema:
-          example: "us,uk"
+          example: us
           maxLength: 100
           pattern: "."
           type: string
@@ -134,7 +133,9 @@ paths:
       - description: "A comma-separated list of categories. Only news from any of\
           \ the given categories will be returned. Possible categories are politics,\
           \ sports, business, technology, entertainment, health, science, lifestyle,\
-          \ travel, culture, education, environment, other."
+          \ travel, culture, education, environment, other. Please note that the filter\
+          \ might leave out news, especially in non-English languages. If too few\
+          \ results are returned, use the text parameter instead."
         explode: false
         in: query
         name: categories

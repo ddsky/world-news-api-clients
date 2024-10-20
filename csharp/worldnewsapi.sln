@@ -2,7 +2,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 VisualStudioVersion = 12.0.0.0
 MinimumVisualStudioVersion = 10.0.0.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "worldnewsapi", "src\worldnewsapi\worldnewsapi.csproj", "{5E5A50B6-A13A-4A42-9810-655C7BFCD642}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "worldnewsapi", "src\worldnewsapi\worldnewsapi.csproj", "{76E57EDC-5982-4AE3-8CF0-F3BB52771380}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "worldnewsapi.Test", "src\worldnewsapi.Test\worldnewsapi.Test.csproj", "{19F1DEBC-DE5E-4517-8062-F000CD499087}"
 EndProject
@@ -12,10 +12,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5E5A50B6-A13A-4A42-9810-655C7BFCD642}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5E5A50B6-A13A-4A42-9810-655C7BFCD642}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5E5A50B6-A13A-4A42-9810-655C7BFCD642}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5E5A50B6-A13A-4A42-9810-655C7BFCD642}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76E57EDC-5982-4AE3-8CF0-F3BB52771380}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76E57EDC-5982-4AE3-8CF0-F3BB52771380}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76E57EDC-5982-4AE3-8CF0-F3BB52771380}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76E57EDC-5982-4AE3-8CF0-F3BB52771380}.Release|Any CPU.Build.0 = Release|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Release|Any CPU.ActiveCfg = Release|Any CPU

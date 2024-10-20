@@ -407,8 +407,8 @@ const apiInstance = new .NewsApi(configuration);
 let body:.NewsApiSearchNewsRequest = {
   // string | The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford (optional)
   text: "tesla",
-  // string | A comma-separated list of ISO 3166 country codes from which the news should originate. (optional)
-  sourceCountries: "us,uk",
+  // string | The ISO 3166 country code from which the news should originate. (optional)
+  sourceCountry: "us",
   // string | The ISO 6391 language code of the news. (optional)
   language: "en",
   // number | The minimal sentiment of the news in range [-1,1]. (optional)
@@ -423,7 +423,7 @@ let body:.NewsApiSearchNewsRequest = {
   newsSources: "https://www.bbc.co.uk",
   // string | A comma-separated list of author names. Only news from any of the given authors will be returned. (optional)
   authors: "John Doe",
-  // string | A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other. (optional)
+  // string | A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other. Please note that the filter might leave out news, especially in non-English languages. If too few results are returned, use the text parameter instead. (optional)
   categories: "politics,sports",
   // string | Filter news by entities (see semantic types). (optional)
   entities: "ORG:Tesla",
@@ -450,7 +450,7 @@ apiInstance.searchNews(body).then((data:any) => {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **text** | [**string**] | The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford | (optional) defaults to undefined
- **sourceCountries** | [**string**] | A comma-separated list of ISO 3166 country codes from which the news should originate. | (optional) defaults to undefined
+ **sourceCountry** | [**string**] | The ISO 3166 country code from which the news should originate. | (optional) defaults to undefined
  **language** | [**string**] | The ISO 6391 language code of the news. | (optional) defaults to undefined
  **minSentiment** | [**number**] | The minimal sentiment of the news in range [-1,1]. | (optional) defaults to undefined
  **maxSentiment** | [**number**] | The maximal sentiment of the news in range [-1,1]. | (optional) defaults to undefined
@@ -458,7 +458,7 @@ Name | Type | Description  | Notes
  **latestPublishDate** | [**string**] | The news must have been published before this date. | (optional) defaults to undefined
  **newsSources** | [**string**] | A comma-separated list of news sources from which the news should originate. | (optional) defaults to undefined
  **authors** | [**string**] | A comma-separated list of author names. Only news from any of the given authors will be returned. | (optional) defaults to undefined
- **categories** | [**string**] | A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other. | (optional) defaults to undefined
+ **categories** | [**string**] | A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other. Please note that the filter might leave out news, especially in non-English languages. If too few results are returned, use the text parameter instead. | (optional) defaults to undefined
  **entities** | [**string**] | Filter news by entities (see semantic types). | (optional) defaults to undefined
  **locationFilter** | [**string**] | Filter news by radius around a certain location. Format is \&quot;latitude,longitude,radius in kilometers\&quot;. Radius must be between 1 and 100 kilometers. | (optional) defaults to undefined
  **sort** | [**string**] | The sorting criteria (publish-time). | (optional) defaults to undefined

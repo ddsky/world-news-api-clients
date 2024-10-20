@@ -254,7 +254,7 @@ defmodule WorldNewsAPI.Api.News do
   - `connection` (WorldNewsAPI.Connection): Connection to server
   - `opts` (keyword): Optional parameters
     - `:text` (String.t): The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford
-    - `:"source-countries"` (String.t): A comma-separated list of ISO 3166 country codes from which the news should originate.
+    - `:"source-country"` (String.t): The ISO 3166 country code from which the news should originate.
     - `:language` (String.t): The ISO 6391 language code of the news.
     - `:"min-sentiment"` (float()): The minimal sentiment of the news in range [-1,1].
     - `:"max-sentiment"` (float()): The maximal sentiment of the news in range [-1,1].
@@ -262,7 +262,7 @@ defmodule WorldNewsAPI.Api.News do
     - `:"latest-publish-date"` (String.t): The news must have been published before this date.
     - `:"news-sources"` (String.t): A comma-separated list of news sources from which the news should originate.
     - `:authors` (String.t): A comma-separated list of author names. Only news from any of the given authors will be returned.
-    - `:categories` (String.t): A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other.
+    - `:categories` (String.t): A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other. Please note that the filter might leave out news, especially in non-English languages. If too few results are returned, use the text parameter instead.
     - `:entities` (String.t): Filter news by entities (see semantic types).
     - `:"location-filter"` (String.t): Filter news by radius around a certain location. Format is \"latitude,longitude,radius in kilometers\". Radius must be between 1 and 100 kilometers.
     - `:sort` (String.t): The sorting criteria (publish-time).
@@ -279,7 +279,7 @@ defmodule WorldNewsAPI.Api.News do
   def search_news(connection, opts \\ []) do
     optional_params = %{
       :text => :query,
-      :"source-countries" => :query,
+      :"source-country" => :query,
       :language => :query,
       :"min-sentiment" => :query,
       :"max-sentiment" => :query,

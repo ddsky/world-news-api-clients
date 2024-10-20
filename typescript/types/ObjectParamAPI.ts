@@ -111,11 +111,11 @@ export interface NewsApiSearchNewsRequest {
      */
     text?: string
     /**
-     * A comma-separated list of ISO 3166 country codes from which the news should originate.
+     * The ISO 3166 country code from which the news should originate.
      * @type string
      * @memberof NewsApisearchNews
      */
-    sourceCountries?: string
+    sourceCountry?: string
     /**
      * The ISO 6391 language code of the news.
      * @type string
@@ -159,7 +159,7 @@ export interface NewsApiSearchNewsRequest {
      */
     authors?: string
     /**
-     * A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other.
+     * A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other. Please note that the filter might leave out news, especially in non-English languages. If too few results are returned, use the text parameter instead.
      * @type string
      * @memberof NewsApisearchNews
      */
@@ -350,7 +350,7 @@ export class ObjectNewsApi {
      * @param param the request object
      */
     public searchNewsWithHttpInfo(param: NewsApiSearchNewsRequest = {}, options?: Configuration): Promise<HttpInfo<SearchNews200Response>> {
-        return this.api.searchNewsWithHttpInfo(param.text, param.sourceCountries, param.language, param.minSentiment, param.maxSentiment, param.earliestPublishDate, param.latestPublishDate, param.newsSources, param.authors, param.categories, param.entities, param.locationFilter, param.sort, param.sortDirection, param.offset, param.number,  options).toPromise();
+        return this.api.searchNewsWithHttpInfo(param.text, param.sourceCountry, param.language, param.minSentiment, param.maxSentiment, param.earliestPublishDate, param.latestPublishDate, param.newsSources, param.authors, param.categories, param.entities, param.locationFilter, param.sort, param.sortDirection, param.offset, param.number,  options).toPromise();
     }
 
     /**
@@ -359,7 +359,7 @@ export class ObjectNewsApi {
      * @param param the request object
      */
     public searchNews(param: NewsApiSearchNewsRequest = {}, options?: Configuration): Promise<SearchNews200Response> {
-        return this.api.searchNews(param.text, param.sourceCountries, param.language, param.minSentiment, param.maxSentiment, param.earliestPublishDate, param.latestPublishDate, param.newsSources, param.authors, param.categories, param.entities, param.locationFilter, param.sort, param.sortDirection, param.offset, param.number,  options).toPromise();
+        return this.api.searchNews(param.text, param.sourceCountry, param.language, param.minSentiment, param.maxSentiment, param.earliestPublishDate, param.latestPublishDate, param.newsSources, param.authors, param.categories, param.entities, param.locationFilter, param.sort, param.sortDirection, param.offset, param.number,  options).toPromise();
     }
 
     /**

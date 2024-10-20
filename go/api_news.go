@@ -3,7 +3,7 @@ World News API
 
 The world's news wrapped into a single API.
 
-API version: 1.3.2
+API version: 2.0.0
 Contact: mail@worldnewsapi.com
 */
 
@@ -922,7 +922,7 @@ type ApiSearchNewsRequest struct {
 	ctx context.Context
 	ApiService *NewsAPIService
 	text *string
-	sourceCountries *string
+	sourceCountry *string
 	language *string
 	minSentiment *float64
 	maxSentiment *float64
@@ -945,9 +945,9 @@ func (r ApiSearchNewsRequest) Text(text string) ApiSearchNewsRequest {
 	return r
 }
 
-// A comma-separated list of ISO 3166 country codes from which the news should originate.
-func (r ApiSearchNewsRequest) SourceCountries(sourceCountries string) ApiSearchNewsRequest {
-	r.sourceCountries = &sourceCountries
+// The ISO 3166 country code from which the news should originate.
+func (r ApiSearchNewsRequest) SourceCountry(sourceCountry string) ApiSearchNewsRequest {
+	r.sourceCountry = &sourceCountry
 	return r
 }
 
@@ -993,7 +993,7 @@ func (r ApiSearchNewsRequest) Authors(authors string) ApiSearchNewsRequest {
 	return r
 }
 
-// A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other.
+// A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other. Please note that the filter might leave out news, especially in non-English languages. If too few results are returned, use the text parameter instead.
 func (r ApiSearchNewsRequest) Categories(categories string) ApiSearchNewsRequest {
 	r.categories = &categories
 	return r
@@ -1078,8 +1078,8 @@ func (a *NewsAPIService) SearchNewsExecute(r ApiSearchNewsRequest) (*SearchNews2
 	if r.text != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "text", r.text, "")
 	}
-	if r.sourceCountries != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "source-countries", r.sourceCountries, "")
+	if r.sourceCountry != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "source-country", r.sourceCountry, "")
 	}
 	if r.language != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "")

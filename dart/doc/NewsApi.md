@@ -336,7 +336,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **searchNews**
-> SearchNews200Response searchNews(text, sourceCountries, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, categories, entities, locationFilter, sort, sortDirection, offset, number)
+> SearchNews200Response searchNews(text, sourceCountry, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, categories, entities, locationFilter, sort, sortDirection, offset, number)
 
 Search News
 
@@ -356,7 +356,7 @@ import 'package:openapi/api.dart';
 
 final api_instance = NewsApi();
 final text = tesla; // String | The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford
-final sourceCountries = us,uk; // String | A comma-separated list of ISO 3166 country codes from which the news should originate.
+final sourceCountry = us; // String | The ISO 3166 country code from which the news should originate.
 final language = en; // String | The ISO 6391 language code of the news.
 final minSentiment = -0.8; // double | The minimal sentiment of the news in range [-1,1].
 final maxSentiment = 0.8; // double | The maximal sentiment of the news in range [-1,1].
@@ -364,7 +364,7 @@ final earliestPublishDate = 2022-04-22 16:12:35; // String | The news must have 
 final latestPublishDate = 2022-04-22 16:12:35; // String | The news must have been published before this date.
 final newsSources = https://www.bbc.co.uk; // String | A comma-separated list of news sources from which the news should originate.
 final authors = John Doe; // String | A comma-separated list of author names. Only news from any of the given authors will be returned.
-final categories = politics,sports; // String | A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other.
+final categories = politics,sports; // String | A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other. Please note that the filter might leave out news, especially in non-English languages. If too few results are returned, use the text parameter instead.
 final entities = ORG:Tesla; // String | Filter news by entities (see semantic types).
 final locationFilter = 51.050407, 13.737262, 20; // String | Filter news by radius around a certain location. Format is \"latitude,longitude,radius in kilometers\". Radius must be between 1 and 100 kilometers.
 final sort = publish-time; // String | The sorting criteria (publish-time).
@@ -373,7 +373,7 @@ final offset = 0; // int | The number of news to skip in range [0,10000]
 final number = 10; // int | The number of news to return in range [1,100]
 
 try {
-    final result = api_instance.searchNews(text, sourceCountries, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, categories, entities, locationFilter, sort, sortDirection, offset, number);
+    final result = api_instance.searchNews(text, sourceCountry, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, categories, entities, locationFilter, sort, sortDirection, offset, number);
     print(result);
 } catch (e) {
     print('Exception when calling NewsApi->searchNews: $e\n');
@@ -385,7 +385,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **text** | **String**| The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford | [optional] 
- **sourceCountries** | **String**| A comma-separated list of ISO 3166 country codes from which the news should originate. | [optional] 
+ **sourceCountry** | **String**| The ISO 3166 country code from which the news should originate. | [optional] 
  **language** | **String**| The ISO 6391 language code of the news. | [optional] 
  **minSentiment** | **double**| The minimal sentiment of the news in range [-1,1]. | [optional] 
  **maxSentiment** | **double**| The maximal sentiment of the news in range [-1,1]. | [optional] 
@@ -393,7 +393,7 @@ Name | Type | Description  | Notes
  **latestPublishDate** | **String**| The news must have been published before this date. | [optional] 
  **newsSources** | **String**| A comma-separated list of news sources from which the news should originate. | [optional] 
  **authors** | **String**| A comma-separated list of author names. Only news from any of the given authors will be returned. | [optional] 
- **categories** | **String**| A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other. | [optional] 
+ **categories** | **String**| A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other. Please note that the filter might leave out news, especially in non-English languages. If too few results are returned, use the text parameter instead. | [optional] 
  **entities** | **String**| Filter news by entities (see semantic types). | [optional] 
  **locationFilter** | **String**| Filter news by radius around a certain location. Format is \"latitude,longitude,radius in kilometers\". Radius must be between 1 and 100 kilometers. | [optional] 
  **sort** | **String**| The sorting criteria (publish-time). | [optional] 

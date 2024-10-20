@@ -576,7 +576,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **search_news**
-> SearchNews200Response search_news(text=text, source_countries=source_countries, language=language, min_sentiment=min_sentiment, max_sentiment=max_sentiment, earliest_publish_date=earliest_publish_date, latest_publish_date=latest_publish_date, news_sources=news_sources, authors=authors, categories=categories, entities=entities, location_filter=location_filter, sort=sort, sort_direction=sort_direction, offset=offset, number=number)
+> SearchNews200Response search_news(text=text, source_country=source_country, language=language, min_sentiment=min_sentiment, max_sentiment=max_sentiment, earliest_publish_date=earliest_publish_date, latest_publish_date=latest_publish_date, news_sources=news_sources, authors=authors, categories=categories, entities=entities, location_filter=location_filter, sort=sort, sort_direction=sort_direction, offset=offset, number=number)
 
 Search News
 
@@ -621,7 +621,7 @@ with worldnewsapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = worldnewsapi.NewsApi(api_client)
     text = 'tesla' # str | The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford (optional)
-    source_countries = 'us,uk' # str | A comma-separated list of ISO 3166 country codes from which the news should originate. (optional)
+    source_country = 'us' # str | The ISO 3166 country code from which the news should originate. (optional)
     language = 'en' # str | The ISO 6391 language code of the news. (optional)
     min_sentiment = -0.8 # float | The minimal sentiment of the news in range [-1,1]. (optional)
     max_sentiment = 0.8 # float | The maximal sentiment of the news in range [-1,1]. (optional)
@@ -629,7 +629,7 @@ with worldnewsapi.ApiClient(configuration) as api_client:
     latest_publish_date = '2022-04-22 16:12:35' # str | The news must have been published before this date. (optional)
     news_sources = 'https://www.bbc.co.uk' # str | A comma-separated list of news sources from which the news should originate. (optional)
     authors = 'John Doe' # str | A comma-separated list of author names. Only news from any of the given authors will be returned. (optional)
-    categories = 'politics,sports' # str | A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other. (optional)
+    categories = 'politics,sports' # str | A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other. Please note that the filter might leave out news, especially in non-English languages. If too few results are returned, use the text parameter instead. (optional)
     entities = 'ORG:Tesla' # str | Filter news by entities (see semantic types). (optional)
     location_filter = '51.050407, 13.737262, 20' # str | Filter news by radius around a certain location. Format is \"latitude,longitude,radius in kilometers\". Radius must be between 1 and 100 kilometers. (optional)
     sort = 'publish-time' # str | The sorting criteria (publish-time). (optional)
@@ -639,7 +639,7 @@ with worldnewsapi.ApiClient(configuration) as api_client:
 
     try:
         # Search News
-        api_response = api_instance.search_news(text=text, source_countries=source_countries, language=language, min_sentiment=min_sentiment, max_sentiment=max_sentiment, earliest_publish_date=earliest_publish_date, latest_publish_date=latest_publish_date, news_sources=news_sources, authors=authors, categories=categories, entities=entities, location_filter=location_filter, sort=sort, sort_direction=sort_direction, offset=offset, number=number)
+        api_response = api_instance.search_news(text=text, source_country=source_country, language=language, min_sentiment=min_sentiment, max_sentiment=max_sentiment, earliest_publish_date=earliest_publish_date, latest_publish_date=latest_publish_date, news_sources=news_sources, authors=authors, categories=categories, entities=entities, location_filter=location_filter, sort=sort, sort_direction=sort_direction, offset=offset, number=number)
         print("The response of NewsApi->search_news:\n")
         pprint(api_response)
     except Exception as e:
@@ -654,7 +654,7 @@ with worldnewsapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **text** | **str**| The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford | [optional] 
- **source_countries** | **str**| A comma-separated list of ISO 3166 country codes from which the news should originate. | [optional] 
+ **source_country** | **str**| The ISO 3166 country code from which the news should originate. | [optional] 
  **language** | **str**| The ISO 6391 language code of the news. | [optional] 
  **min_sentiment** | **float**| The minimal sentiment of the news in range [-1,1]. | [optional] 
  **max_sentiment** | **float**| The maximal sentiment of the news in range [-1,1]. | [optional] 
@@ -662,7 +662,7 @@ Name | Type | Description  | Notes
  **latest_publish_date** | **str**| The news must have been published before this date. | [optional] 
  **news_sources** | **str**| A comma-separated list of news sources from which the news should originate. | [optional] 
  **authors** | **str**| A comma-separated list of author names. Only news from any of the given authors will be returned. | [optional] 
- **categories** | **str**| A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other. | [optional] 
+ **categories** | **str**| A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other. Please note that the filter might leave out news, especially in non-English languages. If too few results are returned, use the text parameter instead. | [optional] 
  **entities** | **str**| Filter news by entities (see semantic types). | [optional] 
  **location_filter** | **str**| Filter news by radius around a certain location. Format is \&quot;latitude,longitude,radius in kilometers\&quot;. Radius must be between 1 and 100 kilometers. | [optional] 
  **sort** | **str**| The sorting criteria (publish-time). | [optional] 
