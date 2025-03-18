@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 ## extractNews
 
-> ExtractNews200Response extractNews(url, analyze)
+> ExtractNews200Response extractNews(url, opts)
 
 Extract News
 
@@ -41,8 +41,10 @@ headerApiKey.apiKey = 'YOUR API KEY';
 
 let apiInstance = new Worldnewsapi.NewsApi();
 let url = "https://www.bbc.com/news/world-us-canada-59340789"; // String | The url of the news.
-let analyze = true; // Boolean | Whether to analyze the news (extract entities etc.)
-apiInstance.extractNews(url, analyze, (error, data, response) => {
+let opts = {
+  'analyze': true // Boolean | Whether to analyze the extracted news (extract entities, detect sentiment etc.)
+};
+apiInstance.extractNews(url, opts, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -57,7 +59,7 @@ apiInstance.extractNews(url, analyze, (error, data, response) => {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **url** | **String**| The url of the news. | 
- **analyze** | **Boolean**| Whether to analyze the news (extract entities etc.) | 
+ **analyze** | **Boolean**| Whether to analyze the extracted news (extract entities, detect sentiment etc.) | [optional] 
 
 ### Return type
 
@@ -75,7 +77,7 @@ Name | Type | Description  | Notes
 
 ## extractNewsLinks
 
-> ExtractNewsLinks200Response extractNewsLinks(url, analyze)
+> ExtractNewsLinks200Response extractNewsLinks(url, opts)
 
 Extract News Links
 
@@ -99,8 +101,10 @@ headerApiKey.apiKey = 'YOUR API KEY';
 
 let apiInstance = new Worldnewsapi.NewsApi();
 let url = "https://www.bbc.com/news/world-us-canada-59340789"; // String | The url of the news.
-let analyze = true; // Boolean | Whether to analyze the news (extract entities etc.)
-apiInstance.extractNewsLinks(url, analyze, (error, data, response) => {
+let opts = {
+  'analyze': true // Boolean | Whether to analyze the extracted news (extract entities, detect sentiment etc.)
+};
+apiInstance.extractNewsLinks(url, opts, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -115,7 +119,7 @@ apiInstance.extractNewsLinks(url, analyze, (error, data, response) => {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **url** | **String**| The url of the news. | 
- **analyze** | **Boolean**| Whether to analyze the news (extract entities etc.) | 
+ **analyze** | **Boolean**| Whether to analyze the extracted news (extract entities, detect sentiment etc.) | [optional] 
 
 ### Return type
 
@@ -189,7 +193,7 @@ Name | Type | Description  | Notes
 
 ## newsWebsiteToRSSFeed
 
-> Object newsWebsiteToRSSFeed(url, analyze)
+> Object newsWebsiteToRSSFeed(url, opts)
 
 News Website to RSS Feed
 
@@ -212,9 +216,11 @@ headerApiKey.apiKey = 'YOUR API KEY';
 //headerApiKey.apiKeyPrefix = 'Token';
 
 let apiInstance = new Worldnewsapi.NewsApi();
-let url = "https://www.bbc.com/news/world-us-canada-59340789"; // String | The url of the news.
-let analyze = true; // Boolean | Whether to analyze the news (extract entities etc.)
-apiInstance.newsWebsiteToRSSFeed(url, analyze, (error, data, response) => {
+let url = "https://www.bbc.com/"; // String | The url of the site for which an RSS feed should be created.
+let opts = {
+  'extractNews': true // Boolean | Whether to extract the news for each link instead of just returning the link.
+};
+apiInstance.newsWebsiteToRSSFeed(url, opts, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -228,8 +234,8 @@ apiInstance.newsWebsiteToRSSFeed(url, analyze, (error, data, response) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **url** | **String**| The url of the news. | 
- **analyze** | **Boolean**| Whether to analyze the news (extract entities etc.) | 
+ **url** | **String**| The url of the site for which an RSS feed should be created. | 
+ **extractNews** | **Boolean**| Whether to extract the news for each link instead of just returning the link. | [optional] 
 
 ### Return type
 
@@ -369,7 +375,7 @@ Name | Type | Description  | Notes
 
 Search News
 
-Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
+Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. Each returned article includes the title, the full text of the article, a summary, image URL, video URL, the publish date, the authors, the category, the language, the source country, and the sentiment of the article. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
 
 ### Example
 
@@ -389,7 +395,8 @@ headerApiKey.apiKey = 'YOUR API KEY';
 
 let apiInstance = new Worldnewsapi.NewsApi();
 let opts = {
-  'text': "tesla", // String | The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford
+  'text': "tesla", // String | The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford. You can also exclude terms by putting a minus sign (-) in front of the term, e.g. tesla -ford. For exact matches just put your term in quotes, e.g. \"elon musk\".
+  'textMatchIndexes': "title,content", // String | If a \"text\" is given to search for, you can specify where this text is searched for. Possible values are title, content, or both separated by a comma. By default, both title and content are searched.
   'sourceCountry': "us", // String | The ISO 3166 country code from which the news should originate.
   'language': "en", // String | The ISO 6391 language code of the news.
   'minSentiment': -0.8, // Number | The minimal sentiment of the news in range [-1,1].
@@ -399,11 +406,11 @@ let opts = {
   'newsSources': "https://www.bbc.co.uk", // String | A comma-separated list of news sources from which the news should originate.
   'authors': "John Doe", // String | A comma-separated list of author names. Only news from any of the given authors will be returned.
   'categories': "politics,sports", // String | A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other. Please note that the filter might leave out news, especially in non-English languages. If too few results are returned, use the text parameter instead.
-  'entities': "ORG:Tesla", // String | Filter news by entities (see semantic types).
+  'entities': "ORG:Tesla,PER:Elon Musk", // String | Filter news by entities (see semantic types).
   'locationFilter': "51.050407, 13.737262, 20", // String | Filter news by radius around a certain location. Format is \"latitude,longitude,radius in kilometers\". Radius must be between 1 and 100 kilometers.
   'sort': "publish-time", // String | The sorting criteria (publish-time).
   'sortDirection': "ASC", // String | Whether to sort ascending or descending (ASC or DESC).
-  'offset': 0, // Number | The number of news to skip in range [0,10000]
+  'offset': 0, // Number | The number of news to skip in range [0,100000]
   'number': 10 // Number | The number of news to return in range [1,100]
 };
 apiInstance.searchNews(opts, (error, data, response) => {
@@ -420,7 +427,8 @@ apiInstance.searchNews(opts, (error, data, response) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **text** | **String**| The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford | [optional] 
+ **text** | **String**| The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford. You can also exclude terms by putting a minus sign (-) in front of the term, e.g. tesla -ford. For exact matches just put your term in quotes, e.g. \&quot;elon musk\&quot;. | [optional] 
+ **textMatchIndexes** | **String**| If a \&quot;text\&quot; is given to search for, you can specify where this text is searched for. Possible values are title, content, or both separated by a comma. By default, both title and content are searched. | [optional] 
  **sourceCountry** | **String**| The ISO 3166 country code from which the news should originate. | [optional] 
  **language** | **String**| The ISO 6391 language code of the news. | [optional] 
  **minSentiment** | **Number**| The minimal sentiment of the news in range [-1,1]. | [optional] 
@@ -434,7 +442,7 @@ Name | Type | Description  | Notes
  **locationFilter** | **String**| Filter news by radius around a certain location. Format is \&quot;latitude,longitude,radius in kilometers\&quot;. Radius must be between 1 and 100 kilometers. | [optional] 
  **sort** | **String**| The sorting criteria (publish-time). | [optional] 
  **sortDirection** | **String**| Whether to sort ascending or descending (ASC or DESC). | [optional] 
- **offset** | **Number**| The number of news to skip in range [0,10000] | [optional] 
+ **offset** | **Number**| The number of news to skip in range [0,100000] | [optional] 
  **number** | **Number**| The number of news to return in range [1,100] | [optional] 
 
 ### Return type

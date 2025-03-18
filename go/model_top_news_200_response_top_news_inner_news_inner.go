@@ -3,7 +3,7 @@ World News API
 
 The world's news wrapped into a single API.
 
-API version: 2.0.0
+API version: 2.1.0
 Contact: mail@worldnewsapi.com
 */
 

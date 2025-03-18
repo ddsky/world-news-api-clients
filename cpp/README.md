@@ -4,7 +4,7 @@
 
 World News API
 
-- API version: 2.0.0
+- API version: 2.1.0
 - Generator version: 7.8.0-SNAPSHOT
 
 The world's news wrapped into a single API.
@@ -85,7 +85,7 @@ void Example::exampleFunction1(){
           loop.quit();
       });
 
-      bool analyze = create(); // bool | Whether to analyze the news (extract entities etc.)
+      bool analyze = create(); // bool | Whether to analyze the extracted news (extract entities, detect sentiment etc.)
       apiInstance.extractNews(urlanalyze);
       QTimer::singleShot(5000, &loop, &QEventLoop::quit);
       loop.exec();

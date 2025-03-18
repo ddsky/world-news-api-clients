@@ -40,7 +40,7 @@ import 'package:openapi/api.dart';
 
 final api_instance = NewsApi();
 final url = https://www.bbc.com/news/world-us-canada-59340789; // String | The url of the news.
-final analyze = true; // bool | Whether to analyze the news (extract entities etc.)
+final analyze = true; // bool | Whether to analyze the extracted news (extract entities, detect sentiment etc.)
 
 try {
     final result = api_instance.extractNews(url, analyze);
@@ -55,7 +55,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **url** | **String**| The url of the news. | 
- **analyze** | **bool**| Whether to analyze the news (extract entities etc.) | 
+ **analyze** | **bool**| Whether to analyze the extracted news (extract entities, detect sentiment etc.) | [optional] 
 
 ### Return type
 
@@ -93,7 +93,7 @@ import 'package:openapi/api.dart';
 
 final api_instance = NewsApi();
 final url = https://www.bbc.com/news/world-us-canada-59340789; // String | The url of the news.
-final analyze = true; // bool | Whether to analyze the news (extract entities etc.)
+final analyze = true; // bool | Whether to analyze the extracted news (extract entities, detect sentiment etc.)
 
 try {
     final result = api_instance.extractNewsLinks(url, analyze);
@@ -108,7 +108,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **url** | **String**| The url of the news. | 
- **analyze** | **bool**| Whether to analyze the news (extract entities etc.) | 
+ **analyze** | **bool**| Whether to analyze the extracted news (extract entities, detect sentiment etc.) | [optional] 
 
 ### Return type
 
@@ -177,7 +177,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **newsWebsiteToRSSFeed**
-> Object newsWebsiteToRSSFeed(url, analyze)
+> Object newsWebsiteToRSSFeed(url, extractNews)
 
 News Website to RSS Feed
 
@@ -196,11 +196,11 @@ import 'package:openapi/api.dart';
 //defaultApiClient.getAuthentication<ApiKeyAuth>('headerApiKey').apiKeyPrefix = 'Bearer';
 
 final api_instance = NewsApi();
-final url = https://www.bbc.com/news/world-us-canada-59340789; // String | The url of the news.
-final analyze = true; // bool | Whether to analyze the news (extract entities etc.)
+final url = https://www.bbc.com/; // String | The url of the site for which an RSS feed should be created.
+final extractNews = true; // bool | Whether to extract the news for each link instead of just returning the link.
 
 try {
-    final result = api_instance.newsWebsiteToRSSFeed(url, analyze);
+    final result = api_instance.newsWebsiteToRSSFeed(url, extractNews);
     print(result);
 } catch (e) {
     print('Exception when calling NewsApi->newsWebsiteToRSSFeed: $e\n');
@@ -211,8 +211,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **url** | **String**| The url of the news. | 
- **analyze** | **bool**| Whether to analyze the news (extract entities etc.) | 
+ **url** | **String**| The url of the site for which an RSS feed should be created. | 
+ **extractNews** | **bool**| Whether to extract the news for each link instead of just returning the link. | [optional] 
 
 ### Return type
 
@@ -336,11 +336,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **searchNews**
-> SearchNews200Response searchNews(text, sourceCountry, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, categories, entities, locationFilter, sort, sortDirection, offset, number)
+> SearchNews200Response searchNews(text, textMatchIndexes, sourceCountry, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, categories, entities, locationFilter, sort, sortDirection, offset, number)
 
 Search News
 
-Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
+Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. Each returned article includes the title, the full text of the article, a summary, image URL, video URL, the publish date, the authors, the category, the language, the source country, and the sentiment of the article. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
 
 ### Example
 ```dart
@@ -355,7 +355,8 @@ import 'package:openapi/api.dart';
 //defaultApiClient.getAuthentication<ApiKeyAuth>('headerApiKey').apiKeyPrefix = 'Bearer';
 
 final api_instance = NewsApi();
-final text = tesla; // String | The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford
+final text = tesla; // String | The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford. You can also exclude terms by putting a minus sign (-) in front of the term, e.g. tesla -ford. For exact matches just put your term in quotes, e.g. \"elon musk\".
+final textMatchIndexes = title,content; // String | If a \"text\" is given to search for, you can specify where this text is searched for. Possible values are title, content, or both separated by a comma. By default, both title and content are searched.
 final sourceCountry = us; // String | The ISO 3166 country code from which the news should originate.
 final language = en; // String | The ISO 6391 language code of the news.
 final minSentiment = -0.8; // double | The minimal sentiment of the news in range [-1,1].
@@ -365,15 +366,15 @@ final latestPublishDate = 2022-04-22 16:12:35; // String | The news must have be
 final newsSources = https://www.bbc.co.uk; // String | A comma-separated list of news sources from which the news should originate.
 final authors = John Doe; // String | A comma-separated list of author names. Only news from any of the given authors will be returned.
 final categories = politics,sports; // String | A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other. Please note that the filter might leave out news, especially in non-English languages. If too few results are returned, use the text parameter instead.
-final entities = ORG:Tesla; // String | Filter news by entities (see semantic types).
+final entities = ORG:Tesla,PER:Elon Musk; // String | Filter news by entities (see semantic types).
 final locationFilter = 51.050407, 13.737262, 20; // String | Filter news by radius around a certain location. Format is \"latitude,longitude,radius in kilometers\". Radius must be between 1 and 100 kilometers.
 final sort = publish-time; // String | The sorting criteria (publish-time).
 final sortDirection = ASC; // String | Whether to sort ascending or descending (ASC or DESC).
-final offset = 0; // int | The number of news to skip in range [0,10000]
+final offset = 0; // int | The number of news to skip in range [0,100000]
 final number = 10; // int | The number of news to return in range [1,100]
 
 try {
-    final result = api_instance.searchNews(text, sourceCountry, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, categories, entities, locationFilter, sort, sortDirection, offset, number);
+    final result = api_instance.searchNews(text, textMatchIndexes, sourceCountry, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, categories, entities, locationFilter, sort, sortDirection, offset, number);
     print(result);
 } catch (e) {
     print('Exception when calling NewsApi->searchNews: $e\n');
@@ -384,7 +385,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **text** | **String**| The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford | [optional] 
+ **text** | **String**| The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford. You can also exclude terms by putting a minus sign (-) in front of the term, e.g. tesla -ford. For exact matches just put your term in quotes, e.g. \"elon musk\". | [optional] 
+ **textMatchIndexes** | **String**| If a \"text\" is given to search for, you can specify where this text is searched for. Possible values are title, content, or both separated by a comma. By default, both title and content are searched. | [optional] 
  **sourceCountry** | **String**| The ISO 3166 country code from which the news should originate. | [optional] 
  **language** | **String**| The ISO 6391 language code of the news. | [optional] 
  **minSentiment** | **double**| The minimal sentiment of the news in range [-1,1]. | [optional] 
@@ -398,7 +400,7 @@ Name | Type | Description  | Notes
  **locationFilter** | **String**| Filter news by radius around a certain location. Format is \"latitude,longitude,radius in kilometers\". Radius must be between 1 and 100 kilometers. | [optional] 
  **sort** | **String**| The sorting criteria (publish-time). | [optional] 
  **sortDirection** | **String**| Whether to sort ascending or descending (ASC or DESC). | [optional] 
- **offset** | **int**| The number of news to skip in range [0,10000] | [optional] 
+ **offset** | **int**| The number of news to skip in range [0,100000] | [optional] 
  **number** | **int**| The number of news to return in range [1,100] | [optional] 
 
 ### Return type

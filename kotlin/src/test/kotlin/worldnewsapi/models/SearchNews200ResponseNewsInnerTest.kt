@@ -43,12 +43,6 @@ class SearchNews200ResponseNewsInnerTest : ShouldSpec() {
             //modelInstance.sentiment shouldBe ("TODO")
         }
 
-        // to test the property `author`
-        should("test author") {
-            // uncomment below to test the property
-            //modelInstance.author shouldBe ("TODO")
-        }
-
         // to test the property `language`
         should("test language") {
             // uncomment below to test the property

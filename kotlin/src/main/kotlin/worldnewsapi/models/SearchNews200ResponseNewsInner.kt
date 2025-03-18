@@ -25,7 +25,6 @@ import com.squareup.moshi.JsonClass
  * @param summary 
  * @param image 
  * @param sentiment 
- * @param author 
  * @param language 
  * @param video 
  * @param title 
@@ -49,9 +48,6 @@ data class SearchNews200ResponseNewsInner (
 
     @Json(name = "sentiment")
     val sentiment: java.math.BigDecimal? = null,
-
-    @Json(name = "author")
-    val author: kotlin.String? = null,
 
     @Json(name = "language")
     val language: kotlin.String? = null,

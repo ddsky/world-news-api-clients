@@ -49,7 +49,7 @@ $apiInstance = new OpenAPI\Client\Api\NewsApi(
     $config
 );
 $url = https://www.bbc.com/news/world-us-canada-59340789; // string | The url of the news.
-$analyze = true; // bool | Whether to analyze the news (extract entities etc.)
+$analyze = true; // bool | Whether to analyze the extracted news (extract entities, detect sentiment etc.)
 
 try {
     $result = $apiInstance->extractNews($url, $analyze);
@@ -64,7 +64,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **url** | **string**| The url of the news. | |
-| **analyze** | **bool**| Whether to analyze the news (extract entities etc.) | |
+| **analyze** | **bool**| Whether to analyze the extracted news (extract entities, detect sentiment etc.) | [optional] |
 
 ### Return type
 
@@ -118,7 +118,7 @@ $apiInstance = new OpenAPI\Client\Api\NewsApi(
     $config
 );
 $url = https://www.bbc.com/news/world-us-canada-59340789; // string | The url of the news.
-$analyze = true; // bool | Whether to analyze the news (extract entities etc.)
+$analyze = true; // bool | Whether to analyze the extracted news (extract entities, detect sentiment etc.)
 
 try {
     $result = $apiInstance->extractNewsLinks($url, $analyze);
@@ -133,7 +133,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **url** | **string**| The url of the news. | |
-| **analyze** | **bool**| Whether to analyze the news (extract entities etc.) | |
+| **analyze** | **bool**| Whether to analyze the extracted news (extract entities, detect sentiment etc.) | [optional] |
 
 ### Return type
 
@@ -222,7 +222,7 @@ try {
 ## `newsWebsiteToRSSFeed()`
 
 ```php
-newsWebsiteToRSSFeed($url, $analyze): object
+newsWebsiteToRSSFeed($url, $extract_news): object
 ```
 
 News Website to RSS Feed
@@ -253,11 +253,11 @@ $apiInstance = new OpenAPI\Client\Api\NewsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$url = https://www.bbc.com/news/world-us-canada-59340789; // string | The url of the news.
-$analyze = true; // bool | Whether to analyze the news (extract entities etc.)
+$url = https://www.bbc.com/; // string | The url of the site for which an RSS feed should be created.
+$extract_news = true; // bool | Whether to extract the news for each link instead of just returning the link.
 
 try {
-    $result = $apiInstance->newsWebsiteToRSSFeed($url, $analyze);
+    $result = $apiInstance->newsWebsiteToRSSFeed($url, $extract_news);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling NewsApi->newsWebsiteToRSSFeed: ', $e->getMessage(), PHP_EOL;
@@ -268,8 +268,8 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **url** | **string**| The url of the news. | |
-| **analyze** | **bool**| Whether to analyze the news (extract entities etc.) | |
+| **url** | **string**| The url of the site for which an RSS feed should be created. | |
+| **extract_news** | **bool**| Whether to extract the news for each link instead of just returning the link. | [optional] |
 
 ### Return type
 
@@ -429,12 +429,12 @@ try {
 ## `searchNews()`
 
 ```php
-searchNews($text, $source_country, $language, $min_sentiment, $max_sentiment, $earliest_publish_date, $latest_publish_date, $news_sources, $authors, $categories, $entities, $location_filter, $sort, $sort_direction, $offset, $number): \OpenAPI\Client\Model\SearchNews200Response
+searchNews($text, $text_match_indexes, $source_country, $language, $min_sentiment, $max_sentiment, $earliest_publish_date, $latest_publish_date, $news_sources, $authors, $categories, $entities, $location_filter, $sort, $sort_direction, $offset, $number): \OpenAPI\Client\Model\SearchNews200Response
 ```
 
 Search News
 
-Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
+Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. Each returned article includes the title, the full text of the article, a summary, image URL, video URL, the publish date, the authors, the category, the language, the source country, and the sentiment of the article. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
 
 ### Example
 
@@ -460,7 +460,8 @@ $apiInstance = new OpenAPI\Client\Api\NewsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$text = tesla; // string | The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford
+$text = tesla; // string | The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford. You can also exclude terms by putting a minus sign (-) in front of the term, e.g. tesla -ford. For exact matches just put your term in quotes, e.g. \"elon musk\".
+$text_match_indexes = title,content; // string | If a \"text\" is given to search for, you can specify where this text is searched for. Possible values are title, content, or both separated by a comma. By default, both title and content are searched.
 $source_country = us; // string | The ISO 3166 country code from which the news should originate.
 $language = en; // string | The ISO 6391 language code of the news.
 $min_sentiment = -0.8; // float | The minimal sentiment of the news in range [-1,1].
@@ -470,15 +471,15 @@ $latest_publish_date = 2022-04-22 16:12:35; // string | The news must have been 
 $news_sources = https://www.bbc.co.uk; // string | A comma-separated list of news sources from which the news should originate.
 $authors = John Doe; // string | A comma-separated list of author names. Only news from any of the given authors will be returned.
 $categories = politics,sports; // string | A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other. Please note that the filter might leave out news, especially in non-English languages. If too few results are returned, use the text parameter instead.
-$entities = ORG:Tesla; // string | Filter news by entities (see semantic types).
+$entities = ORG:Tesla,PER:Elon Musk; // string | Filter news by entities (see semantic types).
 $location_filter = 51.050407, 13.737262, 20; // string | Filter news by radius around a certain location. Format is \"latitude,longitude,radius in kilometers\". Radius must be between 1 and 100 kilometers.
 $sort = publish-time; // string | The sorting criteria (publish-time).
 $sort_direction = ASC; // string | Whether to sort ascending or descending (ASC or DESC).
-$offset = 0; // int | The number of news to skip in range [0,10000]
+$offset = 0; // int | The number of news to skip in range [0,100000]
 $number = 10; // int | The number of news to return in range [1,100]
 
 try {
-    $result = $apiInstance->searchNews($text, $source_country, $language, $min_sentiment, $max_sentiment, $earliest_publish_date, $latest_publish_date, $news_sources, $authors, $categories, $entities, $location_filter, $sort, $sort_direction, $offset, $number);
+    $result = $apiInstance->searchNews($text, $text_match_indexes, $source_country, $language, $min_sentiment, $max_sentiment, $earliest_publish_date, $latest_publish_date, $news_sources, $authors, $categories, $entities, $location_filter, $sort, $sort_direction, $offset, $number);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling NewsApi->searchNews: ', $e->getMessage(), PHP_EOL;
@@ -489,7 +490,8 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **text** | **string**| The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford | [optional] |
+| **text** | **string**| The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford. You can also exclude terms by putting a minus sign (-) in front of the term, e.g. tesla -ford. For exact matches just put your term in quotes, e.g. \&quot;elon musk\&quot;. | [optional] |
+| **text_match_indexes** | **string**| If a \&quot;text\&quot; is given to search for, you can specify where this text is searched for. Possible values are title, content, or both separated by a comma. By default, both title and content are searched. | [optional] |
 | **source_country** | **string**| The ISO 3166 country code from which the news should originate. | [optional] |
 | **language** | **string**| The ISO 6391 language code of the news. | [optional] |
 | **min_sentiment** | **float**| The minimal sentiment of the news in range [-1,1]. | [optional] |
@@ -503,7 +505,7 @@ try {
 | **location_filter** | **string**| Filter news by radius around a certain location. Format is \&quot;latitude,longitude,radius in kilometers\&quot;. Radius must be between 1 and 100 kilometers. | [optional] |
 | **sort** | **string**| The sorting criteria (publish-time). | [optional] |
 | **sort_direction** | **string**| Whether to sort ascending or descending (ASC or DESC). | [optional] |
-| **offset** | **int**| The number of news to skip in range [0,10000] | [optional] |
+| **offset** | **int**| The number of news to skip in range [0,100000] | [optional] |
 | **number** | **int**| The number of news to return in range [1,100] | [optional] |
 
 ### Return type

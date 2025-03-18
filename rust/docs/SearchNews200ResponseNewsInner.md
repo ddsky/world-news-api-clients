@@ -7,7 +7,6 @@ Name | Type | Description | Notes
 **summary** | Option<**String**> |  | [optional]
 **image** | Option<**String**> |  | [optional]
 **sentiment** | Option<**f64**> |  | [optional]
-**author** | Option<**String**> |  | [optional]
 **language** | Option<**String**> |  | [optional]
 **video** | Option<**String**> |  | [optional]
 **title** | Option<**String**> |  | [optional]

@@ -7,7 +7,6 @@ Name | Type | Description | Notes
 **Summary** | Pointer to **NullableString** |  | [optional] 
 **Image** | Pointer to **NullableString** |  | [optional] 
 **Sentiment** | Pointer to **float32** |  | [optional] 
-**Author** | Pointer to **NullableString** |  | [optional] 
 **Language** | Pointer to **NullableString** |  | [optional] 
 **Video** | Pointer to **NullableString** |  | [optional] 
 **Title** | Pointer to **NullableString** |  | [optional] 
@@ -133,41 +132,6 @@ SetSentiment sets Sentiment field to given value.
 
 HasSentiment returns a boolean if a field has been set.
 
-### GetAuthor
-
-`func (o *SearchNews200ResponseNewsInner) GetAuthor() string`
-
-GetAuthor returns the Author field if non-nil, zero value otherwise.
-
-### GetAuthorOk
-
-`func (o *SearchNews200ResponseNewsInner) GetAuthorOk() (*string, bool)`
-
-GetAuthorOk returns a tuple with the Author field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAuthor
-
-`func (o *SearchNews200ResponseNewsInner) SetAuthor(v string)`
-
-SetAuthor sets Author field to given value.
-
-### HasAuthor
-
-`func (o *SearchNews200ResponseNewsInner) HasAuthor() bool`
-
-HasAuthor returns a boolean if a field has been set.
-
-### SetAuthorNil
-
-`func (o *SearchNews200ResponseNewsInner) SetAuthorNil(b bool)`
-
- SetAuthorNil sets the value for Author to be an explicit nil
-
-### UnsetAuthor
-`func (o *SearchNews200ResponseNewsInner) UnsetAuthor()`
-
-UnsetAuthor ensures that no value is present for Author, not even an explicit nil
 ### GetLanguage
 
 `func (o *SearchNews200ResponseNewsInner) GetLanguage() string`

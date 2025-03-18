@@ -28,7 +28,7 @@ Add this dependency to your project's POM:
 <dependency>
     <groupId>com.worldnewsapi</groupId>
     <artifactId>android-client</artifactId>
-    <version>2.0.0</version>
+    <version>2.1.0</version>
     <scope>compile</scope>
 </dependency>
 ```
@@ -38,7 +38,7 @@ Add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-compile "com.worldnewsapi:android-client:2.0.0"
+compile "com.worldnewsapi:android-client:2.1.0"
 ```
 
 ### Others
@@ -49,7 +49,7 @@ At first generate the JAR by executing:
 
 Then manually install the following JARs:
 
-- target/android-client-2.0.0.jar
+- target/android-client-2.1.0.jar
 - target/lib/*.jar
 
 ## Getting Started
@@ -65,7 +65,7 @@ public class NewsApiExample {
     public static void main(String[] args) {
         NewsApi apiInstance = new NewsApi();
         String url = https://www.bbc.com/news/world-us-canada-59340789; // String | The url of the news.
-        Boolean analyze = true; // Boolean | Whether to analyze the news (extract entities etc.)
+        Boolean analyze = true; // Boolean | Whether to analyze the extracted news (extract entities, detect sentiment etc.)
         try {
             ExtractNews200Response result = apiInstance.extractNews(url, analyze);
             System.out.println(result);

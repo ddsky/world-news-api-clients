@@ -3,7 +3,7 @@ World News API
 
 The world's news wrapped into a single API.
 
-API version: 2.0.0
+API version: 2.1.0
 Contact: mail@worldnewsapi.com
 */
 
@@ -36,7 +36,7 @@ func (r ApiExtractNewsRequest) Url(url string) ApiExtractNewsRequest {
 	return r
 }
 
-// Whether to analyze the news (extract entities etc.)
+// Whether to analyze the extracted news (extract entities, detect sentiment etc.)
 func (r ApiExtractNewsRequest) Analyze(analyze bool) ApiExtractNewsRequest {
 	r.analyze = &analyze
 	return r
@@ -87,12 +87,11 @@ func (a *NewsAPIService) ExtractNewsExecute(r ApiExtractNewsRequest) (*ExtractNe
 	if strlen(*r.url) > 1000 {
 		return localVarReturnValue, nil, reportError("url must have less than 1000 elements")
 	}
-	if r.analyze == nil {
-		return localVarReturnValue, nil, reportError("analyze is required and must be specified")
-	}
 
 	parameterAddToHeaderOrQuery(localVarQueryParams, "url", r.url, "")
-	parameterAddToHeaderOrQuery(localVarQueryParams, "analyze", r.analyze, "")
+	if r.analyze != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "analyze", r.analyze, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -188,7 +187,7 @@ func (r ApiExtractNewsLinksRequest) Url(url string) ApiExtractNewsLinksRequest {
 	return r
 }
 
-// Whether to analyze the news (extract entities etc.)
+// Whether to analyze the extracted news (extract entities, detect sentiment etc.)
 func (r ApiExtractNewsLinksRequest) Analyze(analyze bool) ApiExtractNewsLinksRequest {
 	r.analyze = &analyze
 	return r
@@ -239,12 +238,11 @@ func (a *NewsAPIService) ExtractNewsLinksExecute(r ApiExtractNewsLinksRequest) (
 	if strlen(*r.url) > 1000 {
 		return localVarReturnValue, nil, reportError("url must have less than 1000 elements")
 	}
-	if r.analyze == nil {
-		return localVarReturnValue, nil, reportError("analyze is required and must be specified")
-	}
 
 	parameterAddToHeaderOrQuery(localVarQueryParams, "url", r.url, "")
-	parameterAddToHeaderOrQuery(localVarQueryParams, "analyze", r.analyze, "")
+	if r.analyze != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "analyze", r.analyze, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -472,18 +470,18 @@ type ApiNewsWebsiteToRSSFeedRequest struct {
 	ctx context.Context
 	ApiService *NewsAPIService
 	url *string
-	analyze *bool
+	extractNews *bool
 }
 
-// The url of the news.
+// The url of the site for which an RSS feed should be created.
 func (r ApiNewsWebsiteToRSSFeedRequest) Url(url string) ApiNewsWebsiteToRSSFeedRequest {
 	r.url = &url
 	return r
 }
 
-// Whether to analyze the news (extract entities etc.)
-func (r ApiNewsWebsiteToRSSFeedRequest) Analyze(analyze bool) ApiNewsWebsiteToRSSFeedRequest {
-	r.analyze = &analyze
+// Whether to extract the news for each link instead of just returning the link.
+func (r ApiNewsWebsiteToRSSFeedRequest) ExtractNews(extractNews bool) ApiNewsWebsiteToRSSFeedRequest {
+	r.extractNews = &extractNews
 	return r
 }
 
@@ -532,12 +530,11 @@ func (a *NewsAPIService) NewsWebsiteToRSSFeedExecute(r ApiNewsWebsiteToRSSFeedRe
 	if strlen(*r.url) > 1000 {
 		return localVarReturnValue, nil, reportError("url must have less than 1000 elements")
 	}
-	if r.analyze == nil {
-		return localVarReturnValue, nil, reportError("analyze is required and must be specified")
-	}
 
 	parameterAddToHeaderOrQuery(localVarQueryParams, "url", r.url, "")
-	parameterAddToHeaderOrQuery(localVarQueryParams, "analyze", r.analyze, "")
+	if r.extractNews != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "extract-news", r.extractNews, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -922,6 +919,7 @@ type ApiSearchNewsRequest struct {
 	ctx context.Context
 	ApiService *NewsAPIService
 	text *string
+	textMatchIndexes *string
 	sourceCountry *string
 	language *string
 	minSentiment *float64
@@ -939,9 +937,15 @@ type ApiSearchNewsRequest struct {
 	number *int32
 }
 
-// The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford
+// The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford. You can also exclude terms by putting a minus sign (-) in front of the term, e.g. tesla -ford. For exact matches just put your term in quotes, e.g. \&quot;elon musk\&quot;.
 func (r ApiSearchNewsRequest) Text(text string) ApiSearchNewsRequest {
 	r.text = &text
+	return r
+}
+
+// If a \&quot;text\&quot; is given to search for, you can specify where this text is searched for. Possible values are title, content, or both separated by a comma. By default, both title and content are searched.
+func (r ApiSearchNewsRequest) TextMatchIndexes(textMatchIndexes string) ApiSearchNewsRequest {
+	r.textMatchIndexes = &textMatchIndexes
 	return r
 }
 
@@ -1023,7 +1027,7 @@ func (r ApiSearchNewsRequest) SortDirection(sortDirection string) ApiSearchNewsR
 	return r
 }
 
-// The number of news to skip in range [0,10000]
+// The number of news to skip in range [0,100000]
 func (r ApiSearchNewsRequest) Offset(offset int32) ApiSearchNewsRequest {
 	r.offset = &offset
 	return r
@@ -1042,7 +1046,7 @@ func (r ApiSearchNewsRequest) Execute() (*SearchNews200Response, *http.Response,
 /*
 SearchNews Search News
 
-Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
+Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. Each returned article includes the title, the full text of the article, a summary, image URL, video URL, the publish date, the authors, the category, the language, the source country, and the sentiment of the article. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSearchNewsRequest
@@ -1077,6 +1081,9 @@ func (a *NewsAPIService) SearchNewsExecute(r ApiSearchNewsRequest) (*SearchNews2
 
 	if r.text != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "text", r.text, "")
+	}
+	if r.textMatchIndexes != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "text-match-indexes", r.textMatchIndexes, "")
 	}
 	if r.sourceCountry != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "source-country", r.sourceCountry, "")

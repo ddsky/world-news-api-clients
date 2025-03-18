@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 
 # **extract_news**
-> ExtractNews200Response extract_news(url, analyze)
+> ExtractNews200Response extract_news(url, analyze=analyze)
 
 Extract News
 
@@ -60,11 +60,11 @@ with worldnewsapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = worldnewsapi.NewsApi(api_client)
     url = 'https://www.bbc.com/news/world-us-canada-59340789' # str | The url of the news.
-    analyze = true # bool | Whether to analyze the news (extract entities etc.)
+    analyze = true # bool | Whether to analyze the extracted news (extract entities, detect sentiment etc.) (optional)
 
     try:
         # Extract News
-        api_response = api_instance.extract_news(url, analyze)
+        api_response = api_instance.extract_news(url, analyze=analyze)
         print("The response of NewsApi->extract_news:\n")
         pprint(api_response)
     except Exception as e:
@@ -79,7 +79,7 @@ with worldnewsapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **url** | **str**| The url of the news. | 
- **analyze** | **bool**| Whether to analyze the news (extract entities etc.) | 
+ **analyze** | **bool**| Whether to analyze the extracted news (extract entities, detect sentiment etc.) | [optional] 
 
 ### Return type
 
@@ -109,7 +109,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **extract_news_links**
-> ExtractNewsLinks200Response extract_news_links(url, analyze)
+> ExtractNewsLinks200Response extract_news_links(url, analyze=analyze)
 
 Extract News Links
 
@@ -154,11 +154,11 @@ with worldnewsapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = worldnewsapi.NewsApi(api_client)
     url = 'https://www.bbc.com/news/world-us-canada-59340789' # str | The url of the news.
-    analyze = true # bool | Whether to analyze the news (extract entities etc.)
+    analyze = true # bool | Whether to analyze the extracted news (extract entities, detect sentiment etc.) (optional)
 
     try:
         # Extract News Links
-        api_response = api_instance.extract_news_links(url, analyze)
+        api_response = api_instance.extract_news_links(url, analyze=analyze)
         print("The response of NewsApi->extract_news_links:\n")
         pprint(api_response)
     except Exception as e:
@@ -173,7 +173,7 @@ with worldnewsapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **url** | **str**| The url of the news. | 
- **analyze** | **bool**| Whether to analyze the news (extract entities etc.) | 
+ **analyze** | **bool**| Whether to analyze the extracted news (extract entities, detect sentiment etc.) | [optional] 
 
 ### Return type
 
@@ -295,7 +295,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **news_website_to_rss_feed**
-> object news_website_to_rss_feed(url, analyze)
+> object news_website_to_rss_feed(url, extract_news=extract_news)
 
 News Website to RSS Feed
 
@@ -338,12 +338,12 @@ configuration.api_key['headerApiKey'] = os.environ["API_KEY"]
 with worldnewsapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = worldnewsapi.NewsApi(api_client)
-    url = 'https://www.bbc.com/news/world-us-canada-59340789' # str | The url of the news.
-    analyze = true # bool | Whether to analyze the news (extract entities etc.)
+    url = 'https://www.bbc.com/' # str | The url of the site for which an RSS feed should be created.
+    extract_news = true # bool | Whether to extract the news for each link instead of just returning the link. (optional)
 
     try:
         # News Website to RSS Feed
-        api_response = api_instance.news_website_to_rss_feed(url, analyze)
+        api_response = api_instance.news_website_to_rss_feed(url, extract_news=extract_news)
         print("The response of NewsApi->news_website_to_rss_feed:\n")
         pprint(api_response)
     except Exception as e:
@@ -357,8 +357,8 @@ with worldnewsapi.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **url** | **str**| The url of the news. | 
- **analyze** | **bool**| Whether to analyze the news (extract entities etc.) | 
+ **url** | **str**| The url of the site for which an RSS feed should be created. | 
+ **extract_news** | **bool**| Whether to extract the news for each link instead of just returning the link. | [optional] 
 
 ### Return type
 
@@ -576,11 +576,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **search_news**
-> SearchNews200Response search_news(text=text, source_country=source_country, language=language, min_sentiment=min_sentiment, max_sentiment=max_sentiment, earliest_publish_date=earliest_publish_date, latest_publish_date=latest_publish_date, news_sources=news_sources, authors=authors, categories=categories, entities=entities, location_filter=location_filter, sort=sort, sort_direction=sort_direction, offset=offset, number=number)
+> SearchNews200Response search_news(text=text, text_match_indexes=text_match_indexes, source_country=source_country, language=language, min_sentiment=min_sentiment, max_sentiment=max_sentiment, earliest_publish_date=earliest_publish_date, latest_publish_date=latest_publish_date, news_sources=news_sources, authors=authors, categories=categories, entities=entities, location_filter=location_filter, sort=sort, sort_direction=sort_direction, offset=offset, number=number)
 
 Search News
 
-Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
+Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. Each returned article includes the title, the full text of the article, a summary, image URL, video URL, the publish date, the authors, the category, the language, the source country, and the sentiment of the article. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
 
 ### Example
 
@@ -620,7 +620,8 @@ configuration.api_key['headerApiKey'] = os.environ["API_KEY"]
 with worldnewsapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = worldnewsapi.NewsApi(api_client)
-    text = 'tesla' # str | The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford (optional)
+    text = 'tesla' # str | The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford. You can also exclude terms by putting a minus sign (-) in front of the term, e.g. tesla -ford. For exact matches just put your term in quotes, e.g. \"elon musk\". (optional)
+    text_match_indexes = 'title,content' # str | If a \"text\" is given to search for, you can specify where this text is searched for. Possible values are title, content, or both separated by a comma. By default, both title and content are searched. (optional)
     source_country = 'us' # str | The ISO 3166 country code from which the news should originate. (optional)
     language = 'en' # str | The ISO 6391 language code of the news. (optional)
     min_sentiment = -0.8 # float | The minimal sentiment of the news in range [-1,1]. (optional)
@@ -630,16 +631,16 @@ with worldnewsapi.ApiClient(configuration) as api_client:
     news_sources = 'https://www.bbc.co.uk' # str | A comma-separated list of news sources from which the news should originate. (optional)
     authors = 'John Doe' # str | A comma-separated list of author names. Only news from any of the given authors will be returned. (optional)
     categories = 'politics,sports' # str | A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other. Please note that the filter might leave out news, especially in non-English languages. If too few results are returned, use the text parameter instead. (optional)
-    entities = 'ORG:Tesla' # str | Filter news by entities (see semantic types). (optional)
+    entities = 'ORG:Tesla,PER:Elon Musk' # str | Filter news by entities (see semantic types). (optional)
     location_filter = '51.050407, 13.737262, 20' # str | Filter news by radius around a certain location. Format is \"latitude,longitude,radius in kilometers\". Radius must be between 1 and 100 kilometers. (optional)
     sort = 'publish-time' # str | The sorting criteria (publish-time). (optional)
     sort_direction = 'ASC' # str | Whether to sort ascending or descending (ASC or DESC). (optional)
-    offset = 0 # int | The number of news to skip in range [0,10000] (optional)
+    offset = 0 # int | The number of news to skip in range [0,100000] (optional)
     number = 10 # int | The number of news to return in range [1,100] (optional)
 
     try:
         # Search News
-        api_response = api_instance.search_news(text=text, source_country=source_country, language=language, min_sentiment=min_sentiment, max_sentiment=max_sentiment, earliest_publish_date=earliest_publish_date, latest_publish_date=latest_publish_date, news_sources=news_sources, authors=authors, categories=categories, entities=entities, location_filter=location_filter, sort=sort, sort_direction=sort_direction, offset=offset, number=number)
+        api_response = api_instance.search_news(text=text, text_match_indexes=text_match_indexes, source_country=source_country, language=language, min_sentiment=min_sentiment, max_sentiment=max_sentiment, earliest_publish_date=earliest_publish_date, latest_publish_date=latest_publish_date, news_sources=news_sources, authors=authors, categories=categories, entities=entities, location_filter=location_filter, sort=sort, sort_direction=sort_direction, offset=offset, number=number)
         print("The response of NewsApi->search_news:\n")
         pprint(api_response)
     except Exception as e:
@@ -653,7 +654,8 @@ with worldnewsapi.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **text** | **str**| The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford | [optional] 
+ **text** | **str**| The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford. You can also exclude terms by putting a minus sign (-) in front of the term, e.g. tesla -ford. For exact matches just put your term in quotes, e.g. \&quot;elon musk\&quot;. | [optional] 
+ **text_match_indexes** | **str**| If a \&quot;text\&quot; is given to search for, you can specify where this text is searched for. Possible values are title, content, or both separated by a comma. By default, both title and content are searched. | [optional] 
  **source_country** | **str**| The ISO 3166 country code from which the news should originate. | [optional] 
  **language** | **str**| The ISO 6391 language code of the news. | [optional] 
  **min_sentiment** | **float**| The minimal sentiment of the news in range [-1,1]. | [optional] 
@@ -667,7 +669,7 @@ Name | Type | Description  | Notes
  **location_filter** | **str**| Filter news by radius around a certain location. Format is \&quot;latitude,longitude,radius in kilometers\&quot;. Radius must be between 1 and 100 kilometers. | [optional] 
  **sort** | **str**| The sorting criteria (publish-time). | [optional] 
  **sort_direction** | **str**| Whether to sort ascending or descending (ASC or DESC). | [optional] 
- **offset** | **int**| The number of news to skip in range [0,10000] | [optional] 
+ **offset** | **int**| The number of news to skip in range [0,100000] | [optional] 
  **number** | **int**| The number of news to return in range [1,100] | [optional] 
 
 ### Return type

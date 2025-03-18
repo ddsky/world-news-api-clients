@@ -27,11 +27,11 @@ export interface NewsApiExtractNewsRequest {
      */
     url: string
     /**
-     * Whether to analyze the news (extract entities etc.)
+     * Whether to analyze the extracted news (extract entities, detect sentiment etc.)
      * @type boolean
      * @memberof NewsApiextractNews
      */
-    analyze: boolean
+    analyze?: boolean
 }
 
 export interface NewsApiExtractNewsLinksRequest {
@@ -42,11 +42,11 @@ export interface NewsApiExtractNewsLinksRequest {
      */
     url: string
     /**
-     * Whether to analyze the news (extract entities etc.)
+     * Whether to analyze the extracted news (extract entities, detect sentiment etc.)
      * @type boolean
      * @memberof NewsApiextractNewsLinks
      */
-    analyze: boolean
+    analyze?: boolean
 }
 
 export interface NewsApiGetGeoCoordinatesRequest {
@@ -60,17 +60,17 @@ export interface NewsApiGetGeoCoordinatesRequest {
 
 export interface NewsApiNewsWebsiteToRSSFeedRequest {
     /**
-     * The url of the news.
+     * The url of the site for which an RSS feed should be created.
      * @type string
      * @memberof NewsApinewsWebsiteToRSSFeed
      */
     url: string
     /**
-     * Whether to analyze the news (extract entities etc.)
+     * Whether to extract the news for each link instead of just returning the link.
      * @type boolean
      * @memberof NewsApinewsWebsiteToRSSFeed
      */
-    analyze: boolean
+    extractNews?: boolean
 }
 
 export interface NewsApiRetrieveNewsArticlesByIdsRequest {
@@ -105,11 +105,17 @@ export interface NewsApiRetrieveNewspaperFrontPageRequest {
 
 export interface NewsApiSearchNewsRequest {
     /**
-     * The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford
+     * The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford. You can also exclude terms by putting a minus sign (-) in front of the term, e.g. tesla -ford. For exact matches just put your term in quotes, e.g. \&quot;elon musk\&quot;.
      * @type string
      * @memberof NewsApisearchNews
      */
     text?: string
+    /**
+     * If a \&quot;text\&quot; is given to search for, you can specify where this text is searched for. Possible values are title, content, or both separated by a comma. By default, both title and content are searched.
+     * @type string
+     * @memberof NewsApisearchNews
+     */
+    textMatchIndexes?: string
     /**
      * The ISO 3166 country code from which the news should originate.
      * @type string
@@ -189,7 +195,7 @@ export interface NewsApiSearchNewsRequest {
      */
     sortDirection?: string
     /**
-     * The number of news to skip in range [0,10000]
+     * The number of news to skip in range [0,100000]
      * @type number
      * @memberof NewsApisearchNews
      */
@@ -296,7 +302,7 @@ export class ObjectNewsApi {
      * @param param the request object
      */
     public newsWebsiteToRSSFeedWithHttpInfo(param: NewsApiNewsWebsiteToRSSFeedRequest, options?: Configuration): Promise<HttpInfo<any>> {
-        return this.api.newsWebsiteToRSSFeedWithHttpInfo(param.url, param.analyze,  options).toPromise();
+        return this.api.newsWebsiteToRSSFeedWithHttpInfo(param.url, param.extractNews,  options).toPromise();
     }
 
     /**
@@ -305,7 +311,7 @@ export class ObjectNewsApi {
      * @param param the request object
      */
     public newsWebsiteToRSSFeed(param: NewsApiNewsWebsiteToRSSFeedRequest, options?: Configuration): Promise<any> {
-        return this.api.newsWebsiteToRSSFeed(param.url, param.analyze,  options).toPromise();
+        return this.api.newsWebsiteToRSSFeed(param.url, param.extractNews,  options).toPromise();
     }
 
     /**
@@ -345,21 +351,21 @@ export class ObjectNewsApi {
     }
 
     /**
-     * Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
+     * Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. Each returned article includes the title, the full text of the article, a summary, image URL, video URL, the publish date, the authors, the category, the language, the source country, and the sentiment of the article. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
      * Search News
      * @param param the request object
      */
     public searchNewsWithHttpInfo(param: NewsApiSearchNewsRequest = {}, options?: Configuration): Promise<HttpInfo<SearchNews200Response>> {
-        return this.api.searchNewsWithHttpInfo(param.text, param.sourceCountry, param.language, param.minSentiment, param.maxSentiment, param.earliestPublishDate, param.latestPublishDate, param.newsSources, param.authors, param.categories, param.entities, param.locationFilter, param.sort, param.sortDirection, param.offset, param.number,  options).toPromise();
+        return this.api.searchNewsWithHttpInfo(param.text, param.textMatchIndexes, param.sourceCountry, param.language, param.minSentiment, param.maxSentiment, param.earliestPublishDate, param.latestPublishDate, param.newsSources, param.authors, param.categories, param.entities, param.locationFilter, param.sort, param.sortDirection, param.offset, param.number,  options).toPromise();
     }
 
     /**
-     * Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
+     * Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. Each returned article includes the title, the full text of the article, a summary, image URL, video URL, the publish date, the authors, the category, the language, the source country, and the sentiment of the article. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
      * Search News
      * @param param the request object
      */
     public searchNews(param: NewsApiSearchNewsRequest = {}, options?: Configuration): Promise<SearchNews200Response> {
-        return this.api.searchNews(param.text, param.sourceCountry, param.language, param.minSentiment, param.maxSentiment, param.earliestPublishDate, param.latestPublishDate, param.newsSources, param.authors, param.categories, param.entities, param.locationFilter, param.sort, param.sortDirection, param.offset, param.number,  options).toPromise();
+        return this.api.searchNews(param.text, param.textMatchIndexes, param.sourceCountry, param.language, param.minSentiment, param.maxSentiment, param.earliestPublishDate, param.latestPublishDate, param.newsSources, param.authors, param.categories, param.entities, param.locationFilter, param.sort, param.sortDirection, param.offset, param.number,  options).toPromise();
     }
 
     /**

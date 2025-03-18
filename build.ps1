@@ -2,7 +2,7 @@ Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser -F
 
 # Setting environment variables
 $env:PYTHON_POST_PROCESS_FILE = "yapf -i"
-$VERSION = "2.0.0"
+$VERSION = "2.1.0"
 $env:VERSION = $VERSION
 $GEN = "openapi-generator-cli-7.8.0-SNAPSHOT.jar"
 

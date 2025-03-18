@@ -16,7 +16,7 @@ spec/search_news_200_response_spec.lua
 spec/top_news_200_response_spec.lua
 spec/top_news_200_response_top_news_inner_news_inner_spec.lua
 spec/top_news_200_response_top_news_inner_spec.lua
-worldnewsapi-2.0.0.rockspec
+worldnewsapi-2.1.0.rockspec
 worldnewsapi/api/news_api.lua
 worldnewsapi/model/extract_news_200_response.lua
 worldnewsapi/model/extract_news_200_response_images_inner.lua

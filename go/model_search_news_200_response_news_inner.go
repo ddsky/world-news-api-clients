@@ -3,7 +3,7 @@ World News API
 
 The world's news wrapped into a single API.
 
-API version: 2.0.0
+API version: 2.1.0
 Contact: mail@worldnewsapi.com
 */
 
@@ -23,7 +23,6 @@ type SearchNews200ResponseNewsInner struct {
 	Summary NullableString `json:"summary,omitempty"`
 	Image NullableString `json:"image,omitempty"`
 	Sentiment *float32 `json:"sentiment,omitempty"`
-	Author NullableString `json:"author,omitempty"`
 	Language NullableString `json:"language,omitempty"`
 	Video NullableString `json:"video,omitempty"`
 	Title NullableString `json:"title,omitempty"`
@@ -167,48 +166,6 @@ func (o *SearchNews200ResponseNewsInner) HasSentiment() bool {
 // SetSentiment gets a reference to the given float32 and assigns it to the Sentiment field.
 func (o *SearchNews200ResponseNewsInner) SetSentiment(v float32) {
 	o.Sentiment = &v
-}
-
-// GetAuthor returns the Author field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *SearchNews200ResponseNewsInner) GetAuthor() string {
-	if o == nil || IsNil(o.Author.Get()) {
-		var ret string
-		return ret
-	}
-	return *o.Author.Get()
-}
-
-// GetAuthorOk returns a tuple with the Author field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *SearchNews200ResponseNewsInner) GetAuthorOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Author.Get(), o.Author.IsSet()
-}
-
-// HasAuthor returns a boolean if a field has been set.
-func (o *SearchNews200ResponseNewsInner) HasAuthor() bool {
-	if o != nil && o.Author.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetAuthor gets a reference to the given NullableString and assigns it to the Author field.
-func (o *SearchNews200ResponseNewsInner) SetAuthor(v string) {
-	o.Author.Set(&v)
-}
-// SetAuthorNil sets the value for Author to be an explicit nil
-func (o *SearchNews200ResponseNewsInner) SetAuthorNil() {
-	o.Author.Set(nil)
-}
-
-// UnsetAuthor ensures that no value is present for Author, not even an explicit nil
-func (o *SearchNews200ResponseNewsInner) UnsetAuthor() {
-	o.Author.Unset()
 }
 
 // GetLanguage returns the Language field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -629,9 +586,6 @@ func (o SearchNews200ResponseNewsInner) ToMap() (map[string]interface{}, error) 
 	}
 	if !IsNil(o.Sentiment) {
 		toSerialize["sentiment"] = o.Sentiment
-	}
-	if o.Author.IsSet() {
-		toSerialize["author"] = o.Author.Get()
 	}
 	if o.Language.IsSet() {
 		toSerialize["language"] = o.Language.Get()

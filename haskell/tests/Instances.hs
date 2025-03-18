@@ -239,7 +239,6 @@ genSearchNews200ResponseNewsInner n =
     <$> arbitraryReducedMaybe n -- searchNews200ResponseNewsInnerSummary :: Maybe Text
     <*> arbitraryReducedMaybe n -- searchNews200ResponseNewsInnerImage :: Maybe Text
     <*> arbitraryReducedMaybe n -- searchNews200ResponseNewsInnerSentiment :: Maybe Double
-    <*> arbitraryReducedMaybe n -- searchNews200ResponseNewsInnerAuthor :: Maybe Text
     <*> arbitraryReducedMaybe n -- searchNews200ResponseNewsInnerLanguage :: Maybe Text
     <*> arbitraryReducedMaybe n -- searchNews200ResponseNewsInnerVideo :: Maybe Text
     <*> arbitraryReducedMaybe n -- searchNews200ResponseNewsInnerTitle :: Maybe Text

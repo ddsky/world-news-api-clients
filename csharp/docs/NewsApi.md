@@ -15,7 +15,7 @@ All URIs are relative to *https://api.worldnewsapi.com*
 
 <a id="extractnews"></a>
 # **ExtractNews**
-> ExtractNews200Response ExtractNews (string url, bool analyze)
+> ExtractNews200Response ExtractNews (string url, bool? analyze = null)
 
 Extract News
 
@@ -48,7 +48,7 @@ namespace Example
 
             var apiInstance = new NewsApi(config);
             var url = https://www.bbc.com/news/world-us-canada-59340789;  // string | The url of the news.
-            var analyze = true;  // bool | Whether to analyze the news (extract entities etc.)
+            var analyze = true;  // bool? | Whether to analyze the extracted news (extract entities, detect sentiment etc.) (optional) 
 
             try
             {
@@ -92,7 +92,7 @@ catch (ApiException e)
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **url** | **string** | The url of the news. |  |
-| **analyze** | **bool** | Whether to analyze the news (extract entities etc.) |  |
+| **analyze** | **bool?** | Whether to analyze the extracted news (extract entities, detect sentiment etc.) | [optional]  |
 
 ### Return type
 
@@ -123,7 +123,7 @@ catch (ApiException e)
 
 <a id="extractnewslinks"></a>
 # **ExtractNewsLinks**
-> ExtractNewsLinks200Response ExtractNewsLinks (string url, bool analyze)
+> ExtractNewsLinks200Response ExtractNewsLinks (string url, bool? analyze = null)
 
 Extract News Links
 
@@ -156,7 +156,7 @@ namespace Example
 
             var apiInstance = new NewsApi(config);
             var url = https://www.bbc.com/news/world-us-canada-59340789;  // string | The url of the news.
-            var analyze = true;  // bool | Whether to analyze the news (extract entities etc.)
+            var analyze = true;  // bool? | Whether to analyze the extracted news (extract entities, detect sentiment etc.) (optional) 
 
             try
             {
@@ -200,7 +200,7 @@ catch (ApiException e)
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **url** | **string** | The url of the news. |  |
-| **analyze** | **bool** | Whether to analyze the news (extract entities etc.) |  |
+| **analyze** | **bool?** | Whether to analyze the extracted news (extract entities, detect sentiment etc.) | [optional]  |
 
 ### Return type
 
@@ -337,7 +337,7 @@ catch (ApiException e)
 
 <a id="newswebsitetorssfeed"></a>
 # **NewsWebsiteToRSSFeed**
-> Object NewsWebsiteToRSSFeed (string url, bool analyze)
+> Object NewsWebsiteToRSSFeed (string url, bool? extractNews = null)
 
 News Website to RSS Feed
 
@@ -369,13 +369,13 @@ namespace Example
             // config.AddApiKeyPrefix("x-api-key", "Bearer");
 
             var apiInstance = new NewsApi(config);
-            var url = https://www.bbc.com/news/world-us-canada-59340789;  // string | The url of the news.
-            var analyze = true;  // bool | Whether to analyze the news (extract entities etc.)
+            var url = https://www.bbc.com/;  // string | The url of the site for which an RSS feed should be created.
+            var extractNews = true;  // bool? | Whether to extract the news for each link instead of just returning the link. (optional) 
 
             try
             {
                 // News Website to RSS Feed
-                Object result = apiInstance.NewsWebsiteToRSSFeed(url, analyze);
+                Object result = apiInstance.NewsWebsiteToRSSFeed(url, extractNews);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -396,7 +396,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // News Website to RSS Feed
-    ApiResponse<Object> response = apiInstance.NewsWebsiteToRSSFeedWithHttpInfo(url, analyze);
+    ApiResponse<Object> response = apiInstance.NewsWebsiteToRSSFeedWithHttpInfo(url, extractNews);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -413,8 +413,8 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **url** | **string** | The url of the news. |  |
-| **analyze** | **bool** | Whether to analyze the news (extract entities etc.) |  |
+| **url** | **string** | The url of the site for which an RSS feed should be created. |  |
+| **extractNews** | **bool?** | Whether to extract the news for each link instead of just returning the link. | [optional]  |
 
 ### Return type
 
@@ -661,11 +661,11 @@ catch (ApiException e)
 
 <a id="searchnews"></a>
 # **SearchNews**
-> SearchNews200Response SearchNews (string? text = null, string? sourceCountry = null, string? language = null, double? minSentiment = null, double? maxSentiment = null, string? earliestPublishDate = null, string? latestPublishDate = null, string? newsSources = null, string? authors = null, string? categories = null, string? entities = null, string? locationFilter = null, string? sort = null, string? sortDirection = null, int? offset = null, int? number = null)
+> SearchNews200Response SearchNews (string? text = null, string? textMatchIndexes = null, string? sourceCountry = null, string? language = null, double? minSentiment = null, double? maxSentiment = null, string? earliestPublishDate = null, string? latestPublishDate = null, string? newsSources = null, string? authors = null, string? categories = null, string? entities = null, string? locationFilter = null, string? sort = null, string? sortDirection = null, int? offset = null, int? number = null)
 
 Search News
 
-Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
+Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. Each returned article includes the title, the full text of the article, a summary, image URL, video URL, the publish date, the authors, the category, the language, the source country, and the sentiment of the article. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
 
 ### Example
 ```csharp
@@ -693,7 +693,8 @@ namespace Example
             // config.AddApiKeyPrefix("x-api-key", "Bearer");
 
             var apiInstance = new NewsApi(config);
-            var text = tesla;  // string? | The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford (optional) 
+            var text = tesla;  // string? | The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford. You can also exclude terms by putting a minus sign (-) in front of the term, e.g. tesla -ford. For exact matches just put your term in quotes, e.g. \"elon musk\". (optional) 
+            var textMatchIndexes = title,content;  // string? | If a \"text\" is given to search for, you can specify where this text is searched for. Possible values are title, content, or both separated by a comma. By default, both title and content are searched. (optional) 
             var sourceCountry = us;  // string? | The ISO 3166 country code from which the news should originate. (optional) 
             var language = en;  // string? | The ISO 6391 language code of the news. (optional) 
             var minSentiment = -0.8;  // double? | The minimal sentiment of the news in range [-1,1]. (optional) 
@@ -703,17 +704,17 @@ namespace Example
             var newsSources = https://www.bbc.co.uk;  // string? | A comma-separated list of news sources from which the news should originate. (optional) 
             var authors = John Doe;  // string? | A comma-separated list of author names. Only news from any of the given authors will be returned. (optional) 
             var categories = politics,sports;  // string? | A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other. Please note that the filter might leave out news, especially in non-English languages. If too few results are returned, use the text parameter instead. (optional) 
-            var entities = ORG:Tesla;  // string? | Filter news by entities (see semantic types). (optional) 
+            var entities = ORG:Tesla,PER:Elon Musk;  // string? | Filter news by entities (see semantic types). (optional) 
             var locationFilter = 51.050407, 13.737262, 20;  // string? | Filter news by radius around a certain location. Format is \"latitude,longitude,radius in kilometers\". Radius must be between 1 and 100 kilometers. (optional) 
             var sort = publish-time;  // string? | The sorting criteria (publish-time). (optional) 
             var sortDirection = ASC;  // string? | Whether to sort ascending or descending (ASC or DESC). (optional) 
-            var offset = 0;  // int? | The number of news to skip in range [0,10000] (optional) 
+            var offset = 0;  // int? | The number of news to skip in range [0,100000] (optional) 
             var number = 10;  // int? | The number of news to return in range [1,100] (optional) 
 
             try
             {
                 // Search News
-                SearchNews200Response result = apiInstance.SearchNews(text, sourceCountry, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, categories, entities, locationFilter, sort, sortDirection, offset, number);
+                SearchNews200Response result = apiInstance.SearchNews(text, textMatchIndexes, sourceCountry, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, categories, entities, locationFilter, sort, sortDirection, offset, number);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -734,7 +735,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Search News
-    ApiResponse<SearchNews200Response> response = apiInstance.SearchNewsWithHttpInfo(text, sourceCountry, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, categories, entities, locationFilter, sort, sortDirection, offset, number);
+    ApiResponse<SearchNews200Response> response = apiInstance.SearchNewsWithHttpInfo(text, textMatchIndexes, sourceCountry, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, categories, entities, locationFilter, sort, sortDirection, offset, number);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -751,7 +752,8 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **text** | **string?** | The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford | [optional]  |
+| **text** | **string?** | The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford. You can also exclude terms by putting a minus sign (-) in front of the term, e.g. tesla -ford. For exact matches just put your term in quotes, e.g. \&quot;elon musk\&quot;. | [optional]  |
+| **textMatchIndexes** | **string?** | If a \&quot;text\&quot; is given to search for, you can specify where this text is searched for. Possible values are title, content, or both separated by a comma. By default, both title and content are searched. | [optional]  |
 | **sourceCountry** | **string?** | The ISO 3166 country code from which the news should originate. | [optional]  |
 | **language** | **string?** | The ISO 6391 language code of the news. | [optional]  |
 | **minSentiment** | **double?** | The minimal sentiment of the news in range [-1,1]. | [optional]  |
@@ -765,7 +767,7 @@ catch (ApiException e)
 | **locationFilter** | **string?** | Filter news by radius around a certain location. Format is \&quot;latitude,longitude,radius in kilometers\&quot;. Radius must be between 1 and 100 kilometers. | [optional]  |
 | **sort** | **string?** | The sorting criteria (publish-time). | [optional]  |
 | **sortDirection** | **string?** | Whether to sort ascending or descending (ASC or DESC). | [optional]  |
-| **offset** | **int?** | The number of news to skip in range [0,10000] | [optional]  |
+| **offset** | **int?** | The number of news to skip in range [0,100000] | [optional]  |
 | **number** | **int?** | The number of news to return in range [1,100] | [optional]  |
 
 ### Return type

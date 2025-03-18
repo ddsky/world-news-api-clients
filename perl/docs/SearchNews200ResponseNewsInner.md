@@ -11,7 +11,6 @@ Name | Type | Description | Notes
 **summary** | **string** |  | [optional] 
 **image** | **string** |  | [optional] 
 **sentiment** | **double** |  | [optional] 
-**author** | **string** |  | [optional] 
 **language** | **string** |  | [optional] 
 **video** | **string** |  | [optional] 
 **title** | **string** |  | [optional] 

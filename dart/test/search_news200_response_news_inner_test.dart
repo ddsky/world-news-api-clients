@@ -31,11 +31,6 @@ void main() {
       // TODO
     });
 
-    // String author
-    test('to test the property `author`', () async {
-      // TODO
-    });
-
     // String language
     test('to test the property `language`', () async {
       // TODO

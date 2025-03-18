@@ -4,7 +4,7 @@
     "title": "World News API",
     "description": "The world's news wrapped into a single API.",
     "termsOfService": "https://worldnewsapi.com/terms",
-    "version": "2.0.0",
+    "version": "2.1.0",
     "contact": {
       "name": "David Urbansky",
       "email": "mail@worldnewsapi.com"
@@ -51,10 +51,6 @@
                           },
                           "sentiment": {
                             "type": "number"
-                          },
-                          "author": {
-                            "type": "string",
-                            "nullable": true
                           },
                           "language": {
                             "type": "string",
@@ -114,7 +110,6 @@
                           "summary": "Twenty nine areas around Whitehouse Station, NJ, which was the epicenter of the quake, have since reported rumbles.",
                           "image": "https://nypost.com/wp-content/uploads/sites/2/2024/04/79582612.jpg?quality=75&strip=all&w=1200",
                           "sentiment": -0.545,
-                          "author": "Deirdre Bardolf",
                           "language": "en",
                           "video": "https://cdn.jwplayer.com/videos/70lDQJpg-RyIcpnTz.mp4",
                           "title": "Nearly 30 aftershocks recorded around NJ quake epicenter since Friday",
@@ -157,12 +152,26 @@
         "parameters": [
           {
             "name": "text",
-            "description": "The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford",
+            "description": "The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford. You can also exclude terms by putting a minus sign (-) in front of the term, e.g. tesla -ford. For exact matches just put your term in quotes, e.g. \"elon musk\".",
             "schema": {
               "pattern": ".",
               "maxLength": 100,
               "type": "string",
               "example": "tesla"
+            },
+            "required": false,
+            "style": "form",
+            "explode": false,
+            "in": "query"
+          },
+          {
+            "name": "text-match-indexes",
+            "description": "If a \"text\" is given to search for, you can specify where this text is searched for. Possible values are title, content, or both separated by a comma. By default, both title and content are searched.",
+            "schema": {
+              "pattern": ".",
+              "maxLength": 100,
+              "type": "string",
+              "example": "title,content"
             },
             "required": false,
             "style": "form",
@@ -304,7 +313,7 @@
               "pattern": ".",
               "maxLength": 10000,
               "type": "string",
-              "example": "ORG:Tesla"
+              "example": "ORG:Tesla,PER:Elon Musk"
             },
             "required": false,
             "style": "form",
@@ -355,7 +364,7 @@
           },
           {
             "name": "offset",
-            "description": "The number of news to skip in range [0,10000]",
+            "description": "The number of news to skip in range [0,100000]",
             "schema": {
               "format": "int32",
               "minimum": 0,
@@ -392,7 +401,7 @@
         "tags": [
           "News"
         ],
-        "description": "Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.",
+        "description": "Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. Each returned article includes the title, the full text of the article, a summary, image URL, video URL, the publish date, the authors, the category, the language, the source country, and the sentiment of the article. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.",
         "operationId": "searchNews",
         "deprecated": false
       }
@@ -1216,12 +1225,12 @@
           },
           {
             "name": "analyze",
-            "description": "Whether to analyze the news (extract entities etc.)",
+            "description": "Whether to analyze the extracted news (extract entities, detect sentiment etc.)",
             "schema": {
               "type": "boolean",
               "example": true
             },
-            "required": true,
+            "required": false,
             "style": "form",
             "explode": false,
             "in": "query"
@@ -1310,12 +1319,12 @@
           },
           {
             "name": "analyze",
-            "description": "Whether to analyze the news (extract entities etc.)",
+            "description": "Whether to analyze the extracted news (extract entities, detect sentiment etc.)",
             "schema": {
               "type": "boolean",
               "example": true
             },
-            "required": true,
+            "required": false,
             "style": "form",
             "explode": false,
             "in": "query"
@@ -1370,12 +1379,12 @@
         "parameters": [
           {
             "name": "url",
-            "description": "The url of the news.",
+            "description": "The url of the site for which an RSS feed should be created.",
             "schema": {
               "pattern": ".",
               "maxLength": 1000,
               "type": "string",
-              "example": "https://www.bbc.com/news/world-us-canada-59340789"
+              "example": "https://www.bbc.com/"
             },
             "required": true,
             "style": "form",
@@ -1383,13 +1392,13 @@
             "in": "query"
           },
           {
-            "name": "analyze",
-            "description": "Whether to analyze the news (extract entities etc.)",
+            "name": "extract-news",
+            "description": "Whether to extract the news for each link instead of just returning the link.",
             "schema": {
               "type": "boolean",
               "example": true
             },
-            "required": true,
+            "required": false,
             "style": "form",
             "explode": false,
             "in": "query"

@@ -7,7 +7,6 @@ Name | Type | Description | Notes
 **Summary** | **string** |  | [optional] 
 **Image** | **string** |  | [optional] 
 **Sentiment** | **decimal** |  | [optional] 
-**Author** | **string** |  | [optional] 
 **Language** | **string** |  | [optional] 
 **Video** | **string** |  | [optional] 
 **Title** | **string** |  | [optional] 

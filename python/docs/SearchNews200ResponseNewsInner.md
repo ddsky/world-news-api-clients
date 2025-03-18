@@ -8,7 +8,6 @@ Name | Type | Description | Notes
 **summary** | **str** |  | [optional] 
 **image** | **str** |  | [optional] 
 **sentiment** | **float** |  | [optional] 
-**author** | **str** |  | [optional] 
 **language** | **str** |  | [optional] 
 **video** | **str** |  | [optional] 
 **title** | **str** |  | [optional] 

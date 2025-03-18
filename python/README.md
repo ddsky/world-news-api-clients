@@ -4,8 +4,8 @@ The World News API gives you access to thousands of news sources in over 50 lang
 
 This is the python-package for easy acccess to the api.
 
-- API version: 2.0.0
-- Package version: 2.0.0
+- API version: 2.1.0
+- Package version: 2.1.0
 
 ## Resources
 
@@ -88,11 +88,11 @@ with worldnewsapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = worldnewsapi.NewsApi(api_client)
     url = 'https://www.bbc.com/news/world-us-canada-59340789' # str | The url of the news.
-    analyze = true # bool | Whether to analyze the news (extract entities etc.)
+    analyze = true # bool | Whether to analyze the extracted news (extract entities, detect sentiment etc.) (optional)
 
     try:
         # Extract News
-        api_response = api_instance.extract_news(url, analyze)
+        api_response = api_instance.extract_news(url, analyze=analyze)
         print("The response of NewsApi->extract_news:\n")
         pprint(api_response)
     except ApiException as e:

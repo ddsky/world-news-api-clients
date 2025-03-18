@@ -7,7 +7,6 @@
 | **summary** | **kotlin.String** |  |  [optional] |
 | **image** | **kotlin.String** |  |  [optional] |
 | **sentiment** | [**java.math.BigDecimal**](java.math.BigDecimal.md) |  |  [optional] |
-| **author** | **kotlin.String** |  |  [optional] |
 | **language** | **kotlin.String** |  |  [optional] |
 | **video** | **kotlin.String** |  |  [optional] |
 | **title** | **kotlin.String** |  |  [optional] |

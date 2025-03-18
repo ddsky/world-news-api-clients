@@ -21,7 +21,7 @@ void main() {
     //
     // Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, images, videos, publish date, authors, language, source country, and sentiment of the news article.
     //
-    //Future<ExtractNews200Response> extractNews(String url, bool analyze) async
+    //Future<ExtractNews200Response> extractNews(String url, { bool analyze }) async
     test('test extractNews', () async {
       // TODO
     });
@@ -30,7 +30,7 @@ void main() {
     //
     // Extract news links from a news website.
     //
-    //Future<ExtractNewsLinks200Response> extractNewsLinks(String url, bool analyze) async
+    //Future<ExtractNewsLinks200Response> extractNewsLinks(String url, { bool analyze }) async
     test('test extractNewsLinks', () async {
       // TODO
     });
@@ -48,7 +48,7 @@ void main() {
     //
     // Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page.
     //
-    //Future<Object> newsWebsiteToRSSFeed(String url, bool analyze) async
+    //Future<Object> newsWebsiteToRSSFeed(String url, { bool extractNews }) async
     test('test newsWebsiteToRSSFeed', () async {
       // TODO
     });
@@ -73,9 +73,9 @@ void main() {
 
     // Search News
     //
-    // Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
+    // Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. Each returned article includes the title, the full text of the article, a summary, image URL, video URL, the publish date, the authors, the category, the language, the source country, and the sentiment of the article. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
     //
-    //Future<SearchNews200Response> searchNews({ String text, String sourceCountry, String language, double minSentiment, double maxSentiment, String earliestPublishDate, String latestPublishDate, String newsSources, String authors, String categories, String entities, String locationFilter, String sort, String sortDirection, int offset, int number }) async
+    //Future<SearchNews200Response> searchNews({ String text, String textMatchIndexes, String sourceCountry, String language, double minSentiment, double maxSentiment, String earliestPublishDate, String latestPublishDate, String newsSources, String authors, String categories, String entities, String locationFilter, String sort, String sortDirection, int offset, int number }) async
     test('test searchNews', () async {
       // TODO
     });

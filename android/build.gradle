@@ -58,7 +58,7 @@ publishing {
         release(MavenPublication) {
             groupId = 'com.worldnewsapi'
             artifactId = 'android-client'
-            version = '2.0.0'
+            version = '2.1.0'
 
             afterEvaluate {
                 from components.release

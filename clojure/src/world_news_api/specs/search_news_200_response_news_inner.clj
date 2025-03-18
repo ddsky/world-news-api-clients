@@ -10,7 +10,6 @@
    (ds/opt :summary) string?
    (ds/opt :image) string?
    (ds/opt :sentiment) float?
-   (ds/opt :author) string?
    (ds/opt :language) string?
    (ds/opt :video) string?
    (ds/opt :title) string?

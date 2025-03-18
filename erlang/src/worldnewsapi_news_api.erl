@@ -1,9 +1,9 @@
 -module(worldnewsapi_news_api).
 
--export([extract_news/3, extract_news/4,
-         extract_news_links/3, extract_news_links/4,
+-export([extract_news/2, extract_news/3,
+         extract_news_links/2, extract_news_links/3,
          get_geo_coordinates/2, get_geo_coordinates/3,
-         news_website_to_rss_feed/3, news_website_to_rss_feed/4,
+         news_website_to_rss_feed/2, news_website_to_rss_feed/3,
          retrieve_news_articles_by_ids/2, retrieve_news_articles_by_ids/3,
          retrieve_newspaper_front_page/1, retrieve_newspaper_front_page/2,
          search_news/1, search_news/2,
@@ -13,18 +13,18 @@
 
 %% @doc Extract News
 %% Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, images, videos, publish date, authors, language, source country, and sentiment of the news article.
--spec extract_news(ctx:ctx(), binary(), boolean()) -> {ok, worldnewsapi_extract_news_200_response:worldnewsapi_extract_news_200_response(), worldnewsapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), worldnewsapi_utils:response_info()}.
-extract_news(Ctx, Url, Analyze) ->
-    extract_news(Ctx, Url, Analyze, #{}).
+-spec extract_news(ctx:ctx(), binary()) -> {ok, worldnewsapi_extract_news_200_response:worldnewsapi_extract_news_200_response(), worldnewsapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), worldnewsapi_utils:response_info()}.
+extract_news(Ctx, Url) ->
+    extract_news(Ctx, Url, #{}).
 
--spec extract_news(ctx:ctx(), binary(), boolean(), maps:map()) -> {ok, worldnewsapi_extract_news_200_response:worldnewsapi_extract_news_200_response(), worldnewsapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), worldnewsapi_utils:response_info()}.
-extract_news(Ctx, Url, Analyze, Optional) ->
+-spec extract_news(ctx:ctx(), binary(), maps:map()) -> {ok, worldnewsapi_extract_news_200_response:worldnewsapi_extract_news_200_response(), worldnewsapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), worldnewsapi_utils:response_info()}.
+extract_news(Ctx, Url, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
     Cfg = maps:get(cfg, Optional, application:get_env(worldnewsapi_api, config, #{})),
 
     Method = get,
     Path = [?BASE_URL, "/extract-news"],
-    QS = lists:flatten([{<<"url">>, Url}, {<<"analyze">>, Analyze}])++worldnewsapi_utils:optional_params([], _OptionalParams),
+    QS = lists:flatten([{<<"url">>, Url}])++worldnewsapi_utils:optional_params(['analyze'], _OptionalParams),
     Headers = [],
     Body1 = [],
     ContentTypeHeader = worldnewsapi_utils:select_header_content_type([]),
@@ -34,18 +34,18 @@ extract_news(Ctx, Url, Analyze, Optional) ->
 
 %% @doc Extract News Links
 %% Extract news links from a news website.
--spec extract_news_links(ctx:ctx(), binary(), boolean()) -> {ok, worldnewsapi_extract_news_links_200_response:worldnewsapi_extract_news_links_200_response(), worldnewsapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), worldnewsapi_utils:response_info()}.
-extract_news_links(Ctx, Url, Analyze) ->
-    extract_news_links(Ctx, Url, Analyze, #{}).
+-spec extract_news_links(ctx:ctx(), binary()) -> {ok, worldnewsapi_extract_news_links_200_response:worldnewsapi_extract_news_links_200_response(), worldnewsapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), worldnewsapi_utils:response_info()}.
+extract_news_links(Ctx, Url) ->
+    extract_news_links(Ctx, Url, #{}).
 
--spec extract_news_links(ctx:ctx(), binary(), boolean(), maps:map()) -> {ok, worldnewsapi_extract_news_links_200_response:worldnewsapi_extract_news_links_200_response(), worldnewsapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), worldnewsapi_utils:response_info()}.
-extract_news_links(Ctx, Url, Analyze, Optional) ->
+-spec extract_news_links(ctx:ctx(), binary(), maps:map()) -> {ok, worldnewsapi_extract_news_links_200_response:worldnewsapi_extract_news_links_200_response(), worldnewsapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), worldnewsapi_utils:response_info()}.
+extract_news_links(Ctx, Url, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
     Cfg = maps:get(cfg, Optional, application:get_env(worldnewsapi_api, config, #{})),
 
     Method = get,
     Path = [?BASE_URL, "/extract-news-links"],
-    QS = lists:flatten([{<<"url">>, Url}, {<<"analyze">>, Analyze}])++worldnewsapi_utils:optional_params([], _OptionalParams),
+    QS = lists:flatten([{<<"url">>, Url}])++worldnewsapi_utils:optional_params(['analyze'], _OptionalParams),
     Headers = [],
     Body1 = [],
     ContentTypeHeader = worldnewsapi_utils:select_header_content_type([]),
@@ -76,18 +76,18 @@ get_geo_coordinates(Ctx, Location, Optional) ->
 
 %% @doc News Website to RSS Feed
 %% Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page.
--spec news_website_to_rss_feed(ctx:ctx(), binary(), boolean()) -> {ok, maps:map(), worldnewsapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), worldnewsapi_utils:response_info()}.
-news_website_to_rss_feed(Ctx, Url, Analyze) ->
-    news_website_to_rss_feed(Ctx, Url, Analyze, #{}).
+-spec news_website_to_rss_feed(ctx:ctx(), binary()) -> {ok, maps:map(), worldnewsapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), worldnewsapi_utils:response_info()}.
+news_website_to_rss_feed(Ctx, Url) ->
+    news_website_to_rss_feed(Ctx, Url, #{}).
 
--spec news_website_to_rss_feed(ctx:ctx(), binary(), boolean(), maps:map()) -> {ok, maps:map(), worldnewsapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), worldnewsapi_utils:response_info()}.
-news_website_to_rss_feed(Ctx, Url, Analyze, Optional) ->
+-spec news_website_to_rss_feed(ctx:ctx(), binary(), maps:map()) -> {ok, maps:map(), worldnewsapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), worldnewsapi_utils:response_info()}.
+news_website_to_rss_feed(Ctx, Url, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
     Cfg = maps:get(cfg, Optional, application:get_env(worldnewsapi_api, config, #{})),
 
     Method = get,
     Path = [?BASE_URL, "/feed.rss"],
-    QS = lists:flatten([{<<"url">>, Url}, {<<"analyze">>, Analyze}])++worldnewsapi_utils:optional_params([], _OptionalParams),
+    QS = lists:flatten([{<<"url">>, Url}])++worldnewsapi_utils:optional_params(['extract-news'], _OptionalParams),
     Headers = [],
     Body1 = [],
     ContentTypeHeader = worldnewsapi_utils:select_header_content_type([]),
@@ -138,7 +138,7 @@ retrieve_newspaper_front_page(Ctx, Optional) ->
     worldnewsapi_utils:request(Ctx, Method, Path, QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc Search News
-%% Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
+%% Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. Each returned article includes the title, the full text of the article, a summary, image URL, video URL, the publish date, the authors, the category, the language, the source country, and the sentiment of the article. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
 -spec search_news(ctx:ctx()) -> {ok, worldnewsapi_search_news_200_response:worldnewsapi_search_news_200_response(), worldnewsapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), worldnewsapi_utils:response_info()}.
 search_news(Ctx) ->
     search_news(Ctx, #{}).
@@ -150,7 +150,7 @@ search_news(Ctx, Optional) ->
 
     Method = get,
     Path = [?BASE_URL, "/search-news"],
-    QS = lists:flatten([])++worldnewsapi_utils:optional_params(['text', 'source-country', 'language', 'min-sentiment', 'max-sentiment', 'earliest-publish-date', 'latest-publish-date', 'news-sources', 'authors', 'categories', 'entities', 'location-filter', 'sort', 'sort-direction', 'offset', 'number'], _OptionalParams),
+    QS = lists:flatten([])++worldnewsapi_utils:optional_params(['text', 'text-match-indexes', 'source-country', 'language', 'min-sentiment', 'max-sentiment', 'earliest-publish-date', 'latest-publish-date', 'news-sources', 'authors', 'categories', 'entities', 'location-filter', 'sort', 'sort-direction', 'offset', 'number'], _OptionalParams),
     Headers = [],
     Body1 = [],
     ContentTypeHeader = worldnewsapi_utils:select_header_content_type([]),

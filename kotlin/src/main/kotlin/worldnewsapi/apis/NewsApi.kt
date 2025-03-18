@@ -55,7 +55,7 @@ class NewsApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClient = 
      * Extract News
      * Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, images, videos, publish date, authors, language, source country, and sentiment of the news article.
      * @param url The url of the news.
-     * @param analyze Whether to analyze the news (extract entities etc.)
+     * @param analyze Whether to analyze the extracted news (extract entities, detect sentiment etc.) (optional)
      * @return ExtractNews200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -65,7 +65,7 @@ class NewsApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClient = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun extractNews(url: kotlin.String, analyze: kotlin.Boolean) : ExtractNews200Response {
+    fun extractNews(url: kotlin.String, analyze: kotlin.Boolean? = null) : ExtractNews200Response {
         val localVarResponse = extractNewsWithHttpInfo(url = url, analyze = analyze)
 
         return when (localVarResponse.responseType) {
@@ -87,14 +87,14 @@ class NewsApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClient = 
      * Extract News
      * Extract a news article from a website to a well structure JSON object. The API will return the title, text, URL, images, videos, publish date, authors, language, source country, and sentiment of the news article.
      * @param url The url of the news.
-     * @param analyze Whether to analyze the news (extract entities etc.)
+     * @param analyze Whether to analyze the extracted news (extract entities, detect sentiment etc.) (optional)
      * @return ApiResponse<ExtractNews200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun extractNewsWithHttpInfo(url: kotlin.String, analyze: kotlin.Boolean) : ApiResponse<ExtractNews200Response?> {
+    fun extractNewsWithHttpInfo(url: kotlin.String, analyze: kotlin.Boolean?) : ApiResponse<ExtractNews200Response?> {
         val localVariableConfig = extractNewsRequestConfig(url = url, analyze = analyze)
 
         return request<Unit, ExtractNews200Response>(
@@ -106,15 +106,17 @@ class NewsApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClient = 
      * To obtain the request config of the operation extractNews
      *
      * @param url The url of the news.
-     * @param analyze Whether to analyze the news (extract entities etc.)
+     * @param analyze Whether to analyze the extracted news (extract entities, detect sentiment etc.) (optional)
      * @return RequestConfig
      */
-    fun extractNewsRequestConfig(url: kotlin.String, analyze: kotlin.Boolean) : RequestConfig<Unit> {
+    fun extractNewsRequestConfig(url: kotlin.String, analyze: kotlin.Boolean?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
                 put("url", listOf(url.toString()))
-                put("analyze", listOf(analyze.toString()))
+                if (analyze != null) {
+                    put("analyze", listOf(analyze.toString()))
+                }
             }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Accept"] = "application/json"
@@ -133,7 +135,7 @@ class NewsApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClient = 
      * Extract News Links
      * Extract news links from a news website.
      * @param url The url of the news.
-     * @param analyze Whether to analyze the news (extract entities etc.)
+     * @param analyze Whether to analyze the extracted news (extract entities, detect sentiment etc.) (optional)
      * @return ExtractNewsLinks200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -143,7 +145,7 @@ class NewsApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClient = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun extractNewsLinks(url: kotlin.String, analyze: kotlin.Boolean) : ExtractNewsLinks200Response {
+    fun extractNewsLinks(url: kotlin.String, analyze: kotlin.Boolean? = null) : ExtractNewsLinks200Response {
         val localVarResponse = extractNewsLinksWithHttpInfo(url = url, analyze = analyze)
 
         return when (localVarResponse.responseType) {
@@ -165,14 +167,14 @@ class NewsApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClient = 
      * Extract News Links
      * Extract news links from a news website.
      * @param url The url of the news.
-     * @param analyze Whether to analyze the news (extract entities etc.)
+     * @param analyze Whether to analyze the extracted news (extract entities, detect sentiment etc.) (optional)
      * @return ApiResponse<ExtractNewsLinks200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun extractNewsLinksWithHttpInfo(url: kotlin.String, analyze: kotlin.Boolean) : ApiResponse<ExtractNewsLinks200Response?> {
+    fun extractNewsLinksWithHttpInfo(url: kotlin.String, analyze: kotlin.Boolean?) : ApiResponse<ExtractNewsLinks200Response?> {
         val localVariableConfig = extractNewsLinksRequestConfig(url = url, analyze = analyze)
 
         return request<Unit, ExtractNewsLinks200Response>(
@@ -184,15 +186,17 @@ class NewsApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClient = 
      * To obtain the request config of the operation extractNewsLinks
      *
      * @param url The url of the news.
-     * @param analyze Whether to analyze the news (extract entities etc.)
+     * @param analyze Whether to analyze the extracted news (extract entities, detect sentiment etc.) (optional)
      * @return RequestConfig
      */
-    fun extractNewsLinksRequestConfig(url: kotlin.String, analyze: kotlin.Boolean) : RequestConfig<Unit> {
+    fun extractNewsLinksRequestConfig(url: kotlin.String, analyze: kotlin.Boolean?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
                 put("url", listOf(url.toString()))
-                put("analyze", listOf(analyze.toString()))
+                if (analyze != null) {
+                    put("analyze", listOf(analyze.toString()))
+                }
             }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Accept"] = "application/json"
@@ -284,8 +288,8 @@ class NewsApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClient = 
     /**
      * News Website to RSS Feed
      * Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page.
-     * @param url The url of the news.
-     * @param analyze Whether to analyze the news (extract entities etc.)
+     * @param url The url of the site for which an RSS feed should be created.
+     * @param extractNews Whether to extract the news for each link instead of just returning the link. (optional)
      * @return kotlin.Any
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -295,8 +299,8 @@ class NewsApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClient = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun newsWebsiteToRSSFeed(url: kotlin.String, analyze: kotlin.Boolean) : kotlin.Any {
-        val localVarResponse = newsWebsiteToRSSFeedWithHttpInfo(url = url, analyze = analyze)
+    fun newsWebsiteToRSSFeed(url: kotlin.String, extractNews: kotlin.Boolean? = null) : kotlin.Any {
+        val localVarResponse = newsWebsiteToRSSFeedWithHttpInfo(url = url, extractNews = extractNews)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -316,16 +320,16 @@ class NewsApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClient = 
     /**
      * News Website to RSS Feed
      * Turn a news website into an RSS feed. Any page of a news website can be turned into an RSS feed. Provide the URL to the page and the API will return an RSS feed with the latest news from that page.
-     * @param url The url of the news.
-     * @param analyze Whether to analyze the news (extract entities etc.)
+     * @param url The url of the site for which an RSS feed should be created.
+     * @param extractNews Whether to extract the news for each link instead of just returning the link. (optional)
      * @return ApiResponse<kotlin.Any?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun newsWebsiteToRSSFeedWithHttpInfo(url: kotlin.String, analyze: kotlin.Boolean) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = newsWebsiteToRSSFeedRequestConfig(url = url, analyze = analyze)
+    fun newsWebsiteToRSSFeedWithHttpInfo(url: kotlin.String, extractNews: kotlin.Boolean?) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = newsWebsiteToRSSFeedRequestConfig(url = url, extractNews = extractNews)
 
         return request<Unit, kotlin.Any>(
             localVariableConfig
@@ -335,16 +339,18 @@ class NewsApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClient = 
     /**
      * To obtain the request config of the operation newsWebsiteToRSSFeed
      *
-     * @param url The url of the news.
-     * @param analyze Whether to analyze the news (extract entities etc.)
+     * @param url The url of the site for which an RSS feed should be created.
+     * @param extractNews Whether to extract the news for each link instead of just returning the link. (optional)
      * @return RequestConfig
      */
-    fun newsWebsiteToRSSFeedRequestConfig(url: kotlin.String, analyze: kotlin.Boolean) : RequestConfig<Unit> {
+    fun newsWebsiteToRSSFeedRequestConfig(url: kotlin.String, extractNews: kotlin.Boolean?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
                 put("url", listOf(url.toString()))
-                put("analyze", listOf(analyze.toString()))
+                if (extractNews != null) {
+                    put("extract-news", listOf(extractNews.toString()))
+                }
             }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         
@@ -522,8 +528,9 @@ class NewsApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClient = 
 
     /**
      * Search News
-     * Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
-     * @param text The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford (optional)
+     * Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. Each returned article includes the title, the full text of the article, a summary, image URL, video URL, the publish date, the authors, the category, the language, the source country, and the sentiment of the article. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
+     * @param text The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford. You can also exclude terms by putting a minus sign (-) in front of the term, e.g. tesla -ford. For exact matches just put your term in quotes, e.g. \&quot;elon musk\&quot;. (optional)
+     * @param textMatchIndexes If a \&quot;text\&quot; is given to search for, you can specify where this text is searched for. Possible values are title, content, or both separated by a comma. By default, both title and content are searched. (optional)
      * @param sourceCountry The ISO 3166 country code from which the news should originate. (optional)
      * @param language The ISO 6391 language code of the news. (optional)
      * @param minSentiment The minimal sentiment of the news in range [-1,1]. (optional)
@@ -537,7 +544,7 @@ class NewsApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClient = 
      * @param locationFilter Filter news by radius around a certain location. Format is \&quot;latitude,longitude,radius in kilometers\&quot;. Radius must be between 1 and 100 kilometers. (optional)
      * @param sort The sorting criteria (publish-time). (optional)
      * @param sortDirection Whether to sort ascending or descending (ASC or DESC). (optional)
-     * @param offset The number of news to skip in range [0,10000] (optional)
+     * @param offset The number of news to skip in range [0,100000] (optional)
      * @param number The number of news to return in range [1,100] (optional)
      * @return SearchNews200Response
      * @throws IllegalStateException If the request is not correctly configured
@@ -548,8 +555,8 @@ class NewsApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClient = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun searchNews(text: kotlin.String? = null, sourceCountry: kotlin.String? = null, language: kotlin.String? = null, minSentiment: kotlin.Double? = null, maxSentiment: kotlin.Double? = null, earliestPublishDate: kotlin.String? = null, latestPublishDate: kotlin.String? = null, newsSources: kotlin.String? = null, authors: kotlin.String? = null, categories: kotlin.String? = null, entities: kotlin.String? = null, locationFilter: kotlin.String? = null, sort: kotlin.String? = null, sortDirection: kotlin.String? = null, offset: kotlin.Int? = null, number: kotlin.Int? = null) : SearchNews200Response {
-        val localVarResponse = searchNewsWithHttpInfo(text = text, sourceCountry = sourceCountry, language = language, minSentiment = minSentiment, maxSentiment = maxSentiment, earliestPublishDate = earliestPublishDate, latestPublishDate = latestPublishDate, newsSources = newsSources, authors = authors, categories = categories, entities = entities, locationFilter = locationFilter, sort = sort, sortDirection = sortDirection, offset = offset, number = number)
+    fun searchNews(text: kotlin.String? = null, textMatchIndexes: kotlin.String? = null, sourceCountry: kotlin.String? = null, language: kotlin.String? = null, minSentiment: kotlin.Double? = null, maxSentiment: kotlin.Double? = null, earliestPublishDate: kotlin.String? = null, latestPublishDate: kotlin.String? = null, newsSources: kotlin.String? = null, authors: kotlin.String? = null, categories: kotlin.String? = null, entities: kotlin.String? = null, locationFilter: kotlin.String? = null, sort: kotlin.String? = null, sortDirection: kotlin.String? = null, offset: kotlin.Int? = null, number: kotlin.Int? = null) : SearchNews200Response {
+        val localVarResponse = searchNewsWithHttpInfo(text = text, textMatchIndexes = textMatchIndexes, sourceCountry = sourceCountry, language = language, minSentiment = minSentiment, maxSentiment = maxSentiment, earliestPublishDate = earliestPublishDate, latestPublishDate = latestPublishDate, newsSources = newsSources, authors = authors, categories = categories, entities = entities, locationFilter = locationFilter, sort = sort, sortDirection = sortDirection, offset = offset, number = number)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as SearchNews200Response
@@ -568,8 +575,9 @@ class NewsApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClient = 
 
     /**
      * Search News
-     * Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
-     * @param text The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford (optional)
+     * Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. Each returned article includes the title, the full text of the article, a summary, image URL, video URL, the publish date, the authors, the category, the language, the source country, and the sentiment of the article. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
+     * @param text The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford. You can also exclude terms by putting a minus sign (-) in front of the term, e.g. tesla -ford. For exact matches just put your term in quotes, e.g. \&quot;elon musk\&quot;. (optional)
+     * @param textMatchIndexes If a \&quot;text\&quot; is given to search for, you can specify where this text is searched for. Possible values are title, content, or both separated by a comma. By default, both title and content are searched. (optional)
      * @param sourceCountry The ISO 3166 country code from which the news should originate. (optional)
      * @param language The ISO 6391 language code of the news. (optional)
      * @param minSentiment The minimal sentiment of the news in range [-1,1]. (optional)
@@ -583,7 +591,7 @@ class NewsApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClient = 
      * @param locationFilter Filter news by radius around a certain location. Format is \&quot;latitude,longitude,radius in kilometers\&quot;. Radius must be between 1 and 100 kilometers. (optional)
      * @param sort The sorting criteria (publish-time). (optional)
      * @param sortDirection Whether to sort ascending or descending (ASC or DESC). (optional)
-     * @param offset The number of news to skip in range [0,10000] (optional)
+     * @param offset The number of news to skip in range [0,100000] (optional)
      * @param number The number of news to return in range [1,100] (optional)
      * @return ApiResponse<SearchNews200Response?>
      * @throws IllegalStateException If the request is not correctly configured
@@ -591,8 +599,8 @@ class NewsApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClient = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun searchNewsWithHttpInfo(text: kotlin.String?, sourceCountry: kotlin.String?, language: kotlin.String?, minSentiment: kotlin.Double?, maxSentiment: kotlin.Double?, earliestPublishDate: kotlin.String?, latestPublishDate: kotlin.String?, newsSources: kotlin.String?, authors: kotlin.String?, categories: kotlin.String?, entities: kotlin.String?, locationFilter: kotlin.String?, sort: kotlin.String?, sortDirection: kotlin.String?, offset: kotlin.Int?, number: kotlin.Int?) : ApiResponse<SearchNews200Response?> {
-        val localVariableConfig = searchNewsRequestConfig(text = text, sourceCountry = sourceCountry, language = language, minSentiment = minSentiment, maxSentiment = maxSentiment, earliestPublishDate = earliestPublishDate, latestPublishDate = latestPublishDate, newsSources = newsSources, authors = authors, categories = categories, entities = entities, locationFilter = locationFilter, sort = sort, sortDirection = sortDirection, offset = offset, number = number)
+    fun searchNewsWithHttpInfo(text: kotlin.String?, textMatchIndexes: kotlin.String?, sourceCountry: kotlin.String?, language: kotlin.String?, minSentiment: kotlin.Double?, maxSentiment: kotlin.Double?, earliestPublishDate: kotlin.String?, latestPublishDate: kotlin.String?, newsSources: kotlin.String?, authors: kotlin.String?, categories: kotlin.String?, entities: kotlin.String?, locationFilter: kotlin.String?, sort: kotlin.String?, sortDirection: kotlin.String?, offset: kotlin.Int?, number: kotlin.Int?) : ApiResponse<SearchNews200Response?> {
+        val localVariableConfig = searchNewsRequestConfig(text = text, textMatchIndexes = textMatchIndexes, sourceCountry = sourceCountry, language = language, minSentiment = minSentiment, maxSentiment = maxSentiment, earliestPublishDate = earliestPublishDate, latestPublishDate = latestPublishDate, newsSources = newsSources, authors = authors, categories = categories, entities = entities, locationFilter = locationFilter, sort = sort, sortDirection = sortDirection, offset = offset, number = number)
 
         return request<Unit, SearchNews200Response>(
             localVariableConfig
@@ -602,7 +610,8 @@ class NewsApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClient = 
     /**
      * To obtain the request config of the operation searchNews
      *
-     * @param text The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford (optional)
+     * @param text The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford. You can also exclude terms by putting a minus sign (-) in front of the term, e.g. tesla -ford. For exact matches just put your term in quotes, e.g. \&quot;elon musk\&quot;. (optional)
+     * @param textMatchIndexes If a \&quot;text\&quot; is given to search for, you can specify where this text is searched for. Possible values are title, content, or both separated by a comma. By default, both title and content are searched. (optional)
      * @param sourceCountry The ISO 3166 country code from which the news should originate. (optional)
      * @param language The ISO 6391 language code of the news. (optional)
      * @param minSentiment The minimal sentiment of the news in range [-1,1]. (optional)
@@ -616,16 +625,19 @@ class NewsApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClient = 
      * @param locationFilter Filter news by radius around a certain location. Format is \&quot;latitude,longitude,radius in kilometers\&quot;. Radius must be between 1 and 100 kilometers. (optional)
      * @param sort The sorting criteria (publish-time). (optional)
      * @param sortDirection Whether to sort ascending or descending (ASC or DESC). (optional)
-     * @param offset The number of news to skip in range [0,10000] (optional)
+     * @param offset The number of news to skip in range [0,100000] (optional)
      * @param number The number of news to return in range [1,100] (optional)
      * @return RequestConfig
      */
-    fun searchNewsRequestConfig(text: kotlin.String?, sourceCountry: kotlin.String?, language: kotlin.String?, minSentiment: kotlin.Double?, maxSentiment: kotlin.Double?, earliestPublishDate: kotlin.String?, latestPublishDate: kotlin.String?, newsSources: kotlin.String?, authors: kotlin.String?, categories: kotlin.String?, entities: kotlin.String?, locationFilter: kotlin.String?, sort: kotlin.String?, sortDirection: kotlin.String?, offset: kotlin.Int?, number: kotlin.Int?) : RequestConfig<Unit> {
+    fun searchNewsRequestConfig(text: kotlin.String?, textMatchIndexes: kotlin.String?, sourceCountry: kotlin.String?, language: kotlin.String?, minSentiment: kotlin.Double?, maxSentiment: kotlin.Double?, earliestPublishDate: kotlin.String?, latestPublishDate: kotlin.String?, newsSources: kotlin.String?, authors: kotlin.String?, categories: kotlin.String?, entities: kotlin.String?, locationFilter: kotlin.String?, sort: kotlin.String?, sortDirection: kotlin.String?, offset: kotlin.Int?, number: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
                 if (text != null) {
                     put("text", listOf(text.toString()))
+                }
+                if (textMatchIndexes != null) {
+                    put("text-match-indexes", listOf(textMatchIndexes.toString()))
                 }
                 if (sourceCountry != null) {
                     put("source-country", listOf(sourceCountry.toString()))

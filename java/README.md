@@ -1,8 +1,8 @@
 # java-client
 
 World News API
-- API version: 2.0.0
-  - Build date: 2024-10-20T17:03:50.740378100+02:00[Europe/Berlin]
+- API version: 2.1.0
+  - Build date: 2025-03-18T23:46:01.915356500+01:00[Europe/Berlin]
   - Generator version: 7.8.0-SNAPSHOT
 
 The world's news wrapped into a single API.
@@ -41,7 +41,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.worldnewsapi</groupId>
   <artifactId>java-client</artifactId>
-  <version>2.0.0</version>
+  <version>2.1.0</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -57,7 +57,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "com.worldnewsapi:java-client:2.0.0"
+     implementation "com.worldnewsapi:java-client:2.1.0"
   }
 ```
 
@@ -71,7 +71,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/java-client-2.0.0.jar`
+* `target/java-client-2.1.0.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
@@ -107,7 +107,7 @@ public class Example {
 
     NewsApi apiInstance = new NewsApi(defaultClient);
     String url = "https://www.bbc.com/news/world-us-canada-59340789"; // String | The url of the news.
-    Boolean analyze = true; // Boolean | Whether to analyze the news (extract entities etc.)
+    Boolean analyze = true; // Boolean | Whether to analyze the extracted news (extract entities, detect sentiment etc.)
     try {
       ExtractNews200Response result = apiInstance.extractNews(url, analyze);
       System.out.println(result);

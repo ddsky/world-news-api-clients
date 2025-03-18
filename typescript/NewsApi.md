@@ -32,7 +32,7 @@ const apiInstance = new .NewsApi(configuration);
 let body:.NewsApiExtractNewsRequest = {
   // string | The url of the news.
   url: "https://www.bbc.com/news/world-us-canada-59340789",
-  // boolean | Whether to analyze the news (extract entities etc.)
+  // boolean | Whether to analyze the extracted news (extract entities, detect sentiment etc.) (optional)
   analyze: true,
 };
 
@@ -47,7 +47,7 @@ apiInstance.extractNews(body).then((data:any) => {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **url** | [**string**] | The url of the news. | defaults to undefined
- **analyze** | [**boolean**] | Whether to analyze the news (extract entities etc.) | defaults to undefined
+ **analyze** | [**boolean**] | Whether to analyze the extracted news (extract entities, detect sentiment etc.) | (optional) defaults to undefined
 
 
 ### Return type
@@ -95,7 +95,7 @@ const apiInstance = new .NewsApi(configuration);
 let body:.NewsApiExtractNewsLinksRequest = {
   // string | The url of the news.
   url: "https://www.bbc.com/news/world-us-canada-59340789",
-  // boolean | Whether to analyze the news (extract entities etc.)
+  // boolean | Whether to analyze the extracted news (extract entities, detect sentiment etc.) (optional)
   analyze: true,
 };
 
@@ -110,7 +110,7 @@ apiInstance.extractNewsLinks(body).then((data:any) => {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **url** | [**string**] | The url of the news. | defaults to undefined
- **analyze** | [**boolean**] | Whether to analyze the news (extract entities etc.) | defaults to undefined
+ **analyze** | [**boolean**] | Whether to analyze the extracted news (extract entities, detect sentiment etc.) | (optional) defaults to undefined
 
 
 ### Return type
@@ -216,10 +216,10 @@ const configuration = .createConfiguration();
 const apiInstance = new .NewsApi(configuration);
 
 let body:.NewsApiNewsWebsiteToRSSFeedRequest = {
-  // string | The url of the news.
-  url: "https://www.bbc.com/news/world-us-canada-59340789",
-  // boolean | Whether to analyze the news (extract entities etc.)
-  analyze: true,
+  // string | The url of the site for which an RSS feed should be created.
+  url: "https://www.bbc.com/",
+  // boolean | Whether to extract the news for each link instead of just returning the link. (optional)
+  extractNews: true,
 };
 
 apiInstance.newsWebsiteToRSSFeed(body).then((data:any) => {
@@ -232,8 +232,8 @@ apiInstance.newsWebsiteToRSSFeed(body).then((data:any) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **url** | [**string**] | The url of the news. | defaults to undefined
- **analyze** | [**boolean**] | Whether to analyze the news (extract entities etc.) | defaults to undefined
+ **url** | [**string**] | The url of the site for which an RSS feed should be created. | defaults to undefined
+ **extractNews** | [**boolean**] | Whether to extract the news for each link instead of just returning the link. | (optional) defaults to undefined
 
 
 ### Return type
@@ -392,7 +392,7 @@ Name | Type | Description  | Notes
 # **searchNews**
 > SearchNews200Response searchNews()
 
-Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
+Search and filter news by text, date, location, category, language, and more. The API returns a list of news articles matching the given criteria. Each returned article includes the title, the full text of the article, a summary, image URL, video URL, the publish date, the authors, the category, the language, the source country, and the sentiment of the article. You can set as many filtering parameters as you like, but you have to set at least one, e.g. text or language.
 
 ### Example
 
@@ -405,8 +405,10 @@ const configuration = .createConfiguration();
 const apiInstance = new .NewsApi(configuration);
 
 let body:.NewsApiSearchNewsRequest = {
-  // string | The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford (optional)
+  // string | The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford. You can also exclude terms by putting a minus sign (-) in front of the term, e.g. tesla -ford. For exact matches just put your term in quotes, e.g. \"elon musk\". (optional)
   text: "tesla",
+  // string | If a \"text\" is given to search for, you can specify where this text is searched for. Possible values are title, content, or both separated by a comma. By default, both title and content are searched. (optional)
+  textMatchIndexes: "title,content",
   // string | The ISO 3166 country code from which the news should originate. (optional)
   sourceCountry: "us",
   // string | The ISO 6391 language code of the news. (optional)
@@ -426,14 +428,14 @@ let body:.NewsApiSearchNewsRequest = {
   // string | A comma-separated list of categories. Only news from any of the given categories will be returned. Possible categories are politics, sports, business, technology, entertainment, health, science, lifestyle, travel, culture, education, environment, other. Please note that the filter might leave out news, especially in non-English languages. If too few results are returned, use the text parameter instead. (optional)
   categories: "politics,sports",
   // string | Filter news by entities (see semantic types). (optional)
-  entities: "ORG:Tesla",
+  entities: "ORG:Tesla,PER:Elon Musk",
   // string | Filter news by radius around a certain location. Format is \"latitude,longitude,radius in kilometers\". Radius must be between 1 and 100 kilometers. (optional)
   locationFilter: "51.050407, 13.737262, 20",
   // string | The sorting criteria (publish-time). (optional)
   sort: "publish-time",
   // string | Whether to sort ascending or descending (ASC or DESC). (optional)
   sortDirection: "ASC",
-  // number | The number of news to skip in range [0,10000] (optional)
+  // number | The number of news to skip in range [0,100000] (optional)
   offset: 0,
   // number | The number of news to return in range [1,100] (optional)
   number: 10,
@@ -449,7 +451,8 @@ apiInstance.searchNews(body).then((data:any) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **text** | [**string**] | The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford | (optional) defaults to undefined
+ **text** | [**string**] | The text to match in the news content (at least 3 characters, maximum 100 characters). By default all query terms are expected, you can use an uppercase OR to search for any terms, e.g. tesla OR ford. You can also exclude terms by putting a minus sign (-) in front of the term, e.g. tesla -ford. For exact matches just put your term in quotes, e.g. \&quot;elon musk\&quot;. | (optional) defaults to undefined
+ **textMatchIndexes** | [**string**] | If a \&quot;text\&quot; is given to search for, you can specify where this text is searched for. Possible values are title, content, or both separated by a comma. By default, both title and content are searched. | (optional) defaults to undefined
  **sourceCountry** | [**string**] | The ISO 3166 country code from which the news should originate. | (optional) defaults to undefined
  **language** | [**string**] | The ISO 6391 language code of the news. | (optional) defaults to undefined
  **minSentiment** | [**number**] | The minimal sentiment of the news in range [-1,1]. | (optional) defaults to undefined
@@ -463,7 +466,7 @@ Name | Type | Description  | Notes
  **locationFilter** | [**string**] | Filter news by radius around a certain location. Format is \&quot;latitude,longitude,radius in kilometers\&quot;. Radius must be between 1 and 100 kilometers. | (optional) defaults to undefined
  **sort** | [**string**] | The sorting criteria (publish-time). | (optional) defaults to undefined
  **sortDirection** | [**string**] | Whether to sort ascending or descending (ASC or DESC). | (optional) defaults to undefined
- **offset** | [**number**] | The number of news to skip in range [0,10000] | (optional) defaults to undefined
+ **offset** | [**number**] | The number of news to skip in range [0,100000] | (optional) defaults to undefined
  **number** | [**number**] | The number of news to return in range [1,100] | (optional) defaults to undefined
 
 

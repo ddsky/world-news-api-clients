@@ -7,7 +7,6 @@
 | **summary** | **String** |  | [optional] |
 | **image** | **String** |  | [optional] |
 | **sentiment** | **Float** |  | [optional] |
-| **author** | **String** |  | [optional] |
 | **language** | **String** |  | [optional] |
 | **video** | **String** |  | [optional] |
 | **title** | **String** |  | [optional] |
@@ -28,7 +27,6 @@ instance = OpenapiClient::SearchNews200ResponseNewsInner.new(
   summary: null,
   image: null,
   sentiment: null,
-  author: null,
   language: null,
   video: null,
   title: null,

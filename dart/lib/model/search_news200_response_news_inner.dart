@@ -16,7 +16,6 @@ class SearchNews200ResponseNewsInner {
     this.summary,
     this.image,
     this.sentiment,
-    this.author,
     this.language,
     this.video,
     this.title,
@@ -40,8 +39,6 @@ class SearchNews200ResponseNewsInner {
   /// Consider adding a "default:" property in the specification file to hide this note.
   ///
   num? sentiment;
-
-  String? author;
 
   String? language;
 
@@ -74,7 +71,6 @@ class SearchNews200ResponseNewsInner {
     other.summary == summary &&
     other.image == image &&
     other.sentiment == sentiment &&
-    other.author == author &&
     other.language == language &&
     other.video == video &&
     other.title == title &&
@@ -92,7 +88,6 @@ class SearchNews200ResponseNewsInner {
     (summary == null ? 0 : summary!.hashCode) +
     (image == null ? 0 : image!.hashCode) +
     (sentiment == null ? 0 : sentiment!.hashCode) +
-    (author == null ? 0 : author!.hashCode) +
     (language == null ? 0 : language!.hashCode) +
     (video == null ? 0 : video!.hashCode) +
     (title == null ? 0 : title!.hashCode) +
@@ -105,7 +100,7 @@ class SearchNews200ResponseNewsInner {
     (authors.hashCode);
 
   @override
-  String toString() => 'SearchNews200ResponseNewsInner[summary=$summary, image=$image, sentiment=$sentiment, author=$author, language=$language, video=$video, title=$title, url=$url, sourceCountry=$sourceCountry, id=$id, text=$text, category=$category, publishDate=$publishDate, authors=$authors]';
+  String toString() => 'SearchNews200ResponseNewsInner[summary=$summary, image=$image, sentiment=$sentiment, language=$language, video=$video, title=$title, url=$url, sourceCountry=$sourceCountry, id=$id, text=$text, category=$category, publishDate=$publishDate, authors=$authors]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
@@ -123,11 +118,6 @@ class SearchNews200ResponseNewsInner {
       json[r'sentiment'] = this.sentiment;
     } else {
       json[r'sentiment'] = null;
-    }
-    if (this.author != null) {
-      json[r'author'] = this.author;
-    } else {
-      json[r'author'] = null;
     }
     if (this.language != null) {
       json[r'language'] = this.language;
@@ -200,7 +190,6 @@ class SearchNews200ResponseNewsInner {
         summary: mapValueOfType<String>(json, r'summary'),
         image: mapValueOfType<String>(json, r'image'),
         sentiment: num.parse('${json[r'sentiment']}'),
-        author: mapValueOfType<String>(json, r'author'),
         language: mapValueOfType<String>(json, r'language'),
         video: mapValueOfType<String>(json, r'video'),
         title: mapValueOfType<String>(json, r'title'),
