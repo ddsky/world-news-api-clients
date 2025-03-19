@@ -11,6 +11,7 @@ All URIs are relative to *https://api.worldnewsapi.com*
 | [**retrieve_news_articles_by_ids**](NewsApi.md#retrieve_news_articles_by_ids) | **GET** /retrieve-news | Retrieve News Articles by Ids |
 | [**retrieve_newspaper_front_page**](NewsApi.md#retrieve_newspaper_front_page) | **GET** /retrieve-front-page | Retrieve Newspaper Front Page |
 | [**search_news**](NewsApi.md#search_news) | **GET** /search-news | Search News |
+| [**search_news_sources**](NewsApi.md#search_news_sources) | **GET** /search-news-sources | Search News Sources |
 | [**top_news**](NewsApi.md#top_news) | **GET** /top-news | Top News |
 
 
@@ -587,6 +588,82 @@ end
 ### Return type
 
 [**SearchNews200Response**](SearchNews200Response.md)
+
+### Authorization
+
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## search_news_sources
+
+> <SearchNewsSources200Response> search_news_sources(name)
+
+Search News Sources
+
+Search whether a news source is being monitored by the World News API. This API is useful if you want to know if a specific news source is available in the API.
+
+### Examples
+
+```ruby
+require 'time'
+require 'openapi_client'
+# setup authorization
+OpenapiClient.configure do |config|
+  # Configure API key authorization: apiKey
+  config.api_key['apiKey'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['apiKey'] = 'Bearer'
+
+  # Configure API key authorization: headerApiKey
+  config.api_key['headerApiKey'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['headerApiKey'] = 'Bearer'
+end
+
+api_instance = OpenapiClient::NewsApi.new
+name = 'bbc' # String | The (partial) name of the source.
+
+begin
+  # Search News Sources
+  result = api_instance.search_news_sources(name)
+  p result
+rescue OpenapiClient::ApiError => e
+  puts "Error when calling NewsApi->search_news_sources: #{e}"
+end
+```
+
+#### Using the search_news_sources_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<SearchNewsSources200Response>, Integer, Hash)> search_news_sources_with_http_info(name)
+
+```ruby
+begin
+  # Search News Sources
+  data, status_code, headers = api_instance.search_news_sources_with_http_info(name)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <SearchNewsSources200Response>
+rescue OpenapiClient::ApiError => e
+  puts "Error when calling NewsApi->search_news_sources_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **name** | **String** | The (partial) name of the source. |  |
+
+### Return type
+
+[**SearchNewsSources200Response**](SearchNewsSources200Response.md)
 
 ### Authorization
 

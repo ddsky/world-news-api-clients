@@ -4,8 +4,8 @@ The World News API gives you access to thousands of news sources in over 50 lang
 
 This is the python-package for easy acccess to the api.
 
-- API version: 2.1.0
-- Package version: 2.1.0
+- API version: 2.2.0
+- Package version: 2.2.0
 
 ## Resources
 
@@ -113,6 +113,7 @@ Class | Method | HTTP request | Description
 *NewsApi* | [**retrieve_news_articles_by_ids**](docs/NewsApi.md#retrieve_news_articles_by_ids) | **GET** /retrieve-news | Retrieve News Articles by Ids
 *NewsApi* | [**retrieve_newspaper_front_page**](docs/NewsApi.md#retrieve_newspaper_front_page) | **GET** /retrieve-front-page | Retrieve Newspaper Front Page
 *NewsApi* | [**search_news**](docs/NewsApi.md#search_news) | **GET** /search-news | Search News
+*NewsApi* | [**search_news_sources**](docs/NewsApi.md#search_news_sources) | **GET** /search-news-sources | Search News Sources
 *NewsApi* | [**top_news**](docs/NewsApi.md#top_news) | **GET** /top-news | Top News
 
 
@@ -129,6 +130,8 @@ Class | Method | HTTP request | Description
  - [RetrieveNewspaperFrontPage200ResponseFrontPage](docs/RetrieveNewspaperFrontPage200ResponseFrontPage.md)
  - [SearchNews200Response](docs/SearchNews200Response.md)
  - [SearchNews200ResponseNewsInner](docs/SearchNews200ResponseNewsInner.md)
+ - [SearchNewsSources200Response](docs/SearchNewsSources200Response.md)
+ - [SearchNewsSources200ResponseSourcesInner](docs/SearchNewsSources200ResponseSourcesInner.md)
  - [TopNews200Response](docs/TopNews200Response.md)
  - [TopNews200ResponseTopNewsInner](docs/TopNews200ResponseTopNewsInner.md)
  - [TopNews200ResponseTopNewsInnerNewsInner](docs/TopNews200ResponseTopNewsInnerNewsInner.md)

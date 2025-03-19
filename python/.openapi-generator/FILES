@@ -16,6 +16,8 @@ docs/RetrieveNewspaperFrontPage200Response.md
 docs/RetrieveNewspaperFrontPage200ResponseFrontPage.md
 docs/SearchNews200Response.md
 docs/SearchNews200ResponseNewsInner.md
+docs/SearchNewsSources200Response.md
+docs/SearchNewsSources200ResponseSourcesInner.md
 docs/TopNews200Response.md
 docs/TopNews200ResponseTopNewsInner.md
 docs/TopNews200ResponseTopNewsInnerNewsInner.md
@@ -38,6 +40,8 @@ test/test_retrieve_newspaper_front_page200_response.py
 test/test_retrieve_newspaper_front_page200_response_front_page.py
 test/test_search_news200_response.py
 test/test_search_news200_response_news_inner.py
+test/test_search_news_sources200_response.py
+test/test_search_news_sources200_response_sources_inner.py
 test/test_top_news200_response.py
 test/test_top_news200_response_top_news_inner.py
 test/test_top_news200_response_top_news_inner_news_inner.py
@@ -61,6 +65,8 @@ worldnewsapi/models/retrieve_newspaper_front_page200_response.py
 worldnewsapi/models/retrieve_newspaper_front_page200_response_front_page.py
 worldnewsapi/models/search_news200_response.py
 worldnewsapi/models/search_news200_response_news_inner.py
+worldnewsapi/models/search_news_sources200_response.py
+worldnewsapi/models/search_news_sources200_response_sources_inner.py
 worldnewsapi/models/top_news200_response.py
 worldnewsapi/models/top_news200_response_top_news_inner.py
 worldnewsapi/models/top_news200_response_top_news_inner_news_inner.py

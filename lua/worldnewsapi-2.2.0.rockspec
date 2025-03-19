@@ -1,5 +1,5 @@
 package = "worldnewsapi"
-version = "2.1.0"
+version = "2.2.0"
 source = {
 	url = "https://github.com/ddsky/world-news-api-clients/tree/main/lua/.git"
 }
@@ -35,6 +35,8 @@ build = {
 		["worldnewsapi.model.retrieve_newspaper_front_page_200_response_front_page"] = "worldnewsapi/model/retrieve_newspaper_front_page_200_response_front_page.lua";
 		["worldnewsapi.model.search_news_200_response"] = "worldnewsapi/model/search_news_200_response.lua";
 		["worldnewsapi.model.search_news_200_response_news_inner"] = "worldnewsapi/model/search_news_200_response_news_inner.lua";
+		["worldnewsapi.model.search_news_sources_200_response"] = "worldnewsapi/model/search_news_sources_200_response.lua";
+		["worldnewsapi.model.search_news_sources_200_response_sources_inner"] = "worldnewsapi/model/search_news_sources_200_response_sources_inner.lua";
 		["worldnewsapi.model.top_news_200_response"] = "worldnewsapi/model/top_news_200_response.lua";
 		["worldnewsapi.model.top_news_200_response_top_news_inner"] = "worldnewsapi/model/top_news_200_response_top_news_inner.lua";
 		["worldnewsapi.model.top_news_200_response_top_news_inner_news_inner"] = "worldnewsapi/model/top_news_200_response_top_news_inner_news_inner.lua";

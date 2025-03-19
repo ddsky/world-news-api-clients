@@ -15,6 +15,8 @@ src/world_news_api/specs/retrieve_newspaper_front_page_200_response.clj
 src/world_news_api/specs/retrieve_newspaper_front_page_200_response_front_page.clj
 src/world_news_api/specs/search_news_200_response.clj
 src/world_news_api/specs/search_news_200_response_news_inner.clj
+src/world_news_api/specs/search_news_sources_200_response.clj
+src/world_news_api/specs/search_news_sources_200_response_sources_inner.clj
 src/world_news_api/specs/top_news_200_response.clj
 src/world_news_api/specs/top_news_200_response_top_news_inner.clj
 src/world_news_api/specs/top_news_200_response_top_news_inner_news_inner.clj

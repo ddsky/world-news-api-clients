@@ -14,6 +14,8 @@ docs/RetrieveNewspaperFrontPage200Response.md
 docs/RetrieveNewspaperFrontPage200ResponseFrontPage.md
 docs/SearchNews200Response.md
 docs/SearchNews200ResponseNewsInner.md
+docs/SearchNewsSources200Response.md
+docs/SearchNewsSources200ResponseSourcesInner.md
 docs/TopNews200Response.md
 docs/TopNews200ResponseTopNewsInner.md
 docs/TopNews200ResponseTopNewsInnerNewsInner.md
@@ -44,6 +46,8 @@ src/main/java/com/worldnewsapi/client/model/RetrieveNewspaperFrontPage200Respons
 src/main/java/com/worldnewsapi/client/model/RetrieveNewspaperFrontPage200ResponseFrontPage.java
 src/main/java/com/worldnewsapi/client/model/SearchNews200Response.java
 src/main/java/com/worldnewsapi/client/model/SearchNews200ResponseNewsInner.java
+src/main/java/com/worldnewsapi/client/model/SearchNewsSources200Response.java
+src/main/java/com/worldnewsapi/client/model/SearchNewsSources200ResponseSourcesInner.java
 src/main/java/com/worldnewsapi/client/model/TopNews200Response.java
 src/main/java/com/worldnewsapi/client/model/TopNews200ResponseTopNewsInner.java
 src/main/java/com/worldnewsapi/client/model/TopNews200ResponseTopNewsInnerNewsInner.java

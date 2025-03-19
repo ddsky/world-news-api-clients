@@ -11,6 +11,7 @@ All URIs are relative to https://api.worldnewsapi.com, except if the operation d
 | [**retrieveNewsArticlesByIds()**](NewsApi.md#retrieveNewsArticlesByIds) | **GET** /retrieve-news | Retrieve News Articles by Ids |
 | [**retrieveNewspaperFrontPage()**](NewsApi.md#retrieveNewspaperFrontPage) | **GET** /retrieve-front-page | Retrieve Newspaper Front Page |
 | [**searchNews()**](NewsApi.md#searchNews) | **GET** /search-news | Search News |
+| [**searchNewsSources()**](NewsApi.md#searchNewsSources) | **GET** /search-news-sources | Search News Sources |
 | [**topNews()**](NewsApi.md#topNews) | **GET** /top-news | Top News |
 
 
@@ -511,6 +512,73 @@ try {
 ### Return type
 
 [**\OpenAPI\Client\Model\SearchNews200Response**](../Model/SearchNews200Response.md)
+
+### Authorization
+
+[apiKey](../../README.md#apiKey), [headerApiKey](../../README.md#headerApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `searchNewsSources()`
+
+```php
+searchNewsSources($name): \OpenAPI\Client\Model\SearchNewsSources200Response
+```
+
+Search News Sources
+
+Search whether a news source is being monitored by the World News API. This API is useful if you want to know if a specific news source is available in the API.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKey
+$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setApiKey('api-key', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('api-key', 'Bearer');
+
+// Configure API key authorization: headerApiKey
+$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setApiKey('x-api-key', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('x-api-key', 'Bearer');
+
+
+$apiInstance = new OpenAPI\Client\Api\NewsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$name = bbc; // string | The (partial) name of the source.
+
+try {
+    $result = $apiInstance->searchNewsSources($name);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling NewsApi->searchNewsSources: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **name** | **string**| The (partial) name of the source. | |
+
+### Return type
+
+[**\OpenAPI\Client\Model\SearchNewsSources200Response**](../Model/SearchNewsSources200Response.md)
 
 ### Authorization
 

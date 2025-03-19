@@ -80,6 +80,15 @@ void main() {
       // TODO
     });
 
+    // Search News Sources
+    //
+    // Search whether a news source is being monitored by the World News API. This API is useful if you want to know if a specific news source is available in the API.
+    //
+    //Future<SearchNewsSources200Response> searchNewsSources(String name) async
+    test('test searchNewsSources', () async {
+      // TODO
+    });
+
     // Top News
     //
     // Get the top news from a country in a language for a specific date. The top news are clustered from multiple sources in the given country. The more news in a cluster the higher the cluster is ranked.

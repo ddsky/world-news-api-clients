@@ -7,6 +7,7 @@
          retrieve_news_articles_by_ids/2, retrieve_news_articles_by_ids/3,
          retrieve_newspaper_front_page/1, retrieve_newspaper_front_page/2,
          search_news/1, search_news/2,
+         search_news_sources/2, search_news_sources/3,
          top_news/3, top_news/4]).
 
 -define(BASE_URL, <<"">>).
@@ -151,6 +152,27 @@ search_news(Ctx, Optional) ->
     Method = get,
     Path = [?BASE_URL, "/search-news"],
     QS = lists:flatten([])++worldnewsapi_utils:optional_params(['text', 'text-match-indexes', 'source-country', 'language', 'min-sentiment', 'max-sentiment', 'earliest-publish-date', 'latest-publish-date', 'news-sources', 'authors', 'categories', 'entities', 'location-filter', 'sort', 'sort-direction', 'offset', 'number'], _OptionalParams),
+    Headers = [],
+    Body1 = [],
+    ContentTypeHeader = worldnewsapi_utils:select_header_content_type([]),
+    Opts = maps:get(hackney_opts, Optional, []),
+
+    worldnewsapi_utils:request(Ctx, Method, Path, QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
+
+%% @doc Search News Sources
+%% Search whether a news source is being monitored by the World News API. This API is useful if you want to know if a specific news source is available in the API.
+-spec search_news_sources(ctx:ctx(), binary()) -> {ok, worldnewsapi_search_news_sources_200_response:worldnewsapi_search_news_sources_200_response(), worldnewsapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), worldnewsapi_utils:response_info()}.
+search_news_sources(Ctx, Name) ->
+    search_news_sources(Ctx, Name, #{}).
+
+-spec search_news_sources(ctx:ctx(), binary(), maps:map()) -> {ok, worldnewsapi_search_news_sources_200_response:worldnewsapi_search_news_sources_200_response(), worldnewsapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), worldnewsapi_utils:response_info()}.
+search_news_sources(Ctx, Name, Optional) ->
+    _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(worldnewsapi_api, config, #{})),
+
+    Method = get,
+    Path = [?BASE_URL, "/search-news-sources"],
+    QS = lists:flatten([{<<"name">>, Name}])++worldnewsapi_utils:optional_params([], _OptionalParams),
     Headers = [],
     Body1 = [],
     ContentTypeHeader = worldnewsapi_utils:select_header_content_type([]),

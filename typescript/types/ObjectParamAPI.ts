@@ -12,6 +12,8 @@ import { RetrieveNewspaperFrontPage200Response } from '../models/RetrieveNewspap
 import { RetrieveNewspaperFrontPage200ResponseFrontPage } from '../models/RetrieveNewspaperFrontPage200ResponseFrontPage';
 import { SearchNews200Response } from '../models/SearchNews200Response';
 import { SearchNews200ResponseNewsInner } from '../models/SearchNews200ResponseNewsInner';
+import { SearchNewsSources200Response } from '../models/SearchNewsSources200Response';
+import { SearchNewsSources200ResponseSourcesInner } from '../models/SearchNewsSources200ResponseSourcesInner';
 import { TopNews200Response } from '../models/TopNews200Response';
 import { TopNews200ResponseTopNewsInner } from '../models/TopNews200ResponseTopNewsInner';
 import { TopNews200ResponseTopNewsInnerNewsInner } from '../models/TopNews200ResponseTopNewsInnerNewsInner';
@@ -208,6 +210,15 @@ export interface NewsApiSearchNewsRequest {
     number?: number
 }
 
+export interface NewsApiSearchNewsSourcesRequest {
+    /**
+     * The (partial) name of the source.
+     * @type string
+     * @memberof NewsApisearchNewsSources
+     */
+    name: string
+}
+
 export interface NewsApiTopNewsRequest {
     /**
      * The ISO 3166 country code of the country for which top news should be retrieved.
@@ -366,6 +377,24 @@ export class ObjectNewsApi {
      */
     public searchNews(param: NewsApiSearchNewsRequest = {}, options?: Configuration): Promise<SearchNews200Response> {
         return this.api.searchNews(param.text, param.textMatchIndexes, param.sourceCountry, param.language, param.minSentiment, param.maxSentiment, param.earliestPublishDate, param.latestPublishDate, param.newsSources, param.authors, param.categories, param.entities, param.locationFilter, param.sort, param.sortDirection, param.offset, param.number,  options).toPromise();
+    }
+
+    /**
+     * Search whether a news source is being monitored by the World News API. This API is useful if you want to know if a specific news source is available in the API.
+     * Search News Sources
+     * @param param the request object
+     */
+    public searchNewsSourcesWithHttpInfo(param: NewsApiSearchNewsSourcesRequest, options?: Configuration): Promise<HttpInfo<SearchNewsSources200Response>> {
+        return this.api.searchNewsSourcesWithHttpInfo(param.name,  options).toPromise();
+    }
+
+    /**
+     * Search whether a news source is being monitored by the World News API. This API is useful if you want to know if a specific news source is available in the API.
+     * Search News Sources
+     * @param param the request object
+     */
+    public searchNewsSources(param: NewsApiSearchNewsSourcesRequest, options?: Configuration): Promise<SearchNewsSources200Response> {
+        return this.api.searchNewsSources(param.name,  options).toPromise();
     }
 
     /**

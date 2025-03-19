@@ -18,6 +18,8 @@ docs/RetrieveNewspaperFrontPage200Response.md
 docs/RetrieveNewspaperFrontPage200ResponseFrontPage.md
 docs/SearchNews200Response.md
 docs/SearchNews200ResponseNewsInner.md
+docs/SearchNewsSources200Response.md
+docs/SearchNewsSources200ResponseSourcesInner.md
 docs/TopNews200Response.md
 docs/TopNews200ResponseTopNewsInner.md
 docs/TopNews200ResponseTopNewsInnerNewsInner.md
@@ -35,6 +37,8 @@ model_retrieve_newspaper_front_page_200_response.go
 model_retrieve_newspaper_front_page_200_response_front_page.go
 model_search_news_200_response.go
 model_search_news_200_response_news_inner.go
+model_search_news_sources_200_response.go
+model_search_news_sources_200_response_sources_inner.go
 model_top_news_200_response.go
 model_top_news_200_response_top_news_inner.go
 model_top_news_200_response_top_news_inner_news_inner.go

@@ -16,6 +16,8 @@ docs/RetrieveNewspaperFrontPage200Response.md
 docs/RetrieveNewspaperFrontPage200ResponseFrontPage.md
 docs/SearchNews200Response.md
 docs/SearchNews200ResponseNewsInner.md
+docs/SearchNewsSources200Response.md
+docs/SearchNewsSources200ResponseSourcesInner.md
 docs/TopNews200Response.md
 docs/TopNews200ResponseTopNewsInner.md
 docs/TopNews200ResponseTopNewsInnerNewsInner.md
@@ -35,6 +37,8 @@ lib/WWW/OpenAPIClient/Object/RetrieveNewspaperFrontPage200Response.pm
 lib/WWW/OpenAPIClient/Object/RetrieveNewspaperFrontPage200ResponseFrontPage.pm
 lib/WWW/OpenAPIClient/Object/SearchNews200Response.pm
 lib/WWW/OpenAPIClient/Object/SearchNews200ResponseNewsInner.pm
+lib/WWW/OpenAPIClient/Object/SearchNewsSources200Response.pm
+lib/WWW/OpenAPIClient/Object/SearchNewsSources200ResponseSourcesInner.pm
 lib/WWW/OpenAPIClient/Object/TopNews200Response.pm
 lib/WWW/OpenAPIClient/Object/TopNews200ResponseTopNewsInner.pm
 lib/WWW/OpenAPIClient/Object/TopNews200ResponseTopNewsInnerNewsInner.pm
@@ -52,6 +56,8 @@ t/RetrieveNewspaperFrontPage200ResponseFrontPageTest.t
 t/RetrieveNewspaperFrontPage200ResponseTest.t
 t/SearchNews200ResponseNewsInnerTest.t
 t/SearchNews200ResponseTest.t
+t/SearchNewsSources200ResponseSourcesInnerTest.t
+t/SearchNewsSources200ResponseTest.t
 t/TopNews200ResponseTest.t
 t/TopNews200ResponseTopNewsInnerNewsInnerTest.t
 t/TopNews200ResponseTopNewsInnerTest.t

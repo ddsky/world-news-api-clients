@@ -11,6 +11,8 @@ HEADERS += \
     $${PWD}/OAIRetrieveNewsArticlesByIds_200_response_news_inner.h \
     $${PWD}/OAIRetrieveNewspaperFrontPage_200_response.h \
     $${PWD}/OAIRetrieveNewspaperFrontPage_200_response_front_page.h \
+    $${PWD}/OAISearchNewsSources_200_response.h \
+    $${PWD}/OAISearchNewsSources_200_response_sources_inner.h \
     $${PWD}/OAISearchNews_200_response.h \
     $${PWD}/OAISearchNews_200_response_news_inner.h \
     $${PWD}/OAITopNews_200_response.h \
@@ -39,6 +41,8 @@ SOURCES += \
     $${PWD}/OAIRetrieveNewsArticlesByIds_200_response_news_inner.cpp \
     $${PWD}/OAIRetrieveNewspaperFrontPage_200_response.cpp \
     $${PWD}/OAIRetrieveNewspaperFrontPage_200_response_front_page.cpp \
+    $${PWD}/OAISearchNewsSources_200_response.cpp \
+    $${PWD}/OAISearchNewsSources_200_response_sources_inner.cpp \
     $${PWD}/OAISearchNews_200_response.cpp \
     $${PWD}/OAISearchNews_200_response_news_inner.cpp \
     $${PWD}/OAITopNews_200_response.cpp \

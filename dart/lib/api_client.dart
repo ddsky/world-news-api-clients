@@ -204,6 +204,10 @@ class ApiClient {
           return SearchNews200Response.fromJson(value);
         case 'SearchNews200ResponseNewsInner':
           return SearchNews200ResponseNewsInner.fromJson(value);
+        case 'SearchNewsSources200Response':
+          return SearchNewsSources200Response.fromJson(value);
+        case 'SearchNewsSources200ResponseSourcesInner':
+          return SearchNewsSources200ResponseSourcesInner.fromJson(value);
         case 'TopNews200Response':
           return TopNews200Response.fromJson(value);
         case 'TopNews200ResponseTopNewsInner':

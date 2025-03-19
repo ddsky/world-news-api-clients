@@ -25,6 +25,7 @@ import worldnewsapi.models.GetGeoCoordinates200Response
 import worldnewsapi.models.RetrieveNewsArticlesByIds200Response
 import worldnewsapi.models.RetrieveNewspaperFrontPage200Response
 import worldnewsapi.models.SearchNews200Response
+import worldnewsapi.models.SearchNewsSources200Response
 import worldnewsapi.models.TopNews200Response
 
 class NewsApiTest : ShouldSpec() {
@@ -106,6 +107,14 @@ class NewsApiTest : ShouldSpec() {
             //val offset : kotlin.Int = 0 // kotlin.Int | The number of news to skip in range [0,100000]
             //val number : kotlin.Int = 10 // kotlin.Int | The number of news to return in range [1,100]
             //val result : SearchNews200Response = apiInstance.searchNews(text, textMatchIndexes, sourceCountry, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, categories, entities, locationFilter, sort, sortDirection, offset, number)
+            //result shouldBe ("TODO")
+        }
+
+        // to test searchNewsSources
+        should("test searchNewsSources") {
+            // uncomment below to test searchNewsSources
+            //val name : kotlin.String = bbc // kotlin.String | The (partial) name of the source.
+            //val result : SearchNewsSources200Response = apiInstance.searchNewsSources(name)
             //result shouldBe ("TODO")
         }
 

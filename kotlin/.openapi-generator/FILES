@@ -13,6 +13,8 @@ docs/RetrieveNewspaperFrontPage200Response.md
 docs/RetrieveNewspaperFrontPage200ResponseFrontPage.md
 docs/SearchNews200Response.md
 docs/SearchNews200ResponseNewsInner.md
+docs/SearchNewsSources200Response.md
+docs/SearchNewsSources200ResponseSourcesInner.md
 docs/TopNews200Response.md
 docs/TopNews200ResponseTopNewsInner.md
 docs/TopNews200ResponseTopNewsInnerNewsInner.md
@@ -50,6 +52,8 @@ src/main/kotlin/worldnewsapi/models/RetrieveNewspaperFrontPage200Response.kt
 src/main/kotlin/worldnewsapi/models/RetrieveNewspaperFrontPage200ResponseFrontPage.kt
 src/main/kotlin/worldnewsapi/models/SearchNews200Response.kt
 src/main/kotlin/worldnewsapi/models/SearchNews200ResponseNewsInner.kt
+src/main/kotlin/worldnewsapi/models/SearchNewsSources200Response.kt
+src/main/kotlin/worldnewsapi/models/SearchNewsSources200ResponseSourcesInner.kt
 src/main/kotlin/worldnewsapi/models/TopNews200Response.kt
 src/main/kotlin/worldnewsapi/models/TopNews200ResponseTopNewsInner.kt
 src/main/kotlin/worldnewsapi/models/TopNews200ResponseTopNewsInnerNewsInner.kt
@@ -65,6 +69,8 @@ src/test/kotlin/worldnewsapi/models/RetrieveNewspaperFrontPage200ResponseFrontPa
 src/test/kotlin/worldnewsapi/models/RetrieveNewspaperFrontPage200ResponseTest.kt
 src/test/kotlin/worldnewsapi/models/SearchNews200ResponseNewsInnerTest.kt
 src/test/kotlin/worldnewsapi/models/SearchNews200ResponseTest.kt
+src/test/kotlin/worldnewsapi/models/SearchNewsSources200ResponseSourcesInnerTest.kt
+src/test/kotlin/worldnewsapi/models/SearchNewsSources200ResponseTest.kt
 src/test/kotlin/worldnewsapi/models/TopNews200ResponseTest.kt
 src/test/kotlin/worldnewsapi/models/TopNews200ResponseTopNewsInnerNewsInnerTest.kt
 src/test/kotlin/worldnewsapi/models/TopNews200ResponseTopNewsInnerTest.kt

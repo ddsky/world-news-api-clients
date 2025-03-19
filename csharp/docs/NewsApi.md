@@ -11,6 +11,7 @@ All URIs are relative to *https://api.worldnewsapi.com*
 | [**RetrieveNewsArticlesByIds**](NewsApi.md#retrievenewsarticlesbyids) | **GET** /retrieve-news | Retrieve News Articles by Ids |
 | [**RetrieveNewspaperFrontPage**](NewsApi.md#retrievenewspaperfrontpage) | **GET** /retrieve-front-page | Retrieve Newspaper Front Page |
 | [**SearchNews**](NewsApi.md#searchnews) | **GET** /search-news | Search News |
+| [**SearchNewsSources**](NewsApi.md#searchnewssources) | **GET** /search-news-sources | Search News Sources |
 | [**TopNews**](NewsApi.md#topnews) | **GET** /top-news | Top News |
 
 <a id="extractnews"></a>
@@ -773,6 +774,112 @@ catch (ApiException e)
 ### Return type
 
 [**SearchNews200Response**](SearchNews200Response.md)
+
+### Authorization
+
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Success |  -  |
+| **401** | Unauthorized |  -  |
+| **402** | Payment Required |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not Found |  -  |
+| **406** | Not Acceptable |  -  |
+| **429** | Too Many Requests |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="searchnewssources"></a>
+# **SearchNewsSources**
+> SearchNewsSources200Response SearchNewsSources (string name)
+
+Search News Sources
+
+Search whether a news source is being monitored by the World News API. This API is useful if you want to know if a specific news source is available in the API.
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using worldnewsapi.Api;
+using worldnewsapi.Client;
+using worldnewsapi.Model;
+
+namespace Example
+{
+    public class SearchNewsSourcesExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://api.worldnewsapi.com";
+            // Configure API key authorization: apiKey
+            config.AddApiKey("api-key", "YOUR_API_KEY");
+            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+            // config.AddApiKeyPrefix("api-key", "Bearer");
+            // Configure API key authorization: headerApiKey
+            config.AddApiKey("x-api-key", "YOUR_API_KEY");
+            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+            // config.AddApiKeyPrefix("x-api-key", "Bearer");
+
+            var apiInstance = new NewsApi(config);
+            var name = bbc;  // string | The (partial) name of the source.
+
+            try
+            {
+                // Search News Sources
+                SearchNewsSources200Response result = apiInstance.SearchNewsSources(name);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling NewsApi.SearchNewsSources: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the SearchNewsSourcesWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Search News Sources
+    ApiResponse<SearchNewsSources200Response> response = apiInstance.SearchNewsSourcesWithHttpInfo(name);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling NewsApi.SearchNewsSourcesWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **name** | **string** | The (partial) name of the source. |  |
+
+### Return type
+
+[**SearchNewsSources200Response**](SearchNewsSources200Response.md)
 
 ### Authorization
 

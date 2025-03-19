@@ -25,6 +25,7 @@ import worldnewsapi.models.GetGeoCoordinates200Response
 import worldnewsapi.models.RetrieveNewsArticlesByIds200Response
 import worldnewsapi.models.RetrieveNewspaperFrontPage200Response
 import worldnewsapi.models.SearchNews200Response
+import worldnewsapi.models.SearchNewsSources200Response
 import worldnewsapi.models.TopNews200Response
 
 import com.squareup.moshi.Json
@@ -691,6 +692,80 @@ class NewsApi(basePath: kotlin.String = defaultBasePath, client: OkHttpClient = 
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/search-news",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * Search News Sources
+     * Search whether a news source is being monitored by the World News API. This API is useful if you want to know if a specific news source is available in the API.
+     * @param name The (partial) name of the source.
+     * @return SearchNewsSources200Response
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun searchNewsSources(name: kotlin.String) : SearchNewsSources200Response {
+        val localVarResponse = searchNewsSourcesWithHttpInfo(name = name)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SearchNewsSources200Response
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * Search News Sources
+     * Search whether a news source is being monitored by the World News API. This API is useful if you want to know if a specific news source is available in the API.
+     * @param name The (partial) name of the source.
+     * @return ApiResponse<SearchNewsSources200Response?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun searchNewsSourcesWithHttpInfo(name: kotlin.String) : ApiResponse<SearchNewsSources200Response?> {
+        val localVariableConfig = searchNewsSourcesRequestConfig(name = name)
+
+        return request<Unit, SearchNewsSources200Response>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation searchNewsSources
+     *
+     * @param name The (partial) name of the source.
+     * @return RequestConfig
+     */
+    fun searchNewsSourcesRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                put("name", listOf(name.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/search-news-sources",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,

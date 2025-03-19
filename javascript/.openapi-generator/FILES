@@ -15,6 +15,8 @@ docs/RetrieveNewspaperFrontPage200Response.md
 docs/RetrieveNewspaperFrontPage200ResponseFrontPage.md
 docs/SearchNews200Response.md
 docs/SearchNews200ResponseNewsInner.md
+docs/SearchNewsSources200Response.md
+docs/SearchNewsSources200ResponseSourcesInner.md
 docs/TopNews200Response.md
 docs/TopNews200ResponseTopNewsInner.md
 docs/TopNews200ResponseTopNewsInnerNewsInner.md
@@ -35,6 +37,8 @@ src/model/RetrieveNewspaperFrontPage200Response.js
 src/model/RetrieveNewspaperFrontPage200ResponseFrontPage.js
 src/model/SearchNews200Response.js
 src/model/SearchNews200ResponseNewsInner.js
+src/model/SearchNewsSources200Response.js
+src/model/SearchNewsSources200ResponseSourcesInner.js
 src/model/TopNews200Response.js
 src/model/TopNews200ResponseTopNewsInner.js
 src/model/TopNews200ResponseTopNewsInnerNewsInner.js
@@ -50,6 +54,8 @@ test/model/RetrieveNewspaperFrontPage200Response.spec.js
 test/model/RetrieveNewspaperFrontPage200ResponseFrontPage.spec.js
 test/model/SearchNews200Response.spec.js
 test/model/SearchNews200ResponseNewsInner.spec.js
+test/model/SearchNewsSources200Response.spec.js
+test/model/SearchNewsSources200ResponseSourcesInner.spec.js
 test/model/TopNews200Response.spec.js
 test/model/TopNews200ResponseTopNewsInner.spec.js
 test/model/TopNews200ResponseTopNewsInnerNewsInner.spec.js

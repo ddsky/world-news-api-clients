@@ -250,6 +250,25 @@ genSearchNews200ResponseNewsInner n =
     <*> arbitraryReducedMaybe n -- searchNews200ResponseNewsInnerPublishDate :: Maybe Text
     <*> arbitraryReducedMaybe n -- searchNews200ResponseNewsInnerAuthors :: Maybe [Text]
   
+instance Arbitrary SearchNewsSources200Response where
+  arbitrary = sized genSearchNewsSources200Response
+
+genSearchNewsSources200Response :: Int -> Gen SearchNewsSources200Response
+genSearchNewsSources200Response n =
+  SearchNewsSources200Response
+    <$> arbitraryReducedMaybe n -- searchNewsSources200ResponseAvailable :: Maybe Int
+    <*> arbitraryReducedMaybe n -- searchNewsSources200ResponseSources :: Maybe [SearchNewsSources200ResponseSourcesInner]
+  
+instance Arbitrary SearchNewsSources200ResponseSourcesInner where
+  arbitrary = sized genSearchNewsSources200ResponseSourcesInner
+
+genSearchNewsSources200ResponseSourcesInner :: Int -> Gen SearchNewsSources200ResponseSourcesInner
+genSearchNewsSources200ResponseSourcesInner n =
+  SearchNewsSources200ResponseSourcesInner
+    <$> arbitraryReducedMaybe n -- searchNewsSources200ResponseSourcesInnerName :: Maybe Text
+    <*> arbitraryReducedMaybe n -- searchNewsSources200ResponseSourcesInnerUrl :: Maybe Text
+    <*> arbitraryReducedMaybe n -- searchNewsSources200ResponseSourcesInnerLanguage :: Maybe Text
+  
 instance Arbitrary TopNews200Response where
   arbitrary = sized genTopNews200Response
 

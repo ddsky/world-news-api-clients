@@ -16,6 +16,7 @@ Method | HTTP request | Description
 [**retrieveNewsArticlesByIds**](NewsApi.md#retrievenewsarticlesbyids) | **GET** /retrieve-news | Retrieve News Articles by Ids
 [**retrieveNewspaperFrontPage**](NewsApi.md#retrievenewspaperfrontpage) | **GET** /retrieve-front-page | Retrieve Newspaper Front Page
 [**searchNews**](NewsApi.md#searchnews) | **GET** /search-news | Search News
+[**searchNewsSources**](NewsApi.md#searchnewssources) | **GET** /search-news-sources | Search News Sources
 [**topNews**](NewsApi.md#topnews) | **GET** /top-news | Top News
 
 
@@ -406,6 +407,57 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**SearchNews200Response**](SearchNews200Response.md)
+
+### Authorization
+
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **searchNewsSources**
+> SearchNewsSources200Response searchNewsSources(name)
+
+Search News Sources
+
+Search whether a news source is being monitored by the World News API. This API is useful if you want to know if a specific news source is available in the API.
+
+### Example
+```dart
+import 'package:openapi/api.dart';
+// TODO Configure API key authorization: apiKey
+//defaultApiClient.getAuthentication<ApiKeyAuth>('apiKey').apiKey = 'YOUR_API_KEY';
+// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//defaultApiClient.getAuthentication<ApiKeyAuth>('apiKey').apiKeyPrefix = 'Bearer';
+// TODO Configure API key authorization: headerApiKey
+//defaultApiClient.getAuthentication<ApiKeyAuth>('headerApiKey').apiKey = 'YOUR_API_KEY';
+// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//defaultApiClient.getAuthentication<ApiKeyAuth>('headerApiKey').apiKeyPrefix = 'Bearer';
+
+final api_instance = NewsApi();
+final name = bbc; // String | The (partial) name of the source.
+
+try {
+    final result = api_instance.searchNewsSources(name);
+    print(result);
+} catch (e) {
+    print('Exception when calling NewsApi->searchNewsSources: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **String**| The (partial) name of the source. | 
+
+### Return type
+
+[**SearchNewsSources200Response**](SearchNewsSources200Response.md)
 
 ### Authorization
 

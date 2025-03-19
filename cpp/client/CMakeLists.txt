@@ -20,6 +20,8 @@ add_library(${PROJECT_NAME}
   OAIRetrieveNewsArticlesByIds_200_response_news_inner.h
   OAIRetrieveNewspaperFrontPage_200_response.h
   OAIRetrieveNewspaperFrontPage_200_response_front_page.h
+  OAISearchNewsSources_200_response.h
+  OAISearchNewsSources_200_response_sources_inner.h
   OAISearchNews_200_response.h
   OAISearchNews_200_response_news_inner.h
   OAITopNews_200_response.h
@@ -43,6 +45,8 @@ add_library(${PROJECT_NAME}
   OAIRetrieveNewsArticlesByIds_200_response_news_inner.cpp
   OAIRetrieveNewspaperFrontPage_200_response.cpp
   OAIRetrieveNewspaperFrontPage_200_response_front_page.cpp
+  OAISearchNewsSources_200_response.cpp
+  OAISearchNewsSources_200_response_sources_inner.cpp
   OAISearchNews_200_response.cpp
   OAISearchNews_200_response_news_inner.cpp
   OAITopNews_200_response.cpp

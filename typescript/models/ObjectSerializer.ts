@@ -9,6 +9,8 @@ export * from '../models/RetrieveNewspaperFrontPage200Response';
 export * from '../models/RetrieveNewspaperFrontPage200ResponseFrontPage';
 export * from '../models/SearchNews200Response';
 export * from '../models/SearchNews200ResponseNewsInner';
+export * from '../models/SearchNewsSources200Response';
+export * from '../models/SearchNewsSources200ResponseSourcesInner';
 export * from '../models/TopNews200Response';
 export * from '../models/TopNews200ResponseTopNewsInner';
 export * from '../models/TopNews200ResponseTopNewsInnerNewsInner';
@@ -24,6 +26,8 @@ import { RetrieveNewspaperFrontPage200Response } from '../models/RetrieveNewspap
 import { RetrieveNewspaperFrontPage200ResponseFrontPage } from '../models/RetrieveNewspaperFrontPage200ResponseFrontPage';
 import { SearchNews200Response } from '../models/SearchNews200Response';
 import { SearchNews200ResponseNewsInner } from '../models/SearchNews200ResponseNewsInner';
+import { SearchNewsSources200Response } from '../models/SearchNewsSources200Response';
+import { SearchNewsSources200ResponseSourcesInner } from '../models/SearchNewsSources200ResponseSourcesInner';
 import { TopNews200Response } from '../models/TopNews200Response';
 import { TopNews200ResponseTopNewsInner } from '../models/TopNews200ResponseTopNewsInner';
 import { TopNews200ResponseTopNewsInnerNewsInner } from '../models/TopNews200ResponseTopNewsInnerNewsInner';
@@ -55,6 +59,8 @@ let typeMap: {[index: string]: any} = {
     "RetrieveNewspaperFrontPage200ResponseFrontPage": RetrieveNewspaperFrontPage200ResponseFrontPage,
     "SearchNews200Response": SearchNews200Response,
     "SearchNews200ResponseNewsInner": SearchNews200ResponseNewsInner,
+    "SearchNewsSources200Response": SearchNewsSources200Response,
+    "SearchNewsSources200ResponseSourcesInner": SearchNewsSources200ResponseSourcesInner,
     "TopNews200Response": TopNews200Response,
     "TopNews200ResponseTopNewsInner": TopNews200ResponseTopNewsInner,
     "TopNews200ResponseTopNewsInnerNewsInner": TopNews200ResponseTopNewsInnerNewsInner,

@@ -1,4 +1,4 @@
-(defproject world-news-api "2.1.0"
+(defproject world-news-api "2.2.0"
   :description "The world's news wrapped into a single API."
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [metosin/spec-tools "0.7.0"]

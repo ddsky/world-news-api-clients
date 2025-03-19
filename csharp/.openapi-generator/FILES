@@ -15,6 +15,8 @@ docs/RetrieveNewspaperFrontPage200Response.md
 docs/RetrieveNewspaperFrontPage200ResponseFrontPage.md
 docs/SearchNews200Response.md
 docs/SearchNews200ResponseNewsInner.md
+docs/SearchNewsSources200Response.md
+docs/SearchNewsSources200ResponseSourcesInner.md
 docs/TopNews200Response.md
 docs/TopNews200ResponseTopNewsInner.md
 docs/TopNews200ResponseTopNewsInnerNewsInner.md
@@ -31,6 +33,8 @@ src/worldnewsapi.Test/Model/RetrieveNewspaperFrontPage200ResponseFrontPageTests.
 src/worldnewsapi.Test/Model/RetrieveNewspaperFrontPage200ResponseTests.cs
 src/worldnewsapi.Test/Model/SearchNews200ResponseNewsInnerTests.cs
 src/worldnewsapi.Test/Model/SearchNews200ResponseTests.cs
+src/worldnewsapi.Test/Model/SearchNewsSources200ResponseSourcesInnerTests.cs
+src/worldnewsapi.Test/Model/SearchNewsSources200ResponseTests.cs
 src/worldnewsapi.Test/Model/TopNews200ResponseTests.cs
 src/worldnewsapi.Test/Model/TopNews200ResponseTopNewsInnerNewsInnerTests.cs
 src/worldnewsapi.Test/Model/TopNews200ResponseTopNewsInnerTests.cs
@@ -64,6 +68,8 @@ src/worldnewsapi/Model/RetrieveNewspaperFrontPage200Response.cs
 src/worldnewsapi/Model/RetrieveNewspaperFrontPage200ResponseFrontPage.cs
 src/worldnewsapi/Model/SearchNews200Response.cs
 src/worldnewsapi/Model/SearchNews200ResponseNewsInner.cs
+src/worldnewsapi/Model/SearchNewsSources200Response.cs
+src/worldnewsapi/Model/SearchNewsSources200ResponseSourcesInner.cs
 src/worldnewsapi/Model/TopNews200Response.cs
 src/worldnewsapi/Model/TopNews200ResponseTopNewsInner.cs
 src/worldnewsapi/Model/TopNews200ResponseTopNewsInnerNewsInner.cs

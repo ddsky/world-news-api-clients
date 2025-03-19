@@ -11,6 +11,7 @@ All URIs are relative to *https://api.worldnewsapi.com*
 | [**retrieveNewsArticlesByIds**](NewsApi.md#retrieveNewsArticlesByIds) | **GET** /retrieve-news | Retrieve News Articles by Ids |
 | [**retrieveNewspaperFrontPage**](NewsApi.md#retrieveNewspaperFrontPage) | **GET** /retrieve-front-page | Retrieve Newspaper Front Page |
 | [**searchNews**](NewsApi.md#searchNews) | **GET** /search-news | Search News |
+| [**searchNewsSources**](NewsApi.md#searchNewsSources) | **GET** /search-news-sources | Search News Sources |
 | [**topNews**](NewsApi.md#topNews) | **GET** /top-news | Top News |
 
 
@@ -404,6 +405,58 @@ try {
 ### Return type
 
 [**SearchNews200Response**](SearchNews200Response.md)
+
+### Authorization
+
+
+Configure apiKey:
+    ApiClient.apiKey["api-key"] = ""
+    ApiClient.apiKeyPrefix["api-key"] = ""
+Configure headerApiKey:
+    ApiClient.apiKey["x-api-key"] = ""
+    ApiClient.apiKeyPrefix["x-api-key"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a id="searchNewsSources"></a>
+# **searchNewsSources**
+> SearchNewsSources200Response searchNewsSources(name)
+
+Search News Sources
+
+Search whether a news source is being monitored by the World News API. This API is useful if you want to know if a specific news source is available in the API.
+
+### Example
+```kotlin
+// Import classes:
+//import worldnewsapi.infrastructure.*
+//import worldnewsapi.models.*
+
+val apiInstance = NewsApi()
+val name : kotlin.String = bbc // kotlin.String | The (partial) name of the source.
+try {
+    val result : SearchNewsSources200Response = apiInstance.searchNewsSources(name)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling NewsApi#searchNewsSources")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling NewsApi#searchNewsSources")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **name** | **kotlin.String**| The (partial) name of the source. | |
+
+### Return type
+
+[**SearchNewsSources200Response**](SearchNewsSources200Response.md)
 
 ### Authorization
 

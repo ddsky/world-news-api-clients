@@ -31,6 +31,8 @@ main =
       propMimeEq MimeJSON (Proxy :: Proxy RetrieveNewspaperFrontPage200ResponseFrontPage)
       propMimeEq MimeJSON (Proxy :: Proxy SearchNews200Response)
       propMimeEq MimeJSON (Proxy :: Proxy SearchNews200ResponseNewsInner)
+      propMimeEq MimeJSON (Proxy :: Proxy SearchNewsSources200Response)
+      propMimeEq MimeJSON (Proxy :: Proxy SearchNewsSources200ResponseSourcesInner)
       propMimeEq MimeJSON (Proxy :: Proxy TopNews200Response)
       propMimeEq MimeJSON (Proxy :: Proxy TopNews200ResponseTopNewsInner)
       propMimeEq MimeJSON (Proxy :: Proxy TopNews200ResponseTopNewsInnerNewsInner)

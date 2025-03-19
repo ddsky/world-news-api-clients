@@ -18,6 +18,8 @@ lib/world_news_api/model/retrieve_newspaper_front_page_200_response.ex
 lib/world_news_api/model/retrieve_newspaper_front_page_200_response_front_page.ex
 lib/world_news_api/model/search_news_200_response.ex
 lib/world_news_api/model/search_news_200_response_news_inner.ex
+lib/world_news_api/model/search_news_sources_200_response.ex
+lib/world_news_api/model/search_news_sources_200_response_sources_inner.ex
 lib/world_news_api/model/top_news_200_response.ex
 lib/world_news_api/model/top_news_200_response_top_news_inner.ex
 lib/world_news_api/model/top_news_200_response_top_news_inner_news_inner.ex

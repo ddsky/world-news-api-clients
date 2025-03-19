@@ -331,6 +331,43 @@ defmodule WorldNewsAPI.Api.News do
   end
 
   @doc """
+  Search News Sources
+  Search whether a news source is being monitored by the World News API. This API is useful if you want to know if a specific news source is available in the API.
+
+  ### Parameters
+
+  - `connection` (WorldNewsAPI.Connection): Connection to server
+  - `name` (String.t): The (partial) name of the source.
+  - `opts` (keyword): Optional parameters
+
+  ### Returns
+
+  - `{:ok, WorldNewsAPI.Model.SearchNewsSources200Response.t}` on success
+  - `{:error, Tesla.Env.t}` on failure
+  """
+  @spec search_news_sources(Tesla.Env.client, String.t, keyword()) :: {:ok, nil} | {:ok, WorldNewsAPI.Model.SearchNewsSources200Response.t} | {:error, Tesla.Env.t}
+  def search_news_sources(connection, name, _opts \\ []) do
+    request =
+      %{}
+      |> method(:get)
+      |> url("/search-news-sources")
+      |> add_param(:query, :name, name)
+      |> Enum.into([])
+
+    connection
+    |> Connection.request(request)
+    |> evaluate_response([
+      {200, WorldNewsAPI.Model.SearchNewsSources200Response},
+      {401, false},
+      {402, false},
+      {403, false},
+      {404, false},
+      {406, false},
+      {429, false}
+    ])
+  end
+
+  @doc """
   Top News
   Get the top news from a country in a language for a specific date. The top news are clustered from multiple sources in the given country. The more news in a cluster the higher the cluster is ranked.
 

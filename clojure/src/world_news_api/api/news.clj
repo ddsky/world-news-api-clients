@@ -15,8 +15,10 @@
             [world-news-api.specs.top-news-200-response-top-news-inner :refer :all]
             [world-news-api.specs.extract-news-200-response :refer :all]
             [world-news-api.specs.search-news-200-response :refer :all]
+            [world-news-api.specs.search-news-sources-200-response :refer :all]
             [world-news-api.specs.extract-news-200-response-images-inner :refer :all]
             [world-news-api.specs.get-geo-coordinates-200-response :refer :all]
+            [world-news-api.specs.search-news-sources-200-response-sources-inner :refer :all]
             )
   (:import (java.io File)))
 
@@ -195,6 +197,30 @@
      (if (:decode-models *api-context*)
         (st/decode search-news-200-response-spec res st/string-transformer)
         res))))
+
+
+(defn-spec search-news-sources-with-http-info any?
+  "Search News Sources
+  Search whether a news source is being monitored by the World News API. This API is useful if you want to know if a specific news source is available in the API."
+  [name string?]
+  (check-required-params name)
+  (call-api "/search-news-sources" :get
+            {:path-params   {}
+             :header-params {}
+             :query-params  {"name" name }
+             :form-params   {}
+             :content-types []
+             :accepts       ["application/json"]
+             :auth-names    ["apiKey" "headerApiKey"]}))
+
+(defn-spec search-news-sources search-news-sources-200-response-spec
+  "Search News Sources
+  Search whether a news source is being monitored by the World News API. This API is useful if you want to know if a specific news source is available in the API."
+  [name string?]
+  (let [res (:data (search-news-sources-with-http-info name))]
+    (if (:decode-models *api-context*)
+       (st/decode search-news-sources-200-response-spec res st/string-transformer)
+       res)))
 
 
 (defn-spec top-news-with-http-info any?

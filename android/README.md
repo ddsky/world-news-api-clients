@@ -28,7 +28,7 @@ Add this dependency to your project's POM:
 <dependency>
     <groupId>com.worldnewsapi</groupId>
     <artifactId>android-client</artifactId>
-    <version>2.1.0</version>
+    <version>2.2.0</version>
     <scope>compile</scope>
 </dependency>
 ```
@@ -38,7 +38,7 @@ Add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-compile "com.worldnewsapi:android-client:2.1.0"
+compile "com.worldnewsapi:android-client:2.2.0"
 ```
 
 ### Others
@@ -49,7 +49,7 @@ At first generate the JAR by executing:
 
 Then manually install the following JARs:
 
-- target/android-client-2.1.0.jar
+- target/android-client-2.2.0.jar
 - target/lib/*.jar
 
 ## Getting Started
@@ -91,6 +91,7 @@ Class | Method | HTTP request | Description
 *NewsApi* | [**retrieveNewsArticlesByIds**](docs/NewsApi.md#retrieveNewsArticlesByIds) | **GET** /retrieve-news | Retrieve News Articles by Ids
 *NewsApi* | [**retrieveNewspaperFrontPage**](docs/NewsApi.md#retrieveNewspaperFrontPage) | **GET** /retrieve-front-page | Retrieve Newspaper Front Page
 *NewsApi* | [**searchNews**](docs/NewsApi.md#searchNews) | **GET** /search-news | Search News
+*NewsApi* | [**searchNewsSources**](docs/NewsApi.md#searchNewsSources) | **GET** /search-news-sources | Search News Sources
 *NewsApi* | [**topNews**](docs/NewsApi.md#topNews) | **GET** /top-news | Top News
 
 
@@ -107,6 +108,8 @@ Class | Method | HTTP request | Description
  - [RetrieveNewspaperFrontPage200ResponseFrontPage](docs/RetrieveNewspaperFrontPage200ResponseFrontPage.md)
  - [SearchNews200Response](docs/SearchNews200Response.md)
  - [SearchNews200ResponseNewsInner](docs/SearchNews200ResponseNewsInner.md)
+ - [SearchNewsSources200Response](docs/SearchNewsSources200Response.md)
+ - [SearchNewsSources200ResponseSourcesInner](docs/SearchNewsSources200ResponseSourcesInner.md)
  - [TopNews200Response](docs/TopNews200Response.md)
  - [TopNews200ResponseTopNewsInner](docs/TopNews200ResponseTopNewsInner.md)
  - [TopNews200ResponseTopNewsInnerNewsInner](docs/TopNews200ResponseTopNewsInnerNewsInner.md)

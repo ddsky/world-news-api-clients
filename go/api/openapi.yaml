@@ -6,7 +6,7 @@ info:
   description: The world's news wrapped into a single API.
   termsOfService: https://worldnewsapi.com/terms
   title: World News API
-  version: 2.1.0
+  version: 2.2.0
 servers:
 - url: https://api.worldnewsapi.com
 security:
@@ -64,7 +64,7 @@ paths:
         required: false
         schema:
           example: us
-          maxLength: 100
+          maxLength: 2
           pattern: "."
           type: string
         style: form
@@ -923,6 +923,61 @@ paths:
       summary: Extract News Links
       tags:
       - News
+  /search-news-sources:
+    get:
+      deprecated: false
+      description: Search whether a news source is being monitored by the World News
+        API. This API is useful if you want to know if a specific news source is available
+        in the API.
+      externalDocs:
+        description: Read entire docs
+        url: https://worldnewsapi.com/docs/search-news-sources/
+      operationId: searchNewsSources
+      parameters:
+      - description: The (partial) name of the source.
+        explode: false
+        in: query
+        name: name
+        required: true
+        schema:
+          example: bbc
+          maxLength: 1000
+          pattern: "."
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Response:
+                  value:
+                    available: 2
+                    sources:
+                    - name: BBC News
+                      url: https://www.bbc.co.uk
+                      language: en
+                    - name: Home - BBC News
+                      url: https://www.bbc.com
+                      language: en
+              schema:
+                $ref: '#/components/schemas/searchNewsSources_200_response'
+          description: Success
+        "401":
+          description: Unauthorized
+        "402":
+          description: Payment Required
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "406":
+          description: Not Acceptable
+        "429":
+          description: Too Many Requests
+      summary: Search News Sources
+      tags:
+      - News
   /feed.rss:
     get:
       deprecated: false
@@ -1522,6 +1577,40 @@ components:
           items:
             nullable: true
             type: string
+          type: array
+      type: object
+    searchNewsSources_200_response_sources_inner:
+      example:
+        name: name
+        language: language
+        url: url
+      properties:
+        name:
+          nullable: true
+          type: string
+        url:
+          nullable: true
+          type: string
+        language:
+          nullable: true
+          type: string
+      type: object
+    searchNewsSources_200_response:
+      example:
+        sources:
+        - name: name
+          language: language
+          url: url
+        - name: name
+          language: language
+          url: url
+        available: 0
+      properties:
+        available:
+          type: integer
+        sources:
+          items:
+            $ref: '#/components/schemas/searchNewsSources_200_response_sources_inner'
           type: array
       type: object
     getGeoCoordinates_200_response:

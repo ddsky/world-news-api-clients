@@ -41,6 +41,8 @@ part 'model/retrieve_newspaper_front_page200_response.dart';
 part 'model/retrieve_newspaper_front_page200_response_front_page.dart';
 part 'model/search_news200_response.dart';
 part 'model/search_news200_response_news_inner.dart';
+part 'model/search_news_sources200_response.dart';
+part 'model/search_news_sources200_response_sources_inner.dart';
 part 'model/top_news200_response.dart';
 part 'model/top_news200_response_top_news_inner.dart';
 part 'model/top_news200_response_top_news_inner_news_inner.dart';

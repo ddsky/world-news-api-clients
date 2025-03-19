@@ -1,6 +1,6 @@
 [package]
 name = "worldnewsapi"
-version = "2.1.0"
+version = "2.2.0"
 authors = ["mail@worldnewsapi.com"]
 description = "The world's news wrapped into a single API."
 # Override this license by providing a License Object in the OpenAPI.

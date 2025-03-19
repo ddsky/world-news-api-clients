@@ -11,6 +11,7 @@ Method | HTTP request | Description
 [**RetrieveNewsArticlesByIds**](NewsAPI.md#RetrieveNewsArticlesByIds) | **Get** /retrieve-news | Retrieve News Articles by Ids
 [**RetrieveNewspaperFrontPage**](NewsAPI.md#RetrieveNewspaperFrontPage) | **Get** /retrieve-front-page | Retrieve Newspaper Front Page
 [**SearchNews**](NewsAPI.md#SearchNews) | **Get** /search-news | Search News
+[**SearchNewsSources**](NewsAPI.md#SearchNewsSources) | **Get** /search-news-sources | Search News Sources
 [**TopNews**](NewsAPI.md#TopNews) | **Get** /top-news | Top News
 
 
@@ -504,6 +505,72 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**SearchNews200Response**](SearchNews200Response.md)
+
+### Authorization
+
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## SearchNewsSources
+
+> SearchNewsSources200Response SearchNewsSources(ctx).Name(name).Execute()
+
+Search News Sources
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/ddsky/world-news-api-clients/tree/main/go/"
+)
+
+func main() {
+	name := "bbc" // string | The (partial) name of the source.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.NewsAPI.SearchNewsSources(context.Background()).Name(name).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `NewsAPI.SearchNewsSources``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `SearchNewsSources`: SearchNewsSources200Response
+	fmt.Fprintf(os.Stdout, "Response from `NewsAPI.SearchNewsSources`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiSearchNewsSourcesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **string** | The (partial) name of the source. | 
+
+### Return type
+
+[**SearchNewsSources200Response**](SearchNewsSources200Response.md)
 
 ### Authorization
 

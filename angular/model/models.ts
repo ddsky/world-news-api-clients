@@ -9,6 +9,8 @@ export * from './retrieveNewspaperFrontPage200Response';
 export * from './retrieveNewspaperFrontPage200ResponseFrontPage';
 export * from './searchNews200Response';
 export * from './searchNews200ResponseNewsInner';
+export * from './searchNewsSources200Response';
+export * from './searchNewsSources200ResponseSourcesInner';
 export * from './topNews200Response';
 export * from './topNews200ResponseTopNewsInner';
 export * from './topNews200ResponseTopNewsInnerNewsInner';

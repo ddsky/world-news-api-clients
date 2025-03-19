@@ -16,6 +16,8 @@ docs/Model/RetrieveNewspaperFrontPage200Response.md
 docs/Model/RetrieveNewspaperFrontPage200ResponseFrontPage.md
 docs/Model/SearchNews200Response.md
 docs/Model/SearchNews200ResponseNewsInner.md
+docs/Model/SearchNewsSources200Response.md
+docs/Model/SearchNewsSources200ResponseSourcesInner.md
 docs/Model/TopNews200Response.md
 docs/Model/TopNews200ResponseTopNewsInner.md
 docs/Model/TopNews200ResponseTopNewsInnerNewsInner.md
@@ -36,6 +38,8 @@ lib/Model/RetrieveNewspaperFrontPage200Response.php
 lib/Model/RetrieveNewspaperFrontPage200ResponseFrontPage.php
 lib/Model/SearchNews200Response.php
 lib/Model/SearchNews200ResponseNewsInner.php
+lib/Model/SearchNewsSources200Response.php
+lib/Model/SearchNewsSources200ResponseSourcesInner.php
 lib/Model/TopNews200Response.php
 lib/Model/TopNews200ResponseTopNewsInner.php
 lib/Model/TopNews200ResponseTopNewsInnerNewsInner.php
@@ -53,6 +57,8 @@ test/Model/RetrieveNewspaperFrontPage200ResponseFrontPageTest.php
 test/Model/RetrieveNewspaperFrontPage200ResponseTest.php
 test/Model/SearchNews200ResponseNewsInnerTest.php
 test/Model/SearchNews200ResponseTest.php
+test/Model/SearchNewsSources200ResponseSourcesInnerTest.php
+test/Model/SearchNewsSources200ResponseTest.php
 test/Model/TopNews200ResponseTest.php
 test/Model/TopNews200ResponseTopNewsInnerNewsInnerTest.php
 test/Model/TopNews200ResponseTopNewsInnerTest.php

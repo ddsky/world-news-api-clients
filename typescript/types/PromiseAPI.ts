@@ -12,6 +12,8 @@ import { RetrieveNewspaperFrontPage200Response } from '../models/RetrieveNewspap
 import { RetrieveNewspaperFrontPage200ResponseFrontPage } from '../models/RetrieveNewspaperFrontPage200ResponseFrontPage';
 import { SearchNews200Response } from '../models/SearchNews200Response';
 import { SearchNews200ResponseNewsInner } from '../models/SearchNews200ResponseNewsInner';
+import { SearchNewsSources200Response } from '../models/SearchNewsSources200Response';
+import { SearchNewsSources200ResponseSourcesInner } from '../models/SearchNewsSources200ResponseSourcesInner';
 import { TopNews200Response } from '../models/TopNews200Response';
 import { TopNews200ResponseTopNewsInner } from '../models/TopNews200ResponseTopNewsInner';
 import { TopNews200ResponseTopNewsInnerNewsInner } from '../models/TopNews200ResponseTopNewsInnerNewsInner';
@@ -208,6 +210,26 @@ export class PromiseNewsApi {
      */
     public searchNews(text?: string, textMatchIndexes?: string, sourceCountry?: string, language?: string, minSentiment?: number, maxSentiment?: number, earliestPublishDate?: string, latestPublishDate?: string, newsSources?: string, authors?: string, categories?: string, entities?: string, locationFilter?: string, sort?: string, sortDirection?: string, offset?: number, number?: number, _options?: Configuration): Promise<SearchNews200Response> {
         const result = this.api.searchNews(text, textMatchIndexes, sourceCountry, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, categories, entities, locationFilter, sort, sortDirection, offset, number, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Search whether a news source is being monitored by the World News API. This API is useful if you want to know if a specific news source is available in the API.
+     * Search News Sources
+     * @param name The (partial) name of the source.
+     */
+    public searchNewsSourcesWithHttpInfo(name: string, _options?: Configuration): Promise<HttpInfo<SearchNewsSources200Response>> {
+        const result = this.api.searchNewsSourcesWithHttpInfo(name, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Search whether a news source is being monitored by the World News API. This API is useful if you want to know if a specific news source is available in the API.
+     * Search News Sources
+     * @param name The (partial) name of the source.
+     */
+    public searchNewsSources(name: string, _options?: Configuration): Promise<SearchNewsSources200Response> {
+        const result = this.api.searchNewsSources(name, _options);
         return result.toPromise();
     }
 

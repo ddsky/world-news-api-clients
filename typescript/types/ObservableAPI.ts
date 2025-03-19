@@ -13,6 +13,8 @@ import { RetrieveNewspaperFrontPage200Response } from '../models/RetrieveNewspap
 import { RetrieveNewspaperFrontPage200ResponseFrontPage } from '../models/RetrieveNewspaperFrontPage200ResponseFrontPage';
 import { SearchNews200Response } from '../models/SearchNews200Response';
 import { SearchNews200ResponseNewsInner } from '../models/SearchNews200ResponseNewsInner';
+import { SearchNewsSources200Response } from '../models/SearchNewsSources200Response';
+import { SearchNewsSources200ResponseSourcesInner } from '../models/SearchNewsSources200ResponseSourcesInner';
 import { TopNews200Response } from '../models/TopNews200Response';
 import { TopNews200ResponseTopNewsInner } from '../models/TopNews200ResponseTopNewsInner';
 import { TopNews200ResponseTopNewsInnerNewsInner } from '../models/TopNews200ResponseTopNewsInnerNewsInner';
@@ -304,6 +306,39 @@ export class ObservableNewsApi {
      */
     public searchNews(text?: string, textMatchIndexes?: string, sourceCountry?: string, language?: string, minSentiment?: number, maxSentiment?: number, earliestPublishDate?: string, latestPublishDate?: string, newsSources?: string, authors?: string, categories?: string, entities?: string, locationFilter?: string, sort?: string, sortDirection?: string, offset?: number, number?: number, _options?: Configuration): Observable<SearchNews200Response> {
         return this.searchNewsWithHttpInfo(text, textMatchIndexes, sourceCountry, language, minSentiment, maxSentiment, earliestPublishDate, latestPublishDate, newsSources, authors, categories, entities, locationFilter, sort, sortDirection, offset, number, _options).pipe(map((apiResponse: HttpInfo<SearchNews200Response>) => apiResponse.data));
+    }
+
+    /**
+     * Search whether a news source is being monitored by the World News API. This API is useful if you want to know if a specific news source is available in the API.
+     * Search News Sources
+     * @param name The (partial) name of the source.
+     */
+    public searchNewsSourcesWithHttpInfo(name: string, _options?: Configuration): Observable<HttpInfo<SearchNewsSources200Response>> {
+        const requestContextPromise = this.requestFactory.searchNewsSources(name, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.searchNewsSourcesWithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Search whether a news source is being monitored by the World News API. This API is useful if you want to know if a specific news source is available in the API.
+     * Search News Sources
+     * @param name The (partial) name of the source.
+     */
+    public searchNewsSources(name: string, _options?: Configuration): Observable<SearchNewsSources200Response> {
+        return this.searchNewsSourcesWithHttpInfo(name, _options).pipe(map((apiResponse: HttpInfo<SearchNewsSources200Response>) => apiResponse.data));
     }
 
     /**

@@ -629,6 +629,66 @@ class NewsApi {
     return null;
   }
 
+  /// Search News Sources
+  ///
+  /// Search whether a news source is being monitored by the World News API. This API is useful if you want to know if a specific news source is available in the API.
+  ///
+  /// Note: This method returns the HTTP [Response].
+  ///
+  /// Parameters:
+  ///
+  /// * [String] name (required):
+  ///   The (partial) name of the source.
+  Future<Response> searchNewsSourcesWithHttpInfo(String name,) async {
+    // ignore: prefer_const_declarations
+    final path = r'/search-news-sources';
+
+    // ignore: prefer_final_locals
+    Object? postBody;
+
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+      queryParams.addAll(_queryParams('', 'name', name));
+
+    const contentTypes = <String>[];
+
+
+    return apiClient.invokeAPI(
+      path,
+      'GET',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      contentTypes.isEmpty ? null : contentTypes.first,
+    );
+  }
+
+  /// Search News Sources
+  ///
+  /// Search whether a news source is being monitored by the World News API. This API is useful if you want to know if a specific news source is available in the API.
+  ///
+  /// Parameters:
+  ///
+  /// * [String] name (required):
+  ///   The (partial) name of the source.
+  Future<SearchNewsSources200Response?> searchNewsSources(String name,) async {
+    final response = await searchNewsSourcesWithHttpInfo(name,);
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
+    }
+    // When a remote server returns no body with a status of 204, we shall not decode it.
+    // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
+    // FormatException when trying to decode an empty string.
+    if (response.body.isNotEmpty && response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'SearchNewsSources200Response',) as SearchNewsSources200Response;
+    
+    }
+    return null;
+  }
+
   /// Top News
   ///
   /// Get the top news from a country in a language for a specific date. The top news are clustered from multiple sources in the given country. The more news in a cluster the higher the cluster is ranked.

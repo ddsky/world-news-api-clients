@@ -11,6 +11,7 @@ Method | HTTP request | Description
 [**retrieve_news_articles_by_ids**](NewsApi.md#retrieve_news_articles_by_ids) | **GET** /retrieve-news | Retrieve News Articles by Ids
 [**retrieve_newspaper_front_page**](NewsApi.md#retrieve_newspaper_front_page) | **GET** /retrieve-front-page | Retrieve Newspaper Front Page
 [**search_news**](NewsApi.md#search_news) | **GET** /search-news | Search News
+[**search_news_sources**](NewsApi.md#search_news_sources) | **GET** /search-news-sources | Search News Sources
 [**top_news**](NewsApi.md#top_news) | **GET** /top-news | Top News
 
 
@@ -675,6 +676,98 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**SearchNews200Response**](SearchNews200Response.md)
+
+### Authorization
+
+[apiKey](../README.md#apiKey), [headerApiKey](../README.md#headerApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**401** | Unauthorized |  -  |
+**402** | Payment Required |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**406** | Not Acceptable |  -  |
+**429** | Too Many Requests |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **search_news_sources**
+> SearchNewsSources200Response search_news_sources(name)
+
+Search News Sources
+
+Search whether a news source is being monitored by the World News API. This API is useful if you want to know if a specific news source is available in the API.
+
+### Example
+
+* Api Key Authentication (apiKey):
+* Api Key Authentication (headerApiKey):
+
+```python
+import worldnewsapi
+from worldnewsapi.models.search_news_sources200_response import SearchNewsSources200Response
+from worldnewsapi.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.worldnewsapi.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = worldnewsapi.Configuration(
+    host = "https://api.worldnewsapi.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKey
+configuration.api_key['apiKey'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKey'] = 'Bearer'
+
+# Configure API key authorization: headerApiKey
+configuration.api_key['headerApiKey'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['headerApiKey'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with worldnewsapi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = worldnewsapi.NewsApi(api_client)
+    name = 'bbc' # str | The (partial) name of the source.
+
+    try:
+        # Search News Sources
+        api_response = api_instance.search_news_sources(name)
+        print("The response of NewsApi->search_news_sources:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling NewsApi->search_news_sources: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| The (partial) name of the source. | 
+
+### Return type
+
+[**SearchNewsSources200Response**](SearchNewsSources200Response.md)
 
 ### Authorization
 

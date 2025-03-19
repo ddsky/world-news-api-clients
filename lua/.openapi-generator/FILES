@@ -13,10 +13,12 @@ spec/retrieve_newspaper_front_page_200_response_front_page_spec.lua
 spec/retrieve_newspaper_front_page_200_response_spec.lua
 spec/search_news_200_response_news_inner_spec.lua
 spec/search_news_200_response_spec.lua
+spec/search_news_sources_200_response_sources_inner_spec.lua
+spec/search_news_sources_200_response_spec.lua
 spec/top_news_200_response_spec.lua
 spec/top_news_200_response_top_news_inner_news_inner_spec.lua
 spec/top_news_200_response_top_news_inner_spec.lua
-worldnewsapi-2.1.0.rockspec
+worldnewsapi-2.2.0.rockspec
 worldnewsapi/api/news_api.lua
 worldnewsapi/model/extract_news_200_response.lua
 worldnewsapi/model/extract_news_200_response_images_inner.lua
@@ -29,6 +31,8 @@ worldnewsapi/model/retrieve_newspaper_front_page_200_response.lua
 worldnewsapi/model/retrieve_newspaper_front_page_200_response_front_page.lua
 worldnewsapi/model/search_news_200_response.lua
 worldnewsapi/model/search_news_200_response_news_inner.lua
+worldnewsapi/model/search_news_sources_200_response.lua
+worldnewsapi/model/search_news_sources_200_response_sources_inner.lua
 worldnewsapi/model/top_news_200_response.lua
 worldnewsapi/model/top_news_200_response_top_news_inner.lua
 worldnewsapi/model/top_news_200_response_top_news_inner_news_inner.lua

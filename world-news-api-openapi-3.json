@@ -4,7 +4,7 @@
     "title": "World News API",
     "description": "The world's news wrapped into a single API.",
     "termsOfService": "https://worldnewsapi.com/terms",
-    "version": "2.1.0",
+    "version": "2.2.0",
     "contact": {
       "name": "David Urbansky",
       "email": "mail@worldnewsapi.com"
@@ -183,7 +183,7 @@
             "description": "The ISO 3166 country code from which the news should originate.",
             "schema": {
               "pattern": ".",
-              "maxLength": 100,
+              "maxLength": 2,
               "type": "string",
               "example": "us"
             },
@@ -1340,6 +1340,112 @@
         ],
         "description": "Extract news links from a news website.",
         "operationId": "extractNewsLinks",
+        "deprecated": false
+      }
+    },
+    "/search-news-sources": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success",
+            "headers": {},
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "available": {
+                      "type": "integer"
+                    },
+                    "sources": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "url": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "language": {
+                            "type": "string",
+                            "nullable": true
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Response": {
+                    "value": {
+                      "available": 2,
+                      "sources": [
+                        {
+                          "name": "BBC News",
+                          "url": "https://www.bbc.co.uk",
+                          "language": "en"
+                        },
+                        {
+                          "name": "Home - BBC News",
+                          "url": "https://www.bbc.com",
+                          "language": "en"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "402": {
+            "description": "Payment Required"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "406": {
+            "description": "Not Acceptable"
+          },
+          "429": {
+            "description": "Too Many Requests"
+          }
+        },
+        "parameters": [
+          {
+            "name": "name",
+            "description": "The (partial) name of the source.",
+            "schema": {
+              "pattern": ".",
+              "maxLength": 1000,
+              "type": "string",
+              "example": "bbc"
+            },
+            "required": true,
+            "style": "form",
+            "explode": false,
+            "in": "query"
+          }
+        ],
+        "externalDocs": {
+          "description": "Read entire docs",
+          "url": "https://worldnewsapi.com/docs/search-news-sources/"
+        },
+        "summary": "Search News Sources",
+        "tags": [
+          "News"
+        ],
+        "description": "Search whether a news source is being monitored by the World News API. This API is useful if you want to know if a specific news source is available in the API.",
+        "operationId": "searchNewsSources",
         "deprecated": false
       }
     },

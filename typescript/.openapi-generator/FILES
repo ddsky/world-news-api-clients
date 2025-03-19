@@ -24,6 +24,8 @@ models/RetrieveNewspaperFrontPage200Response.ts
 models/RetrieveNewspaperFrontPage200ResponseFrontPage.ts
 models/SearchNews200Response.ts
 models/SearchNews200ResponseNewsInner.ts
+models/SearchNewsSources200Response.ts
+models/SearchNewsSources200ResponseSourcesInner.ts
 models/TopNews200Response.ts
 models/TopNews200ResponseTopNewsInner.ts
 models/TopNews200ResponseTopNewsInnerNewsInner.ts
